@@ -34,13 +34,13 @@
         animation-play-state: paused;
     }
     #akili-widget-btn video {
-        width: 170px; /* Tamanho ajustável do mascote em vídeo */
+        width: 240px; /* Tamanho AUMENTADO do mascote holográfico */
         height: auto;
         object-fit: contain;
         z-index: 10;
         position: relative;
-        mix-blend-mode: screen; /* Máscara mágica que remove o fundo preto do vídeo */
-        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.4));
+        /* Máscara mágica que remove o fundo preto do vídeo em fundos escuros */
+        mix-blend-mode: screen; 
         transition: transform 0.1s ease-out; /* Suavidade no Tracking */
         transform-origin: center center;
     }
@@ -252,8 +252,8 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: #000000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <video style="width: 140%; height: 140%; object-fit: cover; mix-blend-mode: screen;" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
+                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; mix-blend-mode: screen;">
+                    <video style="width: 140%; height: 140%; object-fit: cover;" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
                     <!-- Online Ponto -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
