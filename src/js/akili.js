@@ -9,6 +9,20 @@
 
     // 1. Injetar Estrutura HTML e CSS na Body
     const akiliHTML = `
+    <!-- Motor SVG de Chroma Key Baseado em Hardware (Bypass absoluto de CORS e CORS Canvas) -->
+    <svg width="0" height="0" style="position:absolute; width:0; height:0; pointer-events:none;">
+        <filter id="akili-chroma-key" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                1.5 1.5 1.5 0 -0.25
+            " />
+            <feComponentTransfer>
+                <feFuncA type="linear" slope="4" intercept="0" />
+            </feComponentTransfer>
+        </filter>
+    </svg>
     <!-- CSS Customizado -->
     <style>
     /* Reset local para garantir imunidade */
@@ -33,15 +47,16 @@
     #akili-widget-btn:hover {
         animation-play-state: paused;
     }
-    #akili-widget-btn canvas {
+    #akili-widget-btn video {
         width: 320px; /* Tamanho AUMENTADO do mascote (Maior ainda) */
         height: auto;
         object-fit: contain;
         z-index: 10;
         position: relative;
-        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.3)); /* Sombra suave liberada para Transparência NATIVA */
+        filter: url(#akili-chroma-key) drop-shadow(0 15px 25px rgba(0,0,0, 0.3)); /* Magia pura: Chroma Key via SVG + DropShadow Real */
         transition: transform 0.1s ease-out; /* Suavidade no Tracking */
         transform-origin: center center;
+        pointer-events: none;
     }
     
     /* Animação Hiper-realista de Flutuação */
@@ -238,9 +253,9 @@
     .akili-hide { display: none !important; }
     </style>
     
-    <!-- Botão Flutuante Akili (Motor Canvas Holográfico) -->
+    <!-- Botão Flutuante Akili (Motor Nativo SVG) -->
     <div id="akili-widget-btn" onclick="window.akili.toggle()">
-        <canvas id="akili-canvas"></canvas>
+        <video id="akili-video-main" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
     </div>
     
     <!-- Overlay Escuro -->
@@ -252,7 +267,7 @@
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
                 <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <canvas id="akili-avatar-canvas" style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2;"></canvas>
+                    <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2; filter: url(#akili-chroma-key);"></video>
                     <!-- Online Ponto -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
@@ -296,99 +311,32 @@
     wrapper.innerHTML = akiliHTML;
     document.body.appendChild(wrapper);
 
-    // 2.5 Rastreamento Parallax e Motor de Chroma Key HTML5
+    // 2.5 Rastreamento Parallax Nativo sobre Video
     setTimeout(() => {
-        const lionAvatarBtn = document.getElementById('akili-widget-btn');
-        if (!lionAvatarBtn) return;
-        const lionAvatarCanvas = document.getElementById('akili-canvas');
-        if (!lionAvatarCanvas) return;
-        const ctx = lionAvatarCanvas.getContext('2d', { willReadFrequently: true });
-        
-        // Motor Realtime Chrome Key Robust Version
-        const video = document.createElement('video');
-        video.src = "../../public/imagens/Akili/AKILI 1.mp4"; 
-        video.autoplay = true;
-        video.loop = true;
-        video.muted = true;
-        video.playsInline = true;
-        video.style.position = "absolute";
-        video.style.opacity = "0.001"; // Não use 'display: none', Chrome bloqueia os frames de videos ocultos!
-        video.style.pointerEvents = "none";
-        document.body.appendChild(video);
+        const videoElement = document.getElementById('akili-video-main');
+        if (!videoElement) return;
 
-        let processStarted = false;
-        
-        function processVideoFrame() {
-            if(video.readyState >= 2 && !video.paused) {
-                if(lionAvatarCanvas.width !== video.videoWidth) {
-                    lionAvatarCanvas.width = video.videoWidth;
-                    lionAvatarCanvas.height = video.videoHeight;
-                }
-                
-                try {
-                    ctx.drawImage(video, 0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
-                    let frame = ctx.getImageData(0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
-                    let data = frame.data;
-                    const len = data.length;
-                    
-                    for (let i = 0; i < len; i += 4) {
-                        let r = data[i], g = data[i+1], b = data[i+2];
-                        let maxColor = Math.max(r, g, b); // Brilho do pixel
-                        
-                        // Remoção do Fundo Preto Raiz
-                        if (maxColor < 20) {
-                            data[i+3] = 0; // Invisível total
-                        } else if (maxColor < 50) {
-                            // Suavização do azul que se afasta do preto
-                            data[i+3] = ((maxColor - 20) / 30) * 255;
-                        }
-                    }
-                    ctx.putImageData(frame, 0, 0); 
-                    
-                    // Replicar no Header
-                    const canvasHeader = document.getElementById('akili-avatar-canvas');
-                    if (canvasHeader && canvasHeader.width !== lionAvatarCanvas.width) {
-                        canvasHeader.width = lionAvatarCanvas.width;
-                        canvasHeader.height = lionAvatarCanvas.height;
-                    }
-                    if (canvasHeader) {
-                        canvasHeader.getContext('2d').drawImage(lionAvatarCanvas, 0, 0);
-                    }
-                } catch(e) { /* silent fail for performance if cross origin bugs appear sporadically */ }
-            }
-            requestAnimationFrame(processVideoFrame); 
-        }
+        // Fallback robusto para autoplay bloqueado
+        videoElement.play().catch(()=>{});
 
-        const startEngine = () => {
-            if(!processStarted) {
-                processStarted = true;
-                video.play().catch(()=>{});
-                requestAnimationFrame(processVideoFrame);
-            }
-        };
-
-        video.addEventListener('loadeddata', startEngine);
-        video.addEventListener('play', startEngine);
-        setTimeout(startEngine, 800);
-
-        // Módulo de Tracking Mouse UI Acoplado ao Canvas
+        // Módulo de Tracking Mouse UI Responsivo
         document.addEventListener('mousemove', (e) => {
             if (window.akili && window.akili.isOpen) {
-                lionAvatarCanvas.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                videoElement.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
                 return;
             }
-            const rect = lionAvatarCanvas.getBoundingClientRect();
+            const rect = videoElement.getBoundingClientRect();
             const centerX = rect.left + rect.width / 2;
             const centerY = rect.top + rect.height / 2;
             const deltaX = e.clientX - centerX;
             const deltaY = e.clientY - centerY;
             const rotateY = (deltaX / window.innerWidth) * 35; 
             const rotateX = -(deltaY / window.innerHeight) * 35;
-            lionAvatarCanvas.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            videoElement.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
         });
         
         document.addEventListener('mouseleave', () => {
-            lionAvatarCanvas.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+            videoElement.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
         });
     }, 100);
 
