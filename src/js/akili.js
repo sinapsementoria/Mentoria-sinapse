@@ -33,13 +33,13 @@
     #akili-widget-btn:hover {
         animation-play-state: paused;
     }
-    #akili-widget-btn img {
+    #akili-widget-btn canvas {
         width: 320px; /* Tamanho AUMENTADO do mascote (Maior ainda) */
         height: auto;
         object-fit: contain;
         z-index: 10;
         position: relative;
-        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.3)); /* Sombra suave liberada para PNGs */
+        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.3)); /* Sombra suave liberada para Transparência NATIVA */
         transition: transform 0.1s ease-out; /* Suavidade no Tracking */
         transform-origin: center center;
     }
@@ -238,9 +238,9 @@
     .akili-hide { display: none !important; }
     </style>
     
-    <!-- Botão Flutuante Akili -->
+    <!-- Botão Flutuante Akili (Motor Canvas Holográfico) -->
     <div id="akili-widget-btn" onclick="window.akili.toggle()">
-        <img src="../../public/imagens/Akili/Akili_transparente.png" alt="Akili AI">
+        <canvas id="akili-canvas"></canvas>
     </div>
     
     <!-- Overlay Escuro -->
@@ -252,7 +252,7 @@
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
                 <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <img style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2;" src="../../public/imagens/Akili/Akili_transparente.png" alt="Akili Avatar">
+                    <canvas id="akili-avatar-canvas" style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2;"></canvas>
                     <!-- Online Ponto -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
@@ -296,40 +296,95 @@
     wrapper.innerHTML = akiliHTML;
     document.body.appendChild(wrapper);
 
-    // 2.5 Rastreamento Parallax Holográfico do Leão
+    // 2.5 Rastreamento Parallax e Motor de Chroma Key HTML5
     setTimeout(() => {
         const lionAvatarBtn = document.getElementById('akili-widget-btn');
         if (!lionAvatarBtn) return;
-        const lionAvatarImg = lionAvatarBtn.querySelector('img');
+        const lionAvatarCanvas = document.getElementById('akili-canvas');
+        if (!lionAvatarCanvas) return;
+        const ctx = lionAvatarCanvas.getContext('2d', { willReadFrequently: true });
         
-        if (lionAvatarImg) {
-            document.addEventListener('mousemove', (e) => {
-                // Se a barra estiver aberta ou o bixo invisível, não faz
-                if (window.akili && window.akili.isOpen) {
-                    lionAvatarImg.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-                    return;
+        // Motor de Vídeo Offline com Remoção de Fundo Inteligente (RGB -> Alpha Mode)
+        const video = document.createElement('video');
+        video.src = "../../public/imagens/Akili/AKILI 1.mp4";
+        video.autoplay = true;
+        video.loop = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.crossOrigin = "anonymous";
+        video.style.display = "none";
+        document.body.appendChild(video);
+
+        video.addEventListener('play', function() {
+            function processVideoFrame() {
+                if(video.paused || video.ended) return;
+                
+                // Redimensionar interfaces canvas para encaixe milimétrico com a dimensão original do vídeo
+                if(video.videoWidth && lionAvatarCanvas.width !== video.videoWidth) {
+                    lionAvatarCanvas.width = video.videoWidth;
+                    lionAvatarCanvas.height = video.videoHeight;
                 }
                 
-                const rect = lionAvatarImg.getBoundingClientRect();
-                const centerX = rect.left + rect.width / 2;
-                const centerY = rect.top + rect.height / 2;
-                
-                // Distância do Cursor
-                const deltaX = e.clientX - centerX;
-                const deltaY = e.clientY - centerY;
-                
-                // Amplificador de Inclinação (Max depende da tela)
-                const rotateY = (deltaX / window.innerWidth) * 35; 
-                const rotateX = -(deltaY / window.innerHeight) * 35;
-                
-                lionAvatarImg.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
-            });
-            
-            // Voltar ao normal quando mouse sair
-            document.addEventListener('mouseleave', () => {
-                lionAvatarImg.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
-            });
-        }
+                if(lionAvatarCanvas.width > 0) {
+                    // Desenha o frame opaco do vídeo original (com o fundo da gravação)
+                    ctx.drawImage(video, 0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
+                    
+                    // Varredura cirúrgica Extrato de Pixel
+                    let frame = ctx.getImageData(0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
+                    let data = frame.data;
+                    
+                    // IA Algoritmo Chroma Key (Destruição de matriz negra Alpha Engine)
+                    const threshold = 18;  // Qualidade de recorte extremo pro fundo preto
+                    const feather = 40;    // Pixels ao redor do leão para esfumar o recorte sem gerar bordas duras
+                    
+                    for (let i = 0; i < data.length; i += 4) {
+                        let r = data[i], g = data[i+1], b = data[i+2];
+                        let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Luminância calculada por espectro visual humano
+                        
+                        if (luma < threshold) {
+                            data[i+3] = 0; // Escreve o Pixel de Alpha-0 (100% invisível / sem as caixas)
+                        } else if (luma < threshold + feather) {
+                            let factor = (luma - threshold) / feather;
+                            data[i+3] = Math.floor(factor * 255); // Esfuma sutilmente nas franjas do Leão
+                        }
+                    }
+                    ctx.putImageData(frame, 0, 0); // Estampa de volta ao Canvas (O leão vazado transparente perfeito!)
+                    
+                    // Opcional: Replicar o Feed Vazado também no Header Avatar bolinha!
+                    const canvasHeader = document.getElementById('akili-avatar-canvas');
+                    if (canvasHeader) {
+                        if (canvasHeader.width !== lionAvatarCanvas.width) {
+                            canvasHeader.width = lionAvatarCanvas.width;
+                            canvasHeader.height = lionAvatarCanvas.height;
+                        }
+                        const ctxH = canvasHeader.getContext('2d');
+                        ctxH.drawImage(lionAvatarCanvas, 0, 0);
+                    }
+                }
+                requestAnimationFrame(processVideoFrame); // Engine Repetição a 60FPS
+            }
+            requestAnimationFrame(processVideoFrame);
+        });
+
+        // Módulo de Tracking Mouse UI Acoplado ao Canvas
+        document.addEventListener('mousemove', (e) => {
+            if (window.akili && window.akili.isOpen) {
+                lionAvatarCanvas.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                return;
+            }
+            const rect = lionAvatarCanvas.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            const rotateY = (deltaX / window.innerWidth) * 35; 
+            const rotateX = -(deltaY / window.innerHeight) * 35;
+            lionAvatarCanvas.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+        });
+        
+        document.addEventListener('mouseleave', () => {
+            lionAvatarCanvas.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+        });
     }, 100);
 
     // 3. Lógica do Akili Exposta Globalmente (Namespaced)
