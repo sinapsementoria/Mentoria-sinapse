@@ -266,10 +266,11 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2; filter: url(#akili-chroma-key);"></video>
+                <!-- Avatar Livre sem Círculo -->
+                <div style="position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;">
+                    <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 150%; height: 150%; object-fit: contain; transform: scale(1.4) translateY(-2px); filter: url(#akili-chroma-key); pointer-events: none;"></video>
                     <!-- Online Ponto -->
-                    <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
+                    <div style="position: absolute; bottom: 4px; right: 4px; width: 10px; height: 10px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
                 <div>
                     <h3 style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 20px; color: #0B193C; margin: 0; line-height: 1;">Akili</h3>
