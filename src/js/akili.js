@@ -16,51 +16,39 @@
         box-sizing: border-box;
     }
     
-    /* Botão Flutuante */
+    /* Botão Flutuante (Mascote Livre) */
     #akili-widget-btn {
         position: fixed;
-        bottom: 30px;
+        bottom: 20px;
         right: 30px;
-        width: 68px;
-        height: 68px;
-        border-radius: 50%;
         z-index: 9997;
-        background: linear-gradient(135deg, #1A2242, #0B193C);
-        box-shadow: 0 10px 25px rgba(11,25,60, 0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
+        background: transparent;
         cursor: pointer;
         transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden;
-    }
-    #akili-widget-btn::before {
-        content: '';
-        position: absolute;
-        inset: -2px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, rgba(99,102,241,0.8), rgba(168,85,247,0.8), transparent);
-        z-index: -1;
-        opacity: 0;
-        animation: akiliGlow 3s ease-in-out infinite alternate;
-    }
-    #akili-widget-btn.closed-glow::before {
-        opacity: 0.5; /* Respiração sutil quando fechado */
+        animation: antigravLevitation 4s ease-in-out infinite; /* Flutuação Base */
     }
     #akili-widget-btn:hover {
-        transform: scale(1.06) translateY(-4px);
-        box-shadow: 0 15px 35px rgba(11,25,60, 0.5), 0 0 25px rgba(99,102,241,0.4);
+        animation-play-state: paused;
     }
-    #akili-widget-btn:hover::before {
-        opacity: 0.8;
-    }
-    #akili-widget-btn img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
+    #akili-widget-btn video {
+        width: 170px; /* Tamanho ajustável do mascote em vídeo */
+        height: auto;
+        object-fit: contain;
         z-index: 10;
         position: relative;
+        mix-blend-mode: screen; /* Máscara mágica que remove o fundo preto do vídeo */
+        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.4));
+        transition: transform 0.1s ease-out; /* Suavidade no Tracking */
+        transform-origin: center center;
+    }
+    
+    /* Animação Hiper-realista de Flutuação */
+    @keyframes antigravLevitation {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-12px); }
     }
     
     /* Animação do Pulso/Glow */
@@ -94,7 +82,10 @@
         height: 100%;
         width: 100%;
         max-width: 440px;
-        background: #FFFFFF;
+        background: rgba(255, 255, 255, 0.2); /* Glassmorphism Base */
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-left: 1px solid rgba(255, 255, 255, 0.3);
         z-index: 9999;
         transform: translateX(100%);
         transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
@@ -113,8 +104,8 @@
     
     /* Cabeçalho */
     .akili-glass-header {
-        background: rgba(255, 255, 255, 0.85);
-        backdrop-filter: blur(16px);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         -webkit-backdrop-filter: blur(16px);
         border-bottom: 1px solid rgba(11, 25, 60, 0.05);
         padding: 24px;
@@ -248,9 +239,9 @@
     .akili-hide { display: none !important; }
     </style>
     
-    <!-- Botão Flutuante Akili -->
-    <div id="akili-widget-btn" class="closed-glow" onclick="window.akili.toggle()">
-        <img src="akili_avatar.png" alt="Akili AI" onerror="this.src='https://placehold.co/100x100/1A2242/FFF?text=A'">
+    <!-- Botão Flutuante Akili (Versão VÍDEO) -->
+    <div id="akili-widget-btn" onclick="window.akili.toggle()">
+        <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
     </div>
     
     <!-- Overlay Escuro -->
@@ -261,8 +252,8 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; border: 2px solid #F1F5F9; background: #0B193C; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
-                    <img style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" src="akili_avatar.png" alt="Akili Avatar" onerror="this.src='https://placehold.co/100x100/1A2242/FFF?text=A'">
+                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: #000000; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <video style="width: 140%; height: 140%; object-fit: cover; mix-blend-mode: screen;" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
                     <!-- Online Ponto -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
@@ -305,6 +296,42 @@
     const wrapper = document.createElement('div');
     wrapper.innerHTML = akiliHTML;
     document.body.appendChild(wrapper);
+
+    // 2.5 Rastreamento Parallax Holográfico do Leão
+    setTimeout(() => {
+        const lionAvatarBtn = document.getElementById('akili-widget-btn');
+        if (!lionAvatarBtn) return;
+        const lionAvatarVideo = lionAvatarBtn.querySelector('video');
+        
+        if (lionAvatarVideo) {
+            document.addEventListener('mousemove', (e) => {
+                // Se a barra estiver aberta ou o bixo invisível, não faz
+                if (window.akili && window.akili.isOpen) {
+                    lionAvatarVideo.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    return;
+                }
+                
+                const rect = lionAvatarVideo.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                // Distância do Cursor
+                const deltaX = e.clientX - centerX;
+                const deltaY = e.clientY - centerY;
+                
+                // Amplificador de Inclinação (Max depende da tela)
+                const rotateY = (deltaX / window.innerWidth) * 35; 
+                const rotateX = -(deltaY / window.innerHeight) * 35;
+                
+                lionAvatarVideo.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            });
+            
+            // Voltar ao normal quando mouse sair
+            document.addEventListener('mouseleave', () => {
+                lionAvatarVideo.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+            });
+        }
+    }, 100);
 
     // 3. Lógica do Akili Exposta Globalmente (Namespaced)
     window.akili = {
