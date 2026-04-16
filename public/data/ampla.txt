@@ -1,0 +1,25 @@
+﻿C1  | SEQ
+C2  | UNIVERSIDADE
+C3  | CIDADE
+C4  | UF
+C5  | KM
+C6  | REGIÃO
+C7 Notas ENEM 2025 ==> | VAGAS Ampla concorrência 
+C8  | RED
+C9  | CN
+C10  | CH
+C11  | LIN
+C12  | MAT
+C13 0,00 | Nota final enem 2023
+C14  | Nota final enem 2024
+C15  | Nota final enem 2025
+C16  | NOTA DE CORTE FINAL SISU 2025
+C17  | Parcial 20/01
+C18  | Parcial 21/01
+C19  | Parcial 22/01
+C20  | Parcial 23/01
+C21  | Diferença do corte para a sua maior nota
+C22  | OBERVAÇÃO
+C23  | 
+C24  | 
+C25  | 

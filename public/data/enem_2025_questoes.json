@@ -1,0 +1,392 @@
+[
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 1,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Química",
+    "assunto": "Química Ambiental",
+    "subassunto": "Efeito Estufa e Gases Poluentes",
+    "enunciado": "Considerando o texto, uma alternativa viável para combater o efeito estufa é",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "reduzir o calor irradiado pela Terra mediante a substituição da produção primária pela industrialização refrigerada."
+      },
+      {
+        "letra": "B",
+        "texto": "promover a queima da biomassa vegetal, responsável pelo aumento do efeito estufa devido à produção de CH4."
+      },
+      {
+        "letra": "C",
+        "texto": "reduzir o desmatamento, mantendo-se, assim, o potencial da vegetação em absorver o CO2 da atmosfera."
+      },
+      {
+        "letra": "D",
+        "texto": "aumentar a concentração atmosférica de H2O, molécula capaz de absorver grande quantidade de calor."
+      },
+      {
+        "letra": "E",
+        "texto": "remover moléculas orgânicas polares da atmosfera, diminuindo a capacidade delas de reter calor."
+      }
+    ],
+    "resposta_correta": "C",
+    "imagem_referenciada": false,
+    "texto_apoio": "A atmosfera terrestre é composta pelos gases nitrogênio (N2) e oxigênio (O2), que somam cerca de 99%, e por gases traços, entre eles o gás carbônico (CO2), vapor de água (H2O), metano (CH4), ozônio (O3) e o óxido nitroso (N2O)... A partir da Revolução Industrial, a concentração de gases traços... tem aumentado significativamente. Mais recentemente, outro fator tornou-se diretamente envolvido... o desmatamento.",
+    "habilidade_competencia": "Avaliar propostas de intervenção no meio ambiente.",
+    "dificuldade_estimada": "Fácil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 1"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 2,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Fisiologia Humana",
+    "subassunto": "Metabolismo de Substâncias Tóxicas",
+    "enunciado": "Supondo que seja necessário dar um título para essa figura, a alternativa que melhor traduziria o processo representado seria:",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "Concentração média de álcool no sangue ao longo do dia."
+      },
+      {
+        "letra": "B",
+        "texto": "Variação da frequência da ingestão de álcool ao longo das horas."
+      },
+      {
+        "letra": "C",
+        "texto": "Concentração mínima de álcool no sangue a partir de diferentes dosagens."
+      },
+      {
+        "letra": "D",
+        "texto": "Estimativa de tempo necessário para metabolizar diferentes quantidades de álcool."
+      },
+      {
+        "letra": "E",
+        "texto": "Representação gráfica da distribuição de frequência de álcool em determinada hora do dia."
+      }
+    ],
+    "resposta_correta": "D",
+    "imagem_referenciada": true,
+    "texto_apoio": "Analise a figura. [Gráfico com Concentração de álcool no sangue (mg%) versus Tempo (horas)]",
+    "habilidade_competencia": "Interpretação de gráficos cartesianos relacionados a processos biológicos.",
+    "dificuldade_estimada": "Média",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 1"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 3,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Imunologia",
+    "subassunto": "Vacinas e Vírus (HIV)",
+    "enunciado": "Uma vacina eficiente contra o HIV deveria",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "induzir a imunidade, para proteger o organismo da contaminação viral."
+      },
+      {
+        "letra": "B",
+        "texto": "ser capaz de alterar o genoma do organismo portador, induzindo a síntese de enzimas protetoras."
+      },
+      {
+        "letra": "C",
+        "texto": "produzir antígenos capazes de se ligarem ao vírus, impedindo que este entre nas células do organismo humano."
+      },
+      {
+        "letra": "D",
+        "texto": "ser amplamente aplicada em animais, visto que esses são os principais transmissores do vírus para os seres humanos."
+      },
+      {
+        "letra": "E",
+        "texto": "estimular a imunidade, minimizando a transmissão do vírus por gotículas de saliva."
+      }
+    ],
+    "resposta_correta": "A",
+    "imagem_referenciada": false,
+    "texto_apoio": "Estima-se que haja atualmente no mundo 40 milhões de pessoas infectadas pelo HIV... Nesse cenário de pandemia, uma vacina contra o HIV teria imenso impacto, pois salvaria milhões de vidas.",
+    "habilidade_competencia": "Compreender a função das vacinas no sistema imunológico humano.",
+    "dificuldade_estimada": "Média",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 1"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 4,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Genética e Expressão Gênica",
+    "subassunto": "Interação Genótipo e Ambiente / Clonagem",
+    "enunciado": "Ao final do experimento, os dois grupos de plantas apresentaram",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "os genótipos e os fenótipos idênticos."
+      },
+      {
+        "letra": "B",
+        "texto": "os genótipos idênticos e os fenótipos diferentes."
+      },
+      {
+        "letra": "C",
+        "texto": "diferenças nos genótipos e fenótipos."
+      },
+      {
+        "letra": "D",
+        "texto": "o mesmo fenótipo e apenas dois genótipos diferentes."
+      },
+      {
+        "letra": "E",
+        "texto": "o mesmo fenótipo e grande variedade de genótipos."
+      }
+    ],
+    "resposta_correta": "B",
+    "imagem_referenciada": false,
+    "texto_apoio": "Em um experimento, preparou-se um conjunto de plantas por técnica de clonagem a partir de uma planta original... Um grupo exposto à luz apresentava folhas verdes... o grupo cultivado no escuro apresentava folhas amareladas.",
+    "habilidade_competencia": "Relacionar conceitos de genótipo e fenótipo frente às variáveis ambientais.",
+    "dificuldade_estimada": "Fácil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 2"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 5,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Física",
+    "assunto": "Mecânica (Astronomia)",
+    "subassunto": "História da Ciência e Gravitação",
+    "enunciado": "A respeito dos estudiosos citados no texto, é correto afirmar que",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "Ptolomeu apresentou as ideias mais valiosas, por serem mais antigas e tradicionais."
+      },
+      {
+        "letra": "B",
+        "texto": "Copérnico desenvolveu a teoria do heliocentrismo inspirado no contexto político do Rei Sol."
+      },
+      {
+        "letra": "C",
+        "texto": "Copérnico viveu em uma época em que a pesquisa científica era livre e amplamente incentivada pelas autoridades."
+      },
+      {
+        "letra": "D",
+        "texto": "Kepler estudou o planeta Marte para atender às necessidades de expansão econômica e científica da Alemanha."
+      },
+      {
+        "letra": "E",
+        "texto": "Kepler apresentou uma teoria científica que, graças aos métodos aplicados, pôde ser testada e generalizada."
+      }
+    ],
+    "resposta_correta": "E",
+    "imagem_referenciada": false,
+    "texto_apoio": "Na linha de uma tradição antiga, o astrônomo grego Ptolomeu... A teoria de Ptolomeu resolvia... Copérnico formulou a teoria do heliocentrismo... Kepler verificou que a sua órbita é elíptica. Esse resultado generalizou-se para os demais planetas.",
+    "habilidade_competencia": "Compreender a construção do conhecimento científico e do método dedutivo.",
+    "dificuldade_estimada": "Média",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 2"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 6,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Ecologia",
+    "subassunto": "Ciclos Biogeoquímicos (Carbono)",
+    "enunciado": "A utilização de combustíveis fósseis interfere no ciclo do carbono, pois provoca",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "aumento da porcentagem de carbono contido na Terra."
+      },
+      {
+        "letra": "B",
+        "texto": "redução na taxa de fotossíntese dos vegetais superiores."
+      },
+      {
+        "letra": "C",
+        "texto": "aumento da produção de carboidratos de origem vegetal."
+      },
+      {
+        "letra": "D",
+        "texto": "aumento na quantidade de carbono presente na atmosfera."
+      },
+      {
+        "letra": "E",
+        "texto": "redução da quantidade global de carbono armazenado nos oceanos."
+      }
+    ],
+    "resposta_correta": "D",
+    "imagem_referenciada": false,
+    "texto_apoio": "O ciclo biogeoquímico do carbono compreende diversos compartimentos... Os estoques de carbono armazenados na forma de recursos não renováveis (petróleo) são limitados...",
+    "habilidade_competencia": "Analisar as consequências da queima de biomassa e fósseis nos ciclos biogeoquímicos.",
+    "dificuldade_estimada": "Fácil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 2"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 7,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Biotecnologia",
+    "subassunto": "DNA Recombinante e Engenharia Genética",
+    "enunciado": "A produção de insulina pela técnica do DNA recombinante tem, como consequência,",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "o aperfeiçoamento do processo de extração de insulina a partir do pâncreas suíno."
+      },
+      {
+        "letra": "B",
+        "texto": "a seleção de microrganismos resistentes a antibióticos."
+      },
+      {
+        "letra": "C",
+        "texto": "o progresso na técnica da síntese química de hormônios."
+      },
+      {
+        "letra": "D",
+        "texto": "impacto favorável na saúde de indivíduos diabéticos."
+      },
+      {
+        "letra": "E",
+        "texto": "a criação de animais transgênicos."
+      }
+    ],
+    "resposta_correta": "D",
+    "imagem_referenciada": false,
+    "texto_apoio": "Um novo método para produzir insulina artificial... DNA recombinante... capaz de sintetizar o hormônio (insulina)...",
+    "habilidade_competencia": "Reconhecer os impactos das tecnologias de DNA recombinante na saúde humana.",
+    "dificuldade_estimada": "Fácil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 2"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 8,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Química",
+    "assunto": "Química Ambiental e Energia",
+    "subassunto": "Impactos Ambientais de Matrizes Energéticas",
+    "enunciado": "Entre os possíveis impactos da instalação de uma usina hidrelétrica nessa região, inclui-se",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "a poluição da água por metais da usina."
+      },
+      {
+        "letra": "B",
+        "texto": "a destruição do habitat de animais terrestres."
+      },
+      {
+        "letra": "C",
+        "texto": "o aumento expressivo na liberação de CO2 para a atmosfera."
+      },
+      {
+        "letra": "D",
+        "texto": "o consumo não renovável de toda água que passa pelas turbinas."
+      },
+      {
+        "letra": "E",
+        "texto": "o aprofundamento no leito do rio, com a menor deposição de resíduos no trecho de rio anterior à represa."
+      }
+    ],
+    "resposta_correta": "B",
+    "imagem_referenciada": false,
+    "texto_apoio": "Em uma situação hipotética, optou-se por construir uma usina hidrelétrica em região que abrange diversas quedas d'água em rios cercados por mata...",
+    "habilidade_competencia": "Avaliar criticamente os impactos ambientais de megaobras de geração de energia.",
+    "dificuldade_estimada": "Fácil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 3"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 9,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Evolução e Ecologia",
+    "subassunto": "Paleoclimatologia e Especiação (Refúgios Ecológicos)",
+    "enunciado": "Durante os períodos glaciais,",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "as áreas não-florestais ficam restritas a refúgios ecológicos devido à baixa adaptabilidade de espécies não-florestais a ambientes áridos."
+      },
+      {
+        "letra": "B",
+        "texto": "grande parte da diversidade de espécies vegetais é reduzida, uma vez que necessitam de condições semelhantes a dos períodos interglaciais."
+      },
+      {
+        "letra": "C",
+        "texto": "a vegetação comum ao cerrado deve ter se limitado a uma pequena região do centro do Brasil, da qual se expandiu até atingir a atual distribuição."
+      },
+      {
+        "letra": "D",
+        "texto": "plantas com adaptações ao clima árido, como o desenvolvimento de estruturas que reduzem a perda de água, devem apresentar maior área de distribuição."
+      },
+      {
+        "letra": "E",
+        "texto": "florestas tropicais como a amazônica apresentam distribuição geográfica mais ampla, uma vez que são densas e diminuem a ação da radiação solar sobre o solo e reduzem os efeitos da aridez."
+      }
+    ],
+    "resposta_correta": "D",
+    "imagem_referenciada": false,
+    "texto_apoio": "Essas mudanças resultaram em restrição da distribuição das florestas pluviais, com expansões concomitantes de habitats não-florestais durante períodos áridos (glaciais)...",
+    "habilidade_competencia": "Interpretar as dinâmicas paleoclimáticas e seu efeito na flora sul-americana.",
+    "dificuldade_estimada": "Difícil",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 3"
+  },
+  {
+    "exame": "ENEM",
+    "ano": 2009,
+    "cor_caderno": "AZUL",
+    "numero_questao": 10,
+    "area": "Ciências da Natureza e suas Tecnologias",
+    "disciplina": "Biologia",
+    "assunto": "Bioenergética",
+    "subassunto": "Fotossíntese e Respiração Celular",
+    "enunciado": "As informações sobre obtenção e transformação dos recursos naturais por meio dos processos vitais de fotossíntese e respiração, descritas no texto, permitem concluir que",
+    "alternativas": [
+      {
+        "letra": "A",
+        "texto": "o CO2 e a água são moléculas de alto teor energético."
+      },
+      {
+        "letra": "B",
+        "texto": "os carboidratos convertem energia solar em energia química."
+      },
+      {
+        "letra": "C",
+        "texto": "a vida na Terra depende, em última análise, da energia proveniente do Sol."
+      },
+      {
+        "letra": "D",
+        "texto": "o processo respiratório é responsável pela retirada de carbono da atmosfera."
+      },
+      {
+        "letra": "E",
+        "texto": "a produção de biomassa e de combustível fóssil, por si, é responsável pelo aumento de CO2 atmosférico."
+      }
+    ],
+    "resposta_correta": "C",
+    "imagem_referenciada": false,
+    "texto_apoio": "A fotossíntese é importante para a vida na Terra. Nos cloroplastos... a energia solar é convertida em energia química... liberando CO2 para a atmosfera...",
+    "habilidade_competencia": "Identificar o sol como a matriz final de toda estocagem de energia bioquímica.",
+    "dificuldade_estimada": "Estatística Fácil (Baixa-Média)",
+    "fonte_pdf": "ENEM 2009 - DIA 1 CADERNO AZUL - Pág 3"
+  }
+]

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinapse Pré-Med | Operação Administrativa</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: #03040C; /* Profundo institucional */
+            background-image: 
+                radial-gradient(ellipse at top center, rgba(124, 58, 237, 0.06), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.05), transparent 50%),
+                radial-gradient(circle at 0% 100%, rgba(11, 25, 60, 0.5), transparent 50%);
+            background-attachment: fixed;
+        }
+
+        .glass-header {
+            background: rgba(5, 7, 16, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Ambient glows atrás dos cards para dar volume */
+        .ambient-glow {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(11, 25, 60, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+
+        /* Glass Cards Premium */
+        .premium-card {
+            background: linear-gradient(145deg, rgba(15, 18, 30, 0.7), rgba(8, 12, 25, 0.5));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            border-right: 1px solid rgba(255, 255, 255, 0.03);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(124, 58, 237, 0.02);
+            border-radius: 32px;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Destacar O Card Principal */
+        .premium-card-highlight {
+            background: linear-gradient(145deg, rgba(15, 18, 30, 0.8), rgba(8, 12, 25, 0.6));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-top: 1px solid rgba(168, 85, 247, 0.4);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(124, 58, 237, 0.1), inset 0 0 40px rgba(124, 58, 237, 0.05);
+        }
+
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 50px 100px -15px rgba(0, 0, 0, 1), 0 0 40px rgba(124, 58, 237, 0.15), inset 0 0 60px rgba(124, 58, 237, 0.05);
+            border-color: rgba(124, 58, 237, 0.3);
+            border-top: 1px solid rgba(168, 85, 247, 0.6);
+        }
+
+        .premium-card-highlight:hover {
+            border-color: rgba(124, 58, 237, 0.5);
+            border-top: 1px solid rgba(168, 85, 247, 0.8);
+            box-shadow: 0 50px 100px -15px rgba(0, 0, 0, 1), 0 0 60px rgba(124, 58, 237, 0.25), inset 0 0 80px rgba(124, 58, 237, 0.1);
+        }
+
+        /* Partícula leve para brilho em Hover */
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg);
+            transition: all 0.8s ease;
+        }
+
+        .premium-card:hover::before {
+            left: 150%;
+        }
+
+        /* Ícones com brilho interno */
+        .icon-glow {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.5));
+            transition: all 0.4s ease;
+        }
+
+        .premium-card-highlight .icon-glow {
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.8));
+        }
+
+        .premium-card:hover .icon-glow {
+            filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.9));
+            transform: scale(1.1);
+        }
+
+        /* Gradientes e Textos */
+        .text-gradient {
+            background: linear-gradient(to right, #cfd9df 0%, #e2ebf0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .btn-access {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .premium-card:hover .btn-access {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.4);
+            color: white;
+        }
+
+        /* Botão específico do Highlight */
+        .premium-card-highlight .btn-access {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            border-color: transparent;
+            color: white;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.3);
+        }
+
+        .premium-card-highlight:hover .btn-access {
+            filter: brightness(1.15);
+            box-shadow: 0 12px 35px rgba(124, 58, 237, 0.6);
+        }
+
+        .btn-access .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .premium-card:hover .arrow-icon {
+            transform: translateX(6px);
+        }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="font-body text-slate-300 w-full min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <!-- Top Navigation Window -->
+    <header class="w-full glass-header sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-5">
+                <a href="hub_admin.html" class="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 hover:border-white/20 transition-all group shadow-sm">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-colors">arrow_back</span>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-headline font-extrabold text-white tracking-tight flex items-center gap-3">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#A855F7] shadow-[0_0_10px_rgba(168,85,247,0.8)]"></span>
+                        SINAPSE PRÉ-MED
+                    </h1>
+                    <p class="text-[12px] uppercase text-slate-400 font-extrabold tracking-[0.2em] mt-1 pl-5">Ambiente Gestor</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:flex items-center gap-4">
+                <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest px-3 py-1.5 rounded-lg border border-white/10 bg-white/5 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Sessão Segura
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Glowing orbs -->
+    <div class="ambient-glow" style="top: 20%; left: 0%;"></div>
+    <div class="ambient-glow" style="bottom: 10%; right: 5%; background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(11, 25, 60, 0) 70%);"></div>
+
+    <!-- Main Content Grid -->
+    <main class="flex-1 w-full max-w-[1300px] mx-auto px-6 lg:px-8 py-16 flex flex-col justify-center relative z-10">
+        
+        <div class="text-center mb-16 animate-fade-in-down">
+            <h2 class="text-3xl md:text-5xl font-headline font-extrabold text-white mb-4 tracking-tight">O que você deseja gerenciar?</h2>
+            <p class="text-base text-slate-400 font-medium max-w-2xl mx-auto tracking-wide text-gradient">
+                Ferramentas administrativas da plataforma Sinapse Pré-Med. Escolha a solução operacional para continuar.
+            </p>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center justify-center gap-6 w-full max-w-[1100px] mx-auto mb-16">
+            
+            <!-- Aba 1: Fazer Matrícula -->
+            <a href="#" onclick="alert('Módulo de Matrícula não implementado nesta demo.')" class="group block cursor-pointer outline-none w-full md:w-[320px] transition-transform duration-500 hover:-translate-y-2 relative z-10">
+                <div class="premium-card p-8 h-[280px] flex flex-col justify-between text-center items-center">
+                    <div class="w-16 h-16 rounded-[20px] bg-white/5 border border-white/10 flex items-center justify-center shadow-inner mb-6 transition-transform group-hover:scale-110">
+                        <span class="material-symbols-outlined text-[32px] icon-glow">how_to_reg</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-headline font-extrabold text-white mb-3 group-hover:text-[#E2E8F0] transition-colors leading-tight">
+                            Fazer Matrícula
+                        </h3>
+                        <p class="text-xs leading-relaxed text-slate-400 font-body">
+                            Efetue novos vínculos de alunos às turmas e controle pagamentos.
+                        </p>
+                    </div>
+                    <div class="mt-6 w-full border-t border-white/10 pt-4 text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-indigo-400 transition-colors">
+                        Gerenciar
+                    </div>
+                </div>
+            </a>
+
+            <!-- Aba 2: Cadastro de Alunos -->
+            <a href="#" onclick="alert('O Cadastro de Alunos foi embutido dentro da aba Nexus Provas.')" class="group block cursor-pointer outline-none w-full md:w-[320px] transition-transform duration-500 hover:-translate-y-2 relative z-10">
+                <div class="premium-card p-8 h-[280px] flex flex-col justify-between text-center items-center">
+                    <div class="w-16 h-16 rounded-[20px] bg-white/5 border border-white/10 flex items-center justify-center shadow-inner mb-6 transition-transform group-hover:scale-110">
+                        <span class="material-symbols-outlined text-[32px] icon-glow">manage_accounts</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-headline font-extrabold text-white mb-3 group-hover:text-[#E2E8F0] transition-colors leading-tight">
+                            Cadastro de Alunos
+                        </h3>
+                        <p class="text-xs leading-relaxed text-slate-400 font-body">
+                            Verifique histórico disciplinar e atualize contatos básicos.
+                        </p>
+                    </div>
+                    <div class="mt-6 w-full border-t border-white/10 pt-4 text-xs font-bold uppercase tracking-widest text-slate-500 group-hover:text-indigo-400 transition-colors">
+                        Gerenciar
+                    </div>
+                </div>
+            </a>
+
+            <!-- Aba 3: Nexus Provas (HIGHLIGHT) -->
+            <a href="nexus_provas.html" class="group block cursor-pointer outline-none w-full md:w-[350px] transition-transform duration-500 hover:-translate-y-2 relative z-20">
+                <div class="premium-card premium-card-highlight p-8 h-[300px] flex flex-col justify-between text-center items-center relative overflow-visible">
+                    
+                    <div class="absolute -top-4 w-full text-center flex justify-center">
+                        <span class="px-4 py-1.5 rounded-full bg-[#A855F7]/10 border border-[#A855F7]/30 text-[10px] font-extrabold tracking-widest text-[#A855F7] uppercase shadow-[0_0_15px_rgba(168,85,247,0.2)]">Acesso Global</span>
+                    </div>
+
+                    <div class="w-20 h-20 rounded-[24px] bg-white/10 border border-white/20 flex items-center justify-center shadow-inner mb-4 transition-transform group-hover:scale-110 mt-4">
+                        <span class="material-symbols-outlined text-[40px] icon-glow" style="color: #fff">analytics</span>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-2xl font-headline font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-purple-200 mb-3 leading-tight">
+                            Nexus Provas
+                        </h3>
+                        <p class="text-xs leading-relaxed text-slate-300 font-body font-medium">
+                            Ambiente completo: Simulados, Correção OCR e emissão de Cartões.
+                        </p>
+                    </div>
+                    
+                    <div class="mt-6 w-full border-t border-purple-500/20 pt-4 text-xs font-bold uppercase tracking-widest text-purple-400 group-hover:text-purple-300 transition-colors flex items-center justify-center gap-2">
+                        Lançar Ecossistema <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
+

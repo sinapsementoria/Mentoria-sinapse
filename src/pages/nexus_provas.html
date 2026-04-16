@@ -1,0 +1,2728 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Provas | Sistema de Avaliação Premium</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-manrope { font-family: 'Manrope', sans-serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        
+        /* Tema Cores Nexus */
+        /* Primary: #0B193C, Accent: #6366F1_Indigo, Highlight: #FBBF24_Gold */
+
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+        /* Sidebar item transition */
+        .nav-item {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-item.active {
+            background-color: #0B193C;
+            color: white;
+            box-shadow: 0 4px 15px rgba(11,25,60,0.15);
+        }
+        .nav-item.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1;
+            color: #FBBF24;
+        }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Card Padrao Nexus */
+        .nexus-card {
+            background: #FFFFFF;
+            border: 1px solid #E2E8F0;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px -10px rgba(11,25,60,0.04);
+            transition: box-shadow 0.3s ease;
+        }
+        .nexus-card:hover {
+            box-shadow: 0 15px 50px -10px rgba(11,25,60,0.08);
+            border-color: #CBD5E1;
+        }
+
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .icon-bold { font-variation-settings: 'wght' 600; }
+        
+        /* Esconder abas que nao sao a ativa */
+        /* View Manager overrides Tailwind */
+        .nexus-view { display: none !important; }
+        .nexus-view.active { display: block !important; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden bg-[#FAFAFB] antialiased selection:bg-[#6366F1] selection:text-white">
+
+    <!-- SIDEBAR -->
+    <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col z-30 flex-shrink-0 shadow-[2px_0_24px_rgba(0,0,0,0.02)] relative">
+        
+        <!-- Logo Area -->
+        <div class="h-[120px] px-6 flex items-center justify-center border-b border-slate-100 shrink-0 relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-50"></div>
+            <div class="relative z-10 flex items-center justify-center w-full">
+                <img src="../../public/assets/images/NEXUS PROVAS/NEXUS VETORIZADA.png" alt="Nexus Provas Logo" class="max-w-[180px] max-h-[80px] object-contain drop-shadow-sm">
+            </div>
+        </div>
+
+        <!-- Menu Lateral -->
+        <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1.5 custom-scrollbar">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-2">Visão Operacional</p>
+            
+            <a href="#" onclick="switchView('dashboard')" id="nav-dashboard" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">dashboard</span> Início
+            </a>
+            <a href="#" onclick="switchView('alunos')" id="nav-alunos" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">group</span> Turmas
+            </a>
+            <a href="#" onclick="switchView('provas')" id="nav-provas" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">description</span> Provas & Gabaritos
+            </a>
+            
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-6">Motor de Processamento</p>
+            
+            <a href="#" onclick="switchView('cartoes')" id="nav-cartoes" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">domain_verification</span> Cartões Nominais
+                </div>
+                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+            </a>
+            <a href="#" onclick="switchView('modelosCartao')" id="nav-modelosCartao" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[20px] group-hover:text-amber-500">design_services</span> Cartões de Resposta
+                </div>
+                <span class="bg-amber-100 text-amber-600 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase label-beta">Editor</span>
+            </a>
+            <a href="#" onclick="switchView('correcao')" id="nav-correcao" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">memory</span> Correção Inteligente
+                </div>
+                <span class="bg-indigo-100 text-indigo-600 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase label-beta">Novo</span>
+            </a>
+            <a href="#" onclick="switchView('espelhos')" id="nav-espelhos" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">assignment_ind</span> Espelhos Individuais
+            </a>
+            
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-6">Estatísticas & Sistema</p>
+
+            <a href="#" onclick="switchView('relatorios')" id="nav-relatorios" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">insert_chart</span> Relatórios
+            </a>
+            <a href="#" onclick="switchView('exportacoes')" id="nav-exportacoes" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">ios_share</span> Exportações
+            </a>
+            <a href="#" onclick="switchView('configuracoes')" id="nav-configuracoes" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
+                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">settings</span> Configurações
+            </a>
+        </nav>
+
+        <!-- Footer do Menu -->
+        <div class="p-6 border-t border-slate-100 shrink-0">
+            <a href="sinapse_premed_admin.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-rose-100 bg-rose-50/50 text-rose-600 hover:bg-rose-100 font-semibold text-sm transition-colors">
+                <span class="material-symbols-outlined text-[18px]">logout</span> Voltar ao Hub
+            </a>
+        </div>
+    </aside>
+
+    <!-- CONTAINER PRINCIPAL -->
+    <main class="flex-1 flex flex-col relative h-full overflow-hidden bg-[#FAFAFB]">
+        
+        <!-- TOP HEADER GLOBAR -->
+        <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 flex items-center justify-between shrink-0 z-20 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
+            <div class="flex items-center gap-4">
+                <h2 id="header-title" class="font-manrope text-xl font-extrabold text-[#0B193C] tracking-tight">Dashboard Administrativo</h2>
+            </div>
+
+            <!-- Header Tools -->
+            <div class="flex items-center gap-6">
+                <!-- Search -->
+                <div class="relative w-64 hidden md:block">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                    <input type="text" placeholder="Buscar aluno (Nome/CPF)..." class="w-full bg-slate-100/50 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm font-medium text-slate-700 outline-none focus:border-indigo-400 focus:bg-white transition-all shadow-inner">
+                </div>
+                
+                <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
+                
+                <!-- Quick Actions -->
+                <div class="flex items-center gap-2">
+                    <button class="w-10 h-10 rounded-full border border-slate-200 text-slate-500 hover:bg-slate-50 flex items-center justify-center relative">
+                        <span class="material-symbols-outlined text-[20px]">notifications</span>
+                        <span class="w-2.5 h-2.5 bg-rose-500 border-2 border-white rounded-full absolute top-2 right-2"></span>
+                    </button>
+                    <!-- Perfil Logado -->
+                    <div class="flex items-center gap-3 pl-2 ml-2 border-l border-slate-200 cursor-pointer group">
+                        <div class="text-right hidden lg:block">
+                            <p class="text-xs font-bold text-[#0B193C]">Admin Presidência</p>
+                            <p class="text-[10px] font-bold text-slate-400">Total Access</p>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-[#0B193C] flex items-center justify-center shadow-lg group-hover:shadow-indigo-500/30 transition-shadow">
+                            <span class="material-symbols-outlined text-white icon-fill text-[20px]">shield_person</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- AREA DE RENDERIZACAO DE VIEWS -->
+        <div class="flex-1 overflow-y-auto w-full p-8 relative wrapper-view">
+            
+            <!-- ---------------------------------
+                  VIEW: DASHBOARD
+            ---------------------------------- -->
+            <div id="view-dashboard" class="nexus-view active fade-in pb-10">
+                <!-- KPIs Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    
+                    <!-- KPI 1 -->
+                    <div class="nexus-card p-6 border-l-4 border-l-[#0B193C]">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="w-10 h-10 rounded-[12px] bg-slate-100 flex items-center justify-center text-[#0B193C]">
+                                <span class="material-symbols-outlined icon-fill">groups</span>
+                            </div>
+                            <span class="flex items-center text-emerald-500 text-xs font-bold gap-1 bg-emerald-50 px-2 py-1 rounded-md">
+                                <span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
+                            </span>
+                        </div>
+                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4">Alunos Ativos</p>
+                        <h3 class="font-headline font-extrabold text-3xl text-[#0B193C]">1.428</h3>
+                    </div>
+
+                    <!-- KPI 2 -->
+                    <div class="nexus-card p-6 border-l-4 border-l-indigo-500 relative overflow-hidden">
+                        <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-indigo-50 rounded-full opacity-50 pointer-events-none"></div>
+                        <div class="flex justify-between items-start mb-2 relative z-10">
+                            <div class="w-10 h-10 rounded-[12px] bg-indigo-50 flex items-center justify-center text-indigo-600">
+                                <span class="material-symbols-outlined icon-fill">description</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4 relative z-10">Provas Geradas</p>
+                        <h3 class="font-headline font-extrabold text-3xl text-[#0B193C] relative z-10">145</h3>
+                    </div>
+
+                    <!-- KPI 3 -->
+                    <div class="nexus-card p-6 border-l-4 border-l-emerald-500">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="w-10 h-10 rounded-[12px] bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                <span class="material-symbols-outlined icon-fill">memory</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4">Correções Processadas</p>
+                        <h3 class="font-headline font-extrabold text-3xl text-[#0B193C]">32.540</h3>
+                    </div>
+
+                    <!-- KPI 4 -->
+                    <div class="nexus-card p-6 border-l-4 border-l-[#FBBF24]">
+                        <div class="flex justify-between items-start mb-2">
+                            <div class="w-10 h-10 rounded-[12px] bg-yellow-50 flex items-center justify-center text-yellow-600">
+                                <span class="material-symbols-outlined icon-fill">timer</span>
+                            </div>
+                        </div>
+                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4">Cartões Pendentes</p>
+                        <h3 class="font-headline font-extrabold text-3xl text-[#0B193C]">84</h3>
+                    </div>
+                </div>
+
+                <!-- Secundario Block -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Últimas Provas Cadastradas -->
+                    <div class="lg:col-span-2 nexus-card overflow-hidden flex flex-col">
+                        <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+                            <h3 class="font-manrope font-extrabold text-[#0B193C] text-lg flex items-center gap-2">
+                                <span class="material-symbols-outlined text-indigo-500">checklist</span> Histórico Recente de Aplicação
+                            </h3>
+                            <button onclick="switchView('provas')" class="text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-colors">Ver todas</button>
+                        </div>
+                        <div class="flex-1 overflow-x-auto p-0">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50 border-b border-slate-100 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
+                                        <th class="px-6 py-4">Nome da Prova</th>
+                                        <th class="px-6 py-4">Aplicação</th>
+                                        <th class="px-6 py-4 text-center">Questões</th>
+                                        <th class="px-6 py-4 text-center">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm font-semibold text-slate-700 divide-y divide-slate-50">
+                                    <tr class="hover:bg-slate-50/50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">SM</div>
+                                                <div>
+                                                    <p class="font-bold text-[#0B193C]">Simulado ENEM Nacional - Dia 1</p>
+                                                    <p class="text-[11px] font-bold text-slate-400 uppercase">Linguagens e Humanas</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">12/Acesso/2026</td>
+                                        <td class="px-6 py-4 text-center text-[#0B193C] font-bold">90</td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase tracking-widest">Corrigida</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">DG</div>
+                                                <div>
+                                                    <p class="font-bold text-[#0B193C]">Diagnóstica - Bio e Mat</p>
+                                                    <p class="text-[11px] font-bold text-slate-400 uppercase">Turma Elite</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">08/Acesso/2026</td>
+                                        <td class="px-6 py-4 text-center text-[#0B193C] font-bold">45</td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="px-2.5 py-1 rounded-md bg-amber-100 text-amber-700 text-[10px] font-extrabold uppercase tracking-widest">Em Aplicação</span>
+                                        </td>
+                                    </tr>
+                                    <tr class="hover:bg-slate-50/50 transition-colors">
+                                        <td class="px-6 py-4">
+                                            <div class="flex items-center gap-3">
+                                                <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">BP</div>
+                                                <div>
+                                                    <p class="font-bold text-[#0B193C]">Bolsões Premium 2027</p>
+                                                    <p class="text-[11px] font-bold text-slate-400 uppercase">Público Geral</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">01/Acesso/2026</td>
+                                        <td class="px-6 py-4 text-center text-[#0B193C] font-bold">100</td>
+                                        <td class="px-6 py-4 text-center">
+                                            <span class="px-2.5 py-1 rounded-md bg-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase tracking-widest">Corrigida</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Ranking Right Box -->
+                    <div class="nexus-card p-6 relative overflow-hidden">
+                        <div class="flex justify-between items-center mb-6 relative z-10">
+                            <h3 class="font-manrope font-extrabold text-[#0B193C] text-lg flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sinapse-gold icon-fill">military_tech</span> Top Escore
+                            </h3>
+                            <button class="text-slate-400 hover:text-indigo-600"><span class="material-symbols-outlined">more_vert</span></button>
+                        </div>
+                        
+                        <div class="space-y-4 relative z-10">
+                            <!-- Ranked Student -->
+                            <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div class="w-10 h-10 rounded-full font-bold bg-[#0B193C] text-white flex items-center justify-center shrink-0">1º</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-sm text-[#0B193C] truncate">Pedro Henrique Costa</p>
+                                    <p class="text-[11px] font-bold text-slate-400 uppercase truncate">Turma Elite '26</p>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-sm font-extrabold text-emerald-600">88.5%</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div class="w-10 h-10 rounded-full font-bold bg-slate-200 text-slate-500 flex items-center justify-center shrink-0">2º</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-sm text-[#0B193C] truncate">Mariana Silva G.</p>
+                                    <p class="text-[11px] font-bold text-slate-400 uppercase truncate">Turma Elite '26</p>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-sm font-extrabold text-emerald-600">86.2%</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-100">
+                                <div class="w-10 h-10 rounded-full font-bold bg-slate-200 text-slate-500 flex items-center justify-center shrink-0">3º</div>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-bold text-sm text-[#0B193C] truncate">Lucas Martins</p>
+                                    <p class="text-[11px] font-bold text-slate-400 uppercase truncate">Extensivo MED</p>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-sm font-extrabold text-emerald-600">85.0%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fundo ilustrativo -->
+                        <span class="material-symbols-outlined text-[150px] text-slate-50 absolute -bottom-10 -right-10 icon-fill pointer-events-none select-none z-0 rotate-12">workspace_premium</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ---------------------------------
+                  PLACEHOLDERS PARA OUTRAS VIEWS
+            ---------------------------------- -->
+            <div id="view-alunos" class="nexus-view fade-in">
+                <!-- Controle de Header do Modulo de Alunos -->
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Gestão de Turmas</h3>
+                    <div class="flex items-center gap-3">
+                        <div class="relative w-64">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                            <input type="text" id="filtroTurmaBusca" onkeyup="renderTabelaAlunos()" placeholder="Buscar turma..." class="w-full bg-white border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NOVA ÁREA: Criação de Turma via Excel -->
+                <div class="bg-white rounded-[24px] shadow-sm border border-slate-200 mb-8 overflow-hidden">
+                    <div class="p-6 border-b border-slate-100 bg-gradient-to-r from-slate-50 to-white flex justify-between items-center">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-indigo-50 border border-indigo-100 text-indigo-600 flex items-center justify-center shadow-inner">
+                                <span class="material-symbols-outlined text-[24px]">group_add</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-extrabold text-[#0B193C] text-lg">Criar Nova Turma</h4>
+                                <p class="text-[13px] font-semibold text-slate-400">Importe os dados dos alunos via Excel e estruture sua base operacional.</p>
+                            </div>
+                        </div>
+                        <button onclick="baixarModeloExcel()" class="text-[13px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 border border-indigo-100/50">
+                            <span class="material-symbols-outlined text-[18px]">download</span> Baixar modelo Excel
+                        </button>
+                    </div>
+                    
+                    <div class="p-6 bg-white">
+                        <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                            <!-- Esquerda: Inputs Básicos -->
+                            <div class="md:col-span-5 flex flex-col justify-between space-y-4">
+                                <div class="space-y-4">
+                                    <div class="space-y-1.5">
+                                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Nome da Turma</label>
+                                        <input type="text" id="novaTurmaNome" placeholder="Ex: Extensivo Medicina 2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner placeholder:text-slate-300">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div class="space-y-1.5">
+                                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Unidade Base</label>
+                                            <select id="novaTurmaUnidade" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
+                                                <option value="Sede">Sede Principal</option>
+                                                <option value="Filial 1">Filial Interlagos</option>
+                                            </select>
+                                        </div>
+                                        <div class="space-y-1.5">
+                                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Tipo de Aplicação</label>
+                                            <select id="novaTurmaTipoApp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
+                                                <option value="Geral">Base Curricular</option>
+                                                <option value="Simulado">Ciclo Simulados</option>
+                                                <option value="Prova Diagnóstica">Prova Diagnóstica</option>
+                                                <option value="Concurso de Bolsas">Concurso de Bolsas</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mt-4 pt-4 border-t border-slate-100">
+                                     <button id="btnCriarTurma" onclick="document.getElementById('uploadExcelNativo').click()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-indigo-900/20 transition-all text-sm opacity-50 cursor-not-allowed" disabled>
+                                         <span class="material-symbols-outlined text-[20px]">upload_file</span> SELECIONAR ARQUIVO E CRIAR
+                                     </button>
+                                     <input type="file" id="uploadExcelNativo" accept=".xlsx, .xls" style="display:none;" onchange="importarTurmaExcel(event)" />
+                                </div>
+                            </div>
+                            
+                            <!-- Direita: Dropzone -->
+                            <div class="md:col-span-7 flex flex-col relative group h-[250px]">
+                                <input type="file" title=" " id="dropzoneFile" accept=".xlsx, .xls" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="importarTurmaExcel(event, true)" ondragover="document.getElementById('dropzoneUi').classList.add('border-indigo-400', 'bg-indigo-50/50')" ondragleave="document.getElementById('dropzoneUi').classList.remove('border-indigo-400', 'bg-indigo-50/50')" ondrop="document.getElementById('dropzoneUi').classList.remove('border-indigo-400', 'bg-indigo-50/50')"/>
+                                
+                                <div id="dropzoneUi" class="h-full w-full rounded-2xl border-2 border-dashed border-slate-200 bg-slate-50/80 flex flex-col items-center justify-center gap-4 transition-all group-hover:border-indigo-300 group-hover:bg-indigo-50/30">
+                                    <div class="w-16 h-16 rounded-full bg-white shadow-sm flex items-center justify-center border border-slate-100 text-indigo-400 group-hover:text-indigo-600 group-hover:scale-110 transition-all duration-300">
+                                        <span class="material-symbols-outlined text-[32px]">cloud_upload</span>
+                                    </div>
+                                    <div class="text-center">
+                                        <p class="font-bold text-[#0B193C] text-sm mb-1">Arraste e solte a planilha da turma aqui</p>
+                                        <p class="text-[11px] font-semibold text-slate-400">ou clique em Criar Turma para localizar o arquivo localmente</p>
+                                        <div class="mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded bg-slate-200/50 text-[9px] font-extrabold uppercase tracking-widest text-slate-500">
+                                            <span class="material-symbols-outlined text-[12px]">description</span> .XLSX / .XLS permitidos
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela de Turmas Existentes -->
+                <div class="mb-4 pt-4 border-t border-slate-200 flex justify-between items-center px-2">
+                    <h4 class="font-headline font-extrabold text-lg text-[#0B193C]">Turmas Operacionais</h4>
+                    <span class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest" id="totalTurmasCounter">0 Turmas</span>
+                </div>
+
+                <div class="nexus-card overflow-hidden">
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full min-w-[1000px] text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
+                                    <th class="px-6 py-4">Nome da Turma</th>
+                                    <th class="px-6 py-4">Unidade Base</th>
+                                    <th class="px-6 py-4">Tipo de Aplicação</th>
+                                    <th class="px-6 py-4 text-center">Alunos Inscritos</th>
+                                    <th class="px-6 py-4 text-center">Status</th>
+                                    <th class="px-6 py-4 text-right">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-alunos" class="text-sm font-semibold text-slate-700 divide-y divide-slate-100">
+                                <!-- Injeção via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-provas" class="nexus-view fade-in">
+                <!-- Controle de Header do Modulo de Provas -->
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Cadastro de Provas e Gabaritos</h3>
+                    <button onclick="abrirModalNovaProva()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                        <span class="material-symbols-outlined text-[18px]">add_circle</span> Nova Prova
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <!-- Dashboard Metrics Provas -->
+                    <div class="nexus-card p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Ativas no Bimestre</span>
+                            <span class="material-symbols-outlined text-indigo-400">event_available</span>
+                        </div>
+                        <p class="font-headline font-extrabold text-[#0B193C] text-3xl mt-4">12</p>
+                    </div>
+                    <div class="nexus-card p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Banco de Gabaritos</span>
+                            <span class="material-symbols-outlined text-emerald-400">check_circle</span>
+                        </div>
+                        <p class="font-headline font-extrabold text-[#0B193C] text-3xl mt-4">8</p>
+                    </div>
+                    <div class="nexus-card p-6 flex flex-col justify-between">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Questões Inseridas</span>
+                            <span class="material-symbols-outlined text-[#FBBF24]">format_list_numbered</span>
+                        </div>
+                        <p class="font-headline font-extrabold text-[#0B193C] text-3xl mt-4">760</p>
+                    </div>
+                </div>
+
+                <div class="nexus-card overflow-hidden">
+                    <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                        <h4 class="font-bold text-[#0B193C] text-sm flex items-center gap-2">
+                            <span class="material-symbols-outlined text-[18px] text-indigo-500">list_alt</span> Portfólio de Aplicação
+                        </h4>
+                        <div class="flex gap-2">
+                            <input type="text" id="filtroNomeProva" placeholder="Buscar prova..." onkeyup="renderTabelaProvas()" class="bg-white border border-slate-200 text-[#0B193C] rounded-lg px-3 py-1.5 font-semibold text-xs outline-none focus:border-indigo-400 w-48">
+                            <select id="filtroTipoProva" onchange="renderTabelaProvas()" class="bg-white border border-slate-200 text-[#0B193C] rounded-lg px-3 py-1.5 font-semibold text-xs outline-none focus:border-indigo-400">
+                                <option value="">Todos os Tipos</option>
+                                <option value="Simulado ENEM">Simulado ENEM</option>
+                                <option value="Prova Diagnóstica">Prova Diagnóstica</option>
+                                <option value="Concurso de Bolsas">Concurso de Bolsas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto w-full">
+                        <table class="w-full min-w-[1000px] text-left border-collapse bg-white">
+                            <thead>
+                                <tr class="bg-white border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
+                                    <th class="px-6 py-4">ID Prova</th>
+                                    <th class="px-6 py-4">Título & Modelo</th>
+                                    <th class="px-6 py-4">Estrutura</th>
+                                    <th class="px-6 py-4">Unidade / Publico</th>
+                                    <th class="px-6 py-4 text-center">Status</th>
+                                    <th class="px-6 py-4 text-right">Manejo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody-provas" class="text-sm font-semibold text-slate-700 divide-y divide-slate-100">
+                                <!-- Injeção via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- DIVISORIA DA BIBLIOTECA -->
+                <div class="border-t border-slate-200 mt-8 pt-8 pb-4 shrink-0 px-4">
+                     <h3 class="font-headline font-extrabold text-[#0B193C] text-xl">Biblioteca de Cartões Salvos</h3>
+                     <p class="text-xs text-slate-500 font-semibold mb-4">Gerencie os layouts já configurados e salvos.</p>
+                </div>
+                
+                <!-- TELA: BIBLIOTECA (Movida para Provas & Gabaritos) -->
+                <div id="editor-biblioteca" class="w-full shrink-0 pb-12 px-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6" id="listaModelosCartao">
+                        <!-- Modelos renderizados via JS -->
+                    </div>
+                    
+                    <div id="emptyModelosCard" class="nexus-card p-12 text-center flex flex-col items-center justify-center border-dashed border-2">
+                        <span class="material-symbols-outlined text-4xl text-slate-300 mb-3 block">style</span>
+                        <h3 class="font-bold text-slate-400 text-lg">Nenhum modelo salvo na Biblioteca</h3>
+                        <p class="text-sm text-slate-400 mb-4 max-w-sm">Configure os cartões acessando Menu > Cartões de Resposta (Editor) e clique em Salvar Modelo.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ---------------------------------
+                  VIEW: CARTÕES DE RESPOSTA
+            ---------------------------------- -->
+            <div id="view-cartoes" class="nexus-view fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Emissão de Cartões-Resposta</h3>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                    
+                    <!-- Painel de Geração Lateral -->
+                    <div class="lg:col-span-4 space-y-6">
+                        <div class="nexus-card p-6 bg-white">
+                            <h4 class="font-bold text-[#0B193C] text-sm flex items-center gap-2 mb-4 border-b border-slate-100 pb-3">
+                                <span class="material-symbols-outlined text-[18px] text-indigo-500">settings_account_box</span> Parametrização do Cartão
+                            </h4>
+
+                            <div class="space-y-4">
+                                <div class="space-y-1.5">
+                                    <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione a Turma</label>
+                                    <select id="cartaoSelectTurma" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                                        <option value="">-- Escolher Turma --</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione a Prova Base</label>
+                                    <select id="selProvaBase" onchange="atualizarAbasProvaBase()" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                                        <option value="">-- Escolher Exame --</option>
+                                        <option value="ENEM">Exame Nacional do Ensino Médio (ENEM)</option>
+                                        <option value="VESTIBULAR_UNB">Vestibular - UnB</option>
+                                        <option value="PAS_UNB">Programa de Avaliação Seriada (PAS - UnB)</option>
+                                    </select>
+                                </div>
+                                <div id="containerSubProvas" class="hidden flex-col gap-2 mt-4 p-3 bg-white border border-slate-200 rounded-xl relative">
+                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1 mb-1">Sub-provas <span class="text-slate-400 font-medium">(Marque múltiplas)</span></label>
+                                    <div id="checkSubProvas" class="flex flex-col gap-2 pl-1">
+                                    </div>
+                                </div>
+                                
+                                <div class="pt-4 border-t border-slate-100">
+                                    <button onclick="gerarCartaoVisualizacao()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                                        <span class="material-symbols-outlined text-[18px]">magic_button</span> Preview do Lote (1º Aluno)
+                                    </button>
+                                </div>
+                                
+                                <div class="pt-2">
+                                    <button onclick="confirmarGabaritosLote()" id="btnDownloadCartao" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm opacity-50 pointer-events-none">
+                                        <span class="material-symbols-outlined text-[18px]">check_circle</span> Confirmar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="nexus-card p-6 bg-indigo-50 border-dashed border-2 border-indigo-200 text-center">
+                            <span class="material-symbols-outlined text-[32px] text-indigo-400 mb-2">print</span>
+                            <p class="text-[11px] font-bold text-indigo-700">Modo Lote Ativado: O PDF final conterá folhas de resposta separadas automaticamente para todos os alunos selecionados.</p>
+                        </div>
+                    </div>
+
+                    <!-- Visualizador do Cartão (Direita) -->
+                    <div class="lg:col-span-8 flex justify-center bg-transparent w-full">
+                        
+                        <div class="relative h-[calc(100vh-140px)] w-fit overflow-y-auto custom-scrollbar rounded-xl shadow-2xl border border-slate-200 bg-white">
+                            <!-- Overlay Vazio -->
+                            <div id="cartaoEmptyState" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-50/95 backdrop-blur-sm px-12 text-center" style="width: 210mm;">
+                                <span class="material-symbols-outlined text-[48px] text-slate-300 mb-3">document_scanner</span>
+                                <p class="font-bold text-slate-500">Selecione a turma e a prova para pré-visualizar o layout.</p>
+                            </div>
+
+                            <!-- O Cartão Resposta Dinâmico (Renderizado via Modelo JS) -->
+                            <div id="cartaoPreviewEmissor" class="flex flex-col bg-slate-100 min-h-full" style="width: 210mm;">
+                                <!-- O Layout preenchido e clonado aparecerá aqui durante o preview -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            
+            <!-- ---------------------------------
+                  VIEW: EDITOR DE CARTÕES
+            ---------------------------------- -->
+            <div id="view-modelosCartao" class="nexus-view fade-in pb-10 h-[calc(100vh-100px)] overflow-y-auto custom-scrollbar">
+                <div class="flex justify-between items-center mb-6 shrink-0 shrink-0">
+                    <div>
+                        <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl" id="editorCartaoTitulo">Editor de Cartões</h3>
+                        <p class="text-xs text-slate-500 font-semibold" id="editorCartaoSubtitulo">Parâmetros e design em tempo real.</p>
+                    </div>
+                </div>
+
+                <!-- TELA: EDITOR -->
+                <div id="editor-canvas" class="grid grid-cols-1 lg:grid-cols-12 gap-6 min-h-[500px] shrink-0 mb-8">
+                    
+                    <!-- Parametrização -->
+                    <div class="lg:col-span-4 nexus-card bg-white flex flex-col h-full overflow-hidden">
+                        <div class="p-5 border-b border-slate-100 shrink-0">
+                            <h4 class="font-bold text-[#0B193C] text-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-indigo-500">tune</span> Parâmetros do Layout</h4>
+                        </div>
+                        <div class="flex-1 overflow-y-auto p-5 space-y-6 custom-scrollbar">
+                            
+                            <!-- Dados Basicos -->
+                            <div class="space-y-4">
+                                <h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Identificação do Modelo</h5>
+                                
+                                <div class="space-y-1.5">
+                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Nome de Referência</label>
+                                    <input type="text" id="edNome" oninput="previewRealtime()" placeholder="Ex: ENEM 1º Dia Padrão" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Subtítulo Impresso Central</label>
+                                    <input type="text" id="edSub" oninput="previewRealtime()" placeholder="Ex: SIMULADO GERAL" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400">
+                                </div>
+                            </div>
+                            
+                            <!-- Botoes de Liga/Desliga -->
+                            <div class="space-y-4">
+                                <h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Configuração Visual de Blocos</h5>
+                                
+                                <label class="flex justify-between items-center cursor-pointer p-2 hover:bg-slate-50 rounded-lg border border-transparent hover:border-slate-100 transition-colors">
+                                    <span class="text-xs font-bold text-[#0B193C]">Bloco Opcional: Uso do Chefe de Sala</span>
+                                    <input type="checkbox" id="edChkFiscal" onchange="previewRealtime()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                                </label>
+                                
+                                <label class="flex justify-between items-center cursor-pointer p-2 hover:bg-slate-50 rounded-lg border border-transparent hover:border-slate-100 transition-colors">
+                                    <span class="text-xs font-bold text-[#0B193C]">Ativar Tag do Dia da Prova</span>
+                                    <input type="checkbox" id="edChkSelo" onchange="previewRealtime()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                                </label>
+                                
+                                <div id="divDetalheSelo" class="pl-4 space-y-2 border-l-2 border-indigo-100 ml-2">
+                                    <input type="text" id="edOpSelo" oninput="previewRealtime()" placeholder="Ex: 1º DIA" value="1º DIA" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-1.5 text-sm font-semibold outline-none focus:border-indigo-400 text-center uppercase">
+                                </div>
+                                
+                                <label class="flex justify-between items-center cursor-pointer p-2 hover:bg-slate-50 rounded-lg border border-transparent hover:border-slate-100 transition-colors">
+                                    <span class="text-xs font-bold text-[#0B193C]">Bloco Opcional: Idioma Estrangeiro</span>
+                                    <input type="checkbox" id="edChkIdioma" onchange="previewRealtime()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                                </label>
+                                
+                                <label class="flex justify-between items-center cursor-pointer p-2 hover:bg-slate-50 rounded-lg border border-transparent hover:border-slate-100 transition-colors">
+                                    <span class="text-xs font-bold text-[#0B193C]">Bloco Opcional: Transcrição de Frase</span>
+                                    <input type="checkbox" id="edChkFrase" onchange="previewRealtime()" checked class="w-4 h-4 text-indigo-600 rounded border-slate-300 focus:ring-indigo-500">
+                                </label>
+                            </div>
+                            
+                            <!-- Grade de Respostas -->
+                            <div class="space-y-4 pb-16">
+                                <h5 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest border-b border-slate-100 pb-2">Geometria da Grade de Marcação</h5>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-1.5">
+                                        <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Q. INICIAL (#)</label>
+                                        <input type="number" id="edQStart" value="1" oninput="previewRealtime()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400 text-center">
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Q. FINAL (#)</label>
+                                        <input type="number" id="edQEnd" value="90" oninput="previewRealtime()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400 text-center">
+                                    </div>
+                                </div>
+                                
+                                <div class="space-y-1.5">
+                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Modelo de Alternativa</label>
+                                    <select id="edModeloAlt" onchange="previewRealtime()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400">
+                                        <option value="ABCDE">Padrão: A B C D E</option>
+                                        <option value="ABCD">Padrão: A B C D</option>
+                                        <option value="CE">Certo (C) ou Errado (E) - modelo UnB</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="pt-4 mt-8 border-t border-slate-100">
+                                    <button onclick="salvarModeloEditado()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                                        <span class="material-symbols-outlined text-[20px]">save</span> Salvar na Biblioteca
+                                    </button>
+                                    <p class="text-[10px] text-center text-slate-400 font-bold mt-3">O modelo ficará disponível na aba "Provas & Gabaritos"</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PREVIEW / GIGANTE -->
+                    <div class="lg:col-span-8 bg-slate-200/50 rounded-2xl border border-slate-200 shadow-inner flex justify-center overflow-y-auto p-4 custom-scrollbar relative h-[calc(100vh-210px)]">
+                        <div id="cartaoEditableTemplate" class="bg-white relative shrink-0 font-sans text-black flex flex-col pt-6 font-medium" style="width: 210mm; height: 297mm; max-height: 297mm; overflow: hidden; transform: scale(0.8); transform-origin: top center; margin-bottom: 50px;">
+                            <!-- Marcas de Corte -->
+                            <div class="absolute top-2 left-2 w-8 h-8 border-t-[6px] border-l-[6px] border-black"></div>
+                            <div class="absolute top-2 right-2 w-8 h-8 border-t-[6px] border-r-[6px] border-black"></div>
+                            <div class="absolute bottom-2 left-2 w-8 h-8 border-b-[6px] border-l-[6px] border-black"></div>
+                            <div class="absolute bottom-2 right-2 w-8 h-8 border-b-[6px] border-r-[6px] border-black"></div>
+
+                            <div class="flex-1 flex flex-col mx-4 mt-6">
+                                
+                                <!-- HEADER MASTER -->
+                                <div class="flex items-center justify-between pb-2 mb-2 relative">
+                                    <div class="flex items-center gap-6 ml-8 mt-1">
+                                        <img src="../../public/assets/images/NEXUS PROVAS/NEXUS VETORIZADA.png" class="h-20 object-contain" alt="Nexus">
+                                    </div>
+                                    <div class="absolute inset-0 flex flex-col justify-center items-center pointer-events-none">
+                                        <h1 class="text-[36px] font-black italic tracking-tighter uppercase mb-0 leading-none text-[#EB3223]">CARTÃO-RESPOSTA</h1>
+                                        <h2 class="text-[12px] font-extrabold uppercase mt-1 tracking-widest text-[#EB3223] tmp-prova">EXAME NACIONAL DO ENSINO MÉDIO - ENEM</h2>
+                                    </div>
+                                    <div class="tmp-selo-block border-[3px] border-black p-1 bg-white relative z-10">
+                                        <div class="border-[2px] border-black px-4 py-1 flex justify-center items-center">
+                                            <span class="tmp-selo-text font-black text-[30px] uppercase">1º DIA</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CAIXA VERMELHA SUPERIOR: DADOS -->
+                                <div class="border-[3px] border-black flex flex-col">
+                                    <div class="flex border-b-[3px] border-[#EB3223]">
+                                        <!-- Nome Participante -->
+                                        <div class="flex-1 flex flex-col border-r-[3px] border-[#EB3223] bg-white">
+                                            <div class="px-2 py-1 border-b-[3px] border-[#EB3223] flex items-center h-8 bg-white overflow-hidden">
+                                                <span class="n_nome text-[10px] uppercase font-black text-black tracking-widest truncate w-full">Nome completo do Participante</span>
+                                            </div>
+                                            <div class="relative flex-1 p-2 bg-white flex flex-col justify-end pb-3">
+                                                <div class="w-full mt-10">
+                                                    <div class="border-b-[1.5px] border-[#EB3223] border-dashed"></div>
+                                                    <span class="text-[8px] font-black uppercase text-black tracking-widest text-center block mt-1">Assinatura do Participante</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Turma / CPF / Chefe de Sala -->
+                                        <div class="w-[280px] flex flex-col">
+                                            <div class="flex border-b-[3px] border-[#EB3223] h-12">
+                                                <div class="flex-1 flex flex-col border-r-[3px] border-[#EB3223]">
+                                                    <div class="bg-[#EB3223] text-white text-center py-[2px] text-[9px] font-black uppercase tracking-widest">TURMA</div>
+                                                    <div class="flex-1 flex justify-center items-center bg-white">
+                                                        <span class="n_turma font-bold text-[11px] uppercase truncate px-1"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="flex-1 flex flex-col">
+                                                    <div class="bg-[#EB3223] text-white text-center py-[2px] text-[9px] font-black uppercase tracking-widest">MATRÍCULA</div>
+                                                    <div class="flex-1 flex justify-center items-center bg-white">
+                                                        <span class="n_cpf font-mono font-black text-[13px] tracking-widest truncate px-1 text-center">025.058.632-28</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tmp-fiscal-block flex-1 flex flex-col bg-white">
+                                                <div class="bg-[#EB3223] text-white text-center py-[2px]">
+                                                    <span class="text-[8.5px] uppercase font-black tracking-widest">PARA USO DO CHEFE DE SALA</span>
+                                                </div>
+                                                <div class="flex-1 px-3 py-2 flex flex-col justify-between">
+                                                    <label class="flex justify-between items-center"><span class="text-[8.5px] font-bold">Participante <span class="text-[#EB3223] font-black">AUSENTE?</span></span> <div class="flex items-center gap-1.5"><div class="w-4 h-4 rounded-full border border-black flex items-center justify-center"></div><span class="text-[8.5px] text-[#EB3223] font-black">SIM</span></div></label>
+                                                    <label class="flex justify-between items-center"><span class="text-[8.5px] font-bold text-[#EB3223]">CARTÃO-RESPOSTA <span class="text-black">em BRANCO?</span></span> <div class="flex items-center gap-1.5"><div class="w-4 h-4 rounded-full border border-black flex items-center justify-center"></div><span class="text-[8.5px] text-[#EB3223] font-black">SIM</span></div></label>
+                                                    <label class="flex justify-between items-center"><span class="text-[8.5px] font-bold text-[#EB3223]">REDAÇÃO <span class="text-black">em BRANCO?</span></span> <div class="flex items-center gap-1.5"><div class="w-4 h-4 rounded-full border border-black flex items-center justify-center"></div><span class="text-[8.5px] text-[#EB3223] font-black">SIM</span></div></label>
+                                                    <label class="flex justify-between items-center"><span class="text-[8.5px] font-bold text-[#EB3223]">CARTÃO-RESPOSTA <span class="text-black">Substituído?</span></span> <div class="flex items-center gap-1.5"><div class="w-4 h-4 rounded-full border border-black flex items-center justify-center"></div><span class="text-[8.5px] text-[#EB3223] font-black">SIM</span></div></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-end mt-4 mb-4 pl-4">
+                                    <span class="text-[10px] font-black font-mono">ID</span>
+                                    <div class="w-5 h-5 bg-black ml-4"></div>
+                                    <div class="w-5 h-5 bg-black ml-8"></div>
+                                    <div class="w-3 h-5 bg-black ml-1"></div>
+                                    <div class="w-5 h-5 bg-black ml-1"></div>
+                                    <div class="w-5 h-5 bg-black ml-8"></div>
+                                </div>
+                                
+                                <!-- INSTRUÇÕES -->
+                                <div class="w-full flex">
+                                    <div class="border-[3px] border-black border-r-0 border-b-0 w-4 h-4 mt-2"></div>
+                                    <div class="flex-1 border-t-[3px] border-black mt-2 text-center pt-3 px-10 relative">
+                                        <div class="absolute -top-[10px] left-0 right-0 flex justify-center">
+                                            <span class="bg-white px-2 text-[14px] font-black text-[#EB3223]">INSTRUÇÕES</span>
+                                        </div>
+                                        <div class="text-[9.5px] text-justify font-bold leading-tight flex flex-col gap-1.5">
+                                            <p>1. Verifique se o seu nome completo, a data de nascimento e os demais dados impressos neste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO estão corretos. Preencha o seu nome completo e assine no local apropriado.</p>
+                                            <p>2. O CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO é o único documento que será utilizado para a correção eletrônica de suas provas. Não o amasse, não o rasgue, não o dobre, nem o rasure. Não haverá substituição deste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO por erro de preenchimento e/ou destaque.</p>
+                                            <p>3. Preencha suas respostas nos campos apropriados deste CARTÃO-RESPOSTA, conforme o exemplo de preenchimento, sob o risco de inviabilidade da leitura óptica de suas respostas.</p>
+                                            <p>4. <b>FRAUDAR O ENEM É CRIME. Código Penal Brasileiro Art. 311-A.</b></p>
+                                            <p class="text-[#EB3223]">5. DESTAQUE ESTE CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO E ENTREGUE-O AO CHEFE DE SALA, AO TÉRMINO DO EXAME, SOB PENA DE SUA ELIMINAÇÃO.</p>
+                                        </div>
+                                    </div>
+                                    <div class="border-[3px] border-black border-l-0 border-b-0 w-4 h-4 mt-2"></div>
+                                </div>
+
+                                <!-- FRASE, IDIOMA & EXEMPLO -->
+                                <div class="flex flex-col mt-4 w-[calc(100%-8px)] mx-auto gap-3">
+                                    <!-- Frase -->
+                                    <div class="tmp-frase-block flex border-[1.5px] border-[#EB3223] items-center px-4 py-2 relative w-[40%]">
+                                        <p class="text-[9px] font-medium text-black leading-tight text-center w-full">Transcreva aqui a frase apresentada na <br/>capa de seu <b>CADERNO DE QUESTÕES</b>,<br/> conforme as instruções nela contidas.</p>
+                                        <div class="absolute -right-[13px] top-[50%] -translate-y-1/2 w-[24px] h-[24px] rotate-45 border-t-[1.5px] border-r-[1.5px] border-[#EB3223] bg-white"></div>
+                                    </div>
+                                    
+                                    <!-- Idioma + Exemplo -->
+                                    <div class="flex gap-4">
+                                        <div class="tmp-idioma-block flex border-[1.5px] border-[#EB3223] flex-1 mr-4">
+                                            <div class="bg-[#EB3223] text-white w-[50%] p-2 flex items-center justify-center">
+                                                <p class="text-[9.5px] font-black text-center leading-tight uppercase">PREENCHA O CAMPO CORRESPONDENTE À SUA OPÇÃO DE LÍNGUA ESTRANGEIRA</p>
+                                            </div>
+                                            <div class="w-[50%] flex justify-evenly items-center relative gap-4">
+                                                <div class="flex-1 flex flex-col items-center justify-center gap-1.5 h-full">
+                                                    <div class="w-[14px] h-[14px] rounded-full border border-black bg-white"></div>
+                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nowrap">Língua Inglesa</span>
+                                                </div>
+                                                <div class="w-px h-[80%] bg-black/10 absolute left-1/2 top-1/2 -translate-y-1/2"></div>
+                                                <div class="flex-1 flex flex-col items-center justify-center gap-1.5 h-full">
+                                                    <div class="w-[14px] h-[14px] rounded-full border border-black bg-white"></div>
+                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nowrap">Língua Espanhola</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex-1 flex flex-col items-center">
+                                            <span class="text-[9.5px] font-black text-[#EB3223] uppercase mb-1">EXEMPLO DE PREENCHIMENTO</span>
+                                            <div class="flex items-end justify-center gap-3">
+                                                <div class="flex flex-col gap-1.5 text-[9px] font-bold mt-2">
+                                                    <span class="text-right">resposta à questão X = <span class="text-[#EB3223] font-black">B</span></span>
+                                                    <span class="text-right">resposta à questão Y = <span class="text-[#EB3223] font-black">D</span></span>
+                                                    <span class="text-right">resposta à questão Z = <span class="text-[#EB3223] font-black">E</span></span>
+                                                </div>
+                                                <div class="flex flex-col items-center">
+                                                    <span class="text-[#EB3223] font-black text-[8px] mb-1">QUESTÃO / RESPOSTA</span>
+                                                    <div class="flex gap-1 items-center mb-1">
+                                                        <span class="text-[9px] font-black text-[#EB3223] w-2 text-right mr-1">X</span>
+                                                        <div class="flex gap-1.5">
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">A</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] bg-black rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]"></div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">C</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">D</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">E</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Y demo -->
+                                                    <div class="flex gap-1 items-center mb-1">
+                                                        <span class="text-[9px] font-black text-[#EB3223] w-2 text-right mr-1">Y</span>
+                                                        <div class="flex gap-1.5">
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">A</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">B</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">C</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] bg-black rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]"></div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">E</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Z demo -->
+                                                    <div class="flex gap-1 items-center mb-1">
+                                                        <span class="text-[9px] font-black text-[#EB3223] w-2 text-right mr-1">Z</span>
+                                                        <div class="flex gap-1.5">
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">A</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">B</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">C</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]">D</div>
+                                                            <div class="w-[14px] h-[14px] border-[1px] border-[#EB3223] bg-black rounded-full flex items-center justify-center text-[7px] font-extrabold text-[#EB3223]"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- GABARITO GRID LARGA -->
+                                <!-- flex-1 preenche o resto da página. A função Javascript distribuírá as colunas horizontais  -->
+                                <div class="tmp-grid-container flex w-full gap-2 mt-4 flex-1 pb-4">
+                                    <!-- Renderizado no JS, 6+ colunas -->
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------------------------------
+                  VIEW: MOTOR DE CORREÇÃO
+            ---------------------------------- -->
+            <div id="view-correcao" class="nexus-view fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Motor de Correção Automática</h3>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Painel de Leitura / Input -->
+                    <div class="nexus-card p-6 bg-white min-h-[500px]">
+                        <h4 class="font-bold text-[#0B193C] text-sm flex items-center gap-2 mb-4 border-b border-slate-100 pb-3">
+                            <span class="material-symbols-outlined text-[18px] text-indigo-500">qr_code_scanner</span> Upload de Cartões (Leitura)
+                        </h4>
+                        
+                        <div class="space-y-4 mb-6">
+                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione Lote ou Aluno</label>
+                            <select id="correcaoSelectAluno" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                                <!-- preenchido via JS -->
+                            </select>
+                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione Prova</label>
+                            <select id="correcaoSelectProva" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                                <!-- preenchido via JS -->
+                            </select>
+                        </div>
+
+                        <div class="border-2 border-dashed border-slate-300 rounded-xl bg-slate-50 p-8 text-center flex flex-col items-center justify-center cursor-pointer hover:bg-slate-100 transition-colors h-48">
+                            <span class="material-symbols-outlined text-[40px] text-slate-400 mb-2">upload_file</span>
+                            <p class="font-bold text-[#0B193C] mb-1">Arraste os PDFs digitalizados aqui</p>
+                            <p class="text-xs text-slate-500">ou clique para importar do computador</p>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-3">
+                            <button onclick="simularLeituraCorrecao()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 text-sm">
+                                <span class="material-symbols-outlined text-[18px]">memory</span> Simular Leitura e Correção
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Fila de Processamento -->
+                    <div class="nexus-card bg-slate-900 overflow-hidden min-h-[500px] flex flex-col relative text-white">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                        <div class="p-6 border-b border-slate-800 relative z-10 flex items-center justify-between">
+                            <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[18px] text-emerald-400">terminal</span> Terminal de Operações
+                            </h4>
+                            <span class="flex h-3 w-3 relative">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+                            </span>
+                        </div>
+                        <div id="terminalCorrecao" class="flex-1 p-6 font-mono text-[11px] text-emerald-400 overflow-y-auto space-y-2 relative z-10 leading-relaxed min-h-[300px]">
+                            <p class="text-slate-500">NEXUS OCR ENGINE V2.0 READY.</p>
+                            <p class="text-slate-500">AGUARDANDO INGESTÃO DE DADOS...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ---------------------------------
+                  VIEW: ESPELHOS INDIVIDUAIS
+            ---------------------------------- -->
+            <div id="view-espelhos" class="nexus-view fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Boletins e Espelhos Individuais</h3>
+                    <button onclick="imprimirEspelho()" class="bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all text-sm">
+                        <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span> Gerar PDF Espelho
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <!-- Selecao -->
+                    <div class="lg:col-span-1 border-r border-slate-200 pr-4 space-y-4">
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Filtro de Desempenho</p>
+                        <select id="espelhoSelectResultado" onchange="renderizarEspelho()" class="w-full bg-white border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400 shadow-sm">
+                            <option value="">-- Selecione Resultado --</option>
+                        </select>
+                        <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-xl mt-6">
+                            <span class="material-symbols-outlined text-indigo-500 mb-2">insights</span>
+                            <p class="font-bold text-sm text-[#0B193C] mb-1">Métricas TRI/Clássica</p>
+                            <p class="text-xs text-slate-600">O sistema consolida os resultados brutos em percentuais para geração do espelho.</p>
+                        </div>
+                    </div>
+
+                    <!-- Area de Visualizacao do Espelho Impressionante -->
+                    <div class="lg:col-span-3 flex justify-center bg-slate-100 rounded-2xl p-6 shadow-inner relative min-h-[600px] overflow-hidden">
+                        
+                        <div id="espelhoEmptyState" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-100/90 backdrop-blur-sm">
+                            <span class="material-symbols-outlined text-[48px] text-slate-300 mb-3">query_stats</span>
+                            <p class="font-bold text-slate-500">Selecione um resultado processado para visualizar.</p>
+                        </div>
+
+                        <!-- Pagina A4 Espelho -->
+                        <div id="espelhoA4Template" class="bg-white w-[700px] shadow-xl p-8 pb-12 relative print-exact-A4" style="transform-origin: top center; transform: scale(0.9);">
+                            <!-- Cabeçalho -->
+                            <div class="flex justify-between items-center border-b-[3px] border-[#0B193C] pb-4 mb-6">
+                                <div>
+                                    <h2 class="font-headline font-extrabold text-3xl text-[#0B193C] tracking-tighter">BOLETIM DE PERFORMANCE</h2>
+                                    <p class="font-bold text-slate-400 text-xs tracking-[0.2em] uppercase mt-1">Sinapse Pré-Med Analytics</p>
+                                </div>
+                                <div class="text-right">
+                                    <div class="px-3 py-1 bg-[#0B193C] text-white font-bold text-xs uppercase tracking-widest inline-block mb-1">OFICIAL</div>
+                                    <p class="font-mono text-[9px] text-slate-500 font-bold" id="esp_hash">HASH: #000000</p>
+                                </div>
+                            </div>
+
+                            <!-- Perfil Aluno Topo -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-6 items-center mb-6">
+                                <div class="w-16 h-16 bg-[#0B193C] rounded-full flex items-center justify-center text-white font-headline text-2xl font-bold" id="esp_inicial">
+                                    -
+                                </div>
+                                <div class="flex-1">
+                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-0.5">Candidato Associado</p>
+                                    <h3 class="font-bold text-xl text-[#0B193C]" id="esp_nome">--</h3>
+                                    <p class="text-sm font-semibold text-indigo-600 mt-1" id="esp_curso">--</p>
+                                </div>
+                                <div class="text-right border-l border-slate-200 pl-6 space-y-1">
+                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Inscrição</p>
+                                    <p class="font-mono font-bold text-slate-700" id="esp_insc">--</p>
+                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-2">Unidade</p>
+                                    <p class="font-bold text-slate-700 text-xs" id="esp_unidade">--</p>
+                                </div>
+                            </div>
+
+                            <p class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">Resumo Global | <span id="esp_provaNome" class="text-indigo-600">--</span></p>
+
+                            <!-- Big Metrics -->
+                            <div class="grid grid-cols-3 gap-4 mb-8">
+                                <div class="border border-slate-200 rounded-xl p-4 bg-white text-center shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 inset-x-0 h-1 bg-slate-200"></div>
+                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1 mt-1">Total de Questões</p>
+                                    <p class="font-headline font-extrabold text-3xl text-[#0B193C]" id="esp_totalQ">--</p>
+                                </div>
+                                <div class="border border-emerald-200 rounded-xl p-4 bg-emerald-50 text-center shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 inset-x-0 h-1 bg-emerald-500"></div>
+                                    <p class="text-[10px] font-extrabold text-emerald-700 uppercase tracking-widest mb-1 mt-1">Acertos Claros</p>
+                                    <p class="font-headline font-extrabold text-3xl text-emerald-600" id="esp_acertos">--</p>
+                                </div>
+                                <div class="border border-indigo-200 rounded-xl p-4 bg-[#0B193C] text-center shadow-sm relative overflow-hidden">
+                                    <div class="absolute top-0 inset-x-0 h-1 bg-indigo-500"></div>
+                                    <p class="text-[10px] font-extrabold text-indigo-200 uppercase tracking-widest mb-1 mt-1">Aproveitamento (%)</p>
+                                    <p class="font-headline font-extrabold text-3xl text-white" id="esp_percentual">--</p>
+                                </div>
+                            </div>
+
+                            <!-- Area Gráfico Categoria Dummy -->
+                            <p class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">Distribuição de Acertos (Simulação de Áreas)</p>
+                            <div class="flex items-center gap-6 mb-8 mt-4">
+                                <div class="w-1/2">
+                                    <canvas id="espelhoChart" width="300" height="200"></canvas>
+                                </div>
+                                <div class="w-1/2 space-y-3">
+                                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">Linguagens</span>
+                                        <span class="text-xs font-extrabold text-emerald-600">Alta perform.</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">Humanas</span>
+                                        <span class="text-xs font-extrabold text-emerald-600">Dentro da meta</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">Natureza</span>
+                                        <span class="text-xs font-extrabold text-rose-500">Atenção Crítica</span>
+                                    </div>
+                                    <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">Matemática</span>
+                                        <span class="text-xs font-extrabold text-yellow-600">Mediano</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8 text-center bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                                <p class="text-xs font-bold text-slate-500 italic">"Este relatório é um espelho diagnóstico automatizado pelo Nexus Provas. Recomendamos anexar esse material à sua Mentoria Semanal para calibração de estudos."</p>
+                            </div>
+
+                            <div class="absolute bottom-4 left-8 right-8 flex justify-between text-[8px] font-bold text-slate-400 uppercase">
+                                <span>Impressão Via Nexus Admin</span>
+                                <span>Gerado automaticamente</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-relatorios" class="nexus-view fade-in">
+                <div class="h-[600px] flex items-center justify-center bg-white rounded-[24px] border border-slate-200 text-center flex-col gap-4">
+                    <span class="material-symbols-outlined text-[60px] text-slate-300">engineering</span>
+                    <h3 class="font-manrope font-extrabold text-xl text-slate-400">Painel de Relatórios em construção</h3>
+                </div>
+            </div>
+
+            <div id="view-exportacoes" class="nexus-view fade-in">
+                <div class="h-[600px] flex items-center justify-center bg-white rounded-[24px] border border-slate-200 text-center flex-col gap-4">
+                    <span class="material-symbols-outlined text-[60px] text-slate-300">engineering</span>
+                    <h3 class="font-manrope font-extrabold text-xl text-slate-400">Módulo de Exportações em construção</h3>
+                </div>
+            </div>
+
+            <div id="view-configuracoes" class="nexus-view fade-in">
+                <div class="h-[600px] flex items-center justify-center bg-white rounded-[24px] border border-slate-200 text-center flex-col gap-4">
+                    <span class="material-symbols-outlined text-[60px] text-slate-300">engineering</span>
+                    <h3 class="font-manrope font-extrabold text-xl text-slate-400">Settings em construção</h3>
+                </div>
+            </div>
+
+    </main>
+
+    <!-- VIEW MAPEAMENTO DE COLUNAS -->
+    <div id="view-mapeamento-importacao" class="fixed inset-0 bg-[#FAFAFB] z-[115] hidden flex-col overflow-y-auto">
+        <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
+            <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
+                <button onclick="cancelarMapeamento()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div>
+                    <h2 class="font-headline font-extrabold text-[#0B193C] text-xl tracking-tight leading-none mb-1">Mapeamento da Planilha</h2>
+                    <p class="text-[11px] font-bold tracking-widest uppercase text-slate-400">Verifique e ajuste o reconhecimento de colunas</p>
+                </div>
+                
+                <div class="ml-auto flex items-center gap-6">
+                    <button onclick="avancarParaAuditoria()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                        Avançar para Auditoria <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 w-full max-w-4xl mx-auto px-8 py-8 flex flex-col gap-6">
+            <div class="bg-white p-8 rounded-[24px] border border-slate-200 shadow-sm">
+                <div class="flex flex-col gap-2 mb-8 border-b border-slate-100 pb-6">
+                    <h3 class="font-headline font-bold text-[#0B193C] text-lg">Configuração de Campos</h3>
+                    <p class="text-sm font-semibold text-slate-500">Encontramos <span id="mapQtdColunas" class="text-indigo-600 font-extrabold bg-indigo-50 px-2 py-0.5 rounded">0</span> cabeçalhos na sua planilha. Ligamos automaticamente os campos conhecidos, mas você pode ajustá-los abaixo caso algo esteja errado.</p>
+                </div>
+                
+                <div id="mapeamentoContainer" class="flex flex-col gap-5">
+                    <!-- INJECTED BY JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW PREVIEW IMPORTACAO EXCEL -->
+    <div id="view-preview-importacao" class="fixed inset-0 bg-[#FAFAFB] z-[110] hidden flex-col overflow-y-auto">
+        <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
+            <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
+                <button onclick="cancelarImportacao()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar e Descartar">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+                <div>
+                    <h2 class="font-headline font-extrabold text-[#0B193C] text-xl tracking-tight leading-none mb-1">Auditoria de Importação</h2>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400">Turma:</span>
+                        <span id="previewTurmaNome" class="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded">...</span>
+                        <span class="text-[10px] font-bold tracking-widest uppercase text-slate-400 ml-2">Unidade:</span>
+                        <span id="previewTurmaUnidade" class="text-[11px] font-bold text-slate-600 bg-slate-100 px-2 py-0.5 rounded">...</span>
+                    </div>
+                </div>
+                
+                <div class="ml-auto flex items-center gap-6">
+                    <button onclick="confirmarImportacaoValidados()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                        Confirmar e Importar Válidos <span class="material-symbols-outlined text-[18px]">check_circle</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 w-full max-w-7xl mx-auto px-8 py-8 flex flex-col gap-6">
+            
+            <div class="grid grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Total Lido</span>
+                        <span class="material-symbols-outlined text-slate-300">dataset</span>
+                    </div>
+                    <p class="font-headline font-extrabold text-[#0B193C] text-3xl" id="prevTotal">0</p>
+                </div>
+                <div class="bg-emerald-50 p-5 rounded-2xl border border-emerald-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-extrabold text-emerald-600/70 uppercase tracking-widest">Válidos</span>
+                        <span class="material-symbols-outlined text-emerald-400">check_circle</span>
+                    </div>
+                    <p class="font-headline font-extrabold text-emerald-600 text-3xl" id="prevValidos">0</p>
+                </div>
+                <div class="bg-amber-50 p-5 rounded-2xl border border-amber-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-extrabold text-amber-600/70 uppercase tracking-widest">Incompletos ou com alertas</span>
+                        <span class="material-symbols-outlined text-amber-400">warning</span>
+                    </div>
+                    <p class="font-headline font-extrabold text-amber-600 text-3xl" id="prevIncompletos">0</p>
+                </div>
+                <div class="bg-rose-50 p-5 rounded-2xl border border-rose-100 shadow-sm flex flex-col justify-between">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-[10px] font-extrabold text-rose-600/70 uppercase tracking-widest">Inválidos / Duplicados</span>
+                        <span class="material-symbols-outlined text-rose-400">error</span>
+                    </div>
+                    <p class="font-headline font-extrabold text-rose-600 text-3xl" id="prevInvalidos">0</p>
+                </div>
+            </div>
+
+            <div class="nexus-card overflow-hidden flex-1 flex flex-col">
+                <div class="p-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
+                    <p class="font-bold text-sm text-[#0B193C]">Raio-X da Planilha</p>
+                    <div class="flex gap-4 text-xs font-semibold text-slate-500">
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-emerald-100 border border-emerald-300"></div> Será Importado</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-amber-100 border border-amber-300"></div> Será Importado c/ Furos</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-rose-100 border border-rose-300"></div> Ignorado</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto w-full flex-1">
+                    <table class="w-full min-w-[1000px] text-left border-collapse">
+                        <thead>
+                            <tr class="bg-white border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
+                                <th class="px-5 py-4 w-12 text-center">Linha</th>
+                                <th class="px-5 py-4">Inscrição</th>
+                                <th class="px-5 py-4">Nome do Candidato</th>
+                                <th class="px-5 py-4">CPF</th>
+                                <th class="px-5 py-4">Situação Identificada</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-preview" class="text-sm font-semibold divide-y divide-slate-100">
+                            <!-- JS Injection -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- VIEW TURMA DETALHADA INJETADA -->
+    <div id="view-turma-detalhes" class="fixed inset-0 bg-[#FAFAFB] z-[100] hidden flex-col overflow-y-auto">
+        <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
+            <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
+                <button onclick="voltarParaGestaoTurmas()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200 flex items-center justify-center transition-all">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </button>
+                <div>
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="px-2.5 py-1 rounded bg-indigo-50 text-indigo-600 text-[9px] font-extrabold tracking-widest uppercase border border-indigo-100" id="detalheUnidade">UNIDADE</span>
+                        <span class="px-2.5 py-1 rounded bg-emerald-50 text-emerald-600 text-[9px] font-extrabold tracking-widest uppercase border border-emerald-100">Ativa</span>
+                    </div>
+                    <h2 id="detalheTurmaNome" class="font-headline font-extrabold text-[#0B193C] text-2xl tracking-tight leading-none">Nome da Turma</h2>
+                </div>
+                
+                <div class="ml-auto flex items-center gap-6">
+                    <div class="text-right">
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-0.5">Total de Alunos</p>
+                        <p class="font-headline font-extrabold text-[#0B193C] text-xl leading-none" id="detalheTotal">0</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex-1 w-full max-w-7xl mx-auto px-8 py-8">
+            <div class="flex justify-between items-center mb-6">
+                <div class="relative w-72">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                    <input type="text" id="filtroDetalheAluno" onkeyup="renderAlunosDetalhesList()" placeholder="Buscar aluno nesta turma..." class="w-full bg-white border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
+                </div>
+                <button class="bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all text-sm">
+                    <span class="material-symbols-outlined text-[18px]">rule</span> Preparar Correção
+                </button>
+            </div>
+
+            <div class="nexus-card overflow-hidden">
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full min-w-[1000px] text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
+                                <th class="px-6 py-4">Inscrição</th>
+                                <th class="px-6 py-4">Nome do Aluno</th>
+                                <th class="px-6 py-4">CPF</th>
+                                <th class="px-6 py-4">Unidade</th>
+                                <th class="px-6 py-4">Turno</th>
+                                <th class="px-6 py-4 text-center">Status</th>
+                                <th class="px-6 py-4 text-right">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-turma-detalhes" class="text-sm font-semibold text-slate-700 divide-y divide-slate-100">
+                            <!-- Injeção via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="batchRenderContainer" class="hidden absolute top-0 left-0 -z-50 w-[700px]"></div>
+
+    <script>
+        const titles = {
+            'dashboard': 'Dashboard Administrativo',
+            'alunos': 'Gestão de Turmas',
+            'provas': 'Cadastro de Provas e Gabaritos',
+            'cartoes': 'Cartões-Resposta Nominais',
+            'correcao': 'Inteligência de Correção',
+            'espelhos': 'Espelhos de Desempenho Isolado',
+            'relatorios': 'Relatórios Acadêmicos',
+            'exportacoes': 'Central de Exportações',
+            'configuracoes': 'Configurações Globais'
+        };
+
+        function switchView(viewId) {
+            const detalheView = document.getElementById('view-turma-detalhes');
+            if (detalheView && !detalheView.classList.contains('hidden')) {
+                voltarParaGestaoTurmas();
+            }
+
+            document.getElementById('header-title').textContent = titles[viewId] || 'Nexus Provas';
+            document.querySelectorAll('aside nav a').forEach(a => { a.classList.remove('active'); });
+            const activeNav = document.getElementById('nav-' + viewId);
+            if (activeNav) activeNav.classList.add('active');
+            document.querySelectorAll('.nexus-view').forEach(v => { v.classList.remove('active'); });
+            const targetView = document.getElementById('view-' + viewId);
+            if (targetView) targetView.classList.add('active');
+            if(window['init' + viewId.charAt(0).toUpperCase() + viewId.slice(1)]) {
+                window['init' + viewId.charAt(0).toUpperCase() + viewId.slice(1)]();
+            }
+        }
+
+        // ==========================================
+        // MÓDULO: EDITOR DE MODELOS DE CARTÃO
+        // ==========================================
+        let dbModelosCartao = [];
+        try {
+            const raw = localStorage.getItem('nexusModelosCartao');
+            if(raw) dbModelosCartao = JSON.parse(raw);
+        } catch(e){}
+
+        if (dbModelosCartao.length === 0) {
+            dbModelosCartao = [
+                { id: "mod_enem1", nome: "ENEM 1º Dia Padrão", sub: "EXAME NACIONAL - 1º DIA", chkFiscal: true, chkSelo: true, opSelo: "1º DIA", chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 90, modeloAlt: "ABCDE", ts: Date.now() },
+                { id: "mod_enem2", nome: "ENEM 2º Dia Padrão", sub: "EXAME NACIONAL - 2º DIA", chkFiscal: true, chkSelo: true, opSelo: "2º DIA", chkIdioma: false, chkFrase: true, qStart: 91, qEnd: 180, modeloAlt: "ABCDE", ts: Date.now() }
+            ];
+            localStorage.setItem('nexusModelosCartao', JSON.stringify(dbModelosCartao));
+        }
+
+        let editandoModeloId = null;
+
+        function initModelosCartao() {
+            mudarParaBiblioteca();
+            renderGaleriaModelos();
+        }
+
+        function renderGaleriaModelos() {
+            const container = document.getElementById('listaModelosCartao');
+            const empty = document.getElementById('emptyModelosCard');
+            
+            if(!container || !empty) return;
+
+            if(dbModelosCartao.length === 0) {
+                container.style.display = 'none';
+                empty.style.display = 'flex';
+                return;
+            }
+
+            empty.style.display = 'none';
+            container.style.display = 'grid';
+
+            container.innerHTML = dbModelosCartao.map(m => `
+                <div class="nexus-card bg-white p-5 flex flex-col relative group hover:border-indigo-300 transition-colors cursor-pointer" onclick="editarModelo('${m.id}')">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <span class="material-symbols-outlined text-[20px]">feed</span>
+                        </div>
+                        <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <button onclick="event.stopPropagation(); editarModelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 flex items-center justify-center transition-colors" title="Editar">
+                                <span class="material-symbols-outlined text-[16px]">edit</span>
+                            </button>
+                            <button onclick="event.stopPropagation(); excluirModelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors" title="Excluir">
+                                <span class="material-symbols-outlined text-[16px]">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-[#0B193C] text-[15px] mb-1 line-clamp-1">${m.nome}</h4>
+                        <p class="text-[11px] font-semibold text-slate-500 mb-4 line-clamp-1">${m.sub}</p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[9px] font-extrabold uppercase tracking-wider border border-slate-200">Q. ${m.qStart}-${m.qEnd}</span>
+                            ${m.chkSelo ? `<span class="px-2 py-0.5 rounded bg-slate-100 text-slate-500 text-[9px] font-extrabold uppercase tracking-wider border border-slate-200">${m.opSelo}</span>` : ''}
+                        </div>
+                    </div>
+                    <div class="mt-auto pt-4 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-[10px] font-bold text-slate-400">${new Date(m.ts).toLocaleDateString('pt-BR')}</span>
+                        <span class="flex items-center gap-1 text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest"><span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Salvo</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function mudarParaBiblioteca() {
+            renderGaleriaModelos();
+        }
+
+        function abrirEditorCartao() {
+            editandoModeloId = null;
+            
+            document.getElementById('edNome').value = "";
+            document.getElementById('edSub').value = "";
+            document.getElementById('edChkFiscal').checked = true;
+            document.getElementById('edChkSelo').checked = true;
+            document.getElementById('edOpSelo').value = "1º DIA";
+            document.getElementById('edChkIdioma').checked = true;
+            document.getElementById('edChkFrase').checked = true;
+            document.getElementById('edQStart').value = 1;
+            document.getElementById('edQEnd').value = 90;
+            document.getElementById('edModeloAlt').value = "ABCDE";
+            
+            exibirPainelEditor();
+        }
+
+        function editarModelo(id) {
+            const m = dbModelosCartao.find(x => x.id === id);
+            if(!m) return;
+            editandoModeloId = id;
+            
+            document.getElementById('edNome').value = m.nome;
+            document.getElementById('edSub').value = m.sub;
+            document.getElementById('edChkFiscal').checked = m.chkFiscal;
+            document.getElementById('edChkSelo').checked = m.chkSelo;
+            document.getElementById('edOpSelo').value = m.opSelo;
+            document.getElementById('edChkIdioma').checked = m.chkIdioma;
+            document.getElementById('edChkFrase').checked = m.chkFrase;
+            document.getElementById('edQStart').value = m.qStart;
+            document.getElementById('edQEnd').value = m.qEnd;
+            document.getElementById('edModeloAlt').value = m.modeloAlt;
+            
+            exibirPainelEditor();
+        }
+
+        function exibirPainelEditor() {
+            previewRealtime();
+        }
+
+        function excluirModelo(id) {
+            if(confirm("Tem certeza que deseja excluir esse modelo de cartão?")) {
+                dbModelosCartao = dbModelosCartao.filter(x => x.id !== id);
+                localStorage.setItem('nexusModelosCartao', JSON.stringify(dbModelosCartao));
+                renderGaleriaModelos();
+            }
+        }
+
+        function gerarGradePreview(qStart, qEnd, mode, containerObj) {
+            containerObj.innerHTML = '';
+            const totalQ = (qEnd - qStart) + 1;
+            if(totalQ <= 0) return;
+            
+            let maxColsAllowed = (mode === 'CE') ? 8 : 6;
+            let colsNeeded = Math.ceil(totalQ / 15);
+            let cols = colsNeeded;
+            let maxPerCol = 15;
+
+            // Se o usuário configurar mais questões do que o limite seguro horizontal, nós travamos 
+            // as colunas no máximo permitido e passamos a crescer apenas para baixo (mais linhas por coluna).
+            if (cols > maxColsAllowed) {
+                cols = maxColsAllowed;
+                maxPerCol = Math.ceil(totalQ / cols);
+            }
+            
+            let qCounter = qStart;
+            for(let c = 0; c < cols; c++) {
+                let colDiv = document.createElement('div');
+                colDiv.className = "flex-1 flex flex-col justify-start gap-1 min-w-0"; // min-w-0 evita que o text-[7.5px] quebre o flex-1
+                colDiv.innerHTML = `<div class="w-full bg-[#EB3223] text-white text-center font-black text-[7px] py-[3px] mb-1 uppercase tracking-wider truncate">QUESTÃO / RESP.</div>`;
+                
+                for(let r = 0; r < maxPerCol; r++) {
+                    if (qCounter > qEnd) break;
+                    const numFmt = String(qCounter).padStart(2, '0');
+                    
+                    let bolhas = '';
+                    if(mode === 'ABCDE') {
+                        bolhas = `
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">A</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">B</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">C</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">D</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">E</div>
+                        `;
+                    } else if(mode === 'ABCD') {
+                        bolhas = `
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">A</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">B</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">C</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">D</div>
+                        `;
+                    } else if(mode === 'CE') {
+                        bolhas = `
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">C</div>
+                            <div class="w-3.5 h-3.5 border-[1px] border-[#EB3223] rounded-full flex items-center justify-center text-[6px] font-extrabold text-[#EB3223] uppercase">E</div>
+                        `;
+                    }
+
+                    const bgZebra = (r % 2 === 0) ? 'bg-[#EB3223]/10' : '';
+                    colDiv.innerHTML += `
+                        <div class="flex items-center justify-center gap-[10px] w-full px-1 py-[1.5px] rounded-sm ${bgZebra}">
+                            <span class="text-[9.5px] font-black font-mono w-4 text-right leading-none text-[#EB3223]">${numFmt}</span>
+                            <div class="flex items-center gap-1.5">${bolhas}</div>
+                        </div>
+                    `;
+                    qCounter++;
+                }
+                containerObj.appendChild(colDiv);
+                
+                if (c < cols - 1) {
+                    let sep = document.createElement('div');
+                    sep.className = "w-px bg-black/10 mx-1";
+                    containerObj.appendChild(sep);
+                }
+            }
+        }
+
+        function extractModelObject() {
+            return {
+                nome: document.getElementById('edNome').value || 'Modelo Sem Nome',
+                sub: document.getElementById('edSub').value || 'NEXUS PROVAS',
+                chkFiscal: document.getElementById('edChkFiscal').checked,
+                chkSelo: document.getElementById('edChkSelo').checked,
+                opSelo: document.getElementById('edOpSelo').value,
+                chkIdioma: document.getElementById('edChkIdioma').checked,
+                chkFrase: document.getElementById('edChkFrase').checked,
+                qStart: parseInt(document.getElementById('edQStart').value) || 1,
+                qEnd: parseInt(document.getElementById('edQEnd').value) || 90,
+                modeloAlt: document.getElementById('edModeloAlt').value
+            };
+        }
+
+        function devolveModelObjectDefault(id) {
+            return dbModelosCartao.find(x => x.id === id) || dbModelosCartao[0];
+        }
+
+        function previewRealtime() {
+            const m = extractModelObject();
+            preencherTemplateAlvo(m, document.getElementById('cartaoEditableTemplate'));
+        }
+
+        // Helper genérico para popular qualquer cartao com definicoes do MODELO M (WYSIWYG ou PDF Impressao final)
+        function preencherTemplateAlvo(m, el) {
+            const elProva = el.querySelector('.tmp-prova');
+            if(elProva && m.sub) elProva.textContent = m.sub;
+            
+            const elFiscal = el.querySelector('.tmp-fiscal-block');
+            if(elFiscal) elFiscal.style.visibility = m.chkFiscal ? 'visible' : 'hidden';
+            
+            const seloEl = el.querySelector('.tmp-selo-block');
+            
+            const divSelo = document.getElementById('divDetalheSelo');
+            if(divSelo) divSelo.style.display = m.chkSelo ? 'block' : 'none';
+            
+            if(m.chkSelo) {
+                if(seloEl) seloEl.style.visibility = 'visible';
+                const elSeloText = el.querySelector('.tmp-selo-text');
+                if(elSeloText) elSeloText.textContent = m.opSelo;
+            } else {
+                if(seloEl) seloEl.style.visibility = 'hidden';
+            }
+
+            const elIdioma = el.querySelector('.tmp-idioma-block');
+            if(elIdioma) elIdioma.style.display = m.chkIdioma ? 'flex' : 'none';
+            
+            const elFrase = el.querySelector('.tmp-frase-block');
+            if(elFrase) elFrase.style.display = m.chkFrase ? 'flex' : 'none';
+
+            const elGrid = el.querySelector('.tmp-grid-container');
+            if(elGrid) gerarGradePreview(m.qStart, m.qEnd, m.modeloAlt, elGrid);
+        }
+
+        function salvarModeloEditado() {
+            const obj = extractModelObject();
+            if(!obj.nome.trim()) { alert("De o nome ao modelo!"); return; }
+
+            if(editandoModeloId) {
+                const idx = dbModelosCartao.findIndex(x => x.id === editandoModeloId);
+                if(idx > -1) { dbModelosCartao[idx] = { ...dbModelosCartao[idx], ...obj, ts: Date.now() }; }
+            } else {
+                const novoId = "mod_" + Date.now() + Math.floor(Math.random()*1000);
+                dbModelosCartao.unshift({ id: novoId, ...obj, ts: Date.now() });
+            }
+
+            localStorage.setItem('nexusModelosCartao', JSON.stringify(dbModelosCartao));
+            alert("Modelo de cartão salvo com sucesso na biblioteca!");
+            mudarParaBiblioteca();
+        }
+
+        // ==========================================
+        // MÓDULO: ALUNOS
+        // ==========================================
+        let dbAlunos = [];
+        try {
+            const rawAlunos = localStorage.getItem('nexusAlunos');
+            if(rawAlunos) dbAlunos = JSON.parse(rawAlunos);
+        } catch(e) {}
+
+        function initAlunos() {
+            try {
+                renderTabelaAlunos();
+            } catch(e) {
+                console.error('Erro no initAlunos:', e);
+                // Resiliência máxima
+            }
+        }
+
+        function renderTabelaAlunos() {
+            try {
+                const tbody = document.getElementById('tbody-alunos');
+                if(!tbody) return;
+                
+                const filtroInput = document.getElementById('filtroTurmaBusca');
+                const filtroGeral = filtroInput ? filtroInput.value.toLowerCase() : '';
+
+                // Filtro normal focado nas turmas com safe guards
+                let filtered = dbAlunos.filter(a => {
+                    const searchTurma = a.turma ? String(a.turma).toLowerCase() : '';
+                    const searchUnidade = a.unidade ? String(a.unidade).toLowerCase() : '';
+                    if(filtroGeral && !searchTurma.includes(filtroGeral) && !searchUnidade.includes(filtroGeral)) return false;
+                    return true;
+                });
+
+                if(filtered.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400 font-semibold text-sm">Nenhuma turma registrada ou correspondente à busca.</td></tr>`;
+                    document.getElementById('totalTurmasCounter').textContent = `0 Turmas`;
+                    return;
+                }
+
+                // Agrupa por Turma
+                const groupedByTurma = {};
+                filtered.forEach(a => {
+                    const tName = a.turma ? String(a.turma) : "Turma Padrão";
+                    if(!groupedByTurma[tName]) groupedByTurma[tName] = [];
+                    groupedByTurma[tName].push(a);
+                });
+
+                // Constrói o HTML (Master / Detail)
+                let rawHTML = '';
+                
+                Object.keys(groupedByTurma).sort().forEach((turmaName, idx) => {
+                    const alunos = groupedByTurma[turmaName];
+                    const unidadeBase = alunos[0].unidade || "Geral"; 
+                    
+                    let tipoApp = "Não Definido";
+                    const tNameLower = turmaName.toLowerCase();
+                    if(tNameLower.includes("simulado")) tipoApp = "Simulado";
+                    else if(tNameLower.includes("bolsas") || tNameLower.includes("med") || tNameLower.includes("pas")) tipoApp = "Concurso de Bolsas";
+                    else tipoApp = "Geral"; 
+                    
+                    // Row da Turma
+                    rawHTML += `
+                    <tr class="hover:bg-indigo-50/30 transition-colors cursor-pointer border-b border-slate-100 group" data-turma="${turmaName.replace(/"/g, '&quot;')}" data-unidade="${unidadeBase.replace(/"/g, '&quot;')}" onclick="abrirTurmaDetalhes(this.dataset.turma, this.dataset.unidade)">
+                        <td class="px-6 py-4">
+                            <p class="font-extrabold text-[#0B193C] text-[15px] group-hover:text-indigo-600 transition-colors">${turmaName}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <p class="font-bold text-slate-600 text-[13px]">${unidadeBase}</p>
+                        </td>
+                        <td class="px-6 py-4">
+                            <span class="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-100">${tipoApp}</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="font-bold text-[#0B193C] text-sm">${alunos.length}</span> <span class="text-[10px] text-slate-400 font-extrabold uppercase">Alunos</span>
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            <span class="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-emerald-600 text-[10px] font-extrabold tracking-widest uppercase">Ativa</span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex items-center justify-end gap-1">
+                                <button onclick="excluirTurma(event, '${turmaName.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-lg text-rose-300 hover:bg-rose-100 hover:text-rose-600 transition-colors flex items-center justify-center tooltip" title="Excluir Turma Permanentemente">
+                                    <span class="material-symbols-outlined text-[18px]">delete</span>
+                                </button>
+                                <button class="w-8 h-8 rounded-lg text-slate-400 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-colors flex items-center justify-center">
+                                    <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    `;
+                });
+
+                tbody.innerHTML = rawHTML;
+                document.getElementById('totalTurmasCounter').textContent = `${Object.keys(groupedByTurma).length} Turmas`;
+            } catch (err) {
+                console.error("Erro fatal ao renderizar tabela de turmas: ", err);
+            }
+        }
+
+        // ==========================================
+        // IMPORTAÇÃO DE ALUNOS VIA EXCEL (SheetJS)
+        // ==========================================
+        let turmaAtualContexto = null;
+        let unidadeAtualContexto = null;
+
+        function excluirTurma(event, turmaName) {
+            event.stopPropagation();
+            if(confirm(`ATENÇÃO: Você tem certeza que deseja EXCLUIR a turma "${turmaName}" permanentemente?\n\nIsso removerá todos os alunos vinculados a esta turma na sua conta local.`)) {
+                dbAlunos = dbAlunos.filter(a => a.turma !== turmaName);
+                localStorage.setItem('nexusAlunos', JSON.stringify(dbAlunos));
+                renderTabelaAlunos();
+            }
+        }
+
+        function abrirTurmaDetalhes(turmaName, unidadeBase) {
+            turmaAtualContexto = turmaName;
+            unidadeAtualContexto = unidadeBase;
+            
+            document.getElementById('detalheTurmaNome').textContent = turmaName;
+            document.getElementById('detalheUnidade').textContent = unidadeBase;
+            
+            renderAlunosDetalhesList();
+
+            // Transição visual
+            document.getElementById('view-alunos').classList.add('hidden');
+            document.getElementById('view-turma-detalhes').classList.remove('hidden');
+            document.getElementById('view-turma-detalhes').classList.add('flex');
+            
+            const mainContent = document.querySelector('main');
+            if(mainContent) mainContent.scrollTop = 0;
+        }
+
+        function voltarParaGestaoTurmas() {
+            turmaAtualContexto = null;
+            document.getElementById('view-turma-detalhes').classList.add('hidden');
+            document.getElementById('view-turma-detalhes').classList.remove('flex');
+            document.getElementById('view-alunos').classList.remove('hidden');
+        }
+
+        function renderAlunosDetalhesList() {
+            if(!turmaAtualContexto) return;
+            const tbody = document.getElementById('tbody-turma-detalhes');
+            if(!tbody) return;
+
+            const filtroDetalhes = document.getElementById('filtroDetalheAluno').value.toLowerCase();
+            
+            let alunosTurma = dbAlunos.filter(a => a.turma === turmaAtualContexto);
+            
+            if(filtroDetalhes) {
+                alunosTurma = alunosTurma.filter(a => {
+                    const n = a.nome ? String(a.nome).toLowerCase() : '';
+                    const c = a.cpf ? String(a.cpf).toLowerCase() : '';
+                    return n.includes(filtroDetalhes) || c.includes(filtroDetalhes);
+                });
+            }
+
+            document.getElementById('detalheTotal').textContent = alunosTurma.length;
+
+            if(alunosTurma.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-slate-400 font-semibold text-sm">Nenhum aluno encontrado nesta turma com este filtro.</td></tr>`;
+                return;
+            }
+
+            alunosTurma.sort((a,b) => {
+                const nA = a.nome ? String(a.nome) : '';
+                const nB = b.nome ? String(b.nome) : '';
+                return nA.localeCompare(nB);
+            });
+
+            tbody.innerHTML = alunosTurma.map(a => `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-[#0B193C] text-sm">#${a.inscricao || '---'}</span>
+                            <span class="text-[10px] text-slate-400 uppercase tracking-widest font-extrabold">Seq: ${a.sequencial || '0'}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-sm text-[#0B193C]">${a.nome || 'Sem Nome'}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-semibold text-[13px] text-slate-600">${(a.cpf && a.cpf !== '000.000.000-00') ? a.cpf : 'N/I'}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-[#0B193C] text-[13px]">${a.unidade || '-'}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-[#0B193C] text-[13px]">${a.turno || 'Variável'}</p>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-emerald-600 text-[10px] font-extrabold tracking-widest uppercase">${a.situacao || 'Ativo'}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <button class="w-8 h-8 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-indigo-600 transition-colors tooltip flex items-center justify-center ml-auto" title="Ficha Completa">
+                            <span class="material-symbols-outlined text-[18px]">visibility</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ==========================================
+        // IMPORTAÇÃO DE TURMAS VIA EXCEL (SheetJS)
+        // ==========================================
+        function baixarModeloExcel() {
+            const worksheet = XLSX.utils.json_to_sheet([
+                {
+                    "Nome Completo": "Exemplo Aluno Silva",
+                    "CPF": "123.456.789-00",
+                    "E-mail": "aluno@email.com",
+                    "Telefone": "(11) 99999-9999",
+                    "Data de Nascimento": "01/01/2005",
+                    "Número de Inscrição": "12345",
+                    "Código Sequencial": "001",
+                    "Unidade": "Sede",
+                    "Turno": "Integral",
+                    "Observações": "Anotação opcional"
+                }
+            ]);
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Modelo Alunos");
+            XLSX.writeFile(workbook, "Nexus_Modelo_Cadastro_Alunos.xlsx");
+        }
+
+        let tempImportBatch = [];
+        let rawJsonExcelArray = [];
+        let colunasMapeadasDicionario = {};
+
+        const MAP_FIELDS = [
+            { id: 'nome', label: 'Nome Completo', required: true, aliases: ['nome', 'nome completo', 'candidato', 'aluno', 'estudante'] },
+            { id: 'cpf', label: 'CPF', required: false, aliases: ['cpf', 'documento', 'rg', 'cpf do candidato', 'cpf do aluno'] },
+            { id: 'inscricao', label: 'Número de Inscrição', required: false, aliases: ['inscricao', 'inscrição', 'numero de inscricao', 'número de inscrição', 'matricula', 'matrícula', 'id', 'numero', 'nº', 'código de inscrição'] },
+            { id: 'sequencial', label: 'Cód. Sequencial', required: false, aliases: ['sequencial', 'codigo sequencial', 'código sequencial', 'seq', 'código', 'numero'] },
+            { id: 'unidade', label: 'Unidade / Polo', required: false, aliases: ['unidade', 'polo', 'escola', 'campus', 'filial', 'local'] },
+            { id: 'turno', label: 'Turno', required: false, aliases: ['turno', 'periodo', 'período'] },
+            { id: 'email', label: 'E-mail', required: false, aliases: ['e-mail', 'email', 'correio'] },
+            { id: 'telefone', label: 'Telefone', required: false, aliases: ['telefone', 'celular', 'whatsapp', 'contato'] },
+            { id: 'nascimento', label: 'Data Nasc.', required: false, aliases: ['nascimento', 'data de nascimento', 'data nasc'] },
+            { id: 'observacoes', label: 'Observações', required: false, aliases: ['obs', 'observacao', 'observação', 'observacoes', 'observações'] }
+        ];
+
+        function normalizarString(str) {
+            if(str === null || str === undefined) return "";
+            return String(str).normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim().toLowerCase();
+        }
+
+        function importarTurmaExcel(event, isDrop = false) {
+            let files;
+            if(isDrop && event.dataTransfer) {
+                files = event.dataTransfer.files;
+            } else {
+                files = event.target.files;
+            }
+            
+            const file = files[0];
+            if(!file) return;
+
+            const nomeTurmaInput = document.getElementById('novaTurmaNome').value.trim();
+            if(!nomeTurmaInput) {
+                alert("ATENÇÃO: Preencha o 'Nome da Turma' antes de enviar o arquivo Excel!");
+                if(event.target) event.target.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(data, {type: 'array'});
+                    const sheetName = workbook.SheetNames[0];
+                    const worksheet = workbook.Sheets[sheetName];
+                    
+                    // Buscar a primeira linha válida de headers
+                    const rawRows = XLSX.utils.sheet_to_json(worksheet, {header: 1, defval: ""});
+                    if(rawRows.length === 0) throw new Error("Planilha vazia");
+
+                    let headerRowIndex = 0;
+                    let foundHeaders = [];
+
+                    for (let i = 0; i < Math.min(20, rawRows.length); i++) {
+                        const row = rawRows[i];
+                        const validStringsCount = row.filter(cell => typeof cell === 'string' && cell.trim() !== '').length;
+                        if (validStringsCount > 2) {
+                            headerRowIndex = i;
+                            foundHeaders = row.map(v => typeof v === 'string' ? v.trim() : String(v).trim());
+                            break;
+                        }
+                    }
+
+                    if(foundHeaders.length === 0) {
+                        // fallback se nada achar
+                        foundHeaders = rawRows[0];
+                    }
+
+                    // Gera o json já convertendo pela linha header certa
+                    rawJsonExcelArray = XLSX.utils.sheet_to_json(worksheet, {range: headerRowIndex, defval: ""});
+                    
+                    // Filtra colunas nulas ou vazias
+                    foundHeaders = foundHeaders.filter(h => h.trim() !== "");
+                    
+                    abrirMapeamentoUI(foundHeaders);
+
+                } catch (error) {
+                    alert("Erro ao processar o arquivo Excel: " + error.message);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+            if(event.target) event.target.value = ''; 
+        }
+
+        function abrirMapeamentoUI(foundHeaders) {
+            document.getElementById('mapQtdColunas').textContent = foundHeaders.length;
+            const container = document.getElementById('mapeamentoContainer');
+            let html = '';
+
+            MAP_FIELDS.forEach(field => {
+                let sugerida = "";
+                // Auto-map logic
+                for(let h of foundHeaders) {
+                    const normH = normalizarString(h);
+                    if(field.aliases.includes(normH) || field.aliases.some(alias => normH.includes(alias))) {
+                        sugerida = h;
+                        break;
+                    }
+                }
+
+                const optionsStr = foundHeaders.map(h => `<option value="${h}" ${sugerida === h ? 'selected' : ''}>[Coluna] ${h}</option>`).join('');
+                
+                html += `
+                    <div class="flex items-center justify-between p-4 rounded-xl border ${field.required ? 'border-indigo-100 bg-indigo-50/20' : 'border-slate-100 bg-slate-50/50'}">
+                        <div class="w-1/2 pr-4">
+                            <p class="text-[13px] font-extrabold text-[#0B193C] mb-0.5">${field.label} ${field.required ? '<span class="text-rose-500">*</span>' : ''}</p>
+                            <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">${field.required ? 'Obrigatório' : 'Opcional'}</p>
+                        </div>
+                        <div class="w-1/2">
+                            <select id="map_${field.id}" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-indigo-400 text-sm font-semibold text-slate-700 shadow-sm">
+                                <option value="">-- Não Mapear (Ignorar) --</option>
+                                ${optionsStr}
+                            </select>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            document.getElementById('view-mapeamento-importacao').classList.remove('hidden');
+            document.getElementById('view-mapeamento-importacao').classList.add('flex');
+        }
+
+        function cancelarMapeamento() {
+            rawJsonExcelArray = [];
+            document.getElementById('view-mapeamento-importacao').classList.add('hidden');
+            document.getElementById('view-mapeamento-importacao').classList.remove('flex');
+        }
+
+        function avancarParaAuditoria() {
+            colunasMapeadasDicionario = {};
+            let nomeMapped = false;
+            
+            MAP_FIELDS.forEach(field => {
+                const sel = document.getElementById(`map_${field.id}`);
+                if(sel && sel.value) {
+                    colunasMapeadasDicionario[field.id] = sel.value;
+                    if(field.id === 'nome') nomeMapped = true;
+                }
+            });
+
+            if(!nomeMapped) {
+                alert("Ops! Você precisa obrigatoriamente mapear qual coluna representa o 'Nome Completo'.");
+                return;
+            }
+
+            document.getElementById('view-mapeamento-importacao').classList.add('hidden');
+            document.getElementById('view-mapeamento-importacao').classList.remove('flex');
+
+            processarAuditoriaExcel();
+        }
+
+        function limparEFormatar(str) {
+            if(str === null || str === undefined) return "";
+            return String(str).trim();
+        }
+
+        function processarAuditoriaExcel() {
+            const modalUnidade = document.getElementById('novaTurmaUnidade').value;
+            const headerTurmaStr = document.getElementById('novaTurmaNome').value.trim();
+
+            let validosCount = 0;
+            let incompletosCount = 0;
+            let invalidosCount = 0;
+            tempImportBatch = [];
+            
+            const cpfsNoArquivo = [];
+            const inscricoesNoArquivo = [];
+
+            // Remove empty lines
+            const dadosValidos = rawJsonExcelArray.filter(row => {
+                return Object.keys(row).some(k => limparEFormatar(row[k]) !== "");
+            });
+
+            dadosValidos.forEach((row, index) => {
+                const getVal = (sysParam) => {
+                    const colName = colunasMapeadasDicionario[sysParam];
+                    if(!colName) return "";
+                    return limparEFormatar(row[colName]);
+                };
+
+                const nome = getVal('nome');
+                let inscricao = getVal('inscricao');
+                let cpf = getVal('cpf');
+                const email = getVal('email');
+                const telefone = getVal('telefone');
+                const nascimento = getVal('nascimento');
+                const seqRaw = getVal('sequencial');
+                
+                const unidadeExcel = getVal('unidade');
+                const unidade = unidadeExcel ? unidadeExcel : modalUnidade;
+                const turno = getVal('turno') || 'Variável';
+                const observacoes = getVal('observacoes');
+                
+                // Formatação leve CPF (remover caracteres que não sejan números para validar)
+                let cpfNum = cpf.replace(/\D/g, ''); 
+                if(cpfNum.length > 0 && cpfNum.length !== 11) cpfNum = "00000000000"; // Fake para dar flag
+                const cpfFinal = cpf; // Guarda orig pra visualização, não mascara
+
+                let statusLinha = "Válido";
+                let logErro = "";
+                
+                // Regras Atualizadas
+                // 1. Inválido se Nome não tem
+                if(!nome) {
+                    statusLinha = "Inválido";
+                    logErro += "Nome ausente. ";
+                }
+                
+                // 2. Incompleto se tem nome, MAS falta ambos (CPF e Insc) -> Não é inválido total mas não pode salvar perfeito
+                if(statusLinha !== "Inválido" && !cpf && !inscricao) {
+                    statusLinha = "Incompleto";
+                    logErro += "Sem nenhum identificador (CPF ou Inscrição ausentes). ";
+                }
+
+                // Alerta se só falta um dos identificadores
+                if(statusLinha === "Válido" && (!cpf || !inscricao)) {
+                    statusLinha = "Incompleto"; // Usando a mesma flag laranja
+                    if(!cpf) logErro += "Falta CPF. ";
+                    if(!inscricao) logErro += "Falta Inscrição (será gerada numeração auto). ";
+                }
+                
+                // 3. Duplicidade (Global)
+                if(statusLinha !== "Inválido") {
+                    const cpfNoBanco = cpf ? dbAlunos.find(a => a.cpf === cpf) : null;
+                    const inscNoBanco = inscricao ? dbAlunos.find(a => String(a.inscricao) === String(inscricao)) : null;
+                    
+                    if(cpfNoBanco || inscNoBanco) {
+                        statusLinha = "Duplicado";
+                        logErro += cpfNoBanco ? "CPF já existe (Sist.). " : "Inscrição já existe (Sist.). ";
+                    }
+                }
+                
+                // 4. Duplicidade Interna
+                if(statusLinha !== "Inválido" && statusLinha !== "Duplicado") {
+                    let dupInFile = false;
+                    if(cpf && cpfsNoArquivo.includes(cpf)) { dupInFile = true; logErro += "CPF repetido no arquivo atual. "; }
+                    if(inscricao && inscricoesNoArquivo.includes(inscricao)) { dupInFile = true; logErro += "Inscrição rep. no arquivo atual. "; }
+                    
+                    if(dupInFile) {
+                        statusLinha = "Duplicado";
+                    } else {
+                        if(cpf) cpfsNoArquivo.push(cpf);
+                        if(inscricao) inscricoesNoArquivo.push(inscricao);
+                    }
+                }
+
+                tempImportBatch.push({
+                    linha: index + 2,
+                    nome: nome,
+                    cpf: cpf,
+                    inscricao: inscricao,
+                    sequencial: seqRaw,
+                    email: email,
+                    telefone: telefone,
+                    nascimento: nascimento,
+                    unidade: unidade,
+                    turno: turno,
+                    observacoes: observacoes,
+                    situacao: 'Ativo',
+                    statusFinal: statusLinha,
+                    erroStr: logErro.trim()
+                });
+                
+                if(statusLinha === "Válido") validosCount++;
+                else if(statusLinha === "Incompleto") incompletosCount++;
+                else invalidosCount++;
+            });
+            
+            document.getElementById('prevTotal').textContent = tempImportBatch.length;
+            document.getElementById('prevValidos').textContent = validosCount;
+            document.getElementById('prevIncompletos').textContent = incompletosCount;
+            document.getElementById('prevInvalidos').textContent = invalidosCount;
+            
+            const tbodyPrev = document.getElementById('tbody-preview');
+            let rawPrevRows = "";
+            tempImportBatch.forEach(b => {
+                let rowClass = "hover:bg-slate-50";
+                let statusBadge = "";
+                
+                if(b.statusFinal === "Válido") {
+                    statusBadge = `<span class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-emerald-400"></div> <span class="text-emerald-600">Válido</span></span>`;
+                } else if(b.statusFinal === "Incompleto") {
+                    rowClass = "bg-amber-50/30 hover:bg-amber-50";
+                    statusBadge = `<span class="flex items-center gap-1.5 tooltip text-[11px]" title="${b.erroStr}"><div class="w-2.5 h-2.5 rounded-full bg-amber-400"></div> <span class="text-amber-600">${b.erroStr || 'Info Faltante'}</span></span>`;
+                } else {
+                    rowClass = "bg-rose-50/50 hover:bg-rose-50";
+                    statusBadge = `<span class="flex items-center gap-1.5 tooltip text-[11px]" title="${b.erroStr}"><div class="w-2.5 h-2.5 rounded-full bg-rose-400"></div> <span class="text-rose-600 font-extrabold">${b.statusFinal.toUpperCase()}: ${b.erroStr}</span></span>`;
+                }
+                
+                rawPrevRows += `
+                <tr class="${rowClass} transition-colors text-xs">
+                    <td class="px-5 py-3 text-center text-slate-400 font-bold">${b.linha}</td>
+                    <td class="px-5 py-3 font-semibold text-[#0B193C] ${!b.inscricao ? 'text-amber-500' : ''}">${b.inscricao || '--'} <span class="text-[9px] text-slate-400 ml-1">Seq ${b.sequencial || '--'}</span></td>
+                    <td class="px-5 py-3 font-bold text-[#0B193C] whitespace-nowrap ${!b.nome ? 'text-rose-500 line-through' : ''}">${b.nome || '-- Ausente --'}</td>
+                    <td class="px-5 py-3 font-semibold text-slate-600 ${!b.cpf ? 'text-amber-500' : ''}">${b.cpf || '--'}</td>
+                    <td class="px-5 py-3 font-bold">${statusBadge}</td>
+                </tr>
+                `;
+            });
+            
+            if(tempImportBatch.length === 0) rawPrevRows = `<tr><td colspan="5" class="py-8 text-center text-slate-500 font-semibold text-sm">Arquivo vazio ou dados não encontrados.</td></tr>`;
+            
+            tbodyPrev.innerHTML = rawPrevRows;
+            
+            document.getElementById('previewTurmaNome').textContent = headerTurmaStr;
+            document.getElementById('previewTurmaUnidade').textContent = modalUnidade;
+
+            document.getElementById('view-preview-importacao').classList.remove('hidden');
+            document.getElementById('view-preview-importacao').classList.add('flex');
+        }
+
+        function cancelarImportacao() {
+            tempImportBatch = [];
+            document.getElementById('view-preview-importacao').classList.add('hidden');
+            document.getElementById('view-preview-importacao').classList.remove('flex');
+        }
+
+        function confirmarImportacaoValidados() {
+            if(!tempImportBatch || tempImportBatch.length === 0) {
+                alert("Nenhum dado na prancheta para importar.");
+                return;
+            }
+
+            const headerTurmaStr = document.getElementById('novaTurmaNome').value.trim();
+            const modalUnidade = document.getElementById('novaTurmaUnidade').value;
+            const modalTipoApp = document.getElementById('novaTurmaTipoApp').value;
+
+            let cadastrados = 0;
+            const turmaFormatada = modalTipoApp === "Geral" ? headerTurmaStr : `${modalTipoApp} - ${headerTurmaStr}`;
+
+            tempImportBatch.forEach(b => {
+                if(b.statusFinal === "Válido" || b.statusFinal === "Incompleto") {
+                    
+                    // Se Nome estiver ausente mesmo no incompleto, rejeitamos definitivamente (Safety Check)
+                    if(!b.nome) return;
+
+                    let rInsc = b.inscricao;
+                    if(!rInsc) rInsc = Math.floor(10000 + Math.random() * 90000).toString();
+
+                    let rCpf = b.cpf;
+                    if(!rCpf) rCpf = "Indisponível";
+
+                    dbAlunos.push({
+                        id: Date.now() + Math.random(),
+                        sequencial: b.sequencial || (dbAlunos.length + 1),
+                        inscricao: rInsc,
+                        nome: b.nome,
+                        cpf: rCpf,
+                        email: b.email,
+                        telefone: b.telefone,
+                        nascimento: b.nascimento,
+                        unidade: b.unidade || modalUnidade,
+                        turma: turmaFormatada,
+                        curso: "Não Declarado",
+                        turno: b.turno,
+                        observacoes: b.observacoes,
+                        situacao: b.situacao
+                    });
+                    cadastrados++;
+                }
+            });
+
+            if(cadastrados > 0) {
+                localStorage.setItem('nexusAlunos', JSON.stringify(dbAlunos));
+                document.getElementById('novaTurmaNome').value = '';
+                try { renderTabelaAlunos(); } catch(e){}
+                
+                alert(`Sucesso! ${cadastrados} alunos importados para a turma '${turmaFormatada}'.`);
+                cancelarImportacao(); 
+            } else {
+                alert("Nenhum registro classificado como Válido pôde ser aproveitado.");
+                cancelarImportacao();
+            }
+        }
+
+
+        // ==========================================
+        // MÓDULO: PROVAS
+        // ==========================================
+        let dbProvas = [];
+        try {
+            const rawProvas = localStorage.getItem('nexusProvas');
+            if(rawProvas) dbProvas = JSON.parse(rawProvas);
+        } catch(e) {}
+
+        function initProvas() {
+            renderTabelaProvas();
+        }
+
+        function renderTabelaProvas() {
+            const tbody = document.getElementById('tbody-provas');
+            if(!tbody) return;
+            
+            const filtroNome = document.getElementById('filtroNomeProva').value.toLowerCase();
+            const filtroTipo = document.getElementById('filtroTipoProva').value;
+
+            let filtered = dbProvas.filter(p => {
+                if(filtroNome && !p.nome.toLowerCase().includes(filtroNome) && !p.codigo.toLowerCase().includes(filtroNome)) return false;
+                if(filtroTipo && p.tipo !== filtroTipo) return false;
+                return true;
+            });
+
+            if(filtered.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-slate-400 font-semibold text-sm">Nenhuma prova encontrada.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = filtered.map(p => `
+                <tr class="hover:bg-slate-50 transition-colors">
+                    <td class="px-6 py-4">
+                        <span class="font-bold text-[#0B193C] text-sm">${p.codigo}</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-[#0B193C] text-sm">${p.nome}</p>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">${p.tipo} • ${p.ano}</p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-semibold text-sm text-indigo-600">${p.questoes} Questões</p>
+                        <p class="text-[11px] font-bold text-slate-400">Gabarito: <span class="text-emerald-500">${p.gabaritoFile ? 'Anexado' : 'Ausente'}</span></p>
+                    </td>
+                    <td class="px-6 py-4">
+                        <p class="font-bold text-[#0B193C] text-[13px]">${p.unidade} / ${p.turno}</p>
+                        <p class="text-[11px] font-bold text-slate-400">${p.publico}</p>
+                    </td>
+                    <td class="px-6 py-4 text-center">
+                        <span class="px-2.5 py-1 rounded border border-indigo-200 bg-indigo-50 text-indigo-600 text-[10px] font-extrabold tracking-widest uppercase">${p.status}</span>
+                    </td>
+                    <td class="px-6 py-4 text-right">
+                        <button class="w-8 h-8 rounded-lg text-slate-400 hover:bg-slate-100 hover:text-[#0B193C] transition-colors tooltip flex items-center justify-center ml-auto" title="Configurar Gabarito Oficial">
+                            <span class="material-symbols-outlined text-[18px]">fact_check</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // ==========================================
+        // MÓDULO: CARTÕES NOMINAIS
+        // ==========================================
+        function initCartoes() {
+            const selectTurma = document.getElementById('cartaoSelectTurma');
+            if(selectTurma) {
+                const turmasUnicas = [...new Set(dbAlunos.map(a => a.turma).filter(Boolean))].sort();
+                selectTurma.innerHTML = '<option value="">-- Escolher Turma --</option>' + turmasUnicas.map(t => `<option value="${t}">${t}</option>`).join('');
+            }
+            
+            const selectModelo = document.getElementById('cartaoSelectModelo');
+            if(selectModelo) {
+                if(dbModelosCartao.length === 0) {
+                    selectModelo.innerHTML = '<option value="">-- Crie um modelo no Editor --</option>';
+                    return;
+                }
+                selectModelo.innerHTML = '<option value="">-- Escolher Modelo da Biblioteca --</option>' + 
+                    dbModelosCartao.map(m => `<option value="${m.id}">${m.nome} | Q. ${m.qStart}-${m.qEnd}</option>`).join('');
+            }
+        }
+
+        // Função Master para Clonar e Injetar Dados em um Modelo
+        function buildNodeCartaoParaAluno(alunoInfo, modeloObj, escala = 'scale(1)') {
+            // 1. Clona a árvore DOM inteira do painel de Editor do WYSIWYG
+            const originalTemplate = document.getElementById('cartaoEditableTemplate');
+            const clone = originalTemplate.cloneNode(true);
+            
+            clone.style.transform = escala;
+            clone.style.marginBottom = '0';
+            clone.removeAttribute('id');
+
+            // 2. Aplica as propriedades arquiteturais do Layout
+            preencherTemplateAlvo(modeloObj, clone);
+            
+            // 3. Aplica Dados Pessoais do Aluno (buscando pelos seletores que criarei no HTML)
+            const elNome = clone.querySelector('.n_nome');
+            const elCpf = clone.querySelector('.n_cpf');
+            const elTurma = clone.querySelector('.n_turma');
+            
+            if(elNome) elNome.textContent = alunoInfo.nome || 'NÃO INFORMADO';
+            if(elCpf) {
+                let textCpf = (alunoInfo.cpf && alunoInfo.cpf !== '000.000.000-00') ? alunoInfo.cpf : (alunoInfo.inscricao || 'N/I');
+                let cNum = String(textCpf).replace(/\D/g, '');
+                if(cNum.length === 11) {
+                    textCpf = cNum.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+                }
+                elCpf.textContent = textCpf;
+            }
+            if(elTurma) elTurma.textContent = (alunoInfo.unidade || '') + ' - ' + (alunoInfo.turma || '');
+
+            return clone;
+        }
+
+        function atualizarAbasProvaBase() {
+            const val = document.getElementById('selProvaBase').value;
+            const container = document.getElementById('containerSubProvas');
+            const chkContainer = document.getElementById('checkSubProvas');
+            
+            if(!val) {
+                container.classList.add('hidden');
+                container.classList.remove('flex');
+                chkContainer.innerHTML = '';
+                return;
+            }
+            container.classList.remove('hidden');
+            container.classList.add('flex');
+            
+            let html = '';
+            if(val === 'ENEM' || val === 'VESTIBULAR_UNB') {
+                html = `
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 cursor-pointer"><input type="checkbox" class="chk-subprova w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300" value="Dia_1" checked> 1º Dia</label>
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 cursor-pointer"><input type="checkbox" class="chk-subprova w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300" value="Dia_2"> 2º Dia</label>
+                `;
+            } else if(val === 'PAS_UNB') {
+                html = `
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 cursor-pointer"><input type="checkbox" class="chk-subprova w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300" value="PAS_1" checked> PAS 1</label>
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 cursor-pointer"><input type="checkbox" class="chk-subprova w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300" value="PAS_2"> PAS 2</label>
+                    <label class="flex items-center gap-2 text-sm font-bold text-slate-700 cursor-pointer"><input type="checkbox" class="chk-subprova w-4 h-4 rounded text-indigo-600 focus:ring-indigo-500 border-slate-300" value="PAS_3"> PAS 3</label>
+                `;
+            }
+            chkContainer.innerHTML = html;
+        }
+
+        function getModelosSelecionados() {
+            const provaBase = document.getElementById('selProvaBase').value;
+            const checkboxes = document.querySelectorAll('.chk-subprova:checked');
+            if(!provaBase || checkboxes.length === 0) return [];
+            
+            let modelosArray = [];
+            checkboxes.forEach(chk => {
+                const sp = chk.value;
+                let m = null;
+                if(provaBase === 'ENEM') {
+                    if(sp === 'Dia_1') m = { sub: 'EXAME NACIONAL DO ENSINO MÉDIO - ENEM', opSelo: '1º DIA', chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 90, chkFiscal: true, chkSelo: true, modeloAlt: 'ABCDE', nome: 'ENEM 1' };
+                    if(sp === 'Dia_2') m = { sub: 'EXAME NACIONAL DO ENSINO MÉDIO - ENEM', opSelo: '2º DIA', chkIdioma: false, chkFrase: true, qStart: 91, qEnd: 180, chkFiscal: true, chkSelo: true, modeloAlt: 'ABCDE', nome: 'ENEM 2' };
+                } else if(provaBase === 'VESTIBULAR_UNB') {
+                    if(sp === 'Dia_1') m = { sub: 'VESTIBULAR - UnB', opSelo: '1º DIA', chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 120, chkFiscal: true, chkSelo: true, modeloAlt: 'CE', nome: 'UNB 1' };
+                    if(sp === 'Dia_2') m = { sub: 'VESTIBULAR - UnB', opSelo: '2º DIA', chkIdioma: false, chkFrase: true, qStart: 1, qEnd: 120, chkFiscal: true, chkSelo: true, modeloAlt: 'CE', nome: 'UNB 2' };
+                } else if(provaBase === 'PAS_UNB') {
+                    if(sp === 'PAS_1') m = { sub: 'PROGRAMA DE AVALIAÇÃO SERIADA - PAS', opSelo: 'PAS 1', chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 100, chkFiscal: true, chkSelo: true, modeloAlt: 'CE', nome: 'PAS 1' };
+                    if(sp === 'PAS_2') m = { sub: 'PROGRAMA DE AVALIAÇÃO SERIADA - PAS', opSelo: 'PAS 2', chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 100, chkFiscal: true, chkSelo: true, modeloAlt: 'CE', nome: 'PAS 2' };
+                    if(sp === 'PAS_3') m = { sub: 'PROGRAMA DE AVALIAÇÃO SERIADA - PAS', opSelo: 'PAS 3', chkIdioma: true, chkFrase: true, qStart: 1, qEnd: 120, chkFiscal: true, chkSelo: true, modeloAlt: 'CE', nome: 'PAS 3' };
+                }
+                if(m) modelosArray.push(m);
+            });
+            return modelosArray;
+        }
+
+        function gerarCartaoVisualizacao() {
+            const nomeTurma = document.getElementById('cartaoSelectTurma').value;
+            const modelosArray = getModelosSelecionados();
+            
+            if(!nomeTurma) { alert("Selecione uma Turma."); return; }
+            if(modelosArray.length === 0) { alert("Selecione a Prova Base e marque pelo menos um dia."); return; }
+
+            const alunosDessaTurma = dbAlunos.filter(a => a.turma === nomeTurma);
+
+            if(alunosDessaTurma.length === 0) {
+                alert("Nenhum aluno encontrado nesta turma!");
+                return;
+            }
+
+            document.getElementById('cartaoEmptyState').style.display = 'none';
+            document.getElementById('btnDownloadCartao').classList.remove('opacity-50', 'pointer-events-none');
+
+            const containerPreview = document.getElementById('cartaoPreviewEmissor');
+            containerPreview.innerHTML = ''; 
+            
+            const wrapScroll = document.createElement('div');
+            wrapScroll.className = "flex flex-col gap-12 w-[1000px] origin-top pt-4";
+            wrapScroll.style.transform = "scale(0.80)";
+            
+            alunosDessaTurma.forEach((aluno) => {
+                modelosArray.forEach((modeloSelecionado) => {
+                    const cloneCartao = buildNodeCartaoParaAluno(aluno, modeloSelecionado, 'scale(1)');
+                    wrapScroll.appendChild(cloneCartao);
+                });
+            });
+            
+            containerPreview.appendChild(wrapScroll);
+        }
+
+        function confirmarGabaritosLote() {
+            const nomeTurma = document.getElementById('cartaoSelectTurma').value;
+            const modelosArray = getModelosSelecionados();
+            
+            if(!nomeTurma || modelosArray.length === 0) {
+                alert("Gere o preview do lote primeiro!");
+                return;
+            }
+
+            alert(`✅ Lote Finalizado!\n\nOs gabaritos da turma '${nomeTurma}' foram validados e estão prontos na Biblioteca.`);
+            
+            switchView('provas');
+            
+            // Rola suavemente até a div da Biblioteca na interface de Provas
+            setTimeout(() => {
+                const libContainer = document.getElementById('editor-biblioteca');
+                if(libContainer) {
+                    libContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+
+        function baixarCartaoPDFLote() {
+            const nomeTurma = document.getElementById('cartaoSelectTurma').value;
+            const modelosArray = getModelosSelecionados();
+            
+            if(!nomeTurma || modelosArray.length === 0) return;
+            
+            const btn = document.getElementById('btnDownloadCartao');
+            btn.classList.add('opacity-50', 'pointer-events-none');
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Gerando PDF em Vetor...`;
+
+            const alunosDessaTurma = dbAlunos.filter(a => a.turma === nomeTurma);
+            
+            const batchContainer = document.getElementById('batchRenderContainer');
+            batchContainer.innerHTML = '';
+            batchContainer.classList.remove('hidden');
+
+            // Prepara CSS dinâmico para Impressão
+            let printStyle = document.getElementById('nexus-print-style');
+            if(!printStyle) {
+                printStyle = document.createElement('style');
+                printStyle.id = 'nexus-print-style';
+                printStyle.innerHTML = `
+                    @media print {
+                        body { background: white !important; margin: 0 !important; padding: 0 !important; }
+                        body > :not(#batchRenderContainer) { display: none !important; }
+                        #batchRenderContainer { display: block !important; position: static !important; width: 100%; margin: 0; padding: 0; background: white; }
+                        .nexus-page-break { page-break-after: always; clear: both; }
+                        @page { size: A4 portrait; margin: 0; }
+                        * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+                    }
+                `;
+                document.head.appendChild(printStyle);
+            }
+
+            alunosDessaTurma.forEach((aluno, indexA) => {
+                modelosArray.forEach((modeloSelecionado, indexM) => {
+                    const nodeCartao = buildNodeCartaoParaAluno(aluno, modeloSelecionado, 'scale(1)');
+                    
+                    // Ajuste para forçar altura A4 real (297mm) sem zoom-out extra no print
+                    nodeCartao.style.pageBreakInside = "avoid";
+                    nodeCartao.style.pageBreakAfter = "always";
+                    nodeCartao.style.boxShadow = "none";
+                    nodeCartao.style.margin = "0";
+
+                    batchContainer.appendChild(nodeCartao);
+                    
+                    const isLastAluno = (indexA === alunosDessaTurma.length - 1);
+                    const isLastModel = (indexM === modelosArray.length - 1);
+                    if(!(isLastAluno && isLastModel)) {
+                        let pageBreak = document.createElement('div');
+                        pageBreak.className = 'nexus-page-break';
+                        batchContainer.appendChild(pageBreak);
+                    }
+                });
+            });
+
+            setTimeout(() => {
+                window.print();
+                // Limpeza pós-print
+                batchContainer.innerHTML = '';
+                batchContainer.classList.add('hidden');
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+                btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">download</span> Exportar Lote PDF Completo`;
+            }, 800);
+        }
+
+        // ==========================================
+        // MÓDULO: CORREÇÃO E ESPELHOS
+        // ==========================================
+        let dbResultados = [];
+        let espelhoChartInstance = null;
+
+        try {
+            const raw = localStorage.getItem('nexusResultados');
+            if(raw) dbResultados = JSON.parse(raw);
+        } catch(e) {}
+
+        function initCorrecao() {
+            const selectAluno = document.getElementById('correcaoSelectAluno');
+            const selectProva = document.getElementById('correcaoSelectProva');
+            
+            if(selectAluno) {
+                selectAluno.innerHTML = '<option value="">-- Escolher Aluno --</option>' + dbAlunos.map(a => `<option value="${a.inscricao}">${a.nome} (${a.turma})</option>`).join('');
+            }
+            if(selectProva) {
+                selectProva.innerHTML = '<option value="">-- Escolher Prova --</option>' + dbProvas.map(p => `<option value="${p.id}">${p.nome} - ${p.questoes} Q</option>`).join('');
+            }
+        }
+
+        function wLog(msg, type='info') {
+            const t = document.getElementById('terminalCorrecao');
+            if(!t) return;
+            const time = new Date().toLocaleTimeString();
+            let color = type === 'error' ? 'text-rose-400' : (type === 'success' ? 'text-emerald-300' : 'text-slate-300');
+            t.innerHTML += `<p class="${color}">[${time}] ${msg}</p>`;
+            t.scrollTop = t.scrollHeight;
+        }
+
+        function simularLeituraCorrecao() {
+            const idAluno = document.getElementById('correcaoSelectAluno').value;
+            const idProva = document.getElementById('correcaoSelectProva').value;
+            
+            if(!idAluno || !idProva) {
+                alert("Selecione os parâmetros de lote.");
+                return;
+            }
+
+            const aluno = dbAlunos.find(a => String(a.inscricao) === String(idAluno));
+            const prova = dbProvas.find(p => String(p.id) === String(idProva));
+
+            if(!aluno || !prova) return;
+
+            document.getElementById('terminalCorrecao').innerHTML = ''; // clear
+
+            wLog(`INICIANDO LEITURA ÓPTICA...`, 'info');
+            wLog(`CARREGANDO DADOS: ${aluno.nome.toUpperCase()}`);
+            wLog(`MATRIZ BASE: ${prova.codigo} - ${prova.questoes} QUESTÕES`);
+            
+            setTimeout(() => {
+                wLog(`PROCESSANDO GABARITO...`, 'info');
+                // Simulate calculating correct answers randomly for demo
+                const totalQ = prova.questoes;
+                const acertos = Math.floor(Math.random() * (totalQ - (totalQ * 0.4))) + Math.floor(totalQ * 0.4); // Random between 40%-100%
+                const perce = ((acertos / totalQ) * 100).toFixed(1);
+
+                setTimeout(() => {
+                    wLog(`COMPARAÇÃO BLOCO 1..25 [OK]`, 'success');
+                    wLog(`COMPARAÇÃO BLOCO 26..50 [OK]`, 'success');
+                    setTimeout(() => {
+                        wLog(`RESULTADO APURADO DE ALTA CONFIABILIDADE (99.8%)`, 'success');
+                        wLog(`ACERTOS: ${acertos}/${totalQ} (${perce}%)`, 'success');
+                        wLog(`SALVANDO MATRIZ NO BANCO DE DADOS...`, 'info');
+
+                        const novoResultado = {
+                            id: Date.now(),
+                            aluno_insc: aluno.inscricao,
+                            prova_id: prova.id,
+                            acertos: acertos,
+                            total: totalQ,
+                            percentual: perce,
+                            data: new Date().toLocaleDateString()
+                        };
+
+                        // Evitar duplicatas fáceis ou so atualizar
+                        dbResultados = dbResultados.filter(r => !(String(r.aluno_insc) === String(aluno.inscricao) && String(r.prova_id) === String(prova.id)));
+                        dbResultados.push(novoResultado);
+                        localStorage.setItem('nexusResultados', JSON.stringify(dbResultados));
+                        
+                        setTimeout(() => {
+                            wLog(`OPERAÇÃO CONCLUÍDA. ESPELHO DISPONÍVEL NO MÓDULO.`, 'success');
+                            alert("Correção processada! Vá para a aba de Espelhos para visualizar e emitir as notas.");
+                            initEspelhos(); // update select
+                        }, 500);
+
+                    }, 800);
+                }, 800);
+
+            }, 800);
+        }
+
+        // ESPELHOS
+        function initEspelhos() {
+            const selectEspelho = document.getElementById('espelhoSelectResultado');
+            if(!selectEspelho) return;
+
+            selectEspelho.innerHTML = '<option value="">-- Selecione Resultado Processado --</option>';
+            dbResultados.forEach(r => {
+                const al = dbAlunos.find(a => String(a.inscricao) === String(r.aluno_insc));
+                const p = dbProvas.find(p => String(p.id) === String(r.prova_id));
+                if(al && p) {
+                    selectEspelho.innerHTML += `<option value="${r.id}">${al.nome} - Prova: ${p.nome}</option>`;
+                }
+            });
+        }
+
+        function renderizarEspelho() {
+            const idRes = document.getElementById('espelhoSelectResultado').value;
+            if(!idRes) return;
+
+            const res = dbResultados.find(r => String(r.id) === String(idRes));
+            if(!res) return;
+
+            const al = dbAlunos.find(a => String(a.inscricao) === String(res.aluno_insc));
+            const p = dbProvas.find(x => String(x.id) === String(res.prova_id));
+
+            if(!al || !p) return;
+
+            document.getElementById('espelhoEmptyState').style.display = 'none';
+
+            // Preencher campos
+            document.getElementById('esp_nome').textContent = al.nome;
+            document.getElementById('esp_curso').textContent = "Objetivo: " + al.curso;
+            document.getElementById('esp_inicial').textContent = al.nome.charAt(0).toUpperCase();
+            document.getElementById('esp_insc').textContent = al.inscricao;
+            document.getElementById('esp_unidade').textContent = al.unidade + ' - ' + al.turma;
+            
+            document.getElementById('esp_provaNome').textContent = p.nome;
+            document.getElementById('esp_totalQ').textContent = res.total;
+            document.getElementById('esp_acertos').textContent = res.acertos;
+            document.getElementById('esp_percentual').textContent = res.percentual + '%';
+            document.getElementById('esp_hash').textContent = "HASH: " + btoa(res.id).substring(0, 10).toUpperCase();
+
+            // Renderizar Gráfico
+            renderEspelhoChart(res.percentual);
+        }
+
+        function renderEspelhoChart(percentual) {
+            const ctx = document.getElementById('espelhoChart');
+            if(!ctx) return;
+            
+            if(espelhoChartInstance) espelhoChartInstance.destroy();
+
+            // Fake distribuicao based on percentual. If percent is 80%, Linguagens will be high, etc.
+            const base = parseFloat(percentual);
+            const valLin = Math.min(100, base + 10);
+            const valHum = Math.min(100, base + 5);
+            const valNat = Math.max(0, base - 15);
+            const valMat = Math.max(0, base - 5);
+
+            espelhoChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Linguagens', 'Humanas', 'Natureza', 'Matemática'],
+                    datasets: [{
+                        label: 'Seu Desempenho (%)',
+                        data: [valLin, valHum, valNat, valMat],
+                        backgroundColor: 'rgba(99, 102, 241, 0.2)', // indigo
+                        borderColor: '#4F46E5', // indigo-600
+                        pointBackgroundColor: '#FBBF24',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#FBBF24',
+                        borderWidth: 2
+                    }, {
+                        label: 'Média da Turma (%)',
+                        data: [60, 65, 40, 55], // mock
+                        backgroundColor: 'rgba(203, 213, 225, 0.2)', // slate
+                        borderColor: '#94A3B8',
+                        pointBackgroundColor: '#cbd5e1',
+                        borderWidth: 1,
+                        borderDash: [5, 5]
+                    }]
+                },
+                options: {
+                    scales: {
+                        r: {
+                            angleLines: { color: '#f1f5f9' },
+                            grid: { color: '#f1f5f9' },
+                            pointLabels: { font: { family: 'Inter', size: 10, weight: 'bold' } },
+                            ticks: { display: false, max: 100, min: 0 }
+                        }
+                    },
+                    plugins: { legend: { position: 'bottom', labels: { font: { size: 10 } } } }
+                }
+            });
+        }
+
+        function imprimirEspelho() {
+            const element = document.getElementById('espelhoA4Template');
+            const alunoNome = document.getElementById('esp_nome').textContent;
+            
+            const origTransform = element.style.transform;
+            element.style.transform = 'scale(1)';
+            
+            const opt = {
+                margin:       0.5,
+                filename:     `Espelho_Avaliacao_${alunoNome.replace(/[^a-z0-9]/gi, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 1.0 },
+                html2canvas:  { scale: 2, useCORS: true },
+                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            html2pdf().set(opt).from(element).save().then(() => {
+                element.style.transform = origTransform;
+            });
+        }
+
+    </script>
+    
+    <!-- Dynamically loaded modules will go below here -->
+</body>
+</html>
+

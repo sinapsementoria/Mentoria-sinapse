@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Canela';
+    src: url('../fonts/Canela-Bold.woff2') format('woff2'),
+         url('../fonts/Canela-Bold.woff') format('woff'),
+         url('../fonts/Canela-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Padronização Impecável de Títulos e Headlines para toda a Plataforma */
+h1, h2, h3, .font-headline, .title-canela {
+    font-family: 'Canela', 'DM Serif Display', 'Playfair Display', serif !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em; /* Traz a sofisticação exata de entreletras fechadas */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

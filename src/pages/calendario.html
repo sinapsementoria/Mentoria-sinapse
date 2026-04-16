@@ -1,0 +1,423 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Calendário Pedagógico Oficial</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: { blue: '#0B193C', primary: '#6366F1', accent: '#10B981', light: '#FAFAFB'}
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], headline: ['Manrope', 'sans-serif'] },
+                    boxShadow: { 'premium': '0 10px 40px -10px rgba(11,25,60,0.06)' }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .badge-fade-in { animation: badgeFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes badgeFadeIn { from{ opacity:0; transform:scale(0.9); } to{ opacity:1; transform:scale(1); } }
+        .styled-scrollbar::-webkit-scrollbar { display: none; }
+        .styled-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    <!-- Base de dados pedagógica -->
+    <script src="../../src/js/calendario_pedagogico.js"></script>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <!-- Logo Area -->
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">calendar_month</span> Calendário
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-hidden w-full">
+        <!-- Background Subtle Glow -->
+        <div class="absolute top-0 left-0 w-full h-[300px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+
+        <header class="h-16 shrink-0 bg-white/70 backdrop-blur-xl border-b border-slate-100/50 px-8 flex items-center justify-between z-20">
+            <nav class="flex text-[11px] font-semibold text-slate-400 uppercase tracking-widest space-x-3 items-center">
+                <a href="mentoria.html" class="hover:text-[#0B193C] transition-colors flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">arrow_back</span> Hub Institucional</a>
+                <span class="opacity-40">|</span><span class="text-sinapse-primary">Calendário Pedagógico</span>
+            </nav>
+            <div class="flex items-center gap-4">
+                <span class="text-[9px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded border border-slate-200">Visão 2026</span>
+            </div>
+        </header>
+
+        <div class="flex-1 p-6 max-w-[1600px] mx-auto w-full relative z-10 flex gap-6 overflow-hidden min-h-0">
+            
+            <!-- LEFT MAIN COL: Calendar -->
+            <div class="flex-1 flex flex-col min-w-0 h-full gap-4">
+                <!-- Header Calendar -->
+                <div class="shrink-0 flex items-center justify-between bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+                    <div>
+                        <h1 class="font-headline text-xl font-extrabold text-[#0B193C] tracking-tight flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sinapse-primary text-[24px] icon-fill">auto_awesome</span>
+                            Calendário Oficial
+                        </h1>
+                    </div>
+                    <!-- Controls Month -->
+                    <div class="flex items-center gap-2 bg-slate-50 p-1 rounded-xl border border-slate-200 shadow-sm">
+                        <button onclick="prevMonth()" class="w-8 h-8 bg-white border border-slate-100 rounded-lg flex items-center justify-center hover:bg-slate-100 transition-colors text-slate-500 shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                        </button>
+                        <div class="px-4 flex items-center justify-center font-headline font-extrabold text-[#0B193C] min-w-[140px] text-center text-sm" id="monthDisplay">
+                            <!-- JS Inject -->
+                        </div>
+                        <button onclick="nextMonth()" class="w-8 h-8 bg-white border border-slate-100 rounded-lg flex items-center justify-center hover:bg-slate-100 transition-colors text-slate-500 shadow-sm">
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Calendar Grid -->
+                <div class="flex-1 bg-white rounded-2xl p-5 shadow-sm border border-slate-100 flex flex-col min-h-0">
+                    <div class="grid grid-cols-7 gap-3 mb-2 shrink-0">
+                        <div class="text-center text-[9px] font-extrabold text-rose-400 uppercase tracking-widest">Dom</div>
+                        <div class="text-center text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Seg</div>
+                        <div class="text-center text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Ter</div>
+                        <div class="text-center text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Qua</div>
+                        <div class="text-center text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Qui</div>
+                        <div class="text-center text-[9px] font-extrabold text-slate-400 uppercase tracking-widest">Sex</div>
+                        <div class="text-center text-[9px] font-extrabold text-sinapse-accent uppercase tracking-widest">Sáb</div>
+                    </div>
+
+                    <div id="calendarGrid" class="flex-1 grid grid-cols-7 gap-3 grid-rows-5 min-h-0">
+                        <!-- JS goes here -->
+                    </div>
+                </div>
+                
+                <!-- Legend -->
+                <div class="shrink-0 bg-white rounded-2xl p-4 shadow-sm border border-slate-100 flexitems-center justify-between flex-wrap gap-2">
+                    <div id="legendContainer" class="flex flex-wrap gap-2 items-center"></div>
+                </div>
+            </div>
+
+            <!-- RIGHT COL: Sidebar events -->
+            <div class="w-[300px] shrink-0 flex flex-col h-full gap-4">
+                
+                <!-- Resumo Info Box -->
+                <div class="shrink-0 bg-[#0B193C] rounded-2xl p-5 text-white relative overflow-hidden shadow-md">
+                    <div class="absolute -right-4 -top-4 text-white/5 pointer-events-none transform rotate-12">
+                        <span class="material-symbols-outlined icon-fill" style="font-size: 100px;">emoji_events</span>
+                    </div>
+                    <div class="relative z-10">
+                        <span class="text-[8px] font-extrabold text-sinapse-primary uppercase tracking-widest bg-blue-900/40 px-2 py-1 rounded inline-block mb-2">Ciclo 2026</span>
+                        <h3 class="font-headline font-extrabold text-lg leading-tight mb-2">Compromisso com o seu Resultado.</h3>
+                        <p class="text-slate-300 text-[11px] font-medium leading-tight">O sucesso exige disciplina. Nossa agenda foi projetada para sua alta performance em 2026.</p>
+                    </div>
+                </div>
+                
+                <!-- Next Events List -->
+                <div class="flex-1 bg-white rounded-2xl border border-slate-100 shadow-sm flex flex-col min-h-0">
+                    <div class="shrink-0 p-4 border-b border-slate-100 flex items-center gap-2">
+                        <div class="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center border border-slate-200">
+                            <span class="material-symbols-outlined text-slate-600 text-[16px]">calendar_today</span>
+                        </div>
+                        <div>
+                            <h4 class="font-headline font-extrabold text-[#0B193C] text-sm leading-tight">Próximos Eventos</h4>
+                            <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider" id="todayLabelList">A partir de hoje</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-1 overflow-y-auto p-3 space-y-2 relative" id="nextEventsList">
+                        <!-- JS Inject Upcoming -->
+                        <div class="flex flex-col items-center justify-center h-full text-slate-400 absolute inset-0">
+                            <span class="material-symbols-outlined text-[24px] mb-2 opacity-50">search</span>
+                            <p class="text-[11px] font-medium">Localizando eventos...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Day Events Panel -->
+    <div id="dayModal" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="closeDayModal()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-white shadow-[-10px_0_40px_rgba(0,0,0,0.1)] transform translate-x-full transition-transform duration-300 flex flex-col" id="dayModalContent">
+            
+            <div class="p-8 border-b border-slate-100 bg-slate-50/50 flex justify-between items-start">
+                <div>
+                    <h3 class="font-headline text-3xl font-extrabold text-[#0B193C] tracking-tight" id="modalTitle">Dia</h3>
+                    <p class="text-[11px] font-extrabold text-sinapse-primary uppercase tracking-widest mt-1" id="modalSubtitle">Semana</p>
+                </div>
+                <button onclick="closeDayModal()" class="w-10 h-10 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-rose-500 hover:border-rose-200 transition-colors shadow-sm">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <div class="flex-1 p-6 space-y-4 overflow-y-auto bg-[#FAFAFB]" id="modalEventsList">
+            </div>
+            
+            <div class="p-6 border-t border-slate-100 bg-white">
+                <button onclick="closeDayModal()" class="w-full py-3 bg-[#0B193C] text-white font-bold rounded-xl hover:bg-sinapse-primary transition-colors text-sm shadow-md">FECHAR OBSERVAÇÃO</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const THE_YEAR = 2026;
+        
+        // Vamos usar dia letivo de Março para que os eventos mostrem "Próximos Simulados" de forma correta ao testar. 
+        const fakeTodayStr = "2026-03-24"; 
+        
+        let currentMonth = new Date(fakeTodayStr + "T12:00:00").getMonth();
+        const monthNames = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+        function prevMonth(){ if(currentMonth > 0){ currentMonth--; renderCalendar(); } }
+        function nextMonth(){ if(currentMonth < 11){ currentMonth++; renderCalendar(); } }
+
+        function renderLegend() {
+            const container = document.getElementById('legendContainer');
+            let html = '';
+            for(let key in categoryStyles) {
+                const style = categoryStyles[key];
+                const label = categoryNames[key];
+                html += `
+                <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg border ${style.border} ${style.bg} hover:shadow-sm transition-all cursor-pointer">
+                    <div class="w-2.5 h-2.5 rounded-full ${style.solid}"></div>
+                    <span class="text-[10px] font-extrabold ${style.text} uppercase tracking-wider">${label}</span>
+                </div>`;
+            }
+            container.innerHTML = html;
+            
+            const todayDObj = new Date(fakeTodayStr + "T12:00:00");
+            document.getElementById('todayLabelList').innerText = 'A partir de ' + todayDObj.getDate() + ' de ' + monthNames[todayDObj.getMonth()];
+        }
+
+        function getEventsForDate(dateStr) {
+            return instEvents.filter(e => e.date === dateStr);
+        }
+
+        function renderCalendar() {
+            document.getElementById('monthDisplay').innerText = `${monthNames[currentMonth]} ${THE_YEAR}`;
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+            
+            const firstDayIndex = new Date(THE_YEAR, currentMonth, 1).getDay();
+            const daysInMonth = new Date(THE_YEAR, currentMonth + 1, 0).getDate();
+            
+            // Add blanks
+            for(let i=0; i<firstDayIndex; i++){
+                grid.innerHTML += `<div class="rounded-[20px] bg-slate-50/50"></div>`;
+            }
+
+            for(let d=1; d<=daysInMonth; d++){
+                const dtStr = `${THE_YEAR}-${String(currentMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                
+                const dayEvs = getEventsForDate(dtStr);
+                const isToday = (dtStr === fakeTodayStr);
+                
+                let eventsHTML = '';
+                if(dayEvs.length > 0) {
+                    eventsHTML = `<div class="mt-2 space-y-1 w-full overflow-hidden">`;
+                    dayEvs.forEach(e => {
+                        const s = categoryStyles[e.type];
+                        eventsHTML += `
+                        <div class="badge-fade-in ${s.bg} border ${s.border} px-1.5 py-1.5 rounded-[10px] shadow-sm flex items-center gap-1.5 w-full shrink-0">
+                            <span class="material-symbols-outlined text-[12px] ${s.text} icon-fill">${s.icon}</span>
+                            <span class="text-[9px] font-extrabold ${s.text} uppercase tracking-widest truncate leading-none mt-0.5">${categoryNames[e.type]}</span>
+                        </div>`;
+                    });
+                    eventsHTML += `</div>`;
+                }
+
+                let classes = "bg-white border rounded-[20px] p-2 xl:p-3 min-h-0 h-full cursor-pointer transition-all flex flex-col group items-start relative overflow-hidden ";
+                
+                // Styles base
+                if(isToday) {
+                    classes += 'border-sinapse-accent ring-2 ring-[#10B981]/20 bg-emerald-50/10 hover:shadow-premium z-10 origin-center scale-[1.01]';
+                } else if(dayEvs.length > 0) {
+                    classes += 'border-slate-200 hover:border-sinapse-primary shadow-[0_2px_10px_-4px_rgba(0,0,0,0.02)] hover:shadow-md z-0';
+                } else {
+                    classes += 'border-slate-100 hover:border-slate-200 opacity-90 hover:opacity-100 hover:shadow-sm z-0';
+                }
+
+                let curDLabel = `<span class="text-sm xl:text-base font-headline font-extrabold ${isToday ? 'text-sinapse-accent' : 'text-[#0B193C] px-1 group-hover:text-sinapse-primary'} transition-colors">${d}</span>`;
+                if(isToday) curDLabel = `<div class="w-6 h-6 xl:w-8 xl:h-8 rounded-full bg-sinapse-accent text-white flex items-center justify-center font-headline font-extrabold shadow-md mb-1 ring-4 ring-emerald-100 relative"><div class="absolute -top-1 -right-1 w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>${d}</div>`;
+
+                grid.innerHTML += `
+                <div class="${classes}" onclick="openDayModal('${dtStr}', ${d})">
+                    <div class="flex justify-between w-full items-center mb-1">
+                        ${curDLabel}
+                        ${dayEvs.length > 0 && !isToday ? `<div class="w-1.5 h-1.5 rounded-full ${categoryStyles[dayEvs[0].type].solid}"></div>` : ''}
+                    </div>
+                    <div class="flex-1 overflow-y-auto w-full styled-scrollbar">${eventsHTML}</div>
+                </div>`;
+            }
+            renderUpcoming();
+        }
+
+        function renderUpcoming() {
+            const list = document.getElementById('nextEventsList');
+            // Filter events from fakeTodayStr onwards
+            const futureEvents = instEvents.filter(e => new Date(e.date).getTime() >= new Date(fakeTodayStr).getTime());    
+            
+            if(futureEvents.length === 0) {
+                list.innerHTML = `<div class="text-center py-6 text-slate-400 font-medium">Nenhum evento próximo.</div>`;
+                return;
+            }
+
+            let html = '';
+            // Render limit 6
+            futureEvents.slice(0, 6).forEach(e => {
+                const s = categoryStyles[e.type];
+                const dObj = new Date(e.date + "T12:00:00");
+                const dayStr = String(dObj.getDate()).padStart(2,'0') + " " + monthNames[dObj.getMonth()].substring(0,3);
+                
+                html += `
+                <div class="bg-white border border-slate-100 p-3 rounded-2xl flex items-center gap-4 hover:border-slate-200 hover:shadow-sm cursor-pointer transition-all group" onclick="currentMonth=${dObj.getMonth()}; renderCalendar(); openDayModal('${e.date}', ${dObj.getDate()});">
+                    <div class="w-14 h-14 rounded-2xl ${s.bg} flex flex-col items-center justify-center border border-white shadow-[0_2px_10px_-4px_rgba(0,0,0,0.05)] shrink-0 transition-transform group-hover:scale-105">
+                        <span class="text-[14px] font-headline font-extrabold ${s.text} leading-none mt-1">${dObj.getDate()}</span>
+                        <span class="text-[9px] font-extrabold uppercase text-slate-400 mt-1">${monthNames[dObj.getMonth()].substring(0,3)}</span>
+                    </div>
+                    <div class="flex-1 truncate">
+                        <p class="text-[9px] font-extrabold uppercase tracking-widest ${s.text} flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">${s.icon}</span> ${categoryNames[e.type]}</p>
+                        <p class="font-bold text-[#0B193C] text-[13px] truncate mt-0.5">${e.title}</p>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-300 opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        function openDayModal(dtStr, numStr) {
+            const dObj = new Date(dtStr + "T12:00:00");
+            const dwNames = ["Domingo", "Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira", "Sábado"];
+            
+            document.getElementById('modalTitle').innerText = `${numStr} de ${monthNames[dObj.getMonth()]}`;
+            document.getElementById('modalSubtitle').innerText = dtStr === fakeTodayStr ? `HOJE - ${dwNames[dObj.getDay()]}` : dwNames[dObj.getDay()];
+
+            const dayEvs = getEventsForDate(dtStr);
+            let listHTML = '';
+
+            if(dayEvs.length === 0) {
+                listHTML += `
+                <div class="bg-white border border-slate-100 rounded-[20px] p-8 text-center flex flex-col items-center shadow-sm h-full justify-center min-h-[300px]">
+                    <span class="material-symbols-outlined text-[48px] text-slate-200 mb-3">event_available</span>
+                    <h4 class="font-bold text-[#0B193C] mb-1">Data Livre</h4>
+                    <p class="text-[13px] text-slate-400 leading-relaxed font-medium">Nenhum evento institucional oficial do Sinapse programado para este dia.</p>
+                </div>`;
+            } else {
+                dayEvs.forEach(e => {
+                    const s = categoryStyles[e.type];
+                    listHTML += `
+                    <div class="bg-white rounded-[24px] border ${s.border} shadow-sm relative overflow-hidden group mb-4">
+                        <div class="absolute left-0 top-0 bottom-0 w-2 ${s.solid}"></div>
+                        <div class="p-6 pl-8 relative z-10 flex flex-col gap-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <span class="inline-flex items-center gap-1.5 ${s.bg} ${s.text} px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-widest border ${s.border}">
+                                        <span class="material-symbols-outlined text-[14px]">${s.icon}</span> ${categoryNames[e.type]}
+                                    </span>
+                                </div>
+                                <span class="bg-slate-50 text-slate-400 font-extrabold px-2 py-0.5 rounded text-[10px] uppercase border border-slate-200 tracking-wider">OFICIAL</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline font-extrabold text-xl text-[#0B193C]">${e.title}</h4>
+                                <p class="text-[13px] text-slate-500 font-medium mt-1.5">Lembrete institucional Mentoria Sinapse para o seu acompanhamento pedagógico.</p>
+                            </div>
+                        </div>
+                    </div>`;
+                });
+            }
+
+            document.getElementById('modalEventsList').innerHTML = listHTML;
+
+            const mod = document.getElementById('dayModal');
+            const ctn = document.getElementById('dayModalContent');
+            mod.classList.remove('hidden');
+            setTimeout(() => {
+                mod.classList.remove('opacity-0');
+                ctn.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeDayModal() {
+            const mod = document.getElementById('dayModal');
+            const ctn = document.getElementById('dayModalContent');
+            mod.classList.add('opacity-0');
+            ctn.classList.add('translate-x-full');
+            setTimeout(() => mod.classList.add('hidden'), 300);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderLegend();
+            renderCalendar();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

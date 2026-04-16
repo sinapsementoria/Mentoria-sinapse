@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central Administrativa | Hub de Gestão</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        /* Tema de fundo premium */
+        body {
+            background-color: #050511;
+        }
+
+        /* Ambient glows atrás dos cards para dar volume */
+        .ambient-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(11, 25, 60, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(40px);
+        }
+
+        /* Glass Cards Premium para os Botões/Containers */
+        .premium-card {
+            background: linear-gradient(145deg, rgba(15, 18, 30, 0.6), rgba(11, 20, 45, 0.4));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(124, 58, 237, 0.03);
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .premium-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 1), 0 0 40px rgba(124, 58, 237, 0.1), inset 0 0 60px rgba(124, 58, 237, 0.1);
+            border-color: rgba(124, 58, 237, 0.4);
+            border-top: 1px solid rgba(168, 85, 247, 0.6);
+        }
+
+        /* Partícula leve para brilho em Hover */
+        .premium-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.05), transparent);
+            transform: skewX(-25deg);
+            transition: all 0.8s ease;
+        }
+
+        .premium-card:hover::before {
+            left: 150%;
+        }
+
+        /* Ícones com brilho interno */
+        .icon-glow {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 12px rgba(168, 85, 247, 0.6));
+            transition: all 0.4s ease;
+        }
+
+        .premium-card:hover .icon-glow {
+            filter: drop-shadow(0 0 25px rgba(168, 85, 247, 0.9));
+            transform: scale(1.1);
+        }
+
+        /* Ajuste do botão interno */
+        .btn-access {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .premium-card:hover .btn-access {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            border-color: transparent;
+            box-shadow: 0 8px 25px rgba(124, 58, 237, 0.5);
+            color: white;
+        }
+
+        .btn-access .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .premium-card:hover .arrow-icon {
+            transform: translateX(6px);
+        }
+
+        /* Texto sutil de hierarquia e institucional */
+        .text-gradient {
+            background: linear-gradient(to right, #cfd9df 0%, #e2ebf0 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="font-body text-slate-300 w-full min-h-screen relative overflow-hidden flex flex-col items-center justify-center">
+
+    <!-- Backgound Cinematográfico -->
+    <div class="absolute inset-0 z-0">
+        <!-- Fundo provido -->
+        <img src="../../public/assets/images/fundo administrativo.png" alt="Plataforma de Alta Gestão" class="w-full h-full object-cover object-center opacity-60" />
+        <!-- Máscara de sombreamento escuro e luxuoso -->
+        <div class="absolute inset-0 bg-gradient-to-b from-[#050511]/90 via-[#0B122A]/80 to-[#050511]/95"></div>
+    </div>
+
+    <!-- Glowing orbs -->
+    <div class="ambient-glow" style="top: 10%; left: 10%;"></div>
+    <div class="ambient-glow" style="bottom: -10%; right: 10%; background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(11, 25, 60, 0) 70%);"></div>
+
+    <!-- Conteúdo da Interface -->
+    <div class="relative z-10 w-full max-w-[850px] px-6 py-12 flex flex-col items-center">
+        
+        <!-- Header -->
+        <header class="flex flex-col items-center mb-12 text-center animate-fade-in-down">
+            <div class="mb-5 flex justify-center items-center w-20 h-20 rounded-full bg-white/5 border border-white/10 shadow-[0_0_30px_rgba(168,85,247,0.15)] backdrop-blur-xl">
+                <span class="material-symbols-outlined text-[36px] icon-glow">admin_panel_settings</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-headline font-bold text-white tracking-tight mb-3 flex items-center gap-3">
+                CENTRAL ADMINISTRATIVA
+            </h1>
+            <p class="text-base md:text-lg text-slate-400 font-medium max-w-xl tracking-wide text-gradient">
+                Selecione o ambiente estratégico que deseja acessar.
+            </p>
+        </header>
+
+        <!-- Grid Cards de Seleção -->
+        <main class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mx-auto">
+            
+            <!-- Card 1: Sinapse Pré-Med -->
+            <a href="sinapse_premed_admin.html" class="group block cursor-pointer outline-none">
+                <div class="premium-card rounded-2xl p-6 md:p-8 h-full flex flex-col">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner">
+                            <span class="material-symbols-outlined text-[28px] icon-glow">school</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-[#161B30] border border-white/10 text-[10px] font-bold tracking-widest text-[#A855F7] uppercase">Gestão Acadêmica</span>
+                    </div>
+
+                    <h2 class="text-xl md:text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#E2E8F0] transition-colors">
+                        SINAPSE PRÉ-MED
+                    </h2>
+                    
+                    <p class="text-sm leading-relaxed text-slate-400 mb-8 flex-grow font-body">
+                        Gerencie toda a estrutura acadêmica, administrativa e institucional da operação. Administre alunos, matriculas, acessos e performance geral.
+                    </p>
+
+                    <div class="mt-auto">
+                        <div class="btn-access w-full py-3 px-5 rounded-lg text-slate-300 font-semibold flex items-center justify-between text-xs uppercase tracking-wider">
+                            <span>Acessar Ambiente</span>
+                            <span class="material-symbols-outlined arrow-icon text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 2: Banca de Questões -->
+            <a href="admin_banco_questoes.html" class="group block cursor-pointer outline-none">
+                <div class="premium-card rounded-2xl p-6 md:p-8 h-full flex flex-col">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner">
+                            <span class="material-symbols-outlined text-[28px] icon-glow">database</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-[#161B30] border border-white/10 text-[10px] font-bold tracking-widest text-[#4F46E5] uppercase">Inteligência Pedagógica</span>
+                    </div>
+
+                    <h2 class="text-xl md:text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#E2E8F0] transition-colors">
+                        BANCA DE QUESTÕES
+                    </h2>
+                    
+                    <p class="text-sm leading-relaxed text-slate-400 mb-8 flex-grow font-body">
+                        Administre o banco de questões com inteligência, curadoria de bancas, organização de disciplinas e controle da matriz de habilidades.
+                    </p>
+
+                    <div class="mt-auto">
+                        <div class="btn-access w-full py-3 px-5 rounded-lg text-slate-300 font-semibold flex items-center justify-between text-xs uppercase tracking-wider">
+                            <span>Acessar Banco Mestre</span>
+                            <span class="material-symbols-outlined arrow-icon text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+        </main>
+
+        <!-- Footer discreto -->
+        <footer class="mt-16 text-center">
+            <p class="text-xs text-slate-500 font-medium tracking-wide">
+                Sinapse Pré-Med &copy; 2026 — Plataforma Restrita a Administradores
+            </p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+

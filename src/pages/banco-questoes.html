@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Banco de Questões Elite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 8px 30px -10px rgba(11,25,60,0.06)',
+                        'question': '0 4px 15px -3px rgba(0,0,0,0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        
+        /* Smooth Render */
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 10px; }
+        
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+
+        /* Componentes de Alternativas */
+        .alt-button { transition: all 0.2s ease; cursor: pointer; }
+        .alt-button.selected { border-color: #6366F1 !important; background-color: #EEF2FF !important; }
+        .alt-button.selected .alt-letter { background-color: #6366F1 !important; color: white !important; border-color: #6366F1 !important; }
+        
+        /* Estados de Resposta */
+        .alt-button.correct { border-color: #10B981 !important; background-color: #ECFDF5 !important; color: #065F46 !important; pointer-events: none; }
+        .alt-button.correct .alt-letter { background-color: #10B981; color: white; border-color: #10B981; }
+        
+        .alt-button.wrong { border-color: #EF4444 !important; background-color: #FEF2F2 !important; color: #991B1B !important; }
+        .alt-button.wrong .alt-letter { background-color: #EF4444; color: white; border-color: #EF4444; }
+        
+        .locked { pointer-events: none; opacity: 0.7; }
+        .explanation-box { display: none; }
+        .explanation-box.show { display: block; animation: fadeIn 0.5s ease-out forwards; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden antialiased">
+
+    <!-- SIDEBAR -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 shadow-[2px_0_24px_rgba(0,0,0,0.02)] flex-shrink-0">
+        <!-- Logo Area -->
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">checklist</span> Banco de Questões
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative">
+        
+        <!-- TOPBAR -->
+        <header class="h-24 bg-white/90 backdrop-blur-md border-b border-slate-100 px-10 flex items-center justify-between sticky top-0 z-20 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex-shrink-0">
+            <div class="flex-1 max-w-2xl">
+                <!-- Search Bar -->
+                <div class="relative group">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-sinapse-primary transition-colors">search</span>
+                    <input type="text" id="global-search" placeholder="Buscar palavra-chave, código da questão, ou assunto explícito..." class="w-full bg-slate-50 border border-slate-200 text-sm rounded-xl pl-12 pr-4 py-3 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all font-medium text-slate-700 placeholder-slate-400">
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-6 ml-8">
+                <!-- Performance Dropdown Placeholder -->
+                <div class="hidden md:flex flex-col items-end mr-4">
+                    <span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slate-400">Hoje</span>
+                    <p class="text-sm font-bold text-[#0B193C]"><span id="header-hits">0</span> Acertos / <span id="header-misses">0</span> Erros</p>
+                </div>
+                
+                <div class="h-10 w-10 bg-slate-100 rounded-full border-2 border-slate-200 shadow-sm overflow-hidden cursor-pointer">
+                    <img src="https://ui-avatars.com/api/?name=Lucas+M&background=0B193C&color=fff&font-size=0.35" class="w-full h-full object-cover">
+                </div>
+            </div>
+        </header>
+        <!-- MAIN APP GRID -->
+        <div class="flex-1 overflow-hidden flex flex-col">
+            
+            <!-- TOP PANEL: FILTERS -->
+            <div class="w-full bg-white border-b border-slate-100 flex-shrink-0 z-10 sticky top-0 shadow-sm">
+                <div class="p-4 px-8 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                    <h3 class="font-headline font-bold text-[#0B193C] flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[18px]">tune</span> Filtros Estratégicos
+                    </h3>
+                    <button onclick="clearFilters()" class="text-[10px] text-sinapse-primary font-bold uppercase tracking-widest hover:bg-indigo-50 px-3 py-1.5 rounded transition-colors">Limpar Filtros</button>
+                </div>
+                
+                <div class="p-6 px-8 flex flex-row items-end gap-6 bg-white overflow-x-auto">
+                    <!-- Filter: Disciplina -->
+                    <div class="w-64 flex-shrink-0">
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Disciplinas</p>
+                        <select id="filter-disc" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm font-semibold text-slate-700 outline-none focus:border-sinapse-primary">
+                            <option value="">TODAS AS DISCIPLINAS</option>
+                            <option value="Matemática">MATEMÁTICA</option>
+                            <option value="Física">FÍSICA</option>
+                            <option value="Química">QUÍMICA</option>
+                            <option value="Biologia">BIOLOGIA</option>
+                            <option value="História">HISTÓRIA</option>
+                            <option value="Geografia">GEOGRAFIA</option>
+                            <option value="Filosofia">FILOSOFIA</option>
+                            <option value="Sociologia">SOCIOLOGIA</option>
+                            <option value="Artes">ARTES</option>
+                            <option value="Linguagens">LINGUAGENS</option>
+                            <option value="Literatura">LITERATURA</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter: Assunto -->
+                    <div class="w-72 flex-shrink-0">
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Assuntos</p>
+                        <select id="filter-assunto" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm font-semibold text-slate-700 outline-none focus:border-sinapse-primary">
+                            <option value="">Selecione a Disciplina primeiro...</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter: Banca -->
+                    <div class="w-56 flex-shrink-0">
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2">Instituição (Banca)</p>
+                        <input type="text" id="filter-banca" list="bancas-list" placeholder="Todas as Bancas" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-sm font-semibold text-slate-700 outline-none focus:border-sinapse-primary uppercase">
+                        <datalist id="bancas-list">
+                            <option value="ENEM">
+                            <option value="FUVEST">
+                            <option value="UNICAMP">
+                            <option value="UNESP">
+                            <option value="UFG">
+                            <option value="UFU">
+                            <option value="UFSCAR">
+                            <option value="UNB">
+                            <option value="UFT">
+                            <option value="UEG">
+                            <option value="UEM">
+                            <option value="UFOP">
+                            <option value="UNIFESP">
+                            <option value="UFRGS">
+                            <option value="UFSC">
+                            <option value="UFPR">
+                            <option value="UFAM">
+                            <option value="UFPA">
+                            <option value="UFRR">
+                            <option value="UFGD">
+                            <option value="UNIRIO">
+                            <option value="USP">
+                            <option value="UERJ">
+                            <option value="UENF">
+                            <option value="UEA">
+                            <option value="UDESC">
+                            <option value="UECE">
+                            <option value="URCA">
+                            <option value="UVA">
+                            <option value="UEMA">
+                            <option value="UEMASUL">
+                            <option value="UNITINS">
+                            <option value="UEMG">
+                            <option value="UNEMAT">
+                            <option value="UEL">
+                            <option value="UEPG">
+                            <option value="UNESPAR">
+                            <option value="UENP">
+                            <option value="UNIÃOESTE">
+                            <option value="UNICENTRO">
+                            <option value="UPE">
+                            <option value="UEPB">
+                            <option value="UESB">
+                            <option value="UEFS">
+                            <option value="UNEB">
+                            <option value="UESC">
+                            <option value="UERR">
+                            <option value="UNDF">
+                            <option value="UFJF">
+                            <option value="UFLA">
+                            <option value="UFCSPA">
+                            <option value="FURG">
+                            <option value="UNILA">
+                            <option value="UFFS">
+                            <option value="UNIFAL-MG">
+                            <option value="UFMS">
+                            <option value="OUTRA">
+                        </datalist>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="flex-1 min-w-[200px]">
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Status de Resolução</p>
+                        <div class="flex gap-4 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                            <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer">
+                                <input type="radio" name="status" value="all" checked class="w-4 h-4 text-sinapse-primary focus:ring-sinapse-primary"> Todas
+                            </label>
+                            <label class="flex items-center gap-2 text-xs font-semibold text-slate-600 cursor-pointer">
+                                <input type="radio" name="status" value="unanswered" class="w-4 h-4 text-sinapse-primary focus:ring-sinapse-primary"> Inéditas
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Botão Filtrar -->
+                    <div class="flex-shrink-0 flex items-end">
+                        <button onclick="renderQuestions()" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-2.5 h-[42px] rounded-lg font-bold text-sm shadow-premium transition-all flex items-center justify-center gap-2 mb-0.5 w-full md:w-auto">
+                            FILTRAR <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL / BOTTOM PANEL: FEED DE QUESTÕES -->
+            <div class="flex-1 overflow-y-auto bg-[#FAFAFB] p-8 md:p-12 relative" id="questions-feed-container">
+                <div class="max-w-3xl mx-auto">
+                    <!-- Feed Header -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <p class="text-sm font-medium text-slate-500 mt-1">Exibindo <span id="q-count" class="font-bold text-[#0B193C]">0</span> Questões disponíveis no banco local.</p>
+                        </div>
+                    </div>
+
+                    <!-- CONTAINER DINÂMICO PARA INJEÇÃO DAS QUESTÕES -->
+                    <div id="questions-list" class="space-y-8 pb-32">
+                        <!-- Questions will be injected here by Javascript -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- JS ENGINE (THE "BACKEND" & LOGIC) -->
+    <script>
+        const defaultQuestions = [
+            {
+                id: 'ENEM-2009-Q01',
+                disciplina: 'Química',
+                assunto: 'Meio Ambiente',
+                banca: 'ENEM',
+                ano: 2009,
+                dificuldade: 'Fácil',
+                texto: `A atmosfera terrestre é composta pelos gases nitrogênio (N2) e oxigênio (O2), que somam cerca de 99%, e por gases traços, entre eles o gás carbônico (CO2), metano (CH4), ozônio (O3) e o óxido nitroso (N2O)... A partir da Revolução Industrial, a concentração de gases traços tem aumentado significativamente. Mais recentemente, outro fator tornou-se diretamente envolvido... o desmatamento. <br><br><b>(BROWN, I. F)</b><br><br>Considerando o texto, uma alternativa viável para combater o efeito estufa é:`,
+                alternativas: {
+                    A: 'reduzir o calor irradiado pela Terra mediante a substituição da produção primária pela industrialização refrigerada.',
+                    B: 'promover a queima da biomassa vegetal, responsável pelo aumento do efeito estufa devido à produção de CH4.',
+                    C: 'reduzir o desmatamento, mantendo-se, assim, o potencial da vegetação em absorver o CO2 da atmosfera.',
+                    D: 'aumentar a concentração atmosférica de H2O, molécula capaz de absorver grande quantidade de calor.',
+                    E: 'remover moléculas orgânicas polares da atmosfera, diminuindo a capacidade delas de reter calor.'
+                },
+                correta: 'C',
+                comentario: `<b>Habilidade (Competência 3):</b> Avaliar propostas de intervenção no meio ambiente.<br><br><b>Comentário do Mentor:</b> O desmatamento elimina árvores que sequestram naturalmente o Dióxido de Carbono (CO2) durante a fotossíntese. Reduzir as queimadas e motosserras é o passo macrocrítico para conter a liberação descontrolada do gás estufa na atmosfera terrestre.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2009-Q02',
+                disciplina: 'Biologia',
+                assunto: 'Fisiologia',
+                banca: 'ENEM',
+                ano: 2009,
+                dificuldade: 'Média',
+                texto: `Analise uma figura cartesiana imaginária onde o Eixo Y apresenta a "Concentração de álcool no sangue (mg%)" e o Eixo X mostra o "Tempo" avançando em Horas após o consumo. As diversas linhas no gráfico caem de um pico máximo em direção ao zero com o passar do dia.<br><br>Supondo que seja necessário dar um título para essa figura, a alternativa que melhor traduziria o processo representado seria:`,
+                alternativas: {
+                    A: 'Concentração média de álcool no sangue ao longo do dia.',
+                    B: 'Variação da frequência da ingestão de álcool ao longo das horas.',
+                    C: 'Concentração mínima de álcool no sangue a partir de diferentes dosagens.',
+                    D: 'Estimativa de tempo necessário para metabolizar diferentes quantidades de álcool.',
+                    E: 'Representação gráfica da distribuição de frequência de álcool em determinada hora do dia.'
+                },
+                correta: 'D',
+                comentario: `<b>Comentário Clínico:</b> O fígado humano (via Álcool Desidrogenase) precisa de uma janela de tempo físico para decair os picos de miligramagem. As curvas descendentes mostram matemaÉticamente o "Tempo de Clearance", a que taxa seu corpo elimina dosagens agressivas dessa toxina.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2009-Q03',
+                disciplina: 'Biologia',
+                assunto: 'Imunologia',
+                banca: 'ENEM',
+                ano: 2009,
+                dificuldade: 'Média',
+                texto: `Estima-se que haja atualmente no mundo 40 milhões de pessoas infectadas pelo HIV (o vírus que causa a AIDS). Nesse cenário de pandemia, uma vacina contra o HIV teria imenso impacto, pois salvaria milhões de vidas. Certamente seria um marco na história planetária e uma esperança para o tratamento antiviral.<br><br>Uma vacina eficiente contra o HIV deveria:`,
+                alternativas: {
+                    A: 'induzir a imunidade celular, para proteger o organismo da contaminação retroviral.',
+                    B: 'ser capaz de alterar o genoma do organismo portador, induzindo a síntese de enzimas protetoras.',
+                    C: 'produzir antígenos capazes de se ligarem ao vírus, impedindo que este entre nas células do organismo humano.',
+                    D: 'ser amplamente aplicada em animais, visto que esses são os principais transmissores do retrovírus para os seres humanos.',
+                    E: 'estimular a imunidade, minimizando a transmissão do vírus por gotículas espalhadas na saliva.'
+                },
+                correta: 'A',
+                comentario: `<b>Visão Biológica:</b> O princípio matriz absoluto de uma "Vacina" não é curar os doentes e não é matar o vírus injetando "antígenos" (o vírus próprio JÁ É o antígeno). A vacina introduziria fragmentos (partículas virais mortas ou sintéÉticas) no paciente sadio, engatilhando os linfócitos a memorizarem e criarem <b>anticorpos</b> prévios (induzindo imunidade ativa artificial).`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2009-Q04',
+                disciplina: 'Biologia',
+                assunto: 'Genética',
+                banca: 'ENEM',
+                ano: 2009,
+                dificuldade: 'Fácil',
+                texto: `Em um experimento laboratorial, preparou-se um conjunto de plantas por técnica de clonagem (mudas idênÉticas) a partir de uma planta original que apresentava folhas intensamente verdes. <br><br>Esse conjunto foi dividido em dois grupos mantidos hidratados com rigor acadêmico, com exceção da luz: um grupo foi exposto ao sol pleno diato e outro foi selado em absoluto escuro.<br>Após alguns dias, o grupo exposto à luz permanecia verde, já o do escuro amarelou horrivelmente.<br><br>Ao final do experimento, conclui-se que os dois grupos resultantes apresentaram:`,
+                alternativas: {
+                    A: 'os genótipos e os fenótipos idênticos entre si.',
+                    B: 'os genótipos idênticos, contudo os fenótipos manifestaram-se de formas diferentes.',
+                    C: 'diferenças nos genótipos e drásÉticas diferenças nos fenótipos.',
+                    D: 'o mesmo fenótipo, mas abertamente operavam sob dois genótipos clivados diferentes.',
+                    E: 'uma grande e imprevisível variedade letal em seus genótipos.'
+                },
+                correta: 'B',
+                comentario: `<b>Regra de Ouro Genética (F = G + A)</b>:<br>Por tratarem-se de plantas clonadas da mesmíssima célula-mãe, seu DNA interno (Genótipo) é absolutamente igual (100% idênticos). Porém a ausência de fótons bloqueou a via bioquímica da Clorofila, então fisicamente ela ficou amarela (fenótipo diferente). Genótipos Fixos, Fenótipos Mutáveis ao Meio.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2024-Q1',
+                disciplina: 'Física',
+                assunto: 'Termodinâmica',
+                banca: 'ENEM',
+                ano: 2024,
+                dificuldade: 'Média',
+                texto: `O uso de painéis solares térmicos em residências visa economizar energia no aquecimento de água. Considere um sistema onde a água entra a 20°C e deve sair a 40°C. O que ocorre predominantemente com as moléculas de água durante a passagem pelo coletor solar?`,
+                alternativas: { A: 'Aumento da energia cinéÉtica média.', B: 'Diminuição da ligação de hidrogênio.', C: 'Expansão iônica reversível.', D: 'Sublimação em microescala.', E: 'Resfriamento adiabático.' },
+                correta: 'A',
+                comentario: `Ao receber o calor, a temperatura da água aumenta de 20°C para 40°C. A temperatura macroscópica reflete diretamente o aumento da energia cinéÉtica média das moléculas.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2023-Q45',
+                disciplina: 'Biologia',
+                assunto: 'Ecologia',
+                banca: 'ENEM',
+                ano: 2023,
+                dificuldade: 'Fácil',
+                texto: `O desmatamento na Amazônia contribui severamente para o aquecimento global porque as árvores removidas deixam de realizar um importante processo biológico. Esse processo é a:`,
+                alternativas: { A: 'Respiração celular aeróbia.', B: 'Fotossíntese, que sequestra carbono.', C: 'Fixação de nitrogênio no solo.', D: 'Transpiração pelas folhas.', E: 'Fermentação láÉtica.' },
+                correta: 'B',
+                comentario: `A fotossíntese é responsável por sequestrar o CO2 atmosférico e convertê-lo em biomassa. Menos árvores resulta em mais CO2 (gás estufa) solto na atmosfera.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2022-Q92',
+                disciplina: 'História',
+                assunto: 'Era Vargas',
+                banca: 'ENEM',
+                ano: 2022,
+                dificuldade: 'Difícil',
+                texto: `Durante o Estado Novo (1937-1945), Getúlio Vargas criou o Departamento de Imprensa e Propaganda (DIP) com o grande objetivo central de:`,
+                alternativas: { A: 'Censurar a imprensa, controlar a cultura e construir a imagem míÉtica do presidente.', B: 'Expandir o acesso das universidades públicas aos camponeses.', C: 'Democratizar a rádio no interior do Brasil.', D: 'Facilitar a entrada de filmes de Hollywood no mercado nacional.', E: 'Garantir a liberdade de expressão dos sindicatos.' },
+                correta: 'A',
+                comentario: `O DIP foi a ferramenta máxima da ditadura Vargas para censurar opositores, fiscalizar o rádio e exaltar a figura do líder como 'Pai dos Pobres'.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2021-Q12',
+                disciplina: 'Química',
+                assunto: 'Separação de Misturas',
+                banca: 'ENEM',
+                ano: 2021,
+                dificuldade: 'Fácil',
+                texto: `Para separar os componentes do lixo reciclável que contêm latas de alumínio e garrafas PET, utiliza-se comumente em usinas qual método nas primeiras esteiras, se quisermos separar os metais com presença de ferro?`,
+                alternativas: { A: 'Decantação', B: 'Catação', C: 'Separação MagnéÉtica', D: 'Filtração', E: 'Sublimação' },
+                correta: 'C',
+                comentario: `Metais ferromagnéticos (como latas misturadas ricas em ferro) são facilmente atraídos por grandes ímãs na esteira, agilizando o processo (Separação MagnéÉtica).`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2020-Q130',
+                disciplina: 'Matemática',
+                assunto: 'Estatística - Média',
+                banca: 'ENEM',
+                ano: 2020,
+                dificuldade: 'Média',
+                texto: `Um aluno obteve as seguintes notas nos bimestres: 6.0, 7.5, 8.0 e 8.5. Qual a média aritméÉtica obtida por este aluno no ano letivo?`,
+                alternativas: { A: '7.0', B: '7.5', C: '8.0', D: '8.5', E: '9.0' },
+                correta: 'B',
+                comentario: `Média = (6.0 + 7.5 + 8.0 + 8.5) / 4 = 30 / 4 = 7.5.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2019-Q66',
+                disciplina: 'Biologia',
+                assunto: 'Citologia',
+                banca: 'ENEM',
+                ano: 2019,
+                dificuldade: 'Média',
+                texto: `A organela celular responsável por realizar a respiração celular e gerar a maior parte do ATP necessário para a célula é a:`,
+                alternativas: { A: 'Complexo de Golgi.', B: 'Cloroplasto.', C: 'Mitocôndria.', D: 'Lisossomo.', E: 'Ribossomo.' },
+                correta: 'C',
+                comentario: `As mitocôndrias são as usinas de energia das células eucariontes, produzindo ATP via respiração aeróbia.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2018-Q82',
+                disciplina: 'Física',
+                assunto: 'Cinemática',
+                banca: 'ENEM',
+                ano: 2018,
+                dificuldade: 'Fácil',
+                texto: `Um veículo percorre uma distância de 120 km em 2 horas. A velocidade média desse veículo em km/h e m/s é aproximadamente:`,
+                alternativas: { A: '60 km/h e 16,6 m/s', B: '60 km/h e 20 m/s', C: '120 km/h e 16 m/s', D: '30 km/h e 8,3 m/s', E: '240 km/h e 33 m/s' },
+                correta: 'A',
+                comentario: `V = d/t = 120/2 = 60 km/h. Para converter em m/s, dividimos por 3,6: 60 / 3,6 = ~16,6 m/s.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2017-Q41',
+                disciplina: 'História',
+                assunto: 'Brasil Colônia',
+                banca: 'ENEM',
+                ano: 2017,
+                dificuldade: 'Média',
+                texto: `No ciclo do açúcar no Brasil, a mão de obra utilizada caracterizou-se majoritariamente pelo(a):`,
+                alternativas: { A: 'Trabalho assalariado de imigrantes europeus.', B: 'Escravidão indígena.', C: 'Sistema de parceria.', D: 'Escravidão africana.', E: 'Sistema de mita.' },
+                correta: 'D',
+                comentario: `O complexo açucareiro nordestino foi fundamentalmente mantido pela entrada brutal de mão de obra escravizada originária do continente africano, gerindo altíssimos lucros com o tráfico.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2016-Q05',
+                disciplina: 'Química',
+                assunto: 'Estequiometria',
+                banca: 'ENEM',
+                ano: 2016,
+                dificuldade: 'Difícil',
+                texto: `Sabendo que a massa molar do Carbono é 12g/mol e do Oxigênio é 16g/mol. Uma amostra contém 44g de CO2. Quantos mols dessa molécula existem na amostra?`,
+                alternativas: { A: '0,5 mol', B: '1 mol', C: '2 mols', D: '3 mols', E: '4 mols' },
+                correta: 'B',
+                comentario: `A massa de 1 mol de CO2 é: 12 + (16*2) = 44 g/mol. Se a amostra pesa 44g, então há exatamente 1 mol.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2015-Q90',
+                disciplina: 'Matemática',
+                assunto: 'Matemática Financeira',
+                banca: 'ENEM',
+                ano: 2015,
+                dificuldade: 'Fácil',
+                texto: `Um produto custava R$ 200,00 e sofreu um acréscimo de 10%. Uma semana depois, entrou em promoção com 10% de desconto. Qual é o valor final do produto?`,
+                alternativas: { A: 'R$ 200,00', B: 'R$ 198,00', C: 'R$ 202,00', D: 'R$ 220,00', E: 'R$ 210,00' },
+                correta: 'B',
+                comentario: `10% de R$ 200 = R$ 20. Novo preço = R$ 220. O desconto de 10% incide sobre 220. 10% de R$ 220 = R$ 22. Valor final: 220 - 22 = R$ 198,00.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2014-Q15',
+                disciplina: 'Biologia',
+                assunto: 'Evolução',
+                banca: 'ENEM',
+                ano: 2014,
+                dificuldade: 'Média',
+                texto: `O princípio da Seleção Natural, proposto por Darwin, baseia-se na ideia de que os indivíduos que sobrevivem e deixam descendentes são os que possuem:`,
+                alternativas: { A: 'CaracterísÉticas induzidas pelo ambiente e passadas geneÉticamente.', B: 'Vantagens adaptativas inatas frente às pressões daquele ambiente.', C: 'Mais força física bruta independentemente do meio.', D: 'Imunidade inalterável e eterna a vírus.', E: 'DNA que não sofre mutação ao longo da vida.' },
+                correta: 'B',
+                comentario: `Na Seleção Natural, o meio "deleta" as variantes ruins e "salva" as variantes que acidentalmente já possuíam alguma vantagem adaptativa (sobrevivência do mais apto).`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2013-Q77',
+                disciplina: 'Física',
+                assunto: 'Eletrodinâmica',
+                banca: 'ENEM',
+                ano: 2013,
+                dificuldade: 'Difícil',
+                texto: `A potência dissipada por um chuveiro elétrico pode ser calculada por P = U²/R. No inverno europeu pesado, se os moradores substituírem esse resistor por um cuja resistência seja equivalente à METADE da R original de fábrica, assumindo a tensão constante, o que ocorrerá com a potência que aquece a água?`,
+                alternativas: { A: 'Cairá pela metade.', B: 'Ficará igual.', C: 'Será reduzida em quatro vezes.', D: 'Dobrará.', E: 'Quadruplicará.' },
+                correta: 'D',
+                comentario: `Sendo P = U²/R, a Potência (P) e a Resistência (R) são grandezas inversamente proporcionais. Reduzir a resistência pela metade fará a potência dissipada dobrar, entregando água mais quente, porém torrando muito rapidamente a resistência à longo prazo ou desarmando disjuntores mal calculados.`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2012-Q63',
+                disciplina: 'Química',
+                assunto: 'Tabela Periódica',
+                banca: 'ENEM',
+                ano: 2012,
+                dificuldade: 'Fácil',
+                texto: `Os gases nobres, na Tabela Periódica, são conhecidos por sua baixa reatividade química. Isso se deve principalmente:`,
+                alternativas: { A: 'Ao pequeno tamanho do núcleo.', B: 'À configuração eletrônica estável de máxima valência completa.', C: 'À sua elevada eletropositividade.', D: 'Ao fato de serem gasosos na temperatura ambiente.', E: 'Aos seus altos isótopos instáveis.' },
+                correta: 'B',
+                comentario: `Com raríssimas exceções, a camada de valência (nível atômico e orbital químico) com octeto completo confere alta estabilidade ao átomo (regra do octeto).`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2011-Q80',
+                disciplina: 'História',
+                assunto: 'Idade Antiga',
+                banca: 'ENEM',
+                ano: 2011,
+                dificuldade: 'Média',
+                texto: `A democracia ateniense, na Grécia Clássica, difere profundamente das democracias representativas modernas. A principal caracterísÉtica da democracia em Atenas era o fato de ser:`,
+                alternativas: { A: 'Indireta e baseada em constituição.', B: 'Exclusiva para a elite guerreira espartana.', C: 'Direta e restrita a cidadãos (homens livres, atenienses maiores de idade).', D: 'Universal, permitindo mulheres no Ágora.', E: 'Dominada pelo clero religioso.' },
+                correta: 'C',
+                comentario: `Não existiam "representantes". O próprio cidadão ia à praça pública (Ágora) discutir e votar, mas MULHERES, METECOS (estrangeiros) e ESCRAVOS jamais puderam votar (não eram cidadãos).`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2010-Q03',
+                disciplina: 'Matemática',
+                assunto: 'Geometria Espacial',
+                banca: 'ENEM',
+                ano: 2010,
+                dificuldade: 'Média',
+                texto: `Qual é o volume de um cilindro reto, cuja base possui raio de 2 cm e a altura é igual a 10 cm? (Considere π = 3).`,
+                alternativas: { A: '60 cm³', B: '120 cm³', C: '40 cm³', D: '80 cm³', E: '100 cm³' },
+                correta: 'B',
+                comentario: `Volume do Cilindro = Área da Base * Altura. V = (π * r²) * h. V = (3 * 2²) * 10 = (3 * 4) * 10 = 12 * 10 = 120 cm³`,
+                resolvido: null
+            },
+            {
+                id: 'ENEM-2009-Q02',
+                disciplina: 'Física',
+                assunto: 'Óptica',
+                banca: 'ENEM',
+                ano: 2009,
+                dificuldade: 'Média',
+                texto: `A miopia é um erro de refração no qual a imagem de objetos distantes é formada antes da retina. Para corrigir esse defeito visual, utilizam-se lentes:`,
+                alternativas: { A: 'Convergentes.', B: 'Divergentes.', C: 'Cilíndricas.', D: 'Bifocais planas.', E: 'Côncavo-convexas especiais magnéÉticas.' },
+                correta: 'B',
+                comentario: `Lentes divergentes ajudam a "separar" os raios de luz para que eles convirjam posteriormente apenas na própria retina, reparando o erro focal adiantado (olho alongado).`,
+                resolvido: null
+            }
+        ];
+
+        let questionsDB = [...defaultQuestions];
+
+        // --- MERGE COM BANCO MESTRE (LocalStorage) ---
+        try {
+            const masterBankStr = localStorage.getItem('sinapseMasterBank');
+            if (masterBankStr) {
+                const masterBank = JSON.parse(masterBankStr);
+                // Filtra questões que a diretoria liberou para acesso dos alunos
+                const publicadas = masterBank.filter(q => q.configs && q.configs.publicadaImediata);
+                
+                publicadas.forEach(mq => {
+                    const diffCapitalized = mq.dificuldade === 'facil' ? 'Fácil' : 
+                                            mq.dificuldade === 'media' ? 'Média' : 'Difícil';
+                    
+                    questionsDB.unshift({
+                        id: mq.id,
+                        disciplina: mq.disciplina,
+                        assunto: mq.assunto,
+                        banca: mq.banca,
+                        ano: mq.ano,
+                        dificuldade: diffCapitalized,
+                        texto: mq.enunciado,
+                        imagemBase64: mq.imagemBase64 || null,
+                        alternativas: mq.alternativas,
+                        correta: mq.gabarito,
+                        comentario: mq.resolução || mq.resolucao,
+                        resolvido: null
+                    });
+                });
+            }
+        } catch(e) {
+            console.error("Erro ao mesclar com Banco Mestre: ", e);
+        }
+
+        // Global State & Tracking
+        const assuntosPorDisciplina = {
+            'Matemática': ['Equação do 1º Grau', 'Função do 1º Grau', 'Equação do 2º Grau', 'Função do 2º Grau', 'Equação Exponencial', 'Função Exponencial', 'Função Logarítmica', 'Progressão Aritmética', 'Progressão Geométrica', 'Matrizes', 'Determinantes', 'Sistemas Lineares', 'Trigonometria no Triângulo Retângulo', 'Funções Trigonométricas', 'Retas Paralelas Cortadas por uma Transversal', 'Triângulos', 'Semelhança de Triângulos', 'Teorema de Tales', 'Relações Métricas no Triângulo Retângulo', 'Cevianas e Pontos Notáveis', 'Polígonos', 'Quadriláteros Notáveis', 'Áreas de Figuras Planas', 'Circunferência - Ângulos e Arcos', 'Poliedros', 'Prisma', 'Pirâmide', 'Tronco de Pirâmide', 'Cilindro', 'Cone', 'Tronco de Cone', 'Esfera', 'Estudo do Ponto', 'Estudo da Reta', 'Circunferência', 'Sólidos Semelhantes', 'Conjuntos Numéricos', 'Teoria de Conjuntos', 'MMC', 'MDC', 'Razão e Proporção', 'Grandezas Proporcionais', 'Porcentagem', 'Matemática Financeira', 'Princípio Fundamental da Contagem', 'Permutação', 'Arranjo', 'Combinação', 'Probabilidade', 'Estatística - Média', 'Função'],
+            'Física': ['Cinemática', 'Dinâmica', 'Estática', 'Hidrostática', 'Termodinâmica', 'Calorimetria', 'Óptica Geométrica', 'Ondulatória', 'Eletrostática', 'Eletrodinâmica', 'Eletromagnetismo', 'Física Moderna'],
+            'Química': ['Modelos Atômicos', 'Tabela Periódica', 'Ligações Químicas', 'Funções Inorgânicas', 'Estequiometria', 'Soluções', 'Termoquímica', 'Cinética Química', 'Equilíbrio Químico', 'Eletroquímica', 'Radioatividade', 'Química Orgânica - Funções', 'Isomeria', 'Reações Orgânicas', 'Polímeros', 'Química Ambiental', 'Separação de Misturas'],
+            'Biologia': ['Ecologia', 'Citologia', 'Divisão Celular', 'Metabolismo Energético', 'Genética Mendeliana', 'Engenharia Genética', 'Evolução', 'Fisiologia Humana', 'Imunologia', 'Botânica', 'Zoologia', 'Microbiologia', 'Parasitologia'],
+            'História': [
+                'INTRODUÇÃO AO CURSO DE HISTÓRIA GERAL', 'A FORMAÇÃO DO POVO GREGO', 'ESPARTA E ATENA', 'PERÍODO CLÁSSICO E PERÍODO HELENÍSTICO', 'NASCIMENTO DE ROMA (MONARQUIA E REPÚBLICA)', 'IMPÉRIO ROMANO', 'REINOS BÁRBAROS – IMPÉRIO BIZANTINO E CAROLÍNGIO', 'O ISLAMISMO – ORIGEM E EXPANSÃO', 'FEUDALISMO', 'BAIXA IDADE MÉDIA – RENASCIMENTO COMERCIAL E URBANO/ CRUZADAS', 'ASCENSÃO DAS MONARQUIAS NACIONAIS: O ABSOLUTISMO', 'RENASCIMENTO', 'MERCANTILISMO', 'A REFORMA PROTESTANTE', 'REVOLUÇÃO INGLESA', 'REVOLUÇÕES INDUSTRIAIS', 'HISTÓRIA DOS EUA', 'REVOLUÇÃO FRANCESA', 'PERÍODO NAPOLEÔNICO', 'REVOLUÇÕES BURGUESAS', 'IMPERIALISMO E NEOCOLONIALISMO', 'PRIMEIRA GRANDE GUERRA', 'REVOLUÇÃO RUSSA', 'ENTRE GUERRAS, CRISE DE 20 E TOTALITARISMO', 'SEGUNDA GRANDE GUERRA', 'O MUNDO PÓS-GUERRA', 'BRASIL PRÉ-CABRALINO', 'EXPANSÃO MARÍTIMA PORTUGUESA', 'AMÉRICA PORTUGUESA', 'UNIÃO IBÉRICA', 'BRASIL COLONIAL', 'CRISE DO SISTEMA COLONIAL', 'O PROCESSO DE INDEPENDÊNCIA – INDEPENDÊNCIA DO BRASIL', 'O PROCESSO DE INDEPENDÊNCIA NA AMÉRICA LATINA', 'PRIMEIRO REINADO', 'PERÍODO REGENCIAL – REVOLTAS REGENCIAIS', 'SEGUNDO REINADO', 'TRABALHO ESCRAVO NO BRASIL – LEGADO SOCIOCULTURAL', 'O PROCESSO DE TRANSIÇÃO DA MONARQUIA À REPÚBLICA', 'PRIMEIRA REPÚBLICA', 'ERA VARGAS', 'REPÚBLICA POPULISTA', 'JK – HISTÓRIA DE BRASÍLIA', 'CRISE DO POPULISMO', 'DITADURAS MILITARES NA AMÉRICA DO SUL', 'RECONSTRUÇÃO DEMOCRÁTICA'
+            ],
+            'Geografia': ['Geopolítica', 'Globalização', 'Geografia Agrária', 'Urbanização', 'Indústria', 'Fontes de Energia', 'População', 'Migrações', 'Questões Ambientais', 'Cartografia', 'Climatologia', 'Geomorfologia', 'Biomas e Vegetação', 'Hidrografia'],
+            'Filosofia': ['Filosofia Antiga (Pré-socráticos, Sócrates, Platão, Aristóteles)', 'Filosofia Helenística', 'Filosofia Medieval (Patrística e Escolástica)', 'Filosofia Moderna (Racionalismo e Empirismo)', 'Iluminismo', 'Contratualismo (Hobbes, Locke, Rousseau)', 'Kant', 'Filosofia Contemporânea (Nietzsche, Sartre, Foucault)', 'Ética e Moral', 'Filosofia Política'],
+            'Sociologia': ['Surgimento da Sociologia', 'Cultura e Ideologia', 'Indústria Cultural e Meios de Comunicação', 'Max Weber', 'Émile Durkheim', 'Karl Marx', 'Estratificação e Desigualdade Social', 'Movimentos Sociais', 'Trabalho e Sociedade', 'Cidadania e Direitos Humanos', 'Sociologia Brasileira'],
+            'Artes': ['Arte Pré-Histórica e Antiga', 'Arte Medieval', 'Renascimento', 'Barroco e Rococó', 'Neoclassicismo e Romantismo', 'Realismo e Impressionismo', 'Vanguardas Europeias (Cubismo, Expressionismo, Surrealismo)', 'Modernismo Brasileiro (Semana de 22)', 'Arte Contemporânea', 'Cultura Popular e Folclore', 'Patrimônio Histórico'],
+            'Linguagens': ['Interpretação de Textos', 'Variação Linguística', 'Funções da Linguagem', 'Figuras de Linguagem', 'Tipologia Textual', 'Gêneros Textuais', 'Coesão e Coerência', 'Semântica', 'Sintaxe e Morfologia', 'Estratégias Argumentativas'],
+            'Literatura': ['Trovadorismo e Humanismo', 'Quinhentismo', 'Barroco', 'Arcadismo', 'Romantismo', 'Realismo e Naturalismo', 'Parnasianismo e Simbolismo', 'Pré-Modernismo', 'Modernismo - 1ª Geração', 'Modernismo - 2ª Geração', 'Modernismo - 3ª Geração e Contemporânea']
+        };
+
+        let currentFilters = {
+            disciplina: '',
+            assunto: '',
+            banca: '',
+            dificuldade: '',
+            status: 'all',
+            search: ''
+        };
+
+        const studentStats = {
+            hits: parseInt(localStorage.getItem('sinapse_hits') || '0'),
+            misses: parseInt(localStorage.getItem('sinapse_misses') || '0')
+        };
+
+        const listDiv = document.getElementById('questions-list');
+        const countSpan = document.getElementById('q-count');
+
+        // Init
+        document.addEventListener('DOMContentLoaded', () => {
+            updateBancasList();
+            updateStatsUI();
+            setupEventListeners();
+            renderQuestions();
+        });
+
+        function updateBancasList() {
+            const list = document.getElementById('bancas-list');
+            if(!list) return;
+            const customBancas = JSON.parse(localStorage.getItem('sinapseCustomBancas') || '[]');
+            customBancas.forEach(b => {
+                if (!list.querySelector(`option[value="${b}"]`)) {
+                    list.innerHTML += `<option value="${b}">`;
+                }
+            });
+        }
+
+        function setupEventListeners() {
+            const discSelect = document.getElementById('filter-disc');
+            const assuntoSelect = document.getElementById('filter-assunto');
+
+            if(discSelect) {
+                discSelect.addEventListener('change', (e) => { 
+                    currentFilters.disciplina = e.target.value; 
+                    currentFilters.assunto = ''; 
+
+                    assuntoSelect.innerHTML = '<option value="">Todos os Assuntos</option>';
+                    if (e.target.value && assuntosPorDisciplina[e.target.value]) {
+                        const topics = assuntosPorDisciplina[e.target.value];
+                        topics.forEach(t => {
+                            assuntoSelect.innerHTML += `<option value="${t}">${t}</option>`;
+                        });
+                    } else if (!e.target.value) {
+                        assuntoSelect.innerHTML = '<option value="">Selecione a Disciplina primeiro...</option>';
+                    }
+                    // Aviso: botão "FILTRAR" deve ser pressionado para renderizar
+                });
+            }
+
+            if(assuntoSelect) {
+                assuntoSelect.addEventListener('change', (e) => { currentFilters.assunto = e.target.value; });
+            }
+            if(document.getElementById('filter-banca')) {
+                document.getElementById('filter-banca').addEventListener('change', (e) => { currentFilters.banca = e.target.value; });
+            }
+            
+            document.querySelectorAll('input[name="status"]').forEach(rad => {
+                rad.addEventListener('change', (e) => {
+                    currentFilters.status = e.target.value;
+                });
+            });
+        }
+
+        function clearFilters() {
+            currentFilters = { disciplina: '', assunto: '', banca: '', dificuldade: '', status: 'all', search: '' };
+            if (document.getElementById('filter-disc')) document.getElementById('filter-disc').value = '';
+            
+            const assuntoSelect = document.getElementById('filter-assunto');
+            if (assuntoSelect) {
+                assuntoSelect.innerHTML = '<option value="">Selecione a Disciplina primeiro...</option>';
+                assuntoSelect.value = '';
+            }
+            
+            if (document.getElementById('filter-banca')) document.getElementById('filter-banca').value = '';
+            const statusRadio = document.querySelector('input[name="status"][value="all"]');
+            if (statusRadio) statusRadio.checked = true;
+            renderQuestions();
+        }
+
+        // --- 2. ENGINE FILTERING ---
+        function filterData() {
+            // 🔄 Re-hidratar questoes INÉDITAS fresquinhas do banco do usuario (Tempo Real)
+            try {
+                const masterBankStr = localStorage.getItem('sinapseMasterBank');
+                if (masterBankStr) {
+                    const masterBank = JSON.parse(masterBankStr);
+                    const publicadas = masterBank.filter(q => q.configs && q.configs.publicadaImediata);
+                    
+                    publicadas.forEach(mq => {
+                        if (!questionsDB.find(gq => gq.id === mq.id)) {
+                            const diffCapitalized = mq.dificuldade === 'facil' ? 'Fácil' : 
+                                                    mq.dificuldade === 'media' ? 'Média' : 'Difícil';
+                            questionsDB.unshift({
+                                id: mq.id,
+                                disciplina: mq.disciplina,
+                                assunto: mq.assunto,
+                                banca: mq.banca,
+                                ano: mq.ano,
+                                dificuldade: diffCapitalized,
+                                texto: mq.enunciado,
+                                imagemBase64: mq.imagemBase64 || null,
+                                alternativas: mq.alternativas,
+                                correta: mq.gabarito,
+                                comentario: mq.resolucao || mq.resolução,
+                                resolvido: null
+                            });
+                        }
+                    });
+                }
+            } catch(e) { console.error(e); }
+            
+            return questionsDB.filter(q => {
+                if(currentFilters.disciplina && q.disciplina !== currentFilters.disciplina) return false;
+                if(currentFilters.assunto && !q.assunto.includes(currentFilters.assunto)) return false;
+                if(currentFilters.banca && q.banca !== currentFilters.banca) return false;
+                
+                if(currentFilters.status === 'unanswered' && q.resolvido !== null) return false;
+                if(currentFilters.status === 'errors' && q.resolvido !== 'wrong') return false;
+                
+                return true;
+            });
+        }
+
+        // --- 3. RENDER CORE ---
+        function renderQuestions() {
+            if (!listDiv) return;
+
+            if (!currentFilters.disciplina && !currentFilters.banca) {
+                if(countSpan) countSpan.textContent = "0";
+                listDiv.innerHTML = `
+                <div class="bg-white rounded-2xl p-10 text-center border border-slate-100 shadow-sm mt-12 flex flex-col items-center">
+                    <div class="w-16 h-16 bg-indigo-50/50 rounded-full flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-[32px] text-sinapse-primary mt-1">checklist</span>
+                    </div>
+                    <h3 class="font-headline font-bold text-xl text-[#0B193C] mb-2">Pronto para treinar?</h3>
+                    <p class="text-sm text-slate-500 max-w-sm mx-auto">Utilize os Filtros Estratégicos no topo da página selecionando uma <b>Disciplina</b> ou <b>Banca</b> para carregar seu Caderno de Exercícios.</p>
+                </div>`;
+                return;
+            }
+
+            const data = filterData();
+            if(countSpan) countSpan.textContent = data.length;
+            listDiv.innerHTML = '';
+
+            if(data.length === 0) {
+                listDiv.innerHTML = `
+                <div class="bg-white rounded-2xl p-10 text-center border border-slate-100 shadow-sm mt-8">
+                    <span class="material-symbols-outlined text-[48px] text-slate-300 mb-4 block">search_off</span>
+                    <h3 class="font-headline font-bold text-lg text-[#0B193C]">Nenhuma Questão Localizada</h3>
+                    <p class="text-sm text-slate-400 mt-2">Nao encontramos questoes com esses filtros no banco atual.</p>
+                </div>`;
+                return;
+            }
+
+            // Loop and build UI
+            data.forEach((q, index) => {
+                let isLocked = q.resolvido ? 'locked' : '';
+                let altsHTML = '';
+                for(const [letter, text] of Object.entries(q.alternativas || {})) {
+                    if (!text || text.trim() === '') continue; 
+
+                    let classState = '';
+                    if (q.resolvido) {
+                        if (letter === q.correta) classState = 'correct border-green-500 bg-green-50'; // correta em verde
+                        else if (q.chute === letter && q.chute !== q.correta) classState = 'wrong border-red-500 bg-red-50'; // errada em vermelho
+                    }
+
+                    altsHTML += `
+                        <div id="alt-btn-${q.id}-${letter}" data-letter="${letter}" onclick="selectAlternative('${q.id}', '${letter}')" class="alt-button ${isLocked} ${classState} w-full text-left p-4 rounded-xl border-2 border-slate-100 bg-white hover:border-sinapse-primary/50 cursor-pointer flex gap-4 mt-3 transition-colors">
+                            <div class="alt-letter w-8 h-8 rounded-lg border-2 border-slate-200 flex items-center justify-center font-bold text-slate-500 font-headline flex-shrink-0 bg-white pointer-events-none">
+                                ${letter}
+                            </div>
+                            <div class="text-sm text-slate-600 font-medium leading-relaxed my-auto pointer-events-none">
+                                ${text}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                const cardHTML = `
+                <div class="bg-white rounded-2xl border border-slate-200 shadow-question p-8 fade-in question-card" id="card-${q.id}" style="animation-delay: ${index * 0.05}s">
+                    <div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-slate-100 pb-5">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest">${q.id}</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-xs font-bold text-slate-500">${q.banca} - ${q.ano}</span>
+                            <span class="text-slate-300">|</span>
+                            <span class="text-xs font-bold text-sinapse-primary">${q.disciplina}</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button class="w-8 h-8 rounded border border-slate-200 flex items-center justify-center text-slate-400 hover:text-rose-500 hover:border-rose-200 transition-colors tooltip" title="Salvar Ouro">
+                                <span class="material-symbols-outlined text-[16px]">bookmark_border</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="prose prose-sm max-w-none text-slate-700 font-medium leading-relaxed mb-6">
+                        ${q.texto ? q.texto.replace(/\\n/g, '<br>') : ''}
+                    </div>
+                    ${q.imagemBase64 ? `<div class="mb-6 rounded-xl overflow-hidden border border-slate-200 flex justify-center bg-slate-50 p-4"><img src="${q.imagemBase64}" class="max-w-full h-auto rounded-lg shadow-sm" alt="Imagem auxiliar"></div>` : ''}
+                    <div class="space-y-4 mb-6" id="alts-${q.id}">
+                        ${altsHTML}
+                    </div>
+                    ${ !q.resolvido ? `
+                    <div class="mt-6 flex justify-end border-t border-slate-100 pt-6">
+                        <button id="btn-resp-${q.id}" disabled onclick="answerQuestion('${q.id}')" class="bg-sinapse-primary hover:bg-[#4F46E5] text-white px-10 py-3.5 rounded-xl font-bold text-sm shadow-premium transition-all active:scale-95 flex items-center gap-2 opacity-50 cursor-not-allowed">
+                           RESPONDER <span class="material-symbols-outlined text-[18px]">send</span>
+                        </button>
+                    </div>` : `
+                    <div class="mt-6 flex justify-end gap-3 border-t border-slate-100 pt-6">
+                        <button onclick="document.getElementById('exp-${q.id}').classList.toggle('show'); this.innerHTML = this.innerHTML.includes('ABRIR') ? 'FECHAR COMENTÁRIO <span class=\\'material-symbols-outlined text-[18px]\\'>close</span>' : 'ABRIR COMENTÁRIO <span class=\\'material-symbols-outlined text-[18px]\\'>chat</span>'" class="bg-white text-slate-500 hover:text-[#0B193C] hover:border-[#0B193C] hover:bg-slate-50 px-6 py-2.5 rounded-xl border border-slate-200 font-bold text-xs tracking-widest transition-all flex items-center gap-2 shadow-sm">
+                           ABRIR COMENTÁRIO <span class="material-symbols-outlined text-[18px]">chat</span>
+                        </button>
+                    </div>` }
+                    <div class="explanation-box border-t border-slate-100 pt-6 mt-6" id="exp-${q.id}">
+                        <h4 class="font-headline font-extrabold text-[#0B193C] flex items-center gap-2 mb-3">
+                            <span class="material-symbols-outlined text-amber-500 icon-fill">lightbulb</span> Comentário
+                        </h4>
+                        <div class="bg-indigo-50/50 rounded-xl p-5 border border-indigo-100 text-[13px] text-slate-600 leading-relaxed">
+                            ${q.comentario ? q.comentario.replace(/\n/g, '<br>') : ''}
+                        </div>
+                    </div>
+                </div>`;
+                
+                listDiv.innerHTML += cardHTML;
+            });
+        }
+
+        // --- 4. ENGINE VALIDATION ---
+        window.selectAlternative = function(qId, letter) {
+            const qIndex = questionsDB.findIndex(x => x.id === qId);
+            if(qIndex === -1 || questionsDB[qIndex].resolvido) return;
+            
+            // Remove seleção anterior
+            document.querySelectorAll('#alts-' + qId + ' .alt-button').forEach(btn => {
+                btn.classList.remove('selected', 'border-sinapse-primary', 'bg-indigo-50/50', 'ring-2', 'ring-sinapse-primary/20');
+            });
+            // Adiciona nova seleção
+            const clicked = document.getElementById(`alt-btn-${qId}-${letter}`);
+            if(clicked) {
+                clicked.classList.add('selected', 'border-sinapse-primary', 'bg-indigo-50/50', 'ring-2', 'ring-sinapse-primary/20');
+
+                // Habilita Botão Responder
+                const respBtn = document.getElementById(`btn-resp-${qId}`);
+                if(respBtn) {
+                    respBtn.disabled = false;
+                    respBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+            }
+        };
+
+        window.answerQuestion = function(qId) {
+            // Find Question Obj
+            const qIndex = questionsDB.findIndex(x => x.id === qId);
+            if(qIndex === -1 || questionsDB[qIndex].resolvido) return;
+            
+            const btn = document.querySelector(`#alts-${qId} .selected`);
+            if(!btn) {
+                alert("Por favor, selecione uma alternativa antes de responder!");
+                return;
+            }
+            
+            const selectedLetter = btn.dataset.letter;
+            const q = questionsDB[qIndex];
+            const isCorrect = (selectedLetter === q.correta);
+            
+            // Grava Estado
+            q.resolvido = isCorrect ? 'correct' : 'wrong';
+            q.chute = selectedLetter;
+
+            // Analytics Core (Virtual)
+            if(isCorrect) {
+                 studentStats.hits++;
+                 localStorage.setItem('sinapse_hits', studentStats.hits);
+            } else {
+                 studentStats.misses++;
+                 localStorage.setItem('sinapse_misses', studentStats.misses);
+            }
+            updateStatsUI();
+
+            // Integração com Meu Desempenho (Dashboard global)
+            if (window.db) {
+                const todayPrefix = new Date().toISOString().split('T')[0];
+                let entries = window.db.get('metrics_entries') || [];
+                
+                let existingEntryIndex = entries.findIndex(e => 
+                     e.discipline === q.disciplina && 
+                     e.subject === (q.assunto || 'Diversos') && 
+                     e.created_at && e.created_at.startsWith(todayPrefix)
+                );
+
+                if (existingEntryIndex !== -1) {
+                    let entry = entries[existingEntryIndex];
+                    entry.questions_total += 1;
+                    if(isCorrect) entry.correct_answers += 1;
+                    else entry.wrong_answers += 1;
+                    entry.accuracy_percentage = (entry.correct_answers / entry.questions_total) * 100;
+                    window.db.update('metrics_entries', entry.id, entry);
+                } else {
+                    window.db.insert('metrics_entries', {
+                        user_id: 1,
+                        discipline: q.disciplina,
+                        subject: q.assunto || 'Diversos',
+                        created_at: todayPrefix + 'T20:00:00.000Z', 
+                        questions_total: 1,
+                        correct_answers: isCorrect ? 1 : 0,
+                        wrong_answers: isCorrect ? 0 : 1,
+                        accuracy_percentage: isCorrect ? 100 : 0,
+                        study_time_minutes: 0
+                    });
+                }
+            } // Fechamento do if (window.db)
+            
+            renderQuestions(); // In a heavy framework, we'd only update the specific DOM elements to save paint. For this MVP array, re-rendering entirely is instantaneous and safe.
+        };
+
+        function updateStatsUI() {
+            document.getElementById('header-hits').textContent = studentStats.hits;
+            document.getElementById('header-misses').textContent = studentStats.misses;
+            document.getElementById('header-hits').classList.add('text-emerald-500');
+            document.getElementById('header-misses').classList.add('text-rose-500');
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

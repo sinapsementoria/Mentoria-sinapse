@@ -1,0 +1,4 @@
+﻿LB_EP -> Vagas: C7, Corte: C22
+LB_PPI -> Vagas: C7, Corte: C22
+LI_EP -> Vagas: C7, Corte: C22
+LI_PPI -> Vagas: C7, Corte: C22

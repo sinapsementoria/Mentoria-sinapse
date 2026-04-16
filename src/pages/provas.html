@@ -1,0 +1,1771 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Provas de Larga Escala</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: { blue: '#0B193C', primary: '#6366F1', accent: '#10B981', light: '#FAFAFB' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], headline: ['Manrope', 'sans-serif'] },
+                    boxShadow: { 'premium': '0 10px 40px -10px rgba(11,25,60,0.06)' }
+                }
+            }
+        }
+    </script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline {
+            font-family: 'Playfair Display', serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFB;
+            color: #1E293B;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../src/js/database.js"></script>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+
+<body
+    class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside
+        class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <!-- Logo Area -->
+        <div
+            class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão"
+                class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span
+                class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION
+                <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span>
+                Metas Diárias
+            </a>
+            <a href="metricas.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span>
+                Meu Desempenho
+            </a>
+            <a href="estrategia.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span>
+                Estratégia de Aprovação
+            </a>
+            <a href="provas.html"
+                class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">history_edu</span> Provas
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="planejamento.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span>
+                Planejamento
+            </a>
+            <a href="vestibulares.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span>
+                Vestibulares
+            </a>
+            <a href="calendario.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span>
+                Calendário
+            </a>
+            <a href="simulador.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span>
+                Simulador SISU
+            </a>
+            <a href="banco-questoes.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span>
+                Banco de Questões
+            </a>
+            <a href="redacao.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span>
+                Redação
+            </a>
+            <a href="flashcard.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span>
+                Flashcard
+            </a>
+            <a href="perfil.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span>
+                Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto">
+        <header
+            class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">
+            <nav class="flex text-[11px] font-semibold text-slate-400 uppercase tracking-widest space-x-3 items-center">
+            </nav>
+        </header>
+
+        <div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relative z-10">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1
+                        class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">
+                        PROVAS
+                    </h1>
+                    <p class="text-slate-400 font-semibold text-sm">MONITORAMENTO INTELIGENTE DA SUA PERFORMANCE RUMO À
+                        APROVAÇÃO EM MEDICINA.</p>
+                </div>
+            </div>
+
+            <!-- Formulário de Cadastro de Provas -->
+            <div class="glass-panel rounded-[32px] overflow-hidden shadow-premium p-10 bg-white">
+                <div class="flex items-center gap-3 mb-8">
+                    <span class="material-symbols-outlined text-[#0B193C] text-[28px] icon-fill">add_circle</span>
+                    <h2 class="font-headline text-2xl font-extrabold text-[#0B193C]">Cadastrar Nova Avaliação</h2>
+                </div>
+
+                <form id="formProva" onsubmit="event.preventDefault(); salvarProva();">
+
+                    <!-- Seletor Tipo de Prova -->
+                    <div class="mb-8">
+                        <label
+                            class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-4">Instituição
+                            / Banca</label>
+                                                                                                                                                <div class="grid grid-cols-2 lg:grid-cols-6 gap-4">
+                            <!-- ENEM -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="ENEM" class="peer sr-only" checked
+                                    onchange="toggleAvaliacaoCampos('ENEM')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/ENEM.png" alt="ENEM" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">ENEM</span>
+                                </div>
+                            </label>
+                            <!-- SIMULADO -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="SIMULADO" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('SIMULADO')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/SIMULADO.png" alt="SIMULADO" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">SIMULADO</span>
+                                </div>
+                            </label>
+                            <!-- VEST-UNB -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="VEST-UNB" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('VEST-UNB')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNB.png" alt="VEST-UNB" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">VEST-UNB</span>
+                                </div>
+                            </label>
+                            <!-- PAS-UNB -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="PAS-UNB" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('PAS-UNB')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/PAS-UNB.png" alt="PAS-UNB" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">PAS-UNB</span>
+                                </div>
+                            </label>
+                            <!-- FUVEST -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="FUVEST" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('FUVEST')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/FUVEST.png" alt="FUVEST" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">FUVEST</span>
+                                </div>
+                            </label>
+                            <!-- UNICAMP -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNICAMP" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNICAMP')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNICAMP.png" alt="UNICAMP" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNICAMP</span>
+                                </div>
+                            </label>
+                            <!-- UNESP -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNESP" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNESP')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNESP.png" alt="UNESP" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNESP</span>
+                                </div>
+                            </label>
+                            <!-- FAMERP -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="FAMERP" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('FAMERP')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/FAMERP.png" alt="FAMERP" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">FAMERP</span>
+                                </div>
+                            </label>
+                            <!-- UFG -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFG" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFG')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFG.png" alt="UFG" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFG</span>
+                                </div>
+                            </label>
+                            <!-- UEG -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UEG" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UEG')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UEG.png" alt="UEG" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UEG</span>
+                                </div>
+                            </label>
+                            <!-- UFU -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFU" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFU')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFU.png" alt="UFU" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFU</span>
+                                </div>
+                            </label>
+                            <!-- UFJF -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFJF" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFJF')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFJF.png" alt="UFJF" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFJF</span>
+                                </div>
+                            </label>
+                            <!-- UFMS -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFMS" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFMS')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFMS.png" alt="UFMS" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFMS</span>
+                                </div>
+                            </label>
+                            <!-- UFGD -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFGD" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFGD')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFGD.png" alt="UFGD" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFGD</span>
+                                </div>
+                            </label>
+                            <!-- UFPR -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFPR" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFPR')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFPR.png" alt="UFPR" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFPR</span>
+                                </div>
+                            </label>
+                            <!-- UFSC -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFSC" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFSC')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFSC.png" alt="UFSC" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFSC</span>
+                                </div>
+                            </label>
+                            <!-- UFRGS -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFRGS" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFRGS')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFRGS.png" alt="UFRGS" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFRGS</span>
+                                </div>
+                            </label>
+                            <!-- UFT -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UFT" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UFT')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UFT.png" alt="UFT" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UFT</span>
+                                </div>
+                            </label>
+                            <!-- UNIOESTE -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNIOESTE" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNIOESTE')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNIOESTE.png" alt="UNIOESTE" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNIOESTE</span>
+                                </div>
+                            </label>
+                            <!-- UNIMONTES -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNIMONTES" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNIMONTES')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNIMONTES.png" alt="UNIMONTES" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNIMONTES</span>
+                                </div>
+                            </label>
+                            <!-- UEMG -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UEMG" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UEMG')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UEMG.png" alt="UEMG" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UEMG</span>
+                                </div>
+                            </label>
+                            <!-- UCB -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UCB" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UCB')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UCB.png" alt="UCB" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UCB</span>
+                                </div>
+                            </label>
+                            <!-- UNIRV -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNIRV" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNIRV')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNIRV.png" alt="UNIRV" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNIRV</span>
+                                </div>
+                            </label>
+                            <!-- CEUB -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="CEUB" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('CEUB')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/CEUB.png" alt="CEUB" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">CEUB</span>
+                                </div>
+                            </label>
+                            <!-- UNIEURO -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNIEURO" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNIEURO')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNIEURO.png" alt="UNIEURO" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNIEURO</span>
+                                </div>
+                            </label>
+                            <!-- MAUÁ -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="MAUÁ" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('MAUÁ')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/MAUÁ.png" alt="MAUÁ" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">MAUÁ</span>
+                                </div>
+                            </label>
+                            <!-- UNICEPLAC -->
+                            <label class="relative cursor-pointer group">
+                                <input type="radio" name="banca" value="UNICEPLAC" class="peer sr-only"
+                                    onchange="toggleAvaliacaoCampos('UNICEPLAC')">
+                                <div class="p-5 border border-slate-200 rounded-2xl flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover:border-sinapse-primary/50 peer-checked:bg-[#0B193C] peer-checked:border-[#0B193C] peer-checked:text-white peer-checked:shadow-xl text-slate-500">
+                                    <img src="../../public/assets/images/VESTIBULARES/LOGO VETORIZADA/UNICEPLAC.png" alt="UNICEPLAC" class="h-9 object-contain mb-1">
+                                    <span class="font-bold font-headline tracking-wide text-center">UNICEPLAC</span>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Campos Específicos ENEM / SIMULADO -->
+                    <div id="avaliacaoFields"
+                        class="transition-all duration-500 overflow-hidden opacity-100 max-h-[2000px] border-t border-slate-100 pt-8 mt-8">
+
+                        <!-- Metadados -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
+                            <!-- Ano que serve para ambos -->
+                            <div class="space-y-2 relative md:col-span-1">
+                                <label
+                                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Ano
+                                    de Aplicação</label>
+                                <select id="enemAno"
+                                    class="relative z-10 w-full bg-slate-50 border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all appearance-none cursor-pointer text-sm">
+                                    <option value="2026">2026</option>
+                                    <option value="2025" selected>2025</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019">2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                </select>
+                                <span
+                                    class="material-symbols-outlined absolute right-4 top-[40px] text-slate-400 pointer-events-none z-20">expand_more</span>
+                            </div>
+
+                            <!-- ROW: ENEM -->
+                            <div id="enemMeta"
+                                class="col-span-1 md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-300">
+                                <div class="space-y-2 relative">
+                                    <label
+                                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">É
+                                        prova PPL?</label>
+                                    <select id="enemPpl"
+                                        class="relative z-10 w-full bg-slate-50 border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all appearance-none cursor-pointer text-sm">
+                                        <option value="Não">Não</option>
+                                        <option value="Sim">Sim</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-[40px] text-slate-400 pointer-events-none z-20">expand_more</span>
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Cor
+                                        do Caderno</label>
+                                    <div class="relative">
+                                        <input type="text" id="enemCor" placeholder="Digite a cor do caderno"
+                                            class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm placeholder:font-medium placeholder:text-slate-400">
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">palette</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ROW: SIMULADO -->
+                            <div id="simuladoMeta"
+                                class="hidden col-span-1 md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-300">
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Instituição</label>
+                                    <div class="relative">
+                                        <input type="text" id="simInst" placeholder="Ex: SAS, Poliedro, Bernoulli"
+                                            class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm placeholder:font-medium placeholder:text-slate-400">
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">corporate_fare</span>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <label
+                                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Número
+                                        do Simulado</label>
+                                    <div class="relative">
+                                        <input type="number" id="simNum" placeholder="Ex: 1, 2, 3..."
+                                            class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm placeholder:font-medium placeholder:text-slate-400">
+                                        <span
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">tag</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- ROW: UNICAMP (Remoção da Configuração Antiga de Fases e Áreas) -->
+
+                        <!-- ROW: UNESP -->
+                        <div id="unespMeta"
+                            class="hidden col-span-1 md:col-span-2 lg:col-span-4 grid grid-cols-1 gap-6 transition-all duration-300">
+                            <div class="space-y-2 relative">
+                                <label
+                                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Total
+                                    de Acertos (1ª Fase)</label>
+                                <div class="relative">
+                                    <input type="number" id="notaUnesp" step="1" min="0" max="90" placeholder="0 a 90"
+                                        class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm">
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">menu_book</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ROW: PAS-UNB -->
+                        <div id="pasMeta"
+                            class="hidden col-span-1 md:col-span-2 lg:col-span-4 grid grid-cols-1 md:grid-cols-2 gap-6 transition-all duration-300">
+                            <div class="space-y-2">
+                                <label
+                                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Etapa
+                                    do PAS</label>
+                                <div class="relative">
+                                    <select id="pasNivel"
+                                        class="appearance-none w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm cursor-pointer">
+                                        <option value="1">PAS 1</option>
+                                        <option value="2">PAS 2</option>
+                                        <option value="3">PAS 3</option>
+                                    </select>
+                                    <span
+                                        class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300 pointer-events-none">expand_content</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Lançamento de Notas -->
+                        <div id="lancamentoNotasContainer"
+                            class="bg-[#F8FAFC] border border-slate-200 rounded-3xl p-8 relative overflow-hidden">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-r from-sinapse-primary/5 flex pointer-events-none">
+                            </div>
+
+                            <div class="relative z-10">
+                                <h3
+                                    class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest mb-6 flex items-center gap-2">
+                                    <span
+                                        class="material-symbols-outlined text-[20px] text-sinapse-primary">analytics</span>
+                                    Acertos por Área
+                                </h3>
+
+                                <div id="notasComum" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <!-- Linguagens -->
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-rose-500 focus-within:shadow-rose-500/10 transition-all">
+                                        <div class="flex items-center gap-2 text-rose-500">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">menu_book</span>
+                                            <span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Linguagens</span>
+                                        </div>
+                                        <input type="number" id="notaLin" step="1" min="0" max="45" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
+                                    </div>
+                                    <!-- Humanas -->
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-amber-500 focus-within:shadow-amber-500/10 transition-all">
+                                        <div class="flex items-center gap-2 text-amber-500">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">public</span>
+                                            <span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Humanas</span>
+                                        </div>
+                                        <input type="number" id="notaHum" step="1" min="0" max="45" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
+                                    </div>
+                                    <!-- Natureza -->
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 focus-within:shadow-emerald-500/10 transition-all">
+                                        <div class="flex items-center gap-2 text-emerald-500">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">biotech</span>
+                                            <span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Natureza</span>
+                                        </div>
+                                        <input type="number" id="notaNat" step="1" min="0" max="45" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
+                                    </div>
+                                    <!-- Matemática -->
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 focus-within:shadow-blue-500/10 transition-all">
+                                        <div class="flex items-center gap-2 text-blue-500">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">calculate</span>
+                                            <span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
+                                        </div>
+                                        <input type="number" id="notaMat" step="1" min="0" max="45" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
+                                    </div>
+                                </div>
+
+                                <div id="notasFuvest" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <!-- FUVEST -->
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-sinapse-primary focus-within:shadow-sinapse-primary/10 transition-all">
+                                        <div class="flex items-center gap-2 text-sinapse-primary">
+                                            <span
+                                                class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">school</span>
+                                            <span class="text-[10px] font-extrabold uppercase tracking-widest">Total de
+                                                Acertos (1ª Fase)</span>
+                                        </div>
+                                        <input type="number" id="notaFuvest" step="1" min="0" max="90" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
+                                    </div>
+                                </div>
+
+                                <div id="notasUnicamp" class="hidden grid grid-cols-2 md:grid-cols-5 gap-4">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 transition-all">
+                                        <div class="flex items-center gap-2 text-blue-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
+                                        </div>
+                                        <input type="number" id="notaU_Mat" step="1" min="0" max="12" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-rose-500 transition-all">
+                                        <div class="flex items-center gap-2 text-rose-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Português</span>
+                                        </div>
+                                        <input type="number" id="notaU_Port" step="1" min="0" max="13" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-indigo-500 transition-all">
+                                        <div class="flex items-center gap-2 text-indigo-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Inglês</span>
+                                        </div>
+                                        <input type="number" id="notaU_Ing" step="1" min="0" max="7" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-amber-500 transition-all">
+                                        <div class="flex items-center gap-2 text-amber-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">C.
+                                                Humanas</span></div>
+                                        <input type="number" id="notaU_Hum" step="1" min="0" max="23" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
+                                        <div class="flex items-center gap-2 text-emerald-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">C.
+                                                Natureza</span></div>
+                                        <input type="number" id="notaU_Nat" step="1" min="0" max="22" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                </div>
+
+                                <div id="notasVestUnb" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-indigo-500 transition-all">
+                                        <div class="flex items-center gap-2 text-indigo-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Língua
+                                                Estrangeira</span></div>
+                                        <input type="number" id="notaV_LE" step="1" min="0" max="30" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-amber-500 transition-all">
+                                        <div class="flex items-center gap-2 text-amber-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Humanas</span>
+                                        </div>
+                                        <input type="number" id="notaV_Hum" step="1" min="0" max="120" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 transition-all">
+                                        <div class="flex items-center gap-2 text-blue-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatas</span>
+                                        </div>
+                                        <input type="number" id="notaV_Exa" step="1" min="0" max="150" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                </div>
+
+                                <div id="notasPasUnb" class="hidden grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-indigo-500 transition-all">
+                                        <div class="flex items-center gap-2 text-indigo-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Língua
+                                                Estrangeira</span></div>
+                                        <input type="number" id="notaP_LE" step="1" min="0" max="10" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
+                                        <div class="flex items-center gap-2 text-emerald-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatas +
+                                                Humanas</span></div>
+                                        <input type="number" id="notaP_ExaHum" step="1" min="0" max="110"
+                                            placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                </div>
+
+                                <div id="notasUeg" class="hidden grid grid-cols-1 gap-4">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
+                                        <div class="flex items-center gap-2 text-emerald-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Prova
+                                                Objetiva</span></div>
+                                        <input type="number" id="notaUEG" step="1" min="0" max="60" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                </div>
+
+                                <div id="notasUfg" class="hidden grid grid-cols-1 md:grid-cols-3 gap-4">
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-rose-500 transition-all">
+                                        <div class="flex items-center gap-2 text-rose-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Linguagens</span>
+                                        </div>
+                                        <input type="number" id="notaUFG_Lin" step="1" min="0" max="24" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 transition-all">
+                                        <div class="flex items-center gap-2 text-blue-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
+                                        </div>
+                                        <input type="number" id="notaUFG_Mat" step="1" min="0" max="24" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                    <div
+                                        class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
+                                        <div class="flex items-center gap-2 text-emerald-500"><span
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">C.
+                                                Natureza</span></div>
+                                        <input type="number" id="notaUFG_Nat" step="1" min="0" max="24" placeholder="00"
+                                            class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- UFT Fields -->
+                            <div id="notasUft" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 mt-8">
+                                <div
+                                    class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-sinapse-primary transition-all">
+                                    <div class="flex items-center gap-2 text-sinapse-primary"><span
+                                            class="text-[10px] font-extrabold uppercase tracking-widest">Linguagens</span>
+                                    </div>
+                                    <input type="number" id="notaUFT_Lin" step="1" min="0" placeholder="00"
+                                        class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                </div>
+                                <div
+                                    class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 transition-all">
+                                    <div class="flex items-center gap-2 text-blue-500"><span
+                                            class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
+                                    </div>
+                                    <input type="number" id="notaUFT_Mat" step="1" min="0" placeholder="00"
+                                        class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                </div>
+                                <div
+                                    class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-amber-500 transition-all">
+                                    <div class="flex items-center gap-2 text-amber-500"><span
+                                            class="text-[10px] font-extrabold uppercase tracking-widest">C.
+                                            Humanas</span></div>
+                                    <input type="number" id="notaUFT_Hum" step="1" min="0" placeholder="00"
+                                        class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                </div>
+                                <div
+                                    class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
+                                    <div class="flex items-center gap-2 text-emerald-500"><span
+                                            class="text-[10px] font-extrabold uppercase tracking-widest">C.
+                                            Natureza</span></div>
+                                    <input type="number" id="notaUFT_Nat" step="1" min="0" placeholder="00"
+                                        class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
+                                </div>
+                                <div
+                                    class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-slate-800 transition-all">
+                                    <div class="flex items-center gap-2 text-slate-800"><span
+                                            class="text-[10px] font-extrabold uppercase tracking-widest">Semestre</span>
+                                    </div>
+                                    <select id="uftPeriodo"
+                                        class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center appearance-none cursor-pointer">
+                                        <option value="1">1º / Único</option>
+                                        <option value="2">2º</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- UFPR Fields -->
+
+                        <!-- Botão de Ação -->
+                        <div class="mt-8 flex justify-end">
+                            <button type="submit" id="btnSalvarProva"
+                                class="bg-sinapse-primary hover:bg-[#4F46E5] transition-all duration-300 transform hover:scale-[1.02] shadow-xl shadow-sinapse-primary/30 text-white px-10 py-4.5 rounded-2xl font-bold flex items-center gap-3 font-headline text-sm tracking-wide">
+                                <span class="material-symbols-outlined text-[20px]">save</span>
+                                Salvar Registro
+                            </button>
+                        </div>
+
+                </form>
+            </div>
+
+                <!-- Gráfico Comparativo -->
+                <div class="glass-panel rounded-[32px] overflow-hidden shadow-premium bg-white p-10 mb-8" id="graficoComparativoSection">
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 id="analiticaTitle" class="font-headline text-2xl font-extrabold text-[#0B193C]">ANALÍTICA POR ÁREA</h2>
+                            <p class="text-[12px] font-semibold text-slate-400 mt-1 uppercase tracking-widest">Visão Tática e Comparativa</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="chartsContainer">
+                        <div id="boxLin" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleLin" class="text-[10px] font-extrabold text-rose-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">menu_book</span> Linguagens</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartLin"></canvas></div>
+                        </div>
+                        <div id="boxHum" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleHum" class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">public</span> Humanas</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartHum"></canvas></div>
+                        </div>
+                        <div id="boxNat" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleNat" class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natureza</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartNat"></canvas></div>
+                        </div>
+                        <div id="boxMat" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleMat" class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Matemática</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartMat"></canvas></div>
+                        </div>
+                        
+                        <!-- Box FUVEST chart -->
+                        <div id="boxFuvest" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2">
+                            <h3 class="text-[10px] font-extrabold text-sinapse-primary uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">school</span> Acertos Gerais - 1ª Fase</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartFuvest"></canvas></div>
+                        </div>
+                        
+                        <!-- Box UNESP chart -->
+                        <div id="boxUnesp" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2">
+                            <h3 class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">school</span> Rendimento Geral (1ª Fase)</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartUnesp"></canvas></div>
+                        </div>
+
+                        <!-- Gráficos UNICAMP -->
+                        <div id="boxU_Mat" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Matemática</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Mat"></canvas></div>
+                        </div>
+                        <div id="boxU_Port" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-rose-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">menu_book</span> Português</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Port"></canvas></div>
+                        </div>
+                        <div id="boxU_Ing" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">language</span> Inglês</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Ing"></canvas></div>
+                        </div>
+                        <div id="boxU_Hum" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">public</span> Humanas</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Hum"></canvas></div>
+                        </div>
+                        <div id="boxU_Nat" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2 lg:col-span-1">
+                            <h3 class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natureza</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Nat"></canvas></div>
+                        </div>
+
+                        <!-- Gráficos VEST-UNB -->
+                        <div id="boxV_LE" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">language</span> L. Estrangeira</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartV_LE"></canvas></div>
+                        </div>
+                        <div id="boxV_Hum" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">public</span> Humanas</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartV_Hum"></canvas></div>
+                        </div>
+                        <div id="boxV_Exa" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2 lg:col-span-1">
+                            <h3 class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Exatas</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartV_Exa"></canvas></div>
+                        </div>
+                        
+                        <!-- Gráficos PAS-UNB -->
+                        <div id="boxGeral" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2">
+                            <h3 id="titleGeral" class="text-[10px] font-extrabold text-sinapse-primary uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">school</span> Desempenho Geral</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartGeral"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabela High End -->
+                <div class="glass-panel rounded-[32px] overflow-hidden shadow-premium bg-white">
+                    <div class="px-10 py-8 border-b border-slate-100 flex items-center justify-between">
+                        <div>
+                            <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Histórico de Execuções</h2>
+                            <p class="text-[10px] font-extrabold text-slate-400 mt-1 uppercase tracking-widest">Todos os
+                                exames cadastrados</p>
+                        </div>
+                    </div>
+
+                    <div class="p-10 pt-6" id="provasContainer">
+                        <table class="w-full text-left border-collapse" id="provasTable">
+                            <thead id="provasTableHead">
+                                <tr
+                                    class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
+                                    <th class="pb-5 font-bold px-4">Avaliação</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Ano/PPL</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Cor</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Linguagens</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Humanas</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Natureza</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Matemática</th>
+                                    <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="provasData">
+                                <!-- Data Injected Here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="h-10"></div>
+            </div>
+    </main>
+
+    <!-- Modal Opções da Prova -->
+    <div id="modalProvaOpcoes"
+        class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity opacity-0">
+        <div id="modalProvaContainer"
+            class="bg-white rounded-[32px] p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 relative border border-white/50">
+            <button onclick="fecharOpcoesProva()"
+                class="absolute top-6 right-6 text-slate-300 hover:text-[#0B193C] transition-colors p-1 bg-slate-50 rounded-full hover:bg-slate-100">
+                <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+            <div class="flex flex-col items-center text-center mt-2">
+                <div
+                    class="w-16 h-16 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center mb-5 shadow-inner text-rose-500 relative">
+                    <div class="absolute inset-0 bg-rose-400 opacity-20 rounded-full animate-ping"></div>
+                    <span class="material-symbols-outlined text-[32px] icon-fill relative z-10">delete</span>
+                </div>
+                <h3 class="font-headline text-2xl font-extrabold text-[#0B193C] mb-2" id="modalProvaTitulo">Prova</h3>
+                <p class="text-[13px] font-semibold text-slate-400 mb-8 tracking-wide px-4">Esta ação apagará
+                    <b>definitivamente</b> esta avaliação do seu Histórico e dos Gráficos. Deseja prosseguir?</p>
+
+                <div class="w-full space-y-3">
+                    <button onclick="confirmarExclusaoProva()"
+                        class="w-full flex items-center justify-center gap-3 bg-rose-500 hover:bg-rose-600 text-white font-extrabold font-headline text-[15px] py-4 rounded-2xl shadow-lg shadow-rose-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
+                        <span class="material-symbols-outlined text-[20px]">delete_forever</span>
+                        Confirmar Exclusão
+                    </button>
+                    <button onclick="fecharOpcoesProva()"
+                        class="w-full font-bold text-slate-400 hover:text-[#0B193C] bg-slate-50 hover:bg-slate-100 py-4 rounded-2xl transition-all duration-300">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let charts = {}; // dict to hold chart instances
+
+        function formataNota(valor) {
+            if (valor === undefined || valor === null || valor === '') return '--';
+            return parseFloat(valor).toString(); // Removes extra .0 if integer since they are acertos
+        }
+
+        function atualizarLimitesVestUnb() {
+            const bancaInput = document.querySelector('input[name="banca"]:checked');
+            if (bancaInput && bancaInput.value === 'VEST-UNB') {
+                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
+                const inputLE = document.getElementById('notaV_LE');
+                const inputHum = document.getElementById('notaV_Hum');
+                const inputExa = document.getElementById('notaV_Exa');
+
+                if (ano >= 2026) {
+                    inputLE.max = 20; inputHum.max = 100; inputExa.max = 120;
+                } else {
+                    inputLE.max = 30; inputHum.max = 120; inputExa.max = 150;
+                }
+            }
+        }
+
+        function atualizarLimitesUft() {
+            const bancaInput = document.querySelector('input[name="banca"]:checked');
+            if (bancaInput && bancaInput.value === 'UFT') {
+                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
+                const uftPeriodoContainer = document.getElementById('uftPeriodo').parentElement;
+                if (ano >= 2026) {
+                    document.getElementById('notaUFT_Lin').max = 20;
+                    document.getElementById('notaUFT_Mat').max = 20;
+                    document.getElementById('notaUFT_Hum').max = 20;
+                    document.getElementById('notaUFT_Nat').max = 20;
+                    if (uftPeriodoContainer) uftPeriodoContainer.classList.add('hidden');
+                } else {
+                    document.getElementById('notaUFT_Lin').max = 24;
+                    document.getElementById('notaUFT_Mat').max = 8;
+                    document.getElementById('notaUFT_Hum').max = 20;
+                    document.getElementById('notaUFT_Nat').max = 24;
+                    if (uftPeriodoContainer) uftPeriodoContainer.classList.remove('hidden');
+                }
+            }
+        }
+
+        function atualizarLimitesUfu() {
+            const bancaInput = document.querySelector('input[name="banca"]:checked');
+            if (bancaInput && bancaInput.value === 'UFU') {
+                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
+                if (ano >= 2026) {
+                    document.getElementById('notaUFU_Por').max = 10; document.getElementById('notaUFU_Lit').max = 5;
+                    document.getElementById('notaUFU_LE').max = 5; document.getElementById('notaUFU_Mat').max = 10;
+                    document.getElementById('notaUFU_Bio').max = 5; document.getElementById('notaUFU_Fis').max = 5;
+                    document.getElementById('notaUFU_Qui').max = 5; document.getElementById('notaUFU_Geo').max = 5;
+                    document.getElementById('notaUFU_His').max = 5; document.getElementById('notaUFU_Fil').max = 5;
+                    document.getElementById('notaUFU_Soc').max = 5;
+                } else {
+                    ['notaUFU_Por', 'notaUFU_Lit', 'notaUFU_LE', 'notaUFU_Mat', 'notaUFU_Bio', 'notaUFU_Fis', 'notaUFU_Qui', 'notaUFU_Geo', 'notaUFU_His', 'notaUFU_Fil', 'notaUFU_Soc'].forEach(id => { document.getElementById(id).max = 8; });
+                }
+            }
+        }
+
+        function atualizarLimitesPasUnb() {
+            const bancaInput = document.querySelector('input[name="banca"]:checked');
+            if (bancaInput && bancaInput.value === 'PAS-UNB') {
+                const nivel = document.getElementById('pasNivel').value;
+                const inputExaHum = document.getElementById('notaP_ExaHum');
+                if (nivel === "1") { inputExaHum.max = 90; }
+                else if (nivel === "2") { inputExaHum.max = 100; }
+                else if (nivel === "3") { inputExaHum.max = 110; }
+            }
+        }
+
+
+
+
+        function toggleAvaliacaoCampos(banca) {
+            const selectAno = document.getElementById('enemAno');
+            const anosEnem = [2012, 2011, 2010, 2009];
+            if (banca === 'ENEM') {
+                anosEnem.forEach(y => {
+                    if (!Array.from(selectAno.options).some(o => o.value == y)) {
+                        const opt = document.createElement('option');
+                        opt.value = y; opt.text = y; selectAno.appendChild(opt);
+                    }
+                });
+            } else {
+                Array.from(selectAno.options).forEach(opt => {
+                    if (anosEnem.includes(parseInt(opt.value))) {
+                        if (selectAno.value == opt.value) selectAno.value = '2013';
+                        opt.remove();
+                    }
+                });
+            }
+
+            const container = document.getElementById('avaliacaoFields');
+            const enemMeta = document.getElementById('enemMeta');
+            const simuladoMeta = document.getElementById('simuladoMeta');
+            const notasComum = document.getElementById('notasComum');
+            const notasFuvest = document.getElementById('notasFuvest');
+            const lancamentoNotasContainer = document.getElementById('lancamentoNotasContainer');
+
+            if (['ENEM', 'SIMULADO', 'VEST-UNB', 'PAS-UNB', 'FUVEST', 'UNICAMP', 'UNESP', 'UFG', 'UEG', 'UFU', 'UFJF', 'UFMS', 'UFGD', 'UFPR', 'UFSC', 'UFRGS', 'UFT', 'UNIOESTE', 'UNIMONTES', 'UEMG', 'UCB', 'UNIRV', 'CEUB', 'UNIEURO', 'MAUÁ'].includes(banca)) {
+                container.style.opacity = '1';
+                container.style.maxHeight = '2000px';
+                container.style.marginTop = '2rem';
+                container.classList.remove('hidden');
+
+                if (lancamentoNotasContainer) lancamentoNotasContainer.classList.remove('hidden');
+                if (document.getElementById('unespMeta')) { document.getElementById('unespMeta').classList.add('hidden'); document.getElementById('unespMeta').classList.remove('grid'); }
+                if (document.getElementById('notasVestUnb')) { document.getElementById('notasVestUnb').classList.add('hidden'); document.getElementById('notasVestUnb').classList.remove('grid'); }
+                if (document.getElementById('notasPasUnb')) { document.getElementById('notasPasUnb').classList.add('hidden'); document.getElementById('notasPasUnb').classList.remove('grid'); }
+                if (document.getElementById('notasUfg')) { document.getElementById('notasUfg').classList.add('hidden'); document.getElementById('notasUfg').classList.remove('grid'); }
+                if (document.getElementById('notasUeg')) { document.getElementById('notasUeg').classList.add('hidden'); document.getElementById('notasUeg').classList.remove('grid'); }
+                if (document.getElementById('notasUft')) { document.getElementById('notasUft').classList.add('hidden'); document.getElementById('notasUft').classList.remove('grid'); }
+                if (document.getElementById('pasMeta')) { document.getElementById('pasMeta').classList.add('hidden'); document.getElementById('pasMeta').classList.remove('grid'); }
+
+                if (banca === 'ENEM') {
+                    enemMeta.classList.remove('hidden');
+                    simuladoMeta.classList.add('hidden');
+                    notasComum.classList.remove('hidden');
+                    notasComum.classList.add('grid');
+                    notasFuvest.classList.add('hidden');
+                    notasFuvest.classList.remove('grid'); if (document.getElementById('notasUnesp')) { document.getElementById('notasUnesp').classList.add('hidden'); document.getElementById('notasUnesp').classList.remove('grid'); }
+                    if (document.getElementById('notasUnicamp')) { document.getElementById('notasUnicamp').classList.add('hidden'); document.getElementById('notasUnicamp').classList.remove('grid'); }
+                } else if (banca === 'SIMULADO') {
+                    enemMeta.classList.add('hidden');
+                    simuladoMeta.classList.remove('hidden');
+                    notasComum.classList.remove('hidden');
+                    notasComum.classList.add('grid');
+                    notasFuvest.classList.add('hidden');
+                    notasFuvest.classList.remove('grid'); if (document.getElementById('notasUnesp')) { document.getElementById('notasUnesp').classList.add('hidden'); document.getElementById('notasUnesp').classList.remove('grid'); }
+                    if (document.getElementById('notasUnicamp')) { document.getElementById('notasUnicamp').classList.add('hidden'); document.getElementById('notasUnicamp').classList.remove('grid'); }
+                } else if (banca === 'FUVEST') {
+                    // FUVEST só usa O Ano que já é comum
+                    enemMeta.classList.add('hidden');
+                    simuladoMeta.classList.add('hidden');
+                    notasComum.classList.add('hidden');
+                    notasComum.classList.remove('grid');
+                    notasFuvest.classList.remove('hidden');
+                    notasFuvest.classList.add('grid');
+                    if (document.getElementById('notasUnesp')) { document.getElementById('notasUnesp').classList.add('hidden'); document.getElementById('notasUnesp').classList.remove('grid'); }
+                    if (document.getElementById('notasUnicamp')) { document.getElementById('notasUnicamp').classList.add('hidden'); document.getElementById('notasUnicamp').classList.remove('grid'); }
+                } else if (banca === 'UNESP') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('unespMeta').classList.remove('hidden'); document.getElementById('unespMeta').classList.add('grid');
+                } else if (banca === 'UFT') {
+                    notasUft.classList.remove('hidden');
+                    notasUft.classList.add('grid');
+                    container.style.maxHeight = '2000px';
+                } else if (banca === 'UNICAMP') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('notasUnicamp').classList.remove('hidden'); document.getElementById('notasUnicamp').classList.add('grid');
+                } else if (banca === 'VEST-UNB') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('notasVestUnb').classList.remove('hidden'); document.getElementById('notasVestUnb').classList.add('grid');
+                } else if (banca === 'PAS-UNB') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('notasPasUnb').classList.remove('hidden'); document.getElementById('notasPasUnb').classList.add('grid');
+                    document.getElementById('pasMeta').classList.remove('hidden'); document.getElementById('pasMeta').classList.add('flex');
+                } else if (banca === 'UFG') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('notasUfg').classList.remove('hidden'); document.getElementById('notasUfg').classList.add('grid');
+                } else if (banca === 'UEG') {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.add('hidden');
+                    document.getElementById('notasUeg').classList.remove('hidden'); document.getElementById('notasUeg').classList.add('grid');
+                } else {
+                    enemMeta.classList.add('hidden'); simuladoMeta.classList.add('hidden');
+                    if (lancamentoNotasContainer) lancamentoNotasContainer.classList.remove('hidden');
+                    notasComum.classList.remove('hidden'); notasComum.classList.add('grid');
+                }
+            } else {
+                container.style.marginTop = '0px';
+                setTimeout(() => { if (container.style.opacity === '0') container.classList.add('hidden') }, 500);
+            }
+
+            // Automagically re-render chart interface to sync with active selection
+            if(typeof renderInterface === 'function') {
+                renderInterface();
+            }
+        }
+
+        // Garante que a UI inicial respeite a seleção
+        window.addEventListener('load', () => {
+            const activeRadio = document.querySelector('input[name="banca"]:checked');
+            if (activeRadio) toggleAvaliacaoCampos(activeRadio.value);
+
+            // Adiciona atualizadores dinâmicos caso o usuário mude o ano/nivel DEPOIS de escolher a banca
+            const selectAno = document.getElementById('enemAno');
+            if (selectAno) {
+                selectAno.addEventListener('change', () => {
+                    const b = document.querySelector('input[name="banca"]:checked');
+                    if (b && b.value) toggleAvaliacaoCampos(b.value);
+                });
+            }
+            const selectPasNivel = document.getElementById('pasNivel');
+            if (selectPasNivel) {
+                selectPasNivel.addEventListener('change', atualizarLimitesPasUnb);
+            }
+        });
+
+        function renderInterface() {
+            let examesCadastrados = typeof window.db !== 'undefined' && window.db.get ? window.db.get('exams') : [];
+            const tableOutput = document.getElementById('provasData');
+
+            const activeRadio = document.querySelector('input[name="banca"]:checked');
+            let chartFilter = 'ENEM';
+            if (activeRadio) {
+                if (activeRadio.value === 'PAS-UNB') {
+                    const nivel = document.getElementById('pasNivel') ? document.getElementById('pasNivel').value : '1';
+                    chartFilter = 'PAS-UNB-' + nivel;
+                } else {
+                    chartFilter = activeRadio.value;
+                }
+            }
+
+            const chartTitle = document.getElementById('analiticaTitle');
+            if (chartTitle) {
+                chartTitle.innerText = `ANALÍTICA POR ÁREA - ${chartFilter === 'SIMULADO' ? 'SIMULADOS' : chartFilter.replace('PAS-UNB-', 'PAS ')}`;
+            }
+
+            let tableExames = [];
+            if (chartFilter.startsWith('PAS-UNB-')) {
+                const parts = chartFilter.split('-');
+                tableExames = examesCadastrados ? examesCadastrados.filter(e => e.banca === 'PAS-UNB' && e.pasNivel === parts[2]) : [];
+            } else {
+                tableExames = examesCadastrados ? examesCadastrados.filter(e => e.banca === chartFilter) : [];
+            }
+
+            const headContainer = document.querySelector('#provasTableHead');
+            if (headContainer) {
+                if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
+                    headContainer.innerHTML = `
+                        <tr class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
+                            <th class="pb-5 font-bold px-4">Avaliação</th>
+                            <th class="pb-5 font-bold px-4 text-center">Ano/PPL</th>
+                            <th class="pb-5 font-bold px-4 text-center">Cor</th>
+                            <th class="pb-5 font-bold px-4 text-center">Linguagens</th>
+                            <th class="pb-5 font-bold px-4 text-center">Humanas</th>
+                            <th class="pb-5 font-bold px-4 text-center">Natureza</th>
+                            <th class="pb-5 font-bold px-4 text-center">Matemática</th>
+                            <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
+                        </tr>
+                    `;
+                } else {
+                    headContainer.innerHTML = `
+                        <tr class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
+                            <th class="pb-5 font-bold px-4">Avaliação</th>
+                            <th class="pb-5 font-bold px-4 text-center">Ano</th>
+                            <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
+                        </tr>
+                    `;
+                }
+            }
+
+            if (!tableExames || tableExames.length === 0) {
+                let colspanTotal = (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') ? 8 : 3;
+                tableOutput.innerHTML = `<tr><td colspan="${colspanTotal}" class="py-10 text-center text-slate-400 font-medium">Nenhuma avaliação deste tipo foi cadastrada ainda. Utilize o formulário acima para mapear sua evolução.</td></tr>`;
+            } else {
+                let html = '';
+                tableExames.forEach(p => {
+                    let isEnem = p.banca === 'ENEM';
+                    let isSimulado = p.banca === 'SIMULADO';
+                    let isFuvest = p.banca === 'FUVEST';
+                    let isUnesp = p.banca === 'UNESP';
+                    let isUfg = p.banca === 'UFG';
+                    let isUeg = p.banca === 'UEG';
+                    let isUft = p.banca === 'UFT';
+                    let isUnicamp = p.banca === 'UNICAMP';
+                    let isVestUnb = p.banca === 'VEST-UNB';
+                    let isPasUnb = p.banca === 'PAS-UNB';
+                    let isValidoMetrics = isEnem || isSimulado || !(['FUVEST', 'UNESP', 'UFG', 'UEG', 'UFT', 'UNICAMP', 'VEST-UNB', 'PAS-UNB'].includes(p.banca));
+
+                    let acertosTotaisText = '--';
+                    if (isValidoMetrics) {
+                        let somador_acertos = (parseInt(p.notaLin) || 0) + (parseInt(p.notaHum) || 0) + (parseInt(p.notaNat) || 0) + (parseInt(p.notaMat) || 0);
+                        acertosTotaisText = p.banca === 'ENEM' ? `${somador_acertos}/180 acertos` : `${somador_acertos} acertos`;
+                    } else if (isFuvest) {
+                        let acertoF = parseInt(p.notaFuvest) || 0;
+                        acertosTotaisText = `${acertoF}/90 acertos`;
+                    } else if (isUnesp) {
+                        let acertoU = parseInt(p.notaUnesp) || 0;
+                        acertosTotaisText = `${acertoU}/90 acertos`;
+                    } else if (isUfg) {
+                        let acertoUFG = (parseInt(p.notaUFG_Lin) || 0) + (parseInt(p.notaUFG_Mat) || 0) + (parseInt(p.notaUFG_Nat) || 0);
+                        acertosTotaisText = `${acertoUFG}/72 acertos`;
+                    } else if (isUeg) {
+                        let acertoUEG = parseInt(p.notaUEG) || 0;
+                        acertosTotaisText = `${acertoUEG}/60 acertos`;
+                    } else if (isUft) {
+                        let acertoUFT = (parseInt(p.notaUFT_Lin) || 0) + (parseInt(p.notaUFT_Mat) || 0) + (parseInt(p.notaUFT_Hum) || 0) + (parseInt(p.notaUFT_Nat) || 0);
+                        let maxTotalUft = parseInt(p.ano) >= 2026 ? 80 : 76;
+                        acertosTotaisText = `${acertoUFT}/${maxTotalUft} acertos`;
+                    } else if (isUnicamp) {
+                        let somadorUnicamp = (parseInt(p.notaU_Mat) || 0) + (parseInt(p.notaU_Port) || 0) + (parseInt(p.notaU_Ing) || 0) + (parseInt(p.notaU_Hum) || 0) + (parseInt(p.notaU_Nat) || 0);
+                        acertosTotaisText = `${somadorUnicamp}/77 acertos`;
+                    } else if (isVestUnb) {
+                        let somadorVUnb = (parseInt(p.notaV_LE) || 0) + (parseInt(p.notaV_Hum) || 0) + (parseInt(p.notaV_Exa) || 0);
+                        let maxTotal = parseInt(p.ano) >= 2026 ? 240 : 300;
+                        acertosTotaisText = `${somadorVUnb}/${maxTotal} acertos`;
+                    } else if (isPasUnb) {
+                        let somadorPUnb = (parseInt(p.notaP_LE) || 0) + (parseInt(p.notaP_ExaHum) || 0);
+                        let maxTotalPas = p.pasNivel === "1" ? 100 : (p.pasNivel === "2" ? 110 : 120);
+                        acertosTotaisText = `${somadorPUnb}/${maxTotalPas} acertos`;
+                    }
+
+                    if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
+                        html += `
+                            <tr onclick="abrirOpcoesProva(${p.id}, '${isSimulado ? `Simulado ${p.instituicao || ''}` : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
+                                <td class="py-5 px-4 font-bold text-[#0B193C] flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 text-sinapse-primary flex items-center justify-center font-extrabold shadow-sm">
+                                        <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-headline font-bold text-sm text-[#0B193C] tracking-wide">${isSimulado ? `Simulado ${p.instituicao || ''}` : p.banca}</p>
+                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Desconhecido'}</p>
+                                    </div>
+                                </td>
+                                <td class="py-5 px-4 text-center font-semibold text-slate-600">
+                                    ${isEnem ? (p.ano ? p.ano + (p.ppl === 'Sim' ? ' (PPL)' : '') : '--') : (isSimulado ? `${p.ano} (Exame Nº ${p.numero || '-'})` : '--')}
+                                </td>
+                                <td class="py-5 px-4 text-center font-semibold text-slate-600">
+                                    ${isEnem && p.cor ? p.cor : '--'}
+                                </td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-rose-600">${isValidoMetrics ? formataNota(p.notaLin) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-amber-600">${isValidoMetrics ? formataNota(p.notaHum) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-emerald-600">${isValidoMetrics ? formataNota(p.notaNat) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-blue-600">${isValidoMetrics ? formataNota(p.notaMat) : '--'}</td>
+                                <td class="py-5 px-4 text-right">
+                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nowrap overflow-hidden">${acertosTotaisText}</span>
+                                </td>
+                            </tr>
+                        `;
+                    } else {
+                        html += `
+                            <tr onclick="abrirOpcoesProva(${p.id}, '${isPasUnb ? p.banca + ' (PAS ' + (p.pasNivel || '1') + ')' : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
+                                <td class="py-5 px-4 font-bold text-[#0B193C] flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 text-sinapse-primary flex items-center justify-center font-extrabold shadow-sm">
+                                        <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-headline font-bold text-sm text-[#0B193C] tracking-wide">${isPasUnb ? p.banca + ' (PAS ' + (p.pasNivel || '1') + ')' : p.banca}${isUft && p.uftPeriodo && p.uftPeriodo !== 'Único' ? ' (' + p.uftPeriodo + 'º Sem.)' : ''}</p>
+                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Desconhecido'}</p>
+                                    </div>
+                                </td>
+                                <td class="py-5 px-4 text-center font-semibold text-slate-600">${p.ano || '--'}</td>
+                                <td class="py-5 px-4 text-right">
+                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nowrap overflow-hidden">${acertosTotaisText}</span>
+                                </td>
+                            </tr>
+                        `;
+                    }
+                });
+                tableOutput.innerHTML = html;
+            }
+
+            const chartData = tableExames;
+
+            // Lógica de visualização dos blocos de gráfico
+            const bLin = document.getElementById('boxLin');
+            const bHum = document.getElementById('boxHum');
+            const bNat = document.getElementById('boxNat');
+            const bMat = document.getElementById('boxMat');
+            const bFuv = document.getElementById('boxFuvest');
+            const bUnesp = document.getElementById('boxUnesp');
+            const bufgLin = document.getElementById('boxUFG_Lin');
+            const bufgMat = document.getElementById('boxUFG_Mat');
+            const bufgNat = document.getElementById('boxUFG_Nat');
+            const bUeg = document.getElementById('boxUEG');
+
+
+
+
+
+
+
+
+
+
+            const bUftLin = document.getElementById('boxUFT_Lin');
+            const bUftMat = document.getElementById('boxUFT_Mat');
+            const bUftHum = document.getElementById('boxUFT_Hum');
+            const bUftNat = document.getElementById('boxUFT_Nat');
+
+
+
+
+
+
+
+
+
+
+            const bUfprSoc = document.getElementById('boxUfprSoc');
+            const bUfuSoc = document.getElementById('boxUfuSoc');
+            const buMat = document.getElementById('boxU_Mat');
+            const buPort = document.getElementById('boxU_Port');
+            const buIng = document.getElementById('boxU_Ing');
+            const buHum = document.getElementById('boxU_Hum');
+            const buNat = document.getElementById('boxU_Nat');
+            const bvLE = document.getElementById('boxV_LE');
+            const bvHum = document.getElementById('boxV_Hum');
+            const bvExa = document.getElementById('boxV_Exa');
+            const bpLE = document.getElementById('boxP_LE');
+            const bpExa = document.getElementById('boxP_ExaHum');
+
+            [bLin, bHum, bNat, bMat, bFuv, bUnesp, buMat, buPort, buIng, buHum, buNat, bvLE, bvHum, bvExa, bpLE, bpExa, bufgLin, bufgMat, bufgNat, bUeg, bUftLin, bUftMat, bUftHum, bUftNat, bUfprSoc].forEach(b => { if (b) b.classList.add('hidden'); });
+
+            if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
+                [bLin, bHum, bNat, bMat].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'FUVEST') {
+                if (bFuv) bFuv.classList.remove('hidden');
+            } else if (chartFilter === 'UNESP') {
+                if (bUnesp) bUnesp.classList.remove('hidden');
+            } else if (chartFilter === 'UFPR') {
+                [bUfprSoc].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'UFU') {
+                [bUfuSoc].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'UFT') {
+                [bUftLin, bUftMat, bUftHum, bUftNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'UEG') {
+                if (bUeg) bUeg.classList.remove('hidden');
+            } else if (chartFilter === 'UFG') {
+                [bufgLin, bufgMat, bufgNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'UNICAMP') {
+                [buMat, buPort, buIng, buHum, buNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter === 'VEST-UNB') {
+                [bvLE, bvHum, bvExa].forEach(b => { if (b) b.classList.remove('hidden'); });
+            } else if (chartFilter.startsWith('PAS-UNB-')) {
+                [bpLE, bpExa].forEach(b => { if (b) b.classList.remove('hidden'); });
+            }
+
+            renderMultipleCharts(chartData, chartFilter);
+        }
+
+        function buildMiniChart(ctxId, labels, data, color, maxY) {
+            const ctx = document.getElementById(ctxId);
+            if (!ctx) return;
+            if (charts[ctxId]) { charts[ctxId].destroy(); }
+            if (!labels || labels.length === 0) {
+                ctx.getContext('2d').clearRect(0, 0, ctx.width, ctx.height);
+                return;
+            }
+
+            Chart.defaults.font.family = 'Inter';
+            Chart.defaults.color = '#94a3b8';
+
+            charts[ctxId] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: data,
+                        backgroundColor: color,
+                        hoverBackgroundColor: color.replace('0.9', '1'),
+                        borderRadius: { topLeft: 4, topRight: 4 },
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    layout: { padding: { bottom: 15, left: 15, right: 15, top: 10 } },
+                    plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0B193C', titleFont: { family: 'Manrope', size: 12 }, bodyFont: { family: 'Inter', size: 12 }, padding: 8, cornerRadius: 6, displayColors: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: maxY, grid: { color: '#f1f5f9', drawBorder: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' }, padding: 8, stepSize: maxY === 45 ? 15 : 200 } },
+                        x: { grid: { display: false, drawBorder: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' }, padding: 6, maxRotation: 0, minRotation: 0 } }
+                    },
+                    interaction: { mode: 'index', intersect: false }
+                }
+            });
+        }
+
+
+        function renderMultipleCharts(chartDataGlob, chartFilter) {
+            const allExams = window.db.get('exams') || [];
+            let dataToPlot = allExams.filter(e => {
+                if (chartFilter === 'SIMULADO') return e.banca === 'SIMULADO';
+                if (chartFilter && chartFilter.startsWith('PAS-UNB')) {
+                    const tipo = chartFilter.replace('PAS-UNB-', '');
+                    return e.banca === 'PAS-UNB' && e.tipo_pas === tipo;
+                }
+
+                return e.banca === chartFilter;
+            });
+
+            dataToPlot.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+
+            const labels = dataToPlot.map(e => {
+                if (e.banca === 'ENEM') {
+                    if (e.ppl === 'Sim') {
+                        return [`ENEM ${e.ano || ''}`, `PPL ${e.cor ? e.cor.toUpperCase() : ''}`];
+                    } else {
+                        return `ENEM ${e.ano || ''}`;
+                    }
+                } else if (e.banca === 'SIMULADO') {
+                    return [`SIM ${e.ano || ''}`, `${e.instituicao || ''} ${e.numero ? 'N'+e.numero : ''}`.trim()];
+                } else if (e.banca === 'PAS-UNB') {
+                    return [`PAS ${e.ano || ''}`, `(Etapa ${e.pasNivel || '1'})`];
+                } else if (e.banca === 'UFT' && e.uftPeriodo && e.uftPeriodo !== 'Único') {
+                    return [`UFT ${e.ano || ''}`, `(${e.uftPeriodo})`];
+                } else {
+                    return `${e.banca} ${e.ano || ''}`;
+                }
+            });
+
+            // Arrays
+            let valLin = [], valHum = [], valNat = [], valMat = [], valGeral = [];
+            let titleLin = "Linguagens", titleHum = "Humanas", titleNat = "Natureza", titleMat = "Matemática", titleGeral = "Geral";
+            let maxLin = 45, maxHum = 45, maxNat = 45, maxMat = 45, maxGeral = 90;
+            let showCols = []; // 'Lin', 'Hum', 'Nat', 'Mat', 'Geral'
+
+            // Data extraction & configuration
+            if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
+                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
+                valLin = dataToPlot.map(e => parseInt(e.notaLin) || 0);
+                valHum = dataToPlot.map(e => parseInt(e.notaHum) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaNat) || 0);
+                valMat = dataToPlot.map(e => parseInt(e.notaMat) || 0);
+                maxLin = maxHum = maxNat = maxMat = 45;
+            } else if (chartFilter === 'FUVEST') {
+                showCols = ['Geral']; titleGeral = "Acertos 1ª Fase (FUVEST)"; maxGeral = 90;
+                valGeral = dataToPlot.map(e => parseInt(e.notaFuvest) || 0);
+            } else if (chartFilter === 'UNESP') {
+                showCols = ['Geral']; titleGeral = "Acertos 1ª Fase (UNESP)"; maxGeral = 90;
+                valGeral = dataToPlot.map(e => parseInt(e.notaUnesp) || 0);
+            } else if (chartFilter === 'UEG') {
+                showCols = ['Geral']; titleGeral = "Prova Objetiva (UEG)"; maxGeral = 52;
+                valGeral = dataToPlot.map(e => parseInt(e.notaUEG) || 0);
+            } else if (chartFilter === 'UNB') {
+                showCols = ['Geral']; titleGeral = "Certo x Errado (UNB)"; maxGeral = 120;
+                valGeral = dataToPlot.map(e => parseInt(e.notaCertos) || 0);
+            } else if (chartFilter === 'UNICAMP') {
+                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
+                titleLin = "Linguagens (Port + Ing)";
+                valLin = dataToPlot.map(e => (parseInt(e.notaU_Port) || 0) + (parseInt(e.notaU_Ing) || 0));
+                valHum = dataToPlot.map(e => parseInt(e.notaU_Hum) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaU_Nat) || 0);
+                valMat = dataToPlot.map(e => parseInt(e.notaU_Mat) || 0);
+                maxLin = 20; maxHum = 23; maxNat = 22; maxMat = 12;
+            } else if (chartFilter === 'VEST-UNB') {
+                showCols = ['Lin', 'Hum', 'Nat'];
+                titleLin = "Língua Estrangeira"; titleHum = "Humanas"; titleNat = "Exatas e Natureza";
+                valLin = dataToPlot.map(e => parseInt(e.notaV_LE) || 0);
+                valHum = dataToPlot.map(e => parseInt(e.notaV_Hum) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaV_Exa) || 0);
+                maxLin = 30; maxHum = 120; maxNat = 150;
+            } else if (chartFilter && chartFilter.startsWith('PAS-UNB')) {
+                showCols = ['Lin', 'Nat'];
+                titleLin = "Língua Estrangeira"; titleNat = "Exatas e Humanas";
+                valLin = dataToPlot.map(e => parseInt(e.notaP_LE) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaP_ExaHum) || 0);
+                maxLin = 10; maxNat = 110;
+            } else if (chartFilter === 'UFG') {
+                showCols = ['Lin', 'Nat', 'Mat'];
+                titleLin = "Linguagens"; titleNat = "Ciências da Natureza"; titleMat = "Matemática";
+                valLin = dataToPlot.map(e => parseInt(e.notaUFG_Lin) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaUFG_Nat) || 0);
+                valMat = dataToPlot.map(e => parseInt(e.notaUFG_Mat) || 0);
+                maxLin = maxNat = maxMat = 30;
+            } else if (chartFilter === 'UFT') {
+                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
+                valLin = dataToPlot.map(e => parseInt(e.notaUFT_Lin) || 0);
+                valHum = dataToPlot.map(e => parseInt(e.notaUFT_Hum) || 0);
+                valNat = dataToPlot.map(e => parseInt(e.notaUFT_Nat) || 0);
+                valMat = dataToPlot.map(e => parseInt(e.notaUFT_Mat) || 0);
+                maxLin = 24; maxMat = 8; maxHum = maxNat = 16;
+            }
+
+            // UI Manipulation
+            document.getElementById('titleLin').innerText = titleLin;
+            document.getElementById('titleHum').innerText = titleHum;
+            document.getElementById('titleNat').innerText = titleNat;
+            document.getElementById('titleMat').innerText = titleMat;
+            document.getElementById('titleGeral').innerText = titleGeral;
+
+            const boxes = ['Lin', 'Hum', 'Nat', 'Mat', 'Geral'];
+            boxes.forEach(b => {
+                const boxElem = document.getElementById('box' + b);
+                if (boxElem) {
+                    if (showCols.includes(b)) {
+                        boxElem.classList.remove('hidden');
+                    } else {
+                        boxElem.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Re-render required ones
+            if (showCols.includes('Lin')) buildMiniChart('chartLin', labels, valLin, 'rgba(244, 63, 94, 0.9)', maxLin);
+            if (showCols.includes('Hum')) buildMiniChart('chartHum', labels, valHum, 'rgba(245, 158, 11, 0.9)', maxHum);
+            if (showCols.includes('Nat')) buildMiniChart('chartNat', labels, valNat, 'rgba(16, 185, 129, 0.9)', maxNat);
+            if (showCols.includes('Mat')) buildMiniChart('chartMat', labels, valMat, 'rgba(59, 130, 246, 0.9)', maxMat);
+            if (showCols.includes('Geral')) buildMiniChart('chartGeral', labels, valGeral, 'rgba(99, 102, 241, 0.9)', maxGeral);
+        }
+
+
+        let provaSelecionadaAcaoId = null;
+
+        function abrirOpcoesProva(id, titulo) {
+            provaSelecionadaAcaoId = id;
+            document.getElementById('modalProvaTitulo').innerText = titulo;
+            const modal = document.getElementById('modalProvaOpcoes');
+            const container = document.getElementById('modalProvaContainer');
+            modal.classList.remove('hidden');
+            // Allow display flow then fade in
+            setTimeout(() => {
+                modal.classList.add('flex');
+                modal.classList.remove('opacity-0');
+                container.classList.remove('scale-95');
+                container.classList.add('scale-100');
+            }, 10);
+        }
+
+        function fecharOpcoesProva() {
+            const modal = document.getElementById('modalProvaOpcoes');
+            const container = document.getElementById('modalProvaContainer');
+            modal.classList.add('opacity-0');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                provaSelecionadaAcaoId = null;
+            }, 300);
+        }
+
+        function confirmarExclusaoProva() {
+            if (provaSelecionadaAcaoId && window.db && window.db.delete) {
+                window.db.delete('exams', provaSelecionadaAcaoId);
+                fecharOpcoesProva();
+                setTimeout(() => {
+                    renderInterface();
+                }, 300);
+            }
+        }
+
+        function salvarProva() {
+            const btn = document.getElementById('btnSalvarProva');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">refresh</span> Salvando...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+
+            setTimeout(() => {
+                try {
+                    const bancaInput = document.querySelector('input[name="banca"]:checked');
+                    if (!bancaInput) return; // fail-safe
+                    const banca = bancaInput.value;
+                    const record = { banca: banca };
+
+                    if (['ENEM', 'SIMULADO', 'VEST-UNB', 'PAS-UNB', 'FUVEST', 'UNICAMP', 'UNESP', 'FAMERP', 'UFG', 'UEG', 'UFU', 'UFJF', 'UFMS', 'UFGD', 'UFPR', 'UFSC', 'UFRGS', 'UFT', 'UNIOESTE', 'UNIMONTES', 'UEMG', 'UCB', 'UNIRV', 'CEUB', 'UNIEURO', 'MAUÁ', 'UNICEPLAC'].includes(banca)) {
+                        record.ano = document.getElementById('enemAno').value;
+                        localStorage.setItem('sinapse_last_ano', record.ano);
+                        if (banca === 'ENEM') {
+                            record.ppl = document.getElementById('enemPpl').value;
+                            record.cor = document.getElementById('enemCor').value || '-';
+                        } else if (banca === 'SIMULADO') {
+                            record.instituicao = document.getElementById('simInst').value || '-';
+                            record.numero = document.getElementById('simNum').value || '-';
+                        }
+
+                        if (banca === 'FUVEST') {
+                            record.notaFuvest = document.getElementById('notaFuvest').value;
+                        } else if (banca === 'UNESP') {
+                            record.notaUnesp = document.getElementById('notaUnesp').value;
+                        } else if (banca === 'UFT') {
+                    notasUft.classList.remove('hidden');
+                    notasUft.classList.add('grid');
+                    container.style.maxHeight = '2000px';
+                } else {
+
+                            record.notaLin = document.getElementById('notaLin').value;
+                            record.notaHum = document.getElementById('notaHum').value;
+                            record.notaNat = document.getElementById('notaNat').value;
+                            record.notaMat = document.getElementById('notaMat').value;
+                        }
+                    }
+
+                    // Validação de Duplicidade
+                    const existentes = window.db && window.db.get ? window.db.get('exams') : [];
+                    let isDuplicate = false;
+
+                    if (banca === 'ENEM') {
+                        isDuplicate = existentes.some(e => e.banca === 'ENEM' && e.ano === record.ano && e.ppl === record.ppl);
+                    } else if (banca === 'SIMULADO') {
+                        isDuplicate = existentes.some(e => e.banca === 'SIMULADO' && e.ano === record.ano && e.instituicao === record.instituicao && e.numero === record.numero);
+                    } else if (banca === 'PAS-UNB') {
+                        isDuplicate = existentes.some(e => e.banca === 'PAS-UNB' && e.ano === record.ano && e.pasNivel === record.pasNivel);
+                    } else {
+                        // Para FUVEST, UNICAMP, UNESP, VEST-UNB
+                        isDuplicate = existentes.some(e => e.banca === banca && e.ano === record.ano);
+                    }
+
+                    if (isDuplicate) {
+                        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Avaliação já existe no histórico!';
+                        btn.classList.add('bg-rose-500', 'text-white');
+                        btn.classList.remove('bg-[#0B193C]', 'opacity-80', 'pointer-events-none');
+                        setTimeout(() => {
+                            btn.innerHTML = originalContent;
+                            btn.classList.remove('bg-rose-500', 'text-white');
+                        }, 3000);
+                        return; // Interrompe o processo e evita duplicata
+                    }
+
+                    // Salva no mock localstorage
+                    if (window.db && window.db.insert) {
+                        window.db.insert('exams', record);
+                    }
+
+                    // Reseta form minimamente visual
+                    if (['ENEM', 'SIMULADO', 'VEST-UNB', 'PAS-UNB', 'FUVEST', 'UNICAMP', 'UNESP', 'FAMERP', 'UFG', 'UEG', 'UFU', 'UFJF', 'UFMS', 'UFGD', 'UFPR', 'UFSC', 'UFRGS', 'UFT', 'UNIOESTE', 'UNIMONTES', 'UEMG', 'UCB', 'UNIRV', 'CEUB', 'UNIEURO', 'MAUÁ', 'UNICEPLAC'].includes(banca)) {
+                        document.getElementById('notaLin').value = '';
+                        document.getElementById('notaHum').value = '';
+                        document.getElementById('notaNat').value = '';
+                        document.getElementById('notaMat').value = '';
+                        document.getElementById('notaFuvest').value = '';
+                        if (document.getElementById('notaUnesp')) document.getElementById('notaUnesp').value = '';
+                        if (banca === 'UNICAMP') { document.querySelectorAll('#notasUnicamp input').forEach(i => i.value = ''); }
+                        if (banca === 'VEST-UNB') { document.querySelectorAll('#notasVestUnb input').forEach(i => i.value = ''); }
+                        if (banca === 'PAS-UNB') { document.querySelectorAll('#notasPasUnb input').forEach(i => i.value = ''); }
+                        if (banca === 'UFG') { document.querySelectorAll('#notasUfg input').forEach(i => i.value = ''); }
+                        if (banca === 'UEG') { document.querySelectorAll('#notasUeg input').forEach(i => i.value = ''); }
+                        if (banca === 'ENEM') {
+                            document.getElementById('enemCor').value = '';
+                        } else if (banca === 'SIMULADO') {
+                            document.getElementById('simInst').value = '';
+                            document.getElementById('simNum').value = '';
+                        }
+                    }
+
+                    // Atualiza UI
+                    renderInterface();
+
+                    // Mostra Toast / Feedback visual simples
+                    btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Salvo!';
+                    setTimeout(() => {
+                        btn.innerHTML = originalContent;
+                        btn.classList.remove('opacity-80', 'pointer-events-none');
+                    }, 1500);
+                } catch (err) {
+                    alert('ERRO: ' + err.message);
+                    console.error('ERROR SALVANDO:', err);
+                    btn.innerHTML = '<span class="material-symbols-outlined">error</span> ERRO: ' + err.message;
+                    btn.classList.remove('opacity-80', 'pointer-events-none');
+                }
+            }, 600);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const lastAno = localStorage.getItem('sinapse_last_ano');
+            const anoInput = document.getElementById('enemAno');
+            if (lastAno && anoInput) {
+                anoInput.value = lastAno;
+            }
+            if (anoInput) {
+                anoInput.addEventListener('input', atualizarLimitesVestUnb);
+                anoInput.addEventListener('input', atualizarLimitesUft);
+            }
+            if (document.getElementById('pasNivel')) {
+                document.getElementById('pasNivel').addEventListener('change', atualizarLimitesPasUnb);
+            }
+            renderInterface();
+        });
+    </script>
+</body>
+
+</html>

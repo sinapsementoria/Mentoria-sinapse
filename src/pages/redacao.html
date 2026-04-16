@@ -1,0 +1,829 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redação - Mentoria Sinapse</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            accent: '#10B981', // Verde central
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.06)',
+                        'premium-hover': '0 20px 40px -10px rgba(11,25,60,0.1)',
+                        'glow-primary': '0 0 20px rgba(99,102,241,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        
+        /* Ultra Smooth Animations */
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
+        
+        /* Tema Card Selection */
+        .theme-card { transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); border-left: 4px solid transparent; }
+        .theme-card.active { border-left-color: #6366F1; background: rgba(99, 102, 241, 0.04); box-shadow: 0 4px 15px -3px rgba(99,102,241,0.1); }
+        
+        /* Material symbols refinement */
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        /* Glass Utilities */
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE (Shared Component) -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <!-- Logo Area -->
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">edit_document</span> Redação
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN SCROLL AREA -->
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto overflow-x-hidden">
+        
+        <!-- Header Page -->
+        <header class="w-full bg-white/80 backdrop-blur-md border-b border-slate-100 sticky top-0 z-20 px-10 py-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+                <h1 class="text-3xl font-headline font-extrabold text-[#0B193C] tracking-tight flex items-center gap-3">
+                    Redação <span class="bg-indigo-100 text-indigo-600 text-[10px] font-extrabold uppercase px-2 py-1 rounded-md tracking-widest mt-1">Padrão ENEM</span>
+                </h1>
+                <p class="text-sm text-slate-500 font-medium mt-1">Acompanhe sua evolução por tema, competência e desempenho final no padrão ENEM.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="h-10 w-10 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center font-bold text-sm border border-indigo-100 shadow-sm relative cursor-pointer">
+                    PD
+                    <span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-white rounded-full"></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD CONTENT -->
+        <div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relative z-10 pb-20 fade-in-up" style="animation-delay: 0.1s;">
+            
+            <!-- UPPER CONSOLE: Theme Selection + Grade Inputs -->
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+                
+                <!-- B2: Theme Selector (Left) -->
+                <div class="xl:col-span-4 flex flex-col h-[520px]">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
+                            <span class="material-symbols-outlined text-indigo-500 icon-fill">library_books</span>
+                            Selecione o Tema
+                        </h2>
+                        <span class="text-xs font-bold text-slate-400">30 Sugeridos</span>
+                    </div>
+                    
+                    <div class="glass-panel shadow-premium rounded-[24px] overflow-hidden flex-1 flex flex-col">
+                        <!-- Busca rápida (Opcional, mas de bom tom) -->
+                        <div class="p-4 border-b border-slate-100 bg-slate-50/50">
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
+                                <input type="text" id="themeSearch" placeholder="Pesquisar tema..." class="w-full bg-white border border-slate-200 text-slate-600 text-sm rounded-lg pl-10 pr-4 py-2 outline-none focus:border-indigo-400 focus:ring-2 focus:ring-indigo-50 transition-all font-medium" onkeyup="filterThemes()">
+                            </div>
+                        </div>
+                        
+                        <!-- Lista de Temas Scrollável -->
+                        <div id="themesContainer" class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-1">
+                            <!-- Injetado por JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- B3 e B4: Grading Interface (Right) -->
+                <div class="xl:col-span-8 flex flex-col h-[520px]">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
+                            <span class="material-symbols-outlined text-emerald-500 icon-fill">border_color</span>
+                            Lançamento de Notas
+                        </h2>
+                        <span id="selectedThemeDisplayMini" class="text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100">Nenhum tema selecionado</span>
+                    </div>
+                    
+                    <div class="glass-panel shadow-premium rounded-[24px] p-8 flex-1 flex flex-col relative overflow-hidden">
+                        
+                        <!-- Theme Abstract Display -->
+                        <div class="mb-8 border-b border-slate-100 pb-6">
+                            <h3 id="panelThemeTitle" class="text-xl font-headline font-extrabold text-slate-800 leading-snug">Selecione um tema ao lado para iniciar a correção.</h3>
+                        </div>
+
+                        <!-- Grid de Competências -->
+                        <div class="grid grid-cols-5 gap-4 flex-1 mb-6 relative z-10" id="competencyGrid" style="opacity: 0.5; pointer-events: none;">
+                            
+                            <!-- C1 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full bg-slate-50 rounded-2xl border border-slate-200 p-4 shrink-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] transition-all hover:border-indigo-200 group">
+                                    <span class="block text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Comp 1</span>
+                                    <input type="number" id="gradeC1" min="0" max="200" step="40" class="w-full bg-white border border-slate-200 rounded-xl py-3 px-2 text-center text-lg font-bold text-[#0B193C] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                                    <div class="mt-4 flex flex-col space-y-1 w-full text-[9px] text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        <div class="flex justify-between"><span>Gramática</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                        <div class="flex justify-between"><span>Vocabulário</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- C2 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full bg-slate-50 rounded-2xl border border-slate-200 p-4 shrink-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] transition-all hover:border-indigo-200 group">
+                                    <span class="block text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Comp 2</span>
+                                    <input type="number" id="gradeC2" min="0" max="200" step="40" class="w-full bg-white border border-slate-200 rounded-xl py-3 px-2 text-center text-lg font-bold text-[#0B193C] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                                    <div class="mt-4 flex flex-col space-y-1 w-full text-[9px] text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        <div class="flex justify-between"><span>Estrutura</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                        <div class="flex justify-between"><span>Adequação</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- C3 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full bg-slate-50 rounded-2xl border border-slate-200 p-4 shrink-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] transition-all hover:border-indigo-200 group">
+                                    <span class="block text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Comp 3</span>
+                                    <input type="number" id="gradeC3" min="0" max="200" step="40" class="w-full bg-white border border-slate-200 rounded-xl py-3 px-2 text-center text-lg font-bold text-[#0B193C] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                                    <div class="mt-4 flex flex-col space-y-1 w-full text-[9px] text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        <div class="flex justify-between"><span>Argumentos</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                        <div class="flex justify-between"><span>Coerência</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- C4 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full bg-slate-50 rounded-2xl border border-slate-200 p-4 shrink-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] transition-all hover:border-indigo-200 group">
+                                    <span class="block text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Comp 4</span>
+                                    <input type="number" id="gradeC4" min="0" max="200" step="40" class="w-full bg-white border border-slate-200 rounded-xl py-3 px-2 text-center text-lg font-bold text-[#0B193C] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                                    <div class="mt-4 flex flex-col space-y-1 w-full text-[9px] text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        <div class="flex justify-between"><span>Coesão</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                        <div class="flex justify-between"><span>Conectivos</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- C5 -->
+                            <div class="flex flex-col items-center">
+                                <div class="w-full bg-slate-50 rounded-2xl border border-slate-200 p-4 shrink-0 shadow-[inset_0_2px_10px_rgba(0,0,0,0.02)] transition-all hover:border-indigo-200 group">
+                                    <span class="block text-center text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3">Comp 5</span>
+                                    <input type="number" id="gradeC5" min="0" max="200" step="40" class="w-full bg-white border border-slate-200 rounded-xl py-3 px-2 text-center text-lg font-bold text-[#0B193C] outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100" onchange="calculateTotal()" onkeyup="calculateTotal()">
+                                    <div class="mt-4 flex flex-col space-y-1 w-full text-[9px] text-slate-400 group-hover:text-slate-500 transition-colors">
+                                        <div class="flex justify-between"><span>Proposta</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                        <div class="flex justify-between"><span>Intervenção</span> <span class="material-symbols-outlined text-[12px] opacity-70">check</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Footer: Somatório Total -->
+                        <div class="mt-auto bg-indigo-50/40 rounded-[20px] p-6 border border-indigo-100/50 flex flex-row items-center justify-between w-full shadow-inner relative z-10 transition-all duration-500" id="resultFooter">
+                            <div class="flex flex-col">
+                                <span class="text-[11px] font-extrabold text-indigo-500 uppercase tracking-[0.15em] mb-1">Cálculo Padrão ENEM</span>
+                                <h3 class="text-sm font-semibold text-slate-600">Soma das Competências</h3>
+                            </div>
+                            
+                            <!-- Nota Destacada -->
+                            <div class="flex flex-col items-center justify-center relative">
+                                <div class="absolute inset-0 bg-indigo-500 blur-2xl opacity-10 rounded-full" id="scoreGlow"></div>
+                                <div class="text-[52px] font-headline font-extrabold text-[#0B193C] leading-none tracking-tighter" id="scoreDisplay">
+                                    000
+                                </div>
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <button onclick="salvarRedacao()" id="btnSaveGrade" class="px-8 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm tracking-wide rounded-xl shadow-lg shadow-indigo-600/30 transition-all active:scale-95 flex items-center gap-2 opacity-50 pointer-events-none">
+                                    <span class="material-symbols-outlined text-[18px]">done_all</span>
+                                    Salvar Nota
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- B5 & B6: Analytics Comparativos -->
+            <div class="mt-12 mb-8">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-[17px] font-headline font-extrabold text-[#0B193C]">Análise Isolada de Competências</h3>
+                        <p class="text-xs text-slate-400 font-medium">Batalha de desempenho específica e individual focando nas 5 diretrizes do ENEM</p>
+                    </div>
+                </div>
+
+                <!-- Painel Grid para os 5 gráficos individuais -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    
+                    <!-- Chart C1 -->
+                    <div class="glass-panel rounded-2xl shadow-[0_2px_15px_-5px_rgba(0,0,0,0.05)] p-4 h-[240px] flex flex-col border border-slate-100/50 hover:border-indigo-100 transition-colors">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Competência 1</span>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#818CF8] shadow-sm"></div>
+                        </div>
+                        <div class="flex-1 w-full relative">
+                            <canvas id="chartC1"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart C2 -->
+                    <div class="glass-panel rounded-2xl shadow-[0_2px_15px_-5px_rgba(0,0,0,0.05)] p-4 h-[240px] flex flex-col border border-slate-100/50 hover:border-emerald-100 transition-colors">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Competência 2</span>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#34D399] shadow-sm"></div>
+                        </div>
+                        <div class="flex-1 w-full relative">
+                            <canvas id="chartC2"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart C3 -->
+                    <div class="glass-panel rounded-2xl shadow-[0_2px_15px_-5px_rgba(0,0,0,0.05)] p-4 h-[240px] flex flex-col border border-slate-100/50 hover:border-amber-100 transition-colors">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Competência 3</span>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#FBBF24] shadow-sm"></div>
+                        </div>
+                        <div class="flex-1 w-full relative">
+                            <canvas id="chartC3"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart C4 -->
+                    <div class="glass-panel rounded-2xl shadow-[0_2px_15px_-5px_rgba(0,0,0,0.05)] p-4 h-[240px] flex flex-col border border-slate-100/50 hover:border-pink-100 transition-colors">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Competência 4</span>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#F472B6] shadow-sm"></div>
+                        </div>
+                        <div class="flex-1 w-full relative">
+                            <canvas id="chartC4"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Chart C5 -->
+                    <div class="glass-panel rounded-2xl shadow-[0_2px_15px_-5px_rgba(0,0,0,0.05)] p-4 h-[240px] flex flex-col border border-slate-100/50 hover:border-sky-100 transition-colors">
+                        <div class="mb-2 flex items-center justify-between">
+                            <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Competência 5</span>
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#38BDF8] shadow-sm"></div>
+                        </div>
+                        <div class="flex-1 w-full relative">
+                            <canvas id="chartC5"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Gráfico Evolução Nota Final -->
+            <div class="glass-panel rounded-[24px] shadow-premium p-8 h-[400px] flex flex-col mb-10">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h3 class="text-[15px] font-headline font-extrabold text-[#0B193C]">Evolução Global (Nota Final)</h3>
+                        <p class="text-xs text-slate-400 font-medium">Acompanhamento contínuo rumo aos 1000 pontos</p>
+                    </div>
+                    <span class="material-symbols-outlined text-emerald-400">trending_up</span>
+                </div>
+                <div class="flex-1 w-full relative">
+                    <!-- Canvas Inject -->
+                    <canvas id="evolutionChart"></canvas>
+                </div>
+            </div>
+
+            <!-- B7: Histórico de Redações -->
+            <div class="glass-panel rounded-[24px] shadow-premium p-8 overflow-hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-[17px] font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
+                        <span class="material-symbols-outlined text-slate-400 icon-fill">history</span>
+                        Histórico Documentado
+                    </h3>
+                    <div class="text-xs font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-lg border border-slate-200">
+                        <span id="historyCount">0</span> redações concluídas
+                    </div>
+                </div>
+                
+                <div class="w-full overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-100">
+                                <th class="py-4 px-4 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 rounded-tl-xl">Data</th>
+                                <th class="py-4 px-4 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50">Tema</th>
+                                <th class="py-4 px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center">C1</th>
+                                <th class="py-4 px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center">C2</th>
+                                <th class="py-4 px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center">C3</th>
+                                <th class="py-4 px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center">C4</th>
+                                <th class="py-4 px-2 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center">C5</th>
+                                <th class="py-4 px-4 text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest bg-slate-50/50 text-right">Nota Final</th>
+                                <th class="py-4 px-4 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest bg-slate-50/50 text-center rounded-tr-xl">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historyTableBody" class="text-sm font-medium text-slate-600 divide-y divide-slate-50">
+                            <!-- Injetado por JS -->
+                            <tr><td colspan="8" class="text-center py-8 text-slate-400 italic">Nenhuma redação avaliada ainda. Selecione um tema e preencha suas competências para iniciar.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts de Data, Banco Local e Gráficos -->
+    <script src="../../src/js/database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script>
+        // --- 1. Dados dos Temas ---
+        const ALL_THEMES = [
+            { id: 1, text: "Desafios sociais: equilíbrio entre a liberdade de expressão no Brasil e a regulação de conteúdo" },
+            { id: 2, text: "Os desafios e as contribuições da telemedicina para a democratização do acesso à saúde no Brasil" },
+            { id: 3, text: "Os empecilhos e medidas para a proteção da Amazônia diante do avanço de expedições exploratórias" },
+            { id: 4, text: "A relevância do comprometimento dos genitores na formação educacional de seus descendentes" },
+            { id: 5, text: "Impasses em relação aos princípios de ética no ambiente profissional" },
+            { id: 6, text: "Desafios e impasses em relação à proteção nas instituições de ensino ao combate à violência de jovens e adolescentes" },
+            { id: 7, text: "Desafios para a construção de políticas públicas inclusivas diante da migração involuntária no contexto das desigualdades de gênero no Brasil" },
+            { id: 8, text: "O papel do indivíduo e das organizações na promoção do desenvolvimento sustentável no século XXI" },
+            { id: 9, text: "A importância da arte como forma de expressão, comunicação e transformação social" },
+            { id: 10, text: "Os desafios para o uso ético, responsável e consciente da internet na sociedade brasileira" },
+            { id: 11, text: "Inteligência artificial e desemprego estrutural: desafios para a sociedade brasileira" },
+            { id: 12, text: "Os desafios do enfrentamento das doenças tropicais negligenciadas no Brasil" },
+            { id: 13, text: "A degradação dos biomas brasileiros e seus impactos na segurança hídrica da população" },
+            { id: 14, text: "O papel da escola na formação de cidadãos conscientes sobre diversidade e respeito às diferenças" },
+            { id: 15, text: "A ética do consumo e os impactos do consumismo na sociedade contemporânea" },
+            { id: 16, text: "O papel da educação no trânsito na redução de acidentes" },
+            { id: 17, text: "Envelhecimento populacional e oportunidades de trabalho para os idosos" },
+            { id: 18, text: "Os impactos da tecnologia na cultura atual e nos valores tradicionais" },
+            { id: 19, text: "Desafios da inteligência artificial no processo de ensino-aprendizagem no Brasil" },
+            { id: 20, text: "Os impactos do uso excessivo de redes sociais na saúde mental dos jovens brasileiros" },
+            { id: 21, text: "A desinformação em saúde e seus riscos para a sociedade contemporânea" },
+            { id: 22, text: "Desafios para o enfrentamento aos maus-tratos cometidos contra animais" },
+            { id: 23, text: "O papel das tecnologias digitais na inclusão educacional" },
+            { id: 24, text: "O impacto do consumo consciente na preservação ambiental" },
+            { id: 25, text: "A valorização da diversidade cultural na construção da identidade nacional" },
+            { id: 26, text: "Telemedicina como ferramenta de democratização do acesso à saúde" },
+            { id: 27, text: "O efeito das redes sociais na autoestima dos usuários" },
+            { id: 28, text: "Violência entre jovens e suas consequências sociais e legais" },
+            { id: 29, text: "Feminicídio no Brasil: desafios para prevenção e proteção das mulheres brasileiras" },
+            { id: 30, text: "Educação e cultura de paz: caminhos para reduzir a violência no futebol brasileiro" }
+        ];
+
+        let activeThemeId = null;
+        let compChartInstances = [];
+        let evoChartInstance = null;
+
+        // --- 2. Gerenciamento de Interface ---
+        function renderThemesList(filterStr = "") {
+            const container = document.getElementById('themesContainer');
+            container.innerHTML = '';
+            
+            const filtered = ALL_THEMES.filter(t => t.text.toLowerCase().includes(filterStr.toLowerCase()) || `tema ${t.id}`.includes(filterStr.toLowerCase()));
+
+            filtered.forEach(theme => {
+                const isSelected = theme.id === activeThemeId;
+                
+                // Verificar se ele já tem nota cadastrada no BD para mostrar uma "badgezinha"
+                let savedData = [];
+                if(window.db) { try { savedData = window.db.get('redacoes') || []; } catch(e){} }
+                const alreadyDone = savedData.some(r => r.themeId === theme.id);
+
+                const cardHTML = `
+                    <div class="theme-card relative p-4 rounded-xl cursor-pointer hover:bg-slate-50 border border-transparent hover:border-slate-100 ${isSelected ? 'active' : ''}" onclick="selectTheme(${theme.id})">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <span class="text-[10px] font-extrabold ${isSelected ? 'text-indigo-600' : 'text-slate-400'} uppercase tracking-widest mb-1 block">TEMA ${theme.id}</span>
+                                <h4 class="text-sm font-semibold ${isSelected ? 'text-[#0B193C]' : 'text-slate-600'} line-clamp-2 pr-4 leading-tight">${theme.text}</h4>
+                            </div>
+                            ${alreadyDone ? `<span class="material-symbols-outlined text-emerald-400 text-[16px] shrink-0 fill-current" title="Desempenho Registrado">check_circle</span>` : ''}
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
+            
+            if(filtered.length === 0) {
+                container.innerHTML = `<p class="text-center text-xs text-slate-400 py-6">Nenhum tema encontrado.</p>`;
+            }
+        }
+
+        function filterThemes() {
+            renderThemesList(document.getElementById('themeSearch').value);
+        }
+
+        function selectTheme(id) {
+            activeThemeId = id;
+            const themeObj = ALL_THEMES.find(t => t.id === id);
+            
+            // Re-render list para ativar o Highlight CSS
+            renderThemesList(document.getElementById('themeSearch').value);
+
+            // Atualizar Dashboard Central
+            document.getElementById('panelThemeTitle').innerText = themeObj.text;
+            document.getElementById('selectedThemeDisplayMini').innerText = `Tema ${id}`;
+            document.getElementById('selectedThemeDisplayMini').className = "text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100 animate-pulse";
+            setTimeout(() => document.getElementById('selectedThemeDisplayMini').classList.remove('animate-pulse'), 500);
+
+            // Libertar botões e select
+            document.getElementById('competencyGrid').style.opacity = '1';
+            document.getElementById('competencyGrid').style.pointerEvents = 'auto';
+            document.getElementById('btnSaveGrade').classList.remove('opacity-50', 'pointer-events-none');
+            
+            // Tenta puxar se tivermos salvo
+            let savedData = [];
+            if(window.db) { try { savedData = window.db.get('redacoes') || []; } catch(e){} }
+            const previousRecord = savedData.find(r => r.themeId === id);
+
+            if(previousRecord) {
+                document.getElementById('gradeC1').value = previousRecord.c1;
+                document.getElementById('gradeC2').value = previousRecord.c2;
+                document.getElementById('gradeC3').value = previousRecord.c3;
+                document.getElementById('gradeC4').value = previousRecord.c4;
+                document.getElementById('gradeC5').value = previousRecord.c5;
+            } else {
+                // Set default mock
+                document.getElementById('gradeC1').value = "120";
+                document.getElementById('gradeC2').value = "120";
+                document.getElementById('gradeC3').value = "120";
+                document.getElementById('gradeC4').value = "120";
+                document.getElementById('gradeC5').value = "120";
+            }
+
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            if(!activeThemeId) return;
+
+            // Clamp and parse values
+            const inputs = ['gradeC1', 'gradeC2', 'gradeC3', 'gradeC4', 'gradeC5'].map(id => document.getElementById(id));
+            inputs.forEach(el => {
+                if (parseInt(el.value) > 200) el.value = 200;
+                if (parseInt(el.value) < 0) el.value = 0;
+            });
+
+            const c1 = parseInt(inputs[0].value) || 0;
+            const c2 = parseInt(inputs[1].value) || 0;
+            const c3 = parseInt(inputs[2].value) || 0;
+            const c4 = parseInt(inputs[3].value) || 0;
+            const c5 = parseInt(inputs[4].value) || 0;
+
+            const total = c1 + c2 + c3 + c4 + c5;
+            
+            const display = document.getElementById('scoreDisplay');
+            
+            // Animação numérica simples (opcional em JS avançado, aqui fazemos troca direta)
+            display.innerText = total;
+
+            // Muda cor dependendo de quão top é a nota
+            const glow = document.getElementById('scoreGlow');
+            if(total >= 900) {
+                display.className = "text-[52px] font-headline font-extrabold text-emerald-600 leading-none tracking-tighter transition-colors";
+                glow.className = "absolute inset-0 bg-emerald-500 blur-2xl opacity-20 rounded-full transition-colors";
+            } else if (total >= 700) {
+                display.className = "text-[52px] font-headline font-extrabold text-indigo-600 leading-none tracking-tighter transition-colors";
+                glow.className = "absolute inset-0 bg-indigo-500 blur-2xl opacity-20 rounded-full transition-colors";
+            } else {
+                display.className = "text-[52px] font-headline font-extrabold text-amber-500 leading-none tracking-tighter transition-colors";
+                glow.className = "absolute inset-0 bg-amber-500 blur-2xl opacity-10 rounded-full transition-colors";
+            }
+        }
+
+        function salvarRedacao() {
+            if(!activeThemeId) return;
+
+            const themeObj = ALL_THEMES.find(t => t.id === activeThemeId);
+            const c1 = parseInt(document.getElementById('gradeC1').value) || 0;
+            const c2 = parseInt(document.getElementById('gradeC2').value) || 0;
+            const c3 = parseInt(document.getElementById('gradeC3').value) || 0;
+            const c4 = parseInt(document.getElementById('gradeC4').value) || 0;
+            const c5 = parseInt(document.getElementById('gradeC5').value) || 0;
+            const total = c1 + c2 + c3 + c4 + c5;
+
+            const record = {
+                themeId: activeThemeId,
+                themeText: themeObj.text,
+                c1, c2, c3, c4, c5, total,
+                date: new Date().toISOString()
+            };
+
+            if (window.db) {
+                try {
+                    // Nós queremos substituir a do mesmo themeId se existir, ou inserir nova
+                    let redacoes = window.db.get('redacoes') || [];
+                    const existingIdx = redacoes.findIndex(r => r.themeId === activeThemeId);
+                    
+                    if(existingIdx >= 0) {
+                        // DB fake em memoria
+                        redacoes[existingIdx] = { ...redacoes[existingIdx], ...record };
+                        localStorage.setItem('sinapse_storage', JSON.stringify({
+                            ...JSON.parse(localStorage.getItem('sinapse_storage')),
+                            redacoes: redacoes
+                        }));
+                    } else {
+                        window.db.insert('redacoes', record);
+                    }
+                } catch(e) { console.error("Erro ao salvar:", e); }
+            }
+
+            // Confetti de Sucesso Master
+            if(total >= 900 && typeof confetti === 'function') {
+                confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 }, colors: ['#10B981', '#34D399', '#facc15'] });
+            } else if (typeof confetti === 'function') {
+                confetti({ particleCount: 50, spread: 40, origin: { y: 0.6 } });
+            }
+
+            // Re-render UI Elements
+            renderThemesList(document.getElementById('themeSearch').value);
+            refreshAnalytics();
+            
+            // Botão state tick
+            const btn = document.getElementById('btnSaveGrade');
+            const ogHtml = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">check_circle</span> Salvo!`;
+            btn.classList.add('bg-emerald-500', 'hover:bg-emerald-600');
+            btn.classList.remove('bg-indigo-600', 'hover:bg-indigo-700');
+            setTimeout(() => {
+                btn.innerHTML = ogHtml;
+                btn.classList.remove('bg-emerald-500', 'hover:bg-emerald-600');
+                btn.classList.add('bg-indigo-600', 'hover:bg-indigo-700');
+            }, 2000);
+        }
+
+        function deleteRecord(themeId) {
+            if (!confirm('Você tem certeza que deseja excluir as notas gravadas para este tema?')) return;
+            
+            if (window.db) {
+                try {
+                    let redacoes = window.db.get('redacoes') || [];
+                    redacoes = redacoes.filter(r => r.themeId !== themeId);
+                    localStorage.setItem('sinapse_storage', JSON.stringify({
+                        ...JSON.parse(localStorage.getItem('sinapse_storage')),
+                        redacoes: redacoes
+                    }));
+                } catch (e) { console.error("Erro ao excluir:", e); }
+            }
+            
+            // if currently viewing the deleted theme, reset UI silently
+            if (activeThemeId === themeId) {
+                document.getElementById('gradeC1').value = "120";
+                document.getElementById('gradeC2').value = "120";
+                document.getElementById('gradeC3').value = "120";
+                document.getElementById('gradeC4').value = "120";
+                document.getElementById('gradeC5').value = "120";
+                calculateTotal();
+                
+                document.getElementById('selectedThemeDisplayMini').className = "text-xs font-bold text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full border border-indigo-100";
+            }
+            
+            renderThemesList(document.getElementById('themeSearch').value);
+            refreshAnalytics();
+        }
+
+        // --- 3. Analytics e Gráficos ---
+        function refreshAnalytics() {
+            let records = [];
+            if(window.db) { try { records = window.db.get('redacoes') || []; } catch(e){} }
+            
+            // Ordenar por data (mais antigas primeiro pros gráficos fazerem sentido evolutivo, e descendente pra tabela)
+            const sortedForCharts = [...records].sort((a,b) => new Date(a.date) - new Date(b.date));
+            const sortedForTable = [...records].sort((a,b) => new Date(b.date) - new Date(a.date));
+
+            // Histórico Table Refresh
+            document.getElementById('historyCount').innerText = sortedForTable.length;
+            const tableBody = document.getElementById('historyTableBody');
+            
+            if(sortedForTable.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="9" class="text-center py-8 text-slate-400 italic">Nenhuma redação avaliada ainda. Selecione um tema e preencha suas competências.</td></tr>`;
+            } else {
+                tableBody.innerHTML = '';
+                sortedForTable.forEach(r => {
+                    const dt = new Date(r.date);
+                    const dateStr = `${dt.getDate().toString().padStart(2,'0')}/${(dt.getMonth()+1).toString().padStart(2,'0')}/${dt.getFullYear()}`;
+                    
+                    const hlColor = r.total >= 900 ? 'text-emerald-600 bg-emerald-50' : (r.total >= 700 ? 'text-indigo-600 bg-indigo-50' : 'text-amber-600 bg-amber-50');
+
+                    tableBody.innerHTML += `
+                        <tr class="hover:bg-slate-50 transition-colors cursor-pointer" onclick="selectTheme(${r.themeId})">
+                            <td class="py-4 px-4 whitespace-nowrap"><span class="bg-white border border-slate-200 text-slate-500 text-[11px] font-bold px-2 py-1.5 rounded-md shadow-sm">${dateStr}</span></td>
+                            <td class="py-4 px-4">
+                                <span class="text-[10px] font-extrabold text-slate-400 uppercase mr-1">TEMA ${r.themeId}</span>
+                                <span class="text-xs text-[#0B193C] font-semibold line-clamp-1" title="${r.themeText}">${r.themeText}</span>
+                            </td>
+                            <td class="py-4 px-2 text-center text-sm font-bold text-slate-500">${r.c1}</td>
+                            <td class="py-4 px-2 text-center text-sm font-bold text-slate-500">${r.c2}</td>
+                            <td class="py-4 px-2 text-center text-sm font-bold text-slate-500">${r.c3}</td>
+                            <td class="py-4 px-2 text-center text-sm font-bold text-slate-500">${r.c4}</td>
+                            <td class="py-4 px-2 text-center text-sm font-bold text-slate-500">${r.c5}</td>
+                            <td class="py-4 px-4 text-right">
+                                <span class="inline-flex py-1.5 px-3 rounded-lg font-extrabold text-sm ${hlColor}">${r.total}</span>
+                            </td>
+                            <td class="py-4 px-4 text-center">
+                                <button onclick="event.stopPropagation(); deleteRecord(${r.themeId})" class="text-rose-400 hover:text-rose-600 transition-colors bg-rose-50 hover:bg-rose-100 p-1.5 rounded-md shadow-sm" title="Excluir Avaliação">
+                                    <span class="material-symbols-outlined text-[16px]">delete</span>
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Charts Refresh
+            setupCharts(sortedForCharts);
+        }
+
+        function setupCharts(recordsArray) {
+            // Se tiver mais de 4 records, vamos focar nos últimos 4 para o gráfico de barras não ficar achatado.
+            let chartRecords = [...recordsArray];
+            if(chartRecords.length > 5) {
+                chartRecords = chartRecords.slice(-5); // Ultimos 5
+            }
+
+            const themeLabels = chartRecords.map(r => `T${r.themeId}`);
+            const dataC1 = chartRecords.map(r => r.c1);
+            const dataC2 = chartRecords.map(r => r.c2);
+            const dataC3 = chartRecords.map(r => r.c3);
+            const dataC4 = chartRecords.map(r => r.c4);
+            const dataC5 = chartRecords.map(r => r.c5);
+            const dataTotal = chartRecords.map(r => r.total);
+
+            // Chart 1 to 5: Individual Competências
+            const themeLabelsFallback = chartRecords.length === 0 ? ['Sem Dados'] : themeLabels;
+            const dataPacks = [
+                { id: 'chartC1', data: chartRecords.length === 0 ? [0] : dataC1, color: '#818CF8' },
+                { id: 'chartC2', data: chartRecords.length === 0 ? [0] : dataC2, color: '#34D399' },
+                { id: 'chartC3', data: chartRecords.length === 0 ? [0] : dataC3, color: '#FBBF24' },
+                { id: 'chartC4', data: chartRecords.length === 0 ? [0] : dataC4, color: '#F472B6' },
+                { id: 'chartC5', data: chartRecords.length === 0 ? [0] : dataC5, color: '#38BDF8' }
+            ];
+
+            compChartInstances.forEach(c => c.destroy());
+            compChartInstances = [];
+
+            dataPacks.forEach(pack => {
+                const ctx = document.getElementById(pack.id).getContext('2d');
+                const chart = new Chart(ctx, {
+                    type: 'line', 
+                    data: {
+                        labels: themeLabelsFallback,
+                        datasets: [{
+                            data: pack.data,
+                            borderColor: pack.color,
+                            backgroundColor: pack.color + '30',
+                            borderWidth: 2,
+                            tension: 0.3,
+                            fill: true,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: pack.color,
+                            pointRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true, maintainAspectRatio: false,
+                        plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0B193C', titleFont: { family: 'Manrope', size: 12 }, bodyFont: { family: 'Inter', size: 12 }, padding: 10 } },
+                        scales: {
+                            y: { beginAtZero: true, max: 200, grid: { display: false }, ticks: { stepSize: 40, font: { family: 'Inter', size: 10, weight: 'bold' } } },
+                            x: { grid: { display: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' } } }
+                        }
+                    }
+                });
+                compChartInstances.push(chart);
+            });
+
+            // Chart 2: Evolução Nota Final (Geral)
+            // Para o de evolução, podemos usar TODOS os records, não apenas os ultimos 5
+            const allThemeLabels = recordsArray.map(r => `T${r.themeId}`);
+            const allDataTotal = recordsArray.map(r => r.total);
+
+            const ctxEvo = document.getElementById('evolutionChart').getContext('2d');
+            if(evoChartInstance) evoChartInstance.destroy();
+
+            // Gradient para barra final
+            let bgGradient = ctxEvo.createLinearGradient(0, 0, 0, 400);
+            bgGradient.addColorStop(0, 'rgba(99, 102, 241, 0.8)');
+            bgGradient.addColorStop(1, 'rgba(99, 102, 241, 0.2)');
+
+            evoChartInstance = new Chart(ctxEvo, {
+                type: 'bar', // Barra combinada com linha
+                data: {
+                    labels: recordsArray.length === 0 ? ['Inicie um estudo'] : allThemeLabels,
+                    datasets: [
+                        {
+                            type: 'line',
+                            label: 'Tendência',
+                            data: recordsArray.length === 0 ? [0] : allDataTotal,
+                            borderColor: '#10B981',
+                            borderWidth: 3,
+                            tension: 0.4,
+                            fill: false,
+                            pointBackgroundColor: '#fff',
+                            pointBorderColor: '#10B981',
+                            pointBorderWidth: 2,
+                            pointRadius: 4,
+                            order: 0
+                        },
+                        {
+                            type: 'bar',
+                            label: 'Nota Total',
+                            data: recordsArray.length === 0 ? [0] : allDataTotal,
+                            backgroundColor: bgGradient,
+                            borderRadius: { topLeft: 8, topRight: 8 },
+                            barPercentage: 0.6,
+                            order: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 1000, grid: { color: '#f1f5f9' }, ticks: { stepSize: 200, font: { family: 'Inter', weight: 'bold' } } },
+                        x: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: 'bold' } } }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { usePointStyle: true, font: { family: 'Inter', weight: 'bold', size: 10 } } },
+                        tooltip: { backgroundColor: '#0B193C', titleFont: { family: 'Manrope', size: 14 }, bodyFont: { family: 'Inter', size: 13 }, padding: 12 }
+                    }
+                }
+            });
+        }
+
+        // --- Bootstrap Initialization ---
+        document.addEventListener('DOMContentLoaded', () => {
+            renderThemesList();
+            refreshAnalytics();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+

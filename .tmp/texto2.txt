@@ -1,0 +1,197 @@
+CARTÃO-RESPOSTA
+SIMULADO: EXAME NACIONAL DO ENSINO MÉDIO - ENEM 2026
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+Nome completo do Participante:
+⃝ SIM
+⃝ SIM
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+ID
+8593
+resposta à questão X = B
+X Ⓐ●ⒸⒹⒺ
+⃝
+⃝
+resposta à questão Y = D
+Y ⒶⒷⒸ●Ⓔ
+resposta à questão Z = E
+Z ⒶⒷⒸⒹ●
+1 ⒶⒷⒸⒹⒺ
+16 ⒶⒷⒸⒹⒺ
+31 ⒶⒷⒸⒹⒺ
+46 ⒶⒷⒸⒹⒺ
+61 ⒶⒷⒸⒹⒺ
+76 ⒶⒷⒸⒹⒺ
+2 ⒶⒷⒸⒹⒺ
+17 ⒶⒷⒸⒹⒺ
+32 ⒶⒷⒸⒹⒺ
+47 ⒶⒷⒸⒹⒺ
+62 ⒶⒷⒸⒹⒺ
+77 ⒶⒷⒸⒹⒺ
+3 ⒶⒷⒸⒹⒺ
+18 ⒶⒷⒸⒹⒺ
+33 ⒶⒷⒸⒹⒺ
+48 ⒶⒷⒸⒹⒺ
+63 ⒶⒷⒸⒹⒺ
+78 ⒶⒷⒸⒹⒺ
+4 ⒶⒷⒸⒹⒺ
+19 ⒶⒷⒸⒹⒺ
+34 ⒶⒷⒸⒹⒺ
+49 ⒶⒷⒸⒹⒺ
+64 ⒶⒷⒸⒹⒺ
+79 ⒶⒷⒸⒹⒺ
+5 ⒶⒷⒸⒹⒺ
+20 ⒶⒷⒸⒹⒺ
+35 ⒶⒷⒸⒹⒺ
+50 ⒶⒷⒸⒹⒺ
+65 ⒶⒷⒸⒹⒺ
+80 ⒶⒷⒸⒹⒺ
+6 ⒶⒷⒸⒹⒺ
+21 ⒶⒷⒸⒹⒺ
+36 ⒶⒷⒸⒹⒺ
+51 ⒶⒷⒸⒹⒺ
+66 ⒶⒷⒸⒹⒺ
+81 ⒶⒷⒸⒹⒺ
+7 ⒶⒷⒸⒹⒺ
+22 ⒶⒷⒸⒹⒺ
+37 ⒶⒷⒸⒹⒺ
+52 ⒶⒷⒸⒹⒺ
+67 ⒶⒷⒸⒹⒺ
+82 ⒶⒷⒸⒹⒺ
+8 ⒶⒷⒸⒹⒺ
+23 ⒶⒷⒸⒹⒺ
+38 ⒶⒷⒸⒹⒺ
+53 ⒶⒷⒸⒹⒺ
+68 ⒶⒷⒸⒹⒺ
+83 ⒶⒷⒸⒹⒺ
+9 ⒶⒷⒸⒹⒺ
+24 ⒶⒷⒸⒹⒺ
+39 ⒶⒷⒸⒹⒺ
+54 ⒶⒷⒸⒹⒺ
+69 ⒶⒷⒸⒹⒺ
+84 ⒶⒷⒸⒹⒺ
+10 ⒶⒷⒸⒹⒺ
+25 ⒶⒷⒸⒹⒺ
+40 ⒶⒷⒸⒹⒺ
+55 ⒶⒷⒸⒹⒺ
+70 ⒶⒷⒸⒹⒺ
+85 ⒶⒷⒸⒹⒺ
+11 ⒶⒷⒸⒹⒺ
+26 ⒶⒷⒸⒹⒺ
+41 ⒶⒷⒸⒹⒺ
+56 ⒶⒷⒸⒹⒺ
+71 ⒶⒷⒸⒹⒺ
+86 ⒶⒷⒸⒹⒺ
+12 ⒶⒷⒸⒹⒺ
+27 ⒶⒷⒸⒹⒺ
+42 ⒶⒷⒸⒹⒺ
+57 ⒶⒷⒸⒹⒺ
+72 ⒶⒷⒸⒹⒺ
+87 ⒶⒷⒸⒹⒺ
+13 ⒶⒷⒸⒹⒺ
+28 ⒶⒷⒸⒹⒺ
+43 ⒶⒷⒸⒹⒺ
+58 ⒶⒷⒸⒹⒺ
+73 ⒶⒷⒸⒹⒺ
+88 ⒶⒷⒸⒹⒺ
+14 ⒶⒷⒸⒹⒺ
+29 ⒶⒷⒸⒹⒺ
+44 ⒶⒷⒸⒹⒺ
+59 ⒶⒷⒸⒹⒺ
+74 ⒶⒷⒸⒹⒺ
+89 ⒶⒷⒸⒹⒺ
+15 ⒶⒷⒸⒹⒺ
+30 ⒶⒷⒸⒹⒺ
+45 ⒶⒷⒸⒹⒺ
+60 ⒶⒷⒸⒹⒺ
+75 ⒶⒷⒸⒹⒺ
+90 ⒶⒷⒸⒹⒺ
+INSTRUÇÕES
+1º DIA
+CPF - MATRÍCULA
+IDIOMA
+PARA USO DO CHEFE DE SALA
+REDAÇÃO em BRANCO?
+Nome completo do participante com caligrafia legível
+CARTÃO-RESPOSTA Substituído?
+QUESTÃO / RESPOSTA
+EXEMPLO DE PREENCHIMENTO
+PREENCHA O CAMPO CORRESPONDENTE À SUA OPÇÃO 
+DE LÍNGUA ESTRANGEIRA
+QUESTÃO / RESPOSTA
+Língua Inglesa
+Língua Espanhola
+QUESTÃO / RESPOSTA
+QUESTÃO / RESPOSTA
+QUESTÃO / RESPOSTA
+QUESTÃO / RESPOSTA
+QUESTÃO / RESPOSTA
+Preencha
+os
+círculos
+completamente,
+conforme a imagem ao lado, utilizando
+caneta
+esferográfica
+de tinta preta,
+fabricada em material transparente. Não
+será permitido o uso de lápis, lapiseira
+(grafite) e borracha.
+Transcreva aqui a frase apresentada na
+capa de seu CADERNO DE QUESTÕES,
+conforme as instruções nela contidas.
+1.
+Verifique se o seu nome completo, a data de nascimento e os demais dados impressos neste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO estão
+corretos. Preencha o seu nome completo e assine no local apropriado.
+2.
+O CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO é o único documento que será utilizado para a correção eletrônica de suas provas. Não o amasse, não o
+rasgue, não o dobre, nem o rasure. Não haverá substuição deste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO por erro de preenchimento e/ou destaque.
+3.
+Preencha suas respostas nos campos apropriados deste CARTÃO-RESPOSTA, conforme o exemplo de preenchimento, sob o risco de inviabilidade da
+leitura óptica de suas respostas.
+4.
+FRAUDAR O ENEM É CRIME. Código Penal Brasileiro Art. 311-A.
+5.
+DESTAQUE ESTE CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO E ENTREGUE-O AO CHEFE DE SALA, AO TÉRMINO DO EXAME, SOB PENA DE
+SUA ELIMINAÇÃO.

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestibulares - Lion Mentoria</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', 
+                            primary: '#6366F1', 
+                            accent: '#10B981', 
+                            light: '#FAFAFB', 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.15)',
+                        'premium-hover': '0 20px 40px -10px rgba(11,25,60,0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'DM Serif Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .hover-pulse-scale:hover { animation: pulseScale 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .view-section { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 1; transform: translateX(0); }
+        .view-hidden { opacity: 0; transform: translateX(20px); pointer-events: none; position: absolute; visibility: hidden; height: 0; overflow: hidden; }
+    </style>
+    <link rel="stylesheet" href="canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a id="aba-vestibulares" href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">school</span> Vestibulares
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-x-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+
+        <div class="px-10 pt-10 pb-16 max-w-[1500px] mx-auto w-full relative z-10 flex-1 overflow-y-auto">
+            
+            <!-- VIEW LISTA -->
+            <div id="view-lista" class="view-section w-full">
+                <div class="mb-10 text-center fade-in-up">
+                    <h1 class="font-headline text-5xl lg:text-7xl font-normal text-[#0B193C] mb-4 drop-shadow-sm tracking-tight antialiased">Vestibulares</h1>
+                    <p class="text-slate-500 font-medium text-lg lg:text-xl max-w-2xl mx-auto tracking-wide">Acompanhe cronogramas, inscrições e etapas das universidades mais importantes do Brasil</p>
+                </div>
+                <!-- CARDS GRID -->
+                <div id="grid-vestibulares" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 fade-in-up" style="animation-delay: 0.1s;">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <!-- VIEW DETALHES -->
+            <div id="view-detalhes" class="view-section view-hidden w-full max-w-5xl mx-auto">
+                
+                <button onclick="voltarLista()" class="flex items-center gap-2 text-slate-400 hover:text-[#0B193C] font-bold text-sm uppercase tracking-wider mb-8 transition-colors group">
+                    <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    VOLTAR
+                </button>
+
+                <!-- CABEÇALHO -->
+                <div class="bg-white rounded-[32px] p-8 md:p-12 shadow-premium border border-slate-100 mb-8 flex flex-col lg:flex-row gap-8 items-center lg:items-start text-center lg:text-left relative overflow-hidden">
+                    <div id="detail-color-bar" class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sinapse-primary to-indigo-400"></div>
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 bg-slate-50 rounded-3xl p-4 border border-slate-100/50 flex items-center justify-center relative shadow-sm">
+                        <img id="detail-logo" src="" alt="Logo" class="w-full h-full object-contain drop-shadow-sm mix-blend-multiply">
+                    </div>
+                    <div class="flex-1 space-y-4">
+                        <div>
+                            <h2 id="detail-nome" class="font-headline text-4xl md:text-5xl font-normal text-[#0B193C] tracking-tight mb-2 antialiased">UNIVERSIDADE</h2>
+                            <p id="detail-subnome" class="text-slate-500 font-medium text-lg">Nome Processo</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 pt-2">
+                            <a id="detail-site" href="#" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#0B193C] hover:bg-sinapse-primary border border-transparent text-white rounded-xl font-bold text-sm transition-all shadow-premium">
+                                ACESSAR SITE OFICIAL
+                                <span class="material-symbols-outlined text-[18px]">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- RESUMO -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <div class="bg-white p-6 rounded-[24px] border border-slate-100 text-center flex flex-col justify-center">
+                        <span class="material-symbols-outlined text-rose-300 text-3xl mb-2">new_releases</span>
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1">Status</p>
+                        <p id="detail-status" class="font-bold text-[#0B193C] truncate">...</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] border border-slate-100 text-center flex flex-col justify-center">
+                        <span class="material-symbols-outlined text-emerald-300 text-3xl mb-2">calendar_month</span>
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1">Inscrições</p>
+                        <p id="detail-ins" class="font-bold text-[#0B193C] text-sm truncate">...</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] border border-slate-100 text-center flex flex-col justify-center">
+                        <span class="material-symbols-outlined text-indigo-300 text-3xl mb-2">payments</span>
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1">Valor</p>
+                        <p id="detail-val" class="font-bold text-[#0B193C] text-sm">...</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-[24px] border border-slate-100 text-center flex flex-col justify-center">
+                        <span class="material-symbols-outlined text-amber-300 text-3xl mb-2">edit_calendar</span>
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1">Prova</p>
+                        <p id="detail-prova-res" class="font-bold text-[#0B193C] text-sm truncate">...</p>
+                    </div>
+                </div>
+
+                <!-- CONTEÚDO (DUAS COLUNAS) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+                    <!-- ESQUERDA -->
+                    <div class="space-y-8">
+                        <div class="bg-white p-8 rounded-[32px] border border-slate-100">
+                            <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-sinapse-primary">visibility</span> Visão geral</h3>
+                            <p id="txt-visao" class="text-slate-600 font-medium leading-relaxed">...</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-[32px] border border-slate-100">
+                            <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-sinapse-primary">event_note</span> Cronograma</h3>
+                            <div id="txt-cronograma" class="text-slate-600 font-medium leading-relaxed space-y-2">...</div>
+                        </div>
+                        <div class="bg-white p-8 rounded-[32px] border border-slate-100">
+                            <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-sinapse-primary">quiz</span> Formato da prova</h3>
+                            <p id="txt-formato" class="text-slate-600 font-medium leading-relaxed">...</p>
+                        </div>
+                    </div>
+                    <!-- DIREITA -->
+                    <div class="space-y-8">
+                        <div class="bg-white p-8 rounded-[32px] border border-slate-100">
+                            <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-sinapse-primary">menu_book</span> Disciplinas cobradas</h3>
+                            <p id="txt-disciplinas" class="text-slate-600 font-medium leading-relaxed">...</p>
+                        </div>
+                        <div class="bg-amber-50 p-8 rounded-[32px] border border-amber-100">
+                            <h3 class="font-headline text-xl font-extrabold text-amber-900 mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-amber-500">info</span> Informações extras</h3>
+                            <p id="txt-extras" class="text-amber-800 font-medium leading-relaxed">...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Dados oficiais exatos preenchidos conforme solicitação (Taxas atualizadas)
+        const dataMaster = [
+            {
+                id: "ENEM", color: "from-blue-600 to-sky-400", colorText: "text-blue-500",
+                processo: "Exame Nacional",
+                status: "Em breve", inscricao: "Aguardando edital", prova: "Aguardando", valor: "R$ 85,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> exame nacional</li><li><strong>Forma de ingresso:</strong> usado para acesso ao Sisu, Prouni, Fies e também aceito por instituições portuguesas conveniadas</li></ul>",
+                cronograma: "O que já está confirmado: pedido de isenção e justificativa de ausência do Enem 2025 de 13/04/2026 a 24/04/2026; resultado em 08/05/2026; recurso de 11/05/2026 a 15/05/2026. <br>Inscrição principal e prova ainda dependem do edital específico do Enem 2026.",
+                formato: "Acesso unificado e nacional. Formato de 2 dias de prova.",
+                disciplinas: "Linguagens, Códigos e suas Tecnologias, Ciências Humanas, Ciências da Natureza, Matemática e Redação.",
+                extras: "Maior porta de acesso às universidades públicas brasileiras.",
+                site: "https://enem.inep.gov.br/participante/"
+            },
+            {
+                id: "UNB", color: "from-emerald-600 to-green-400", colorText: "text-emerald-500",
+                processo: "Vestibular UnB 2026",
+                status: "A definir", inscricao: "A definir", prova: "A definir", valor: "R$ 173,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio da UnB pelo Cebraspe</li><li><strong>Edição oficial localizada:</strong> Vestibular UnB 2026</li></ul>",
+                cronograma: "<strong>Inscrições:</strong> A definir<br><strong>Provas:</strong> A definir",
+                formato: "<strong>Forma da seleção:</strong> vestibular próprio; a universidade também tem acesso por Enem em processo separado.",
+                disciplinas: "Modelo tradicional do Cebraspe/UnB com as matérias do ensino médio.",
+                extras: "Cuidar com a mecânica da banca Cebraspe onde em avaliações Certo/Errado um erro pode anular um acerto.",
+                site: "https://www.cebraspe.org.br/vestibulares/"
+            },
+            {
+                id: "FUVEST", color: "from-amber-500 to-yellow-400", colorText: "text-amber-500",
+                processo: "Vestibular USP 2027",
+                status: "Em breve", inscricao: "17/08 a 09/10/2026", prova: "15/11/2026", valor: "R$ 211,00",
+                visao: "<ul><li><strong>Universidade:</strong> USP</li><li><strong>Tipo de processo:</strong> vestibular próprio em duas fases</li></ul>",
+                cronograma: "<strong>Vestibular 2027:</strong> inscrições de 17/08/2026 a 09/10/2026<br><strong>1ª fase:</strong> 15/11/2026<br><strong>2ª fase:</strong> 13 e 14/12/2026",
+                formato: "<strong>Formato da prova:</strong> 1ª fase objetiva; 2ª fase discursiva, com redação e provas específicas.",
+                disciplinas: "Contempla Matriz Curricular Comum. Exige a leitura obrigatória de livros clássicos.",
+                extras: "Provas de Habilidades Específicas se aplicam para Música, Arquitetura, Artes Cênicas e Plásticas.",
+                site: "https://www.fuvest.br/"
+            },
+            {
+                id: "UNICAMP", color: "from-rose-600 to-red-400", colorText: "text-rose-500",
+                processo: "Comvest 2027",
+                status: "Em breve", inscricao: "03/08 a 31/08/2026", prova: "18/10/2026", valor: "R$ 221,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio da Comvest</li></ul>",
+                cronograma: "<strong>Vestibular 2027:</strong> inscrições de 03/08/2026 a 31/08/2026<br><strong>1ª fase:</strong> 18/10/2026<br><strong>2ª fase:</strong> 29 e 30/11/2026",
+                formato: "<strong>Formato da prova:</strong> 1ª fase objetiva; 2ª fase discursiva, com redação e provas por área.",
+                disciplinas: "Todas focadas na capacidade analítica e de interpretação ampla.",
+                extras: "Excelente processo para quem tem fortes habilidades interpretativas e leitura contextual.",
+                site: "https://www.comvest.unicamp.br/"
+            },
+            {
+                id: "UNESP", color: "from-cyan-600 to-blue-500", colorText: "text-cyan-500",
+                processo: "Vestibular Vunesp",
+                status: "Em breve", inscricao: "Em breve", prova: "Em breve", valor: "R$ 210,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio pela Vunesp</li><li><strong>Situação:</strong> cronograma do Vestibular Unesp 2027 ainda não publicado oficialmente</li></ul>",
+                cronograma: "<strong>Período de inscrição:</strong> em breve<br><strong>Data da prova:</strong> em breve<br><strong>Segunda fase:</strong> em breve<br>Última referência oficial disponível: Vestibular Unesp 2026.",
+                formato: "<strong>Formato da prova:</strong> vestibular em duas fases.",
+                disciplinas: "1ª Fase com blocos gerais. 2ª Fase com redação e discursivas baseadas na área do curso escolhido.",
+                extras: "Observação: assim que o edital oficial do Vestibular Unesp 2027 for publicado, atualizar automaticamente as datas e informações na plataforma.",
+                site: "https://www.vunesp.com.br/"
+            },
+            {
+                id: "UFG", color: "from-teal-600 to-emerald-500", colorText: "text-teal-500",
+                processo: "Instituto Verbena 2026",
+                status: "Aguardando", inscricao: "Ver edital completo", prova: "Ver edital", valor: "R$ 130,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio da UFG, organizado pelo Instituto Verbena</li><li><strong>Edição oficial localizada:</strong> Vestibular UFG 2026</li></ul>",
+                cronograma: "Situação: página oficial do Vestibular UFG 2026 está disponível no Instituto Verbena. Observação: no resultado de busca aberto, o cronograma resumido não apareceu inteiro; para preencher a página, o melhor é puxar direto do edital oficial do processo.",
+                formato: "Modelos dinâmicos definidos anualmente nos Processos Seletivos e Sisu.",
+                disciplinas: "Verificar núcleo de testes na página do Verbena.",
+                extras: "Estar atento também ao Sisu caso a modalidade Verbena do curso desejado feche vagas exclusivas.",
+                site: "https://sistemas.institutoverbena.ufg.br/"
+            },
+            {
+                id: "UEG", color: "from-sky-500 to-blue-400", colorText: "text-sky-500",
+                processo: "Vestibular UEG 2026/2",
+                status: "Inscrições Abertas", inscricao: "02/03 a 06/04/2026", prova: "Ver Edital", valor: "R$ 50,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio</li><li><strong>Versão:</strong> Vestibular UEG 2026/2</li></ul>",
+                cronograma: "<strong>Inscrições:</strong> 02/03/2026 a 06/04/2026<br><strong>Pagamento da taxa:</strong> até 08/04/2026",
+                formato: "Prova objetiva tradicional.",
+                disciplinas: "Português, Matemática, Ciências Humanas e Naturais, etc.",
+                extras: "Observação: a UEG também teve Vestibular 2026/1, com prova em 02/11/2025.",
+                site: "https://www.ueg.br/"
+            },
+            {
+                id: "UFU", color: "from-purple-600 to-fuchsia-500", colorText: "text-purple-500",
+                processo: "Vestibular 2026-2",
+                status: "Inscrições Abertas", inscricao: "Até 14/04/2026 às 16h", prova: "17/05/2026", valor: "R$ 117,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio</li><li><strong>Edição oficial localizada:</strong> Vestibular 2026-2</li><li><strong>Vagas:</strong> 1.729</li></ul>",
+                cronograma: "<strong>Inscrições:</strong> até 14/04/2026 às 16h<br><strong>Prova:</strong> 17/05/2026",
+                formato: "A comunicação oficial informa aplicação de primeira e segunda fases no **mesmo dia**.",
+                disciplinas: "Padrão de ensino médio de provas paulistas e mineiras.",
+                extras: "Uma facilidade logística imensa resolver as duas provas num só deslocamento.",
+                site: "https://ingresso.ufu.br/"
+            },
+            {
+                id: "UFJF", color: "from-indigo-600 to-blue-500", colorText: "text-indigo-500",
+                processo: "PISM / COPESE",
+                status: "Processo Seriado", inscricao: "Previsto", prova: "05 e 06/12/2026", valor: "R$ 150,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> PISM (Programa de Ingresso Seletivo Misto)</li><li><strong>Forma da seleção:</strong> processo seriado em 3 módulos, um por ano do ensino médio.</li></ul>",
+                cronograma: "<strong>PISM 2027:</strong> provas agendadas para 05 e 06/12/2026.",
+                formato: "A UFJF informa que o PISM oferta impressionantes 50% das vagas totais da graduação.",
+                disciplinas: "Conteúdos específicos do exato ano que o ser discente se encontra matriculado.",
+                extras: "Módulo 3 usualmente soma com 1 e 2 multiplicando e calculando via pesos exclusivos.",
+                site: "https://www.ufjf.br/copese/"
+            },
+            {
+                id: "UFMS", color: "from-cyan-700 to-blue-500", colorText: "text-cyan-600",
+                processo: "PSV-UFMS 2027",
+                status: "No Final do Ano", inscricao: "Previsto Ago/Set", prova: "06/12/2026", valor: "R$ 100,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio anual</li><li><strong>Nome do processo:</strong> PSV-UFMS</li></ul>",
+                cronograma: "<strong>Vestibular 2027 (Anual):</strong> prova em 06/12/2026.",
+                formato: "Prova presencial num único dia, incluindo redação.",
+                disciplinas: "Blocos de humanas, linguagens, matemática e ciências da natureza tradicionais.",
+                extras: "Observação: a UFMS também mantém o PASSE, que é processo seriado; para o PASSE 2027, a prova está prevista para 13/12/2026.",
+                site: "https://ingresso.ufms.br/"
+            },
+            {
+                id: "UFGD", color: "from-green-600 to-emerald-400", colorText: "text-green-500",
+                processo: "PSV-UFGD",
+                status: "Em breve", inscricao: "Aguardando edital", prova: "Aguardando", valor: "R$ 120,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio</li><li><strong>Nome do processo:</strong> PSV-UFGD</li><li><strong>Edição oficial localizada:</strong> Vestibular 2026</li></ul>",
+                cronograma: "O resumo aberto da busca não trouxe, de forma visível, o cronograma completo da edição 2026. Recomendável checagem contínua no quadro oficial.",
+                formato: "Vagas de graduação presencial e, conforme a página geral do processo, também há referência a oferta em modalidades presencial e a distância.",
+                disciplinas: "Conhecimentos elementares das áreas fundamentais descritas nos PPPs das grades E.M.",
+                extras: "Bastante buscada para cursos de Agro e afins no polo Sul-mato-grossense.",
+                site: "https://portal.ufgd.edu.br/"
+            },
+            {
+                id: "UFPR", color: "from-blue-700 to-indigo-500", colorText: "text-blue-600",
+                processo: "Vestibular 2027",
+                status: "Docs Publicados", inscricao: "Consultar Edital", prova: "A confirmar", valor: "R$ 195,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio</li><li><strong>Situação atual:</strong> programa oficial de prova e documentos do processo já estão na página do concurso.</li></ul>",
+                cronograma: "Vestibular UFPR 2027: já tem página oficial publicada. O ideal é puxar as datas diretas do novo edital recém gerado na plataforma oficial.",
+                formato: "1ª Fase extensa com 2ª Fase rica na construção textual com gêneros discursivos exigentes.",
+                disciplinas: "Gerais. Muitas exigência leitura literária e obras sociológicas.",
+                extras: "A UFPR é referência no quesito redação, solicitando resumo, cartas ou manifestos dependendo do ano.",
+                site: "https://servicos.nc.ufpr.br/"
+            },
+            {
+                id: "UFSC", color: "from-teal-700 to-cyan-500", colorText: "text-teal-600",
+                processo: "Unificado",
+                status: "Previsões publicadas", inscricao: "A partir de Ago/2026", prova: "05 e 06/12/2026", valor: "R$ 192,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> Vestibular Unificado UFSC/IFSC/IFC</li></ul>",
+                cronograma: "<strong>Inscrições:</strong> a partir de agosto de 2026<br><strong>Vestibular 2027 (Provas):</strong> 05 e 06/12/2026",
+                formato: "Vestibular unificado organizado pela ilustre Coperve.",
+                disciplinas: "Muitas vezes usa formato SOMATÓRIA (Cálculo somatório das alternativas corretas).",
+                extras: "Cuidado altíssimo na somatória, pois preenchimento parcial errado subtrai totais absurdamente.",
+                site: "https://coperve.ufsc.br/"
+            },
+            {
+                id: "UFRGS", color: "from-rose-800 to-red-500", colorText: "text-rose-600",
+                processo: "Vestibular COPERSE",
+                status: "Aguardando abril", inscricao: "Agosto/Setembro", prova: "Novembro", valor: "R$ 180,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> vestibular próprio da COPERSE</li><li><strong>Forma de ingresso:</strong> a UFRGS informa que 70% das vagas são pelo vestibular e 30% pelo Sisu.</li></ul>",
+                cronograma: "<strong>Cronograma 2027:</strong> a página oficial informa apenas a previsão geral: datas das provas devem ser divulgadas em abril, inscrições em agosto/setembro e aplicação em novembro, em datas diferentes do Enem.",
+                formato: "Aplicada em 2 dias; no 1º dia há provas objetivas de Pt, Lit, Mat, Geo e Hist; no 2º dia há Redação, Ling. estran., Bio, Fis e Qui.",
+                disciplinas: "Português, Literatura, Matemática, Geografia, História, Redação, Estrangeira, Biologia, Física, Química.",
+                extras: "Leituras obrigatórias sempre se fazem presentes.",
+                site: "https://www.ufrgs.br/coperse/"
+            },
+            {
+                id: "UFT", color: "from-emerald-700 to-green-500", colorText: "text-emerald-600",
+                processo: "Exame EXATO",
+                status: "Inscrições Abertas", inscricao: "23/02 a 01/04/2026", prova: "17/05/2026", valor: "R$ 70,00",
+                visao: "<ul><li><strong>Tipo de processo:</strong> Exato — Exame de Acesso ao Ensino Superior do Tocantins</li><li><strong>Versão:</strong> Exato 2026 – 1ª edição</li></ul>",
+                cronograma: "<strong>Inscrições:</strong> 23/02/2026 a 01/04/2026<br><strong>Pagamento taxa:</strong> até 02/04/2026<br><strong>Prova:</strong> 17/05/2026",
+                formato: "Prova padronizada e moderna para captação.",
+                disciplinas: "Áreas de Conhecimento, focado nas especificidades do currículo nacional base e tocante.",
+                extras: "A própria UFT apresenta o Exato como uma nova e facilitada porta de entrada para seus cursos de graduação.",
+                site: "https://www.uft.edu.br/"
+            }
+        ];
+
+        function renderLista() {
+            const grid = document.getElementById("grid-vestibulares");
+            grid.innerHTML = "";
+            
+            dataMaster.forEach((vest, index) => {
+                let badgeCss = "bg-slate-100 text-slate-500";
+                if(vest.status.toLowerCase().includes("abert") || vest.status.toLowerCase().includes("andamento")) badgeCss = "bg-emerald-100 text-emerald-700";
+                else if(vest.status.toLowerCase().includes("encerrado")) badgeCss = "bg-rose-100 text-rose-700";
+                else badgeCss = "bg-amber-100 text-amber-700";
+
+                const card = document.createElement("div");
+                card.className = "bg-white p-6 rounded-[24px] border border-slate-100 shadow-premium hover:shadow-premium-hover hover:-translate-y-2 hover-pulse-scale active:scale-[0.98] active:shadow-inner transition-all duration-300 group flex flex-col items-center text-center cursor-pointer relative overflow-hidden";
+                card.onclick = () => abrir(index);
+
+                card.innerHTML = `
+                    <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r ${vest.color} opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div class="w-16 h-16 rounded-2xl bg-slate-50 p-2 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-sm border border-slate-100/50">
+                        <img src="VESTIBULARES/LOGO VETORIZADA/${vest.id}.png" alt="${vest.id}" class="w-full h-full object-contain mix-blend-multiply">
+                    </div>
+                    <h3 class="font-headline font-extrabold text-xl text-[#0B193C] mb-1">${vest.id}</h3>
+                    <div class="w-full bg-[#FAFAFB] p-4 rounded-xl border border-slate-100/50 mt-auto group-hover:bg-slate-50 transition-colors">
+                        <div class="inline-block px-3 py-1 rounded-full text-[10px] uppercase font-bold tracking-widest ${badgeCss} mb-2">
+                            ${vest.status}
+                        </div>
+                        <p class="text-[11px] font-bold text-slate-500 truncate w-full" title="Inscrições: ${vest.inscricao}">Inscrições: ${vest.inscricao}</p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function abrir(index) {
+            const v = dataMaster[index];
+            document.getElementById("detail-logo").src = `VESTIBULARES/LOGO VETORIZADA/${v.id}.png`;
+            document.getElementById("detail-color-bar").className = `absolute top-0 left-0 w-full h-2 bg-gradient-to-r ${v.color}`;
+            document.getElementById("detail-nome").textContent = v.id;
+            document.getElementById("detail-subnome").textContent = v.processo;
+            
+            // BOTAO SITE OFICIAL
+            document.getElementById("detail-site").href = v.site;
+
+            // STATUS CARDS
+            document.getElementById("detail-status").textContent = v.status;
+            document.getElementById("detail-ins").textContent = v.inscricao;
+            document.getElementById("detail-val").textContent = v.valor;
+            document.getElementById("detail-prova-res").textContent = v.prova;
+
+            let sColor = "text-amber-600";
+            if(v.status.toLowerCase().includes("aberta") || v.status.toLowerCase().includes("andamento")) sColor = "text-emerald-600";
+            if(v.status.toLowerCase().includes("encerra")) sColor = "text-rose-600";
+            document.getElementById("detail-status").className = `font-bold truncate ${sColor}`;
+
+            // BLOCKS
+            document.getElementById("txt-visao").innerHTML = v.visao;
+            document.getElementById("txt-cronograma").innerHTML = v.cronograma;
+            document.getElementById("txt-formato").innerHTML = v.formato;
+            document.getElementById("txt-disciplinas").innerHTML = v.disciplinas;
+            document.getElementById("txt-extras").innerHTML = v.extras;
+
+            document.getElementById("aba-vestibulares").classList.add("animate-pulse");
+
+            document.getElementById("view-lista").classList.add("view-hidden");
+            document.getElementById("view-detalhes").classList.remove("view-hidden");
+            document.querySelector("main").scrollTo(0,0);
+        }
+
+        function voltarLista() {
+            document.getElementById("aba-vestibulares").classList.remove("animate-pulse");
+            document.getElementById("view-detalhes").classList.add("view-hidden");
+            document.getElementById("view-lista").classList.remove("view-hidden");
+            document.querySelector("main").scrollTo(0,0);
+        }
+
+        document.addEventListener('DOMContentLoaded', renderLista);
+    </script>
+</body>
+</html>
+

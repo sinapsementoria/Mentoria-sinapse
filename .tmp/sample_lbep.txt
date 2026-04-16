@@ -1,0 +1,15 @@
+﻿Univ: UNIVERSIDADE | VAGAS (C7): VAGAS no SISU 2026 | C16: NOTA DE CORTE FINAL SISU 2025 | C21: NOTA DE CORTE SISU 2026
+Univ: UFAL | VAGAS (C7): 1 | C16: 783,10 | C21: 
+Univ: UFAL | VAGAS (C7): 3 | C16: 773,36 | C21: 
+Univ: UFOB | VAGAS (C7): 1 | C16: 784,24 | C21: 
+Univ: UEFS | VAGAS (C7): 3 | C16: - | C21: 
+Univ: UESC | VAGAS (C7): - | C16: - | C21: 
+Univ: UESB | VAGAS (C7): - | C16: - | C21: 
+Univ: UESB | VAGAS (C7): - | C16: - | C21: 
+Univ: UFBA | VAGAS (C7): 1 | C16: 776,57 | C21: 
+Univ: UFBA | VAGAS (C7): 1 | C16: 767,53 | C21: 
+Univ: UFRB | VAGAS (C7): 1 | C16: 772,74 | C21: 
+Univ: UFSB | VAGAS (C7): 1 | C16: 789,44 | C21: 
+Univ: UNIVASF | VAGAS (C7): 1 | C16: 770,74 | C21: 
+Univ: UNIVASF | VAGAS (C7): 3 | C16: 773,24 | C21: 
+Univ: UFCA | VAGAS (C7): 1 | C16: 773,01 | C21: 

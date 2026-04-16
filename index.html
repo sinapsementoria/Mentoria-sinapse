@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sinapse Pré-Med | A Elite da Aprovação em Medicina</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:ital,wght@0,400..900;1,400..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary": "#000000",
+                      "secondary-container": "#fed488",
+                      "on-secondary-container": "#785a1a",
+                      "on-primary-fixed": "#141a36",
+                      "primary-fixed-dim": "#bfc4e9",
+                      "surface-container-high": "#e5e9eb",
+                      "primary": "#000000",
+                      "background": "#f7fafc",
+                      "surface-container-highest": "#e0e3e5",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#002114",
+                      "surface-variant": "#e0e3e5",
+                      "on-primary-container": "#7d82a4",
+                      "inverse-primary": "#bfc4e9",
+                      "on-surface-variant": "#46464d",
+                      "primary-fixed": "#dde1ff",
+                      "surface-container-low": "#f1f4f6",
+                      "error": "#ba1a1a",
+                      "tertiary-fixed": "#a0f4ca",
+                      "inverse-surface": "#2d3133",
+                      "surface-bright": "#f7fafc",
+                      "surface-container": "#ebeef0",
+                      "inverse-on-surface": "#eef1f3",
+                      "surface-container-lowest": "#ffffff",
+                      "outline": "#77767e",
+                      "on-secondary": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "secondary-fixed": "#ffdea5",
+                      "on-primary-fixed-variant": "#3f4564",
+                      "on-surface": "#181c1e",
+                      "outline-variant": "#c7c5ce",
+                      "on-background": "#181c1e",
+                      "primary-container": "#141a36",
+                      "surface": "#f7fafc",
+                      "on-primary": "#ffffff",
+                      "error-container": "#ffdad6",
+                      "surface-dim": "#d7dadc",
+                      "tertiary-fixed-dim": "#84d7af",
+                      "tertiary-container": "#002114",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "secondary": "#775a19",
+                      "on-tertiary-container": "#40936f",
+                      "on-secondary-fixed": "#261900",
+                      "surface-tint": "#575d7c",
+                      "on-error": "#ffffff",
+                      "secondary-fixed-dim": "#e9c176",
+                      "on-tertiary-fixed-variant": "#005137"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "fontFamily": {
+                      "headline": ["Playfair Display", "serif"],
+                      "body": ["Inter"],
+                      "label": ["Inter"],
+                      "display": ["Playfair Display", "serif"]
+              }
+            },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-nav { background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); }
+        .hero-gradient { background: linear-gradient(135deg, #141A36 0%, #000000 100%); }
+        .card-shadow { box-shadow: 0 40px 80px -20px rgba(20, 26, 54, 0.08); }
+        .text-glow { text-shadow: 0 0 20px rgba(254, 212, 136, 0.3); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        
+        /* Hero Carousel Styles */
+        .hero-carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+        .hero-carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .hero-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.3);
+            color: white;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s, background 0.3s, transform 0.2s;
+            backdrop-filter: blur(4px);
+        }
+        .hero-carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.6);
+            transform: translateY(-50%) scale(1.1);
+        }
+        .group\/hero:hover .hero-carousel-btn {
+            opacity: 1;
+        }
+        .hero-carousel-dots {
+            position: absolute;
+            bottom: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+        .hero-carousel-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .hero-carousel-dot:hover {
+            background: rgba(255, 255, 255, 1);
+        }
+        .hero-carousel-dot.active {
+            background: white;
+            transform: scale(1.3);
+            box-shadow: 0 0 6px rgba(0,0,0,0.5);
+        }
+        
+        /* Marquee Animation */
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes marquee-scroll2 {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(0%); }
+        }
+        .animate-marquee {
+            animation: marquee-scroll 75s linear infinite;
+            display: flex;
+            width: max-content;
+        }
+        .animate-marquee2 {
+            animation: marquee-scroll2 75s linear infinite;
+            display: flex;
+            width: max-content;
+        }
+        .group\/marquee:hover .animate-marquee,
+        .group\/marquee:hover .animate-marquee2 {
+            animation-play-state: paused;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+      <link rel="stylesheet" href="public/assets/styles/canela-global.css">
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopAppBar Container -->
+<header class="fixed top-0 w-full z-50 flex flex-col shadow-xl">
+    
+    <!-- Nova Barra Superior Horizontal (Premium) -->
+    <div class="bg-gradient-to-r from-[#0A0D1B] via-[#141A36] to-[#0A0D1B] text-white/80 h-10 w-full flex items-center border-b border-white/5 relative z-20">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-8 w-full text-[11px] md:text-xs font-semibold tracking-widest uppercase">
+            
+            <!-- Esquerda: Contato -->
+            <div class="flex items-center gap-2 group cursor-pointer hover:text-[#E1AA33] transition-colors duration-300">
+                <svg class="w-[15px] h-[15px] text-[#E1AA33]/80 group-hover:text-[#E1AA33] transition-colors fill-current" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/></svg>
+                <a href="mailto:sinapsemedicina@gmail.com" class="hidden sm:block mt-0.5" contenteditable="true" spellcheck="false" title="Clique para editar e copiar o e-mail">sinapsemedicina@gmail.com</a>
+            </div>
+
+            <!-- Direita: Redes Sociais -->
+            <div class="flex items-center gap-3 md:gap-4">
+                <span class="hidden md:block mr-2 text-white/30 lowercase tracking-[0.2em] text-[9px] font-normal">Siga o Sinapse</span>
+                
+                <!-- Instagram -->
+                <a href="https://instagram.com/sinapsemedicina" target="_blank" class="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:text-white hover:scale-110 hover:shadow-[0_0_15px_rgba(220,39,67,0.5)] transition-all duration-300">
+                    <svg class="w-3 h-3 md:w-3.5 md:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                </a>
+                
+                <!-- YouTube -->
+                <a href="https://www.youtube.com/@SINAPSEMEDICINA-gz8cm" target="_blank" class="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#FF0000] hover:text-white hover:scale-110 hover:shadow-[0_0_15px_rgba(255,0,0,0.5)] transition-all duration-300">
+                    <svg class="w-3.5 h-3.5 md:w-4 md:h-4 fill-current translate-x-[0.5px]" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+
+                <!-- TikTok -->
+                <a href="#" class="w-6 h-6 md:w-7 md:h-7 rounded-full bg-white/5 flex items-center justify-center hover:bg-white hover:text-black hover:scale-110 hover:shadow-[0_0_15px_rgba(255,255,255,0.5)] transition-all duration-300">
+                    <svg class="w-3 h-3 md:w-3.5 md:h-3.5 fill-current" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navegação Principal -->
+    <div class="bg-gradient-to-br from-[#f2f2f2] to-[#e7e5e3] h-20 w-full relative z-10 border-b border-[#d8d6d4]">
+        <div class="flex justify-between items-center max-w-7xl mx-auto px-8 h-full relative">
+            <div class="flex items-center gap-2 relative group hover:-translate-y-0.5 transition-transform duration-300 cursor-pointer">
+                <img src="public/assets/images/FOTO%202%20INDEX.png" alt="Logo Sinapse" class="h-12 md:h-14 w-auto object-contain mix-blend-multiply drop-shadow-sm">
+            </div>
+            
+            <nav class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8">
+                <a class="text-[#775A19] font-bold border-b-2 border-[#775A19] pb-1 font-headline hover:text-[#E1AA33] hover:border-[#E1AA33] transition-colors" href="login.html">Portal do Professor</a>
+                <a class="text-[#141A36] font-medium hover:text-[#775A19] transition-colors duration-300 font-headline" href="src/pages/aluno.html">Espaço do Aluno</a>
+                <a class="text-[#141A36] font-medium hover:text-[#775A19] transition-colors duration-300 font-headline" href="src/pages/admin.html">Central Administrativa</a>
+            </nav>
+            
+            <button onclick="document.getElementById('matricula-section').scrollIntoView({behavior: 'smooth', block: 'center'})" class="bg-[#141A36] text-[#fed488] px-6 py-2.5 rounded-lg font-bold tracking-tight shadow-md hover:bg-[#775A19] hover:text-white transition-all duration-300 scale-95 hover:scale-100 active:scale-90 font-headline flex items-center gap-2 group">
+                MATRICULE-SE
+                <span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main class="pt-[120px]">
+<section class="relative w-full flex items-center overflow-hidden bg-[#141A36] group/hero" id="heroCarouselContainer">
+    <!-- Anchor invisível para que o container abrace as proporções reais da foto -->
+    <img src="public/assets/images/PERFIL/foto 1.jpeg" class="w-full h-auto opacity-0 pointer-events-none" aria-hidden="true">
+    
+    <!-- Carousel Background (Pure High Quality) -->
+    <div class="absolute inset-0 z-0">
+        <img src="public/assets/images/PERFIL/foto 1.jpeg" alt="Foto Perfil 1" class="absolute inset-0 w-full h-full object-cover hero-carousel-slide active">
+        <img src="public/assets/images/PERFIL/foto 2.jpeg" alt="Foto Perfil 2" class="absolute inset-0 w-full h-full object-cover hero-carousel-slide">
+        <img src="public/assets/images/PERFIL/foto 3.jpeg" alt="Foto Perfil 3" class="absolute inset-0 w-full h-full object-cover hero-carousel-slide">
+        <img src="public/assets/images/PERFIL/foto 4.jpeg" alt="Foto Perfil 4" class="absolute inset-0 w-full h-full object-cover hero-carousel-slide">
+    </div>
+    
+    <!-- Carousel Controls -->
+    <div class="absolute inset-y-0 left-4 flex items-center z-20">
+        <div class="hero-carousel-btn !relative top-0 transform-none" style="top:auto; transform:none;" onclick="prevHeroSlide(event)">
+            <span class="material-symbols-outlined text-[24px]">chevron_left</span>
+        </div>
+    </div>
+    <div class="absolute inset-y-0 right-4 flex items-center z-20">
+        <div class="hero-carousel-btn !relative top-0 transform-none" style="top:auto; transform:none;" onclick="nextHeroSlide(event)">
+            <span class="material-symbols-outlined text-[24px]">chevron_right</span>
+        </div>
+    </div>
+    <div class="hero-carousel-dots z-20">
+        <div class="hero-carousel-dot active" onclick="goToHeroSlide(0, event)"></div>
+        <div class="hero-carousel-dot" onclick="goToHeroSlide(1, event)"></div>
+        <div class="hero-carousel-dot" onclick="goToHeroSlide(2, event)"></div>
+        <div class="hero-carousel-dot" onclick="goToHeroSlide(3, event)"></div>
+    </div>
+</section>
+<!-- Stats Bar -->
+<section class="bg-surface-container-lowest relative z-30 -mt-16 max-w-5xl mx-auto rounded-2xl p-6 md:p-8 card-shadow">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+<div class="text-center flex flex-col items-center justify-center">
+<p class="text-3xl md:text-3xl font-headline font-black text-primary-container">28</p>
+<p class="text-xs md:text-sm font-label text-slate-500 uppercase tracking-wider mt-1 text-center">Aprovados em Med 2025</p>
+</div>
+<div class="text-center flex flex-col items-center justify-center">
+<p class="text-3xl md:text-3xl font-headline font-black text-secondary">45,7%</p>
+<p class="text-xs md:text-sm font-label text-slate-500 uppercase tracking-wider mt-1 text-center">Turma SuperMed Aprovada</p>
+</div>
+<div class="text-center flex flex-col items-center justify-center">
+<p class="text-3xl md:text-3xl font-headline font-black text-primary-container">7</p>
+<p class="text-xs md:text-sm font-label text-slate-500 uppercase tracking-wider mt-1 text-center">Aprovados na ESCS</p>
+</div>
+<div class="text-center flex flex-col items-center justify-center">
+<p class="text-3xl md:text-3xl font-headline font-black text-on-tertiary-container">+70%</p>
+<p class="text-xs md:text-sm font-label text-slate-500 uppercase tracking-wider mt-1 text-center">Alunos 900+ Redação</p>
+</div>
+</div>
+</section>
+<!-- Nossas Turmas -->
+<section class="pt-4 pb-4 px-8 max-w-7xl mx-auto">
+<div class="text-center w-full mx-auto mb-10 flex flex-col items-center">
+<h2 class="font-headline text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-primary-container mb-6 lg:whitespace-nowrap">Excelência formatada para o seu objetivo</h2>
+<p class="text-lg text-slate-600 font-light max-w-3xl">Programas intensivos desenhados por especialistas para garantir sua vaga na faculdade dos sonhos.</p>
+</div>
+
+<div class="grid md:grid-cols-3 gap-8">
+<!-- Card SuperMed -->
+<div class="group bg-surface-container-lowest p-8 rounded-xl card-shadow border-b-4 border-secondary-container hover:translate-y-[-8px] transition-all duration-500">
+<div class="w-14 h-14 bg-secondary-container/10 rounded-lg flex items-center justify-center mb-8 group-hover:bg-secondary-container transition-colors duration-300">
+<span class="material-symbols-outlined text-secondary text-2xl group-hover:text-white" data-icon="star">star</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary-container mb-4">SuperMed</h3>
+<p class="text-slate-600 mb-8 leading-relaxed">Imersão total para quem busca as universidades mais concorridas do país. Foco absoluto em alto desempenho.</p>
+<ul class="space-y-3 mb-10">
+<li class="flex items-center gap-3 text-sm text-slate-500">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="check_circle">check_circle</span> Monitoria individual 24h
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-500">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="check_circle">check_circle</span> Material didático premium
+                        </li>
+</ul>
+<button class="w-full py-3 font-bold text-primary border-b-2 border-primary/10 group-hover:border-secondary transition-all">SAIBA MAIS</button>
+</div>
+<!-- Card ENEMMed -->
+<div class="group bg-primary-container p-8 rounded-xl card-shadow hover:translate-y-[-8px] transition-all duration-500">
+<div class="w-14 h-14 bg-white/10 rounded-lg flex items-center justify-center mb-8">
+<span class="material-symbols-outlined text-secondary-container text-2xl" data-icon="menu_book">menu_book</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-white mb-4">ENEMMed</h3>
+<p class="text-slate-400 mb-8 leading-relaxed">Metodologia baseada na TRI e análise de recorrência. A estratégia perfeita para conquistar sua nota máxima no ENEM.</p>
+<ul class="space-y-3 mb-10">
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg" data-icon="check_circle">check_circle</span> Simulados semanais TRI
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-300">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg" data-icon="check_circle">check_circle</span> Laboratório de redação
+                        </li>
+</ul>
+<button class="w-full py-3 font-bold text-secondary-container border-b-2 border-secondary-container/20 hover:border-secondary-container transition-all">SAIBA MAIS</button>
+</div>
+<!-- Card PAS 1 -->
+<div class="group bg-surface-container-lowest p-8 rounded-xl card-shadow border-b-4 border-slate-200 hover:translate-y-[-8px] transition-all duration-500">
+<div class="w-14 h-14 bg-surface-container-high rounded-lg flex items-center justify-center mb-8 group-hover:bg-primary-container transition-colors duration-300">
+<span class="material-symbols-outlined text-primary-container text-2xl group-hover:text-white" data-icon="account_tree">account_tree</span>
+</div>
+<h3 class="font-headline text-2xl font-bold text-primary-container mb-4">PAS UnB</h3>
+<p class="text-slate-600 mb-8 leading-relaxed">Preparação específica para as etapas do PAS, focada no edital da UnB e nas obras obrigatórias.</p>
+<ul class="space-y-3 mb-10">
+<li class="flex items-center gap-3 text-sm text-slate-500">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="check_circle">check_circle</span> Análise profunda de obras
+                        </li>
+<li class="flex items-center gap-3 text-sm text-slate-500">
+<span class="material-symbols-outlined text-tertiary-fixed-dim text-lg" data-icon="check_circle">check_circle</span> Professores especialistas UnB
+                        </li>
+</ul>
+<button class="w-full py-3 font-bold text-primary border-b-2 border-primary/10 group-hover:border-primary transition-all">SAIBA MAIS</button>
+</div>
+</div>
+<!-- Title for Redacao -->
+<div class="text-center w-full mx-auto mt-8 mb-4 flex flex-col items-center px-4">
+<h2 class="font-headline text-xl md:text-2xl lg:text-3xl font-bold tracking-tight text-primary-container">7 em cada 10 alunos matriculados tiraram 900+ na Redação do ENEM</h2>
+</div>
+<!-- Marquee de fotos Redação (abaixo das turmas) -->
+<div class="w-[100vw] relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] overflow-hidden h-[220px] flex items-center mt-2 group/marquee">
+    <!-- Gradient Masks -->
+    <div class="absolute left-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-r from-surface to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute right-0 top-0 bottom-0 w-16 md:w-48 bg-gradient-to-l from-surface to-transparent z-10 pointer-events-none"></div>
+    
+    <!-- First Scrolling Strip -->
+    <div class="animate-marquee gap-8 px-4 flex group-hover/marquee:pause items-center h-full">
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+
+    </div>
+    
+    <!-- Second Scrolling Strip (Duplicata) -->
+    <div class="animate-marquee2 absolute gap-8 px-4 flex items-center h-full group-hover/marquee:pause top-0 min-h-full">
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 960">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.52 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 940">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.53 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.54.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.00.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 920">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.55.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.56 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57 (1).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.57.jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.58 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.00.59 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.01 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02 (2).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+        <div class="w-[180px] h-[180px] rounded-[2rem] overflow-hidden shadow-lg shrink-0 relative group">
+            <img src="public/assets/images/FOTO REDACOES/WhatsApp Image 2026-04-11 at 19.01.02 (3).jpeg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Aluno 900">
+        </div>
+
+    </div>
+</div>
+</section>
+
+
+<!-- Metodologia Section -->
+<section class="pt-8 pb-32 bg-surface-container-low overflow-hidden">
+<div class="max-w-7xl mx-auto px-8 grid lg:grid-cols-2 gap-24 items-center">
+<div class="order-2 lg:order-1">
+<img class="rounded-2xl card-shadow w-full h-[600px] object-cover" data-alt="collaborative educational study session with diverse group of students working on digital tablets in a clean white high-end space" src="public/assets/images/metodologia.png"/>
+</div>
+<div class="space-y-8 order-1 lg:order-2">
+<p class="font-label text-secondary font-bold tracking-[0.2em] uppercase">O Segredo dos Aprovados</p>
+<h2 class="font-headline text-4xl md:text-5xl font-bold text-primary-container leading-tight">Metodologia que não apenas ensina, mas <span class="italic text-secondary">aprova</span>.</h2>
+<div class="space-y-6">
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center card-shadow">
+<span class="material-symbols-outlined text-primary-container" data-icon="psychology">psychology</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-primary-container mb-2">Neurociência Aplicada</h4>
+<p class="text-slate-600 font-light">Técnicas de memorização e retenção de longo prazo integradas ao cronograma diário.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center card-shadow">
+<span class="material-symbols-outlined text-primary-container" data-icon="target">target</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-primary-container mb-2">Análise de Dados Individual</h4>
+<p class="text-slate-600 font-light">Identificamos suas lacunas de conhecimento com precisão cirúrgica através de inteligência de dados.</p>
+</div>
+</div>
+<div class="flex gap-6">
+<div class="flex-shrink-0 w-12 h-12 bg-white rounded-lg flex items-center justify-center card-shadow">
+<span class="material-symbols-outlined text-primary-container" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<div>
+<h4 class="text-xl font-bold text-primary-container mb-2">Suporte Emocional de Elite</h4>
+<p class="text-slate-600 font-light">Acompanhamento psicológico especializado para lidar com a pressão dos grandes vestibulares.</p>
+</div>
+</div>
+</div>
+<div class="pt-8">
+<a class="inline-flex items-center gap-2 text-primary font-bold text-lg group" href="#">
+                            Descubra nossa tecnologia de ensino
+                            <span class="w-8 h-[2px] bg-primary group-hover:w-16 transition-all duration-300"></span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Depoimento Premium -->
+<section class="py-12 lg:py-16 px-8 bg-[#15B6B8] relative overflow-hidden min-h-[calc(100vh-5rem)] flex items-center">
+    <!-- Decorative background effects -->
+    <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute top-[-20%] right-[-10%] w-[60%] h-[60%] bg-white/10 blur-[150px] rounded-full"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#141A36]/10 blur-[130px] rounded-full"></div>
+        <div class="absolute top-[40%] left-[20%] w-[30%] h-[30%] bg-primary-fixed/20 blur-[120px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto w-full relative z-10">
+        <!-- Headers -->
+        <div class="text-center mb-6 lg:mb-8 w-full flex justify-center">
+            <h2 class="font-display text-3xl md:text-4xl lg:text-[3.25rem] font-bold italic text-white tracking-tight leading-[1] w-full md:whitespace-nowrap opacity-90 drop-shadow-lg">
+                Histórias de quem superou os limites.
+            </h2>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center justify-center max-w-6xl mx-auto">
+            
+            <!-- Bloco do Vídeo + Setas (Left/Top) -->
+            <div class="lg:col-span-5 relative order-1 flex justify-center items-center gap-2 md:gap-4 w-full">
+                
+                <!-- Seta Esquerda -->
+                <button onclick="changeDepoimento(-1)" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#141A36]/60 hover:bg-[#15B6B8] border border-white/10 hover:border-transparent flex items-center justify-center text-white backdrop-blur-sm transition-all hover:-translate-x-1 hover:shadow-[0_0_20px_rgba(21,182,184,0.5)] shrink-0 z-20">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">arrow_back_ios_new</span>
+                </button>
+
+                <!-- Grupo do Vídeo Central -->
+                <div class="relative group w-full max-w-[270px] shrink-0">
+                    <!-- Outer glow hover -->
+                    <div class="absolute inset-4 blur-3xl bg-[#E1AA33]/30 rounded-[3rem] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"></div>
+                    
+                    <!-- Container Fixo do Vídeo -->
+                    <div class="relative w-full aspect-[9/16] rounded-[2rem] overflow-hidden bg-[#0A0D1B] shadow-[0_30px_60px_-15px_rgba(0,0,0,0.9)] border-[3px] border-[#141A36] ring-1 ring-white/10 group-hover:-translate-y-2 transition-transform duration-700">
+                        
+                        <!-- Iframe Real do YouTube -->
+                        <iframe
+                          id="youtube-player"
+                          class="absolute inset-0 w-full h-full z-0 opacity-0 transition-opacity duration-500"
+                          src="https://www.youtube.com/embed/dt-F-uPnO0M"
+                          title="Depoimento Aprovação em Medicina"
+                          referrerpolicy="strict-origin-when-cross-origin"
+                          frameborder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowfullscreen>
+                        </iframe>
+
+                        <!-- Capa Faux Player Dinâmica -->
+                        <div id="youtube-overlay" onclick="handlePlayClick()" class="absolute inset-0 z-20 flex flex-col items-center justify-center overflow-hidden cursor-pointer group/btn bg-[#0A0D1B]">
+                            
+                            <!-- Foto Local a Trocar -->
+                            <div id="youtube-overlay-capa" class="absolute inset-0 bg-[url('./CAPA%20DO%20VIDEO/CAPA%20ARTHUR.jpeg')] bg-cover bg-center opacity-70 mix-blend-screen group-hover/btn:opacity-90 transition-all duration-700 group-hover/btn:scale-105"></div>
+                            
+                            <!-- Overlay Degradê para Leitura -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-[#141A36] via-black/40 to-transparent"></div>
+
+                            <!-- Mega Botão Play Dourado -->
+                            <div class="relative z-30 flex justify-center items-center mt-6">
+                                <!-- Ondas Pulso Hover -->
+                                <div class="absolute w-20 h-20 bg-[#E1AA33] rounded-full opacity-0 group-hover/btn:animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite] pointer-events-none"></div>
+                                <div class="absolute inset-[-10px] bg-gradient-to-tr from-[#fed488]/40 to-[#E1AA33]/40 rounded-full blur opacity-40 group-hover/btn:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+                                
+                                <!-- Botão Físico -->
+                                <div class="relative w-16 h-16 md:w-[72px] md:h-[72px] bg-gradient-to-br from-[#fed488] to-[#E1AA33] rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(225,170,51,0.6)] border-[3px] border-white/60 group-hover/btn:border-white group-hover/btn:scale-110 transition-all duration-300">
+                                    <span class="material-symbols-outlined text-[#141A36] text-[40px] translate-x-0.5" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Texto CTA Elegante -->
+                            <div class="relative z-30 mt-6 px-5 py-2.5 rounded-full bg-black/50 backdrop-blur-md border border-white/20 group-hover/btn:bg-[#141A36]/80 group-hover/btn:border-[#15B6B8]/50 transition-all duration-300 shadow-xl">
+                                <p class="text-[#fed488] font-bold text-[11px] tracking-[0.2em] uppercase text-center flex items-center gap-2">
+                                    Assistir Depoimento
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Seta Direita -->
+                <button onclick="changeDepoimento(1)" class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#141A36]/60 hover:bg-[#15B6B8] border border-white/10 hover:border-transparent flex items-center justify-center text-white backdrop-blur-sm transition-all hover:translate-x-1 hover:shadow-[0_0_20px_rgba(21,182,184,0.5)] shrink-0 z-20">
+                    <span class="material-symbols-outlined" style="font-variation-settings: 'wght' 300;">arrow_forward_ios</span>
+                </button>
+            </div>
+
+            <!-- Card Depoimento Dinâmico (Right/Bottom) -->
+            <div class="lg:col-span-7 order-2 h-full flex flex-col justify-center">
+                <div class="bg-white rounded-[2rem] p-6 md:p-8 lg:p-10 shadow-xl relative overflow-hidden group hover:-translate-y-1 transition-transform duration-700 border border-slate-100">
+                    <!-- Aspas gigantes decorativas -->
+                    <div class="absolute -top-6 -right-6 opacity-[0.03] text-primary-container pointer-events-none group-hover:rotate-[15deg] group-hover:scale-110 transition-transform duration-1000">
+                        <span class="material-symbols-outlined text-[150px]" style="font-variation-settings: 'FILL' 1;">format_quote</span>
+                    </div>
+
+                    <div class="relative z-10">
+                        <!-- Estrelas -->
+                        <div class="flex gap-1 mb-5">
+                            <span class="material-symbols-outlined text-[18px] text-[#E1AA33]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] text-[#E1AA33]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] text-[#E1AA33]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] text-[#E1AA33]" style="font-variation-settings: 'FILL' 1;">star</span>
+                            <span class="material-symbols-outlined text-[18px] text-[#E1AA33]" style="font-variation-settings: 'FILL' 1;">star</span>
+                        </div>
+                        
+                        <!-- Corpo do Texto -->
+                        <div class="relative mb-6">
+                            <span class="absolute -left-4 -top-2 text-[#15B6B8]/30 font-serif text-4xl md:text-5xl leading-none font-bold">"</span>
+                            <p id="depoimento-texto" class="text-slate-800 text-[15px] md:text-base lg:text-lg font-medium leading-[1.65] relative z-10 tracking-tight transition-opacity duration-300">
+                                Essa aprovação não nasceu de um dia fácil. Nasceu do cansaço vencido, das inseguranças enfrentadas e da decisão de não desistir. O Sinapse foi essencial na minha caminhada, porque me deu método, direção e confiança para continuar quando tudo parecia pesado. Hoje, ver meu nome em Medicina na ESCS é a prova de que, quando existe propósito e preparação de verdade, o impossível começa a sair do papel.
+                            </p>
+                        </div>
+
+                        <!-- Assinatura do Aluno -->
+                        <div class="flex items-center gap-4 pt-5 border-t border-slate-100/80">
+                            <!-- Avatar Local Dinâmico -->
+                            <div class="w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden shrink-0 border-[2px] border-[#15B6B8] shadow-md bg-[#141A36] flex items-center justify-center">
+                                <div id="depoimento-avatar" class="w-full h-full bg-[url('./CAPA%20DO%20VIDEO/CAPA%20ARTHUR.jpeg')] bg-cover bg-center transition-all duration-500"></div>
+                            </div>
+                            <div>
+                                <h4 id="depoimento-nome" class="font-bold text-[#141A36] text-[14px] md:text-[15px] tracking-tight">Arthur</h4>
+                                <p id="depoimento-curso" class="text-[#E1AA33] font-black text-[10px] md:text-[11px] tracking-wide uppercase mt-0.5">APROVADO EM MEDICINA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCRIPTS DA LÓGICA DO CARROSSEL -->
+            <script>
+                const depoimentosData = [
+                    {
+                        id: "dt-F-uPnO0M",
+                        capa: "./CAPA DO VIDEO/CAPA ARTHUR.jpeg",
+                        texto: "Essa aprovação não nasceu de um dia fácil. Nasceu do cansaço vencido, das inseguranças enfrentadas e da decisão de não desistir. O Sinapse foi essencial na minha caminhada, porque me deu método, direção e confiança para continuar quando tudo parecia pesado. Hoje, ver meu nome em Medicina na ESCS é a prova de que, quando existe propósito e preparação de verdade, o impossível começa a sair do papel.",
+                        nome: "Arthur",
+                        curso: "APROVADO EM MEDICINA ESCS"
+                    },
+                    {
+                        id: "hY7m5jjJ9mM", // Vídeo Placeholder
+                        capa: "./PERFIL/foto 3.jpeg", // Foto Menina sorrindo como placeholder
+                        texto: "A estrutura de simulados daqui não tem comparação. A cada semana, eu via meu desempenho subir. O cursinho tradicional não me dava o feedback cirúrgico que a plataforma inteligente do Sinapse trouxe para minha vida. Quando cheguei no Enem real, parecia apenas mais um domingo no preparatório. A sensação de dever cumprido na federal não tem preço.",
+                        nome: "Mariana",
+                        curso: "APROVADA EM MEDICINA UnB"
+                    },
+                    {
+                        id: "jfKfPfyJRdk", // Vídeo Placeholder
+                        capa: "./PERFIL/foto 1.jpeg", // Foto Estudantes como placeholder
+                        texto: "No começo, a rotina pesada de estudos parecia assustadora para quem tinha uma base fraca nas discursivas, mas os plantões de redação e o acompanhamento de metas diárias me garantiram os sonhados 960+. Eles literalmente pegam na sua mão até a linha de chegada. Todo o suor e as madrugadas silenciosas finalmente valeram a pena.",
+                        nome: "Lucas",
+                        curso: "APROVADO EM MEDICINA UFG"
+                    }
+                ];
+
+                let currentDepoIndex = 0;
+
+                function changeDepoimento(direction) {
+                    currentDepoIndex += direction;
+                    if (currentDepoIndex < 0) currentDepoIndex = depoimentosData.length - 1;
+                    if (currentDepoIndex >= depoimentosData.length) currentDepoIndex = 0;
+
+                    const current = depoimentosData[currentDepoIndex];
+
+                    // Fazemos um efeitinho fade rápido desativando a opacidade
+                    const textoEl = document.getElementById('depoimento-texto');
+                    textoEl.style.opacity = '0';
+                    
+                    setTimeout(() => {
+                        textoEl.innerText = current.texto;
+                        document.getElementById('depoimento-nome').innerText = current.nome;
+                        document.getElementById('depoimento-curso').innerText = current.curso;
+                        
+                        document.getElementById('youtube-overlay-capa').style.backgroundImage = `url('${current.capa}')`;
+                        document.getElementById('depoimento-avatar').style.backgroundImage = `url('${current.capa}')`;
+                        
+                        const player = document.getElementById('youtube-player');
+                        const overlay = document.getElementById('youtube-overlay');
+                        
+                        // Reser o vídeo caso já estivesse rolando! O iframe perde opacidade e reseta link.
+                        player.src = `https://www.youtube.com/embed/${current.id}`;
+                        player.style.opacity = '0';
+                        overlay.style.display = 'flex'; // Volta a capa para tapar o iframe original
+                        
+                        textoEl.style.opacity = '1';
+                    }, 200);
+                }
+
+                function handlePlayClick() {
+                    const current = depoimentosData[currentDepoIndex];
+                    if (window.location.protocol === 'file:') {
+                        alert("ALERTA DO YOUTUBE: \n\nVocê está acessando em modo local (file://). Erros de segurança vão bloquear o frame.\nMas fique tranquilo: redirecionaremos você para o YouTube da história correspondente com perfeição!");
+                        window.open(`https://youtube.com/shorts/${current.id}`, "_blank");
+                    } else {
+                        document.getElementById('youtube-overlay').style.display='none';
+                        document.getElementById('youtube-player').style.opacity='1';
+                        document.getElementById('youtube-player').src += '?autoplay=1';
+                    }
+                }
+            </script>
+
+        </div>
+    </div>
+</section>
+<!-- Seção Pré-Matrícula Premium -->
+<section id="matricula-section" class="py-12 lg:py-16 px-8 bg-surface-container-lowest relative overflow-hidden flex items-center min-h-[calc(100vh-5rem)]">
+    <!-- Decorative background elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div class="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] bg-primary-container/5 blur-[120px] rounded-full"></div>
+        <div class="absolute bottom-[10%] -right-[10%] w-[40%] h-[40%] bg-secondary-container/10 blur-[100px] rounded-full"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        <!-- Lado Esquerdo: Copy e Autoridade -->
+        <div class="lg:col-span-6 space-y-6">
+            <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-container/5 border border-primary-container/10 mb-4">
+                    <span class="text-primary-container font-label text-[10px] uppercase tracking-widest font-bold">A Elite da Preparação</span>
+                </div>
+                <h2 class="font-headline text-4xl md:text-[2.75rem] font-black text-primary-container tracking-tight leading-[1.1] mb-4">
+                    Seu futuro exige <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-container to-secondary">alta performance.</span>
+                </h2>
+                <p class="text-base text-slate-600 font-light leading-relaxed">
+                    Dê o primeiro passo rumo à aprovação. Nossa metodologia exclusiva molda alunos comuns em primeiros lugares nos vestibulares mais disputados de Medicina.
+                </p>
+            </div>
+
+            <div class="space-y-4 pt-2">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                        <span class="material-symbols-outlined text-secondary text-[20px]">trending_up</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base">Índice de Aprovação Insuperável</h4>
+                        <p class="text-slate-500 text-[13px] mt-0.5">Liderança consistente em aprovações na ESCS, UnB e principais particulares.</p>
+                    </div>
+                </div>
+                
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                        <span class="material-symbols-outlined text-secondary text-[20px]">mindfulness</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base">Metodologia Validada</h4>
+                        <p class="text-slate-500 text-[13px] mt-0.5">Estratégias de estudo baseadas em dados e inteligência pedagógica.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                        <span class="material-symbols-outlined text-secondary text-[20px]">group</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base">Acompanhamento Individualizado</h4>
+                        <p class="text-slate-500 text-[13px] mt-0.5">Mentoria dedicada para identificar e corrigir suas deficiências pontuais.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-white shadow-sm flex items-center justify-center shrink-0 border border-slate-100">
+                        <span class="material-symbols-outlined text-secondary text-[20px]">apartment</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base">Estrutura de Excelência</h4>
+                        <p class="text-slate-500 text-[13px] mt-0.5">Salas otimizadas, cabine de estudo individual e ambiente de imersão total nos estudos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lado Direito: Formulário Premium -->
+        <div class="lg:col-span-6 w-full max-w-[500px] mx-auto lg:max-w-none">
+            <div class="bg-[#15B6B8] rounded-3xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-bl-full opacity-50"></div>
+                
+                <h3 class="font-headline text-xl font-bold text-white mb-1 relative z-10">Inicie sua Jornada</h3>
+                <p class="text-white/80 text-[13px] mb-5 relative z-10">Preencha os dados para contato prioritário.</p>
+
+                <form class="space-y-4 relative z-10" onsubmit="submitFormularioMatricula(event)">
+                    
+                    <!-- Seletor Segmentado (Unidade) -->
+                    <div class="bg-black/10 p-1 rounded-lg flex gap-1 mb-5 relative">
+                        <div id="unit-slider" class="absolute top-1 left-1 bottom-1 w-[calc(50%-0.25rem)] bg-white rounded shadow-sm transition-transform duration-300 ease-in-out z-0"></div>
+                        <label class="flex-1 text-center relative z-10 cursor-pointer group">
+                            <input type="radio" name="unidade" value="Asa Sul" class="sr-only peer" checked onchange="updateUnitSelection(this)">
+                            <div class="py-2.5 font-bold text-xs text-white peer-checked:text-[#15B6B8] transition-colors duration-300">Unidade Asa Sul</div>
+                        </label>
+                        <label class="flex-1 text-center relative z-10 cursor-pointer group">
+                            <input type="radio" name="unidade" value="Taguatinga" class="sr-only peer" onchange="updateUnitSelection(this)">
+                            <div class="py-2.5 font-bold text-xs text-white peer-checked:text-[#15B6B8] transition-colors duration-300">Unidade Taguatinga</div>
+                        </label>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-[10px] font-bold text-white uppercase tracking-wider mb-1.5">Nome Completo</label>
+                            <input type="text" id="preMatNome" required class="w-full bg-white border-0 text-slate-900 rounded-lg focus:ring-4 focus:ring-white/30 focus:outline-none p-3 text-sm font-medium transition-all shadow-sm" placeholder="Seu nome">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-white uppercase tracking-wider mb-1.5">WhatsApp</label>
+                            <input type="tel" id="preMatTel" required class="w-full bg-white border-0 text-slate-900 rounded-lg focus:ring-4 focus:ring-white/30 focus:outline-none p-3 text-sm font-medium transition-all shadow-sm" placeholder="(61) 90000-0000">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-white uppercase tracking-wider mb-1.5">E-mail Profissional</label>
+                        <input type="email" id="preMatEmail" required class="w-full bg-white border-0 text-slate-900 rounded-lg focus:ring-4 focus:ring-white/30 focus:outline-none p-3 text-sm font-medium transition-all shadow-sm" placeholder="seu.email@exemplo.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-[10px] font-bold text-white uppercase tracking-wider mb-1.5">Modalidade de Interesse</label>
+                        <div class="relative">
+                            <select id="preMatTurma" required class="w-full bg-white border-0 text-slate-900 rounded-lg focus:ring-4 focus:ring-white/30 focus:outline-none p-3 text-sm font-medium transition-all cursor-pointer appearance-none shadow-sm">
+                                <option value="" disabled selected>Selecione uma turma...</option>
+                                <option value="SUPERMED (MATUTINO)">SUPERMED (MATUTINO)</option>
+                                <option value="ENEM-MED (VESPERTINO)">ENEM-MED (VESPERTINO)</option>
+                                <option value="COMBO TERCEIRÃO (ENEM+PAS3)">COMBO TERCEIRÃO (ENEM+PAS3)</option>
+                                <option value="PAS 2">PAS 2</option>
+                                <option value="PAS 1">PAS 1</option>
+                            </select>
+                            <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-xl">expand_more</span>
+                        </div>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-[#141A36] text-white py-4 rounded-xl flex items-center justify-center gap-2 group border border-white/5 shadow-xl hover:bg-[#0A0D1B] hover:-translate-y-0.5 transition-all duration-300">
+                            <span class="font-bold tracking-wide text-sm">GARANTIR MINHA VAGA</span>
+                            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform text-[20px]">arrow_forward</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary-container text-white pt-20 pb-10">
+<div class="max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 border-b border-white/5 pb-16">
+<div>
+<div class="flex items-center gap-2 mb-8">
+<img src="public/assets/images/FOTO%202%20INDEX.png" alt="Logo 2" class="h-12 w-auto object-contain brightness-0 invert">
+</div>
+<p class="text-slate-400 leading-relaxed font-light mb-8">
+                    O centro de excelência em preparação médica mais respeitado do Centro-Oeste. Transformando dedicação em carreiras brilhantes.
+                </p>
+<div class="flex gap-4">
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="public">public</span>
+</a>
+<a class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-secondary-container hover:text-on-secondary-container transition-all" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="chat">chat</span>
+</a>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-wider text-xs font-label">Links Rápidos</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Nossas Turmas</a></li>
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Metodologia</a></li>
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Blog Sinapse</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-wider text-xs font-label">Legal</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Termos de Uso</a></li>
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Privacidade</a></li>
+<li><a class="text-slate-400 hover:text-secondary-container transition-colors text-sm" href="#">Transparência</a></li>
+</ul>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-white mb-6 uppercase tracking-wider text-xs font-label">Newsletter Elite</h4>
+<p class="text-slate-400 text-sm mb-6 font-light">Receba conteúdos exclusivos sobre vestibulares de medicina e dicas de estudo.</p>
+<div class="flex">
+<input class="bg-white/5 border-none rounded-l-md w-full focus:ring-1 focus:ring-secondary-container text-white placeholder:text-slate-600" placeholder="Seu e-mail" type="email"/>
+<button class="bg-secondary-container text-on-secondary-container px-4 rounded-r-md hover:bg-white transition-all">
+<span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto px-8 pt-10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500 uppercase tracking-widest font-label">
+<p>© 2024 Sinapse Pré-Med. Excelência Médica.</p>
+<p>Brasília - DF | Unidade Asa Sul &amp; Sudoeste</p>
+</div>
+</footer>
+<!-- BottomNavBar / Floating Action -->
+<div class="fixed bottom-8 right-8 z-50 flex gap-4 items-center">
+<a class="bg-[#25D366] text-white p-4 rounded-full shadow-2xl hover:scale-110 active:scale-90 transition-all duration-300 group relative animate-bounce" href="https://wa.me/5561985950666?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20as%20turmas%20do%20Sinapse%20Pr%C3%A9-Med." target="_blank">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor" class="w-7 h-7"><path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-2.1-3.6 .1-5.5 2.8-8.2 2.5-2.5 5.5-6.4 8.2-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.9-3.7 .9-7-5.5-12.5-5.6-5.5-12.5-30-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/></svg>
+<span class="absolute right-full mr-4 bg-white text-primary-container font-bold text-sm py-2 px-4 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-xl">Fale com um consultor</span>
+</a>
+</div>
+
+
+</body>
+<script>
+    // Hero Carousel Logic
+    let currentHeroIndex = 0;
+    const heroSlides = document.querySelectorAll('.hero-carousel-slide');
+    const heroDots = document.querySelectorAll('.hero-carousel-dot');
+    let heroInterval;
+
+    function updateHeroCarousel(index) {
+        if(!heroSlides.length) return;
+        heroSlides.forEach(slide => slide.classList.remove('active'));
+        heroDots.forEach(dot => dot.classList.remove('active'));
+        
+        heroSlides[index].classList.add('active');
+        heroDots[index].classList.add('active');
+        currentHeroIndex = index;
+    }
+
+    function nextHeroSlide(e) {
+        if(e) e.stopPropagation();
+        if(!heroSlides.length) return;
+        let next = (currentHeroIndex + 1) % heroSlides.length;
+        updateHeroCarousel(next);
+        resetHeroInterval();
+    }
+
+    function prevHeroSlide(e) {
+        if(e) e.stopPropagation();
+        if(!heroSlides.length) return;
+        let prev = (currentHeroIndex - 1 + heroSlides.length) % heroSlides.length;
+        updateHeroCarousel(prev);
+        resetHeroInterval();
+    }
+
+    function goToHeroSlide(index, e) {
+        if(e) e.stopPropagation();
+        updateHeroCarousel(index);
+        resetHeroInterval();
+    }
+
+    function resetHeroInterval() {
+        clearInterval(heroInterval);
+        heroInterval = setInterval(() => {
+            let next = (currentHeroIndex + 1) % heroSlides.length;
+            updateHeroCarousel(next);
+        }, 3000);
+    }
+
+    function updateUnitSelection(radio) {
+        const slider = document.getElementById('unit-slider');
+        if (radio.value === 'Taguatinga') {
+            slider.style.transform = 'translateX(100%)';
+            slider.style.marginLeft = '0.5rem';
+        } else {
+            slider.style.transform = 'translateX(0)';
+            slider.style.marginLeft = '0';
+        }
+    }
+
+    function submitFormularioMatricula(e) {
+        e.preventDefault();
+        const unidade = document.querySelector('input[name="unidade"]:checked').value;
+        const nome = document.getElementById('preMatNome').value;
+        const whats = document.getElementById('preMatTel').value;
+        const email = document.getElementById('preMatEmail').value;
+        const modalidade = document.getElementById('preMatTurma').value;
+        const obs = document.getElementById('preMatObs').value;
+        
+        let texto = `*NOVA PRÉ-MATRÍCULA* 🎓\n\n`;
+        texto += `*Unidade:* ${unidade}\n`;
+        texto += `*Nome:* ${nome}\n`;
+        texto += `*Tel:* ${whats}\n`;
+        texto += `*Email:* ${email}\n`;
+        texto += `*Modalidade:* ${modalidade}\n`;
+        if(obs.trim() !== "") texto += `*Obs:* ${obs}\n`;
+        
+        const url = `https://wa.me/5561985950666?text=${encodeURIComponent(texto)}`;
+        window.open(url, '_blank');
+        
+        // Reset form or show beautiful success visually
+        alert("Direcionando você para o nosso setor de matrículas...");
+    }
+
+    // Input mask for phone
+    const matTelInput = document.getElementById('preMatTel');
+    if(matTelInput){
+        matTelInput.addEventListener('input', function (e) {
+            let x = e.target.value.replace(/\D/g, '').match(/(\d{0,2})(\d{0,5})(\d{0,4})/);
+            e.target.value = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+        });
+    }
+
+    // Initialize Hero Interval
+    if(heroSlides.length) {
+        updateHeroCarousel(0);
+        resetHeroInterval();
+    }
+</script>
+
+

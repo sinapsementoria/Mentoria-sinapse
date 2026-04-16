@@ -1,0 +1,166 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinapse PrÃ©-Med - Plataforma de Alta Performance</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        body {
+            background-color: #071a4d;
+            font-family: 'Inter', sans-serif;
+            color: #FFFFFF;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .font-headline { font-family: 'Playfair Display', serif; }
+        
+        .premium-card {
+            background: rgba(30, 34, 53, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
+        }
+        
+        .premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8), 0 0 20px rgba(140, 87, 255, 0.15);
+            border-color: rgba(140, 87, 255, 0.3);
+        }
+
+        .btn-premium {
+            background: linear-gradient(135deg, #1A2242, #10162B);
+            border: 1px solid rgba(140, 87, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-premium:hover {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            border-color: transparent;
+            box-shadow: 0 10px 25px -4px rgba(124, 58, 237, 0.6);
+            transform: scale(1.02);
+            color: white !important;
+        }
+        
+        .glow-text {
+            background: linear-gradient(to right, #fff, #a881ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+    <link rel="stylesheet" href="canela-global.css">
+</head>
+<body class="antialiased relative overflow-hidden h-[100dvh] flex flex-col">
+
+    <!-- Fundo CinematogrÃ¡fico Premium (Estilo Fintech) -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none w-full h-full bg-[#071a4d] overflow-hidden">
+        <!-- Gradiente Base Misto (Marinho, PetrÃ³leo e toque Violeta na base) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#061230]/70 to-[#0c0828] opacity-90"></div>
+        
+        <!-- IluminaÃ§Ã£o radial sutil atrÃ¡s do tÃ­tulo -->
+        <div class="absolute -top-[10%] left-1/2 -translate-x-1/2 w-[70vw] h-[40vh] bg-gradient-to-b from-[#2563eb]/10 to-transparent blur-[120px] rounded-[100%]"></div>
+        
+        <!-- Vinheta suave nas bordas -->
+        <div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(2,6,23,0.9)] mix-blend-multiply"></div>
+        
+        <!-- Halos discretos atrÃ¡s dos cards (Esquerda=PetrÃ³leo/Azul, Direita=Violeta) -->
+        <div class="absolute top-[60%] left-[20%] -translate-y-1/2 w-[40vw] h-[50vh] bg-[#0ea5e9]/[0.04] blur-[100px] rounded-full"></div>
+        <div class="absolute top-[60%] right-[20%] -translate-y-1/2 w-[40vw] h-[50vh] bg-[#8b5cf6]/[0.05] blur-[100px] rounded-full"></div>
+    </div>
+
+    <!-- Header Simples -->
+    <header class="w-full py-4 px-6 flex justify-between items-center max-w-7xl mx-auto z-10 relative shrink-0">
+        <div class="flex items-center">
+            <!-- Tamanho escalado massivamente e sem filtros para mÃ¡xima resoluÃ§Ã£o -->
+            <img src="LOGO SINAPSE FUNDO PRETO FINAL.png" alt="Logo Sinapse" class="h-[70px] md:h-[90px] w-auto object-contain transform origin-left scale-100 md:scale-125" onerror="this.onerror=null; this.src='https://placehold.co/300x120/transparent/FFF?text=ðŸ©º';"/>
+        </div>
+        <div>
+            <a href="aluno.html" class="text-sm text-slate-400 hover:text-white transition-colors flex items-center gap-2 group">
+                <span class="material-symbols-outlined text-[18px] group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                Sair da Conta
+            </a>
+        </div>
+    </header>
+
+    <!-- Estrutura Principal -->
+    <main class="flex-grow flex flex-col items-center justify-center px-6 py-2 min-h-0 z-10 relative">
+        
+        <!-- Textos IntrodutÃ³rios -->
+        <div class="text-center absolute top-2 md:top-4 left-1/2 -translate-x-1/2 w-full px-4 max-w-[1600px]">
+            <h1 class="font-headline text-2xl md:text-[2.5rem] leading-tight font-extrabold text-white mb-3 tracking-widest md:tracking-[0.18em] relative z-10 w-full animate-fade-in uppercase">
+                VocÃª estÃ¡ um passo de mudar sua <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#8C57FF] to-[#3B82F6]">histÃ³ria</span>
+            </h1>
+            <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto font-light mb-2 animate-fade-in tracking-wider" style="animation-delay: 0.1s;">
+                Sua jornada rumo Ã  aprovaÃ§Ã£o em Medicina comeÃ§a aqui.
+            </p>
+        </div>
+
+        <!-- Grid de Plataformas -->
+        <div class="w-full max-w-[1050px] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mx-auto min-h-0 mt-16 md:mt-28">
+            
+            <!-- Card 1: SINASPRIME -->
+            <div class="premium-card rounded-2xl flex flex-col group cursor-pointer overflow-hidden" onclick="window.location.href='prime'">
+                <!-- Imagem "Tela" Borda-a-Borda com ajuste de scale -->
+                <div class="w-full h-[180px] md:h-[220px] bg-[#0B193C] overflow-hidden flex items-center justify-center shrink-0">
+                    <img src="SINASPRIME.jpeg" alt="SINASPRIME" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none';"/>
+                </div>
+                
+                <div class="p-8 md:p-10 flex flex-col flex-grow">
+                    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-3 tracking-wide text-white">SINASPRIME</h2>
+                    <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-6 flex-grow">
+                        ConteÃºdos exclusivos, aulas estratÃ©gicas e aprofundamento completo para alta performance no ENEM e vestibulares.
+                    </p>
+                    <button class="w-full btn-premium font-semibold text-[#A855F7] py-3.5 rounded-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2 mt-auto">
+                        ACESSAR AGORA
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card 2: LION MENTORIA -->
+            <div class="premium-card rounded-2xl flex flex-col group cursor-pointer overflow-hidden" onclick="window.location.href='mentoria.html'">
+                <!-- Imagem "Tela" Borda-a-Borda com ajuste de scale -->
+                <div class="w-full h-[180px] md:h-[220px] bg-[#0B193C] overflow-hidden flex items-center justify-center shrink-0">
+                    <img src="MENTORIA SINAPSE.jpeg" alt="LION MENTORIA" class="w-full h-full object-cover object-[center_35%] group-hover:scale-110 transition-transform duration-700" onerror="this.style.display='none';"/>
+                </div>
+
+                <div class="p-8 md:p-10 flex flex-col flex-grow">
+                    <h2 class="font-headline text-2xl md:text-3xl font-bold mb-3 tracking-wide text-white">LION MENTORIA</h2>
+                    <p class="text-slate-400 text-sm md:text-[15px] leading-relaxed mb-6 flex-grow">
+                        Acompanhamento individual, direcionamento estratÃ©gico e organizaÃ§Ã£o de estudos para aprovaÃ§Ã£o em Medicina.
+                    </p>
+                    <button class="w-full btn-premium font-semibold text-[#6366F1] py-3.5 rounded-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2 mt-auto">
+                        QUERO MINHA APROVAÃ‡ÃƒO
+                        <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer Frase -->
+    <footer class="w-full py-4 text-center relative z-10 shrink-0">
+        <p class="font-headline text-slate-500 font-medium tracking-widest uppercase text-[11px] md:text-xs">
+            "Quando o mÃ©todo encontra disciplina, <span class="text-slate-400/90 drop-shadow-sm">a aprovaÃ§Ã£o se torna inevitÃ¡vel.</span>"
+        </p>
+    </footer>
+
+</body>
+</html>
+
+
+
+
+
+
+
+

@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Questões | Sinapse Pré-Med</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: #050511;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.05), transparent 40%),
+                radial-gradient(circle at 85% 30%, rgba(79, 70, 229, 0.05), transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(15, 18, 30, 0.7), rgba(11, 20, 45, 0.5));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7);
+            border-radius: 24px;
+        }
+
+        .input-dark {
+            background-color: rgba(15, 18, 30, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #E2E8F0;
+            transition: all 0.3s ease;
+        }
+        .input-dark:focus {
+            outline: none;
+            border-color: #A855F7;
+            box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.3), inset 0 0 15px rgba(168, 85, 247, 0.05);
+            background-color: rgba(15, 18, 30, 0.8);
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            box-shadow: 0 8px 25px -4px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-purple:hover {
+            box-shadow: 0 15px 35px -4px rgba(79, 70, 229, 0.7);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            transition: all 0.3s ease;
+        }
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            color: white;
+        }
+
+        /* Drag and Drop Zone */
+        .drop-zone {
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            background: rgba(15, 18, 30, 0.3);
+        }
+        .drop-zone.dragover {
+            border-color: #A855F7;
+            background: rgba(168, 85, 247, 0.05);
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.1) inset;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #050511; }
+        ::-webkit-scrollbar-thumb { background: #2A2F4C; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+
+        /* Custom Radio */
+        .custom-radio {
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: grid;
+            place-content: center;
+            transition: all 0.2s ease;
+        }
+        .custom-radio::before {
+            content: "";
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            background-color: white;
+        }
+        .custom-radio:checked {
+            border-color: #A855F7;
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+        }
+        .custom-radio:checked::before {
+            transform: scale(1);
+        }
+
+        /* Switch Toggle */
+        .toggle-switch:checked {
+            background-color: #A855F7;
+            border-color: #A855F7;
+        }
+        .toggle-switch:checked::after {
+            transform: translateX(100%);
+            background-color: white;
+        }
+
+        /* Ambient Glow Title */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="font-body text-slate-300 w-full min-h-screen">
+
+    <!-- Top Navigation / Header -->
+    <header class="w-full border-b border-white/10 bg-[#050511]/80 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4">
+                <a href="admin_banco_questoes.html" class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors group">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-colors">arrow_back</span>
+                </a>
+                <div>
+                    <div class="flex items-center gap-2 text-[11px] font-bold tracking-widest text-[#A855F7] uppercase mb-1">
+                        <a href="hub_admin.html" class="hover:text-white transition-colors">Hub</a>
+                        <span class="text-slate-600">/</span>
+                        <a href="admin_banco_questoes.html" class="hover:text-white transition-colors">Banco Mestre</a>
+                        <span class="text-slate-600">/</span>
+                        <span class="text-white">Cadastro</span>
+                    </div>
+                    <h1 class="text-2xl font-headline font-bold text-white text-glow">Cadastro de Questões</h1>
+                    <p class="text-sm text-slate-400 mt-1">Cadastre, organize e publique novas questões no banco mestre.</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button type="button" class="btn-outline px-5 py-2.5 rounded-xl text-sm font-semibold flex items-center gap-2 text-slate-300">
+                    <span class="material-symbols-outlined text-[18px]">draft</span>
+                    Salvar Rascunho
+                </button>
+                <button type="button" onclick="salvarQuestaoAoBanco()" class="btn-purple px-6 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">publish</span>
+                    Publicar Questão
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="max-w-7xl mx-auto px-6 py-10 pb-32 flex flex-col gap-8">
+
+        <!-- Formulário Dinâmico -->
+        <form id="formCadastroQuestao" class="space-y-10">
+
+            <!-- BLOCO 1: INFORMAÇÕES GERAIS -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">dataset</span>
+                    <h2 class="text-xl font-headline font-bold text-white">Informações Gerais</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Universidade -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Universidade / Banca</label>
+                        <input type="text" id="q_banca" list="bancas-list" placeholder="Digite ou selecione a banca" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium outline-none border border-slate-700 focus:border-sinapse-primary transition-colors bg-[#0B193C] text-white uppercase">
+                        <datalist id="bancas-list">
+                            <option value="ENEM">
+                            <option value="FUVEST">
+                            <option value="UNICAMP">
+                            <option value="UNESP">
+                            <option value="UFG">
+                            <option value="UFU">
+                            <option value="UFSCAR">
+                            <option value="UNB">
+                            <option value="UFT">
+                            <option value="UEG">
+                            <option value="UEM">
+                            <option value="UFOP">
+                            <option value="UNIFESP">
+                            <option value="UFRGS">
+                            <option value="UFSC">
+                            <option value="UFPR">
+                            <option value="UFAM">
+                            <option value="UFPA">
+                            <option value="UFRR">
+                            <option value="UFGD">
+                            <option value="UNIRIO">
+                            <option value="USP">
+                            <option value="UERJ">
+                            <option value="UENF">
+                            <option value="UEA">
+                            <option value="UDESC">
+                            <option value="UECE">
+                            <option value="URCA">
+                            <option value="UVA">
+                            <option value="UEMA">
+                            <option value="UEMASUL">
+                            <option value="UNITINS">
+                            <option value="UEMG">
+                            <option value="UNEMAT">
+                            <option value="UEL">
+                            <option value="UEPG">
+                            <option value="UNESPAR">
+                            <option value="UENP">
+                            <option value="UNIOESTE">
+                            <option value="UNICENTRO">
+                            <option value="UPE">
+                            <option value="UEPB">
+                            <option value="UESB">
+                            <option value="UEFS">
+                            <option value="UNEB">
+                            <option value="UESC">
+                            <option value="UERR">
+                            <option value="UNDF">
+                            <option value="UFJF">
+                            <option value="UFLA">
+                            <option value="UFCSPA">
+                            <option value="FURG">
+                            <option value="UNILA">
+                            <option value="UFFS">
+                            <option value="UNIFAL-MG">
+                            <option value="UFMS">
+                            <option value="OUTRA">
+                        </datalist>
+                    </div>
+
+                    <!-- Ano -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Ano da Prova</label>
+                        <input type="number" id="q_ano" class="input-dark w-full rounded-xl py-3 px-4 text-sm" placeholder="Ex: 2024" min="1990" max="2030">
+                    </div>
+
+                    <!-- Tipo de Questão -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Tipo</label>
+                        <select id="q_tipo" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium appearance-none">
+                            <option value="multipla">Múltipla Escolha</option>
+                            <option value="somatoria">Somatória</option>
+                            <option value="aberta">Aberta / Discursiva</option>
+                        </select>
+                    </div>
+
+                    <!-- Disciplina -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Disciplina</label>
+                        <select id="q_disciplina" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium appearance-none">
+                            <option value="">Selecione...</option>
+                            <option value="Biologia">Biologia</option>
+                            <option value="Física">Física</option>
+                            <option value="Química">Química</option>
+                            <option value="Matemática">Matemática</option>
+                            <option value="História">História</option>
+                            <option value="Geografia">Geografia</option>
+                            <option value="Filosofia">Filosofia</option>
+                            <option value="Sociologia">Sociologia</option>
+                            <option value="Artes">Artes</option>
+                            <option value="Linguagens">Linguagens</option>
+                            <option value="Literatura">Literatura</option>
+                        </select>
+                    </div>
+
+                    <!-- Assunto -->
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Assunto</label>
+                        <select id="q_assunto" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium appearance-none">
+                            <option value="">Selecione a Disciplina primeiro...</option>
+                        </select>
+                    </div>
+
+                    <!-- Dificuldade -->
+                    <div class="space-y-2 hidden" id="diff_block">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Nível de Dificuldade</label>
+                        <select id="q_dificuldade" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium appearance-none">
+                            <option value="facil">Fácil</option>
+                            <option value="media" selected>Média</option>
+                            <option value="dificil">Difícil</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BLOCO 2: ENUNCIADO -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">article</span>
+                    <h2 class="text-xl font-headline font-bold text-white">Enunciado da Questão</h2>
+                </div>
+                
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2 bg-white/5 p-2 rounded-lg w-fit mb-2 border border-white/5">
+                        <button type="button" onclick="formatText('bold')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Negrito"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
+                        <button type="button" onclick="formatText('italic')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Itálico"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
+                        <button type="button" onclick="formatText('underline')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Sublinhado"><span class="material-symbols-outlined text-[18px]">format_underlined</span></button>
+                        <div class="w-px h-5 bg-white/10 mx-1"></div>
+                        <button type="button" onclick="formatText('list')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Lista"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
+                        <button type="button" onclick="formatText('math')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Fórmula Matemática"><span class="material-symbols-outlined text-[18px]">functions</span></button>
+                    </div>
+                    <textarea id="q_enunciado" rows="8" class="input-dark w-full rounded-xl py-5 px-6 text-[15px] leading-relaxed resize-y font-body" placeholder="Cole ou digite o texto completo e detalhado da questão aqui..."></textarea>
+                </div>
+            </section>
+
+            <!-- BLOCO 3: IMAGEM DA QUESTÃO -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">image</span>
+                    <div>
+                        <h2 class="text-xl font-headline font-bold text-white">Imagem da Questão</h2>
+                        <p class="text-xs text-slate-400 mt-1">Opcional. Adicione gráficos, mapas ou figuras inerentes ao enunciado.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-6 items-start">
+                    <!-- Drop Zone -->
+                    <div id="dropZone" class="drop-zone w-full md:w-1/2 flex flex-col items-center justify-center p-10 rounded-2xl cursor-pointer min-h-[200px] relative overflow-hidden group">
+                        <input type="file" id="fileInput" class="hidden" accept="image/png, image/jpeg, image/jpg, image/webp">
+                        
+                        <div id="uploadPrompt" class="flex flex-col items-center pointer-events-none">
+                            <div class="w-16 h-16 rounded-full bg-[#A855F7]/10 flex items-center justify-center mb-4 group-hover:bg-[#A855F7]/20 transition-colors">
+                                <span class="material-symbols-outlined text-[32px] text-[#A855F7]">cloud_upload</span>
+                            </div>
+                            <h3 class="text-sm font-bold text-white mb-1">Clique ou Arraste uma Imagem</h3>
+                            <p class="text-xs text-slate-400 text-center max-w-[250px]">PNG, JPG, WEBP. Também suporta "Ctrl+V" colar direto da área de transferência.</p>
+                        </div>
+
+                        <!-- O preview da imagem convertido em base64 entrará aqui -->
+                        <img id="imagePreview" src="" alt="Preview" class="absolute inset-0 w-full h-full object-contain bg-[#050511]/80 hidden" />
+                    </div>
+
+                    <!-- Controles da Imagem (Só aparecem se houver imagem) -->
+                    <div id="imageControls" class="w-full md:w-1/2 flex flex-col gap-3 hidden">
+                        <div class="p-4 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center gap-3 mb-2">
+                            <span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
+                            <p class="text-sm text-green-400 font-medium">Imagem vinculada na cache com sucesso.</p>
+                        </div>
+                        <button type="button" onclick="removerImagem()" class="btn-outline px-4 py-3 rounded-xl text-sm font-semibold flex justify-center items-center gap-2 text-red-400 hover:!bg-red-500/10 hover:!border-red-500/30 hover:!text-red-400 w-full">
+                            <span class="material-symbols-outlined text-[18px]">delete</span> Remover Imagem
+                        </button>
+                        <p class="text-[11px] text-slate-500 mt-2">A resolução original do arquivo é mantida. Ela será atrelada à questão permanentemente usando tecnologia de persistência Base64 no banco de dados local.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- BLOCO 4: ALTERNATIVAS -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">checklist</span>
+                    <div class="flex-grow">
+                        <h2 class="text-xl font-headline font-bold text-white flex items-center gap-3">
+                            Alternativas
+                            <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] uppercase font-bold tracking-widest border border-blue-500/30">Múltipla Escolha</span>
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-1">Preencha as opções e marque no círculo qual é o <span class="text-green-400 font-bold">gabarito oficial</span>.</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4" id="alternativasContainer">
+                    <!-- Opção A -->
+                    <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
+                        <div class="pt-3">
+                            <input type="radio" name="gabarito" value="A" class="custom-radio cursor-pointer" title="Marcar como correta" />
+                        </div>
+                        <div class="flex-grow flex flex-col gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-headline font-bold text-lg text-slate-500">A.</span>
+                                <input type="text" id="alt_a" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa A..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opção B -->
+                    <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
+                        <div class="pt-3">
+                            <input type="radio" name="gabarito" value="B" class="custom-radio cursor-pointer" title="Marcar como correta" />
+                        </div>
+                        <div class="flex-grow flex flex-col gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-headline font-bold text-lg text-slate-500">B.</span>
+                                <input type="text" id="alt_b" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa B..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opção C -->
+                    <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
+                        <div class="pt-3">
+                            <input type="radio" name="gabarito" value="C" class="custom-radio cursor-pointer" title="Marcar como correta" />
+                        </div>
+                        <div class="flex-grow flex flex-col gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-headline font-bold text-lg text-slate-500">C.</span>
+                                <input type="text" id="alt_c" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa C..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opção D -->
+                    <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
+                        <div class="pt-3">
+                            <input type="radio" name="gabarito" value="D" class="custom-radio cursor-pointer" title="Marcar como correta" />
+                        </div>
+                        <div class="flex-grow flex flex-col gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-headline font-bold text-lg text-slate-500">D.</span>
+                                <input type="text" id="alt_d" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa D..." />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Opção E -->
+                    <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
+                        <div class="pt-3">
+                            <input type="radio" name="gabarito" value="E" class="custom-radio cursor-pointer" title="Marcar como correta" />
+                        </div>
+                        <div class="flex-grow flex flex-col gap-2">
+                            <div class="flex items-center gap-2">
+                                <span class="font-headline font-bold text-lg text-slate-500">E.</span>
+                                <input type="text" id="alt_e" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa E..." />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 flex justify-end">
+                    <button type="button" class="text-xs text-red-400 font-bold tracking-widest uppercase hover:text-red-300 transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-[16px]">block</span>
+                        Marcar Questão como Anulada
+                    </button>
+                </div>
+            </section>
+
+            <!-- BLOCO 5: RESOLUÇÃO E COMENTÁRIOS -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">tips_and_updates</span>
+                    <div>
+                        <h2 class="text-xl font-headline font-bold text-white">Resolução e Comentários</h2>
+                        <p class="text-xs text-slate-400 mt-1">Opcional. Contexto pedagógico invisível na prova, visível no gabarito/resolução.</p>
+                    </div>
+                </div>
+                
+                <textarea id="q_resolucao" rows="5" class="input-dark w-full rounded-xl py-4 px-5 text-[14px] leading-relaxed resize-y font-body" placeholder="Escreva a explicação passo a passo ou dicas de raciocínio para os professores e monitores..."></textarea>
+            </section>
+
+            <!-- BLOCO 6: PUBLICAÇÃO -->
+            <section class="glass-panel p-8">
+                <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">tune</span>
+                    <h2 class="text-xl font-headline font-bold text-white">Configurações de Publicação</h2>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-sm font-bold text-slate-300 block">Exibir imediatamente no Banco Master</span>
+                                <span class="text-xs text-slate-500">Torna a questão visível e filtrável por todos.</span>
+                            </div>
+                            <input type="checkbox" id="pub_imediata" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
+                        </div>
+
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-sm font-bold text-slate-300 block">Disponibilizar p/ simuladores Sinapse</span>
+                                <span class="text-xs text-slate-500">Habilita uso em simulados automáticos da Mentoria.</span>
+                            </div>
+                            <input type="checkbox" id="pub_sinapse" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-sm font-bold text-slate-300 block">Ativar filtros Inteligentes (Meta-Tags)</span>
+                                <span class="text-xs text-slate-500">Permite IA ler e categorizar automaticamente.</span>
+                            </div>
+                            <input type="checkbox" id="pub_filtros" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-end gap-4">
+                    <button type="button" class="text-sm font-bold text-slate-400 hover:text-white transition-colors uppercase tracking-widest px-4">Cancelar</button>
+                    <button type="button" onclick="salvarQuestaoAoBanco()" class="btn-purple w-full md:w-auto px-10 py-4 rounded-xl text-base font-bold text-white flex justify-center items-center gap-2">
+                        <span class="material-symbols-outlined">save</span>
+                        Salvar e Publicar Questão
+                    </button>
+                </div>
+            </section>
+        </form>
+
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"></div>
+
+    <!-- Script Master de Funcionalidade Persistente -->
+    <script>
+        // --- 1. LÓGICA DE UPLOAD DE IMAGEM (Drag n Drop e Clipboard) ---
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const uploadPrompt = document.getElementById('uploadPrompt');
+        const imageControls = document.getElementById('imageControls');
+        let currentBase64Image = null;
+        let editModeId = null;
+
+        // Clicar p/ abrir seletor
+        dropZone.addEventListener('click', () => { fileInput.click(); });
+
+        // Arrastar sobre a zona
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+        dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+        
+        // Soltar imagem
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) processFile(e.dataTransfer.files[0]);
+        });
+
+        // Selecionar do computador
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files.length > 0) processFile(e.target.files[0]);
+        });
+
+        // Colar (Ctrl+V) em qualquer lugar do arquivo ou na zona
+        window.addEventListener('paste', (e) => {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (let index in items) {
+                const item = items[index];
+                if (item.kind === 'file' && item.type.includes('image/')) {
+                    processFile(item.getAsFile());
+                    break;
+                }
+            }
+        });
+
+        // Função Master para converter em Base64
+        function processFile(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Formato inválido. Envie JPG, PNG ou WEBP.', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                currentBase64Image = e.target.result;
+                // Exibe
+                imagePreview.src = currentBase64Image;
+                imagePreview.classList.remove('hidden');
+                uploadPrompt.classList.add('hidden');
+                imageControls.classList.remove('hidden');
+                
+                showToast('Imagem processada com sucesso!', 'success');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Remover Imagem
+        function removerImagem() {
+            // Impedir bubble do click
+            event.stopPropagation();
+            currentBase64Image = null;
+            imagePreview.src = "";
+            imagePreview.classList.add('hidden');
+            uploadPrompt.classList.remove('hidden');
+            imageControls.classList.add('hidden');
+            fileInput.value = "";
+        }
+
+        // --- 2. LÓGICA DE SALVAMENTO DE QUESTÃO (IndexedDB / LocalStorage) ---
+        function salvarQuestaoAoBanco() {
+            // 1. Extração de Dados
+            let banca = document.getElementById('q_banca').value;
+            if(banca) banca = banca.toUpperCase().trim();
+            const disciplina = document.getElementById('q_disciplina').value;
+            const ano = document.getElementById('q_ano').value;
+            const dificuldade = document.getElementById('q_dificuldade').value;
+            const enunciado = document.getElementById('q_enunciado').value;
+
+            // Salva banca customizada
+            if (banca) {
+                let customBancas = JSON.parse(localStorage.getItem('sinapseCustomBancas') || '[]');
+                const defaultBancas = ["ENEM", "FUVEST", "UNICAMP", "UNESP", "UFG", "UFU", "UFSCAR", "UNB", "UFT", "UEG", "UEM", "UFOP", "UNIFESP", "UFRGS", "UFSC", "UFPR", "UFAM", "UFPA", "UFRR", "UFGD", "UNIRIO", "USP", "UERJ", "UENF", "UEA", "UDESC", "UECE", "URCA", "UVA", "UEMA", "UEMASUL", "UNITINS", "UEMG", "UNEMAT", "UEL", "UEPG", "UNESPAR", "UENP", "UNIOESTE", "UNICENTRO", "UPE", "UEPB", "UESB", "UEFS", "UNEB", "UESC", "UERR", "UNDF", "UFJF", "UFLA", "UFCSPA", "FURG", "UNILA", "UFFS", "UNIFAL-MG", "UFMS", "OUTRA"];
+                if (!defaultBancas.includes(banca) && !customBancas.includes(banca)) {
+                    customBancas.push(banca);
+                    localStorage.setItem('sinapseCustomBancas', JSON.stringify(customBancas));
+                    updateBancasList();
+                }
+            }
+
+            // Validação Básica
+            if(!banca || !disciplina || !enunciado) {
+                showToast('Preencha os campos obrigatórios (Banca, Disciplina, Enunciado).', 'error');
+                return;
+            }
+
+            // Descobrir qual botão radio foi o Gabarito (A-E)
+            let gabaritoCorreto = null;
+            const radios = document.getElementsByName('gabarito');
+            for (let i = 0; i < radios.length; i++) {
+                if (radios[i].checked) { gabaritoCorreto = radios[i].value; break; }
+            }
+
+            if(!gabaritoCorreto) {
+                showToast('Atenção: Selecione no círculo qual alternativa é a CORRETA!', 'error');
+                return;
+            }
+
+            // 2. Criação do Objeto JSON
+            const questaoData = {
+                id: editModeId ? editModeId : ('QST' + Date.now().toString().substring(5)), // Preserva ID se edição
+                banca: banca,
+                ano: ano,
+                tipo: document.getElementById('q_tipo').value,
+                disciplina: disciplina,
+                assunto: document.getElementById('q_assunto').value,
+                dificuldade: dificuldade,
+                enunciado: enunciado,
+                imagemBase64: currentBase64Image,
+                alternativas: {
+                    A: document.getElementById('alt_a').value,
+                    B: document.getElementById('alt_b').value,
+                    C: document.getElementById('alt_c').value,
+                    D: document.getElementById('alt_d').value,
+                    E: document.getElementById('alt_e').value
+                },
+                gabarito: gabaritoCorreto,
+                resolucao: document.getElementById('q_resolucao').value,
+                configs: {
+                    publicadaImediata: document.getElementById('pub_imediata').checked,
+                    liberadoSimulado: document.getElementById('pub_sinapse').checked,
+                },
+                dataCadastro: new Date().toISOString()
+            };
+
+            // 3. Salvar no Banco simulado (LocalStorage)
+            let masterBank = JSON.parse(localStorage.getItem('sinapseMasterBank')) || [];
+            
+            if (editModeId) {
+                const index = masterBank.findIndex(q => q.id === editModeId);
+                if (index !== -1) masterBank[index] = questaoData;
+            } else {
+                masterBank.push(questaoData);
+            }
+            
+            localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
+
+            console.log("Banco de Questões Atualizado:", masterBank);
+
+            // 4. Feedback e Limpeza Visual
+            showToast(editModeId ? `Questão #${editModeId} atualizada com sucesso!` : `Questão da ${banca} salva com sucesso no banco!`, 'success');
+            
+            // Opcional: Voltar para painel mestre após a notificação
+            setTimeout(() => {
+                window.location.href = 'admin_banco_questoes.html';
+            }, 1500);
+        }
+
+        // --- 3. SISTEMA DE ALERTAS (TOASTS) ---
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            
+            const isSuccess = type === 'success';
+            const icon = isSuccess ? 'check_circle' : 'error';
+            const bgColor = isSuccess ? 'bg-[#0F172A]' : 'bg-red-950';
+            const borderColor = isSuccess ? 'border-green-500/30' : 'border-red-500/30';
+            const iconColor = isSuccess ? 'text-green-500' : 'text-red-400';
+
+            toast.className = `flex items-center gap-3 px-5 py-4 rounded-xl shadow-2xl ${bgColor} border ${borderColor} animate-fade-in transform transition-all duration-300 translate-x-0 opacity-100`;
+            toast.innerHTML = `
+                <span class="material-symbols-outlined ${iconColor} text-[24px]">${icon}</span>
+                <span class="text-sm font-medium text-white">${message}</span>
+            `;
+
+            container.appendChild(toast);
+
+            // Animação de saída
+            setTimeout(() => {
+                toast.classList.replace('translate-x-0', 'translate-x-[120%]');
+                toast.classList.replace('opacity-100', 'opacity-0');
+                setTimeout(() => toast.remove(), 300);
+            }, 3500);
+        }
+
+        // Previne submissão default por enter form
+        document.getElementById('formCadastroQuestao').addEventListener('submit', e => e.preventDefault());
+
+        // --- 4. PREENCHIMENTO E EVENTOS ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            
+        const assuntosPorDisciplina = {
+            'Matemática': ['Equação do 1º Grau', 'Função do 1º Grau', 'Equação do 2º Grau', 'Função do 2º Grau', 'Equação Exponencial', 'Função Exponencial', 'Função Logarítmica', 'Progressão Aritmética', 'Progressão Geométrica', 'Matrizes', 'Determinantes', 'Sistemas Lineares', 'Trigonometria no Triângulo Retângulo', 'Funções Trigonométricas', 'Retas Paralelas Cortadas por uma Transversal', 'Triângulos', 'Semelhança de Triângulos', 'Teorema de Tales', 'Relações Métricas no Triângulo Retângulo', 'Cevianas e Pontos Notáveis', 'Polígonos', 'Quadriláteros Notáveis', 'Áreas de Figuras Planas', 'Circunferência - Ângulos e Arcos', 'Poliedros', 'Prisma', 'Pirâmide', 'Tronco de Pirâmide', 'Cilindro', 'Cone', 'Tronco de Cone', 'Esfera', 'Estudo do Ponto', 'Estudo da Reta', 'Circunferência', 'Sólidos Semelhantes', 'Conjuntos Numéricos', 'Teoria de Conjuntos', 'MMC', 'MDC', 'Razão e Proporção', 'Grandezas Proporcionais', 'Porcentagem', 'Matemática Financeira', 'Princípio Fundamental da Contagem', 'Permutação', 'Arranjo', 'Combinação', 'Probabilidade', 'Estatística - Média', 'Função'],
+            'Física': ['Cinemática', 'Dinâmica', 'Estática', 'Hidrostática', 'Termodinâmica', 'Calorimetria', 'Óptica Geométrica', 'Ondulatória', 'Eletrostática', 'Eletrodinâmica', 'Eletromagnetismo', 'Física Moderna'],
+            'Química': ['Modelos Atômicos', 'Tabela Periódica', 'Ligações Químicas', 'Funções Inorgânicas', 'Estequiometria', 'Soluções', 'Termoquímica', 'Cinética Química', 'Equilíbrio Químico', 'Eletroquímica', 'Radioatividade', 'Química Orgânica - Funções', 'Isomeria', 'Reações Orgânicas', 'Polímeros', 'Química Ambiental', 'Separação de Misturas'],
+            'Biologia': ['Ecologia', 'Citologia', 'Divisão Celular', 'Metabolismo Energético', 'Genética Mendeliana', 'Engenharia Genética', 'Evolução', 'Fisiologia Humana', 'Imunologia', 'Botânica', 'Zoologia', 'Microbiologia', 'Parasitologia'],
+            'História': [
+                'INTRODUÇÃO AO CURSO DE HISTÓRIA GERAL', 'A FORMAÇÃO DO POVO GREGO', 'ESPARTA E ATENA', 'PERÍODO CLÁSSICO E PERÍODO HELENÍSTICO', 'NASCIMENTO DE ROMA (MONARQUIA E REPÚBLICA)', 'IMPÉRIO ROMANO', 'REINOS BÁRBAROS – IMPÉRIO BIZANTINO E CAROLÍNGIO', 'O ISLAMISMO – ORIGEM E EXPANSÃO', 'FEUDALISMO', 'BAIXA IDADE MÉDIA – RENASCIMENTO COMERCIAL E URBANO/ CRUZADAS', 'ASCENSÃO DAS MONARQUIAS NACIONAIS: O ABSOLUTISMO', 'RENASCIMENTO', 'MERCANTILISMO', 'A REFORMA PROTESTANTE', 'REVOLUÇÃO INGLESA', 'REVOLUÇÕES INDUSTRIAIS', 'HISTÓRIA DOS EUA', 'REVOLUÇÃO FRANCESA', 'PERÍODO NAPOLEÔNICO', 'REVOLUÇÕES BURGUESAS', 'IMPERIALISMO E NEOCOLONIALISMO', 'PRIMEIRA GRANDE GUERRA', 'REVOLUÇÃO RUSSA', 'ENTRE GUERRAS, CRISE DE 20 E TOTALITARISMO', 'SEGUNDA GRANDE GUERRA', 'O MUNDO PÓS-GUERRA', 'BRASIL PRÉ-CABRALINO', 'EXPANSÃO MARÍTIMA PORTUGUESA', 'AMÉRICA PORTUGUESA', 'UNIÃO IBÉRICA', 'BRASIL COLONIAL', 'CRISE DO SISTEMA COLONIAL', 'O PROCESSO DE INDEPENDÊNCIA – INDEPENDÊNCIA DO BRASIL', 'O PROCESSO DE INDEPENDÊNCIA NA AMÉRICA LATINA', 'PRIMEIRO REINADO', 'PERÍODO REGENCIAL – REVOLTAS REGENCIAIS', 'SEGUNDO REINADO', 'TRABALHO ESCRAVO NO BRASIL – LEGADO SOCIOCULTURAL', 'O PROCESSO DE TRANSIÇÃO DA MONARQUIA À REPÚBLICA', 'PRIMEIRA REPÚBLICA', 'ERA VARGAS', 'REPÚBLICA POPULISTA', 'JK – HISTÓRIA DE BRASÍLIA', 'CRISE DO POPULISMO', 'DITADURAS MILITARES NA AMÉRICA DO SUL', 'RECONSTRUÇÃO DEMOCRÁTICA'
+            ],
+            'Geografia': ['Geopolítica', 'Globalização', 'Geografia Agrária', 'Urbanização', 'Indústria', 'Fontes de Energia', 'População', 'Migrações', 'Questões Ambientais', 'Cartografia', 'Climatologia', 'Geomorfologia', 'Biomas e Vegetação', 'Hidrografia'],
+            'Filosofia': ['Filosofia Antiga (Pré-socráticos, Sócrates, Platão, Aristóteles)', 'Filosofia Helenística', 'Filosofia Medieval (Patrística e Escolástica)', 'Filosofia Moderna (Racionalismo e Empirismo)', 'Iluminismo', 'Contratualismo (Hobbes, Locke, Rousseau)', 'Kant', 'Filosofia Contemporânea (Nietzsche, Sartre, Foucault)', 'Ética e Moral', 'Filosofia Política'],
+            'Sociologia': ['Surgimento da Sociologia', 'Cultura e Ideologia', 'Indústria Cultural e Meios de Comunicação', 'Max Weber', 'Émile Durkheim', 'Karl Marx', 'Estratificação e Desigualdade Social', 'Movimentos Sociais', 'Trabalho e Sociedade', 'Cidadania e Direitos Humanos', 'Sociologia Brasileira'],
+            'Artes': ['Arte Pré-Histórica e Antiga', 'Arte Medieval', 'Renascimento', 'Barroco e Rococó', 'Neoclassicismo e Romantismo', 'Realismo e Impressionismo', 'Vanguardas Europeias (Cubismo, Expressionismo, Surrealismo)', 'Modernismo Brasileiro (Semana de 22)', 'Arte Contemporânea', 'Cultura Popular e Folclore', 'Patrimônio Histórico'],
+            'Linguagens': ['Interpretação de Textos', 'Variação Linguística', 'Funções da Linguagem', 'Figuras de Linguagem', 'Tipologia Textual', 'Gêneros Textuais', 'Coesão e Coerência', 'Semântica', 'Sintaxe e Morfologia', 'Estratégias Argumentativas'],
+            'Literatura': ['Trovadorismo e Humanismo', 'Quinhentismo', 'Barroco', 'Arcadismo', 'Romantismo', 'Realismo e Naturalismo', 'Parnasianismo e Simbolismo', 'Pré-Modernismo', 'Modernismo - 1ª Geração', 'Modernismo - 2ª Geração', 'Modernismo - 3ª Geração e Contemporânea']
+        };
+
+            function populateAssuntos(disciplina) {
+                const qAssunto = document.getElementById('q_assunto');
+                if(!qAssunto) return;
+                qAssunto.innerHTML = '<option value="">Selecione...</option>';
+                if (disciplina && assuntosPorDisciplina[disciplina]) {
+                    assuntosPorDisciplina[disciplina].forEach(topic => {
+                        qAssunto.innerHTML += `<option value="${topic}">${topic}</option>`;
+                    });
+                } else if (!disciplina) {
+                    qAssunto.innerHTML = '<option value="">Selecione a Disciplina primeiro...</option>';
+                }
+            }
+
+            const qDisciplinaSelect = document.getElementById('q_disciplina');
+            if (qDisciplinaSelect) {
+                qDisciplinaSelect.addEventListener('change', (e) => {
+                    populateAssuntos(e.target.value);
+                });
+            }
+
+            window.updateBancasList = function() {
+                const list = document.getElementById('bancas-list');
+                if(!list) return;
+                const customBancas = JSON.parse(localStorage.getItem('sinapseCustomBancas') || '[]');
+                customBancas.forEach(b => {
+                    if (!list.querySelector(`option[value="${b}"]`)) {
+                        list.innerHTML += `<option value="${b}">`;
+                    }
+                });
+            };
+            window.updateBancasList();
+
+        // --- 5. FORMATADOR DE TEXTO (ENUNCIADO) ---
+        window.formatText = function(command) {
+            const textarea = document.getElementById('q_enunciado');
+            if(!textarea) return;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            let replacement = '';
+            
+            switch(command) {
+                case 'bold': replacement = `<b>${selectedText}</b>`; break;
+                case 'italic': replacement = `<i>${selectedText}</i>`; break;
+                case 'underline': replacement = `<u>${selectedText}</u>`; break;
+                case 'list': replacement = `\n<ul>\n  <li>${selectedText || 'item'}</li>\n</ul>\n`; break;
+                case 'math': replacement = `$$ ${selectedText || 'x = y^2'} $$`; break;
+            }
+            
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            textarea.focus();
+            const newCursorPos = start + replacement.length;
+            textarea.setSelectionRange(newCursorPos, newCursorPos);
+        };
+            const editId = params.get('edit');
+            if (editId) {
+                editModeId = editId;
+                let masterBank = JSON.parse(localStorage.getItem('sinapseMasterBank')) || [];
+                const q = masterBank.find(x => x.id === editId);
+                if (q) {
+                    // Update texts
+                    document.querySelector('h1.font-headline').textContent = 'Edição de Questão #' + editId;
+                    
+                    // Populate forms
+                    const safeSet = (id, val) => { if(document.getElementById(id) && val !== undefined) document.getElementById(id).value = val; };
+                    safeSet('q_banca', q.banca);
+                    
+                    safeSet('q_disciplina', q.disciplina);
+                    populateAssuntos(q.disciplina);
+                    
+                    safeSet('q_ano', q.ano);
+                    safeSet('q_tipo', q.tipo || 'multipla');
+                    safeSet('q_assunto', q.assunto);
+                    safeSet('q_dificuldade', q.dificuldade);
+                    safeSet('q_enunciado', q.enunciado);
+                    
+                    if (q.imagemBase64) {
+                        currentBase64Image = q.imagemBase64;
+                        document.getElementById('imagePreview').src = currentBase64Image;
+                        document.getElementById('imagePreview').classList.remove('hidden');
+                        document.getElementById('uploadPrompt').classList.add('hidden');
+                        document.getElementById('imageControls').classList.remove('hidden');
+                    }
+                    
+                    if (q.alternativas) {
+                        safeSet('alt_a', q.alternativas.A);
+                        safeSet('alt_b', q.alternativas.B);
+                        safeSet('alt_c', q.alternativas.C);
+                        safeSet('alt_d', q.alternativas.D);
+                        safeSet('alt_e', q.alternativas.E);
+                    }
+                    
+                    if (q.gabarito) {
+                        const radios = document.getElementsByName('gabarito');
+                        for (let i = 0; i < radios.length; i++) {
+                            if (radios[i].value === q.gabarito) radios[i].checked = true;
+                        }
+                    }
+                    
+                    safeSet('q_resolucao', q.resolucao || '');
+                    if (q.configs) {
+                        if(document.getElementById('pub_imediata')) document.getElementById('pub_imediata').checked = q.configs.publicadaImediata;
+                        if(document.getElementById('pub_sinapse')) document.getElementById('pub_sinapse').checked = q.configs.liberadoSimulado;
+                    }
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Banco Mestre | Sinapse Pré-Med</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        
+        body {
+            background-color: #03040C; /* Ainda mais profundo que o anterior */
+            background-image: 
+                radial-gradient(ellipse at top center, rgba(124, 58, 237, 0.08), transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(79, 70, 229, 0.06), transparent 40%);
+            background-attachment: fixed;
+        }
+
+        .glass-header {
+            background: rgba(5, 7, 16, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .glass-panel {
+            background: linear-gradient(145deg, rgba(15, 18, 30, 0.7), rgba(8, 12, 25, 0.5));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.8);
+            border-radius: 24px;
+        }
+
+        .btn-purple {
+            background: linear-gradient(135deg, #A855F7, #4F46E5);
+            box-shadow: 0 8px 25px -4px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-purple:hover {
+            box-shadow: 0 15px 35px -4px rgba(79, 70, 229, 0.7);
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+
+        .table-row-hover:hover {
+            background-color: rgba(168, 85, 247, 0.04);
+        }
+
+        /* Scrollbar da tabela */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #2A2F4C; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #4F46E5; }
+
+        /* KPI Glow */
+        .kpi-glow {
+            text-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+        }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="font-body text-slate-300 w-full min-h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <header class="w-full glass-header sticky top-0 z-50">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 py-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4">
+                <a href="hub_admin.html" class="w-11 h-11 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-white/10 transition-colors group">
+                    <span class="material-symbols-outlined text-slate-400 group-hover:text-white transition-colors">home</span>
+                </a>
+                <div>
+                    <h1 class="text-2xl font-headline font-bold text-white tracking-tight flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[#A855F7]">database</span>
+                        Banco Mestre
+                    </h1>
+                    <p class="text-[13px] text-slate-400 font-medium">Gestão Administrativa do Banco de Questões</p>
+                </div>
+            </div>
+
+            <div class="flex items-center">
+                <a href="cadastro_questoes.html" class="btn-purple px-6 py-3 rounded-xl text-[13.5px] font-bold text-white flex items-center gap-2 uppercase tracking-wide">
+                    <span class="material-symbols-outlined text-[18px]">add_circle</span>
+                    Cadastrar Nova Questão
+                </a>
+            </div>
+
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-1 w-full max-w-[1400px] mx-auto px-6 lg:px-8 py-10 flex flex-col gap-8">
+
+        <!-- KPI Cards Section -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="glass-panel p-6 flex flex-col gap-1">
+                <h3 class="text-[11px] font-bold text-slate-400 tracking-widest uppercase">Total de Questões</h3>
+                <span class="text-4xl font-headline font-bold text-white kpi-glow mt-1" id="kpi-total">0</span>
+                <p class="text-xs text-green-400 mt-2 flex items-center gap-1 font-medium"><span class="material-symbols-outlined text-[14px]">trending_up</span> Registradas Localmente</p>
+            </div>
+            
+            <div class="glass-panel p-6 flex flex-col gap-1">
+                <h3 class="text-[11px] font-bold text-slate-400 tracking-widest uppercase">Acesso Liberado</h3>
+                <span class="text-4xl font-headline font-bold text-[#A855F7] kpi-glow mt-1" id="kpi-ativas">0</span>
+                <p class="text-xs text-slate-500 mt-2 font-medium">Visíveis no portal dos alunos</p>
+            </div>
+            
+            <div class="glass-panel p-6 flex flex-col gap-1">
+                <h3 class="text-[11px] font-bold text-slate-400 tracking-widest uppercase">Disciplinas</h3>
+                <span class="text-4xl font-headline font-bold text-[#4F46E5] kpi-glow mt-1" id="kpi-disc">0</span>
+                <p class="text-xs text-slate-500 mt-2 font-medium">Categorias cadastradas ativas</p>
+            </div>
+
+            <!-- Mini filtro de busca rápida na mesma linha dos KPIs -->
+            <div class="glass-panel p-6 flex flex-col justify-center gap-3">
+                <h3 class="text-[11px] font-bold text-slate-400 tracking-widest uppercase mb-1">Localização Direta</h3>
+                <div class="relative w-full">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+                    <input type="text" id="searchInput" onkeyup="renderTable()" class="w-full bg-[#050711] border border-white/10 rounded-lg py-2.5 pl-11 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-[#A855F7] transition-colors" placeholder="Buscar ID, Banca, Assunto...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Table Section -->
+        <div class="glass-panel flex-1 flex flex-col overflow-hidden relative">
+            <div class="px-8 py-6 border-b border-white/10 flex items-center justify-between">
+                <h2 class="text-lg font-headline font-bold text-white flex items-center gap-2">
+                    <span class="material-symbols-outlined text-slate-400 text-[20px]">table_rows</span>
+                    Listagem Geral (Master Data)
+                </h2>
+                
+                <div class="flex gap-2">
+                    <button class="px-4 py-2 bg-white/5 border border-white/10 rounded-lg text-xs font-bold text-slate-300 hover:text-white transition-colors">Exportar CSV</button>
+                    <button onclick="clearSeedQuestions()" class="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-lg text-xs font-bold text-yellow-400 hover:bg-yellow-500/20 transition-colors tooltip flex items-center gap-2" title="Remover Questões via JSON">
+                        <span class="material-symbols-outlined text-[14px]">cleaning_services</span> Remover JSON
+                    </button>
+                    <button onclick="clearDatabaseAndRefresh()" class="px-4 py-2 bg-red-500/10 border border-red-500/20 rounded-lg text-xs font-bold text-red-400 hover:bg-red-500/20 transition-colors tooltip flex items-center gap-2" title="Zerar localStorage">
+                        <span class="material-symbols-outlined text-[14px]">delete_sweep</span> Limpar Cache
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tabela Wrapper para Scroll Horizontal em telas menores -->
+            <div class="flex-1 overflow-x-auto w-full">
+                <table class="w-full min-w-[900px] text-left border-collapse">
+                    <thead>
+                        <tr class="bg-white/5 border-b border-white/10 text-[11px] tracking-widest uppercase font-bold text-slate-400">
+                            <th class="px-8 py-4 font-body">Cód OIE / ID</th>
+                            <th class="px-6 py-4 font-body">Banca</th>
+                            <th class="px-6 py-4 font-body">Disciplina</th>
+                            <th class="px-6 py-4 font-body">Assunto</th>
+                            <th class="px-6 py-4 font-body">Dificuldade</th>
+                            <th class="px-6 py-4 font-body">Status</th>
+                            <th class="px-8 py-4 font-body text-right">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="text-sm font-medium text-slate-300 divide-y divide-white/5">
+                        <!-- Injecao Dinamica -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Empty State Area (conditionally shown) -->
+            <div id="emptyState" class="hidden flex-col items-center justify-center p-16 opacity-70">
+                <span class="material-symbols-outlined text-[64px] text-slate-600 mb-4">folder_off</span>
+                <p class="text-lg font-headline font-bold text-slate-300">Nenhuma Questão Cadastrada Ainda</p>
+                <p class="text-sm text-slate-500 mb-6 font-body text-center max-w-sm">Este painel exibe e arquiva todas as questões provenientes da tela de Cadastro Local (LocalStorage).</p>
+                <a href="cadastro_questoes.html" class="px-5 py-2 rounded-lg border border-[#A855F7]/30 text-[#A855F7] text-sm hover:bg-[#A855F7]/10 transition-colors">Cadastrar Primeira Questão</a>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Script de Gestão Analítica -->
+    <script>
+        // 1. Extração da Storage (Temos de puxar aquele array preenchido via Cadastro_Questoes)
+        let masterBank = [];
+        try {
+            const rawData = localStorage.getItem('sinapseMasterBank');
+            if(rawData) { masterBank = JSON.parse(rawData); }
+        } catch (e) { console.error("Falha ao puxar banco master.", e); }
+
+        const tableBody = document.getElementById('tableBody');
+        const emptyState = document.getElementById('emptyState');
+
+        // 2. Renderização da Tabela
+        function renderTable() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            tableBody.innerHTML = '';
+
+            let dataToRender = masterBank;
+            
+            // Filtro dinâmico de texto
+            if(searchInput) {
+                dataToRender = masterBank.filter(q => 
+                    q.id.toLowerCase().includes(searchInput) ||
+                    q.banca.toLowerCase().includes(searchInput) ||
+                    q.disciplina.toLowerCase().includes(searchInput) ||
+                    q.assunto.toLowerCase().includes(searchInput)
+                );
+            }
+
+            // Atualização dos CIs (KPIs)
+            document.getElementById('kpi-total').textContent = masterBank.length;
+            const ativas = masterBank.filter(q => q.configs && q.configs.publicadaImediata).length;
+            document.getElementById('kpi-ativas').textContent = ativas;
+
+            const discUnique = new Set(masterBank.map(q => q.disciplina));
+            document.getElementById('kpi-disc').textContent = discUnique.size;
+
+            if(dataToRender.length === 0) {
+                tableBody.innerHTML = '';
+                emptyState.style.display = 'flex';
+                return;
+            } else {
+                emptyState.style.display = 'none';
+            }
+
+            // Render loop de Linhas
+            dataToRender.reverse().forEach(q => {
+                const diffColorClass = q.dificuldade === 'facil' ? 'text-emerald-400 bg-emerald-500/10 border-emerald-500/20' : 
+                                       q.dificuldade === 'dificil' ? 'text-rose-400 bg-rose-500/10 border-rose-500/20' : 
+                                       'text-amber-400 bg-amber-500/10 border-amber-500/20';
+
+                const badgeStatus = (q.configs && q.configs.publicadaImediata) ? 
+                    `<span class="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span> Pub` : 
+                    `<span class="w-2.5 h-2.5 rounded-full bg-slate-500"></span> Rsc`;
+
+                const tr = document.createElement('tr');
+                tr.className = "table-row-hover transition-colors";
+                tr.innerHTML = `
+                    <td class="px-8 py-5 whitespace-nowrap">
+                        <span class="text-xs font-headline font-bold text-slate-200">#${q.id}</span>
+                    </td>
+                    <td class="px-6 py-5 whitespace-nowrap">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-white">${q.banca}</span>
+                            <span class="text-xs text-slate-500">${q.ano}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-5 whitespace-nowrap">
+                        <span class="text-[13px] text-[#A855F7] font-semibold">${q.disciplina}</span>
+                    </td>
+                    <td class="px-6 py-5 whitespace-nowrap text-[13px] text-slate-300">
+                        ${q.assunto.length > 25 ? q.assunto.substring(0, 25) + '...' : q.assunto}
+                    </td>
+                    <td class="px-6 py-5 whitespace-nowrap">
+                        <span class="text-[10px] uppercase tracking-widest font-bold px-2 py-1 rounded border ${diffColorClass}">${q.dificuldade}</span>
+                    </td>
+                    <td class="px-6 py-5 whitespace-nowrap">
+                        <div class="flex items-center gap-2 text-[11px] font-bold uppercase text-slate-300">
+                            ${badgeStatus}
+                        </div>
+                    </td>
+                    <td class="px-8 py-5 whitespace-nowrap text-right">
+                        <div class="flex items-center justify-end gap-2">
+                            <a href="cadastro_questoes.html?edit=${q.id}" class="w-8 h-8 rounded bg-white/5 hover:bg-[#4F46E5]/20 hover:text-[#4F46E5] text-slate-400 flex items-center justify-center transition-colors" title="Editar">
+                                <span class="material-symbols-outlined text-[16px]">edit</span>
+                            </a>
+                            <button class="w-8 h-8 rounded bg-white/5 hover:bg-rose-500/20 hover:text-rose-400 text-slate-400 flex items-center justify-center transition-colors" onclick="excluirQuestao('${q.id}')" title="Excluir">
+                                <span class="material-symbols-outlined text-[16px]">delete</span>
+                            </button>
+                        </div>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // Funções da Lógica Administrativa
+        window.excluirQuestao = function(codigo) {
+            if(confirm("Tem certeza que deseja apagar a questão #" + codigo + "?")) {
+                masterBank = masterBank.filter(x => x.id !== codigo);
+                localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
+                renderTable();
+            }
+        };
+
+        window.clearSeedQuestions = function() {
+            if(confirm("Tem certeza que deseja apagar TODAS as questões inseridas via JSON? Essa ação manterá APENAS as questões criadas manualmente (QST).")) {
+                const originalCount = masterBank.length;
+                // Mantém apenas as que foram criadas manualmente (iniciam com QST)
+                masterBank = masterBank.filter(x => String(x.id).startsWith('QST'));
+                const deleted = originalCount - masterBank.length;
+                localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
+                renderTable();
+                alert(deleted + " questões oriundas do JSON foram excluídas com sucesso.");
+            }
+        };
+
+        window.clearDatabaseAndRefresh = function() {
+            if(confirm("ALERTA CRÍTICO: Isso apagará absolutamente TODAS as questões recém salvas e os Base64 em Cache! Prosseguir?")) {
+                localStorage.removeItem('sinapseMasterBank');
+                masterBank = [];
+                renderTable();
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Auto-Clean forçado (aniquila na hora as questões JSON sem precisar de clique)
+            let rawData = localStorage.getItem('sinapseMasterBank');
+            if(rawData) {
+                let tempBank = JSON.parse(rawData);
+                const countBefore = tempBank.length;
+                tempBank = tempBank.filter(x => String(x.id).startsWith('QST')); // Manter somente os manuais (QST)
+                const countAfter = tempBank.length;
+                
+                if(countBefore !== countAfter) {
+                    masterBank = tempBank;
+                    localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
+                    console.log(`Auto-Clean executado: apagou ${countBefore - countAfter} questões oriundas do JSON.`);
+                }
+            }
+
+            renderTable();
+        });
+    </script>
+</body>
+</html>
+

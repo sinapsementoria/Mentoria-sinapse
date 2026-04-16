@@ -1,0 +1,387 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Simulador SISU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: { blue: '#0B193C', primary: '#6366F1', accent: '#10B981', light: '#FAFAFB'}
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], headline: ['Manrope', 'sans-serif'] },
+                    boxShadow: { 'premium': '0 10px 40px -10px rgba(11,25,60,0.06)' }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+    </style>
+    <!-- Carrega a Base do SISU -->
+    <script src="../../src/js/sisu_data.js"></script>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <!-- Logo Area -->
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">calculate</span> Simulador SISU
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto">
+        <header class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">
+            <nav class="flex text-[11px] font-semibold text-slate-400 uppercase tracking-widest space-x-3 items-center">
+                <span class="text-sinapse-primary">Análise Preditiva SISU Completa</span>
+            </nav>
+        </header>
+
+        <div class="p-10 max-w-[1600px] mx-auto w-full space-y-6 relative z-10">
+            
+            <div class="flex justify-between items-end mb-4">
+                <div>
+                    <h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">
+                        <span class="material-symbols-outlined text-sinapse-primary text-[40px] icon-fill">query_stats</span>
+                        Simulador de Notas SISU
+                    </h1>
+                    <p class="text-slate-400 font-semibold text-sm">Pesos das Faculdades de Medicina e Correlação TRI 2025.</p>
+                </div>
+            </div>
+
+            <!-- MODALIDADE SECTION -->
+            <div class="glass-panel rounded-[32px] p-8 shadow-premium">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">1</div>
+                    <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Modalidade de Concorrência</h2>
+                </div>
+                <p class="text-slate-400 text-sm mb-6 ml-8">Escolha sua modalidade para que a projeção utilize a base correta de notas de corte.</p>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 ml-8">
+                    <button onclick="setModality('ampla', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">Ampla Concorrência</button>
+                    <button onclick="setModality('lb_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LB_EP</button>
+                    <button onclick="setModality('lb_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LB_PPI</button>
+                    <button onclick="setModality('li_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LI_EP</button>
+                    <button onclick="setModality('li_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LI_PPI</button>
+                </div>
+
+                <div class="mt-6 ml-8 bg-slate-50 p-5 rounded-2xl border border-slate-100/80">
+                    <h3 class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-[16px] text-sinapse-primary">info</span> Entenda sua modalidade
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">Ampla Concorrência:</strong> Concorrência geral</p>
+                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LB_EP:</strong> Escola pública e baixa renda</p>
+                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LB_PPI:</strong> Escola pública, baixa renda – pretos, pardos e indígenas</p>
+                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LI_EP:</strong> Escola pública e independente de renda</p>
+                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LI_PPI:</strong> Escola pública, independente de renda – pretos, pardos e indígenas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
+                
+                <!-- Inputs Section -->
+                <div class="xl:col-span-1 glass-panel rounded-[32px] p-8 shadow-premium self-start sticky top-28">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">2</div>
+                        <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Notas TRI</h2>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-red-500">Redação (RED)</label>
+                            <input id="inRED" type="number" min="0" max="1000" placeholder="Ex: 920.00" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-red-500 outline-none transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-green-600">C. da Natureza (CN)</label>
+                            <input id="inCN" type="number" min="0" max="1000" placeholder="Ex: 702.20" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-green-600 outline-none transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-yellow-600">C. Humanas (CH)</label>
+                            <input id="inCH" type="number" min="0" max="1000" placeholder="Ex: 678.60" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-yellow-600 outline-none transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-pink-600">Linguagens (LIN)</label>
+                            <input id="inLIN" type="number" min="0" max="1000" placeholder="Ex: 638.30" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-pink-600 outline-none transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-blue-600">Matemática (MAT)</label>
+                            <input id="inMAT" type="number" min="0" max="1000" placeholder="Ex: 816.10" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-blue-600 outline-none transition-colors">
+                        </div>
+                        
+                        <div class="pt-4 border-t border-slate-100 flex items-center gap-2 mb-2 w-full justify-center">
+                            <div class="bg-sinapse-primary text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">3</div>
+                            <span class="text-xs font-bold text-sinapse-primary uppercase tracking-widest">Execute</span>
+                        </div>
+                        
+                        <button onclick="calcularSisu()" class="w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-[16px] font-bold shadow-xl shadow-sinapse-primary/20 transition-all flex justify-center items-center gap-2 mt-2">
+                            <span class="material-symbols-outlined">rocket_launch</span>
+                            Simular Aprovação
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="xl:col-span-3 glass-panel rounded-[32px] overflow-hidden shadow-premium flex flex-col h-[850px]">
+                    <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-white bg-opacity-70 backdrop-blur-md z-10 sticky top-0">
+                        <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Projeção de Universidades</h2>
+                        <span class="text-xs font-semibold text-slate-400 bg-slate-100 py-1.5 px-3 rounded-lg" id="statusCounter">Aguardando dados...</span>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto bg-white relative">
+                        <table class="w-full text-left border-collapse" id="resultsTable">
+                            <thead>
+                                <tr class="text-[9px] text-slate-400 uppercase tracking-[0.1em] border-b border-slate-100 bg-slate-50/50">
+                                    <th class="px-6 py-4 font-bold sticky top-0 bg-slate-50/90 z-20">Universidade</th>
+                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Vagas</th>
+                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Pesos (R/N/H/L/M)</th>
+                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Nota Corte 2025</th>
+                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Sua Média</th>
+                                    <th class="px-6 py-4 font-bold sticky top-0 bg-slate-50/90 text-right z-20">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-sm" id="resultsData">
+                                <tr>
+                                    <td colspan="6" class="py-10 text-center text-slate-400 font-medium h-[400px]">
+                                        <div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">
+                                            <span class="material-symbols-outlined text-[60px] text-slate-200 mb-4">analytics</span>
+                                            <p class="font-bold text-[#0B193C] mb-2">Simulador Aguardando</p>
+                                            <p class="text-xs">Escolha sua modalidade, preencha suas notas TRI e clique em simular para ver sua projeção personalizada.</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        let selectedModality = null;
+
+        function setModality(mod, btnElement) {
+            selectedModality = mod;
+            
+            // Reseta todos os botões
+            document.querySelectorAll('.modality-btn').forEach(btn => {
+                btn.classList.remove('border-sinapse-primary', 'text-sinapse-primary', 'bg-sinapse-primary/5', 'shadow-md');
+                btn.classList.add('border-slate-100', 'text-slate-500');
+            });
+            
+            // Adiciona classe ativa
+            btnElement.classList.add('border-sinapse-primary', 'text-sinapse-primary', 'bg-sinapse-primary/5', 'shadow-md');
+            btnElement.classList.remove('border-slate-100', 'text-slate-500');
+
+            // Limpeza visual informando ao usuário nova carga de dados
+            document.getElementById('resultsData').innerHTML = `
+                <tr>
+                    <td colspan="6" class="py-10 text-center text-slate-400 font-medium h-[400px]">
+                        <div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">
+                            <span class="material-symbols-outlined text-[60px] text-sinapse-primary animate-pulse mb-4">refresh</span>
+                            <p class="font-bold text-[#0B193C] mb-2">Modalidade Carregada</p>
+                            <p class="text-xs">Insira / Atualize suas notas e inicie a simulação.</p>
+                        </div>
+                    </td>
+                </tr>
+            `;
+            document.getElementById('statusCounter').innerHTML = `Base "${btnElement.innerText}" selecionada`;
+        }
+
+        function calcularSisu() {
+            if(!selectedModality) {
+                alert('Selecione sua modalidade de concorrência antes de simular.');
+                return;
+            }
+
+            const nRed = parseFloat(document.getElementById('inRED').value) || 0;
+            const nCn = parseFloat(document.getElementById('inCN').value) || 0;
+            const nCh = parseFloat(document.getElementById('inCH').value) || 0;
+            const nLin = parseFloat(document.getElementById('inLIN').value) || 0;
+            const nMat = parseFloat(document.getElementById('inMAT').value) || 0;
+
+            if(nRed === 0 && nCn === 0 && nCh === 0 && nLin === 0 && nMat === 0) {
+                alert('Por favor, preencha as notas para simular.');
+                return;
+            }
+
+            const results = [];
+            let aprovadosCount = 0;
+            
+            // Carrega dados da modalidade dinamicamente
+            const baseDados = sisuDB[selectedModality] || [];
+
+            baseDados.forEach(univ => {
+                const somaPesos = univ.pesoRed + univ.pesoCn + univ.pesoCh + univ.pesoLin + univ.pesoMat;
+                const somaNotasPesadas = (nRed * univ.pesoRed) + (nCn * univ.pesoCn) + (nCh * univ.pesoCh) + (nLin * univ.pesoLin) + (nMat * univ.pesoMat);
+                
+                const mediaFinal = somaPesos > 0 ? (somaNotasPesadas / somaPesos) : 0;
+                let diferenca = null;
+                
+                if (univ.corte !== null && univ.corte > 0) {
+                    diferenca = mediaFinal - univ.corte;
+                    if(diferenca >= 0) aprovadosCount++;
+                }
+
+                results.push({
+                    ...univ,
+                    media: mediaFinal,
+                    diff: diferenca
+                });
+            });
+
+            // Ordena pela maior folga (Diferença) até a menor. Os nulls vão para o final
+            results.sort((a, b) => {
+                if (a.diff === null && b.diff === null) return 0;
+                if (a.diff === null) return 1;
+                if (b.diff === null) return -1;
+                return b.diff - a.diff;
+            });
+
+            // Renderização da Tabela
+            const tbody = document.getElementById('resultsData');
+            let html = '';
+
+            results.forEach(r => {
+                let badgeClass = '';
+                let badgeText = '';
+                let diffFmt = '-';
+                
+                if (r.diff === null) {
+                    badgeClass = 'bg-slate-200/50 text-slate-500';
+                    badgeText = 'Sem Nota Base';
+                    diffFmt = 'N/D';
+                } else if (r.diff >= 0) {
+                    badgeClass = 'bg-[#10B981]/15 text-[#10B981]';
+                    badgeText = 'Chance Alta';
+                    diffFmt = '+' + r.diff.toFixed(2);
+                } else if (r.diff >= -5) {
+                    badgeClass = 'bg-yellow-500/15 text-yellow-600';
+                    badgeText = 'Chance Média';
+                    diffFmt = r.diff.toFixed(2);
+                } else {
+                    badgeClass = 'bg-rose-500/15 text-rose-500';
+                    badgeText = 'Chance Baixa';
+                    diffFmt = r.diff.toFixed(2);
+                }
+
+                const corteDisplay = r.corte !== null ? r.corte.toFixed(2) : '-';
+
+                html += `
+                    <tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50/50 transition-colors group">
+                        <td class="px-6 py-4 font-bold text-[#0B193C]">
+                            <div class="flex items-center gap-3">
+                                <div class="w-1 h-8 rounded-full ${r.diff === null ? 'bg-slate-300' : (r.diff >= 0 ? 'bg-[#10B981]' : (r.diff >= -5 ? 'bg-yellow-500' : 'bg-rose-500'))}"></div>
+                                <div>
+                                    <p class="text-[14px]">${r.univ} <span class="text-xs font-semibold text-slate-400"> - ${r.cidade} (${r.uf})</span></p>
+                                    <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">${r.regiao} • ${r.km} KM</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-4 py-4 text-center">
+                            <span class="inline-flex items-center justify-center bg-slate-100 text-[#0B193C] text-xs font-bold px-2 py-1 rounded border border-slate-200 shadow-sm">${r.vagas} Vagas</span>
+                        </td>
+                        <td class="px-4 py-4 text-center text-xs font-semibold text-slate-500 tracking-wide">
+                            <span class="text-red-500 font-bold">${r.pesoRed}</span>
+                            <span class="opacity-50">/</span><span class="text-green-600 font-bold">${r.pesoCn}</span>
+                            <span class="opacity-50">/</span><span class="text-yellow-600 font-bold">${r.pesoCh}</span>
+                            <span class="opacity-50">/</span><span class="text-pink-600 font-bold">${r.pesoLin}</span>
+                            <span class="opacity-50">/</span><span class="text-blue-600 font-bold">${r.pesoMat}</span>
+                        </td>
+                        <td class="px-4 py-4 text-center font-bold text-slate-500">
+                            ${corteDisplay}
+                        </td>
+                        <td class="px-4 py-4 text-center font-headline text-[15px] font-extrabold text-[#0B193C]">
+                            ${r.media.toFixed(2)}
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <div class="flex flex-col items-end gap-1">
+                                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-widest uppercase ${badgeClass}">${badgeText}</span>
+                                <span class="text-[13px] font-bold ${r.diff === null ? 'text-slate-400' : (r.diff >= 0 ? 'text-[#10B981]' : (r.diff >= -5 ? 'text-yellow-600' : 'text-rose-500'))}">${diffFmt}</span>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+            document.getElementById('statusCounter').innerHTML = `<span class="text-[#10B981] font-bold">${aprovadosCount}</span> aprovações possíveis nas regras de Vagas selecionadas`;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

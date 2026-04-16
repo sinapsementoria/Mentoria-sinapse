@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Espaço do Aluno | Sinapse Pré-Med</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Inter', sans-serif; }
+        .glass-card {
+            background: #0B193C; /* A cor fisica 100% EXATA do pixel de fundo do seu arquivo JPEG */
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 40px 120px -10px rgba(0, 0, 0, 0.95);
+        }
+        .input-dark {
+            background-color: rgba(15, 18, 30, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.3s ease;
+        }
+        .input-dark:focus {
+            outline: none;
+            border-color: #7C3AED;
+            box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.3), inset 0 0 15px rgba(124, 58, 237, 0.05);
+            background-color: rgba(15, 18, 30, 0.7);
+        }
+        .btn-purple {
+            background: linear-gradient(135deg, #A855F7, #4F46E5); /* Fusão de ametista e índigo */
+            box-shadow: 0 8px 30px -4px rgba(79, 70, 229, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-purple:hover {
+            box-shadow: 0 15px 40px -4px rgba(79, 70, 229, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        /* Corrigindo a distorção do JPEG: grayscale e alto contraste matam os ruídos coloridos de compressão do WhatsApp! */
+        .logo-adapt {
+            filter: grayscale(1) contrast(300%) invert(1);
+            mix-blend-mode: screen;
+            opacity: 1;
+        }
+        /* Elimina o fundo e revela as letras iluminadas do Logo matematicamente, fundindo à interface da área de login */
+        .logo-blend {
+            mix-blend-mode: lighten;
+        }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="font-body text-slate-300 w-full min-h-screen relative overflow-hidden bg-black flex items-center justify-center">
+
+    <!-- Fundo de Impacto (Gerado pela IA) -->
+    <div class="absolute inset-0 z-0">
+        <img src="../../public/assets/images/fundo espaço do aluno.png" alt="Criando leões, futuros médicos" class="w-full h-full object-cover object-[75%_center] opacity-100" />
+        
+        <!-- Degradê suave para dar maior destaque na imagem de fundo épica -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+    </div>
+
+    <!-- Login Card Ultra-Premium -->
+    <div class="relative z-10 glass-card w-full max-w-[420px] rounded-[32px] p-8 md:p-12 flex flex-col items-center">
+        
+        <!-- Logo Única Física (Sem distorções) -->
+        <div class="mb-5 flex flex-col items-center w-full">
+            <img src="../../public/assets/images/LOGO SINAPSE FUNDO PRETO FINAL.png" alt="Logo Sinapse" class="w-[60%] h-auto object-contain logo-blend" onerror="this.onerror=null; this.src='https://placehold.co/300x120/transparent/FFF?text=🩺';"/>
+        </div>
+
+        <p class="text-[13px] text-slate-300/80 mb-9 text-center font-body tracking-wide">Acesse a sua área exclusiva do aluno.</p>
+
+        <!-- Formulário (Redirect Automático) -->
+        <form action="plataforma.html" class="w-full space-y-6">
+            
+            <!-- Campo E-mail -->
+            <div class="space-y-2 w-full">
+                <label class="text-[11px] font-bold tracking-widest text-slate-400 block uppercase ml-1" for="email">Seu E-mail</label>
+                <div class="relative flex items-center group">
+                    <span class="material-symbols-outlined absolute left-4 text-slate-500 text-[20px] group-focus-within:text-[#A855F7] transition-colors">mail</span>
+                    <input type="email" id="email" class="input-dark w-full rounded-xl text-black text-sm py-3.5 pl-12 pr-4 transition-all" placeholder="nome@email.com" />
+                </div>
+            </div>
+
+            <!-- Campo Senha -->
+            <div class="space-y-2 w-full">
+                <label class="text-[11px] font-bold tracking-widest text-slate-400 block uppercase ml-1" for="password">Sua Senha</label>
+                <div class="relative flex items-center group">
+                    <span class="material-symbols-outlined absolute left-4 text-slate-500 text-[20px] group-focus-within:text-[#A855F7] transition-colors">lock</span>
+                    <input type="password" id="password" class="input-dark w-full rounded-xl text-black text-sm py-3.5 pl-12 pr-12 transition-all tracking-widest" placeholder="••••••••" />
+                    <span id="togglePasswordVis" class="material-symbols-outlined absolute right-4 text-slate-500 text-[18px] cursor-pointer hover:text-slate-300 transition-colors z-10" title="Mostrar senha">visibility</span>
+                </div>
+            </div>
+
+            <!-- Lembrar e Esqueci -->
+            <div class="flex items-center justify-between pt-1">
+                <label class="flex items-center gap-2 cursor-pointer group">
+                    <input type="checkbox" class="w-4 h-4 rounded border-[#434968] bg-[#25293C] text-[#8C57FF] focus:ring-[#8C57FF]/50 cursor-pointer transition-colors" />
+                    <span class="text-[13px] text-slate-400 group-hover:text-slate-300 transition-colors">Lembrar de mim</span>
+                </label>
+                <a href="#" class="text-[13px] text-[#8C57FF] hover:text-[#A855F7] transition-colors">Esqueceu a senha?</a>
+            </div>
+
+            <!-- Botão Entrar Oficial -->
+            <div class="pt-3">
+                <button type="submit" class="w-full btn-purple text-white font-semibold flex items-center justify-center gap-2 py-3.5 rounded-xl hover:brightness-110 active:scale-[0.98] transition-all">
+                    <span class="material-symbols-outlined text-[20px]">login</span>
+                    Acessar Plataforma
+                </button>
+            </div>
+            
+            <!-- Divisor -->
+            <div class="relative flex items-center pt-2">
+                <div class="flex-grow border-t border-white/5"></div>
+                <span class="flex-shrink mx-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Ou</span>
+                <div class="flex-grow border-t border-white/5"></div>
+            </div>
+
+            <!-- Botão Google -->
+            <button type="button" onclick="window.location.href='plataforma.html'" class="w-full flex items-center justify-center gap-3 bg-[rgba(15,18,30,0.4)] border border-white/5 py-3.5 rounded-xl text-slate-300 font-semibold text-sm hover:bg-[rgba(15,18,30,0.8)] transition-all active:scale-[0.98]">
+                <svg class="w-5 h-5" viewbox="0 0 24 24">
+                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+                </svg>
+                Entrar com Google
+            </button>
+            
+        </form>
+
+        <!-- Footer Card -->
+        <div class="w-full mt-10 flex flex-col items-center gap-3">
+            <p class="text-[13px] text-slate-500">Dificuldades de acesso? <a href="#" class="text-[#8C57FF] hover:text-[#A855F7] font-medium transition-colors">Suporte ao Aluno</a></p>
+            <div class="flex items-center gap-1.5 text-[11px] text-[#434968] mt-2">
+                <span class="material-symbols-outlined text-[14px]">shield</span>
+                Ambiente seguro e protegido
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script de UI e Interação do Aluno -->
+    <script>
+        // Lógica para mostrar/esconder senha mantendo padrão premium
+        const togglePasswordVis = document.getElementById('togglePasswordVis');
+        const passwordInput = document.getElementById('password');
+
+        if (togglePasswordVis && passwordInput) {
+            togglePasswordVis.addEventListener('click', function() {
+                const currentType = passwordInput.getAttribute('type');
+                const newType = currentType === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', newType);
+                
+                // Mudar o ícone
+                this.textContent = currentType === 'password' ? 'visibility_off' : 'visibility';
+                
+                // Ajustar o espaçamento quando legível para não distorcer visual
+                if (newType === 'text') {
+                    passwordInput.classList.remove('tracking-widest');
+                } else {
+                    passwordInput.classList.add('tracking-widest');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
+
+
+

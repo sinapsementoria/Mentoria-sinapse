@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estratégia de Aprovação - Mentoria Sinapse</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', 
+                            primary: '#6366F1', 
+                            accent: '#10B981', 
+                            light: '#FAFAFB', 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 15px 50px -15px rgba(11,25,60,0.15)',
+                        'premium-hover': '0 30px 60px -15px rgba(11,25,60,0.25)',
+                        'glow-primary': '0 0 30px rgba(99,102,241,0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        html, body {
+            height: 100vh !important;
+            max-height: 100vh !important;
+            width: 100vw !important;
+            overflow: hidden !important;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        
+        /* Ultra Smooth Animations */
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
+        
+        /* Material symbols refinement */
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .icon-thin { font-variation-settings: 'wght' 200; }
+        
+        /* Glass Utilities */
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+
+        .styled-scrollbar::-webkit-scrollbar { height: 4px; border-radius: 4px; }
+        .styled-scrollbar::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 4px; }
+        .draft-slide-in { animation: slideInDraft 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        @keyframes slideInDraft { from { opacity: 0; transform: translateY(10px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen w-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)] h-screen">
+        <!-- Logo Area -->
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">route</span> Estratégia de Aprovação
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+        
+    </aside>
+
+    <!-- MAIN SCROLL AREA -->
+    <main class="flex-1 flex flex-col min-w-0 min-h-0 overflow-hidden relative bg-[#FAFAFB]">
+        
+        <!-- Top Decorator Subtle Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+
+
+
+        <!-- DASHBOARD CONTENT (SCROLLABLE AREA) -->
+        <div class="flex-1 overflow-y-auto px-10 pt-6 pb-20 max-w-[1500px] mx-auto w-full styled-scrollbar relative z-10">
+            
+            <!-- EXCLUSIVE GREETING & HEADER -->
+            <div class="flex items-center justify-between mb-8 mt-2">
+                <div>
+                    <h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">
+                        ESTRATÉGIA DE APROVAÇÃO
+                    </h1>
+                    <p class="text-slate-400 font-semibold text-sm">REGISTRE SEUS DÉFICITS DE APRENDIZAGEM E TRANSFORME FRAQUEZAS EM REVISÃO ESTRATÉGICA.</p>
+                </div>
+            </div>
+            
+            <!-- SECTION: BUILDER E ESTRATEGIA -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0 mb-10">
+                    
+                <!-- COLUNA ESQUERDA: INPUT PANEL -->
+                <div class="lg:col-span-4 flex flex-col gap-5">
+                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col min-h-0 relative h-full">
+                        <div class="mb-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 text-rose-500 text-[10px] uppercase font-extrabold tracking-widest rounded-lg mb-4">
+                                <span class="material-symbols-outlined text-[16px]">target</span> Mapear Déficit
+                            </div>
+                            <h2 class="font-headline text-[22px] font-extrabold text-[#0B193C] leading-tight mb-1">Mapeamento Tático</h2>
+                            <p class="text-xs text-slate-400 font-medium">Não ignore o que você errou ou teve branco.</p>
+                        </div>
+
+                        <div class="space-y-5 flex-1">
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">A Matéria Deficiente</label>
+                                <select id="bDisciplina" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-bold appearance-none text-sm cursor-pointer hover:border-indigo-200">
+                                    <option value="Matemática">Matemática</option>
+                                    <option value="Física">Física</option>
+                                    <option value="Química">Química</option>
+                                    <option value="Biologia">Biologia</option>
+                                    <option value="Filosofia">Filosofia</option>
+                                    <option value="Sociologia">Sociologia</option>
+                                    <option value="História">História</option>
+                                    <option value="Geografia">Geografia</option>
+                                    <option value="Literatura">Literatura</option>
+                                    <option value="Gramática">Gramática</option>
+                                    <option value="Linguagens">Linguagens</option>
+                                    <option value="Inglês">Inglês</option>
+                                    <option value="Espanhol">Espanhol</option>
+                                    <option value="Artes">Artes</option>
+                                </select>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">Qual o assunto específico?</label>
+                                <input id="bAssunto" type="text" placeholder="Digite o assunto em que está com déficit" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-bold placeholder:text-slate-400 placeholder:font-medium text-sm focus:bg-white">
+                            </div>
+                            
+                            <div class="pt-2">
+                                <div class="p-4 rounded-xl bg-orange-50/50 border border-orange-100 flex gap-3 items-start">
+                                    <span class="material-symbols-outlined text-orange-400 text-[18px]">info</span>
+                                    <p class="text-[11px] text-orange-700/80 font-medium leading-relaxed">
+                                        Ao salvar, o sistema fará a conta mecânica para reavivar sua memória nos momentos de quase-esquecimento. <strong>Esse assunto será reapresentado nas suas Metas Diárias nas datas exatas.</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button onclick="gerarEstrategia()" class="mt-6 w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-xl font-bold shadow-premium-hover transition-all flex items-center justify-center gap-2 active:scale-95 group text-sm">
+                            <span class="material-symbols-outlined text-[20px] group-hover:rotate-180 transition-transform duration-500">sync</span> Gerar Estratégia de Aprovação
+                        </button>
+                    </div>
+                </div>
+
+                <!-- COLUNA DIREITA: ESTRATÃ‰GIA GERADA E CONCLUÍDOS -->
+                <div class="lg:col-span-8 flex flex-col overflow-hidden min-h-0 bg-transparent">
+                    
+                    <!-- Ãšltima estratégia programada -->
+                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col mb-8 relative overflow-hidden h-[300px]" id="lastStrategyDisplay">
+                        
+                        <!-- Estado Vazio -->
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white z-10 transition-opacity duration-300" id="emptyStrategyState">
+                            <div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4 border border-slate-100">
+                                <span class="material-symbols-outlined text-[32px] text-slate-300">hub</span>
+                            </div>
+                            <h3 class="font-headline text-[17px] font-extrabold text-[#0B193C] mb-1">Nenhuma revisão em foco</h3>
+                            <p class="text-xs font-medium text-slate-400 text-center max-w-[300px]">Lance um déficit no painel lateral. A inteligência pedagógica mapeará o ciclo perfeito para você.</p>
+                        </div>
+
+                        <!-- Estado Preenchido -->
+                        <div class="flex-none flex items-center justify-between mb-6 opacity-0" id="headerStrategyState">
+                            <div>
+                                <h3 class="font-headline text-lg font-extrabold text-[#0B193C]">Trilha de Revisão Automatizada</h3>
+                                <p class="text-xs text-slate-400 font-medium">Seu déficit virou estratégia. Programamos 3 missões futuras para garantir a fixação.</p>
+                            </div>
+                            <div class="bg-emerald-50 text-emerald-600 text-[10px] uppercase tracking-widest font-extrabold px-3 py-1.5 rounded-lg border border-emerald-100 flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-[14px]">bolt</span> Ativa
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-5 flex-1 opacity-0" id="cardsStrategyState">
+                            <!-- Card 7 Dias -->
+                            <div class="glass-panel p-5 rounded-2xl border border-indigo-100/50 flex flex-col items-center text-center shadow-sm relative overflow-hidden bg-gradient-to-b from-white to-slate-50/50">
+                                <div class="absolute inset-x-0 top-0 h-1 bg-[#818CF8]"></div>
+                                <span class="text-[10px] font-extrabold text-[#818CF8] uppercase tracking-widest bg-indigo-50 px-2 py-1 rounded-md mb-3 mt-1">+7 DIAS</span>
+                                
+                                <h4 class="font-bold text-[#0B193C] text-sm mb-1 leading-snug line-clamp-2 min-h-[40px] flex items-center" id="card7Subject">Assunto</h4>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-auto" id="card7Disc">Disciplina</p>
+                                
+                                <div class="w-full h-[1px] bg-slate-200/60 my-4"></div>
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex flex-col text-left">
+                                        <span class="text-[9px] text-slate-400 font-bold uppercase mb-0.5">Agendada para</span>
+                                        <span class="text-xs font-black text-slate-600" id="card7Date">00/00/0000</span>
+                                    </div>
+                                    <div class="bg-emerald-50 w-7 h-7 rounded-full flex items-center justify-center text-emerald-500">
+                                        <span class="material-symbols-outlined text-[14px]">event_available</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 21 Dias -->
+                            <div class="glass-panel p-5 rounded-2xl border border-sinapse-primary/30 flex flex-col items-center text-center shadow-sm relative overflow-hidden bg-gradient-to-b from-white to-indigo-50/30">
+                                <div class="absolute inset-x-0 top-0 h-1 bg-sinapse-primary"></div>
+                                <span class="text-[10px] font-extrabold text-sinapse-primary uppercase tracking-widest bg-indigo-50 px-2 py-1 rounded-md mb-3 mt-1">+21 DIAS</span>
+                                
+                                <h4 class="font-bold text-[#0B193C] text-sm mb-1 leading-snug line-clamp-2 min-h-[40px] flex items-center" id="card21Subject">Assunto</h4>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-auto" id="card21Disc">Disciplina</p>
+                                
+                                <div class="w-full h-[1px] bg-indigo-100 my-4"></div>
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex flex-col text-left">
+                                        <span class="text-[9px] text-slate-400 font-bold uppercase mb-0.5">Agendada para</span>
+                                        <span class="text-xs font-black text-slate-600" id="card21Date">00/00/0000</span>
+                                    </div>
+                                    <div class="bg-indigo-50 w-7 h-7 rounded-full flex items-center justify-center text-indigo-500">
+                                        <span class="material-symbols-outlined text-[14px]">event_available</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Card 60 Dias -->
+                            <div class="glass-panel p-5 rounded-2xl border border-emerald-100/50 flex flex-col items-center text-center shadow-sm relative overflow-hidden bg-gradient-to-b from-white to-emerald-50/20">
+                                <div class="absolute inset-x-0 top-0 h-1 bg-emerald-400"></div>
+                                <span class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest bg-emerald-50 px-2 py-1 rounded-md mb-3 mt-1">+60 DIAS</span>
+                                
+                                <h4 class="font-bold text-[#0B193C] text-sm mb-1 leading-snug line-clamp-2 min-h-[40px] flex items-center" id="card60Subject">Assunto</h4>
+                                <p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest mb-auto" id="card60Disc">Disciplina</p>
+                                
+                                <div class="w-full h-[1px] bg-slate-200/60 my-4"></div>
+                                <div class="flex items-center justify-between w-full">
+                                    <div class="flex flex-col text-left">
+                                        <span class="text-[9px] text-slate-400 font-bold uppercase mb-0.5">Agendada para</span>
+                                        <span class="text-xs font-black text-slate-600" id="card60Date">00/00/0000</span>
+                                    </div>
+                                    <div class="bg-emerald-50 w-7 h-7 rounded-full flex items-center justify-center text-emerald-500">
+                                        <span class="material-symbols-outlined text-[14px]">event_available</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BANCO DE HISTÃ“RICO DE DÃ‰FICITS -->
+                    <div class="glass-panel rounded-[24px] shadow-premium p-8 overflow-hidden flex-1 border border-slate-100 bg-white">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-[17px] font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
+                                <span class="material-symbols-outlined text-slate-400 icon-fill">table_chart</span>
+                                Arsenal Estratégico (Déficits Transformados)
+                            </h3>
+                            <div class="text-xs font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-lg border border-slate-200">
+                                <span id="lblDeficitsCount">0</span> conteúdos em andamento
+                            </div>
+                        </div>
+                        
+                        <div class="w-full overflow-x-auto rounded-xl border border-slate-100">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="bg-slate-50/80 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
+                                        <th class="py-4 px-5 rounded-tl-xl">Lançamento</th>
+                                        <th class="py-4 px-4 w-[25%]">Disciplina</th>
+                                        <th class="py-4 px-4 w-[35%]">Déficit Estratégico</th>
+                                        <th class="py-4 px-4 text-center">Tiro +7</th>
+                                        <th class="py-4 px-4 text-center">Tiro +21</th>
+                                        <th class="py-4 px-4 text-center">Tiro +60</th>
+                                        <th class="py-4 px-4 text-center rounded-tr-xl">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="deficitsTableBody" class="text-sm font-medium text-slate-600 divide-y divide-slate-50 bg-white">
+                                    <!-- Injection via JS -->
+                                    <tr><td colspan="7" class="text-center py-10 text-slate-400 italic font-medium">Buscando o 100%. Nenhuma demanda cadastrada no momento.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="mt-4 flex items-center gap-2 px-1 opacity-70">
+                            <span class="material-symbols-outlined text-sinapse-primary text-[14px]">verified</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Todos os itens dessa tabela foram injetados em Metas Diárias com cobrança obrigatória de 5 questões cada.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="../../src/js/database.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            renderDeficitsHistory();
+        });
+
+        function formatBRLDate(dVal) {
+            // Recebe yyyy-MM-dd
+            if(!dVal) return "";
+            const parts = dVal.split('-');
+            if(parts.length !== 3) return dVal;
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
+        function gerarEstrategia() {
+            const disciplina = document.getElementById('bDisciplina').value;
+            const assunto = document.getElementById('bAssunto').value;
+
+            if(!assunto.trim()) { alert("Por favor, digite o assunto no qual sentiu déficit!"); return; }
+
+            const today = new Date();
+            // Evitar problemas timezone criando Data limpa (meio dia garante isso)
+            const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+            
+            const addDaysAndFormat = (baseDateStr, days) => {
+                const parts = baseDateStr.split('-');
+                const d = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]), 12, 0, 0);
+                d.setDate(d.getDate() + days);
+                return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+            };
+
+            const data7 = addDaysAndFormat(todayStr, 7);
+            const data21 = addDaysAndFormat(todayStr, 21);
+            const data60 = addDaysAndFormat(todayStr, 60);
+
+            if(window.db) {
+                // 1) Registrar no DB de Déficits para o painel
+                window.db.insert('deficits', {
+                    discipline: disciplina,
+                    subject: assunto,
+                    date_registered: todayStr,
+                    r7: data7,
+                    r21: data21,
+                    r60: data60,
+                    status: 'active'
+                });
+
+                // 2) Gerar e empurrar 3 rotinas para a tabela padrão "activities" das Metas Diárias (diario/agenda/home)
+                const pushMeta = (dateStr, days) => {
+                    const dObj = new Date(dateStr + "T12:00:00");
+                    window.db.insert('activities', {
+                        user_id: 1, 
+                        title: `Revisão Estratégica (${days}d): ${assunto}`,
+                        description: `Missão autogerada pela Plataforma (Repetição Espaçada). Faça *5 Questões* diretas sobre [${assunto}] da matéria de [${disciplina}]. Essa repetição no ponto de curva de esquecimento gravará o conteúdo na memória de longo prazo.`,
+                        date: dateStr,
+                        time: '18:00', // Põe no final da tarde default
+                        weekday: dObj.getDay(),
+                        activity_type: 'revisão',
+                        discipline: disciplina,
+                        subject: assunto,
+                        priority: 'Alta', // Alta urgencia para blindar falhas
+                        status: 'pendente' 
+                    });
+                };
+
+                pushMeta(data7, 7);
+                pushMeta(data21, 21);
+                pushMeta(data60, 60);
+            }
+
+            // UI Actions
+            renderLastStrategy(disciplina, assunto, data7, data21, data60);
+            renderDeficitsHistory();
+            
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 }, colors: ['#6366F1', '#10B981'] });
+            }
+            
+            document.getElementById('bAssunto').value = '';
+        }
+
+        function renderLastStrategy(disciplina, assunto, d7, d21, d60) {
+            // Remove empty state, reveal cards
+            document.getElementById('emptyStrategyState').style.opacity = '0';
+            setTimeout(() => { document.getElementById('emptyStrategyState').style.display = 'none'; }, 300);
+            
+            document.getElementById('headerStrategyState').classList.remove('opacity-0');
+            document.getElementById('cardsStrategyState').classList.remove('opacity-0');
+            document.getElementById('headerStrategyState').classList.add('draft-slide-in');
+            document.getElementById('cardsStrategyState').classList.add('draft-slide-in');
+
+            // Fill Text
+            ['7', '21', '60'].forEach((day, index) => {
+                document.getElementById(`card${day}Subject`).innerText = assunto;
+                document.getElementById(`card${day}Disc`).innerText = disciplina;
+                document.getElementById(`card${day}Date`).innerText = formatBRLDate([d7, d21, d60][index]);
+            });
+        }
+
+        function renderDeficitsHistory() {
+            const tableBody = document.getElementById('deficitsTableBody');
+            const lblCount = document.getElementById('lblDeficitsCount');
+            
+            if(!window.db) return;
+            let list = window.db.get('deficits') || [];
+            
+            lblCount.innerText = list.length;
+
+            if(list.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-slate-400 italic mx-auto"><span class="block material-symbols-outlined text-[32px] mb-2 opacity-50 text-center w-full">auto_stories</span> Nenhuma demanda estratégica mapeada. Aproveite para registrar o primeiro déficit.</td></tr>`;
+                return;
+            }
+
+            // Exibir os mais novos em cima
+            const sorted = [...list].sort((a,b) => new Date(b.date_registered) - new Date(a.date_registered));
+
+            tableBody.innerHTML = sorted.map(item => `
+                <tr class="hover:bg-slate-50 transition-colors group">
+                    <td class="py-4 px-5 whitespace-nowrap">
+                        <span class="bg-white border border-slate-200 text-slate-600 text-[11px] font-bold px-2.5 py-1.5 rounded shadow-sm">${formatBRLDate(item.date_registered)}</span>
+                    </td>
+                    <td class="py-4 px-4 whitespace-nowrap">
+                        <span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2 py-1 rounded max-w-fit uppercase tracking-widest">${item.discipline}</span>
+                    </td>
+                    <td class="py-4 px-4 w-[35%]">
+                        <span class="text-sm font-bold text-[#0B193C] leading-snug line-clamp-2">${item.subject}</span>
+                    </td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap">
+                        <span class="inline-flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
+                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r7).slice(0,5)}</span>
+                        </span>
+                    </td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap">
+                        <span class="inline-flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
+                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r21).slice(0,5)}</span>
+                        </span>
+                    </td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap">
+                        <span class="inline-flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
+                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r60).slice(0,5)}</span>
+                        </span>
+                    </td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap">
+                        <button onclick="removerDeficit(${item.id})" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all" title="Excluir Ciclo de Repetição">
+                            <span class="material-symbols-outlined text-[18px]">delete</span>
+                        </button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        function removerDeficit(id) {
+            if(!confirm("Tem certeza que deseja apagar este ciclo de déficit?\nAtenção: isso não removerá as atividades que já foram postadas nas Metas Diárias. Você pode excluí-las manualmente lá.")) return;
+
+            window.db.delete('deficits', id);
+            renderDeficitsHistory();
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+

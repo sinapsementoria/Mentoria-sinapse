@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Flashcards Elite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', 
+                            primary: '#6366F1', 
+                            accent: '#10B981', 
+                            light: '#FAFAFB', 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.06)',
+                        'premium-hover': '0 20px 40px -10px rgba(11,25,60,0.1)',
+                        'glow-primary': '0 0 20px rgba(99,102,241,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; scroll-behavior: smooth; }
+        .fade-in-up { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(10px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; }
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+        .perspective-1000 { perspective: 1000px; }
+        .transform-style-3d { transform-style: preserve-3d; }
+        .backface-hidden { backface-visibility: hidden; }
+        .rotate-y-180 { transform: rotateY(180deg); }
+        /* Active Tab indicator */
+        .tab-active { color: #0B193C !important; border-bottom-color: #0B193C !important; }
+        /* Heatmap blocks */
+        .heat-0 { background-color: #ebedf0; }
+        .heat-1 { background-color: #9be9a8; }
+        .heat-2 { background-color: #40c463; }
+        .heat-3 { background-color: #30a14e; }
+        .heat-4 { background-color: #216e39; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/assets/images/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
+            </a>
+            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
+            </a>
+            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
+            </a>
+            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
+            </a>
+            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
+            </a>
+            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
+            </a>
+            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
+            </a>
+            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">style</span> Flashcard
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[300px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+
+        <div class="w-full flex-1 flex flex-col relative z-10 h-full max-w-[1500px] mx-auto pt-8 px-8">
+            
+            <!-- ABAS ANKI -->
+            <header class="flex justify-center border-b border-slate-200 pb-0 mb-6 shrink-0">
+                <nav class="flex items-center gap-8 text-sm font-bold text-slate-500">
+                    <button onclick="switchTab(0)" class="anki-tab tab-active hover:text-[#0B193C] transition-colors pb-3 border-b-2 border-transparent">Baralhos</button>
+                    <button onclick="switchTab(1)" class="anki-tab hover:text-[#0B193C] transition-colors pb-3 border-b-2 border-transparent">Adicionar</button>
+                    <button onclick="switchTab(2)" class="anki-tab hover:text-[#0B193C] transition-colors pb-3 border-b-2 border-transparent">Painel</button>
+                    <button onclick="switchTab(3)" class="anki-tab hover:text-[#0B193C] transition-colors pb-3 border-b-2 border-transparent">Estatísticas</button>
+                    <button onclick="switchTab(4)" class="anki-tab hover:text-[#0B193C] transition-colors pb-3 border-b-2 border-transparent">Sincronizar</button>
+                </nav>
+            </header>
+
+            <!-- CONTAINER PRINCIPAL -->
+            <div class="flex-1 overflow-y-auto overflow-x-hidden pb-10">
+                
+                <!-- VIEW 1: BARALHOS -->
+                <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
+                    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden">
+                        <div class="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-200 bg-slate-50/80 items-center">
+                            <div class="col-span-6 font-extrabold text-[10px] text-slate-400 uppercase tracking-widest pl-2">Baralho</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Novo</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Aprender</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Revisar</div>
+                        </div>
+                        <div id="ankiDeckGridWrapper" class="flex flex-col text-sm text-[#0B193C] font-semibold divide-y divide-slate-100"></div>
+                    </div>
+                    <div class="max-w-4xl mx-auto flex justify-center gap-4">
+                        <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
+                        <button onclick="abrirModalNovoBaralho()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-[#0B193C] border border-slate-200 hover:bg-slate-50 shadow-sm focus:ring-2 focus:ring-sinapse-primary">Criar Baralho</button>
+                        <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Importar arquivo</button>
+                    </div>
+                </div>
+
+                <!-- VIEW 2: ADICIONAR CARD -->
+                <div id="view-adicionar" class="view-section hidden fade-in-up max-w-4xl mx-auto space-y-6 flex-1 w-full flex flex-col pb-8">
+                    <div class="bg-white rounded-[24px] shadow-sm border border-slate-200 p-8 flex flex-col gap-6">
+                        <div class="flex items-center gap-4 mb-2 border-b border-slate-100 pb-4">
+                            <div class="w-10 h-10 rounded-full bg-[#0B193C]/5 text-[#0B193C] flex items-center justify-center"><span class="material-symbols-outlined icon-fill">add_circle</span></div>
+                            <h2 class="font-headline font-extrabold text-2xl text-[#0B193C]">Adicionar Cartão</h2>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">Tipo de Cartão</label>
+                                <select id="addType" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 outline-none font-bold text-sm focus:border-[#0B193C] transition-colors">
+                                    <option value="basico">Básico (Frente e Verso)</option>
+                                    <option value="cloze">Omissão de Palavras (Cloze)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">Baralho de Destino</label>
+                                <div class="relative">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[20px]">style</span>
+                                    <select id="addDeck" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl pl-12 pr-4 py-3 outline-none font-bold text-sm focus:border-[#0B193C] transition-colors"></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <!-- Frente -->
+                            <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-400 transition-colors shadow-sm">
+                                <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex justify-between items-center">
+                                    <div class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-wider">Frente do Card</div>
+                                    <div class="flex gap-1 items-center">
+                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded font-bold text-xs text-slate-600 transition-colors tooltip" title="Negrito">B</button>
+                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded italic text-xs text-slate-600 transition-colors tooltip" title="Itálico">I</button>
+                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded underline text-xs text-slate-600 transition-colors tooltip" title="Sublinhado">U</button>
+                                        <div class="w-px h-4 bg-slate-300 mx-1"></div>
+                                        <button type="button" class="border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50 px-2 py-1 rounded text-xs flex items-center gap-1 font-bold text-slate-600 hover:text-indigo-600 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px]">image</span> Add Imagem
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea id="addFront" rows="3" placeholder="Insira o conceito que deseja relembrar..." class="w-full p-5 outline-none font-medium resize-y bg-white min-h-[120px] text-slate-700"></textarea>
+                            </div>
+                            
+                            <!-- Verso -->
+                            <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-emerald-400 transition-colors shadow-sm">
+                                <div class="bg-emerald-50/50 border-b border-slate-200 px-4 py-2.5 flex justify-between items-center">
+                                    <div class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-wider">Verso (Resposta Oculta)</div>
+                                    <div class="flex gap-1 items-center">
+                                        <button type="button" class="border border-emerald-200 hover:border-emerald-400 bg-white hover:bg-emerald-50 px-2 py-1 rounded text-xs flex items-center gap-1 font-bold text-emerald-700 transition-colors">
+                                            <span class="material-symbols-outlined text-[14px]">image</span> Add Imagem
+                                        </button>
+                                    </div>
+                                </div>
+                                <textarea id="addBack" rows="4" placeholder="Insira a resposta, fórmula ou resolução..." class="w-full p-5 outline-none font-medium resize-y bg-emerald-50/10 min-h-[140px] text-slate-700"></textarea>
+                            </div>
+
+                            <!-- Extra Box -->
+                            <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-amber-400 transition-colors hidden shadow-sm" id="extraBoxContainer">
+                                <div class="bg-amber-50/50 border-b border-amber-100 px-4 py-2 flex items-center">
+                                    <span class="material-symbols-outlined text-amber-500 text-[16px] mr-2 icon-fill">lightbulb</span>
+                                    <div class="text-[10px] font-extrabold text-amber-700 uppercase tracking-wider">Informações Extras & Dicas</div>
+                                </div>
+                                <textarea id="addExtra" rows="2" placeholder="Exemplo, mnemônica ou observação que será exibida no verso..." class="w-full p-4 outline-none font-medium resize-y bg-white text-sm"></textarea>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">Etiquetas (Separe suas tags por vírgula)</label>
+                            <div class="relative">
+                                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[20px]">sell</span>
+                                <input type="text" id="addTags" placeholder="Ex: revisar, biologia, formulas..." class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl pl-12 pr-4 py-3 outline-none focus:border-sinapse-primary text-sm font-semibold transition-colors">
+                            </div>
+                        </div>
+                        
+                        <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                            <button class="text-xs text-slate-500 font-bold hover:text-[#0B193C] hover:underline flex items-center gap-1" onclick="document.getElementById('extraBoxContainer').classList.toggle('hidden')">
+                                <span class="material-symbols-outlined text-[16px]">add_notes</span> Campo Extra / Dicas
+                            </button>
+                            <div class="flex gap-4 items-center">
+                                <div class="group relative flex items-center">
+                                    <button onclick="limparFormAdd()" class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center transition-colors">
+                                        <span class="material-symbols-outlined text-[20px]">mop</span>
+                                    </button>
+                                </div>
+                                <button onclick="salvarCard()" id="btnSaveCard" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-extrabold shadow-[0_4px_14px_0_rgb(11,25,60,0.39)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.23)] transition-all text-sm flex items-center gap-2 hover:-translate-y-0.5 transform duration-200">
+                                    Adicionar Cartão
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-right text-[10px] font-bold text-slate-400 mt-[-15px] pr-2">Atalho rápido: <span class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Ctrl</span> + <span class="bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">Enter</span></p>
+                    </div>
+                </div>
+
+                <!-- VIEW 3: PAINEL (BROWSER) -->
+                <div id="view-painel" class="view-section hidden fade-in-up h-full flex flex-col max-h-[80vh]">
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 flex-1 flex overflow-hidden min-h-[500px]">
+                        <!-- Sidebar Filtros -->
+                        <div class="w-64 bg-slate-50/50 border-r border-slate-200 flex flex-col p-5 h-full">
+                            <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 ml-1">Filtros Rápidos</h3>
+                            <ul class="space-y-1.5 text-sm font-semibold text-slate-600 mb-6">
+                                <li onclick="currentTagFilter=null; renderBrowserTable();" class="px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 bg-[#0B193C]/5 text-[#0B193C] flex items-center gap-2 border border-[#0B193C]/10 transition-colors"><span class="material-symbols-outlined text-[16px]">all_inbox</span> Coleção Completa</li>
+                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-blue-500">today</span> Adicionados Hoje</li>
+                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-emerald-500">replay</span> Para Revisar</li>
+                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-rose-500">warning</span> Em Atraso</li>
+                            </ul>
+                            <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 ml-1">Por Etiqueta</h3>
+                            <div class="flex-1 overflow-y-auto custom-scrollbar pr-1 -mr-2">
+                                <ul id="browserDeckFilter" class="space-y-1 text-sm font-medium text-slate-500">
+                                    <!-- Injetado via JS -->
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Content -->
+                        <div class="flex-1 flex flex-col bg-white relative h-full">
+                            <div class="p-4 border-b border-slate-100 flex items-center gap-4 bg-white z-10 shrink-0">
+                                <div class="relative flex-1 group">
+                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-sinapse-primary transition-colors">search</span>
+                                    <input type="text" placeholder="Pesquisar em toda a coleção (frente, verso ou tag)..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-2.5 font-medium text-sm outline-none focus:border-sinapse-primary focus:bg-white transition-all shadow-sm">
+                                </div>
+                            </div>
+                            
+                            <!-- Table -->
+                            <div class="flex-1 overflow-auto custom-scrollbar flex flex-col relative bg-slate-50/30">
+                                <table class="w-full text-left text-sm whitespace-nowrap">
+                                    <thead class="sticky top-0 bg-white border-b border-slate-200 z-10 shadow-sm">
+                                        <tr class="text-slate-400 font-extrabold text-[10px] uppercase tracking-wider">
+                                            <th class="px-8 py-3.5 font-medium">Pergunta (Frente)</th>
+                                            <th class="px-6 py-3.5 font-medium">Resposta (Verso)</th>
+                                            <th class="px-6 py-3.5 font-medium">Baralho</th>
+                                            <th class="px-6 py-3.5 font-medium">Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="browserTableBody" class="divide-y divide-slate-100 text-slate-700 font-medium cursor-pointer">
+                                        <!-- Injetado via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Preview Painel (Quick Edit) overlay -->
+                            <div id="quickEditPanel" class="absolute top-0 bottom-0 right-0 w-[450px] bg-white border-l border-slate-200 shadow-[0_0_40px_rgba(0,0,0,0.08)] transform translate-x-full transition-transform duration-300 ease-out flex flex-col z-20">
+                                <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
+                                    <h3 class="font-headline font-extrabold text-lg text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined icon-fill text-sinapse-primary">edit_square</span> Editor Rápido</h3>
+                                    <button onclick="fecharQuickEdit()" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px]">close</span></button>
+                                </div>
+                                <div class="p-6 flex-1 overflow-y-auto space-y-5 custom-scrollbar">
+                                    <input type="hidden" id="qEditId">
+                                    <div>
+                                        <div class="flex justify-between items-center mb-1.5">
+                                            <label class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest pl-1">Frente</label>
+                                            <span class="text-[10px] bg-indigo-50 text-indigo-600 px-2 rounded font-bold">Auto-save</span>
+                                        </div>
+                                        <textarea id="qEditFront" rows="4" class="w-full p-4 border border-indigo-100 rounded-xl text-sm bg-white outline-none focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 transition-all shadow-sm font-medium resize-y"></textarea>
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest pl-1 mb-1.5 block">Verso</label>
+                                        <textarea id="qEditBack" rows="5" class="w-full p-4 border border-emerald-100 rounded-xl text-sm bg-emerald-50/10 outline-none focus:border-emerald-400 focus:ring-4 focus:ring-emerald-50 transition-all shadow-sm font-medium resize-y"></textarea>
+                                    </div>
+                                </div>
+                                <div class="p-5 border-t border-slate-100 bg-slate-50/50 flex gap-3">
+                                    <button onclick="excluirCartao(document.getElementById('qEditId').value)" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-50 hover:border-rose-300 transition-colors shadow-sm flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px]">delete</span> Apagar</button>
+                                    <button onclick="salvarQuickEdit()" class="flex-1 py-2.5 bg-[#0B193C] text-white rounded-xl font-bold text-sm hover:bg-sinapse-primary transition-all shadow-md flex justify-center items-center gap-2">Salvar Fechar <span class="material-symbols-outlined text-[18px]">arrow_forward</span></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 4: ESTATÍSTICAS -->
+                <div id="view-estatisticas" class="view-section hidden fade-in-up space-y-6 max-w-[1000px] mx-auto pb-10">
+                    <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-2">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center"><span class="material-symbols-outlined text-[24px]">monitoring</span></div>
+                            <div>
+                                <h2 class="font-headline font-extrabold text-2xl text-[#0B193C]">Análise de Desempenho</h2>
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mt-0.5">Sua evolução nos flashcards</p>
+                            </div>
+                        </div>
+                        <div class="bg-slate-50 rounded-xl p-1.5 border border-slate-200 flex gap-1 shadow-inner">
+                            <button class="px-4 py-2 rounded-lg bg-white text-[#0B193C] font-bold text-xs shadow-sm ring-1 ring-slate-200 transition-all">1 Mês</button>
+                            <button class="px-4 py-2 rounded-lg text-slate-500 hover:text-[#0B193C] hover:bg-white/50 font-bold text-xs transition-colors">3 Meses</button>
+                            <button class="px-4 py-2 rounded-lg text-slate-500 hover:text-[#0B193C] hover:bg-white/50 font-bold text-xs transition-colors">1 Ano</button>
+                        </div>
+                    </div>
+
+                    <!-- Github Style Heatmap -->
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200">
+                        <div class="flex justify-between items-end mb-6">
+                            <div>
+                                <h3 class="text-sm font-extrabold text-[#0B193C]">Frequência de Revisão</h3>
+                                <p class="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">Dias estudados nos últimos meses</p>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-2xl font-extrabold text-emerald-500 leading-none">12</span>
+                                <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block mt-1">Dias de Ofensiva 🔥</span>
+                            </div>
+                        </div>
+                        <div class="flex justify-center overflow-x-auto bg-slate-50/50 p-6 rounded-xl border border-slate-100">
+                            <div id="heatmapGrid" class="grid grid-rows-7 grid-flow-col gap-1.5 w-max">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+                        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] font-bold text-slate-400 tracking-wider hidden md:flex">
+                            MENOS <div class="w-3.5 h-3.5 heat-0 rounded-[3px] ml-1"></div><div class="w-3.5 h-3.5 heat-1 rounded-[3px]"></div><div class="w-3.5 h-3.5 heat-2 rounded-[3px]"></div><div class="w-3.5 h-3.5 heat-3 rounded-[3px]"></div><div class="w-3.5 h-3.5 heat-4 rounded-[3px] mr-1"></div> MAIS
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 h-[320px] flex flex-col">
+                            <h3 class="text-sm font-extrabold text-[#0B193C]">Cartões Estudados</h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 mb-6">Volume por dia da semana</p>
+                            <div class="flex-1 w-full mx-auto relative"><canvas id="chartEstudados"></canvas></div>
+                        </div>
+                        <div class="bg-white rounded-2xl p-6 shadow-sm border border-slate-200 h-[320px] flex flex-col">
+                            <h3 class="text-sm font-extrabold text-[#0B193C]">Taxa de Retenção</h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1 mb-4">Lembrados vs Esquecidos</p>
+                            <div class="flex-1 w-full mx-auto relative flex justify-center"><canvas id="chartRetencao"></canvas></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW 5: SINCRONIZAR -->
+                <div id="view-sincronizar" class="view-section hidden fade-in-up h-[60vh] flex flex-col items-center justify-center">
+                    <div class="bg-white p-10 rounded-3xl shadow-sm border border-slate-200 text-center max-w-md w-full relative overflow-hidden">
+                        <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-400 to-sinapse-primary"></div>
+                        <div class="relative w-24 h-24 mx-auto mb-6">
+                            <div class="absolute inset-0 bg-blue-100 rounded-full animate-ping opacity-60"></div>
+                            <div class="relative w-full h-full bg-white border-4 border-blue-500 rounded-full flex flex-col items-center justify-center shadow-lg">
+                                <span class="material-symbols-outlined text-[40px] text-blue-600">cloud_sync</span>
+                            </div>
+                        </div>
+                        <h2 class="font-headline font-extrabold text-2xl text-[#0B193C] mb-3">Sincronizar Coleção</h2>
+                        <p class="text-sm text-slate-500 mb-8 font-medium px-4">Seus flashcards e progresso em Baralhos serão salvos no banco de dados na nuvem da Mentoria.</p>
+                        
+                        <button onclick="mockSync()" id="btnSyncNow" class="bg-[#0B193C] hover:bg-sinapse-primary text-white font-bold w-full py-3.5 rounded-xl transition-all shadow-[0_4px_14px_0_rgb(11,25,60,0.39)] flex justify-center items-center gap-2 text-[15px]">
+                            <span class="material-symbols-outlined text-[20px]">sync</span> Iniciar Sincronização
+                        </button>
+                        
+                        <div id="syncMsg" class="hidden mt-6 text-emerald-600 font-bold bg-emerald-50 py-3 rounded-xl justify-center text-sm items-center gap-2 border border-emerald-100">
+                            <span class="material-symbols-outlined text-[18px]">check_circle</span> Nenhuma alteração pendente. Atualizado!
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL CRIAR BARALHO (NEW DECK) -->
+        <div id="modalNovoBaralho" class="fixed inset-0 z-[70] hidden opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharModalNovoBaralho()"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-sm bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col">
+                <div class="p-8">
+                    <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-2 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sinapse-primary icon-fill">add_to_photos</span> Novo Baralho
+                    </h3>
+                    <p class="text-xs text-slate-500 mb-6 font-medium leading-relaxed">Crie hierarquias utilizando "::".<br>Exemplo: <span class="font-bold text-slate-700 bg-slate-100 px-1 rounded">Matemática::Geometria</span></p>
+                    <input id="inputNovoBaralho" type="text" placeholder="Nome do Baralho (Path)" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-5 py-3.5 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-indigo-50 font-bold transition-all">
+                </div>
+                <div class="px-8 py-5 bg-slate-50/80 border-t border-slate-100 flex justify-end gap-3 w-full">
+                    <button onclick="fecharModalNovoBaralho()" class="px-5 py-2.5 rounded-xl font-bold text-slate-500 hover:bg-slate-200 hover:text-slate-700 transition-colors text-sm">Cancelar</button>
+                    <button onclick="salvarGeralBaralho()" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-6 py-2.5 rounded-xl font-bold shadow-md transition-colors text-sm">Salvar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTEXT MENU BARALHOS -->
+        <div id="deckContextMenu" class="hidden absolute z-50 bg-white border border-slate-200 shadow-premium rounded-xl w-48 py-2 text-sm font-bold text-slate-600 flex flex-col overflow-hidden">
+            <button onclick="contextMenuAction('estudar')" class="text-left px-4 py-2.5 hover:bg-indigo-50 hover:text-indigo-600 flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">play_circle</span> Estudar Agora</button>
+            <button onclick="contextMenuAction('adicionar')" class="text-left px-4 py-2.5 hover:bg-slate-50 hover:text-[#0B193C] flex items-center gap-2 border-b border-slate-100 transition-colors"><span class="material-symbols-outlined text-[18px]">add</span> Adicionar Card</button>
+            <button onclick="contextMenuAction('renomear')" class="text-left px-4 py-2.5 hover:bg-slate-50 hover:text-[#0B193C] flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span> Renomear</button>
+            <button onclick="contextMenuAction('excluir')" class="text-left px-4 py-2.5 hover:bg-rose-50 hover:text-rose-600 flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span> Excluir Deck</button>
+        </div>
+
+        <!-- MODAL ESTUDO OTIMIZADO -->
+        <div id="modalEstudo" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300 bg-[#FAFAFB]">
+             <!-- Top bar study -->
+            <div class="absolute top-0 inset-x-0 h-20 bg-white border-b border-slate-100 flex items-center justify-between px-6 md:px-10 z-20 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)]">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-inner"><span class="material-symbols-outlined icon-fill">school</span></div>
+                    <div>
+                        <h2 class="font-headline font-extrabold text-xl text-[#0B193C] leading-none" id="studyDeckTitle">Estudando...</h2>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1.5" id="studyDeckDiscipline">...</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="hidden md:flex bg-slate-50 rounded-xl px-4 py-2 border border-slate-100 text-xs font-bold gap-4">
+                        <span class="text-blue-600 flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-blue-500"></div> <span id="studyCntNew">0</span></span>
+                        <div class="w-px h-4 bg-slate-200"></div>
+                        <span class="text-rose-500 flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-rose-500"></div> <span id="studyCntLearn">0</span></span>
+                        <div class="w-px h-4 bg-slate-200"></div>
+                        <span class="text-emerald-500 flex items-center gap-1.5"><div class="w-2 h-2 rounded-full bg-emerald-500"></div> <span id="studyCntRev">0</span></span>
+                    </div>
+                    <button onclick="editarCardEstudoAtual()" class="flex items-center gap-1.5 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-slate-500 font-bold hover:text-indigo-600 hover:bg-indigo-50 transition-colors tooltip" title="Editar Cartão Atual">
+                        <span class="material-symbols-outlined text-[18px]">edit</span> <span class="text-xs hidden md:inline">Editar</span>
+                    </button>
+                    <button onclick="fecharModalEstudo()" class="w-10 h-10 rounded-full bg-white border border-slate-200 shadow-sm text-slate-400 flex items-center justify-center hover:bg-rose-50 hover:text-rose-500 hover:border-rose-200 transition-all font-bold">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Container -->
+            <div class="h-full w-full flex flex-col items-center justify-center pt-24 pb-10 px-6 perspective-1000">
+                <div id="flashcardBox" class="w-full max-w-4xl h-[500px] relative transform-style-3d transition-transform duration-700 ease-in-out cursor-pointer group shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] rounded-[40px]">
+                    <!-- Frente -->
+                    <div class="absolute inset-0 bg-white rounded-[40px] border border-slate-200 flex flex-col p-12 md:p-16 backface-hidden z-10 transition-shadow bg-[url('https://www.transparenttextures.com/patterns/notebook.png')]">
+                        <div class="flex-1 flex flex-col justify-center items-center text-center relative z-10 w-full">
+                            <span class="bg-indigo-50/80 text-indigo-600 text-[10px] font-extrabold uppercase px-4 py-2 rounded-full tracking-widest mb-8 border border-indigo-100 shadow-sm">Card — Frente</span>
+                            <h2 id="studyCardFront" class="text-3xl md:text-4xl font-headline font-bold text-[#0B193C] leading-snug break-words whitespace-pre-wrap max-w-full overflow-hidden">Carregando Baralho...</h2>
+                        </div>
+                    </div>
+                    <!-- Verso -->
+                    <div class="absolute inset-0 bg-white rounded-[40px] border border-emerald-200 flex flex-col p-12 md:p-16 backface-hidden rotate-y-180 transition-shadow bg-[url('https://www.transparenttextures.com/patterns/notebook.png')] shadow-[0_20px_60px_-15px_rgba(16,185,129,0.15)]">
+                        <div class="flex-1 flex flex-col justify-center items-center text-center overflow-y-auto custom-scrollbar relative px-4">
+                            <span class="bg-emerald-50 text-emerald-600 text-[10px] font-extrabold uppercase px-4 py-2 rounded-full tracking-widest mb-8 border border-emerald-100 shadow-sm">Verso — Resposta</span>
+                            <div class="text-2xl md:text-3xl font-headline font-bold text-[#0B193C] leading-relaxed max-w-3xl break-words whitespace-pre-wrap w-full flex-1 flex flex-col justify-center">
+                                <span id="studyCardBack">Aguardando...</span>
+                            </div>
+                            <!-- Box Extra Hint -->
+                            <div id="studyCardExtraBox" class="mt-8 bg-amber-50 border border-amber-100 rounded-2xl w-full p-5 flex gap-4 text-left hidden shadow-sm">
+                                <span class="material-symbols-outlined text-amber-500 mt-0.5 icon-fill text-[24px]">info</span>
+                                <div>
+                                    <p class="text-[10px] font-extrabold uppercase text-amber-700 tracking-widest block mb-1">Dica / Extra</p>
+                                    <p id="studyCardExtra" class="text-sm font-semibold text-amber-900"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controls Panel -->
+                <div class="mt-12 w-full max-w-3xl flex justify-center h-[90px] relative">
+                    <button id="btnShowAnswer" onclick="flipCard()" class="bg-[#0B193C] hover:bg-sinapse-primary transition-colors text-white font-extrabold text-lg px-20 py-4.5 rounded-2xl shadow-[0_10px_25px_-5px_rgba(11,25,60,0.4)] absolute top-0 w-full md:w-auto h-[60px] flex items-center justify-center">
+                        Mostrar Resposta
+                    </button>
+                    <div id="ratingsPanel" class="flex flex-nowrap items-center justify-center gap-4 w-full opacity-0 translate-y-10 transition-all duration-500 absolute top-0 pointer-events-none px-4">
+                        <button class="bg-white hover:bg-rose-50 border-b-4 border-rose-200 hover:border-rose-400 font-bold px-4 py-3.5 rounded-2xl flex flex-col items-center flex-1 transition-all shadow-[0_4px_15px_-5px_rgba(0,0,0,0.05)] group" onclick="nextCard('repetir')">
+                            <span id="lblRepetir" class="text-[10px] font-extrabold text-rose-500 mb-0.5">&lt; 1 min</span>
+                            <span class="text-lg text-rose-600 font-headline">Repetir</span>
+                        </button>
+                        <button class="bg-white hover:bg-orange-50 border-b-4 border-orange-200 hover:border-orange-400 font-bold px-4 py-3.5 rounded-2xl flex flex-col items-center flex-1 transition-all shadow-[0_4px_15px_-5px_rgba(0,0,0,0.05)] group" onclick="nextCard('dificil')">
+                            <span id="lblDificil" class="text-[10px] font-extrabold text-orange-500 mb-0.5">10 min</span>
+                            <span class="text-lg text-orange-600 font-headline">Difícil</span>
+                        </button>
+                        <button class="bg-white hover:bg-blue-50 border-b-4 border-blue-200 hover:border-blue-400 font-bold px-4 py-3.5 rounded-2xl flex flex-col items-center flex-1 transition-all shadow-[0_4px_15px_-5px_rgba(0,0,0,0.05)] group" onclick="nextCard('bom')">
+                            <span id="lblBom" class="text-[10px] font-extrabold text-blue-500 mb-0.5">1 a 2 d</span>
+                            <span class="text-lg text-blue-600 font-headline">Bom</span>
+                        </button>
+                        <button class="bg-white hover:bg-emerald-50 border-b-4 border-emerald-200 hover:border-emerald-400 font-bold px-4 py-3.5 rounded-2xl flex flex-col items-center flex-1 transition-all shadow-[0_4px_15px_-5px_rgba(0,0,0,0.05)] group" onclick="nextCard('facil')">
+                            <span id="lblFacil" class="text-[10px] font-extrabold text-emerald-500 mb-0.5">4 Dias</span>
+                            <span class="text-lg text-emerald-600 font-headline">Fácil</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../src/js/database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // ===============================
+        // CORE SPA ROUTER & NAVIGATION
+        // ===============================
+        function switchTab(index) {
+            const tabs = document.querySelectorAll('.anki-tab');
+            const views = document.querySelectorAll('.view-section');
+            
+            tabs.forEach((t, i) => {
+                if(i === index) t.classList.add('tab-active');
+                else t.classList.remove('tab-active');
+            });
+
+            views.forEach((v, i) => {
+                if(i === index) v.classList.remove('hidden');
+                else v.classList.add('hidden');
+            });
+
+            if(index === 0) renderDecksHome();
+            if(index === 1) renderDropdowns();
+            if(index === 2) renderBrowserTable();
+            if(index === 3) initStats();
+        }
+
+        // ===============================
+        // TAB 1: BARALHOS E ÁRVORE
+        // ===============================
+        const expandedDecks = new Set();
+        let selectedDeck = null;
+
+        function toggleDeck(path) {
+            if(expandedDecks.has(path)) expandedDecks.delete(path);
+            else expandedDecks.add(path);
+            renderDecksHome();
+        }
+
+        function buildDeckTree() {
+            let decks = window.db ? (window.db.get('flashcard_decks') || []) : [];
+            let cards = window.db ? (window.db.get('flashcards') || []) : [];
+            let r_decks = [], stats = {};
+
+            decks.forEach(d => {
+                const path = d.fullPath || d.nome;
+                if(!r_decks.includes(path)) r_decks.push(path);
+            });
+
+            cards.forEach(c => {
+                const dPath = c.deckId || 'Padrão';
+                if(!r_decks.includes(dPath)) r_decks.push(dPath);
+                let p = dPath.split('::');
+                for(let i=1; i<p.length; i++){
+                    let parent = p.slice(0,i).join('::');
+                    if(!r_decks.includes(parent)) r_decks.push(parent);
+                }
+            });
+
+            r_decks.forEach(d => { stats[d] = { novo: 0, aprender: 0, revisar: 0 }; });
+
+            const now = new Date();
+            cards.forEach(c => {
+                let dPath = c.deckId || 'Padrão';
+                let isNew = c.status === 'novo' || (!c.status);
+                let dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
+                
+                let isLearn = c.status === 'aprendendo' && (!dt || dt <= now);
+                let isRev = c.status === 'revisao' && (!dt || dt <= now);
+
+                let p = dPath.split('::');
+                for(let i=1; i<=p.length; i++){
+                    let asc = p.slice(0,i).join('::');
+                    if (!stats[asc]) stats[asc] = { novo:0, aprender:0, revisar:0 };
+                    if(isNew) stats[asc].novo++;
+                    else if(isLearn) stats[asc].aprender++;
+                    else if(isRev) stats[asc].revisar++; 
+                }
+            });
+
+            r_decks.sort();
+            return { r_decks, stats };
+        }
+
+        function renderDecksHome() {
+            const wrap = document.getElementById('ankiDeckGridWrapper');
+            if(!wrap) return;
+            const { r_decks, stats } = buildDeckTree();
+            
+            if(r_decks.length === 0){
+                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p></div>';
+                return;
+            }
+
+            const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
+            const isVisible = (p) => {
+                const parts = p.split('::');
+                for(let i=1; i<parts.length; i++){
+                    if(!expandedDecks.has(parts.slice(0,i).join('::'))) return false;
+                }
+                return true;
+            }
+
+            let html = [];
+            r_decks.forEach(p => {
+                if(!isVisible(p)) return;
+                let parts = p.split('::');
+                let name = parts[parts.length-1];
+                let deep = parts.length-1;
+                let s = stats[p];
+                let pl = deep * 26 + 16;
+                let exp = expandedDecks.has(p);
+
+                let chevron = hasChild(p) ? 
+                    `<span class="material-symbols-outlined text-[18px] text-slate-400 hover:text-[#0B193C] cursor-pointer inline-flex items-center justify-center w-6 transition-transform ${exp ? 'rotate-90' : ''}" onclick="event.stopPropagation(); toggleDeck('${p}')">play_arrow</span>` 
+                    : `<span class="inline-block w-6"></span>`;
+
+                html.push(`
+                    <div class="grid grid-cols-12 gap-4 px-2 py-3.5 items-center hover:bg-indigo-50/40 transition-colors cursor-pointer group select-none text-[15px]" onclick="selectedDeck='${p}'; document.getElementById('deckContextMenu').classList.add('hidden');" oncontextmenu="showContextMenu(event, '${p}')">
+                        <div class="col-span-6 flex items-center pr-2" style="padding-left: ${pl}px">
+                            ${chevron}
+                            <span class="ml-1.5 font-bold text-[#0B193C] hover:underline whitespace-nowrap overflow-hidden text-ellipsis flex-1" onclick="event.stopPropagation(); abEstudo('${p}')">${name}</span>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center ml-2">
+                                <button class="material-symbols-outlined text-[18px] text-slate-400 hover:text-sinapse-primary p-1 bg-white hover:bg-slate-50 rounded shadow-sm border border-slate-200 transition-colors" onclick="event.stopPropagation(); showContextMenu(event, '${p}')">more_horiz</button>
+                            </div>
+                        </div>
+                        <div class="col-span-2 text-center font-extrabold ${s.novo===0?'text-slate-300':'text-blue-500'}">${s.novo}</div>
+                        <div class="col-span-2 text-center font-extrabold ${s.aprender===0?'text-slate-300':'text-rose-500'}">${s.aprender}</div>
+                        <div class="col-span-2 text-center font-extrabold ${s.revisar===0?'text-slate-300':'text-emerald-500'}">${s.revisar}</div>
+                    </div>
+                `);
+            });
+            wrap.innerHTML = html.join('');
+        }
+
+        // --- CONTEXT MENU & MODAL NOVO BARALHO ---
+        function showContextMenu(e, path) {
+            e.preventDefault(); e.stopPropagation();
+            selectedDeck = path;
+            const menu = document.getElementById('deckContextMenu');
+            menu.style.left = e.pageX + 'px';
+            menu.style.top = e.pageY + 'px';
+            menu.classList.remove('hidden');
+        }
+        document.addEventListener('click', e => {
+            const m = document.getElementById('deckContextMenu');
+            if(m && !m.contains(e.target)) m.classList.add('hidden');
+        });
+
+        let editDeckMode = null;
+        function abrirModalNovoBaralho(path=null){
+            editDeckMode = path;
+            const m = document.getElementById('modalNovoBaralho');
+            const i = document.getElementById('inputNovoBaralho');
+            i.value = path || '';
+            m.classList.remove('hidden');
+            setTimeout(() => { m.classList.remove('opacity-0'); i.focus(); }, 10);
+        }
+        function fecharModalNovoBaralho(){
+            const m = document.getElementById('modalNovoBaralho');
+            m.classList.add('opacity-0');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+        
+        function salvarGeralBaralho(){
+            const val = document.getElementById('inputNovoBaralho').value.trim();
+            if(!val) return;
+            
+            let dDb = window.db ? (window.db.get('flashcard_decks')||[]) : [];
+            let cDb = window.db ? (window.db.get('flashcards')||[]) : [];
+
+            if(editDeckMode) {
+                // Modo renomear
+                dDb.forEach(d => {
+                    if(d.fullPath === editDeckMode) d.fullPath = val;
+                    else if(d.fullPath && d.fullPath.startsWith(editDeckMode+'::')) {
+                        d.fullPath = d.fullPath.replace(editDeckMode, val);
+                    }
+                });
+                cDb.forEach(c => {
+                    if(c.deckId === editDeckMode) c.deckId = val;
+                    else if(c.deckId && c.deckId.startsWith(editDeckMode+'::')) c.deckId = c.deckId.replace(editDeckMode, val);
+                });
+                if(window.db) { window.db.set('flashcards', cDb); window.db.set('flashcard_decks', dDb); }
+            } else {
+                // Modo Criar
+                let uuid = window.db ? window.db.uuid() : Date.now().toString();
+                dDb.push({ id: uuid, fullPath: val, nome: val.split('::').pop() });
+                if(window.db) window.db.set('flashcard_decks', dDb);
+                val.split('::').forEach((_, idx, arr) => {
+                    if(idx>0) expandedDecks.add(arr.slice(0,idx).join('::'));
+                });
+            }
+            renderDecksHome();
+            fecharModalNovoBaralho();
+        }
+
+        function contextMenuAction(a) {
+            document.getElementById('deckContextMenu').classList.add('hidden');
+            if(a==='estudar') return abEstudo(selectedDeck);
+            if(a==='adicionar') { switchTab(1); setTimeout(() => { document.getElementById('addDeck').value = selectedDeck; }, 50); return; }
+            if(a==='renomear') return abrirModalNovoBaralho(selectedDeck);
+            if(a==='excluir') {
+                if(confirm(`ATENÇÃO!\nTem certeza que deseja apagar o baralho "${selectedDeck}" e TODOS os seus cartões?`)){
+                    let cDb = window.db.get('flashcards')||[];
+                    let novocDb = cDb.filter(c => c.deckId !== selectedDeck && !c.deckId.startsWith(selectedDeck+'::'));
+                    window.db.set('flashcards', novocDb);
+                    
+                    let dDb = window.db.get('flashcard_decks')||[];
+                    let novodDb = dDb.filter(d => d.fullPath !== selectedDeck && !d.fullPath.startsWith(selectedDeck+'::'));
+                    window.db.set('flashcard_decks', novodDb);
+
+                    renderDecksHome();
+                }
+            }
+        }
+
+        // ===============================
+        // TAB 2: ADICIONAR CARD
+        // ===============================
+        function renderDropdowns() {
+            let sel = document.getElementById('addDeck');
+            if(!sel) return;
+            let decks = buildDeckTree().r_decks;
+            let current = sel.value;
+            sel.innerHTML = '';
+            if(decks.length===0) sel.innerHTML = '<option value="Padrão">Padrão</option>';
+            decks.forEach(d => sel.innerHTML+=`<option value="${d}">${d}</option>`);
+            if(current && decks.includes(current)) sel.value = current;
+        }
+
+        function limparFormAdd(manterSelect = true) {
+            document.getElementById('addFront').value='';
+            document.getElementById('addBack').value='';
+            document.getElementById('addExtra').value='';
+            document.getElementById('addTags').value='';
+            document.getElementById('addFront').focus();
+        }
+
+        function salvarCard() {
+            let type = document.getElementById('addType').value;
+            let deckId = document.getElementById('addDeck').value;
+            let front = document.getElementById('addFront').value;
+            let back = document.getElementById('addBack').value;
+            let extra = document.getElementById('addExtra').value;
+            let tags = document.getElementById('addTags').value.split(',').map(s=>s.trim()).filter(s=>s);
+
+            if(!front) { alert("A frente do cartão não pode estar vazia."); return; }
+            if(type === 'basico' && !back) { alert("O verso do cartão básico não pode estar vazio."); return; }
+            if(type === 'cloze' && !front.includes('{{c')) { alert("Para cartões Omissão, você deve usar a notação {{c1::palavra}} na pergunta."); return; }
+
+            let id = window.db ? window.db.uuid() : Date.now().toString();
+            let card = {
+                id, deckId, tipo: type,
+                front, back, extra, tags,
+                status: 'novo', easeFactor: 2.5, intervaloDias: 0, passosAprendizado: 0,
+                repeticoes: 0, acertos: 0, erros: 0, ultimaResposta: null,
+                ultimoEstudoEm: null, proximaRevisaoEm: null, tempoRespostaSegundos: 0,
+                created_at: new Date().toISOString()
+            };
+
+            if(window.db) {
+                let cards = window.db.get('flashcards')||[];
+                cards.push(card);
+                window.db.set('flashcards', cards);
+            }
+
+            // Green feedback flow
+            const btn = document.getElementById('btnSaveCard');
+            const oldHtml = btn.innerHTML;
+            btn.classList.add('bg-emerald-500'); btn.classList.remove('bg-[#0B193C]', 'hover:bg-sinapse-primary');
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Adicionado!';
+            setTimeout(() => {
+                btn.classList.remove('bg-emerald-500'); btn.classList.add('bg-[#0B193C]', 'hover:bg-sinapse-primary');
+                btn.innerHTML = oldHtml;
+                limparFormAdd();
+            }, 800);
+        }
+
+        document.addEventListener('keydown', e => {
+            if(e.ctrlKey && e.key === 'Enter') {
+                const act = document.querySelector('.tab-active');
+                if(act && act.innerText === 'Adicionar') salvarCard();
+            }
+        });
+
+        // ===============================
+        // TAB 3: BROWSER / PAINEL
+        // ===============================
+        let currentTagFilter = null;
+        function renderBrowserTable() {
+            const table = document.getElementById('browserTableBody');
+            const dFilter = document.getElementById('browserDeckFilter');
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+
+            // Tags left filter menu
+            let tagsMap = [...new Set(cards.flatMap(c => c.tags || []))].sort();
+            dFilter.innerHTML = tagsMap.map(t => {
+                let isActive = currentTagFilter === t;
+                let t_class = isActive ? 'bg-sinapse-primary/10 text-sinapse-primary border border-sinapse-primary/20' : 'text-slate-600 hover:bg-slate-100';
+                let icon_class = isActive ? 'text-sinapse-primary' : 'text-slate-400';
+                return `<li onclick="currentTagFilter='${t}'; renderBrowserTable();" class="px-3 py-2.5 rounded-xl cursor-pointer truncate transition-colors font-bold ${t_class}" title="${t}"><span class="material-symbols-outlined text-[14px] ${icon_class} mr-1 align-sub">sell</span>${t}</li>`;
+            }).join('');
+
+            // Fazer a filtragem caso haja etiqueta selecionada
+            let finalCards = [...cards];
+            if(currentTagFilter) {
+                finalCards = finalCards.filter(c => c.tags && c.tags.includes(currentTagFilter));
+            }
+
+            // Fill table logic (latest 50 for quickness)
+            const sortedCards = finalCards.reverse();
+            if(sortedCards.length === 0) {
+                table.innerHTML = `<tr><td colspan="4" class="px-6 py-10 text-center text-slate-400 font-bold">Nenhum cartão cadastrado na coleção.</td></tr>`;
+                return;
+            }
+
+            table.innerHTML = sortedCards.slice(0,50).map(c => {
+                let statusColor = "text-blue-500 bg-blue-50";
+                let statusText = "NOVO";
+                if(c.status === 'aprendendo') { statusColor = "text-rose-500 bg-rose-50"; statusText = "APRENDENDO"; }
+                else if(c.status === 'revisao') { statusColor = "text-emerald-500 bg-emerald-50"; statusText = "REVISÃO"; }
+                
+                return `
+                <tr class="hover:bg-indigo-50/50 border-b border-slate-100 transition-colors group" onclick="abEstudoUnico('${c.id}')">
+                    <td class="px-8 py-4 truncate max-w-[250px] font-bold text-[#0B193C]">${c.front}</td>
+                    <td class="px-6 py-4 truncate max-w-[200px] text-slate-500 font-medium">${c.back || '<span class="opacity-50 italic">Vazio</span>'}</td>
+                    <td class="px-6 py-4 truncate max-w-[150px]"><span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] uppercase font-bold relative -top-0.5">${c.deckId}</span></td>
+                    <td class="px-6 py-4">
+                        <span class="${statusColor} px-2.5 py-1.5 flex items-center justify-center rounded text-[10px] uppercase font-bold tracking-widest relative -top-0.5 max-w-max border ${statusColor.split(' ')[0].replace('text','border')}">
+                            ${statusText}
+                        </span>
+                    </td>
+                </tr>
+            `}).join('');
+        }
+
+        function openQuickEdit(id) {
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+            let c = cards.find(x=>x.id===id);
+            if(!c) return;
+            document.getElementById('qEditId').value = c.id;
+            document.getElementById('qEditFront').value = c.front;
+            document.getElementById('qEditBack').value = c.back;
+            document.getElementById('quickEditPanel').classList.remove('translate-x-full');
+            document.getElementById('qEditFront').focus();
+        }
+        function fecharQuickEdit() {
+            document.getElementById('quickEditPanel').classList.add('translate-x-full');
+        }
+        function excluirCartao(id) {
+            if(confirm('Tem certeza que deseja apagar permanentemente este cartão?')) {
+                let cards = window.db ? window.db.get('flashcards')||[] : [];
+                window.db.set('flashcards', cards.filter(c=>c.id!==id));
+                fecharQuickEdit();
+                renderBrowserTable();
+            }
+        }
+        function salvarQuickEdit() {
+            let id = document.getElementById('qEditId').value;
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+            let i = cards.findIndex(c=>c.id===id);
+            if(i > -1) {
+                cards[i].front = document.getElementById('qEditFront').value;
+                cards[i].back = document.getElementById('qEditBack').value;
+                window.db.set('flashcards', cards);
+                fecharQuickEdit();
+                renderBrowserTable();
+            }
+        }
+
+        // ===============================
+        // TAB 4: ESTATISTICAS
+        // ===============================
+        function initStats() {
+            let reviews = window.db ? window.db.get('flashcard_reviews') || [] : [];
+            
+            // Build Map date -> count
+            let mapCounts = {};
+            let acertos = 0; let erros = 0;
+            let totalTime = 0;
+            
+            reviews.forEach(r => {
+                let dStr = r.respondidoEm.substring(0, 10);
+                mapCounts[dStr] = (mapCounts[dStr] || 0) + 1;
+                if(r.resposta === 'bom' || r.resposta === 'facil') acertos++;
+                else erros++;
+                totalTime += (r.tempoSegundos || 0);
+            });
+            
+            // Render Heatmap (84 dias)
+            const hm = document.getElementById('heatmapGrid');
+            hm.innerHTML = '';
+            
+            let heatDates = [];
+            let td = new Date();
+            for(let i=0; i<84; i++) {
+                let dObj = new Date(td);
+                dObj.setDate(td.getDate() - i);
+                let isodate = dObj.toISOString().substring(0, 10);
+                heatDates.unshift(isodate);
+            }
+            
+            heatDates.forEach(dt => {
+                let cnt = mapCounts[dt] || 0;
+                let val = 0;
+                if(cnt > 0 && cnt <= 10) val = 1;
+                else if(cnt > 10 && cnt <= 30) val = 2;
+                else if(cnt > 30 && cnt <= 80) val = 3;
+                else if(cnt > 80) val = 4;
+                hm.innerHTML += `<div class="w-3.5 h-3.5 rounded-[3px] heat-${val} hover:border hover:border-slate-800 transition-all cursor-pointer" title="${cnt} revisões em ${dt}"></div>`;
+            });
+
+            // Bars (Last 7 Days)
+            let bLabels = [], bData = [];
+            const dayNames = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+            for(let i=6; i>=0; i--) {
+                let dObj = new Date(td);
+                dObj.setDate(td.getDate() - i);
+                let dStr = dObj.toISOString().substring(0,10);
+                bLabels.push(dayNames[dObj.getDay()]);
+                bData.push(mapCounts[dStr] || 0);
+            }
+
+            if(window.c1) window.c1.destroy();
+            if(window.c2) window.c2.destroy();
+
+            const ctxA = document.getElementById('chartEstudados').getContext('2d');
+            window.c1 = new Chart(ctxA, {
+                type: 'bar',
+                data: { labels: bLabels, datasets: [{ label: 'Cartões Resolvidos', data: bData, backgroundColor: '#6366F1', borderRadius: 4, hoverBackgroundColor: '#4f46e5' }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { display:false }, x: { grid: { display: false }, ticks: { font: { weight: 'bold' }, color: '#64748b' } } } }
+            });
+
+            const ctxB = document.getElementById('chartRetencao').getContext('2d');
+            let total = acertos + erros;
+            let pAcerto = total > 0 ? Math.round((acertos/total)*100) : 0;
+            let pErro = total > 0 ? Math.round((erros/total)*100) : 0;
+            if(total===0) { acertos=1; pAcerto=100; pErro=0; } // default visual if zero
+
+            window.c2 = new Chart(ctxB, {
+                type: 'doughnut',
+                data: { labels: [`Lembrei (${pAcerto}%)`,`Esqueci (${pErro}%)`], datasets: [{ data: [acertos, erros], backgroundColor: ['#10B981', '#f43f5e'], borderWidth: 0, hoverOffset: 4 }] },
+                options: { layout: { padding: 10 }, responsive: true, maintainAspectRatio: false, plugins:{ legend: { position: 'bottom', labels: { boxWidth: 10, padding: 15, font: {size: 11, weight: 'bold', family: 'Inter'}, color: '#475569' } } } }
+            });
+            
+            // Sub updates text globais
+            try {
+                let min = Math.floor(totalTime / 60);
+                document.getElementById('statTotalTime').innerText = min < 60 ? min + ' min' : Math.round(min/60*10)/10 + ' h';
+                document.getElementById('statTotalQuestions').innerText = reviews.length;
+            } catch(e) {}
+        }
+
+        // ===============================
+        // TAB 5: SINCRONIZAR
+        // ===============================
+        function mockSync() {
+            const btn = document.getElementById('btnSyncNow');
+            const msg = document.getElementById('syncMsg');
+            msg.classList.add('hidden');
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[20px]">sync</span> Sincronizando com a Nuvem...';
+            btn.classList.add('opacity-80', 'cursor-not-allowed', 'pointer-events-none');
+            
+            setTimeout(() => {
+                btn.innerHTML = '<span class="material-symbols-outlined text-[20px]">sync</span> Iniciar Sincronização';
+                btn.classList.remove('opacity-80', 'cursor-not-allowed', 'pointer-events-none');
+                msg.classList.remove('hidden');
+                setTimeout(()=>msg.classList.add('hidden'), 4000);
+            }, 2500);
+        }
+
+        // ===============================
+        // MODAL ESTUDAR (MOTOR ANKI SRS)
+        // ===============================
+        let estudoCards = [], actIdx = 0;
+        let cardRenderTime = 0;
+        
+        function abEstudo(path) {
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+            let allDeckCards = cards.filter(c => c.deckId === path || c.deckId.startsWith(path+'::'));
+            
+            const now = new Date();
+            let cNovos = [], cLearn = [], cRev = [];
+            
+            allDeckCards.forEach(c => {
+                let dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
+                if(c.status === 'novo') {
+                    cNovos.push(c);
+                } else if(c.status === 'aprendendo' && (!dt || dt <= now)) {
+                    cLearn.push(c);
+                } else if(c.status === 'revisao' && (!dt || dt <= now)) {
+                    cRev.push(c);
+                }
+            });
+
+            // DAILY LIMITS MOCK (Can be inputs later)
+            const LIMIT_NEW = 20;
+            const LIMIT_REV = 200;
+            
+            // Queue priorities: Learn (no limits, they are active steps), Reviews (up to Limit), New (Up to Limit)
+            cRev = cRev.slice(0, LIMIT_REV);
+            cNovos = cNovos.slice(0, LIMIT_NEW);
+            
+            document.getElementById('studyCntNew').innerText = cNovos.length;
+            document.getElementById('studyCntLearn').innerText = cLearn.length;
+            document.getElementById('studyCntRev').innerText = cRev.length;
+
+            estudoCards = [...cLearn, ...cRev, ...cNovos];
+            actIdx = 0;
+
+            document.getElementById('studyDeckTitle').innerText = path.split('::').pop();
+            document.getElementById('studyDeckDiscipline').innerText = path;
+            const m = document.getElementById('modalEstudo');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
+            
+            renderStudyCard();
+        }
+
+        function buildClozeView(text, reveal=false) {
+            if(!text.includes('{{c')) return text;
+            return text.replace(/{{c(\d+)::(.*?)}}/g, (match, numb, content) => {
+                if(reveal) {
+                    return `<span class="bg-blue-100 text-blue-700 px-1 rounded font-bold border-b-2 border-blue-300">${content}</span>`;
+                } else {
+                    return `<span class="bg-slate-200 text-slate-500 font-bold px-3 py-0.5 rounded border border-slate-300 select-none">[vazio]</span>`;
+                }
+            });
+        }
+
+        function renderStudyCard() {
+            const p = document.getElementById('ratingsPanel');
+            const b = document.getElementById('btnShowAnswer');
+            const box = document.getElementById('flashcardBox');
+            box.classList.remove('rotate-y-180');
+            p.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+            b.classList.remove('opacity-0', 'pointer-events-none');
+            
+            if(estudoCards.length===0) {
+                document.getElementById('studyCardFront').innerHTML = '<span class="text-slate-400">Este baralho está vazio ou você não tem cartões para hoje.</span>';
+                document.getElementById('studyCardBack').innerText = '';
+                document.getElementById('studyCardExtraBox').classList.add('hidden');
+                b.classList.add('hidden');
+                return;
+            }
+            if(actIdx >= estudoCards.length) {
+                document.getElementById('studyCardFront').innerHTML = '<span class="text-emerald-500 flex flex-col items-center gap-4"><span class="material-symbols-outlined text-[64px] mb-4">celebration</span> Você revisou todos cartões da fila!</span>';
+                document.getElementById('studyCardBack').innerText = 'Volte amanhã para manter sua ofensiva 🔥.';
+                document.getElementById('studyCardExtraBox').classList.add('hidden');
+                b.classList.add('hidden');
+                
+                if (typeof confetti === 'function') confetti({ particleCount: 150, spread: 80, origin: { y: 0.6 } });
+                return;
+            }
+
+            let c = estudoCards[actIdx];
+            
+            if(c.tipo === 'cloze') {
+                document.getElementById('studyCardFront').innerHTML = buildClozeView(c.front, false);
+                document.getElementById('studyCardBack').innerHTML = buildClozeView(c.front, true);
+            } else {
+                document.getElementById('studyCardFront').innerText = c.front;
+                document.getElementById('studyCardBack').innerText = c.back;
+            }
+
+            if(c.extra) {
+                document.getElementById('studyCardExtra').innerText = c.extra;
+                document.getElementById('studyCardExtraBox').classList.remove('hidden');
+            } else { 
+                document.getElementById('studyCardExtraBox').classList.add('hidden'); 
+            }
+            
+            cardRenderTime = Date.now();
+        }
+        
+        function flipCard() {
+            document.getElementById('flashcardBox').classList.add('rotate-y-180');
+            document.getElementById('btnShowAnswer').classList.add('opacity-0', 'pointer-events-none');
+            document.getElementById('ratingsPanel').classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+            
+            let c = estudoCards[actIdx];
+            let lblR = '1 min', lblD = '6 min', lblB = '10 min', lblF = '4 dias';
+            
+            if (c.status === 'novo') {
+                lblR = '< 1 m'; lblD = '6 m'; lblB = '10 m'; lblF = '4 d';
+            } else if (c.status === 'aprendendo') {
+                lblR = '< 1 m'; lblD = '6 m'; 
+                lblB = c.passosAprendizado === 2 ? '1 d' : '10 m'; 
+                lblF = '3 d';
+            } else if (c.status === 'revisao') {
+                lblR = '10 m'; 
+                lblD = Math.max(1, Math.round(c.intervaloDias * 1.2)) + ' d';
+                lblB = Math.max(1, Math.round(c.intervaloDias * c.easeFactor)) + ' d';
+                lblF = Math.max(1, Math.round(c.intervaloDias * (c.easeFactor + 0.30))) + ' d';
+            }
+            
+            document.getElementById('lblRepetir').innerText = lblR;
+            document.getElementById('lblDificil').innerText = lblD;
+            document.getElementById('lblBom').innerText = lblB;
+            document.getElementById('lblFacil').innerText = lblF;
+        }
+        
+        function nextCard(rat) {
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+            let curr = estudoCards[actIdx];
+            let gIdx = cards.findIndex(c=>c.id===curr.id);
+            
+            if(gIdx > -1) {
+                let c = cards[gIdx];
+                let msRes = Date.now() - cardRenderTime;
+                let segs = Math.floor(msRes/1000);
+                
+                let oldStatus = c.status;
+                let oldInterval = c.intervaloDias;
+                
+                const addMin = (m) => new Date(Date.now() + m * 60000).toISOString();
+                const addDay = (d) => new Date(Date.now() + d * 86400000).toISOString();
+                
+                if (c.status === 'novo') {
+                    if(rat === 'repetir') {
+                        c.status = 'aprendendo'; c.passosAprendizado = 1; c.proximaRevisaoEm = addMin(1); c.erros++;
+                    } else if(rat === 'dificil') {
+                        c.status = 'aprendendo'; c.passosAprendizado = 1; c.proximaRevisaoEm = addMin(6); c.erros++;
+                    } else if(rat === 'bom') {
+                        c.status = 'aprendendo'; c.passosAprendizado = 2; c.proximaRevisaoEm = addMin(10); c.acertos++;
+                    } else if(rat === 'facil') {
+                        c.status = 'revisao'; c.intervaloDias = 4; c.easeFactor = 2.5; c.repeticoes = 1; c.proximaRevisaoEm = addDay(4); c.acertos++;
+                    }
+                } else if (c.status === 'aprendendo') {
+                    if(rat === 'repetir') {
+                        c.passosAprendizado = 1; c.proximaRevisaoEm = addMin(1); c.erros++;
+                    } else if(rat === 'dificil') {
+                        c.proximaRevisaoEm = addMin(6); c.erros++;
+                    } else if(rat === 'bom') {
+                        if (c.passosAprendizado === 2) {
+                            c.status = 'revisao'; c.intervaloDias = 1; c.repeticoes = 1; c.proximaRevisaoEm = addDay(1); c.acertos++;
+                        } else {
+                            c.passosAprendizado = 2; c.proximaRevisaoEm = addMin(10); c.acertos++;
+                        }
+                    } else if(rat === 'facil') {
+                        c.status = 'revisao'; c.intervaloDias = 3; c.repeticoes = 1; c.proximaRevisaoEm = addDay(3); c.acertos++;
+                    }
+                } else if (c.status === 'revisao') {
+                    if(rat === 'repetir') {
+                        c.status = 'aprendendo'; c.passosAprendizado = 1; c.proximaRevisaoEm = addMin(10); 
+                        c.easeFactor = Math.max(1.3, c.easeFactor - 0.20); c.erros++; c.repeticoes = 0;
+                    } else if(rat === 'dificil') {
+                        c.intervaloDias = Math.max(1, Math.round(c.intervaloDias * 1.2));
+                        c.easeFactor = Math.max(1.3, c.easeFactor - 0.15);
+                        c.proximaRevisaoEm = addDay(c.intervaloDias); c.erros++;
+                    } else if(rat === 'bom') {
+                        c.intervaloDias = Math.max(1, Math.round(c.intervaloDias * c.easeFactor));
+                        c.proximaRevisaoEm = addDay(c.intervaloDias); c.acertos++; c.repeticoes++;
+                    } else if(rat === 'facil') {
+                        c.intervaloDias = Math.max(1, Math.round(c.intervaloDias * (c.easeFactor + 0.30)));
+                        c.easeFactor = Math.min(3.5, c.easeFactor + 0.15);
+                        c.proximaRevisaoEm = addDay(c.intervaloDias); c.acertos++; c.repeticoes++;
+                    }
+                }
+                c.ultimoEstudoEm = new Date().toISOString();
+                c.ultimaResposta = rat;
+                c.tempoRespostaSegundos = segs;
+                
+                let hist = window.db.get('flashcard_reviews') || [];
+                hist.push({
+                    id: window.db.uuid(), cardId: c.id, deckId: c.deckId, respondidoEm: new Date().toISOString(),
+                    resposta: rat, tempoSegundos: segs,
+                    statusAnterior: oldStatus, statusNovo: c.status,
+                    intervaloAnterior: oldInterval, intervaloNovo: c.intervaloDias
+                });
+                window.db.set('flashcard_reviews', hist);
+                
+                window.db.set('flashcards', cards);
+                
+                if(oldStatus === 'novo'){
+                    let cnt = parseInt(document.getElementById('studyCntNew').innerText);
+                    if(cnt>0) document.getElementById('studyCntNew').innerText = cnt-1;
+                } else if (oldStatus === 'aprendendo' && c.status === 'revisao') {
+                    let cnt = parseInt(document.getElementById('studyCntLearn').innerText);
+                    if(cnt>0) document.getElementById('studyCntLearn').innerText = cnt-1;
+                } else if (oldStatus === 'revisao' && c.status === 'aprendendo') {
+                    let cnR = parseInt(document.getElementById('studyCntRev').innerText);
+                    if(cnR>0) document.getElementById('studyCntRev').innerText = cnR-1;
+                    document.getElementById('studyCntLearn').innerText = parseInt(document.getElementById('studyCntLearn').innerText) + 1;
+                }
+            }
+            
+            actIdx++;
+            renderStudyCard();
+        }
+
+        function fecharModalEstudo() {
+            const m = document.getElementById('modalEstudo');
+            m.classList.add('opacity-0');
+            setTimeout(() => { m.classList.add('hidden'); renderDecksHome(); }, 300);
+        }
+
+        function abEstudoUnico(id) {
+            let cards = window.db ? window.db.get('flashcards')||[] : [];
+            let targetCard = cards.find(c => c.id === id);
+            if (!targetCard) return;
+
+            estudoCards = [targetCard];
+            actIdx = 0;
+
+            document.getElementById('studyCntNew').innerText = 0;
+            document.getElementById('studyCntLearn').innerText = 0;
+            document.getElementById('studyCntRev').innerText = 0;
+
+            document.getElementById('studyDeckTitle').innerText = 'Revisão Avulsa';
+            document.getElementById('studyDeckDiscipline').innerText = targetCard.deckId;
+
+            const m = document.getElementById('modalEstudo');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
+            renderStudyCard();
+        }
+
+        function editarCardEstudoAtual() {
+            if(estudoCards[actIdx]) {
+                let cId = estudoCards[actIdx].id;
+                fecharModalEstudo();
+                switchTab(2); // Muda para o painel se não estiver
+                setTimeout(() => openQuickEdit(cId), 300);
+            }
+        }
+
+        // INIT LOAD
+        document.addEventListener('DOMContentLoaded', () => {
+            switchTab(0);
+        });
+
+    </script>
+</body>
+</html>

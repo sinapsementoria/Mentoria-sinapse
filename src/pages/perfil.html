@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Perfil Elite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="../../src/js/database.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            accent: '#10B981', // Verde central
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                            gold: '#FBBF24', // Dourado Elite
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.06)',
+                        'premium-hover': '0 15px 50px -10px rgba(11,25,60,0.12)',
+                        'glow-primary': '0 0 20px rgba(99,102,241,0.2)',
+                        'glow-gold': '0 0 25px rgba(251,191,36,0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline {
+            font-family: 'Manrope', sans-serif;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAFAFB;
+            color: #1E293B;
+        }
+
+        /* Ultra Smooth Animations */
+        .fade-in-up {
+            animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(15px);
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Premium Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #E2E8F0;
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #CBD5E1;
+        }
+
+        /* Material symbols refinement */
+        .material-symbols-outlined {
+            font-size: 20px;
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+
+        .icon-bold {
+            font-variation-settings: 'wght' 600;
+        }
+
+        /* Glass / Premium Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 1);
+        }
+
+        .elite-gradient-text {
+            background: linear-gradient(135deg, #FBBF24 0%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .premium-input {
+            transition: all 0.3s ease;
+        }
+
+        .premium-input:focus {
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        /* Carousel Avatar Styles */
+        .avatar-carousel-slide {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none;
+        }
+
+        .avatar-carousel-slide.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .avatar-carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.4);
+            color: #0B193C;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s, background 0.3s, transform 0.2s;
+            backdrop-filter: blur(2px);
+        }
+
+        .avatar-carousel-btn:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        #avatarContainer:hover .avatar-carousel-btn {
+            opacity: 1;
+        }
+
+        .avatar-carousel-dots {
+            position: absolute;
+            bottom: 6px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            z-index: 10;
+        }
+
+        .avatar-carousel-dot {
+            width: 6px;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .avatar-carousel-dot:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .avatar-carousel-dot.active {
+            background: white;
+            transform: scale(1.2);
+            box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+
+<body
+    class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside
+        class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <!-- Logo Area -->
+        <div class="h-24 flex items-center px-8 border-b border-slate-50/50">
+            <img src="../../public/assets/images/LEAO.jpeg" alt="Logo Leão" class="w-10 h-10 object-contain mr-3 mix-blend-multiply"
+                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzBCOTE5M0MiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHoiLz48L3N2Zz4='" />
+            <span
+                class="font-headline font-extrabold text-[17px] text-[#0B193C] tracking-tight whitespace-nowrap">MENTORIA
+                <span class="font-light opacity-70">SINAPSE</span></span>
+        </div>
+
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span>
+                Metas Diárias
+            </a>
+            <a href="metricas.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span>
+                Meu Desempenho
+            </a>
+            <a href="estrategia.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span>
+                Estratégia de Aprovação
+            </a>
+            <a href="provas.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span>
+                Provas
+            </a>
+            <a href="planejamento.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span>
+                Planejamento
+            </a>
+            <a href="vestibulares.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span>
+                Vestibulares
+            </a>
+            <a href="calendario.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span>
+                Calendário
+            </a>
+            <a href="simulador.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span>
+                Simulador SISU
+            </a>
+            <a href="banco-questoes.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span>
+                Banco de Questões
+            </a>
+            <a href="redacao.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span>
+                Redação
+            </a>
+            <a href="flashcard.html"
+                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span
+                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span>
+                Flashcard
+            </a>
+            <a href="perfil.html"
+                class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">person</span> Perfil
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+        </nav>
+    </aside>
+
+    <!-- MAIN SCROLL AREA -->
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto overflow-x-hidden">
+
+        <!-- Top Decorator Subtle Glow -->
+        <div
+            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0">
+        </div>
+
+        <div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relative z-10 pb-20">
+
+            <!-- EXCLUSIVE TOP HEADER BANNER -->
+            <div class="relative w-full rounded-[32px] bg-[#0B193C] overflow-hidden shadow-premium fade-in-up"
+                style="animation-delay: 0.05s;">
+                <!-- Abstract BG Elements -->
+                <div
+                    class="absolute top-0 right-0 w-[600px] h-[600px] bg-sinapse-primary/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/3 pointer-events-none">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-sinapse-accent/10 rounded-full blur-[80px] translate-y-1/3 -translate-x-1/4 pointer-events-none">
+                </div>
+
+                <div class="relative p-10 md:p-14 flex flex-col md:flex-row items-center md:items-start gap-10">
+
+                    <!-- Avatar Group -->
+                    <div class="relative shrink-0 flex flex-col items-center group">
+                        <div
+                            class="w-40 h-40 rounded-full p-1.5 bg-gradient-to-tr from-sinapse-gold to-yellow-200 shadow-glow-gold transition-transform duration-500 group-hover:scale-105">
+                            <div class="w-full h-full rounded-full border-4 border-[#0B193C] bg-slate-200 overflow-hidden relative"
+                                id="avatarContainer">
+                                <img src="../../public/assets/images/PERFIL/FOTO 1.jpg" alt="Foto Perfil 1"
+                                    class="w-full h-full object-cover avatar-carousel-slide active">
+                                <img src="../../public/assets/images/PERFIL/FOTO 2.jpg" alt="Foto Perfil 2"
+                                    class="w-full h-full object-cover avatar-carousel-slide">
+                                <img src="../../public/assets/images/PERFIL/FOTO 3.jpg" alt="Foto Perfil 3"
+                                    class="w-full h-full object-cover avatar-carousel-slide">
+                                <img src="../../public/assets/images/PERFIL/FOTO 4.png" alt="Foto Perfil 4"
+                                    class="w-full h-full object-cover avatar-carousel-slide">
+
+                                <div class="avatar-carousel-btn left-2" onclick="prevAvatarSlide(event)">
+                                    <span class="material-symbols-outlined text-[14px]">chevron_left</span>
+                                </div>
+                                <div class="avatar-carousel-btn right-2" onclick="nextAvatarSlide(event)">
+                                    <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                                </div>
+
+                                <div class="avatar-carousel-dots">
+                                    <div class="avatar-carousel-dot active" onclick="goToAvatarSlide(0, event)"></div>
+                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(1, event)"></div>
+                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(2, event)"></div>
+                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(3, event)"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Status Badge Overlay -->
+                        <div
+                            class="absolute -bottom-4 bg-gradient-to-r from-sinapse-gold to-yellow-500 text-[#0B193C] font-extrabold text-[11px] uppercase tracking-widest px-4 py-1.5 rounded-full shadow-lg border-2 border-[#0B193C] flex items-center gap-1.5">
+                            <span class="material-symbols-outlined text-[14px] icon-fill">local_fire_department</span>
+                            Leão em Alta
+                        </div>
+                    </div>
+
+                    <!-- Presentation Content -->
+                    <div class="flex-1 text-center md:text-left text-white pt-2">
+                        <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
+                            <div>
+                                <h1 class="font-headline text-4xl font-extrabold tracking-tight mb-2">Pedro Henrique
+                                </h1>
+                                <p
+                                    class="text-indigo-200 font-semibold text-lg flex items-center justify-center md:justify-start gap-2 mb-4">
+                                    <span class="material-symbols-outlined text-[20px]">school</span> Medicina USP
+                                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 mx-2"></span>
+                                    <span id="mainTurma">Turma Elite '26</span>
+                                </p>
+
+                                <div class="flex flex-wrap items-center justify-center md:justify-start gap-3">
+                                    <span
+                                        class="bg-indigo-500/20 border border-indigo-400/30 text-indigo-100 text-[10px] font-extrabold uppercase px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                                        <span
+                                            class="material-symbols-outlined text-indigo-400 icon-fill text-[14px]">star</span>
+                                        Top da Semana
+                                    </span>
+                                    <span
+                                        class="bg-emerald-500/20 border border-emerald-400/30 text-emerald-100 text-[10px] font-extrabold uppercase px-3 py-1.5 rounded-lg flex items-center gap-1.5">
+                                        <span
+                                            class="material-symbols-outlined text-emerald-400 icon-fill text-[14px]">target</span>
+                                        Foco Máximo
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Header Action Buttons -->
+                            <div class="flex items-center gap-3">
+                                <button
+                                    class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-xl font-bold transition-all text-sm flex items-center gap-2 backdrop-blur-md">
+                                    <span class="material-symbols-outlined text-[18px]">history</span> Histórico
+                                </button>
+                                <button onclick="abrirModalEditarPerfil()"
+                                    class="bg-white text-[#0B193C] hover:bg-slate-50 px-5 py-2.5 rounded-xl font-extrabold transition-all text-sm flex items-center gap-2 shadow-lg hover:-translate-y-0.5">
+                                    <span class="material-symbols-outlined text-[18px] icon-fill">edit</span> Editar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Stat Bar inside Header -->
+                <div
+                    class="bg-[#040C23]/80 backdrop-blur-md border-t border-white/10 p-6 flex flex-wrap justify-between items-center gap-6 md:px-14">
+                    <div class="flex-1 min-w-[200px]">
+                        <p class="text-[10px] text-indigo-300 font-extrabold uppercase tracking-[0.15em] mb-1">Nível de
+                            Experiência</p>
+                        <p class="font-headline font-extrabold text-white text-xl elite-gradient-text tracking-wide">
+                            Elite Nível 44</p>
+                    </div>
+                    <div class="w-px h-10 bg-white/10 hidden md:block"></div>
+                    <div class="flex-1 min-w-[150px] md:text-center">
+                        <p class="text-[10px] text-indigo-300 font-extrabold uppercase tracking-[0.15em] mb-1">XP Geral
+                        </p>
+                        <p
+                            class="font-headline font-extrabold text-white text-2xl flex items-center md:justify-center gap-2">
+                            9.850 <span class="text-sm font-semibold text-indigo-300">XP</span>
+                        </p>
+                    </div>
+                    <div class="w-px h-10 bg-white/10 hidden md:block"></div>
+                    <div class="flex-1 min-w-[200px] md:text-right">
+                        <p class="text-[10px] text-indigo-300 font-extrabold uppercase tracking-[0.15em] mb-3 md:mb-1">
+                            Desempenho Atual</p>
+                        <div class="flex items-center md:justify-end gap-3">
+                            <div class="flex-1 max-w-[150px] h-2 bg-white/10 rounded-full overflow-hidden">
+                                <div class="bg-emerald-400 h-full w-[88%] shadow-[0_0_10px_rgba(52,211,153,0.8)]"></div>
+                            </div>
+                            <span class="font-headline font-extrabold text-white text-xl">88.5%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 xl:grid-cols-12 gap-8">
+
+                <!-- LEFT COLUMN: Info Pessoal & Bio -->
+                <div class="xl:col-span-4 space-y-8 fade-in-up" style="animation-delay: 0.15s;">
+
+                    <!-- Meta e Frase Motivacional -->
+                    <div
+                        class="bg-white rounded-[24px] p-8 shadow-premium border border-slate-100 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-0"></div>
+                        <span
+                            class="material-symbols-outlined absolute top-6 right-6 text-indigo-200 text-4xl z-0 icon-fill">format_quote</span>
+
+                        <div class="relative z-10">
+                            <h3
+                                class="text-[11px] font-extrabold text-indigo-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-[16px]">psychology</span> Mentalidade
+                                Sinapse
+                            </h3>
+                            <p id="mainBio"
+                                class="text-slate-700 font-semibold text-[15px] italic leading-relaxed mb-6">
+                                "A disciplina é a ponte entre o sonho arquitetado e a realidade. Cada questão resolvida
+                                é um passo no tapete vermelho da aprovação."
+                            </p>
+
+                            <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 flex items-start gap-4">
+                                <div
+                                    class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center shrink-0">
+                                    <span class="material-symbols-outlined icon-fill">flag</span>
+                                </div>
+                                <div>
+                                    <p
+                                        class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-0.5">
+                                        Meta da Semana</p>
+                                    <p id="mainGoal" class="text-sm font-bold text-[#0B193C] leading-snug">Atingir 80%
+                                        de precisão nos blocos de Física e terminar simulado INEP.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Informações Pessoais Form -->
+                    <div class="glass-panel rounded-[24px] p-8 shadow-premium">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="font-headline font-extrabold text-[#0B193C] text-lg flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sinapse-primary">badge</span> Dados Pessoais
+                            </h3>
+                        </div>
+
+                        <form class="space-y-5">
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Nome
+                                    Completo</label>
+                                <input type="text" id="mainName" value="Pedro Henrique" readonly
+                                    class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">E-mail</label>
+                                <input type="email" id="mainEmail" value="pedro.henrique@elite.sinapse.com" readonly
+                                    class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-1.5">
+                                    <label
+                                        class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatsApp</label>
+                                    <input type="text" id="mainPhone" value="(11) 99999-9999" readonly
+                                        class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                                </div>
+                                <div class="space-y-1.5">
+                                    <label
+                                        class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Cidade</label>
+                                    <input type="text" id="mainCity" value="São Paulo, SP" readonly
+                                        class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                                </div>
+                            </div>
+
+                            <hr class="border-slate-100 my-4">
+
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Universidade
+                                    dos Sonhos</label>
+                                <input type="text" id="mainUni" value="Universidade de São Paulo (USP)" readonly
+                                    class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Modalidade
+                                    de Ingresso</label>
+                                <input type="text" id="mainMode" value="ENEM / SISU" readonly
+                                    class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Dashboard & Ranking -->
+                <div class="xl:col-span-8 space-y-8 fade-in-up" style="animation-delay: 0.25s;">
+
+                    <!-- Elite Ranking Banner -->
+                    <div
+                        class="bg-gradient-to-r from-[#0B193C] via-[#152A5C] to-[#0B193C] rounded-[24px] p-8 shadow-[0_15px_40px_-10px_rgba(11,25,60,0.3)] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-indigo-900/50">
+                        <!-- BG Details -->
+                        <div
+                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none">
+                        </div>
+
+                        <div
+                            class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-6 text-white w-full">
+                            <div
+                                class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-sinapse-gold to-yellow-300 flex items-center justify-center shrink-0 shadow-glow-gold">
+                                <span
+                                    class="material-symbols-outlined text-[#0B193C] text-[40px] icon-fill">trophy</span>
+                            </div>
+
+                            <div class="flex-1 text-center md:text-left flex flex-col justify-center h-full pt-1">
+                                <h3
+                                    class="text-[11px] font-extrabold text-sinapse-gold uppercase tracking-[0.2em] mb-1">
+                                    Classificação Elite</h3>
+                                <div class="flex items-center justify-center md:justify-start gap-4">
+                                    <p class="font-headline font-extrabold text-4xl text-white">#12 <span
+                                            class="text-sm font-semibold text-slate-300 ml-1 tracking-normal">Geral</span>
+                                    </p>
+                                    <div class="w-px h-8 bg-white/20"></div>
+                                    <p class="font-headline font-extrabold text-3xl text-slate-200">#3 <span
+                                            class="text-sm font-semibold text-slate-400 ml-1 tracking-normal">Turma</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mini stats side inside banner -->
+                        <div
+                            class="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 shrink-0 w-full md:w-auto text-center md:text-left">
+                            <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                                <span
+                                    class="material-symbols-outlined text-emerald-400 icon-bold text-[18px]">moving</span>
+                                <span class="text-sm font-bold text-emerald-400">+5 Posições</span>
+                            </div>
+                            <p class="text-xs font-semibold text-slate-300">nesta semana. Continue assim!</p>
+                            <p
+                                class="text-[10px] font-extrabold text-indigo-300 uppercase tracking-widest mt-3 pt-3 border-t border-white/10">
+                                Baseado em 540 Alunos</p>
+                        </div>
+                    </div>
+
+                    <!-- Resumo Acadêmico (8 Cards Metric Grid) -->
+                    <div>
+                        <div class="flex justify-between items-end mb-6">
+                            <div>
+                                <h2 class="font-headline text-2xl font-extrabold text-[#0B193C] tracking-tight">Resumo
+                                    Acadêmico</h2>
+                            </div>
+                            <button onclick="baixarRelatorioPDF()"
+                                class="text-[11px] font-extrabold uppercase text-sinapse-primary hover:text-indigo-700 tracking-widest flex items-center gap-1 transition-colors">
+                                Baixar Relatório <span class="material-symbols-outlined text-[16px]">download</span>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                            <!-- Card 1 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100 hover:border-indigo-100 transition-colors">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">task_alt</span></div>
+                                </div>
+                                <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">
+                                    Questões Resolvidas</p>
+                                <p id="valQuestions" class="font-headline font-extrabold text-2xl text-[#0B193C]">4.520
+                                </p>
+                            </div>
+                            <!-- Card 2 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100 hover:border-emerald-100 transition-colors relative overflow-hidden">
+                                <div class="absolute bottom-0 inset-x-0 h-1 bg-emerald-400"></div>
+                                <div class="flex justify-between items-start mb-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">percent</span></div>
+                                </div>
+                                <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">
+                                    Acertos Global</p>
+                                <p id="valAccuracy" class="font-headline font-extrabold text-2xl text-[#0B193C]">84<span
+                                        class="text-base text-slate-400">%</span></p>
+                            </div>
+                            <!-- Card 3 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100 hover:border-purple-100 transition-colors">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">edit_document</span></div>
+                                </div>
+                                <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">
+                                    Redações Entregues</p>
+                                <p id="valRedacoes" class="font-headline font-extrabold text-2xl text-[#0B193C]">42</p>
+                            </div>
+                            <!-- Card 4 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100 hover:border-amber-100 transition-colors">
+                                <div class="flex justify-between items-start mb-3">
+                                    <div
+                                        class="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[18px]">psychology</span></div>
+                                </div>
+                                <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">
+                                    Flashcards Revisados</p>
+                                <p id="valFlashcards" class="font-headline font-extrabold text-2xl text-[#0B193C]">1.280
+                                </p>
+                            </div>
+
+                            <!-- Card 5 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100">
+                                <p
+                                    class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px] icon-bold">trending_up</span>
+                                    Melhor Matéria</p>
+                                <p id="valBestSubject" class="font-bold text-[#0B193C] text-lg mb-1 truncate">Biologia
+                                </p>
+                                <p class="text-xs font-semibold text-slate-400">Em Evolução</p>
+                            </div>
+                            <!-- Card 6 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100">
+                                <p
+                                    class="text-[10px] font-extrabold text-rose-500 uppercase tracking-widest mb-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px] icon-bold">trending_down</span>
+                                    Foco Alerta</p>
+                                <p id="valAlertSubject" class="font-bold text-[#0B193C] text-lg mb-1 truncate">Física
+                                </p>
+                                <p class="text-xs font-semibold text-slate-400">Atenção Sugerida</p>
+                            </div>
+                            <!-- Card 7 -->
+                            <div
+                                class="bg-white rounded-2xl p-5 shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] border border-slate-100">
+                                <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-1">
+                                    Simulados Feitos</p>
+                                <p id="valSimulados" class="font-headline font-extrabold text-2xl text-[#0B193C] mb-1">
+                                    14</p>
+                                <p class="text-xs font-semibold text-sinapse-primary">+2 neste mês</p>
+                            </div>
+                            <2!-- Card 8 -->
+                            <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 shadow-sm">
+                                <p
+                                    class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest mb-1 flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">analytics</span> Estimativa TRI
+                                </p>
+                                <p id="valTRI"
+                                    class="font-headline font-extrabold text-3xl text-indigo-700 tracking-tight">
+                                    785<span class="text-base">.4</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Progresso do Aluno (Charts) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
+
+                        <!-- Chart 1: Evolução Mensal -->
+                        <div class="glass-panel rounded-[24px] p-8 shadow-premium border border-slate-100">
+                            <h3 class="font-headline font-extrabold text-[#0B193C] text-lg mb-6">Evolução Mensal
+                                (Acertos)</h3>
+                            <div class="h-[220px] w-full relative">
+                                <canvas id="evolutionChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Constância de Estudo -->
+                        <div class="glass-panel rounded-[24px] p-8 shadow-premium border border-slate-100">
+                            <h3 class="font-headline font-extrabold text-[#0B193C] text-lg mb-6">Frequência e Constância
+                            </h3>
+                            <div class="h-[220px] w-full relative flex items-center justify-center">
+                                <canvas id="radarChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- MODAL EDITAR PERFIL -->
+    <div id="modalEditarPerfil" class="fixed inset-0 z[60] hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalEditarPerfil()"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white rounded-[32px] shadow-premium-hover overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col z-10"
+            id="modalEditarPerfilContent" style="max-height: 90vh;">
+
+            <div
+                class="p-8 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10 w-full">
+                <h3 class="font-headline text-xl font-extrabold text-[#0B193C] flex items-center gap-3">
+                    <span class="material-symbols-outlined text-sinapse-primary icon-fill">manage_accounts</span>
+                    Editar Perfil
+                </h3>
+                <button onclick="fecharModalEditarPerfil()"
+                    class="text-slate-400 hover:text-rose-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="formEditProfile" class="p-8 space-y-6 overflow-y-auto custom-scrollbar"
+                onsubmit="salvarPerfil(event)">
+
+                <!-- Sessão: Avatar & Identificação -->
+                <div>
+                    <h4
+                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-100 pb-2">
+                        Foto & Título</h4>
+                    <div class="flex items-center gap-6">
+                        <label
+                            class="w-20 h-20 rounded-full bg-slate-100 border-2 border-slate-200 overflow-hidden shrink-0 relative group cursor-pointer shadow-sm block">
+                            <img id="editAvatarPreview"
+                                src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80"
+                                class="w-full h-full object-cover">
+                            <div
+                                class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center transition-all">
+                                <span class="material-symbols-outlined text-white text-[20px]">photo_camera</span>
+                            </div>
+                            <input type="file" accept="image/*" class="hidden" onchange="previewAvatar(event)">
+                        </label>
+                        <div class="flex-1 grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Nome
+                                    Principal</label>
+                                <input type="text" id="editName" value="Pedro Henrique"
+                                    class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                            </div>
+                            <div class="space-y-1.5">
+                                <label
+                                    class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Nome
+                                    da Turma</label>
+                                <input type="text" id="editTurma" value="Turma Elite '26"
+                                    class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sessão: Informações Pessoais -->
+                <div>
+                    <h4
+                        class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-100 pb-2">
+                        Informações Pessoais & Metas</h4>
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">E-mail</label>
+                            <input type="email" id="editEmail" value="pedro.henrique@elite.sinapse.com"
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatsApp</label>
+                            <input type="text" id="editPhone" value="(11) 99999-9999"
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Cidade</label>
+                            <input type="text" id="editCity" value="São Paulo, SP"
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                        </div>
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Universidade
+                                dos Sonhos</label>
+                            <input type="text" id="editUni" value="Universidade de São Paulo (USP)"
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                        </div>
+                    </div>
+
+                    <div class="space-y-1.5 mb-6">
+                        <label
+                            class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Modalidade
+                            de Ingresso</label>
+                        <select id="editMode"
+                            class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input cursor-pointer appearance-none">
+                            <option value="ENEM / SISU" selected>ENEM / SISU</option>
+                            <option value="PAS / Seriados">PAS / Seriados</option>
+                            <option value="Vestibular Tradicional">Vestibular Tradicional</option>
+                            <option value="Múltiplas Modalidades">Múltiplas Modalidades</option>
+                        </select>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="space-y-1.5">
+                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Seu
+                                Lema Motivacional</label>
+                            <textarea rows="2" id="editBio"
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input resize-none">"A disciplina é a ponte entre o sonho arquitetado e a realidade. Cada questão resolvida é um passo no tapete vermelho da aprovação."</textarea>
+                        </div>
+                        <div class="space-y-1.5">
+                            <label
+                                class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest px-1">Meta
+                                Principal da Semana</label>
+                            <input type="text" id="editGoal"
+                                value="Atingir 80% de precisão nos blocos de Física e terminar simulado INEP."
+                                class="w-full bg-emerald-50 border border-emerald-100 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="p-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 w-full">
+                <button type="button" onclick="fecharModalEditarPerfil()"
+                    class="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-200 transition-all text-sm">Cancelar</button>
+                <button type="submit" form="formEditProfile"
+                    class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-bold shadow-premium transition-all text-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">save</span> Salvar Alterações
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart Configuration Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            carregarPerfilDashboard();
+
+            Chart.defaults.font.family = 'Inter';
+            Chart.defaults.color = '#94a3b8';
+            Chart.defaults.scale.grid.color = '#f1f5f9';
+
+            // Chart 1: Line Evolution
+            const ctxEvol = document.getElementById('evolutionChart').getContext('2d');
+            const gradLine = ctxEvol.createLinearGradient(0, 0, 0, 220);
+            gradLine.addColorStop(0, 'rgba(99, 102, 241, 0.4)');
+            gradLine.addColorStop(1, 'rgba(99, 102, 241, 0)');
+
+            new Chart(ctxEvol, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
+                    datasets: [{
+                        label: 'Acertos Gerais (%)',
+                        data: [65, 72, 78, 85, 88.5],
+                        borderColor: '#6366F1',
+                        borderWidth: 3,
+                        backgroundColor: gradLine,
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#6366F1',
+                        pointBorderWidth: 3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: {
+                            border: { display: false },
+                            min: 50, max: 100,
+                            ticks: { callback: function (value) { return value + '%'; } }
+                        }
+                    }
+                }
+            });
+
+            // Chart 2: Discipline Radar
+            const ctxRadar = document.getElementById('radarChart').getContext('2d');
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Nat', 'Mat', 'Red', 'Lin', 'Hum'],
+                    datasets: [{
+                        label: 'Desempenho',
+                        data: [85, 92, 90, 82, 88],
+                        backgroundColor: 'rgba(16, 185, 129, 0.2)',
+                        borderColor: '#10B981',
+                        pointBackgroundColor: '#10B981',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#10B981',
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    no 
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        r: {
+                            angleLines: { color: '#f1f5f9' },
+                            grid: { color: '#f1f5f9' },
+                            pointLabels: {
+                                font: { family: 'Inter', weight: 'bold', size: 10 },
+                                color: '#64748b'
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    }
+                }
+            });
+        });
+
+        // -------------------------
+        // MODAL DE EDIÇÃO DE PERFIL
+        // -------------------------
+        function abrirModalEditarPerfil() {
+            const modal = document.getElementById('modalEditarPerfil');
+            const cont = document.getElementById('modalEditarPerfilContent');
+            modal.style.zIndex = '9999';
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                cont.classList.replace('scale-95', 'scale-100');
+            }, 10);
+        }
+
+        function fecharModalEditarPerfil() {
+            const modal = document.getElementById('modalEditarPerfil');
+            const cont = document.getElementById('modalEditarPerfilContent');
+            modal.classList.add('opacity-0');
+            cont.classList.replace('scale-100', 'scale-95');
+            setTimeout(() => { modal.classList.add('hidden'); }, 300);
+        }
+
+        function previewAvatar(event) {
+            const input = event.target;
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('editAvatarPreview').src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function salvarPerfil(e) {
+            e.preventDefault();
+            const btn = document.querySelector('button[form="formEditProfile"]');
+            const origHTML = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">sync</span> Salvando...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+
+            setTimeout(() => {
+                // Efeito demonstrativo na interface
+                const novoNome = document.getElementById('editName').value;
+                const novaTurma = document.getElementById('editTurma').value;
+                const modalAvatarSrc = document.getElementById('editAvatarPreview').src;
+                const novaBio = document.getElementById('editBio').value;
+                const novaMeta = document.getElementById('editGoal').value;
+
+                const novoEmail = document.getElementById('editEmail').value;
+                const novoPhone = document.getElementById('editPhone').value;
+                const novaCity = document.getElementById('editCity').value;
+                const novaUni = document.getElementById('editUni').value;
+                const novoMode = document.getElementById('editMode').value;
+
+                // Salvar permanentemente no localStorage
+                const perfilData = {
+                    nome: novoNome,
+                    turma: novaTurma,
+                    bio: novaBio,
+                    meta: novaMeta,
+                    avatar: modalAvatarSrc,
+                    email: novoEmail,
+                    phone: novoPhone,
+                    city: novaCity,
+                    uni: novaUni,
+                    mode: novoMode
+                };
+                localStorage.setItem('sinapsePerfilData', JSON.stringify(perfilData));
+
+                // Atualiza títulos e textos principais do cabeçalho
+                const h1El = document.querySelector('h1.font-extrabold');
+                if (h1El) h1El.innerText = novoNome;
+
+                const turmaEl = document.getElementById('mainTurma');
+                if (turmaEl) turmaEl.innerText = novaTurma;
+
+                const bioEl = document.getElementById('mainBio');
+                if (bioEl) bioEl.innerText = novaBio;
+
+                const metaEl = document.getElementById('mainGoal');
+                if (metaEl) metaEl.innerText = novaMeta;
+
+                // Atualiza os painéis fixos de Dados Pessoais
+                const mainNameEl = document.getElementById('mainName');
+                if (mainNameEl) mainNameEl.value = novoNome;
+
+                const mainEmailEl = document.getElementById('mainEmail');
+                if (mainEmailEl) mainEmailEl.value = novoEmail;
+
+                const mainPhoneEl = document.getElementById('mainPhone');
+                if (mainPhoneEl) mainPhoneEl.value = novoPhone;
+
+                const mainCityEl = document.getElementById('mainCity');
+                if (mainCityEl) mainCityEl.value = novaCity;
+
+                const mainUniEl = document.getElementById('mainUni');
+                if (mainUniEl) mainUniEl.value = novaUni;
+
+                const mainModeEl = document.getElementById('mainMode');
+                if (mainModeEl) mainModeEl.value = novoMode;
+
+                // Atualiza o avatar na área principal
+                const avatarPrincipal = document.getElementById('mainAvatar');
+                if (avatarPrincipal) {
+                    avatarPrincipal.src = modalAvatarSrc;
+                }
+
+                fecharModalEditarPerfil();
+                btn.innerHTML = origHTML;
+                btn.classList.remove('opacity-80', 'pointer-events-none');
+
+                // Ativando a satisfação do envio!
+                if (typeof confetti === 'function') {
+                    confetti({
+                        particleCount: 100,
+                        spread: 70,
+                        origin: { y: 0.6 },
+                        colors: ['#6366F1', '#10B981', '#FBBF24']
+                    });
+                }
+            }, 800);
+        }
+
+        // -------------------------
+        // GERADOR DE RELATÓRIO PDF
+        // -------------------------
+        function baixarRelatorioPDF() {
+            const btn = document.querySelector('button[onclick="baixarRelatorioPDF()"]');
+            const conteudoOriginal = btn.innerHTML;
+            btn.innerHTML = 'Gerando PDF... <span class="material-symbols-outlined text-[16px] animate-spin">sync</span>';
+            btn.classList.add('opacity-50', 'pointer-events-none');
+
+            // Área exata a capturar (Conteúdo principal dentro de "main", ignorando a sidebar left)
+            const elementoParaPDF = document.querySelector('main > div');
+
+            const opcoes = {
+                margin: 5,
+                filename: 'Relatorio_Alta_Performance_Sinapse.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                // Configurado como landscape (paisagem) para manter as medidas largas fiéis (ex: side by side chart)
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+
+            html2pdf().set(opcoes).from(elementoParaPDF).save().then(() => {
+                btn.innerHTML = conteudoOriginal;
+                btn.classList.remove('opacity-50', 'pointer-events-none');
+            });
+        }
+
+        // -------------------------
+        // GERENCIAMENTO DE DADOS LOCAIS
+        // -------------------------
+        function carregarPerfilDashboard() {
+            const dataStr = localStorage.getItem('sinapsePerfilData');
+            if (dataStr) {
+                try {
+                    const data = JSON.parse(dataStr);
+
+                    // Popula Modal Edit
+                    if (data.nome) document.getElementById('editName').value = data.nome;
+                    if (data.turma) document.getElementById('editTurma').value = data.turma;
+                    if (data.bio) document.getElementById('editBio').value = data.bio;
+                    if (data.meta) document.getElementById('editGoal').value = data.meta;
+                    if (data.avatar) document.getElementById('editAvatarPreview').src = data.avatar;
+
+                    if (data.email) document.getElementById('editEmail').value = data.email;
+                    if (data.phone) document.getElementById('editPhone').value = data.phone;
+                    if (data.city) document.getElementById('editCity').value = data.city;
+                    if (data.uni) document.getElementById('editUni').value = data.uni;
+                    if (data.mode) document.getElementById('editMode').value = data.mode;
+
+                    // Atualiza Tela Principal (Cabeçalho)
+                    const h1El = document.querySelector('h1.font-extrabold');
+                    if (h1El && data.nome) h1El.innerText = data.nome;
+
+                    const turmaEl = document.getElementById('mainTurma');
+                    if (turmaEl && data.turma) turmaEl.innerText = data.turma;
+
+                    const bioEl = document.getElementById('mainBio');
+                    if (bioEl && data.bio) bioEl.innerText = data.bio;
+
+                    const metaEl = document.getElementById('mainGoal');
+                    if (metaEl && data.meta) metaEl.innerText = data.meta;
+
+                    // Atualiza campos fixos de perfil
+                    if (data.nome) { const m = document.getElementById('mainName'); if (m) m.value = data.nome; }
+                    if (data.email) { const m = document.getElementById('mainEmail'); if (m) m.value = data.email; }
+                    if (data.phone) { const m = document.getElementById('mainPhone'); if (m) m.value = data.phone; }
+                    if (data.city) { const m = document.getElementById('mainCity'); if (m) m.value = data.city; }
+                    if (data.uni) { const m = document.getElementById('mainUni'); if (m) m.value = data.uni; }
+                    if (data.mode) { const m = document.getElementById('mainMode'); if (m) m.value = data.mode; }
+
+                    const avatarPrincipal = document.getElementById('mainAvatar');
+                    if (avatarPrincipal && data.avatar) {
+                        avatarPrincipal.src = data.avatar;
+                    }
+                } catch (e) {
+                    console.error('Erro ao carregar localStorage:', e);
+                }
+            }
+            carregarResumoAcademicoGlobais();
+        }
+
+        // Função que interliga plataforma toda consumindo de database.js
+        function carregarResumoAcademicoGlobais() {
+            if (window.db && window.db.getAcademicSummary) {
+                const globais = window.db.getAcademicSummary();
+
+                // Formatação
+                const fmtQuestoes = typeof globais.questoesFeitas === 'number' ? globais.questoesFeitas.toLocaleString('pt-BR') : globais.questoesFeitas;
+                const fmtRedacoes = globais.redacoesEntregues.toLocaleString('pt-BR');
+                const fmtFlashcs = globais.flashcardsRevisados.toLocaleString('pt-BR');
+                const fmtSimulas = globais.simuladosFeitos.toLocaleString('pt-BR');
+
+                // Injetandos Dados Calculados / Projetos da Plataforma
+                const dq = document.getElementById('valQuestions');
+                if (dq) dq.innerText = fmtQuestoes;
+
+                const da = document.getElementById('valAccuracy');
+                if (da) da.innerHTML = `${globais.acertosGlobal}<span class="text-base text-slate-400">%</span>`;
+
+                const dr = document.getElementById('valRedacoes');
+                if (dr) dr.innerText = fmtRedacoes;
+
+                const df = document.getElementById('valFlashcards');
+                if (df) df.innerText = fmtFlashcs;
+
+                const dbest = document.getElementById('valBestSubject');
+                if (dbest) dbest.innerText = globais.melhorMateria;
+
+                const dworst = document.getElementById('valAlertSubject');
+                if (dworst) dworst.innerText = globais.piorMateria;
+
+                const dsimu = document.getElementById('valSimulados');
+                if (dsimu) dsimu.innerText = fmtSimulas;
+
+                const dtri = document.getElementById('valTRI');
+                if (dtri) {
+                    let ints = Math.floor(globais.estimativaTRI);
+                    let decs = (globais.estimativaTRI - ints).toFixed(1).replace('0.', '.');
+                    dtri.innerHTML = `${ints}<span class="text-base">${decs}</span>`;
+                }
+            }
+        }
+        // -------------------------
+        // CARROSSEL DE AVATAR MAIN
+        // -------------------------
+        let currentAvatarIndex = 0;
+        const avatarSlides = document.querySelectorAll('.avatar-carousel-slide');
+        const avatarDots = document.querySelectorAll('.avatar-carousel-dot');
+        let avatarInterval;
+
+        function updateAvatarCarousel(index) {
+            if (!avatarSlides.length) return;
+            avatarSlides.forEach(slide => slide.classList.remove('active'));
+            avatarDots.forEach(dot => dot.classList.remove('active'));
+
+            avatarSlides[index].classList.add('active');
+            avatarDots[index].classList.add('active');
+            currentAvatarIndex = index;
+        }
+
+        function nextAvatarSlide(e) {
+            if (e) e.stopPropagation();
+            if (!avatarSlides.length) return;
+            let next = (currentAvatarIndex + 1) % avatarSlides.length;
+            updateAvatarCarousel(next);
+            resetAvatarInterval();
+        }
+
+        function prevAvatarSlide(e) {
+            if (e) e.stopPropagation();
+            if (!avatarSlides.length) return;
+            let prev = (currentAvatarIndex - 1 + avatarSlides.length) % avatarSlides.length;
+            updateAvatarCarousel(prev);
+            resetAvatarInterval();
+        }
+
+        function goToAvatarSlide(index, e) {
+            if (e) e.stopPropagation();
+            updateAvatarCarousel(index);
+            resetAvatarInterval();
+        }
+
+        function resetAvatarInterval() {
+            clearInterval(avatarInterval);
+            avatarInterval = setInterval(() => nextAvatarSlide(), 3000);
+        }
+
+        // Start carousel
+        if (avatarSlides.length > 0) {
+            resetAvatarInterval();
+        }
+    </script>
+</body>
+
+</html>
