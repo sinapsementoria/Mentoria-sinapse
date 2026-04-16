@@ -304,53 +304,52 @@
         if (!lionAvatarCanvas) return;
         const ctx = lionAvatarCanvas.getContext('2d', { willReadFrequently: true });
         
-        // Motor de Vídeo Offline com Remoção de Fundo Inteligente (RGB -> Alpha Mode)
+        // Motor de Vídeo Offline com Remoção de Fundo Inteligente Robusto
         const video = document.createElement('video');
-        video.src = "../../public/imagens/Akili/AKILI 1.mp4";
+        video.src = "../../public/imagens/Akili/AKILI%201.mp4"; // URL encodada pra evitar bugs do espaço
         video.autoplay = true;
         video.loop = true;
         video.muted = true;
         video.playsInline = true;
-        video.crossOrigin = "anonymous";
         video.style.display = "none";
         document.body.appendChild(video);
 
-        video.addEventListener('play', function() {
-            function processVideoFrame() {
-                if(video.paused || video.ended) return;
-                
-                // Redimensionar interfaces canvas para encaixe milimétrico com a dimensão original do vídeo
-                if(video.videoWidth && lionAvatarCanvas.width !== video.videoWidth) {
+        let processStarted = false;
+        
+        function processVideoFrame() {
+            if(video.videoWidth > 0 && !video.paused && !video.ended) {
+                // Redimensionar interfaces canvas para encaixe milimétrico
+                if(lionAvatarCanvas.width !== video.videoWidth) {
                     lionAvatarCanvas.width = video.videoWidth;
                     lionAvatarCanvas.height = video.videoHeight;
                 }
                 
-                if(lionAvatarCanvas.width > 0) {
-                    // Desenha o frame opaco do vídeo original (com o fundo da gravação)
+                try {
+                    // Desenha o frame opaco do vídeo original
                     ctx.drawImage(video, 0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
                     
-                    // Varredura cirúrgica Extrato de Pixel
+                    // Extração do Frame Realtime
                     let frame = ctx.getImageData(0, 0, lionAvatarCanvas.width, lionAvatarCanvas.height);
                     let data = frame.data;
                     
-                    // IA Algoritmo Chroma Key (Destruição de matriz negra Alpha Engine)
-                    const threshold = 18;  // Qualidade de recorte extremo pro fundo preto
-                    const feather = 40;    // Pixels ao redor do leão para esfumar o recorte sem gerar bordas duras
+                    // IA Algoritmo Chroma Key
+                    const threshold = 18;  
+                    const feather = 40;    
                     
                     for (let i = 0; i < data.length; i += 4) {
                         let r = data[i], g = data[i+1], b = data[i+2];
-                        let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // Luminância calculada por espectro visual humano
+                        let luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; 
                         
                         if (luma < threshold) {
-                            data[i+3] = 0; // Escreve o Pixel de Alpha-0 (100% invisível / sem as caixas)
+                            data[i+3] = 0; 
                         } else if (luma < threshold + feather) {
                             let factor = (luma - threshold) / feather;
-                            data[i+3] = Math.floor(factor * 255); // Esfuma sutilmente nas franjas do Leão
+                            data[i+3] = Math.floor(factor * 255); 
                         }
                     }
-                    ctx.putImageData(frame, 0, 0); // Estampa de volta ao Canvas (O leão vazado transparente perfeito!)
+                    ctx.putImageData(frame, 0, 0); 
                     
-                    // Opcional: Replicar o Feed Vazado também no Header Avatar bolinha!
+                    // Replicar no Header
                     const canvasHeader = document.getElementById('akili-avatar-canvas');
                     if (canvasHeader) {
                         if (canvasHeader.width !== lionAvatarCanvas.width) {
@@ -360,11 +359,27 @@
                         const ctxH = canvasHeader.getContext('2d');
                         ctxH.drawImage(lionAvatarCanvas, 0, 0);
                     }
+                } catch(e) {
+                    console.error("Erro no Canvas do Akili:", e);
                 }
-                requestAnimationFrame(processVideoFrame); // Engine Repetição a 60FPS
             }
-            requestAnimationFrame(processVideoFrame);
-        });
+            requestAnimationFrame(processVideoFrame); 
+        }
+
+        // Gatilho ultra seguro de reprodução
+        const startEngine = () => {
+            if(!processStarted) {
+                processStarted = true;
+                video.play().catch(e => console.warn("Autoplay bloqueado:", e));
+                requestAnimationFrame(processVideoFrame);
+            }
+        };
+
+        video.addEventListener('canplay', startEngine);
+        video.addEventListener('play', startEngine);
+        
+        // Failsafe caso os eventos falhem no Chrome
+        setTimeout(startEngine, 1000);
 
         // Módulo de Tracking Mouse UI Acoplado ao Canvas
         document.addEventListener('mousemove', (e) => {
