@@ -22,10 +22,10 @@ def main():
         print(f"[ERRO] Dropzone file not found: {args.source}")
         sys.exit(1)
 
-    # Base public assets images mapping
-    base_dest = os.path.join(os.getcwd(), 'public', 'assets', 'images')
+    # Base public imagens mapping
+    base_dest = os.path.join(os.getcwd(), 'public', 'imagens')
     
-    # Check if arg is an absolute subpath or just a generic folder like FOTO REDACOES
+    # Check if arg is an absolute subpath or just a generic folder like hero
     if "/" not in args.dest and "\\" not in args.dest:
         dest_folder = os.path.join(base_dest, args.dest)
     else:
