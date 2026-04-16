@@ -33,8 +33,8 @@
     /* Botão Flutuante (Mascote Livre) */
     #akili-widget-btn {
         position: fixed;
-        bottom: 20px;
-        right: 30px;
+        bottom: -5px;
+        right: 5px;
         z-index: 9997;
         background: transparent;
         cursor: pointer;
