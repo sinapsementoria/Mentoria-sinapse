@@ -33,14 +33,13 @@
     #akili-widget-btn:hover {
         animation-play-state: paused;
     }
-    #akili-widget-btn video {
-        width: 240px; /* Tamanho AUMENTADO do mascote holográfico */
+    #akili-widget-btn img {
+        width: 320px; /* Tamanho AUMENTADO do mascote (Maior ainda) */
         height: auto;
         object-fit: contain;
         z-index: 10;
         position: relative;
-        /* Máscara mágica que remove o fundo preto do vídeo em fundos escuros */
-        mix-blend-mode: screen; 
+        filter: drop-shadow(0 15px 25px rgba(0,0,0, 0.3)); /* Sombra suave liberada para PNGs */
         transition: transform 0.1s ease-out; /* Suavidade no Tracking */
         transform-origin: center center;
     }
@@ -239,9 +238,9 @@
     .akili-hide { display: none !important; }
     </style>
     
-    <!-- Botão Flutuante Akili (Versão VÍDEO) -->
+    <!-- Botão Flutuante Akili -->
     <div id="akili-widget-btn" onclick="window.akili.toggle()">
-        <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
+        <img src="../../public/imagens/Akili/Akili_transparente.png" alt="Akili AI">
     </div>
     
     <!-- Overlay Escuro -->
@@ -252,8 +251,8 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; mix-blend-mode: screen;">
-                    <video style="width: 140%; height: 140%; object-fit: cover;" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
+                <div style="position: relative; width: 48px; height: 48px; border-radius: 50%; background: transparent; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img style="width: 140%; height: 140%; object-fit: cover; transform: translateY(4px); scale: 1.2;" src="../../public/imagens/Akili/Akili_transparente.png" alt="Akili Avatar">
                     <!-- Online Ponto -->
                     <div style="position: absolute; bottom: 0; right: 0; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
@@ -301,17 +300,17 @@
     setTimeout(() => {
         const lionAvatarBtn = document.getElementById('akili-widget-btn');
         if (!lionAvatarBtn) return;
-        const lionAvatarVideo = lionAvatarBtn.querySelector('video');
+        const lionAvatarImg = lionAvatarBtn.querySelector('img');
         
-        if (lionAvatarVideo) {
+        if (lionAvatarImg) {
             document.addEventListener('mousemove', (e) => {
                 // Se a barra estiver aberta ou o bixo invisível, não faz
                 if (window.akili && window.akili.isOpen) {
-                    lionAvatarVideo.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    lionAvatarImg.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
                     return;
                 }
                 
-                const rect = lionAvatarVideo.getBoundingClientRect();
+                const rect = lionAvatarImg.getBoundingClientRect();
                 const centerX = rect.left + rect.width / 2;
                 const centerY = rect.top + rect.height / 2;
                 
@@ -323,12 +322,12 @@
                 const rotateY = (deltaX / window.innerWidth) * 35; 
                 const rotateX = -(deltaY / window.innerHeight) * 35;
                 
-                lionAvatarVideo.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+                lionAvatarImg.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
             });
             
             // Voltar ao normal quando mouse sair
             document.addEventListener('mouseleave', () => {
-                lionAvatarVideo.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                lionAvatarImg.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
             });
         }
     }, 100);
