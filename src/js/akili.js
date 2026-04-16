@@ -48,7 +48,7 @@
         animation-play-state: paused;
     }
     #akili-widget-btn video {
-        width: 320px; /* Tamanho AUMENTADO do mascote (Maior ainda) */
+        width: 360px; /* Tamanho AUMENTO EXTREMO do mascote principal */
         height: auto;
         object-fit: contain;
         z-index: 10;
@@ -266,11 +266,11 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <!-- Avatar Livre sem Círculo -->
-                <div style="position: relative; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;">
-                    <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 150%; height: 150%; object-fit: contain; transform: scale(1.4) translateY(-2px); filter: url(#akili-chroma-key); pointer-events: none;"></video>
-                    <!-- Online Ponto -->
-                    <div style="position: absolute; bottom: 4px; right: 4px; width: 10px; height: 10px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
+                <!-- Avatar Livre sem Círculo MAJORADO -->
+                <div style="position: relative; width: 85px; height: 85px; display: flex; align-items: center; justify-content: center; margin-left: -10px;">
+                    <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; transform: scale(1.8) translateY(-4px); filter: url(#akili-chroma-key); pointer-events: none;"></video>
+                    <!-- Online Ponto Reposicionado -->
+                    <div style="position: absolute; bottom: 8px; right: 10px; width: 12px; height: 12px; background: #10B981; border: 2px solid #FFFFFF; border-radius: 50%; z-index: 10;"></div>
                 </div>
                 <div>
                     <h3 style="font-family: 'Playfair Display', serif; font-weight: 800; font-size: 20px; color: #0B193C; margin: 0; line-height: 1;">Akili</h3>
