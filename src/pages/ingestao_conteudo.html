@@ -773,8 +773,9 @@ Ao analisar a página, siga esta rigorosa hierarquia de identificação:
 - ATENÇÃO: Nunca confunda reações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação (setas, letras e números menores), IGNORE o índice dessa figura e apenas processe-a como texto Unicode perfeitamente formatado. Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
 
 REGRAS ADICIONAIS:
-- "texto_base": parágrafo/contexto ANTES da figura ou pergunta (incluindo transcrições LaTeX de reações da questão).
-- "enunciado": a pergunta final da questão.
+- DIVISÃO DE ESCOPO OBRIGATÓRIA (Texto Base vs Comando Final):
+  * "texto_base": Uso EXCLUSIVO para o texto introdutório de ambientação, contexto teórico e transcrição da equação química matemática. NUNCA coloque o parágrafo da pergunta final aqui.
+  * "enunciado": Uso EXCLUSIVO para o comando imperativo final ou a pergunta real da questão (ex: "Sabendo-se que são produzidos...", "A massa de cloreto de sódio formada é:", "Assinale a alternativa que..."). É OBRIGATÓRIO fatiar o texto original, transferindo a introdução para o texto_base e o parágrafo declarativo final para o enunciado!
 - "tem_imagem": true APENAS se houver uma Imagem Técnica associada (gráficos/diagramas). Retorne false para questões 100% textuais com equações.
 - "indice_figura": índice inteiro da figura analisada (0, 1, 2...). Use null se for apenas texto/fórmula matemática.
 - "indices_figuras_opcoes": array de inteiros correspondente a cada alternativa (A, B, C...). Ex: se a alt A for uma Imagem Técnica índice 2, retorne [2, null, ...]. Use arrays de null espelhados para fórmulas transcritas.
