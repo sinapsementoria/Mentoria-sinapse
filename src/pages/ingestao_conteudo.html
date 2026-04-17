@@ -380,31 +380,54 @@
 
         // ═══════════════════════════════════════════════════════
         // EXTRATOR DE IMAGENS INDIVIDUAIS VIA PDF.js XObject API
-        // Extrai cada imagem embutida no PDF como objeto de pixel separado
-        // Não retorna a página inteira, retorna SOMENTE as figuras/gráficos/fórmulas
         // ═══════════════════════════════════════════════════════
         async function extractPDFImages(page, ops) {
+            // ┌─────────────────────────────────────────────────────────────────┐
+            // │  PASSO CRÍTICO: Renderizar a página ANTES de extrair as imagens  │
+            // │  O PDF.js carrega os XObjects (imagens) de forma assíncrona     │
+            // │  durante a renderização. Sem render(), page.objs.get() pode      │
+            // │  nunca chamar o callback, travando o sistema para sempre.        │
+            // └─────────────────────────────────────────────────────────────────┘
+            try {
+                const vp = page.getViewport({ scale: 1.5 });
+                const tmpCanvas = document.createElement('canvas');
+                tmpCanvas.width  = vp.width;
+                tmpCanvas.height = vp.height;
+                await page.render({ canvasContext: tmpCanvas.getContext('2d'), viewport: vp }).promise;
+                // tmpCanvas descartado após render — só nos interessa que os recursos estejam em page.objs
+            } catch (renderErr) {
+                console.warn('[ImageExtractor] Pre-render falhou (continuando sem imagens):', renderErr);
+                return []; // Se a pre-renderização falhar, pula a extração desta página
+            }
+
+            // Coleta nomes de XObjects de imagem na ordem que aparecem
             const nomesDeImagem = [];
-            // Coleta os nomes dos XObjects de imagem na ordem em que aparecem na página
             for (let i = 0; i < ops.fnArray.length; i++) {
                 if (ops.fnArray[i] === pdfjsLib.OPS.paintImageXObject) {
                     const nome = ops.argsArray[i][0];
                     if (!nomesDeImagem.includes(nome)) nomesDeImagem.push(nome);
                 }
             }
+
             const imagensExtraidas = [];
+
             for (const nome of nomesDeImagem) {
                 await new Promise((resolver) => {
-                    // page.objs.get(name, callback): callback é chamado quando a imagem está carregada
-                    // as imagens já ficam em memória após getOperatorList() ser chamado
-                    page.objs.get(nome, (imgObj) => {
-                        // Ignora imagens muito pequenas (logow, logos, ornamentos)
+                    // Timeout de segurança: se o callback não responder em 3s, continua
+                    const timeoutId = setTimeout(() => {
+                        console.warn('[ImageExtractor] Timeout aguardando XObject:', nome);
+                        resolver();
+                    }, 3000);
+
+                    const processarImagem = (imgObj) => {
+                        clearTimeout(timeoutId);
+                        // Filtra imagens muito pequenas (ícones, ornamentos, logos)
                         if (imgObj && imgObj.data && imgObj.width > 120 && imgObj.height > 80) {
                             try {
-                                const canvas = document.createElement('canvas');
-                                canvas.width  = imgObj.width;
-                                canvas.height = imgObj.height;
-                                const ctx = canvas.getContext('2d');
+                                const imgCanvas = document.createElement('canvas');
+                                imgCanvas.width  = imgObj.width;
+                                imgCanvas.height = imgObj.height;
+                                const imgCtx = imgCanvas.getContext('2d');
                                 const totalPx = imgObj.width * imgObj.height;
                                 const canais  = imgObj.data.length / totalPx;
                                 const rgba = new Uint8ClampedArray(totalPx * 4);
@@ -422,27 +445,42 @@
                                         rgba[k*4+2] = imgObj.data[k*3+2];
                                         rgba[k*4+3] = 255;
                                     }
-                                } else { // Escala de cinza
+                                } else { // Grayscale
                                     for (let k = 0; k < totalPx; k++) {
                                         const v = imgObj.data[k];
                                         rgba[k*4] = rgba[k*4+1] = rgba[k*4+2] = v;
                                         rgba[k*4+3] = 255;
                                     }
                                 }
-                                ctx.putImageData(new ImageData(rgba, canvas.width, canvas.height), 0, 0);
-                                imagensExtraidas.push(canvas.toDataURL('image/jpeg', 0.9));
+                                imgCtx.putImageData(new ImageData(rgba, imgCanvas.width, imgCanvas.height), 0, 0);
+                                imagensExtraidas.push(imgCanvas.toDataURL('image/jpeg', 0.9));
                             } catch(e) {
-                                console.warn('[ImageExtractor] Falha ao renderizar:', nome, e);
+                                console.warn('[ImageExtractor] Erro ao renderizar pixels de:', nome, e);
                             }
                         }
                         resolver();
-                    });
+                    };
+
+                    // Tenta primeiro em commonObjs (recursos compartilhados entre páginas),
+                    // depois em objs (recursos específicos da página)
+                    try {
+                        if (page.commonObjs.has(nome)) {
+                            page.commonObjs.get(nome, processarImagem);
+                        } else {
+                            page.objs.get(nome, processarImagem);
+                        }
+                    } catch(e) {
+                        clearTimeout(timeoutId);
+                        console.warn('[ImageExtractor] Erro ao chamar get():', nome, e);
+                        resolver();
+                    }
                 });
             }
+
             return imagensExtraidas;
         }
 
-        // Extrai páginas do PDF com texto + imagens individuais embutidas
+        // Extrai páginas do PDF: texto + imagens individuais (via XObject)
         async function parsePDFWithVision(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -458,26 +496,26 @@
                             // 1) Texto OCR
                             const textContent = await page.getTextContent();
                             const pageText = textContent.items.map(it => it.str).join(' ').trim();
-                            // 2) Lista de operações (necessário para carregar os objetos de imagem na memória)
+                            // 2) Lista de operações (detecta se há imagens na página)
                             const ops = await page.getOperatorList();
-                            // 3) Detecta XObjects de imagem na página
-                            const hasImgOps = ops.fnArray.some(fn =>
-                                fn === pdfjsLib.OPS.paintImageXObject
-                            );
-                            // 4) Extrai as imagens individuais (não o canvas da página!)
-                            const extractedImages = hasImgOps
-                                ? await extractPDFImages(page, ops)
-                                : [];
+                            const hasImgOps = ops.fnArray.some(fn => fn === pdfjsLib.OPS.paintImageXObject);
+                            // 3) Extrai imagens individuais (inclui pre-render interno para carregar objs)
+                            let extractedImages = [];
+                            if (hasImgOps) {
+                                setStatus(`Extraindo figuras da página ${i}/${maxPages}...`, 'orange');
+                                extractedImages = await extractPDFImages(page, ops);
+                            }
                             if (pageText.length > 10) {
                                 pages.push({
                                     text: pageText,
-                                    extractedImages,         // Array de base64 de cada figura
+                                    extractedImages,
                                     pageNum: i,
                                     temImagem: extractedImages.length > 0
                                 });
                             }
                         }
                         resolve(pages);
+
                     } catch(e) { reject(e); }
                 };
                 reader.readAsArrayBuffer(file);
