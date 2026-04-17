@@ -693,8 +693,9 @@ REGRAS ADICIONAIS:
 - "texto_base": parágrafo/contexto ANTES da figura ou pergunta.
 - "enunciado": a pergunta final da questão.
 - "tem_imagem": true se houver figura/gráfico/tabela/fórmula associada à questão.
-- "indice_figura": índice inteiro (0, 1, 2...) da figura anexada que pertence a essa questão. Obrigatório quando tem_imagem=true.
-- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "opcoes": [], "resposta_esperada"}] }`;
+- "indice_figura": índice inteiro (0, 1, 2...) da figura associada à questão (enunciado). Use null se não houver.
+- "indices_figuras_opcoes": array de inteiros (ou null) correspondente a cada alternativa (A, B, C...). Ex: se a alternativa A for a figura 2 e a B for nula, retorne [2, null, ...]. Se nenhuma alternativa tiver imagem, retorne um array de nulls.
+- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "indices_figuras_opcoes": [int|null]|null, "opcoes": [], "resposta_esperada"}] }`;
 
                 const payload = {
                     model: hasImages ? 'gpt-4o' : 'gpt-4o-mini',
@@ -741,6 +742,21 @@ REGRAS ADICIONAIS:
                                     q.imagem_base64 = page.extractedImages[0];
                                 }
                             }
+
+                            // Processar imagens das alternativas (A, B, C...)
+                            q.opcoes_imagens = [];
+                            if(q.opcoes && Array.isArray(q.opcoes)) {
+                                q.opcoes.forEach(() => q.opcoes_imagens.push(null));
+                                if (q.indices_figuras_opcoes && Array.isArray(q.indices_figuras_opcoes) && page.extractedImages) {
+                                    q.indices_figuras_opcoes.forEach((idxDaFigura, optIdx) => {
+                                        const idxNum = parseInt(idxDaFigura, 10);
+                                        if(!isNaN(idxNum) && page.extractedImages[idxNum] && optIdx < q.opcoes.length) {
+                                            q.opcoes_imagens[optIdx] = page.extractedImages[idxNum];
+                                        }
+                                    });
+                                }
+                            }
+
                             parsedQuestionsArray.push(q);
                         });
 
@@ -797,13 +813,46 @@ REGRAS ADICIONAIS:
                 
                 let opcoesHtml = '';
                 if(isMultipla && q.opcoes && q.opcoes.length > 0) {
-                    opcoesHtml = `<div class="mt-1 flex flex-col gap-2">
-                        <label class="text-[10px] uppercase tracking-widest text-slate-600 flex items-center gap-1">
+                    if(!q.opcoes_imagens) q.opcoes_imagens = Array(q.opcoes.length).fill(null);
+                    opcoesHtml = `<div class="mt-1 flex flex-col gap-3">
+                        <label class="text-[10px] uppercase tracking-widest text-slate-600 flex items-center gap-1 mb-1">
                             <span class="material-symbols-outlined text-[13px]">list</span> Alternativas
                         </label>
-                        ${q.opcoes.map((op, i) => `
-                            <input type="text" value="${op.replace(/"/g, '&quot;')}" class="w-full bg-[#0a0f1e] border border-white/5 rounded-lg pl-3 pr-2 py-2 text-sm text-slate-300 focus:border-[#f59e0b]/50 focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
-                        `).join('')}
+                        ${q.opcoes.map((op, i) => {
+                            const imgBase64 = q.opcoes_imagens[i];
+                            const badgeAuto = imgBase64 ? '<span class="ml-2 px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[8px] rounded absolute bottom-1 right-1 pointer-events-none">AUTO ✓</span>' : '';
+                            return `
+                            <div class="flex flex-col gap-2 bg-white/[0.02] p-2 rounded-lg border border-white/5 relative group/optrow">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs text-slate-500 font-bold w-4">${String.fromCharCode(65 + i)}</span>
+                                    <input type="text" value="${op.replace(/"/g, '&quot;')}" class="flex-1 bg-[#0a0f1e] border border-white/5 rounded-lg px-3 py-1.5 text-sm text-slate-300 focus:border-[#f59e0b]/50 focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
+                                    
+                                    <button onclick="if(!document.getElementById('opt-img-preview-${idx}-${i}') || document.getElementById('opt-img-preview-${idx}-${i}').classList.contains('hidden')) document.getElementById('opt-img-file-${idx}-${i}').click()" 
+                                        class="w-8 h-8 flex items-center justify-center bg-white/5 hover:bg-blue-500/20 hover:text-blue-400 ${imgBase64 ? 'text-blue-400 bg-blue-500/10' : 'text-slate-400'} rounded-lg transition shrink-0" title="Anexar imagem nesta alternativa">
+                                        <span class="material-symbols-outlined text-[16px]">image</span>
+                                    </button>
+                                    <input type="file" id="opt-img-file-${idx}-${i}" accept="image/*" class="hidden" onchange="anexarImagemOpcao(${idx}, ${i}, this)">
+                                </div>
+                                
+                                <!-- Dropzone / Preview Alternativa -->
+                                <div id="opt-img-dropzone-${idx}-${i}" 
+                                    class="relative ${imgBase64 ? 'flex' : 'hidden'} justify-center mt-1 border-2 border-dashed border-white/10 hover:border-blue-400/30 rounded-lg overflow-hidden bg-[#0a0f1e]/50 cursor-pointer w-full p-2"
+                                    ondragover="event.preventDefault(); this.style.borderColor='rgba(96,165,250,0.5)';"
+                                    ondragleave="this.style.borderColor='';"
+                                    ondrop="handleImageDropOpcao(event,${idx},${i}); this.style.borderColor='';"
+                                    onclick="document.getElementById('opt-img-file-${idx}-${i}').click()">
+                                    
+                                    <div id="opt-img-preview-${idx}-${i}" class="relative group/optimg w-full flex items-center justify-center bg-white p-2 min-h-[60px] rounded">
+                                        <img id="opt-img-tag-${idx}-${i}" src="${imgBase64 || ''}" class="max-h-24 w-auto object-contain drop-shadow">
+                                        <button onclick="event.stopPropagation(); removerImagemOpcao(${idx}, ${i})"
+                                            class="absolute -top-2 -right-2 w-6 h-6 bg-black hover:bg-red-600 text-white rounded-full flex items-center justify-center transition opacity-0 group-hover/optimg:opacity-100 z-10 shadow-lg" title="Remover Imagem">
+                                            <span class="material-symbols-outlined text-[12px]">close</span>
+                                        </button>
+                                        ${badgeAuto}
+                                    </div>
+                                </div>
+                            </div>
+                        `;}).join('')}
                     </div>`;
                 }
 
@@ -948,6 +997,53 @@ REGRAS ADICIONAIS:
             if(imgTag) imgTag.src = '';
             if(empty) empty.classList.remove('hidden');
         };
+
+        // --- FUNÇÕES DE IMAGEM PARA ALTERNATIVAS ---
+        function processarImagemOpcaoCard(idx, opIdx, base64Str) {
+            if(!base64Str) return;
+            if(parsedQuestionsArray[idx]) {
+                if(!parsedQuestionsArray[idx].opcoes_imagens) parsedQuestionsArray[idx].opcoes_imagens = [];
+                parsedQuestionsArray[idx].opcoes_imagens[opIdx] = base64Str;
+            }
+            const dropzone = document.getElementById(`opt-img-dropzone-${idx}-${opIdx}`);
+            const imgTag = document.getElementById(`opt-img-tag-${idx}-${opIdx}`);
+            if(imgTag) imgTag.src = base64Str;
+            if(dropzone) {
+                dropzone.classList.remove('hidden');
+                dropzone.classList.add('flex');
+            }
+        }
+
+        window.anexarImagemOpcao = (idx, opIdx, fileInput) => {
+            const file = fileInput.files[0];
+            if(!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => processarImagemOpcaoCard(idx, opIdx, e.target.result);
+            reader.readAsDataURL(file);
+        };
+
+        window.handleImageDropOpcao = (event, idx, opIdx) => {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            if(!file || !file.type.startsWith('image/')) return;
+            const reader = new FileReader();
+            reader.onload = (e) => processarImagemOpcaoCard(idx, opIdx, e.target.result);
+            reader.readAsDataURL(file);
+        };
+
+        window.removerImagemOpcao = (idx, opIdx) => {
+            if(parsedQuestionsArray[idx] && parsedQuestionsArray[idx].opcoes_imagens) {
+                parsedQuestionsArray[idx].opcoes_imagens[opIdx] = null;
+            }
+            const dropzone = document.getElementById(`opt-img-dropzone-${idx}-${opIdx}`);
+            const imgTag = document.getElementById(`opt-img-tag-${idx}-${opIdx}`);
+            if(imgTag) imgTag.src = '';
+            if(dropzone) {
+                dropzone.classList.remove('flex');
+                dropzone.classList.add('hidden');
+            }
+        };
+        // -------------------------------------------
         
         window.atualizarEnunciado = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].enunciado = val; };
         window.atualizarTextoBase = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].texto_base = val; };
