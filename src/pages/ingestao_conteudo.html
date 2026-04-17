@@ -453,9 +453,9 @@
             // ────────────────────────────────────────────────────────────────
             // MÉTODO 2: Text-Gap — captura VETORES e qualquer figura
             // Lógica: linha de texto tem posição Y. Entre duas linhas com gap
-            // grande (≥ 60pt PDF = ~132px canvas), há uma figura.
+            // (≥ 35pt PDF) há uma figura (reduzido para suportar alternativas curtas).
             // ────────────────────────────────────────────────────────────────
-            const MIN_GAP_PDF = 60;  // mínimo em unidades PDF
+            const MIN_GAP_PDF = 35;  // mínimo em unidades PDF
             const MARGIN_PDF  = 30;  // ignora margem superior/inferior da página
 
             if (textItems && textItems.length > 0) {
@@ -660,7 +660,7 @@
                 // ── Monta a mensagem do usuário ────────────────────────────────
                 let userContent;
                 if (hasImages) {
-                    const figuras = page.extractedImages.slice(0, 4);
+                    const figuras = page.extractedImages.slice(0, 20); // Aumentado para 20 figuras para acomodar opções ABCD
                     userContent = [
                         {
                             type: 'text',
