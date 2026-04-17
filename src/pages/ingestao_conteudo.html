@@ -554,11 +554,13 @@
                 const isMultipla = q.tipo === 'multipla_escolha';
                 
                 let opcoesHtml = '';
-                if(isMultipla && q.opcoes) {
-                    opcoesHtml = `<div class="mt-3 flex flex-col gap-2">
-                        <label class="text-xs text-slate-400">Alternativas</label>
+                if(isMultipla && q.opcoes && q.opcoes.length > 0) {
+                    opcoesHtml = `<div class="mt-1 flex flex-col gap-2">
+                        <label class="text-[10px] uppercase tracking-widest text-slate-600 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[13px]">list</span> Alternativas
+                        </label>
                         ${q.opcoes.map((op, i) => `
-                            <input type="text" value="${op.replace(/"/g, '&quot;')}" class="w-full bg-[#050511] border border-white/5 rounded pl-3 pr-2 py-1.5 text-xs text-slate-300 focus:border-[#f59e0b] focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
+                            <input type="text" value="${op.replace(/"/g, '&quot;')}" class="w-full bg-[#0a0f1e] border border-white/5 rounded-lg pl-3 pr-2 py-2 text-sm text-slate-300 focus:border-[#f59e0b]/50 focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
                         `).join('')}
                     </div>`;
                 }
@@ -569,7 +571,7 @@
                             <span class="material-symbols-outlined">delete</span>
                         </button>
                         
-                        <div class="flex gap-4 items-center mb-4">
+                        <div class="flex gap-4 items-center mb-5">
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-bold text-slate-300">Questão ${idx+1}</span>
                             <select class="bg-transparent border-b border-white/10 text-xs text-[#f59e0b] font-semibold focus:outline-none focus:border-white/30 cursor-pointer" onchange="atualizarTipo(${idx}, this.value)">
                                 <option value="multipla_escolha" style="background:#0F172A;" ${isMultipla ? 'selected' : ''}>MÚLTIPLA ESCOLHA</option>
@@ -577,29 +579,68 @@
                             </select>
                         </div>
 
-                        <div class="w-full mb-3">
-                            <label class="text-xs text-slate-400 mb-1 block">Enunciado (Editável)</label>
-                            <textarea id="enunciado-${idx}" class="w-full bg-[#050511] border border-white/10 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-[#f59e0b] break-words" rows="4" onchange="atualizarEnunciado(${idx}, this.value)">${q.enunciado || ''}</textarea>
-                            
-                            <!-- BOTAO DE ANEXAR IMAGEM PARA ESTA QUESTAO -->
-                            <div class="mt-2 flex items-center gap-3">
-                                <label for="img-upload-${idx}" class="cursor-pointer px-3 py-1.5 bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 border border-blue-500/20 text-xs font-semibold rounded flex items-center gap-2 transition">
-                                    <span class="material-symbols-outlined text-[16px]">image</span> Anexar Imagem ao Enunciado
-                                </label>
-                                <input type="file" id="img-upload-${idx}" accept="image/*" class="hidden" onchange="anexarImagemQuestao(${idx}, this)">
-                            </div>
-                            <div id="img-preview-container-${idx}" class="mt-3 hidden rounded-lg border border-white/10 overflow-hidden w-fit max-w-full">
-                                <!-- Previews das imagens anexadas aparecerão aqui -->
+                        <!-- ZONA 1: TEXTO DE CONTEXTO -->
+                        <div class="w-full mb-4">
+                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">Texto de Contexto / Introdução</label>
+                            <textarea id="texto-base-${idx}"
+                                class="w-full bg-[#0a0f1e] border border-white/8 rounded-lg p-3 text-sm text-slate-300 leading-relaxed focus:outline-none focus:border-blue-500/40 resize-none"
+                                rows="3"
+                                placeholder="Parágrafo introdutório que antecede a pergunta..."
+                                onchange="atualizarTextoBase(${idx}, this.value)">${q.texto_base || ''}</textarea>
+                        </div>
+
+                        <!-- ZONA 2: IMAGEM CENTRAL -->
+                        <div class="w-full mb-4">
+                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">Imagem / Figura / Gráfico</label>
+                            <div id="img-dropzone-${idx}"
+                                class="relative rounded-xl border-2 border-dashed border-white/10 hover:border-blue-400/30 bg-[#0a0f1e] transition-all duration-200 overflow-hidden cursor-pointer"
+                                ondragover="event.preventDefault(); this.style.borderColor='rgba(96,165,250,0.5)'; this.style.background='rgba(59,130,246,0.05)'"
+                                ondragleave="this.style.borderColor=''; this.style.background=''"
+                                ondrop="handleImageDrop(event,${idx}); this.style.borderColor=''; this.style.background=''"
+                                onclick="if(!document.getElementById('img-preview-${idx}') || document.getElementById('img-preview-${idx}').classList.contains('hidden')) document.getElementById('img-file-${idx}').click()">
+
+                                <!-- Estado Vazio -->
+                                <div id="img-empty-${idx}" class="py-8 flex flex-col items-center justify-center gap-2 select-none">
+                                    <span class="material-symbols-outlined text-[42px] text-slate-700">add_photo_alternate</span>
+                                    <p class="text-xs text-slate-700 font-medium">Clique ou arraste a imagem da questão aqui</p>
+                                    <span class="text-[10px] text-slate-700 bg-white/3 px-3 py-1 rounded-full border border-white/5">PNG · JPG · GIF · WEBP</span>
+                                </div>
+
+                                <!-- Preview da Imagem -->
+                                <div id="img-preview-${idx}" class="hidden relative group/img">
+                                    <div class="bg-white p-6 flex items-center justify-center min-h-[160px]">
+                                        <img id="img-tag-${idx}" src="" alt="Figura da questão" class="max-h-72 w-auto object-contain drop-shadow">
+                                    </div>
+                                    <button onclick="event.stopPropagation(); removerImagem(${idx})"
+                                        class="absolute top-2 right-2 w-7 h-7 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition opacity-0 group-hover/img:opacity-100 z-10"
+                                        title="Remover imagem">
+                                        <span class="material-symbols-outlined text-[14px]">close</span>
+                                    </button>
+                                </div>
+                                
+                                <input type="file" id="img-file-${idx}" accept="image/*" class="hidden" onchange="anexarImagemQuestao(${idx}, this)">
                             </div>
                         </div>
+
+                        <!-- ZONA 3: PERGUNTA FINAL -->
+                        <div class="w-full mb-4">
+                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">Pergunta / Enunciado Final</label>
+                            <textarea id="enunciado-${idx}"
+                                class="w-full bg-[#0a0f1e] border border-white/8 rounded-lg p-3 text-sm text-slate-200 font-medium focus:outline-none focus:border-[#f59e0b]/50 resize-none leading-relaxed"
+                                rows="3"
+                                onchange="atualizarEnunciado(${idx}, this.value)">${q.enunciado || ''}</textarea>
+                        </div>
                         
+                        <!-- ZONA 4: ALTERNATIVAS -->
                         ${opcoesHtml}
                         
-                        <div class="mt-4 pt-3 border-t border-white/5 flex gap-4">
-                            <div class="flex-grow">
-                                <label class="text-xs text-slate-400 mb-1 block">Gabarito Esperado</label>
-                                <input type="text" class="w-full bg-[#10b981]/10 border border-[#10b981]/20 rounded p-2 text-xs text-[#10b981] font-bold focus:outline-none focus:border-[#10b981]" value="${(q.resposta_esperada || '').replace(/"/g, '&quot;')}" onchange="atualizarGabarito(${idx}, this.value)">
-                            </div>
+                        <!-- ZONA 5: GABARITO -->
+                        <div class="mt-4 pt-3 border-t border-white/5">
+                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">Gabarito Esperado</label>
+                            <input type="text"
+                                class="w-full bg-[#10b981]/10 border border-[#10b981]/20 rounded-lg p-2 text-sm text-[#10b981] font-bold focus:outline-none focus:border-[#10b981]/50"
+                                value="${(q.resposta_esperada || '').replace(/"/g, '&quot;')}"
+                                onchange="atualizarGabarito(${idx}, this.value)">
                         </div>
                     </div>
                 `;
@@ -614,33 +655,46 @@
             atualizarContador();
         };
 
-        // Script para Anexos Automáticos de Imagem na Memória do Enunciado
-        window.anexarImagemQuestao = (idx, fileInput) => {
-            const file = fileInput.files[0];
-            if(!file) return;
-
+        // Script para Anexos de Imagem nas Zonas Dedicadas dos Cards
+        function processarImagemParaCard(idx, file) {
+            if(!file || !file.type.startsWith('image/')) return;
             const reader = new FileReader();
             reader.onload = (e) => {
                 const base64Str = e.target.result;
-                const htmlInjetado = `<div class="mt-3"><img src="${base64Str}" class="max-w-full h-auto rounded-lg shadow-md border border-white/10 shadow-black/50" /></div>`;
-                
-                // Salvar dinamicamente esse anexo HTML ao final da string literal da questao na memoria
+                // Salvar na propriedade dedicada da questão
                 if(parsedQuestionsArray[idx]) {
-                    parsedQuestionsArray[idx].enunciado += htmlInjetado;
-                    
-                    // Exibir Preview Visual
-                    const container = document.getElementById(`img-preview-container-${idx}`);
-                    container.classList.remove('hidden');
-                    const img = document.createElement('img');
-                    img.src = base64Str;
-                    img.className = "max-w-[200px] h-auto block mt-2"; // Visual small for admin audit
-                    container.appendChild(img);
+                    parsedQuestionsArray[idx].imagem_base64 = base64Str;
                 }
+                // Exibir Preview no card
+                const empty = document.getElementById(`img-empty-${idx}`);
+                const preview = document.getElementById(`img-preview-${idx}`);
+                const imgTag = document.getElementById(`img-tag-${idx}`);
+                if(empty) empty.classList.add('hidden');
+                if(imgTag) imgTag.src = base64Str;
+                if(preview) preview.classList.remove('hidden');
             };
             reader.readAsDataURL(file);
+        }
+        window.anexarImagemQuestao = (idx, fileInput) => {
+            processarImagemParaCard(idx, fileInput.files[0]);
+        };
+        window.handleImageDrop = (event, idx) => {
+            event.preventDefault();
+            const file = event.dataTransfer.files[0];
+            processarImagemParaCard(idx, file);
+        };
+        window.removerImagem = (idx) => {
+            if(parsedQuestionsArray[idx]) delete parsedQuestionsArray[idx].imagem_base64;
+            const empty = document.getElementById(`img-empty-${idx}`);
+            const preview = document.getElementById(`img-preview-${idx}`);
+            const imgTag = document.getElementById(`img-tag-${idx}`);
+            if(preview) preview.classList.add('hidden');
+            if(imgTag) imgTag.src = '';
+            if(empty) empty.classList.remove('hidden');
         };
         
         window.atualizarEnunciado = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].enunciado = val; };
+        window.atualizarTextoBase = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].texto_base = val; };
         window.atualizarTipo = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].tipo = val; };
         window.atualizarGabarito = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].resposta_esperada = val; };
         
@@ -690,9 +744,10 @@
                     banca: "Ingestão Extraída (IA)",
                     vestibular: "Múltiplos / Apostila",
                     ano: new Date().getFullYear().toString(),
-                    texto_base: "", // Nao aplicavel na extracao bruta inicial a menos que o prompt aborte texto base.
+                    texto_base: q.texto_base || "",
+                    imagem_base64: q.imagem_base64 || "",
                     enunciado: q.enunciado || "",
-                    tipo: (q.tipo === 'multipla_escolha') ? 'multipla_escolha' : 'certo_errado', // Padroes de plataforma real (certo_errado acts as dissertative review point)
+                    tipo: (q.tipo === 'multipla_escolha') ? 'multipla_escolha' : 'certo_errado',
                     gabarito_oficial: q.resposta_esperada || "",
                     opcoes: q.opcoes || [],
                     data_criacao: new Date().toISOString()
