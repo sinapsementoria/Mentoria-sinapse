@@ -461,50 +461,77 @@
             const apiKey = apiKeyInput.value.trim();
             const url = 'https://api.openai.com/v1/chat/completions';
             
-            const payload = {
-                model: "gpt-4o-mini", // ideal pra textos longos sem encarecer
-                messages: [
-                    { "role": "system", "content": masterPrompt },
-                    { "role": "user", "content": "TEXTO DA APOSTILA:\n\n" + contextText }
-                ],
-                temperature: 0.1, // Preciso no parsing
-                response_format: { "type": "json_object" },
-                max_tokens: 16380 // Libera o limite MÁXIMO da IA para gerar JSONs gigantes e não cortar a string no meio
-            };
-
-            // Ajuste leve no prompt pra forçar JSON Object válido no GPT-4o
-            payload.messages[0].content = masterPrompt + "\nRetorne no formato de objeto: { \"questoes\": [ {...} ] }";
-
-            const res = await fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${apiKey}`
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (!res.ok) {
-                const errJson = await res.json();
-                throw new Error(errJson.error?.message || "Falha na OpenAI API");
-            }
-
-            const data = await res.json();
+            // ENGENHARIA DE LOTES (CHUNKING DYNAMICS)
+            // Cortamos o monstro de texto em fatias menores (ex: ~12000 caracteres / ~3000 tokens)
+            // garantindo que a IA nunca estoure os "Tops" de limite estourando o JSON!
+            const maxLength = 12000;
+            let chunks = [];
+            let currentChunk = "";
+            let paragraphs = contextText.split('\\n');
             
-            // Tratamento de segurança contra cortes de Token Limit!
-            let content;
-            try {
-                content = JSON.parse(data.choices[0].message.content);
-            } catch (jsonErr) {
-                console.error("String JSON cortada:", data.choices[0].message.content);
-                throw new Error("A Inteligência Artificial limitou a resposta porque o Simulado é muito gigante! Tente processar o PDF em fatias menores (ex: 20 páginas por vez) ou use a Rota C (Manual).");
+            for(let p of paragraphs) {
+                if((currentChunk.length + p.length) > maxLength) {
+                    chunks.push(currentChunk);
+                    currentChunk = p + "\\n";
+                } else {
+                    currentChunk += p + "\\n";
+                }
+            }
+            if(currentChunk.trim().length > 0) chunks.push(currentChunk);
+
+            parsedQuestionsArray = [];
+            
+            // Loop Sequencial Anti-DDoS e Anti-Timeout
+            for (let i = 0; i < chunks.length; i++) {
+                setStatus(`Minerando Lote ${i+1}/${chunks.length}...`, 'orange');
+                btnProcessar.innerHTML = `<div class="loader-spinner"></div> Lote ${i+1}/${chunks.length}`;
+                
+                const payload = {
+                    model: "gpt-4o-mini", // ideal pra fatias médias textuais
+                    messages: [
+                        { "role": "system", "content": masterPrompt + "\\nRetorne estritamente no formato de objeto com um Array JSON nomeado 'questoes': { \"questoes\": [ {...} ] }" },
+                        { "role": "user", "content": "TEXTO DA APOSTILA (Lote Segmentado " + (i+1) + " de " + chunks.length + "):\\n\\n" + chunks[i] }
+                    ],
+                    temperature: 0.1, // Extrema lealdade no parsing de alternativas
+                    response_format: { "type": "json_object" },
+                    max_tokens: 16380 
+                };
+
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${apiKey}`
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!res.ok) {
+                    const errJson = await res.json();
+                    throw new Error(errJson.error?.message || "Falha na OpenAI API ao invadir o Lote " + (i+1));
+                }
+
+                const data = await res.json();
+                
+                try {
+                    let content = JSON.parse(data.choices[0].message.content);
+                    if(content.questoes && Array.isArray(content.questoes)) {
+                        // Concatenação universal dos lotes resgatados
+                        parsedQuestionsArray = parsedQuestionsArray.concat(content.questoes);
+                    }
+                } catch (jsonErr) {
+                    console.warn(`String JSON cortada no Lote ${i+1}:`, data.choices[0].message.content);
+                    // Em vez de travar o sistema inteiro, alertamos e engolimos esse pedacinho de erro para salvar o resto!
+                    alert(`Calor extremo detectado: O Lote PDF fragmentado nº ${i+1} perdeu a quebra e engoliu algumas questões. O restante será salvo pacificamente.`);
+                }
             }
             
-            if(content.questoes && Array.isArray(content.questoes)) {
-                parsedQuestionsArray = content.questoes;
+            // Renderização Triunfal
+            if(parsedQuestionsArray.length > 0) {
                 renderAuditList(parsedQuestionsArray);
+                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Concluído!';
             } else {
-                throw new Error("Retorno da IA em formato inesperado estrutural.");
+                throw new Error("A IA processou o DNA dos lotes inteiros mas não conseguiu extrair a arquitetura das perguntas.");
             }
         }
 
