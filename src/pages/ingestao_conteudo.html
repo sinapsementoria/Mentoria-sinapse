@@ -379,11 +379,70 @@
         });
 
         // ═══════════════════════════════════════════════════════
-        // EXTRATORES DE ARQUIVO: PDF (Vision Canvas) + WORD (HTML)
+        // EXTRATOR DE IMAGENS INDIVIDUAIS VIA PDF.js XObject API
+        // Extrai cada imagem embutida no PDF como objeto de pixel separado
+        // Não retorna a página inteira, retorna SOMENTE as figuras/gráficos/fórmulas
         // ═══════════════════════════════════════════════════════
+        async function extractPDFImages(page, ops) {
+            const nomesDeImagem = [];
+            // Coleta os nomes dos XObjects de imagem na ordem em que aparecem na página
+            for (let i = 0; i < ops.fnArray.length; i++) {
+                if (ops.fnArray[i] === pdfjsLib.OPS.paintImageXObject) {
+                    const nome = ops.argsArray[i][0];
+                    if (!nomesDeImagem.includes(nome)) nomesDeImagem.push(nome);
+                }
+            }
+            const imagensExtraidas = [];
+            for (const nome of nomesDeImagem) {
+                await new Promise((resolver) => {
+                    // page.objs.get(name, callback): callback é chamado quando a imagem está carregada
+                    // as imagens já ficam em memória após getOperatorList() ser chamado
+                    page.objs.get(nome, (imgObj) => {
+                        // Ignora imagens muito pequenas (logow, logos, ornamentos)
+                        if (imgObj && imgObj.data && imgObj.width > 120 && imgObj.height > 80) {
+                            try {
+                                const canvas = document.createElement('canvas');
+                                canvas.width  = imgObj.width;
+                                canvas.height = imgObj.height;
+                                const ctx = canvas.getContext('2d');
+                                const totalPx = imgObj.width * imgObj.height;
+                                const canais  = imgObj.data.length / totalPx;
+                                const rgba = new Uint8ClampedArray(totalPx * 4);
+                                if (canais >= 4) {
+                                    for (let k = 0; k < totalPx; k++) {
+                                        rgba[k*4]   = imgObj.data[k*4];
+                                        rgba[k*4+1] = imgObj.data[k*4+1];
+                                        rgba[k*4+2] = imgObj.data[k*4+2];
+                                        rgba[k*4+3] = imgObj.data[k*4+3] ?? 255;
+                                    }
+                                } else if (canais >= 3) {
+                                    for (let k = 0; k < totalPx; k++) {
+                                        rgba[k*4]   = imgObj.data[k*3];
+                                        rgba[k*4+1] = imgObj.data[k*3+1];
+                                        rgba[k*4+2] = imgObj.data[k*3+2];
+                                        rgba[k*4+3] = 255;
+                                    }
+                                } else { // Escala de cinza
+                                    for (let k = 0; k < totalPx; k++) {
+                                        const v = imgObj.data[k];
+                                        rgba[k*4] = rgba[k*4+1] = rgba[k*4+2] = v;
+                                        rgba[k*4+3] = 255;
+                                    }
+                                }
+                                ctx.putImageData(new ImageData(rgba, canvas.width, canvas.height), 0, 0);
+                                imagensExtraidas.push(canvas.toDataURL('image/jpeg', 0.9));
+                            } catch(e) {
+                                console.warn('[ImageExtractor] Falha ao renderizar:', nome, e);
+                            }
+                        }
+                        resolver();
+                    });
+                });
+            }
+            return imagensExtraidas;
+        }
 
-        // Renderiza cada página do PDF como imagem canvas (screenshot)
-        // e extrai text content, retornando array de {text, imageBase64, pageNum}
+        // Extrai páginas do PDF com texto + imagens individuais embutidas
         async function parsePDFWithVision(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -393,38 +452,29 @@
                         const pdfDoc = await pdfjsLib.getDocument({data: typedarray}).promise;
                         const pages = [];
                         const maxPages = Math.min(pdfDoc.numPages, 40);
-
                         for (let i = 1; i <= maxPages; i++) {
-                            setStatus(`Renderizando página ${i}/${maxPages}...`, 'orange');
+                            setStatus(`Extraindo página ${i}/${maxPages}...`, 'orange');
                             const page = await pdfDoc.getPage(i);
-
-                            // 1) Extrai texto puro
+                            // 1) Texto OCR
                             const textContent = await page.getTextContent();
                             const pageText = textContent.items.map(it => it.str).join(' ').trim();
-
-                            // 2) Renderiza a página como canvas (screenshot de alta qualidade)
-                            const scale = 2.0; // 2x = qualidade suficiente pra IA ler formulas
-                            const viewport = page.getViewport({ scale });
-                            const canvas = document.createElement('canvas');
-                            canvas.width = viewport.width;
-                            canvas.height = viewport.height;
-                            const ctx = canvas.getContext('2d');
-                            await page.render({ canvasContext: ctx, viewport }).promise;
-
-                            // 3) Detecta se a página tem elementos gráficos (imagens/desenhos)
-                            // Analisa o operador de conteúdo da página para verificar XObjects (imagens)
+                            // 2) Lista de operações (necessário para carregar os objetos de imagem na memória)
                             const ops = await page.getOperatorList();
-                            const temImagem = ops.fnArray.some(fn =>
-                                fn === pdfjsLib.OPS.paintImageXObject ||
-                                fn === pdfjsLib.OPS.paintInlineImageXObject ||
-                                fn === pdfjsLib.OPS.paintXObject
+                            // 3) Detecta XObjects de imagem na página
+                            const hasImgOps = ops.fnArray.some(fn =>
+                                fn === pdfjsLib.OPS.paintImageXObject
                             );
-
-                            // Converte canvas em JPEG base64 (comprimido para economizar tokens de API)
-                            const imageBase64 = canvas.toDataURL('image/jpeg', 0.82);
-
-                            if(pageText.length > 10) { // Ignora páginas em branco
-                                pages.push({ text: pageText, imageBase64, pageNum: i, temImagem });
+                            // 4) Extrai as imagens individuais (não o canvas da página!)
+                            const extractedImages = hasImgOps
+                                ? await extractPDFImages(page, ops)
+                                : [];
+                            if (pageText.length > 10) {
+                                pages.push({
+                                    text: pageText,
+                                    extractedImages,         // Array de base64 de cada figura
+                                    pageNum: i,
+                                    temImagem: extractedImages.length > 0
+                                });
                             }
                         }
                         resolve(pages);
@@ -434,32 +484,29 @@
             });
         }
 
-        // Converte DOCX para HTML com imagens embutidas (base64)
+        // Converte DOCX para HTML: mammoth extrai imagens embutidas como data URIs
         async function parseWordWithImages(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
                     try {
                         const arrayBuffer = e.target.result;
-                        // mammoth.convertToHtml preserva imagens como data URIs
                         const result = await mammoth.convertToHtml({
                             arrayBuffer,
                             convertImage: mammoth.images.imgElement(function(image) {
-                                return image.read('base64').then(function(imageBuffer) {
-                                    return { src: 'data:' + image.contentType + ';base64,' + imageBuffer };
+                                return image.read('base64').then(function(buf) {
+                                    return { src: 'data:' + image.contentType + ';base64,' + buf };
                                 });
                             })
                         });
-                        // Extrai texto do HTML e coleta imagens
                         const parser = new DOMParser();
                         const doc = parser.parseFromString(result.value, 'text/html');
-                        const fullText = doc.body.innerText || doc.body.textContent || '';
-                        const imgs = doc.querySelectorAll('img');
-                        // Retorna como um só bloco (Word não tem paginação clara)
+                        const fullText = doc.body.innerText || '';
+                        const imgs = Array.from(doc.querySelectorAll('img'));
                         resolve([{
                             text: fullText,
-                            imageBase64: imgs.length > 0 ? imgs[0].src : null,
-                            embeddedImages: Array.from(imgs).map(img => img.src),
+                            extractedImages: imgs.filter(img => img.src && img.src.length > 100)
+                                               .map(img => img.src),
                             pageNum: 1,
                             temImagem: imgs.length > 0
                         }]);
@@ -509,51 +556,74 @@
         });
 
         // ═══════════════════════════════════════════════════════════
-        // ROTA A: GPT-4o VISION — Lê imagem + texto de cada página
+        // ROTA A: Pipeline Híbrido
+        //   - Páginas SEM imagem  → gpt-4o-mini (texto, barato)
+        //   - Páginas COM imagem  → gpt-4o Vision (envia cada figura individualmente)
         // ═══════════════════════════════════════════════════════════
         async function processWithOpenAIVision(pagesData) {
             const apiKey = apiKeyInput.value.trim();
             const url = 'https://api.openai.com/v1/chat/completions';
-
             parsedQuestionsArray = [];
 
             for (let i = 0; i < pagesData.length; i++) {
                 const page = pagesData[i];
-                setStatus(`Analisando página ${i+1}/${pagesData.length} com Vision IA...`, 'orange');
+                const hasImages = page.extractedImages && page.extractedImages.length > 0;
+                setStatus(`Analisando pág. ${i+1}/${pagesData.length}${hasImages ? ' (com figuras)' : ''}...`, 'orange');
                 btnProcessar.innerHTML = `<div class="loader-spinner"></div> Pág. ${i+1}/${pagesData.length}`;
 
-                // Monta o conteúdo da mensagem para o usuário
-                // Sempre envia a IMAGEM da página + opção de texto como backup
-                const userContent = [
-                    {
-                        type: 'image_url',
-                        image_url: {
-                            url: page.imageBase64,
-                            detail: 'high'  // Alta fidelidade para ler formulas e graficos
+                // ── Monta a mensagem do usuário ──────────────────────────────────
+                // Se há imagens: envia o texto + cada figura extraída individualmente
+                // Se não há: envia só o texto (gpt-4o-mini, sem custo de vision)
+                let userContent;
+                if (hasImages) {
+                    // Máximo de 4 figuras por página para não exceder o limite de tokens
+                    const figuras = page.extractedImages.slice(0, 4);
+                    userContent = [
+                        {
+                            type: 'text',
+                            text: [
+                                `=== PÁGINA ${page.pageNum} ===`,
+                                `TEXTO DA PÁGINA: ${page.text.substring(0, 4000)}`,
+                                '',
+                                `Esta página contém ${figuras.length} figura(s) embutida(s). As imagens estão anexadas abaixo, NA ORDEM em que aparecem na página.`,
+                                'Identifique a qual questão cada figura pertence e defina "tem_imagem": true nessa questão.',
+                                'Extraia todas as questões presentes na página.'
+                            ].join('\n')
+                        },
+                        // Anexa cada figura embutida individualmente (não a página inteira!)
+                        ...figuras.map((img64, fi) => ({
+                            type: 'image_url',
+                            image_url: { url: img64, detail: 'high' },
+                            // Nota informativa (não é campo oficial da API, mas o texto acima explica a ordem)
+                        }))
+                    ];
+                } else {
+                    userContent = [
+                        {
+                            type: 'text',
+                            text: `=== PÁGINA ${page.pageNum} ===\nTEXTO: ${page.text.substring(0, 8000)}`
                         }
-                    },
-                    {
-                        type: 'text',
-                        text: `Página ${page.pageNum} do documento. Texto OCR auxiliar: ${page.text.substring(0, 3000)}`
-                    }
-                ];
+                    ];
+                }
 
+                // ── Prompt de sistema ─────────────────────────────────────────────
                 const systemPrompt = masterPrompt + `
 
-REGRAS ADICIONAIS PARA ANÁLISE VISUAL:
-- Se a página contiver imagens, figuras, gráficos, tabelas ou fórmulas químicas/matemáticas, defina "tem_imagem": true nessa questão.
-- Separe claramente o "texto_base" (parágrafo introdutório antes da figura) do "enunciado" (pergunta após a figura).
-- Retorne objeto JSON: { "questoes": [ {"tipo", "texto_base", "enunciado", "tem_imagem": bool, "opcoes": [], "resposta_esperada"} ] }`;
+REGRAS ADICIONAIS:
+- "texto_base": texto introdutório/contexto que vem ANTES da figura ou pergunta.
+- "enunciado": a pergunta final da questão (após a figura, se houver).
+- "tem_imagem": true somente se a questão DESTA PÁGINA tiver uma figura/gráfico/tabela/fórmula de estrutura química associada.
+- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "opcoes": [], "resposta_esperada"}] }`;
 
                 const payload = {
-                    model: 'gpt-4o',  // VISION: único modelo que vê imagens
+                    model: hasImages ? 'gpt-4o' : 'gpt-4o-mini',
                     messages: [
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: userContent }
                     ],
                     temperature: 0.1,
                     response_format: { type: 'json_object' },
-                    max_tokens: 4096
+                    max_tokens: hasImages ? 4096 : 8192
                 };
 
                 const res = await fetch(url, {
@@ -564,30 +634,32 @@ REGRAS ADICIONAIS PARA ANÁLISE VISUAL:
 
                 if (!res.ok) {
                     const errJson = await res.json();
-                    throw new Error(errJson.error?.message || `Falha na OpenAI Vision API (pág. ${page.pageNum})`);
+                    throw new Error(errJson.error?.message || `Falha na API (pág. ${page.pageNum})`);
                 }
 
                 const data = await res.json();
-
                 try {
                     const content = JSON.parse(data.choices[0].message.content);
                     if (content.questoes && Array.isArray(content.questoes)) {
+                        let imgIdx = 0; // Ponteiro para a próxima imagem disponível da página
                         content.questoes.forEach(q => {
-                            // Anexa automaticamente a imagem da página nas questões que têm elementos visuais
-                            if (q.tem_imagem || page.temImagem) {
-                                q.imagem_base64 = page.imageBase64;
+                            // Mapeamento em ordem: 1ª questão com tem_imagem → 1ª figura extraída, etc.
+                            if (q.tem_imagem && page.extractedImages && page.extractedImages[imgIdx]) {
+                                q.imagem_base64 = page.extractedImages[imgIdx];
+                                imgIdx++;
                             }
                             parsedQuestionsArray.push(q);
                         });
                     }
                 } catch(jsonErr) {
-                    console.warn(`Erro ao parsear JSON da pág. ${page.pageNum}:`, data.choices[0].message.content);
+                    console.warn(`Erro JSON pág. ${page.pageNum}:`, data.choices[0].message.content);
                 }
             }
 
             if (parsedQuestionsArray.length > 0) {
                 renderAuditList(parsedQuestionsArray);
                 btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Concluído!';
+                setStatus(`${parsedQuestionsArray.length} questões extraídas`, 'green');
             } else {
                 throw new Error('A IA não conseguiu extrair nenhuma questão do documento.');
             }
