@@ -765,9 +765,12 @@
 HIERARQUIA VISUAL E DIRETRIZES DE FÓRMULAS VS IMAGENS:
 Ao analisar a página, siga esta rigorosa hierarquia de identificação:
 1. Texto Linear: Enunciados comuns e alternativas.
-2. Expressões Simbólicas: Equações químicas (ex: $Na_2SO_3 + HCl \\rightarrow NaCl + \\dots$) e fórmulas matemáticas. Diferencie estritamente 'Fórmulas' de 'Imagens'. Fórmulas são sequências de caracteres alfanuméricos e símbolos operacionais (+, -, \\rightarrow, \\Delta). Devem ser transcritas fielmente em formato de texto estruturado ou LaTeX matematicamente perfeito embutidas junto ao 'texto_base' ou 'enunciado', e NÃO como imagens!
+2. Expressões Simbólicas: Reações químicas e fórmulas matemáticas. DEVEM ser processadas como texto e NÃO como imagens! Ao transcrever uma reação química no 'texto_base' ou 'enunciado', aplique EXATAMENTE estas 3 regras de formatação:
+   - REGRA A: Insira uma quebra de linha em branco (espaço invisível) ANTES de começar a reação química.
+   - REGRA B: Quando houver números indicando quantidades na molécula (subscritos), utilize estritamente CARACTERES UNICODE NATURAIS DE SUBSCRITO para que fiquem menores ao lado da letra, como na imagem impressa. NUNCA use cifrão de LaTeX ou underscore. Exemplo OBRIGATÓRIO de formatação: Na₂SO₃ + HCl → NaCl + H₂O + SO₂
+   - REGRA C: Insira uma nova quebra de linha em branco LOGO APÓS a reação química, antes de escrever o restante do texto (ex: "Sabendo-se que...").
 3. Imagens Técnicas: Diagramas, gráficos, mapas e estruturas moleculares complexas desenhadas (ex: cadeias carbônicas de benzeno/fenol). Estas SIM devem ser marcadas e referenciadas via 'indice_figura'.
-- ATENÇÃO: Nunca confunda notação científica e equações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação ou blocos com símbolos de reações (setas, subscritos), IGNORE o índice dessa figura e apenas processe-a como texto (OCR). Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
+- ATENÇÃO: Nunca confunda reações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação (setas, letras e números menores), IGNORE o índice dessa figura e apenas processe-a como texto Unicode perfeitamente formatado. Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
 
 REGRAS ADICIONAIS:
 - "texto_base": parágrafo/contexto ANTES da figura ou pergunta (incluindo transcrições LaTeX de reações da questão).
