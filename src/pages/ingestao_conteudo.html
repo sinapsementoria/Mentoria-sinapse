@@ -594,70 +594,7 @@
                 }
             }
 
-            // ────────────────────────────────────────────────────────────────
-            // MÉTODO 4: Formula-Dent — Textos puramente centralizados/isolados
-            // Captura fórmulas 100% texto que não têm setas de vetor
-            // ────────────────────────────────────────────────────────────────
-            if (textItems && textItems.length > 0) {
-                const bands4 = textItems
-                    .filter(it => it.str.trim().length > 0 && it.transform)
-                    .map(it => {
-                        const yBottom = it.transform[5];
-                        const fontH   = Math.abs(it.transform[3]) || (it.height || 10);
-                        const cTop    = Math.max(0, (pageH - (yBottom + fontH)) * SCALE);
-                        const cBottom = Math.min(fullCanvas.height, (pageH - yBottom) * SCALE);
-                        const left    = it.transform[4] * SCALE;
-                        const right   = left + ((it.width || 0) * SCALE);
-                        return { cTop, cBottom, left, right, str: it.str };
-                    })
-                    .sort((a,b) => a.cTop - b.cTop);
-                    
-                const m4 = []; // Linhas agrupadas por Y
-                for (const b of bands4) {
-                    if (!m4.length || b.cTop > m4[m4.length-1].bottom + 8) {
-                        m4.push({ top: b.cTop, bottom: b.cBottom, left: b.left, right: b.right });
-                    } else {
-                        const cur = m4[m4.length-1];
-                        cur.bottom = Math.max(cur.bottom, b.cBottom);
-                        cur.left = Math.min(cur.left, b.left);
-                        cur.right = Math.max(cur.right, b.right);
-                    }
-                }
 
-                // Acha a margem left esmagadora do documento
-                const sortedLeft = m4.map(b => b.left).sort((a,b)=>a-b);
-                const pageLeftMargin = sortedLeft[Math.floor(sortedLeft.length * 0.1)] || 0;
-
-                for (let i = 0; i < m4.length; i++) {
-                    const line = m4[i];
-                    // Para ser uma formula textual, precisa estar deslocado (indented ~80px) em relacao à margem
-                    // E não bater na margem direita (largura máxima do texto).
-                    if (line.left > pageLeftMargin + 90 && line.right < fullCanvas.width - 90) {
-                        const prevBottom = i > 0 ? m4[i-1].bottom : 0;
-                        const nextTop    = i < m4.length-1 ? m4[i+1].top : fullCanvas.height;
-                        
-                        // Se estiver isolada verticamente em +-15px, assumimos que é equação/fórmula
-                        if (line.top - prevBottom > 15 && nextTop - line.bottom > 15) {
-                            const pad = 12;
-                            const sy = Math.max(0, Math.round(line.top) - pad);
-                            const sh = Math.min(Math.round(line.bottom - line.top) + pad*2, fullCanvas.height - sy);
-                            const sw = fullCanvas.width;
-                            const key = `${sy}-${sy+sh}`;
-                            const duplica = [...cropsMap.keys()].some(k => {
-                                const [ksy, kend] = k.split('-').map(Number);
-                                return Math.abs(ksy - sy) < 40 && Math.abs(kend - (sy+sh)) < 40;
-                            });
-                            if (!cropsMap.has(key) && !duplica) {
-                                const cc = document.createElement('canvas');
-                                cc.width = sw; cc.height = sh;
-                                cc.getContext('2d').drawImage(fullCanvas, 0, sy, sw, sh, 0, 0, sw, sh);
-                                cropsMap.set(key, cc.toDataURL('image/jpeg', 0.93));
-                                console.log(`[TextCenter] Fórmula química textual pura isolada: ${sw}×${sh}px`);
-                            }
-                        }
-                    }
-                }
-            }
 
             const result = Array.from(cropsMap.values());
             console.log(`[Extractor] Total figuras extraídas: ${result.length}`);
@@ -825,13 +762,20 @@
                 // ── Prompt de sistema ──────────────────────────────────────────
                 const systemPrompt = masterPrompt + `
 
+HIERARQUIA VISUAL E DIRETRIZES DE FÓRMULAS VS IMAGENS:
+Ao analisar a página, siga esta rigorosa hierarquia de identificação:
+1. Texto Linear: Enunciados comuns e alternativas.
+2. Expressões Simbólicas: Equações químicas (ex: $Na_2SO_3 + HCl \\rightarrow NaCl + \\dots$) e fórmulas matemáticas. Diferencie estritamente 'Fórmulas' de 'Imagens'. Fórmulas são sequências de caracteres alfanuméricos e símbolos operacionais (+, -, \\rightarrow, \\Delta). Devem ser transcritas fielmente em formato de texto estruturado ou LaTeX matematicamente perfeito embutidas junto ao 'texto_base' ou 'enunciado', e NÃO como imagens!
+3. Imagens Técnicas: Diagramas, gráficos, mapas e estruturas moleculares complexas desenhadas (ex: cadeias carbônicas de benzeno/fenol). Estas SIM devem ser marcadas e referenciadas via 'indice_figura'.
+- ATENÇÃO: Nunca confunda notação científica e equações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação ou blocos com símbolos de reações (setas, subscritos), IGNORE o índice dessa figura e apenas processe-a como texto (OCR). Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
+
 REGRAS ADICIONAIS:
-- "texto_base": parágrafo/contexto ANTES da figura ou pergunta.
+- "texto_base": parágrafo/contexto ANTES da figura ou pergunta (incluindo transcrições LaTeX de reações da questão).
 - "enunciado": a pergunta final da questão.
-- "tem_imagem": true se houver figura/gráfico/tabela/fórmula associada à questão.
-- "indice_figura": índice inteiro (0, 1, 2...) da figura associada à questão (enunciado). Use null se não houver.
-- "indices_figuras_opcoes": array de inteiros (ou null) correspondente a cada alternativa (A, B, C...). Ex: se a alternativa A for a figura 2 e a B for nula, retorne [2, null, ...]. Se nenhuma alternativa tiver imagem, retorne um array de nulls.
-- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "indices_figuras_opcoes": [int|null]|null, "opcoes": [], "resposta_esperada"}] }`;
+- "tem_imagem": true APENAS se houver uma Imagem Técnica associada (gráficos/diagramas). Retorne false para questões 100% textuais com equações.
+- "indice_figura": índice inteiro da figura analisada (0, 1, 2...). Use null se for apenas texto/fórmula matemática.
+- "indices_figuras_opcoes": array de inteiros correspondente a cada alternativa (A, B, C...). Ex: se a alt A for uma Imagem Técnica índice 2, retorne [2, null, ...]. Use arrays de null espelhados para fórmulas transcritas.
+- Retorne obrigatoriamente a estrutura: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "indices_figuras_opcoes": [int|null]|null, "opcoes": [], "resposta_esperada"}] }`;
 
                 const payload = {
                     model: hasImages ? 'gpt-4o' : 'gpt-4o-mini',
