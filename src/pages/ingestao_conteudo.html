@@ -468,7 +468,8 @@
                     { "role": "user", "content": "TEXTO DA APOSTILA:\n\n" + contextText }
                 ],
                 temperature: 0.1, // Preciso no parsing
-                response_format: { "type": "json_object" } // mas openai pede json_object contendo array, então ajustamos o prompt!
+                response_format: { "type": "json_object" },
+                max_tokens: 16380 // Libera o limite MÁXIMO da IA para gerar JSONs gigantes e não cortar a string no meio
             };
 
             // Ajuste leve no prompt pra forçar JSON Object válido no GPT-4o
@@ -489,7 +490,15 @@
             }
 
             const data = await res.json();
-            const content = JSON.parse(data.choices[0].message.content);
+            
+            // Tratamento de segurança contra cortes de Token Limit!
+            let content;
+            try {
+                content = JSON.parse(data.choices[0].message.content);
+            } catch (jsonErr) {
+                console.error("String JSON cortada:", data.choices[0].message.content);
+                throw new Error("A Inteligência Artificial limitou a resposta porque o Simulado é muito gigante! Tente processar o PDF em fatias menores (ex: 20 páginas por vez) ou use a Rota C (Manual).");
+            }
             
             if(content.questoes && Array.isArray(content.questoes)) {
                 parsedQuestionsArray = content.questoes;
