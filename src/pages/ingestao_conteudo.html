@@ -610,15 +610,12 @@
             for (let i = 0; i < pagesData.length; i++) {
                 const page = pagesData[i];
                 const hasImages = page.extractedImages && page.extractedImages.length > 0;
-                setStatus(`Analisando pág. ${i+1}/${pagesData.length}${hasImages ? ' (com figuras)' : ''}...`, 'orange');
+                setStatus(`Analisando pág. ${i+1}/${pagesData.length}${hasImages ? ` (${page.extractedImages.length} figura(s))` : ''}...`, 'orange');
                 btnProcessar.innerHTML = `<div class="loader-spinner"></div> Pág. ${i+1}/${pagesData.length}`;
 
-                // ── Monta a mensagem do usuário ──────────────────────────────────
-                // Se há imagens: envia o texto + cada figura extraída individualmente
-                // Se não há: envia só o texto (gpt-4o-mini, sem custo de vision)
+                // ── Monta a mensagem do usuário ────────────────────────────────
                 let userContent;
                 if (hasImages) {
-                    // Máximo de 4 figuras por página para não exceder o limite de tokens
                     const figuras = page.extractedImages.slice(0, 4);
                     userContent = [
                         {
@@ -627,35 +624,33 @@
                                 `=== PÁGINA ${page.pageNum} ===`,
                                 `TEXTO DA PÁGINA: ${page.text.substring(0, 4000)}`,
                                 '',
-                                `Esta página contém ${figuras.length} figura(s) embutida(s). As imagens estão anexadas abaixo, NA ORDEM em que aparecem na página.`,
-                                'Identifique a qual questão cada figura pertence e defina "tem_imagem": true nessa questão.',
-                                'Extraia todas as questões presentes na página.'
+                                `Esta página contém ${figuras.length} figura(s) embutida(s) nas imagens abaixo (índice 0 = primeira, ${figuras.length-1} = última).`,
+                                'Para cada questão que TIVER figura associada, preencha "tem_imagem": true E "indice_figura": <número do índice>.',
+                                'Para questões SEM figura, use "tem_imagem": false e omita "indice_figura".',
+                                'Extraia TODAS as questões da página.'
                             ].join('\n')
                         },
-                        // Anexa cada figura embutida individualmente (não a página inteira!)
-                        ...figuras.map((img64, fi) => ({
+                        ...figuras.map(img64 => ({
                             type: 'image_url',
-                            image_url: { url: img64, detail: 'high' },
-                            // Nota informativa (não é campo oficial da API, mas o texto acima explica a ordem)
+                            image_url: { url: img64, detail: 'high' }
                         }))
                     ];
                 } else {
-                    userContent = [
-                        {
-                            type: 'text',
-                            text: `=== PÁGINA ${page.pageNum} ===\nTEXTO: ${page.text.substring(0, 8000)}`
-                        }
-                    ];
+                    userContent = [{
+                        type: 'text',
+                        text: `=== PÁGINA ${page.pageNum} ===\nTEXTO: ${page.text.substring(0, 8000)}`
+                    }];
                 }
 
-                // ── Prompt de sistema ─────────────────────────────────────────────
+                // ── Prompt de sistema ──────────────────────────────────────────
                 const systemPrompt = masterPrompt + `
 
 REGRAS ADICIONAIS:
-- "texto_base": texto introdutório/contexto que vem ANTES da figura ou pergunta.
-- "enunciado": a pergunta final da questão (após a figura, se houver).
-- "tem_imagem": true somente se a questão DESTA PÁGINA tiver uma figura/gráfico/tabela/fórmula de estrutura química associada.
-- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "opcoes": [], "resposta_esperada"}] }`;
+- "texto_base": parágrafo/contexto ANTES da figura ou pergunta.
+- "enunciado": a pergunta final da questão.
+- "tem_imagem": true se houver figura/gráfico/tabela/fórmula associada à questão.
+- "indice_figura": índice inteiro (0, 1, 2...) da figura anexada que pertence a essa questão. Obrigatório quando tem_imagem=true.
+- Retorne: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "opcoes": [], "resposta_esperada"}] }`;
 
                 const payload = {
                     model: hasImages ? 'gpt-4o' : 'gpt-4o-mini',
@@ -683,15 +678,46 @@ REGRAS ADICIONAIS:
                 try {
                     const content = JSON.parse(data.choices[0].message.content);
                     if (content.questoes && Array.isArray(content.questoes)) {
-                        let imgIdx = 0; // Ponteiro para a próxima imagem disponível da página
+                        let imgIdxSequencial = 0; // Ponteiro sequencial (fallback)
+
                         content.questoes.forEach(q => {
-                            // Mapeamento em ordem: 1ª questão com tem_imagem → 1ª figura extraída, etc.
-                            if (q.tem_imagem && page.extractedImages && page.extractedImages[imgIdx]) {
-                                q.imagem_base64 = page.extractedImages[imgIdx];
-                                imgIdx++;
+                            if (q.tem_imagem && page.extractedImages && page.extractedImages.length > 0) {
+                                // Nível 1: IA retornou o índice exato da figura
+                                const idxFig = parseInt(q.indice_figura, 10);
+                                if (!isNaN(idxFig) && page.extractedImages[idxFig]) {
+                                    q.imagem_base64 = page.extractedImages[idxFig];
+                                }
+                                // Nível 2: Fallback sequencial — próxima imagem disponível
+                                else if (page.extractedImages[imgIdxSequencial]) {
+                                    q.imagem_base64 = page.extractedImages[imgIdxSequencial];
+                                    imgIdxSequencial++;
+                                }
+                                // Nível 3: Fallback final — única imagem da página, atribui a esta questão
+                                else if (page.extractedImages.length === 1 && !parsedQuestionsArray.some(pq => pq.imagem_base64 === page.extractedImages[0])) {
+                                    q.imagem_base64 = page.extractedImages[0];
+                                }
                             }
                             parsedQuestionsArray.push(q);
                         });
+
+                        // Se a página tem imagens mas NENHUMA questão recebeu (IA não indicou tem_imagem),
+                        // força a atribuição na primeira questão da página
+                        if (hasImages) {
+                            const questoesDaPagina = content.questoes;
+                            const nenhumaRecebeuImagem = questoesDaPagina.every(q => !q.imagem_base64);
+                            if (nenhumaRecebeuImagem && questoesDaPagina.length > 0) {
+                                // Procura a questão correspondente no parsedQuestionsArray e injeta
+                                const startIdx = parsedQuestionsArray.length - questoesDaPagina.length;
+                                page.extractedImages.forEach((img, fi) => {
+                                    const targetQ = parsedQuestionsArray[startIdx + fi];
+                                    if (targetQ) {
+                                        targetQ.imagem_base64 = img;
+                                        targetQ.tem_imagem = true;
+                                        console.log(`[Fallback Forçado] Figura ${fi} → Questão ${startIdx + fi}`);
+                                    }
+                                });
+                            }
+                        }
                     }
                 } catch(jsonErr) {
                     console.warn(`Erro JSON pág. ${page.pageNum}:`, data.choices[0].message.content);
