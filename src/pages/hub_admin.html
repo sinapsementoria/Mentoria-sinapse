@@ -129,7 +129,7 @@
     <div class="ambient-glow" style="bottom: -10%; right: 10%; background: radial-gradient(circle, rgba(79, 70, 229, 0.15) 0%, rgba(11, 25, 60, 0) 70%);"></div>
 
     <!-- Conteúdo da Interface -->
-    <div class="relative z-10 w-full max-w-[850px] px-6 py-12 flex flex-col items-center">
+    <div class="relative z-10 w-full max-w-[1100px] px-6 py-12 flex flex-col items-center">
         
         <!-- Header -->
         <header class="flex flex-col items-center mb-12 text-center animate-fade-in-down">
@@ -145,7 +145,7 @@
         </header>
 
         <!-- Grid Cards de Seleção -->
-        <main class="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 mx-auto">
+        <main class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mx-auto">
             
             <!-- Card 1: Sinapse Pré-Med -->
             <a href="sinapse_premed_admin.html" class="group block cursor-pointer outline-none">
@@ -190,11 +190,36 @@
                     
                     <p class="text-sm leading-relaxed text-slate-400 mb-8 flex-grow font-body">
                         Administre o banco de questões com inteligência, curadoria de bancas, organização de disciplinas e controle da matriz de habilidades.
+                    <div class="mt-auto">
+                        <div class="btn-access w-full py-3 px-5 rounded-lg text-slate-300 font-semibold flex items-center justify-between text-xs uppercase tracking-wider">
+                            <span>Acessar Banco Mestre</span>
+                            <span class="material-symbols-outlined arrow-icon text-lg">arrow_forward</span>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Card 3: Ingestão de Conteúdo via IA -->
+            <a href="ingestao_conteudo.html" class="group block cursor-pointer outline-none">
+                <div class="premium-card rounded-2xl p-6 md:p-8 h-full flex flex-col">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shadow-inner">
+                            <span class="material-symbols-outlined text-[28px] icon-glow">smart_toy</span>
+                        </div>
+                        <span class="px-3 py-1 rounded-full bg-[#161B30] border border-white/10 text-[10px] font-bold tracking-widest text-[#F59E0B] uppercase">Engenharia de Dados</span>
+                    </div>
+
+                    <h2 class="text-xl md:text-2xl font-headline font-bold text-white mb-3 group-hover:text-[#E2E8F0] transition-colors">
+                        INGESTÃO (IA)
+                    </h2>
+                    
+                    <p class="text-sm leading-relaxed text-slate-400 mb-8 flex-grow font-body">
+                        Automatize o cadastro de questões processando arquivos em PDF e Word através de um motor avançado de inteligência artificial via Prompts mestres.
                     </p>
 
                     <div class="mt-auto">
                         <div class="btn-access w-full py-3 px-5 rounded-lg text-slate-300 font-semibold flex items-center justify-between text-xs uppercase tracking-wider">
-                            <span>Acessar Banco Mestre</span>
+                            <span>Iniciar Ingestão</span>
                             <span class="material-symbols-outlined arrow-icon text-lg">arrow_forward</span>
                         </div>
                     </div>

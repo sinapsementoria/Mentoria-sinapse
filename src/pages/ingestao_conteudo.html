@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingestão de Conteúdo via IA | Lion Hub</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <!-- Fontes -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    
+    <!-- Bibliotecas de Parse (PDF e Word) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.21/mammoth.browser.min.js"></script>
+
+    <style>
+        body {
+            background-color: #050511;
+            font-family: 'Inter', sans-serif;
+            color: #cbd5e1;
+            overflow-x: hidden;
+        }
+
+        .ambient-glow {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.1) 0%, rgba(11, 25, 60, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(50px);
+        }
+
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .dropzone {
+            border: 2px dashed rgba(245, 158, 11, 0.4);
+            transition: all 0.3s ease;
+            background: rgba(245, 158, 11, 0.02);
+            cursor: pointer;
+        }
+
+        .dropzone.dragover {
+            border-color: rgba(245, 158, 11, 0.9);
+            background: rgba(245, 158, 11, 0.1);
+            transform: scale(1.02);
+        }
+
+        .card-questao {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-left: 4px solid #f59e0b;
+        }
+
+        /* Scrollbar customizada */
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #475569; }
+        
+        .loader-spinner {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top-color: #f59e0b;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="relative min-h-screen">
+
+    <!-- Glowing Background -->
+    <div class="ambient-glow" style="top: -10%; left: -10%;"></div>
+    <div class="ambient-glow" style="bottom: -10%; right: -10%;"></div>
+
+    <!-- Header / Navbar Minimalista -->
+    <header class="relative z-10 border-b border-white/5 bg-[#0B122A]/80 backdrop-blur-md px-6 py-4 flex items-center justify-between sticky top-0">
+        <div class="flex items-center gap-4">
+            <a href="hub_admin.html" class="flex items-center justify-center w-10 h-10 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-colors text-slate-400 hover:text-white">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </a>
+            <div>
+                <h1 class="text-xl font-bold text-white tracking-tight flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#f59e0b]">smart_toy</span>
+                    Ingestão Neural de Conteúdo
+                </h1>
+                <p class="text-xs text-slate-400">Extração Inteligente de PDFs e DOCXs para o MasterBank</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-3">
+            <div id="status-badge" class="px-3 py-1.5 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-xs font-semibold flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span> Sistema Pronto
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10 container mx-auto px-4 py-8 max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Coluna Esquerda: Setup & Upload -->
+        <div class="lg:col-span-4 flex flex-col gap-6">
+            
+            <!-- Etapa 1: Upload Dropzone -->
+            <section class="glass-panel rounded-2xl p-6">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <span class="bg-[#f59e0b] text-black w-6 h-6 rounded-full flex justify-center items-center">1</span>
+                    Arquivo Base
+                </h2>
+                <div id="dropzone" class="dropzone rounded-xl p-8 flex flex-col items-center justify-center text-center">
+                    <span class="material-symbols-outlined text-[48px] text-[#f59e0b] mb-3 opacity-80">upload_file</span>
+                    <h3 class="text-white font-medium mb-1">Arraste a Apostila</h3>
+                    <p class="text-xs text-slate-400 mb-4">PDF ou MS Word (DOCX)</p>
+                    <input type="file" id="file-input" class="hidden" accept=".pdf,.doc,.docx" />
+                    <button onclick="document.getElementById('file-input').click()" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 transition-all rounded-lg text-sm text-white font-medium">
+                        Procurar no PC
+                    </button>
+                    <p id="file-name-display" class="mt-4 text-xs font-semibold text-[#f59e0b] hidden break-all"></p>
+                </div>
+            </section>
+
+            <!-- Etapa 2: Estratégia de Processamento -->
+            <section class="glass-panel rounded-2xl p-6">
+                <h2 class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
+                    <span class="bg-[#f59e0b] text-black w-6 h-6 rounded-full flex justify-center items-center">2</span>
+                    Processamento (IA)
+                </h2>
+                
+                <div class="flex flex-col gap-3">
+                    <label class="relative flex cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+                        <div class="flex items-center h-5">
+                            <input id="mode-api" name="ai-mode" type="radio" checked class="w-4 h-4 rounded-full accent-[#f59e0b] focus:ring-[#f59e0b] border-gray-600 bg-gray-700">
+                        </div>
+                        <div class="ml-3">
+                            <span class="block text-sm font-medium text-white mb-1">Rota A (Auto API)</span>
+                            <span class="block text-xs text-slate-400">Processa invisivelmente em 10s.</span>
+                            <!-- Input Condicional de API Key -->
+                            <div id="api-key-container" class="mt-3">
+                                <input type="password" id="api-key-input" placeholder="Cole sua OpenAI Key (sk-...)" class="w-full bg-[#0B122A] border border-white/10 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-[#f59e0b]">
+                            </div>
+                        </div>
+                    </label>
+
+                    <label class="relative flex cursor-pointer p-4 rounded-xl border border-white/10 bg-white/5 hover:bg-white/10 transition">
+                        <div class="flex items-center h-5">
+                            <input id="mode-manual" name="ai-mode" type="radio" class="w-4 h-4 rounded-full accent-[#f59e0b] focus:ring-[#f59e0b] border-gray-600 bg-gray-700">
+                        </div>
+                        <div class="ml-3">
+                            <span class="block text-sm font-medium text-white mb-1">Rota C (Manual / Grátis)</span>
+                            <span class="block text-xs text-slate-400">O sistema copia o Texto + Prompt e você joga no ChatGPT.</span>
+                        </div>
+                    </label>
+                </div>
+
+                <button id="btn-processar" class="mt-6 w-full py-3 bg-gradient-to-r from-[#f59e0b] to-[#ea580c] hover:brightness-110 shadow-lg shadow-orange-500/20 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition opacity-50 cursor-not-allowed">
+                    <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+                    Extrair e Analisar
+                </button>
+            </section>
+
+        </div>
+
+        <!-- Coluna Direita: Auditoria & Resultados -->
+        <div class="lg:col-span-8">
+            <section class="glass-panel rounded-2xl p-6 h-full min-h-[600px] flex flex-col">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-white/5">
+                    <h2 class="text-sm font-bold text-white uppercase tracking-wider flex items-center gap-2">
+                        <span class="bg-[#f59e0b] text-black w-6 h-6 rounded-full flex justify-center items-center">3</span>
+                        Painel de Auditoria e Revisão
+                    </h2>
+                    <div id="result-stats" class="text-xs font-semibold text-[#f59e0b] hidden">0 Questões Lidas</div>
+                </div>
+
+                <!-- Modos de Exibição de Acordo com a Rota -->
+                <div id="workspace-area" class="flex-grow flex flex-col items-center justify-center text-center text-slate-500">
+                    <span class="material-symbols-outlined text-6xl opacity-20 mb-4">fact_check</span>
+                    <p class="text-sm">Os resultados do processamento aparecerão aqui.<br>Faça o upload do documento para iniciar.</p>
+                </div>
+
+                <!-- Rota C - Workspace Manual (Hidden by default) -->
+                <div id="manual-workspace" class="hidden flex-col gap-4 animate-fade-in">
+                    <div class="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
+                        <strong>PASSO MANUAL:</strong><br>
+                        1. Clique abaixo para copiar o <b>Super Prompt</b> + O <b>Texto da Apostila</b>.<br>
+                        2. Cole no seu Chatbot (ChatGPT, Claude, etc).<br>
+                        3. Copie a Resposta crua dele e cole no campo gigante abaixo.
+                    </div>
+                    
+                    <button id="btn-copy-prompt" class="py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 transition">
+                        <span class="material-symbols-outlined text-lg">content_copy</span> COPIAR TEXTO E PROMPT MESTRE
+                    </button>
+
+                    <label class="text-white text-sm font-medium mt-4">Cole a resposta JSON da IA aqui:</label>
+                    <textarea id="manual-json-input" rows="8" class="w-full bg-[#0B122A] border border-white/10 rounded-xl p-4 text-xs font-mono text-green-400 focus:outline-none focus:border-[#f59e0b]" placeholder='[{ "tipo": "multipla_escolha", "enunciado": "...", "opcoes": ["A", "B", ...], "resposta_esperada": "C" }]'></textarea>
+                    
+                    <button id="btn-parse-manual" class="py-3 bg-[#f59e0b] hover:bg-orange-600 text-black font-bold rounded-xl text-sm transition">
+                        Renderizar Layout de Auditoria
+                    </button>
+                    
+                    <textarea id="raw-extracted-text" class="hidden"></textarea>
+                </div>
+
+                <!-- Lista Dinâmica de Cards de Questões (Audit) -->
+                <div id="audit-list" class="hidden flex-col gap-5 overflow-y-auto pr-2" style="max-height: 600px;">
+                    <!-- Inserido dinamicamente via JS -->
+                </div>
+
+                <!-- Controles Finais -->
+                <div id="audit-footer" class="hidden mt-6 pt-6 border-t border-white/5 flex justify-end gap-4">
+                    <button id="btn-cancel" class="px-6 py-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition font-medium text-sm">
+                        Descartar Lote
+                    </button>
+                    <button id="btn-save-masterbank" class="px-8 py-2 rounded-lg bg-[#10b981] hover:bg-emerald-600 text-white font-bold tracking-wide transition shadow-lg shadow-emerald-900 flex items-center gap-2 text-sm">
+                        <span class="material-symbols-outlined text-lg">save</span>
+                        Salvar no MasterBank
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // ESTADOS DO SISTEMA
+        let rawExtractedText = "";
+        let parsedQuestionsArray = [];
+        let extractedFile = null;
+        let aiMode = "api"; // 'api' ou 'manual'
+        
+        // PROMPT MESTRE DO USUARIO
+        const masterPrompt = `Analise o texto a seguir extraído de uma apostila. Identifique e separe cada questão. Se a questão tiver alternativas (A, B, C, D), classifique como 'multipla_escolha'. Se não tiver e pedir uma explicação, classifique como 'dissertativa'. Retorne ESTritamente e NADA MAIS ALÉM de um JSON no formato EXATO abaixo, sendo um array de objetos:
+[
+  {
+    "tipo": "multipla_escolha ou dissertativa",
+    "enunciado": "Texto da pergunta",
+    "opcoes": ["A) Opção 1", "B) Opção 2"], // deixar array vazio [] se dissertativa
+    "resposta_esperada": "Letra ou explicação se houver no texto, senao deixe em branco"
+  }
+]
+`;
+
+        // DOM Elements
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('file-input');
+        const fileNameDisplay = document.getElementById('file-name-display');
+        const btnProcessar = document.getElementById('btn-processar');
+        const modeApiRadio = document.getElementById('mode-api');
+        const modeManualRadio = document.getElementById('mode-manual');
+        const apiKeyContainer = document.getElementById('api-key-container');
+        const apiKeyInput = document.getElementById('api-key-input');
+        const statusBadge = document.getElementById('status-badge');
+        
+        const workspaceArea = document.getElementById('workspace-area');
+        const manualWorkspace = document.getElementById('manual-workspace');
+        const rawExtractedTextArea = document.getElementById('raw-extracted-text');
+        const btnCopyPrompt = document.getElementById('btn-copy-prompt');
+        const manualJsonInput = document.getElementById('manual-json-input');
+        const btnParseManual = document.getElementById('btn-parse-manual');
+        
+        const auditList = document.getElementById('audit-list');
+        const auditFooter = document.getElementById('audit-footer');
+        const resultStats = document.getElementById('result-stats');
+        const btnSaveMasterBank = document.getElementById('btn-save-masterbank');
+        const btnCancel = document.getElementById('btn-cancel');
+
+        // Carregar chave salva se houver
+        if(localStorage.getItem('sinapse_openai_key')){
+            apiKeyInput.value = localStorage.getItem('sinapse_openai_key');
+        }
+
+        // Toggles Rota
+        modeApiRadio.addEventListener('change', () => {
+            if(modeApiRadio.checked) {
+                apiKeyContainer.classList.remove('hidden');
+                aiMode = "api";
+            }
+        });
+        modeManualRadio.addEventListener('change', () => {
+            if(modeManualRadio.checked) {
+                apiKeyContainer.classList.add('hidden');
+                aiMode = "manual";
+            }
+        });
+
+        // Eventos Drag & Drop
+        dropzone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropzone.classList.add('dragover');
+        });
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('dragover');
+        });
+        dropzone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropzone.classList.remove('dragover');
+            if (e.dataTransfer.files.length) {
+                handleFile(e.dataTransfer.files[0]);
+            }
+        });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                handleFile(e.target.files[0]);
+            }
+        });
+
+        function handleFile(file) {
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (ext !== 'pdf' && ext !== 'doc' && ext !== 'docx') {
+                alert('Formato inválido. Use PDF ou DOCX.');
+                return;
+            }
+            extractedFile = file;
+            fileNameDisplay.textContent = file.name;
+            fileNameDisplay.classList.remove('hidden');
+            btnProcessar.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+        // Action de Processar Buffer (Ligar PDF.js ou Mammoth)
+        btnProcessar.addEventListener('click', async () => {
+            if (!extractedFile) return;
+            
+            // Salvando API Key se for route A
+            if (aiMode === 'api') {
+                if(!apiKeyInput.value.trim()) {
+                    alert("A Rota A necessita de uma chave de API (OpenAI/ChatGPT). Se preferir fazer de graça copiando e colando, selecione a Rota C.");
+                    return;
+                }
+                localStorage.setItem('sinapse_openai_key', apiKeyInput.value.trim());
+            }
+
+            setStatus('Extraindo Texto...', 'orange');
+            btnProcessar.innerHTML = '<div class="loader-spinner"></div> Extraindo...';
+            btnProcessar.disabled = true;
+
+            try {
+                const ext = extractedFile.name.split('.').pop().toLowerCase();
+                let text = "";
+
+                if (ext === 'pdf') {
+                    text = await parsePDF(extractedFile);
+                } else if (ext === 'doc' || ext === 'docx') {
+                    text = await parseWord(extractedFile);
+                }
+
+                if(!text || text.length < 20) {
+                    throw new Error("O texto extraído é nulo ou imagem escaneada não suportada.");
+                }
+
+                rawExtractedText = text;
+                rawExtractedTextArea.value = text;
+                
+                if (aiMode === 'manual') {
+                    // Prepara o Workspace C (Cópia)
+                    workspaceArea.classList.add('hidden');
+                    manualWorkspace.classList.remove('hidden');
+                    manualWorkspace.classList.add('flex');
+                    setStatus('Aguardando Input Humano', 'blue');
+                } else {
+                    // Chama rota API OpenAI Direta
+                    setStatus('Gerando JSON com IA...', 'orange');
+                    await processWithOpenAI(text);
+                }
+
+            } catch (err) {
+                alert('Erro na extração: ' + err.message);
+                setStatus('Erro no Processo', 'red');
+            } finally {
+                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Extrair e Analisar';
+                btnProcessar.disabled = false;
+            }
+        });
+
+        // Leitores de Arquivo Client Side
+        async function parsePDF(file) {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.onload = async function() {
+                    try {
+                        const typedarray = new Uint8Array(this.result);
+                        const pdfDocument = await pdfjsLib.getDocument({data: typedarray}).promise;
+                        let fullText = "";
+                        
+                        // Extrai texto de todas as paginas (limitado para sanidade client-side a 50 pgs se mt pesadas)
+                        for (let i = 1; i <= Math.min(pdfDocument.numPages, 50); i++) {
+                            const page = await pdfDocument.getPage(i);
+                            const textContent = await page.getTextContent();
+                            const pageText = textContent.items.map(item => item.str).join(' ');
+                            fullText += pageText + "\n";
+                        }
+                        resolve(fullText);
+                    } catch(e) { reject(e); }
+                };
+                fileReader.readAsArrayBuffer(file);
+            });
+        }
+
+        async function parseWord(file) {
+            return new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.onload = async function(e) {
+                    try {
+                        const arrayBuffer = e.target.result;
+                        const result = await mammoth.extractRawText({arrayBuffer: arrayBuffer});
+                        resolve(result.value);
+                    } catch(e) { reject(e); }
+                };
+                fileReader.readAsArrayBuffer(file);
+            });
+        }
+
+        // Action Copiar Prompt (Rota C)
+        btnCopyPrompt.addEventListener('click', () => {
+            const finalPrompt = masterPrompt + "\n\n--- TEXTO DA APOSTILA ---\n\n" + rawExtractedText;
+            navigator.clipboard.writeText(finalPrompt).then(() => {
+                btnCopyPrompt.innerHTML = '<span class="material-symbols-outlined text-lg">check</span> COPIADO COM SUCESSO!';
+                btnCopyPrompt.classList.replace('bg-white/5', 'bg-green-500/20');
+                btnCopyPrompt.classList.replace('border-white/10', 'border-green-500/50');
+                btnCopyPrompt.classList.replace('text-white', 'text-green-400');
+                
+                setTimeout(() => {
+                    btnCopyPrompt.innerHTML = '<span class="material-symbols-outlined text-lg">content_copy</span> COPIAR TEXTO E PROMPT MESTRE';
+                    btnCopyPrompt.classList.replace('bg-green-500/20', 'bg-white/5');
+                    btnCopyPrompt.classList.replace('border-green-500/50', 'border-white/10');
+                    btnCopyPrompt.classList.replace('text-green-400', 'text-white');
+                }, 3000);
+            });
+        });
+
+        // Renderiza View (Após colar)
+        btnParseManual.addEventListener('click', () => {
+            try {
+                let jsonStr = manualJsonInput.value.trim();
+                if(jsonStr.startsWith("```json")) {
+                    jsonStr = jsonStr.replace(/```json/g, '').replace(/```/g, '').trim();
+                }
+                const parsed = JSON.parse(jsonStr);
+                
+                if(Array.isArray(parsed)){
+                    parsedQuestionsArray = parsed;
+                    renderAuditList(parsedQuestionsArray);
+                } else {
+                    alert("O JSON fornecido não é um array de objetos. Verifique se copiou corretamente.");
+                }
+                
+            } catch(e) {
+                alert("Erro de sintaxe no JSON: " + e.message);
+            }
+        });
+
+        // ROTA A: OpenAI Chat Completions API
+        async function processWithOpenAI(contextText) {
+            const apiKey = apiKeyInput.value.trim();
+            const url = 'https://api.openai.com/v1/chat/completions';
+            
+            const payload = {
+                model: "gpt-4o-mini", // ideal pra textos longos sem encarecer
+                messages: [
+                    { "role": "system", "content": masterPrompt },
+                    { "role": "user", "content": "TEXTO DA APOSTILA:\n\n" + contextText }
+                ],
+                temperature: 0.1, // Preciso no parsing
+                response_format: { "type": "json_object" } // mas openai pede json_object contendo array, então ajustamos o prompt!
+            };
+
+            // Ajuste leve no prompt pra forçar JSON Object válido no GPT-4o
+            payload.messages[0].content = masterPrompt + "\nRetorne no formato de objeto: { \"questoes\": [ {...} ] }";
+
+            const res = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${apiKey}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+                const errJson = await res.json();
+                throw new Error(errJson.error?.message || "Falha na OpenAI API");
+            }
+
+            const data = await res.json();
+            const content = JSON.parse(data.choices[0].message.content);
+            
+            if(content.questoes && Array.isArray(content.questoes)) {
+                parsedQuestionsArray = content.questoes;
+                renderAuditList(parsedQuestionsArray);
+            } else {
+                throw new Error("Retorno da IA em formato inesperado estrutural.");
+            }
+        }
+
+        // RENDER AUDITORIA
+        function renderAuditList(arrayDeQuestoes) {
+            workspaceArea.classList.add('hidden');
+            manualWorkspace.classList.add('hidden');
+            auditList.classList.remove('hidden');
+            auditList.classList.add('flex');
+            auditFooter.classList.remove('hidden');
+            auditFooter.classList.add('flex');
+            
+            setStatus('Auditoria Necessária', 'green');
+            resultStats.textContent = `${arrayDeQuestoes.length} Questões Extraídas`;
+            resultStats.classList.remove('hidden');
+            
+            auditList.innerHTML = '';
+            
+            arrayDeQuestoes.forEach((q, idx) => {
+                const isMultipla = q.tipo === 'multipla_escolha';
+                
+                let opcoesHtml = '';
+                if(isMultipla && q.opcoes) {
+                    opcoesHtml = `<div class="mt-3 flex flex-col gap-2">
+                        <label class="text-xs text-slate-400">Alternativas</label>
+                        ${q.opcoes.map((op, i) => `
+                            <input type="text" value="${op.replace(/"/g, '&quot;')}" class="w-full bg-[#050511] border border-white/5 rounded pl-3 pr-2 py-1.5 text-xs text-slate-300 focus:border-[#f59e0b] focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
+                        `).join('')}
+                    </div>`;
+                }
+
+                const cardHtml = `
+                    <div class="card-questao rounded-xl p-5 relative group" id="card-q-${idx}">
+                        <button onclick="removerQuestao(${idx})" class="absolute top-4 right-4 text-slate-500 hover:text-red-500 transition" title="Descartar Questão">
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                        
+                        <div class="flex gap-4 items-center mb-4">
+                            <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-bold text-slate-300">Questão ${idx+1}</span>
+                            <select class="bg-transparent border-b border-white/10 text-xs text-[#f59e0b] font-semibold focus:outline-none focus:border-white/30 cursor-pointer" onchange="atualizarTipo(${idx}, this.value)">
+                                <option value="multipla_escolha" style="background:#0F172A;" ${isMultipla ? 'selected' : ''}>MÚLTIPLA ESCOLHA</option>
+                                <option value="dissertativa" style="background:#0F172A;" ${!isMultipla ? 'selected' : ''}>DISSERTATIVA</option>
+                            </select>
+                        </div>
+
+                        <div class="w-full mb-3">
+                            <label class="text-xs text-slate-400 mb-1 block">Enunciado (Editável)</label>
+                            <textarea class="w-full bg-[#050511] border border-white/10 rounded-lg p-3 text-sm text-slate-200 focus:outline-none focus:border-[#f59e0b] break-words" rows="3" onchange="atualizarEnunciado(${idx}, this.value)">${q.enunciado || ''}</textarea>
+                        </div>
+                        
+                        ${opcoesHtml}
+                        
+                        <div class="mt-4 pt-3 border-t border-white/5 flex gap-4">
+                            <div class="flex-grow">
+                                <label class="text-xs text-slate-400 mb-1 block">Gabarito Esperado</label>
+                                <input type="text" class="w-full bg-[#10b981]/10 border border-[#10b981]/20 rounded p-2 text-xs text-[#10b981] font-bold focus:outline-none focus:border-[#10b981]" value="${(q.resposta_esperada || '').replace(/"/g, '&quot;')}" onchange="atualizarGabarito(${idx}, this.value)">
+                            </div>
+                        </div>
+                    </div>
+                `;
+                auditList.insertAdjacentHTML('beforeend', cardHtml);
+            });
+        }
+
+        // Funcoes de Atualização do Array de Memória pelos Inputs Modificados
+        window.removerQuestao = (idx) => {
+            document.getElementById(`card-q-${idx}`).style.display = 'none';
+            parsedQuestionsArray[idx] = null; // Marca pra exclusão
+            atualizarContador();
+        };
+        window.atualizarEnunciado = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].enunciado = val; };
+        window.atualizarTipo = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].tipo = val; };
+        window.atualizarGabarito = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].resposta_esperada = val; };
+        
+        // Listener Dinamico para multiplas escolhas mutaveis via Event Delegation
+        auditList.addEventListener('input', (e) => {
+            if(e.target.classList.contains('input-opcao')) {
+                const idx = e.target.getAttribute('data-idx');
+                const opIdx = e.target.getAttribute('data-opidx');
+                if(parsedQuestionsArray[idx]) {
+                    parsedQuestionsArray[idx].opcoes[opIdx] = e.target.value;
+                }
+            }
+        });
+
+        function atualizarContador() {
+            const valid = parsedQuestionsArray.filter(q => q !== null).length;
+            resultStats.textContent = `${valid} Questões Lidas`;
+        }
+
+        function setStatus(text, color) {
+            let colors = {
+                'blue': 'bg-blue-500/10 border-blue-500/20 text-blue-400',
+                'orange': 'bg-orange-500/10 border-orange-500/20 text-orange-400',
+                'green': 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+                'red': 'bg-red-500/10 border-red-500/20 text-red-500',
+            };
+            statusBadge.className = `px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-2 ${colors[color]}`;
+            statusBadge.innerHTML = `<span class="w-2 h-2 rounded-full ${color === 'red' ? 'bg-red-500' : 'bg-'+color+'-400 animate-pulse'}"></span> ${text}`;
+        }
+
+        // PERSISTENCIA MASTERBANK LOCALSTORAGE
+        btnSaveMasterBank.addEventListener('click', () => {
+            const validQuestions = parsedQuestionsArray.filter(q => q !== null);
+            
+            if(validQuestions.length === 0) {
+                alert("Nenhuma questão válida para salvar!");
+                return;
+            }
+
+            let masterBank = JSON.parse(localStorage.getItem('sinapseMasterBank')) || [];
+            
+            // Formatando e injetando Metadata
+            const formattedCards = validQuestions.map((q) => {
+                const uniqId = 'ia_' + Date.now().toString() + Math.random().toString(36).substr(2, 5);
+                return {
+                    id: uniqId,
+                    banca: "Ingestão Extraída (IA)",
+                    vestibular: "Múltiplos / Apostila",
+                    ano: new Date().getFullYear().toString(),
+                    texto_base: "", // Nao aplicavel na extracao bruta inicial a menos que o prompt aborte texto base.
+                    enunciado: q.enunciado || "",
+                    tipo: (q.tipo === 'multipla_escolha') ? 'multipla_escolha' : 'certo_errado', // Padroes de plataforma real (certo_errado acts as dissertative review point)
+                    gabarito_oficial: q.resposta_esperada || "",
+                    opcoes: q.opcoes || [],
+                    data_criacao: new Date().toISOString()
+                };
+            });
+
+            masterBank = [...masterBank, ...formattedCards];
+            localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
+
+            // Feedback Visual de Sucesso
+            btnSaveMasterBank.innerHTML = '<span class="material-symbols-outlined text-lg">check_circle</span> SUCESSO! SALVO.';
+            btnSaveMasterBank.classList.replace('bg-[#10b981]', 'bg-[#064e3b]');
+            
+            setTimeout(() => {
+                window.location.reload(); // Reseta pipeline
+            }, 1000);
+        });
+
+        // Cancelar Limpar
+        btnCancel.addEventListener('click', () => {
+            if(confirm("Deseja deletar todo o andamento visual e cancelar essa extração?")) {
+                window.location.reload();
+            }
+        });
+
+    </script>
+</body>
+</html>
