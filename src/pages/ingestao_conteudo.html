@@ -379,108 +379,156 @@
         });
 
         // ═══════════════════════════════════════════════════════════════════════
-        // EXTRATOR DE IMAGENS — ABORDAGEM CTM (Transformation Matrix Crop)
+        // EXTRATOR DE FIGURAS — ABORDAGEM DUAL
         // ═══════════════════════════════════════════════════════════════════════
-        // Funcionamento:
-        //  1. Renderiza a página em canvas de alta qualidade (2x scale)
-        //  2. Rastreia a pilha de matrizes CTM (save/restore/transform)
-        //  3. Quando encontra paintImageXObject, calcula o bounding-box exato
-        //     usando a CTM atual e recorta aquela região do canvas renderizado
+        // MÉTODO 1 (CTM): Detecta imagens raster (paintImageXObject) via matriz de
+        //    transformação e recorta do canvas renderizado (bom para fotos/bitmaps).
         //
-        // Esta abordagem é 100% confiável porque:
-        //  - Não depende de callbacks assíncronos (page.objs.get)
-        //  - Não pode travar — é síncrono após o await render()
-        //  - A imagem é exatamente o que o usuário veria na tela
+        // MÉTODO 2 (Text-Gap): Detecta QUALQUER figura — incluindo vetores, gráficos
+        //    químicos, diagramas — analisando LACUNAS entre blocos de texto.
+        //    Em PDFs de questões, figuras sempre ficam entre parágrafos de texto.
+        //    Uma lacuna vertical ≥ 60pt é quase certamente uma figura.
         // ═══════════════════════════════════════════════════════════════════════
-        async function extractPDFImages(page, ops) {
-            const SCALE = 2.2; // Alta qualidade para figuras químicas/gráficas
+        async function extractPDFImages(page, ops, textItems) {
+            const SCALE = 2.2;
             const viewport = page.getViewport({ scale: SCALE });
-            const pageH = viewport.height / SCALE; // Altura da página em unidades PDF
+            const pageH    = viewport.height / SCALE; // Altura em unidades PDF
+            const pageW    = viewport.width  / SCALE;
 
             // ── Renderiza a página completa ──────────────────────────────────
             const fullCanvas = document.createElement('canvas');
             fullCanvas.width  = viewport.width;
             fullCanvas.height = viewport.height;
-            const fullCtx = fullCanvas.getContext('2d');
             try {
-                await page.render({ canvasContext: fullCtx, viewport }).promise;
+                await page.render({ canvasContext: fullCanvas.getContext('2d'), viewport }).promise;
             } catch(e) {
-                console.warn('[CTM-Extractor] Falha na renderização:', e);
+                console.warn('[Extractor] Falha na renderização:', e);
                 return [];
             }
 
-            // ── Multipica duas matrizes 2D (formato PDF: [a b c d e f]) ─────
-            const mulMat = (m, n) => [
-                m[0]*n[0] + m[2]*n[1],
-                m[1]*n[0] + m[3]*n[1],
-                m[0]*n[2] + m[2]*n[3],
-                m[1]*n[2] + m[3]*n[3],
-                m[0]*n[4] + m[2]*n[5] + m[4],
-                m[1]*n[4] + m[3]*n[5] + m[5]
-            ];
+            const cropsMap = new Map(); // key = "sy-sh" para deduplicar
 
-            // ── Rastreia CTM e recorta cada imagem encontrada ────────────────
-            const crops = [];
-            const stack  = [];
-            let ctm = [1, 0, 0, 1, 0, 0]; // Matriz identidade
+            // ────────────────────────────────────────────────────────────────
+            // MÉTODO 1: CTM — captura imagens raster via paintImageXObject
+            // ────────────────────────────────────────────────────────────────
+            const mulMat = (m, n) => [
+                m[0]*n[0]+m[2]*n[1], m[1]*n[0]+m[3]*n[1],
+                m[0]*n[2]+m[2]*n[3], m[1]*n[2]+m[3]*n[3],
+                m[0]*n[4]+m[2]*n[5]+m[4], m[1]*n[4]+m[3]*n[5]+m[5]
+            ];
+            let ctm = [1,0,0,1,0,0];
+            const stk = [];
 
             for (let i = 0; i < ops.fnArray.length; i++) {
-                const fn   = ops.fnArray[i];
-                const args = ops.argsArray[i];
-
-                if      (fn === pdfjsLib.OPS.save)      { stack.push([...ctm]); }
-                else if (fn === pdfjsLib.OPS.restore)   { ctm = stack.pop() || [1,0,0,1,0,0]; }
-                else if (fn === pdfjsLib.OPS.transform) { ctm = mulMat(ctm, args); }
-                else if (
-                    fn === pdfjsLib.OPS.paintImageXObject ||
-                    fn === pdfjsLib.OPS.paintInlineImageXObject ||
-                    fn === pdfjsLib.OPS.paintImageMaskXObject
-                ) {
-                    // A imagem ocupa (0,0)→(1,1) no espaço do objeto.
-                    // A CTM mapeia esse espaço para o espaço do usuário PDF.
+                const fn = ops.fnArray[i], args = ops.argsArray[i];
+                if      (fn === pdfjsLib.OPS.save)      stk.push([...ctm]);
+                else if (fn === pdfjsLib.OPS.restore)   ctm = stk.pop() || [1,0,0,1,0,0];
+                else if (fn === pdfjsLib.OPS.transform) ctm = mulMat(ctm, args);
+                else if (fn === pdfjsLib.OPS.paintImageXObject ||
+                         fn === pdfjsLib.OPS.paintInlineImageXObject ||
+                         fn === pdfjsLib.OPS.paintImageMaskXObject) {
                     const [a, b, c, d, e, f] = ctm;
-                    // Quatro cantos em coordenadas PDF
-                    const pxs = [e, a+e, a+c+e, c+e];
-                    const pys = [f, b+f, b+d+f, d+f];
-                    const pdfL = Math.min(...pxs), pdfR = Math.max(...pxs);
-                    const pdfB = Math.min(...pys), pdfT = Math.max(...pys);
-
-                    // Converte para coordenadas canvas (eixo Y invertido)
-                    const cx = Math.round(pdfL * SCALE);
-                    const cy = Math.round((pageH - pdfT) * SCALE);
-                    const cw = Math.round((pdfR - pdfL) * SCALE);
-                    const ch = Math.round((pdfT - pdfB) * SCALE);
-
-                    // Filtra decorações pequenas (ícones, linhas, separadores)
-                    if (cw < 80 || ch < 55) continue;
-                    if (cx < 0 || cy < 0)   continue;  // fora da página
-
-                    // Recorte com padding de 14px (captura legenda abaixo da figura)
-                    const pad = 14;
-                    const sx = Math.max(0, cx - pad);
-                    const sy = Math.max(0, cy - pad);
-                    const sw = Math.min(cw + pad * 2, fullCanvas.width  - sx);
-                    const sh = Math.min(ch + pad * 2, fullCanvas.height - sy);
-
-                    if (sw < 40 || sh < 40) continue;
-
-                    const cropCanvas = document.createElement('canvas');
-                    cropCanvas.width  = sw;
-                    cropCanvas.height = sh;
-                    cropCanvas.getContext('2d').drawImage(
-                        fullCanvas, sx, sy, sw, sh,
-                        0, 0, sw, sh
-                    );
-                    crops.push(cropCanvas.toDataURL('image/jpeg', 0.93));
-                    console.log(`[CTM-Extractor] Figura ${crops.length} extraída: ${sw}×${sh}px`);
+                    const pxs=[e,a+e,a+c+e,c+e], pys=[f,b+f,b+d+f,d+f];
+                    const pdfL=Math.min(...pxs), pdfR=Math.max(...pxs);
+                    const pdfB=Math.min(...pys), pdfT=Math.max(...pys);
+                    const cx=Math.round(pdfL*SCALE), cy=Math.round((pageH-pdfT)*SCALE);
+                    const cw=Math.round((pdfR-pdfL)*SCALE), ch=Math.round((pdfT-pdfB)*SCALE);
+                    if (cw<80||ch<55||cx<0||cy<0) continue;
+                    const pad=16;
+                    const sx=Math.max(0,cx-pad), sy=Math.max(0,cy-pad);
+                    const sw=Math.min(cw+pad*2,fullCanvas.width-sx);
+                    const sh=Math.min(ch+pad*2,fullCanvas.height-sy);
+                    if (sw<40||sh<40) continue;
+                    const cc=document.createElement('canvas');
+                    cc.width=sw; cc.height=sh;
+                    cc.getContext('2d').drawImage(fullCanvas,sx,sy,sw,sh,0,0,sw,sh);
+                    const key=`${sy}-${sy+sh}`;
+                    if(!cropsMap.has(key)){
+                        cropsMap.set(key, cc.toDataURL('image/jpeg',0.93));
+                        console.log(`[CTM] Raster: ${sw}×${sh}px`);
+                    }
                 }
             }
 
-            console.log(`[CTM-Extractor] Total de figuras extraídas: ${crops.length}`);
-            return crops;
+            // ────────────────────────────────────────────────────────────────
+            // MÉTODO 2: Text-Gap — captura VETORES e qualquer figura
+            // Lógica: linha de texto tem posição Y. Entre duas linhas com gap
+            // grande (≥ 60pt PDF = ~132px canvas), há uma figura.
+            // ────────────────────────────────────────────────────────────────
+            const MIN_GAP_PDF = 60;  // mínimo em unidades PDF
+            const MARGIN_PDF  = 30;  // ignora margem superior/inferior da página
+
+            if (textItems && textItems.length > 0) {
+                // Pega apenas itens com texto real e posição válida
+                const bands = textItems
+                    .filter(it => it.str.trim().length > 0 && it.transform)
+                    .map(it => {
+                        // it.transform = [scX, sk, sk, scY, x, y_bottom_pdf]
+                        const yBottom = it.transform[5];
+                        const fontH   = Math.abs(it.transform[3]) || (it.height || 10);
+                        const yTop    = yBottom + fontH;
+                        // Converte pdf→canvas (y flip): canvas_top = (pageH - pdfYtop)*SCALE
+                        return {
+                            cTop:    Math.max(0, (pageH - yTop)    * SCALE),
+                            cBottom: Math.min(fullCanvas.height, (pageH - yBottom) * SCALE)
+                        };
+                    })
+                    .filter(b => b.cTop >= 0 && b.cBottom > b.cTop)
+                    .sort((a, b) => a.cTop - b.cTop);
+
+                // Mescla bandas próximas (≤ 8px entre si) para evitar falsos gaps
+                const merged = [];
+                for (const b of bands) {
+                    if (!merged.length || b.cTop > merged[merged.length-1].cBottom + 8) {
+                        merged.push({ top: b.cTop, bottom: b.cBottom });
+                    } else {
+                        merged[merged.length-1].bottom = Math.max(merged[merged.length-1].bottom, b.cBottom);
+                    }
+                }
+
+                const marginPx  = MARGIN_PDF  * SCALE;
+                const minGapPx  = MIN_GAP_PDF * SCALE;
+
+                for (let j = 0; j < merged.length - 1; j++) {
+                    const gapTop    = merged[j].bottom;
+                    const gapBottom = merged[j+1].top;
+                    const gapH      = gapBottom - gapTop;
+
+                    // Só considera lacunas significativas (não margem superior nem inferior)
+                    if (gapH < minGapPx) continue;
+                    if (gapTop < marginPx) continue;
+                    if (gapBottom > fullCanvas.height - marginPx) continue;
+
+                    const pad  = 10;
+                    const sy   = Math.max(0, Math.round(gapTop) - pad);
+                    const sh   = Math.min(Math.round(gapH) + pad * 2, fullCanvas.height - sy);
+                    const sw   = fullCanvas.width;
+
+                    if (sh < 50) continue;
+
+                    const key = `${sy}-${sy+sh}`;
+                    // Só adiciona se não duplicar uma extração CTM (±40px de tolerância)
+                    const duplica = [...cropsMap.keys()].some(k => {
+                        const [ksy, kend] = k.split('-').map(Number);
+                        return Math.abs(ksy - sy) < 40 && Math.abs(kend - (sy+sh)) < 40;
+                    });
+                    if (!cropsMap.has(key) && !duplica) {
+                        const cc = document.createElement('canvas');
+                        cc.width  = sw;
+                        cc.height = sh;
+                        cc.getContext('2d').drawImage(fullCanvas, 0, sy, sw, sh, 0, 0, sw, sh);
+                        cropsMap.set(key, cc.toDataURL('image/jpeg', 0.93));
+                        console.log(`[TextGap] Vetor/Figura: gap ${Math.round(gapH/SCALE)}pt → ${sw}×${sh}px`);
+                    }
+                }
+            }
+
+            const result = Array.from(cropsMap.values());
+            console.log(`[Extractor] Total figuras extraídas: ${result.length}`);
+            return result;
         }
 
-        // Extrai páginas do PDF: texto + figuras individuais por recorte CTM
+        // Extrai páginas do PDF: texto + figuras (raster E vetores)
         async function parsePDFWithVision(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -488,35 +536,31 @@
                     try {
                         const typedarray = new Uint8Array(this.result);
                         const pdfDoc = await pdfjsLib.getDocument({data: typedarray}).promise;
-                        const pages = [];
+                        const pages  = [];
                         const maxPages = Math.min(pdfDoc.numPages, 40);
+
                         for (let i = 1; i <= maxPages; i++) {
                             setStatus(`Processando página ${i}/${maxPages}...`, 'orange');
                             const page = await pdfDoc.getPage(i);
-                            // 1) Texto OCR
+
+                            // 1) Texto OCR (mantém os items com posição para o text-gap)
                             const textContent = await page.getTextContent();
-                            const pageText = textContent.items.map(it => it.str).join(' ').trim();
-                            // 2) Lista de operações — detecta se há imagens
+                            const pageText    = textContent.items.map(it => it.str).join(' ').trim();
+                            if (pageText.length < 10) continue; // Ignora páginas em branco
+
+                            // 2) Operator list (passado para o método CTM)
                             const ops = await page.getOperatorList();
-                            const hasImgOps = ops.fnArray.some(fn =>
-                                fn === pdfjsLib.OPS.paintImageXObject ||
-                                fn === pdfjsLib.OPS.paintInlineImageXObject ||
-                                fn === pdfjsLib.OPS.paintImageMaskXObject
-                            );
-                            // 3) Se houver imagens: recorta cada figura do canvas renderizado
-                            let extractedImages = [];
-                            if (hasImgOps) {
-                                setStatus(`Extraindo figuras da página ${i}/${maxPages}...`, 'orange');
-                                extractedImages = await extractPDFImages(page, ops);
-                            }
-                            if (pageText.length > 10) {
-                                pages.push({
-                                    text: pageText,
-                                    extractedImages,
-                                    pageNum: i,
-                                    temImagem: extractedImages.length > 0
-                                });
-                            }
+
+                            // 3) Extrai figuras: dual method (CTM + text-gap)
+                            setStatus(`Extraindo figuras pág. ${i}/${maxPages}...`, 'orange');
+                            const extractedImages = await extractPDFImages(page, ops, textContent.items);
+
+                            pages.push({
+                                text:   pageText,
+                                extractedImages,
+                                pageNum: i,
+                                temImagem: extractedImages.length > 0
+                            });
                         }
                         resolve(pages);
                     } catch(e) { reject(e); }
