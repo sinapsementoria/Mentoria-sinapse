@@ -337,37 +337,36 @@
                 localStorage.setItem('sinapse_openai_key', apiKeyInput.value.trim());
             }
 
-            setStatus('Extraindo Texto...', 'orange');
+            setStatus('Extraindo páginas...', 'orange');
             btnProcessar.innerHTML = '<div class="loader-spinner"></div> Extraindo...';
             btnProcessar.disabled = true;
 
             try {
                 const ext = extractedFile.name.split('.').pop().toLowerCase();
-                let text = "";
+                let pagesData = []; // [{text, imageBase64, pageNum}]
 
                 if (ext === 'pdf') {
-                    text = await parsePDF(extractedFile);
+                    pagesData = await parsePDFWithVision(extractedFile);
                 } else if (ext === 'doc' || ext === 'docx') {
-                    text = await parseWord(extractedFile);
+                    pagesData = await parseWordWithImages(extractedFile);
                 }
 
-                if(!text || text.length < 20) {
-                    throw new Error("O texto extraído é nulo ou imagem escaneada não suportada.");
+                if(!pagesData.length) {
+                    throw new Error('Não foi possível extrair conteúdo do arquivo.');
                 }
 
-                rawExtractedText = text;
-                rawExtractedTextArea.value = text;
+                // Acumula texto total para Rota C (manual)
+                rawExtractedText = pagesData.map(p => p.text).join('\n\n--- NOVA PÁGINA ---\n\n');
+                rawExtractedTextArea.value = rawExtractedText;
                 
                 if (aiMode === 'manual') {
-                    // Prepara o Workspace C (Cópia)
                     workspaceArea.classList.add('hidden');
                     manualWorkspace.classList.remove('hidden');
                     manualWorkspace.classList.add('flex');
                     setStatus('Aguardando Input Humano', 'blue');
                 } else {
-                    // Chama rota API OpenAI Direta
-                    setStatus('Gerando JSON com IA...', 'orange');
-                    await processWithOpenAI(text);
+                    setStatus('Analisando visualmente com IA...', 'orange');
+                    await processWithOpenAIVision(pagesData);
                 }
 
             } catch (err) {
@@ -379,41 +378,94 @@
             }
         });
 
-        // Leitores de Arquivo Client Side
-        async function parsePDF(file) {
+        // ═══════════════════════════════════════════════════════
+        // EXTRATORES DE ARQUIVO: PDF (Vision Canvas) + WORD (HTML)
+        // ═══════════════════════════════════════════════════════
+
+        // Renderiza cada página do PDF como imagem canvas (screenshot)
+        // e extrai text content, retornando array de {text, imageBase64, pageNum}
+        async function parsePDFWithVision(file) {
             return new Promise((resolve, reject) => {
-                const fileReader = new FileReader();
-                fileReader.onload = async function() {
+                const reader = new FileReader();
+                reader.onload = async function() {
                     try {
                         const typedarray = new Uint8Array(this.result);
-                        const pdfDocument = await pdfjsLib.getDocument({data: typedarray}).promise;
-                        let fullText = "";
-                        
-                        // Extrai texto de todas as paginas (limitado para sanidade client-side a 50 pgs se mt pesadas)
-                        for (let i = 1; i <= Math.min(pdfDocument.numPages, 50); i++) {
-                            const page = await pdfDocument.getPage(i);
+                        const pdfDoc = await pdfjsLib.getDocument({data: typedarray}).promise;
+                        const pages = [];
+                        const maxPages = Math.min(pdfDoc.numPages, 40);
+
+                        for (let i = 1; i <= maxPages; i++) {
+                            setStatus(`Renderizando página ${i}/${maxPages}...`, 'orange');
+                            const page = await pdfDoc.getPage(i);
+
+                            // 1) Extrai texto puro
                             const textContent = await page.getTextContent();
-                            const pageText = textContent.items.map(item => item.str).join(' ');
-                            fullText += pageText + "\n";
+                            const pageText = textContent.items.map(it => it.str).join(' ').trim();
+
+                            // 2) Renderiza a página como canvas (screenshot de alta qualidade)
+                            const scale = 2.0; // 2x = qualidade suficiente pra IA ler formulas
+                            const viewport = page.getViewport({ scale });
+                            const canvas = document.createElement('canvas');
+                            canvas.width = viewport.width;
+                            canvas.height = viewport.height;
+                            const ctx = canvas.getContext('2d');
+                            await page.render({ canvasContext: ctx, viewport }).promise;
+
+                            // 3) Detecta se a página tem elementos gráficos (imagens/desenhos)
+                            // Analisa o operador de conteúdo da página para verificar XObjects (imagens)
+                            const ops = await page.getOperatorList();
+                            const temImagem = ops.fnArray.some(fn =>
+                                fn === pdfjsLib.OPS.paintImageXObject ||
+                                fn === pdfjsLib.OPS.paintInlineImageXObject ||
+                                fn === pdfjsLib.OPS.paintXObject
+                            );
+
+                            // Converte canvas em JPEG base64 (comprimido para economizar tokens de API)
+                            const imageBase64 = canvas.toDataURL('image/jpeg', 0.82);
+
+                            if(pageText.length > 10) { // Ignora páginas em branco
+                                pages.push({ text: pageText, imageBase64, pageNum: i, temImagem });
+                            }
                         }
-                        resolve(fullText);
+                        resolve(pages);
                     } catch(e) { reject(e); }
                 };
-                fileReader.readAsArrayBuffer(file);
+                reader.readAsArrayBuffer(file);
             });
         }
 
-        async function parseWord(file) {
+        // Converte DOCX para HTML com imagens embutidas (base64)
+        async function parseWordWithImages(file) {
             return new Promise((resolve, reject) => {
-                const fileReader = new FileReader();
-                fileReader.onload = async function(e) {
+                const reader = new FileReader();
+                reader.onload = async function(e) {
                     try {
                         const arrayBuffer = e.target.result;
-                        const result = await mammoth.extractRawText({arrayBuffer: arrayBuffer});
-                        resolve(result.value);
+                        // mammoth.convertToHtml preserva imagens como data URIs
+                        const result = await mammoth.convertToHtml({
+                            arrayBuffer,
+                            convertImage: mammoth.images.imgElement(function(image) {
+                                return image.read('base64').then(function(imageBuffer) {
+                                    return { src: 'data:' + image.contentType + ';base64,' + imageBuffer };
+                                });
+                            })
+                        });
+                        // Extrai texto do HTML e coleta imagens
+                        const parser = new DOMParser();
+                        const doc = parser.parseFromString(result.value, 'text/html');
+                        const fullText = doc.body.innerText || doc.body.textContent || '';
+                        const imgs = doc.querySelectorAll('img');
+                        // Retorna como um só bloco (Word não tem paginação clara)
+                        resolve([{
+                            text: fullText,
+                            imageBase64: imgs.length > 0 ? imgs[0].src : null,
+                            embeddedImages: Array.from(imgs).map(img => img.src),
+                            pageNum: 1,
+                            temImagem: imgs.length > 0
+                        }]);
                     } catch(e) { reject(e); }
                 };
-                fileReader.readAsArrayBuffer(file);
+                reader.readAsArrayBuffer(file);
             });
         }
 
@@ -456,82 +508,88 @@
             }
         });
 
-        // ROTA A: OpenAI Chat Completions API
-        async function processWithOpenAI(contextText) {
+        // ═══════════════════════════════════════════════════════════
+        // ROTA A: GPT-4o VISION — Lê imagem + texto de cada página
+        // ═══════════════════════════════════════════════════════════
+        async function processWithOpenAIVision(pagesData) {
             const apiKey = apiKeyInput.value.trim();
             const url = 'https://api.openai.com/v1/chat/completions';
-            
-            // ENGENHARIA DE LOTES (CHUNKING DYNAMICS)
-            // Cortamos o monstro de texto em fatias menores (ex: ~12000 caracteres / ~3000 tokens)
-            // garantindo que a IA nunca estoure os "Tops" de limite estourando o JSON!
-            const maxLength = 12000;
-            let chunks = [];
-            let currentChunk = "";
-            let paragraphs = contextText.split('\\n');
-            
-            for(let p of paragraphs) {
-                if((currentChunk.length + p.length) > maxLength) {
-                    chunks.push(currentChunk);
-                    currentChunk = p + "\\n";
-                } else {
-                    currentChunk += p + "\\n";
-                }
-            }
-            if(currentChunk.trim().length > 0) chunks.push(currentChunk);
 
             parsedQuestionsArray = [];
-            
-            // Loop Sequencial Anti-DDoS e Anti-Timeout
-            for (let i = 0; i < chunks.length; i++) {
-                setStatus(`Minerando Lote ${i+1}/${chunks.length}...`, 'orange');
-                btnProcessar.innerHTML = `<div class="loader-spinner"></div> Lote ${i+1}/${chunks.length}`;
-                
+
+            for (let i = 0; i < pagesData.length; i++) {
+                const page = pagesData[i];
+                setStatus(`Analisando página ${i+1}/${pagesData.length} com Vision IA...`, 'orange');
+                btnProcessar.innerHTML = `<div class="loader-spinner"></div> Pág. ${i+1}/${pagesData.length}`;
+
+                // Monta o conteúdo da mensagem para o usuário
+                // Sempre envia a IMAGEM da página + opção de texto como backup
+                const userContent = [
+                    {
+                        type: 'image_url',
+                        image_url: {
+                            url: page.imageBase64,
+                            detail: 'high'  // Alta fidelidade para ler formulas e graficos
+                        }
+                    },
+                    {
+                        type: 'text',
+                        text: `Página ${page.pageNum} do documento. Texto OCR auxiliar: ${page.text.substring(0, 3000)}`
+                    }
+                ];
+
+                const systemPrompt = masterPrompt + `
+
+REGRAS ADICIONAIS PARA ANÁLISE VISUAL:
+- Se a página contiver imagens, figuras, gráficos, tabelas ou fórmulas químicas/matemáticas, defina "tem_imagem": true nessa questão.
+- Separe claramente o "texto_base" (parágrafo introdutório antes da figura) do "enunciado" (pergunta após a figura).
+- Retorne objeto JSON: { "questoes": [ {"tipo", "texto_base", "enunciado", "tem_imagem": bool, "opcoes": [], "resposta_esperada"} ] }`;
+
                 const payload = {
-                    model: "gpt-4o-mini", // ideal pra fatias médias textuais
+                    model: 'gpt-4o',  // VISION: único modelo que vê imagens
                     messages: [
-                        { "role": "system", "content": masterPrompt + "\\nRetorne estritamente no formato de objeto com um Array JSON nomeado 'questoes': { \"questoes\": [ {...} ] }" },
-                        { "role": "user", "content": "TEXTO DA APOSTILA (Lote Segmentado " + (i+1) + " de " + chunks.length + "):\\n\\n" + chunks[i] }
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: userContent }
                     ],
-                    temperature: 0.1, // Extrema lealdade no parsing de alternativas
-                    response_format: { "type": "json_object" },
-                    max_tokens: 16380 
+                    temperature: 0.1,
+                    response_format: { type: 'json_object' },
+                    max_tokens: 4096
                 };
 
                 const res = await fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${apiKey}`
-                    },
+                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
                     body: JSON.stringify(payload)
                 });
 
                 if (!res.ok) {
                     const errJson = await res.json();
-                    throw new Error(errJson.error?.message || "Falha na OpenAI API ao invadir o Lote " + (i+1));
+                    throw new Error(errJson.error?.message || `Falha na OpenAI Vision API (pág. ${page.pageNum})`);
                 }
 
                 const data = await res.json();
-                
+
                 try {
-                    let content = JSON.parse(data.choices[0].message.content);
-                    if(content.questoes && Array.isArray(content.questoes)) {
-                        // Concatenação universal dos lotes resgatados
-                        parsedQuestionsArray = parsedQuestionsArray.concat(content.questoes);
+                    const content = JSON.parse(data.choices[0].message.content);
+                    if (content.questoes && Array.isArray(content.questoes)) {
+                        content.questoes.forEach(q => {
+                            // Anexa automaticamente a imagem da página nas questões que têm elementos visuais
+                            if (q.tem_imagem || page.temImagem) {
+                                q.imagem_base64 = page.imageBase64;
+                            }
+                            parsedQuestionsArray.push(q);
+                        });
                     }
-                } catch (jsonErr) {
-                    console.warn(`String JSON cortada no Lote ${i+1}:`, data.choices[0].message.content);
-                    // Em vez de travar o sistema inteiro, alertamos e engolimos esse pedacinho de erro para salvar o resto!
-                    alert(`Calor extremo detectado: O Lote PDF fragmentado nº ${i+1} perdeu a quebra e engoliu algumas questões. O restante será salvo pacificamente.`);
+                } catch(jsonErr) {
+                    console.warn(`Erro ao parsear JSON da pág. ${page.pageNum}:`, data.choices[0].message.content);
                 }
             }
-            
-            // Renderização Triunfal
-            if(parsedQuestionsArray.length > 0) {
+
+            if (parsedQuestionsArray.length > 0) {
                 renderAuditList(parsedQuestionsArray);
                 btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Concluído!';
             } else {
-                throw new Error("A IA processou o DNA dos lotes inteiros mas não conseguiu extrair a arquitetura das perguntas.");
+                throw new Error('A IA não conseguiu extrair nenhuma questão do documento.');
             }
         }
 
@@ -591,7 +649,10 @@
 
                         <!-- ZONA 2: IMAGEM CENTRAL -->
                         <div class="w-full mb-4">
-                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 block">Imagem / Figura / Gráfico</label>
+                            <label class="text-[10px] uppercase tracking-widest text-slate-600 mb-1.5 flex items-center gap-2">
+                                Imagem / Figura / Gráfico
+                                ${q.imagem_base64 ? '<span class="px-1.5 py-0.5 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-[9px] rounded">AUTO-DETECTADO ✓</span>' : '<span class="text-slate-700">(manual se necessário)</span>'}
+                            </label>
                             <div id="img-dropzone-${idx}"
                                 class="relative rounded-xl border-2 border-dashed border-white/10 hover:border-blue-400/30 bg-[#0a0f1e] transition-all duration-200 overflow-hidden cursor-pointer"
                                 ondragover="event.preventDefault(); this.style.borderColor='rgba(96,165,250,0.5)'; this.style.background='rgba(59,130,246,0.05)'"
@@ -645,6 +706,13 @@
                     </div>
                 `;
                 auditList.insertAdjacentHTML('beforeend', cardHtml);
+                
+                // Auto-popula a zona de imagem se a IA já detectou e retornou a imagem
+                if(q.imagem_base64) {
+                    requestAnimationFrame(() => {
+                        processarImagemNoCard(idx, q.imagem_base64);
+                    });
+                }
             });
         }
 
@@ -660,20 +728,24 @@
             if(!file || !file.type.startsWith('image/')) return;
             const reader = new FileReader();
             reader.onload = (e) => {
-                const base64Str = e.target.result;
-                // Salvar na propriedade dedicada da questão
-                if(parsedQuestionsArray[idx]) {
-                    parsedQuestionsArray[idx].imagem_base64 = base64Str;
-                }
-                // Exibir Preview no card
-                const empty = document.getElementById(`img-empty-${idx}`);
-                const preview = document.getElementById(`img-preview-${idx}`);
-                const imgTag = document.getElementById(`img-tag-${idx}`);
-                if(empty) empty.classList.add('hidden');
-                if(imgTag) imgTag.src = base64Str;
-                if(preview) preview.classList.remove('hidden');
+                processarImagemNoCard(idx, e.target.result);
             };
             reader.readAsDataURL(file);
+        }
+        
+        // Popula visualmente a zona de imagem do card com uma string base64 (sem FileReader)
+        // Usada tanto pelo upload manual quanto pelo auto-carregamento da IA Vision
+        function processarImagemNoCard(idx, base64Str) {
+            if(!base64Str) return;
+            if(parsedQuestionsArray[idx]) {
+                parsedQuestionsArray[idx].imagem_base64 = base64Str;
+            }
+            const empty = document.getElementById(`img-empty-${idx}`);
+            const preview = document.getElementById(`img-preview-${idx}`);
+            const imgTag = document.getElementById(`img-tag-${idx}`);
+            if(empty) empty.classList.add('hidden');
+            if(imgTag) imgTag.src = base64Str;
+            if(preview) preview.classList.remove('hidden');
         }
         window.anexarImagemQuestao = (idx, fileInput) => {
             processarImagemParaCard(idx, fileInput.files[0]);
