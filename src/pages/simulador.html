@@ -1,374 +1,409 @@
-﻿<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mentoria Sinapse - Simulador SISU</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        sinapse: { blue: '#0B193C', primary: '#6366F1', accent: '#10B981', light: '#FAFAFB'}
-                    },
-                    fontFamily: { sans: ['Inter', 'sans-serif'], headline: ['Manrope', 'sans-serif'] },
-                    boxShadow: { 'premium': '0 10px 40px -10px rgba(11,25,60,0.06)' }
-                }
-            }
-        }
-    </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <style>
-        .font-headline { font-family: 'Playfair Display', serif; }
-        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
-        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
-        .icon-fill { font-variation-settings: 'FILL' 1; }
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
-    </style>
-    <!-- Carrega a Base do SISU -->
-    <script src="../../src/js/sisu_data.js"></script>
-    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
-</head>
-<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
-
-    <!-- SIDEBAR ELITE -->
-    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
-        <!-- Logo Area -->
-        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
-            <img src="../../public/imagens/globais/marca/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
-            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
-        </div>
-        
-        <!-- Menu Principal -->
-        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
-            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
-            </a>
-            <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span> Meu Desempenho
-            </a>
-            <a href="estrategia.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span> Estratégia de Aprovação
-            </a>
-            <a href="provas.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span> Provas
-            </a>
-            <a href="planejamento.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span> Planejamento
-            </a>
-            <a href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span> Vestibulares
-            </a>
-            <a href="calendario.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span> Calendário
-            </a>
-            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
-                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">calculate</span> Simulador SISU
-                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
-            </a>
-            <a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span> Banco de Questões
-            </a>
-            <a href="redacao.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span> Redação
-            </a>
-            <a href="flashcard.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span> Flashcard
-            </a>
-            <a href="perfil.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span> Perfil
-            </a>
-        </nav>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto">
-        <header class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">
-            <nav class="flex text-[11px] font-semibold text-slate-400 uppercase tracking-widest space-x-3 items-center">
-                <span class="text-sinapse-primary">Análise Preditiva SISU Completa</span>
-            </nav>
-        </header>
-
-        <div class="p-10 max-w-[1600px] mx-auto w-full space-y-6 relative z-10">
-            
-            <div class="flex justify-between items-end mb-4">
-                <div>
-                    <h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">
-                        <span class="material-symbols-outlined text-sinapse-primary text-[40px] icon-fill">query_stats</span>
-                        Simulador de Notas SISU
-                    </h1>
-                    <p class="text-slate-400 font-semibold text-sm">Pesos das Faculdades de Medicina e Correlação TRI 2025.</p>
-                </div>
-            </div>
-
-            <!-- MODALIDADE SECTION -->
-            <div class="glass-panel rounded-[32px] p-8 shadow-premium">
-                <div class="flex items-center gap-2 mb-2">
-                    <div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">1</div>
-                    <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Modalidade de Concorrência</h2>
-                </div>
-                <p class="text-slate-400 text-sm mb-6 ml-8">Escolha sua modalidade para que a projeção utilize a base correta de notas de corte.</p>
-                
-                <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 ml-8">
-                    <button onclick="setModality('ampla', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">Ampla Concorrência</button>
-                    <button onclick="setModality('lb_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LB_EP</button>
-                    <button onclick="setModality('lb_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LB_PPI</button>
-                    <button onclick="setModality('li_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LI_EP</button>
-                    <button onclick="setModality('li_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slate-100 text-slate-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">LI_PPI</button>
-                </div>
-
-                <div class="mt-6 ml-8 bg-slate-50 p-5 rounded-2xl border border-slate-100/80">
-                    <h3 class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest mb-3 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-[16px] text-sinapse-primary">info</span> Entenda sua modalidade
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
-                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">Ampla Concorrência:</strong> Concorrência geral</p>
-                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LB_EP:</strong> Escola pública e baixa renda</p>
-                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LB_PPI:</strong> Escola pública, baixa renda – pretos, pardos e indígenas</p>
-                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LI_EP:</strong> Escola pública e independente de renda</p>
-                        <p class="text-[13px] text-slate-500"><strong class="text-[#0B193C]">LI_PPI:</strong> Escola pública, independente de renda – pretos, pardos e indígenas</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
-                
-                <!-- Inputs Section -->
-                <div class="xl:col-span-1 glass-panel rounded-[32px] p-8 shadow-premium self-start sticky top-28">
-                    <div class="flex items-center gap-2 mb-6">
-                        <div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">2</div>
-                        <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Notas TRI</h2>
-                    </div>
-                    
-                    <div class="space-y-4">
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-red-500">Redação (RED)</label>
-                            <input id="inRED" type="number" min="0" max="1000" placeholder="Ex: 920.00" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-red-500 outline-none transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-green-600">C. da Natureza (CN)</label>
-                            <input id="inCN" type="number" min="0" max="1000" placeholder="Ex: 702.20" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-green-600 outline-none transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-yellow-600">C. Humanas (CH)</label>
-                            <input id="inCH" type="number" min="0" max="1000" placeholder="Ex: 678.60" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-yellow-600 outline-none transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-pink-600">Linguagens (LIN)</label>
-                            <input id="inLIN" type="number" min="0" max="1000" placeholder="Ex: 638.30" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-pink-600 outline-none transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-blue-600">Matemática (MAT)</label>
-                            <input id="inMAT" type="number" min="0" max="1000" placeholder="Ex: 816.10" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-blue-600 outline-none transition-colors">
-                        </div>
-                        
-                        <div class="pt-4 border-t border-slate-100 flex items-center gap-2 mb-2 w-full justify-center">
-                            <div class="bg-sinapse-primary text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">3</div>
-                            <span class="text-xs font-bold text-sinapse-primary uppercase tracking-widest">Execute</span>
-                        </div>
-                        
-                        <button onclick="calcularSisu()" class="w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-[16px] font-bold shadow-xl shadow-sinapse-primary/20 transition-all flex justify-center items-center gap-2 mt-2">
-                            <span class="material-symbols-outlined">rocket_launch</span>
-                            Simular Aprovação
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Results Section -->
-                <div class="xl:col-span-3 glass-panel rounded-[32px] overflow-hidden shadow-premium flex flex-col h-[850px]">
-                    <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between bg-white bg-opacity-70 backdrop-blur-md z-10 sticky top-0">
-                        <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Projeção de Universidades</h2>
-                        <span class="text-xs font-semibold text-slate-400 bg-slate-100 py-1.5 px-3 rounded-lg" id="statusCounter">Aguardando dados...</span>
-                    </div>
-
-                    <div class="flex-1 overflow-y-auto bg-white relative">
-                        <table class="w-full text-left border-collapse" id="resultsTable">
-                            <thead>
-                                <tr class="text-[9px] text-slate-400 uppercase tracking-[0.1em] border-b border-slate-100 bg-slate-50/50">
-                                    <th class="px-6 py-4 font-bold sticky top-0 bg-slate-50/90 z-20">Universidade</th>
-                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Vagas</th>
-                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Pesos (R/N/H/L/M)</th>
-                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Nota Corte 2025</th>
-                                    <th class="px-4 py-4 font-bold sticky top-0 bg-slate-50/90 text-center z-20">Sua Média</th>
-                                    <th class="px-6 py-4 font-bold sticky top-0 bg-slate-50/90 text-right z-20">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-sm" id="resultsData">
-                                <tr>
-                                    <td colspan="6" class="py-10 text-center text-slate-400 font-medium h-[400px]">
-                                        <div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">
-                                            <span class="material-symbols-outlined text-[60px] text-slate-200 mb-4">analytics</span>
-                                            <p class="font-bold text-[#0B193C] mb-2">Simulador Aguardando</p>
-                                            <p class="text-xs">Escolha sua modalidade, preencha suas notas TRI e clique em simular para ver sua projeção personalizada.</p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </main>
-
-    <script>
-        let selectedModality = null;
-
-        function setModality(mod, btnElement) {
-            selectedModality = mod;
-            
-            // Reseta todos os botões
-            document.querySelectorAll('.modality-btn').forEach(btn => {
-                btn.classList.remove('border-sinapse-primary', 'text-sinapse-primary', 'bg-sinapse-primary/5', 'shadow-md');
-                btn.classList.add('border-slate-100', 'text-slate-500');
-            });
-            
-            // Adiciona classe ativa
-            btnElement.classList.add('border-sinapse-primary', 'text-sinapse-primary', 'bg-sinapse-primary/5', 'shadow-md');
-            btnElement.classList.remove('border-slate-100', 'text-slate-500');
-
-            // Limpeza visual informando ao usuário nova carga de dados
-            document.getElementById('resultsData').innerHTML = `
-                <tr>
-                    <td colspan="6" class="py-10 text-center text-slate-400 font-medium h-[400px]">
-                        <div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">
-                            <span class="material-symbols-outlined text-[60px] text-sinapse-primary animate-pulse mb-4">refresh</span>
-                            <p class="font-bold text-[#0B193C] mb-2">Modalidade Carregada</p>
-                            <p class="text-xs">Insira / Atualize suas notas e inicie a simulação.</p>
-                        </div>
-                    </td>
-                </tr>
-            `;
-            document.getElementById('statusCounter').innerHTML = `Base "${btnElement.innerText}" selecionada`;
-        }
-
-        function calcularSisu() {
-            if(!selectedModality) {
-                alert('Selecione sua modalidade de concorrência antes de simular.');
-                return;
-            }
-
-            const nRed = parseFloat(document.getElementById('inRED').value) || 0;
-            const nCn = parseFloat(document.getElementById('inCN').value) || 0;
-            const nCh = parseFloat(document.getElementById('inCH').value) || 0;
-            const nLin = parseFloat(document.getElementById('inLIN').value) || 0;
-            const nMat = parseFloat(document.getElementById('inMAT').value) || 0;
-
-            if(nRed === 0 && nCn === 0 && nCh === 0 && nLin === 0 && nMat === 0) {
-                alert('Por favor, preencha as notas para simular.');
-                return;
-            }
-
-            const results = [];
-            let aprovadosCount = 0;
-            
-            // Carrega dados da modalidade dinamicamente
-            const baseDados = sisuDB[selectedModality] || [];
-
-            baseDados.forEach(univ => {
-                const somaPesos = univ.pesoRed + univ.pesoCn + univ.pesoCh + univ.pesoLin + univ.pesoMat;
-                const somaNotasPesadas = (nRed * univ.pesoRed) + (nCn * univ.pesoCn) + (nCh * univ.pesoCh) + (nLin * univ.pesoLin) + (nMat * univ.pesoMat);
-                
-                const mediaFinal = somaPesos > 0 ? (somaNotasPesadas / somaPesos) : 0;
-                let diferenca = null;
-                
-                if (univ.corte !== null && univ.corte > 0) {
-                    diferenca = mediaFinal - univ.corte;
-                    if(diferenca >= 0) aprovadosCount++;
-                }
-
-                results.push({
-                    ...univ,
-                    media: mediaFinal,
-                    diff: diferenca
-                });
-            });
-
-            // Ordena pela maior folga (Diferença) até a menor. Os nulls vão para o final
-            results.sort((a, b) => {
-                if (a.diff === null && b.diff === null) return 0;
-                if (a.diff === null) return 1;
-                if (b.diff === null) return -1;
-                return b.diff - a.diff;
-            });
-
-            // Renderização da Tabela
-            const tbody = document.getElementById('resultsData');
-            let html = '';
-
-            results.forEach(r => {
-                let badgeClass = '';
-                let badgeText = '';
-                let diffFmt = '-';
-                
-                if (r.diff === null) {
-                    badgeClass = 'bg-slate-200/50 text-slate-500';
-                    badgeText = 'Sem Nota Base';
-                    diffFmt = 'N/D';
-                } else if (r.diff >= 0) {
-                    badgeClass = 'bg-[#10B981]/15 text-[#10B981]';
-                    badgeText = 'Chance Alta';
-                    diffFmt = '+' + r.diff.toFixed(2);
-                } else if (r.diff >= -5) {
-                    badgeClass = 'bg-yellow-500/15 text-yellow-600';
-                    badgeText = 'Chance Média';
-                    diffFmt = r.diff.toFixed(2);
-                } else {
-                    badgeClass = 'bg-rose-500/15 text-rose-500';
-                    badgeText = 'Chance Baixa';
-                    diffFmt = r.diff.toFixed(2);
-                }
-
-                const corteDisplay = r.corte !== null ? r.corte.toFixed(2) : '-';
-
-                html += `
-                    <tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50/50 transition-colors group">
-                        <td class="px-6 py-4 font-bold text-[#0B193C]">
-                            <div class="flex items-center gap-3">
-                                <div class="w-1 h-8 rounded-full ${r.diff === null ? 'bg-slate-300' : (r.diff >= 0 ? 'bg-[#10B981]' : (r.diff >= -5 ? 'bg-yellow-500' : 'bg-rose-500'))}"></div>
-                                <div>
-                                    <p class="text-[14px]">${r.univ} <span class="text-xs font-semibold text-slate-400"> - ${r.cidade} (${r.uf})</span></p>
-                                    <p class="text-[10px] text-slate-400 uppercase tracking-widest mt-0.5">${r.regiao} • ${r.km} KM</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="px-4 py-4 text-center">
-                            <span class="inline-flex items-center justify-center bg-slate-100 text-[#0B193C] text-xs font-bold px-2 py-1 rounded border border-slate-200 shadow-sm">${r.vagas} Vagas</span>
-                        </td>
-                        <td class="px-4 py-4 text-center text-xs font-semibold text-slate-500 tracking-wide">
-                            <span class="text-red-500 font-bold">${r.pesoRed}</span>
-                            <span class="opacity-50">/</span><span class="text-green-600 font-bold">${r.pesoCn}</span>
-                            <span class="opacity-50">/</span><span class="text-yellow-600 font-bold">${r.pesoCh}</span>
-                            <span class="opacity-50">/</span><span class="text-pink-600 font-bold">${r.pesoLin}</span>
-                            <span class="opacity-50">/</span><span class="text-blue-600 font-bold">${r.pesoMat}</span>
-                        </td>
-                        <td class="px-4 py-4 text-center font-bold text-slate-500">
-                            ${corteDisplay}
-                        </td>
-                        <td class="px-4 py-4 text-center font-headline text-[15px] font-extrabold text-[#0B193C]">
-                            ${r.media.toFixed(2)}
-                        </td>
-                        <td class="px-6 py-4 text-right">
-                            <div class="flex flex-col items-end gap-1">
-                                <span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-widest uppercase ${badgeClass}">${badgeText}</span>
-                                <span class="text-[13px] font-bold ${r.diff === null ? 'text-slate-400' : (r.diff >= 0 ? 'text-[#10B981]' : (r.diff >= -5 ? 'text-yellow-600' : 'text-rose-500'))}">${diffFmt}</span>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-
-            tbody.innerHTML = html;
-            document.getElementById('statusCounter').innerHTML = `<span class="text-[#10B981] font-bold">${aprovadosCount}</span> aprovações possíveis nas regras de Vagas selecionadas`;
-        }
-    </script>
-</body>
-</html>
+﻿<!DOCTYPE html>ã
+ã<html lang="pt-BR">ã
+ã<head>ã
+ã ã ã ã ã<meta charset="UTF-8">ã
+ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
+ã ã ã ã ã<title>ãMãeãnãtãoãrãiãaã ãSãiãnãaãpãsãeã ã-ã ãSãiãmãuãlãaãdãoãrã ãSãIãSãUã</title>ã
+ã ã ã ã ã<script src="https://cdn.tailwindcss.com"></script>ã
+ã ã ã ã ã<script>ã
+ã ã ã ã ã ã ã ã ãtãaãiãlãwãiãnãdã.ãcãoãnãfãiãgã ã=ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãhãeãmãeã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãxãtãeãnãdã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãiãnãaãpãsãeã:ã ã{ã ãbãlãuãeã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã ãpãrãiãmãaãrãyã:ã ã'ã#ã6ã3ã6ã6ãFã1ã'ã,ã ãaãcãcãeãnãtã:ã ã'ã#ã1ã0ãBã9ã8ã1ã'ã,ã ãlãiãgãhãtã:ã ã'ã#ãFãAãFãAãFãBã'ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtãFãaãmãiãlãyã:ã ã{ã ãsãaãnãsã:ã ã[ã'ãIãnãtãeãrã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã ãhãeãaãdãlãiãnãeã:ã ã[ã'ãMãaãnãrãoãpãeã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxãSãhãaãdãoãwã:ã ã{ã ã'ãpãrãeãmãiãuãmã'ã:ã ã'ã0ã ã1ã0ãpãxã ã4ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã1ã1ã,ã2ã5ã,ã6ã0ã,ã0ã.ã0ã6ã)ã'ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</script>ã
+ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
+ã ã ã ã ã<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />ã
+ã ã ã ã ã<style>ã
+ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
+ã ã ã ã ã ã ã ã ãbãoãdãyã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãFãAãFãAãFãBã;ã ãcãoãlãoãrã:ã ã#ã1ãEã2ã9ã3ãBã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãgãlãaãsãsã-ãpãaãnãeãlã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã9ã5ã)ã;ã ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã1ã2ãpãxã)ã;ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã2ã5ã5ã,ã2ã5ã5ã,ã1ã)ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãiãcãoãnã-ãfãiãlãlã ã{ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã1ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã ã{ã ãwãiãdãtãhã:ã ã4ãpãxã;ã ã}ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãrãaãcãkã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã ã}ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ãEã2ãEã8ãFã0ã;ã ãbãoãrãdãeãrã-ãrãaãdãiãuãsã:ã ã1ã0ãpãxã;ã ã}ã
+ã ã ã ã ã</style>ã
+ã ã ã ã ã<!-- Carrega a Base do SISU -->ã
+ã ã ã ã ã<script src="../../src/js/sisu_datéa.js"></script>ã
+ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
+ã</head>ã
+ã<body class="flex h-screen overflow-hidden text-slatée-800 antialiased selection:bg-sinapse-primary selection:text-white">ã
+ã
+ã ã ã ã ã<!-- SIDEBAR ELITE -->ã
+ã ã ã ã ã<aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relatéive bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">ã
+ã ã ã ã ã<!-- Logo Area -->ã
+ã ã ã ã ã<div class="pt-10 pb-6 flex flex-col items-center justify-center shrink-0 relatéive">ã
+ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO VETORIZADA.png" alt="Lion Study" class="h-10 w-auto object-contain" />ã
+ã ã ã ã ã</div>ã
+ã ã ã ã ã
+ã ã ã ã ã<!-- Menu Principal -->ã
+ã ã ã ã ã<nav class="flex-1 overflow-y-auto px-4 space-y-1 relatéive pb-10 custom-scrollbar">ã
+ã ã ã ã ã ã ã ã ã<a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãhãoãmãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãtãaãsã ãDãiãáãrãiãaãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãlãiãsãtã_ãaãlãtã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãPãlãaãnãeãjãaãmãeãnãtãoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãaãcãkãeãdã_ãlãiãnãeã_ãcãhãaãrãtã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="estratéegia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãrãoãuãtãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãEãsãtãrãaãtãéãéãgãiãaã ãAãPã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãqãuãiãzã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãBãaãnãcãoã ãdãeã ãQãuãeãsãtãõãeãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãeãdãiãtã_ãnãããoãtãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãRãeãdãaãçãããoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="simulador.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relatéive border border-white/10 shadow-sm transition-all">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[22px] text-white leading-nãone block" style="font-variatéion-settings: 'FILL' 1;">ãmãoãnãiãtãoãrãiãnãgã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="tracking-wide">ãSãiãmãuãlãaãdãoãrã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãcãaãlãeãnãdãaãrã_ãmãoãnãtãhã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãCãrãoãnãããoãgãrãaãmãaã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãyãlãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãFãlãaãsãhãcãaãrãdãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãcãhãoãoãlã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãVãeãsãtãiãbãuãlãaãrãeãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã</nav>ã
+ã ã ã ã ã
+ã ã ã ã ã<!-- User Profile Footer -->ã
+ã ã ã ã ã<div class="p-4 shrink-0 relatéive z-20 border-t border-white/10">ã
+ã ã ã ã ã ã ã ã ã<div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">ãJãOã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 min-w-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[13px] font-bold text-white truncatée drop-shadow-sm">ãJãoãhãnãnã ãOãlãiãvãeãiãrãaã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[11px] text-white/70 truncatée group-hover:text-white/90 transition-colors">ãVãeãrã ãpãeãrãfãiãlã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã</div>ã
+ã</aside>ã
+ã
+ã ã ã ã ã<main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relatéive overflow-y-auto">ã
+ã ã ã ã ã ã ã ã ã<header class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<nav class="flex text-[11px] font-semibold text-slatée-400 uppercase tracking-widest space-x-3 items-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-sinapse-primary">ãAãnãáãlãiãsãeã ãPãrãeãdãiãtãiãvãaã ãSãIãSãUã ãCãoãmãpãlãeãtãaã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</nav>ã
+ã ã ã ã ã ã ã ã ã</header>ã
+ã
+ã ã ã ã ã ã ã ã ã<div class="p-10 max-w-[1600px] mx-auto w-full space-y-6 relatéive z-10">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex justify-between items-end mb-4">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-sinapse-primary text-[40px] icon-fill">ãqãuãeãrãyã_ãsãtãaãtãéãsã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãiãmãuãlãaãdãoãrã ãdãeã ãNãoãtãaãsã ãSãIãSãUã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h1>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-400 font-semibold text-sm">ãPãeãsãoãsã ãdãaãsã ãFãaãcãuãlãdãaãdãeãsã ãdãeã ãMãeãdãiãcãiãnãaã ãeã ãCãoãrãrãeãlãaãçãããoã ãTãRãIã ã2ã0ã2ã5ã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- MODALIDADE SECTION -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="glass-panel rounded-[32px] p-8 shadow-premium">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-2 mb-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">ã1ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C]">ãMãoãdãaãlãiãdãaãdãeã ãdãeã ãCãoãnãcãoãrãrãêãnãcãiãaã</h2>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-400 text-sm mb-6 ml-8">ãEãsãcãoãlãhãaã ãsãuãaã ãmãoãdãaãlãiãdãaãdãeã ãpãaãrãaã ãqãuãeã ãaã ãpãrãoãjãeãçãããoã ãuãtãiãlãiãzãeã ãaã ãbãaãsãeã ãcãoãrãrãeãtãaã ãdãeã ãnãããoãtãaãsã ãdãeã ãcãoãrãtãeã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-2 lg:grid-cols-5 gap-4 ml-8">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="setmodality('ampla', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slatée-100 text-slatée-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">ãAãmãpãlãaã ãCãoãnãcãoãrãrãêãnãcãiãaã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="setmodality('lb_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slatée-100 text-slatée-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">ãLãBã_ãEãPã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="setmodality('lb_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slatée-100 text-slatée-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">ãLãBã_ãPãPãIã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="setmodality('li_ep', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slatée-100 text-slatée-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">ãLãIã_ãEãPã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="setmodality('li_ppi', this)" class="modality-btn py-4 px-3 rounded-2xl border-2 border-slatée-100 text-slatée-500 font-bold hover:border-sinapse-primary hover:text-sinapse-primary hover:bg-sinapse-primary/5 transition-all text-sm shadow-sm hover:shadow-md">ãLãIã_ãPãPãIã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="mt-6 ml-8 bg-slatée-50 p-5 rounded-2xl border border-slatée-100/80">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest mb-3 flex items-center gap-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[16px] text-sinapse-primary">ãiãnãfãoã</span>ã ãEãnãtãeãnãdãaã ãsãuãaã ãmãoãdãaãlãiãdãaãdãeã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500"><strong class="text-[#0B193C]">ãAãmãpãlãaã ãCãoãnãcãoãrãrãêãnãcãiãaã:ã</strong>ã ãCãoãnãcãoãrãrãêãnãcãiãaã ãgãeãrãaãlã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500"><strong class="text-[#0B193C]">ãLãBã_ãEãPã:ã</strong>ã ãEãsãcãoãlãaã ãpãúãbãlãiãcãaã ãeã ãbãaãiãxãaã ãrãeãnãdãaã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500"><strong class="text-[#0B193C]">ãLãBã_ãPãPãIã:ã</strong>ã ãEãsãcãoãlãaã ãpãúãbãlãiãcãaã,ã ãbãaãiãxãaã ãrãeãnãdãaã ã–ã ãpãrãeãtãoãsã,ã ãpãaãrãdãoãsã ãeã ãiãnãdãíãgãeãnãaãsã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500"><strong class="text-[#0B193C]">ãLãIã_ãEãPã:ã</strong>ã ãEãsãcãoãlãaã ãpãúãbãlãiãcãaã ãeã ãiãnãdãeãpãeãnãdãeãnãtãeã ãdãeã ãrãeãnãdãaã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500"><strong class="text-[#0B193C]">ãLãIã_ãPãPãIã:ã</strong>ã ãEãsãcãoãlãaã ãpãúãbãlãiãcãaã,ã ãiãnãdãeãpãeãnãdãeãnãtãeã ãdãeã ãrãeãnãdãaã ã–ã ãpãrãeãtãoãsã,ã ãpãaãrãdãoãsã ãeã ãiãnãdãíãgãeãnãaãsã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 xl:grid-cols-4 gap-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Inputs Section -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="xl:col-span-1 glass-panel rounded-[32px] p-8 shadow-premium self-start sticky top-28">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-2 mb-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-[#0B193C] text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">ã2ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C]">ãNãoãtãaãsã ãTãRãIã</h2>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-4">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-red-500">ãRãeãdãaãçãããoã ã(ãRãEãDã)ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="inRED" type="number" min="0" max="1000" placeholder="Ex: 920.00" class="w-full bg-slatée-50 border border-slatée-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-red-500 outline-nãone transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-green-600">ãCã.ã ãdãaã ãNãaãtãéãuãrãeãzãaã ã(ãCãNã)ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="inCN" type="number" min="0" max="1000" placeholder="Ex: 702.20" class="w-full bg-slatée-50 border border-slatée-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-green-600 outline-nãone transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-yellow-600">ãCã.ã ãHãuãmãaãnãaãsã ã(ãCãHã)ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="inCH" type="number" min="0" max="1000" placeholder="Ex: 678.60" class="w-full bg-slatée-50 border border-slatée-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-yellow-600 outline-nãone transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-pink-600">ãLãiãnãgãuãaãgãeãnãsã ã(ãLãIãNã)ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="inLIN" type="number" min="0" max="1000" placeholder="Ex: 638.30" class="w-full bg-slatée-50 border border-slatée-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-pink-600 outline-nãone transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-blue-600">ãMãaãtãéãeãmãáãtãiãcãaã ã(ãMãAãTã)ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="inMAT" type="number" min="0" max="1000" placeholder="Ex: 816.10" class="w-full bg-slatée-50 border border-slatée-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-blue-600 outline-nãone transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="pt-4 border-t border-slatée-100 flex items-center gap-2 mb-2 w-full justify-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-sinapse-primary text-white w-6 h-6 flex justify-center items-center rounded-full text-xs font-bold">ã3ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-xs font-bold text-sinapse-primary uppercase tracking-widest">ãEãxãeãcãuãtãeã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="calcularsisu()" class="w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-[16px] font-bold shadow-xl shadow-sinapse-primary/20 transition-all flex justify-center items-center gap-2 mt-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined">ãrãoãcãkãeãtã_ãlãaãuãnãcãhã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãiãmãuãlãaãrã ãAãpãrãoãvãaãçãããoã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Results Section -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="xl:col-span-3 glass-panel rounded-[32px] overflow-hidden shadow-premium flex flex-col h-[850px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="px-8 py-6 border-b border-slatée-100 flex items-center justify-between bg-white bg-opacity-70 backdrop-blur-md z-10 sticky top-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C]">ãPãrãoãjãeãçãããoã ãdãeã ãUãnãiãvãeãrãsãiãdãaãdãeãsã</h2>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-xs font-semibold text-slatée-400 bg-slatée-100 py-1.5 px-3 rounded-lg" id="statéusCounter">ãAãgãuãaãrãdãaãnãdãoã ãdãaãdãoãsã.ã.ã.ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 overflow-y-auto bg-white relatéive">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<table class="w-full text-left border-collapse" id="resultsTable">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<thead>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr class="text-[9px] text-slatée-400 uppercase tracking-[0.1em] border-b border-slatée-100 bg-slatée-50/50">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-6 py-4 font-bold sticky top-0 bg-slatée-50/90 z-20">ãUãnãiãvãeãrãsãiãdãaãdãeã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-4 py-4 font-bold sticky top-0 bg-slatée-50/90 text-center z-20">ãVãaãgãaãsã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-4 py-4 font-bold sticky top-0 bg-slatée-50/90 text-center z-20">ãPãeãsãoãsã ã(ãRã/ãNã/ãHã/ãLã/ãMã)ã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-4 py-4 font-bold sticky top-0 bg-slatée-50/90 text-center z-20">ãNãoãtãaã ãCãoãrãtãeã ã2ã0ã2ã5ã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-4 py-4 font-bold sticky top-0 bg-slatée-50/90 text-center z-20">ãSãuãaã ãMãéãdãiãaã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="px-6 py-4 font-bold sticky top-0 bg-slatée-50/90 text-right z-20">ãSãtãaãtãéãuãsã</th>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</thead>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tbody class="text-sm" id="resultsDatéa">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td colspan="6" class="py-10 text-center text-slatée-400 font-medium h-[400px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[60px] text-slatée-200 mb-4">ãaãnãaãlãyãtãiãcãsã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="font-bold text-[#0B193C] mb-2">ãSãiãmãuãlãaãdãoãrã ãAãgãuãaãrãdãaãnãdãoã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-xs">ãEãsãcãoãlãhãaã ãsãuãaã ãmãoãdãaãlãiãdãaãdãeã,ã ãpãrãeãeãnãcãhãaã ãsãuãaãsã ãnãããoãtãaãsã ãTãRãIã ãeã ãcãlãiãqãuãeã ãeãmã ãsãiãmãuãlãaãrã ãpãaãrãaã ãvãeãrã ãsãuãaã ãpãrãoãjãeãçãããoã ãpãeãrãsãoãnãaãlãiãzãaãdãaã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tbody>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</table>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã</main>ã
+ã
+ã ã ã ã ã<script>ã
+ã ã ã ã ã ã ã ã ãlãeãtã ãsãeãlãeãcãtãeãdãMãoãdãaãlãiãtãyã ã=ã ãnãuãlãlã;ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãsãeãtãMãoãdãaãlãiãtãyã(ãmãoãdã,ã ãbãtãnãEãlãeãmãeãnãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãlãeãcãtãeãdãMãoãdãaãlãiãtãyã ã=ã ãmãoãdã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeãsãeãtãaã ãtãoãdãoãsã ãoãsã ãbãoãtãõãeãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrãAãlãlã(ã'ã.ãmãoãdãaãlãiãtãyã-ãbãtãnã'ã)ã.ãfãoãrãEãaãcãhã(ãbãtãnã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãbãoãrãdãeãrã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãtãeãxãtã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãbãgã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã/ã5ã'ã,ã ã'ãsãhãaãdãoãwã-ãmãdã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãbãoãrãdãeãrã-ãsãlãaãtãéãeã-ã1ã0ã0ã'ã,ã ã'ãtãeãxãtã-ãsãlãaãtãéãeã-ã5ã0ã0ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãAãdãiãcãiãoãnãaã ãcãlãaãsãsãeã ãaãtãéãiãvãaã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnãEãlãeãmãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãbãoãrãdãeãrã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãtãeãxãtã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãbãgã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã/ã5ã'ã,ã ã'ãsãhãaãdãoãwã-ãmãdã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnãEãlãeãmãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãbãoãrãdãeãrã-ãsãlãaãtãéãeã-ã1ã0ã0ã'ã,ã ã'ãtãeãxãtã-ãsãlãaãtãéãeã-ã5ã0ã0ã'ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãLãiãmãpãeãzãaã ãvãiãsãuãaãlã ãiãnãfãoãrãmãaãnãdãoã ãaãoã ãuãsãuãáãrãiãoã ãnãããoãvãaã ãcãaãrãgãaã ãdãeã ãdãaãdãoãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãrãeãsãuãlãtãsãDãaãtãéãaã'ã)ã.ãiãnãnãeãrãHãTãMãLã ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td colspan="6" class="py-10 text-center text-slatée-400 font-medium h-[400px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col items-center justify-center h-full max-w-md mx-auto text-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[60px] text-sinapse-primary animatée-pulse mb-4">ãrãeãfãrãeãsãhã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="font-bold text-[#0B193C] mb-2">ãMãoãdãaãlãiãdãaãdãeã ãCãaãrãrãeãgãaãdãaã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-xs">ãIãnãsãiãrãaã ã/ã ãAãtãuãaãlãiãzãeã ãsãuãaãsã ãnãããoãtãaãsã ãeã ãiãnãiãcãiãeã ãaã ãsãiãmãuãlãaãçãããoã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãsãtãaãtãéãuãsãCãoãuãnãtãeãrã'ã)ã.ãiãnãnãeãrãHãTãMãLã ã=ã ã`ãBãaãsãeã ã"ã$ã{ãbãtãnãEãlãeãmãeãnãtã.ãiãnãnãeãrãTãeãxãtã}ã"ã ãsãeãlãeãcãiãoãnãaãdãaã`ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãcãaãlãcãuãlãaãrãSãiãsãuã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ã!ãsãeãlãeãcãtãeãdãMãoãdãaãlãiãtãyã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãeãrãtã(ã'ãSãeãlãeãcãiãoãnãeã ãsãuãaã ãmãoãdãaãlãiãdãaãdãeã ãdãeã ãcãoãnãcãoãrãrãêãnãcãiãaã ãaãnãtãeãsã ãdãeã ãsãiãmãuãlãaãrã.ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãRãeãdã ã=ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãRãEãDã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãCãnã ã=ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãCãNã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãCãhã ã=ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãCãHã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãLãiãnã ã=ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãLãIãNã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãMãaãtãéã ã=ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãMãAãTã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãnãRãeãdã ã=ã=ã=ã ã0ã ã&ã&ã ãnãCãnã ã=ã=ã=ã ã0ã ã&ã&ã ãnãCãhã ã=ã=ã=ã ã0ã ã&ã&ã ãnãLãiãnã ã=ã=ã=ã ã0ã ã&ã&ã ãnãMãaãtãéã ã=ã=ã=ã ã0ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãeãrãtã(ã'ãPãoãrã ãfãaãvãoãrã,ã ãpãrãeãeãnãcãhãaã ãaãsã ãnãããoãtãaãsã ãpãaãrãaã ãsãiãmãuãlãaãrã.ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãrãeãsãuãlãtãsã ã=ã ã[ã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãaãpãrãoãvãaãdãoãsãCãoãuãnãtã ã=ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãCãaãrãrãeãgãaã ãdãaãdãoãsã ãdãaã ãmãoãdãaãlãiãdãaãdãeã ãdãiãnãaãmãiãcãaãmãeãnãtãeã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãaãsãeãDãaãdãoãsã ã=ã ãsãiãsãuãDãBã[ãsãeãlãeãcãtãeãdãMãoãdãaãlãiãtãyã]ã ã|ã|ã ã[ã]ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãsãeãDãaãdãoãsã.ãfãoãrãEãaãcãhã(ãuãnãiãvã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãoãmãaãPãeãsãoãsã ã=ã ãuãnãiãvã.ãpãeãsãoãRãeãdã ã+ã ãuãnãiãvã.ãpãeãsãoãCãnã ã+ã ãuãnãiãvã.ãpãeãsãoãCãhã ã+ã ãuãnãiãvã.ãpãeãsãoãLãiãnã ã+ã ãuãnãiãvã.ãpãeãsãoãMãaãtãéã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãoãmãaãNãoãtãaãsãPãeãsãaãdãaãsã ã=ã ã(ãnãRãeãdã ã*ã ãuãnãiãvã.ãpãeãsãoãRãeãdã)ã ã+ã ã(ãnãCãnã ã*ã ãuãnãiãvã.ãpãeãsãoãCãnã)ã ã+ã ã(ãnãCãhã ã*ã ãuãnãiãvã.ãpãeãsãoãCãhã)ã ã+ã ã(ãnãLãiãnã ã*ã ãuãnãiãvã.ãpãeãsãoãLãiãnã)ã ã+ã ã(ãnãMãaãtãéã ã*ã ãuãnãiãvã.ãpãeãsãoãMãaãtãéã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãeãdãiãaãFãiãnãaãlã ã=ã ãsãoãmãaãPãeãsãoãsã ã>ã ã0ã ã?ã ã(ãsãoãmãaãNãoãtãaãsãPãeãsãaãdãaãsã ã/ã ãsãoãmãaãPãeãsãoãsã)ã ã:ã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãdãiãfãeãrãeãnãcãaã ã=ã ãnãuãlãlã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãuãnãiãvã.ãcãoãrãtãeã ã!ã=ã=ã ãnãuãlãlã ã&ã&ã ãuãnãiãvã.ãcãoãrãtãeã ã>ã ã0ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãeãrãeãnãcãaã ã=ã ãmãeãdãiãaãFãiãnãaãlã ã-ã ãuãnãiãvã.ãcãoãrãtãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãiãfãeãrãeãnãcãaã ã>ã=ã ã0ã)ã ãaãpãrãoãvãaãdãoãsãCãoãuãnãtã+ã+ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãuãlãtãsã.ãpãuãsãhã(ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã.ã.ã.ãuãnãiãvã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãeãdãiãaã:ã ãmãeãdãiãaãFãiãnãaãlã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãfã:ã ãdãiãfãeãrãeãnãcãaã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãOãrãdãeãnãaã ãpãeãlãaã ãmãaãiãoãrã ãfãoãlãgãaã ã(ãDãiãfãeãrãeãnãçãaã)ã ãaãtãéã ãaã ãmãeãnãããoãrã.ã ãOãsã ãnãuãlãlãsã ãvãããoã ãpãaãrãaã ãoã ãfãiãnãaãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãuãlãtãsã.ãsãoãrãtã(ã(ãaã,ã ãbã)ã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãaã.ãdãiãfãfã ã=ã=ã=ã ãnãuãlãlã ã&ã&ã ãbã.ãdãiãfãfã ã=ã=ã=ã ãnãuãlãlã)ã ãrãeãtãuãrãnã ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãaã.ãdãiãfãfã ã=ã=ã=ã ãnãuãlãlã)ã ãrãeãtãuãrãnã ã1ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãbã.ãdãiãfãfã ã=ã=ã=ã ãnãuãlãlã)ã ãrãeãtãuãrãnã ã-ã1ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ãbã.ãdãiãfãfã ã-ã ãaã.ãdãiãfãfã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeãnãdãeãrãiãzãaãçãããoã ãdãaã ãTãaãbãeãlãaã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãbãoãdãyã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãrãeãsãuãlãtãsãDãaãtãéãaã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãhãtãmãlã ã=ã ã'ã'ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãuãlãtãsã.ãfãoãrãEãaãcãhã(ãrã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãbãaãdãgãeãCãlãaãsãsã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãbãaãdãgãeãTãeãxãtã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãdãiãfãfãFãmãtã ã=ã ã'ã-ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãrã.ãdãiãfãfã ã=ã=ã=ã ãnãuãlãlã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãCãlãaãsãsã ã=ã ã'ãbãgã-ãsãlãaãtãéãeã-ã2ã0ã0ã/ã5ã0ã ãtãeãxãtã-ãsãlãaãtãéãeã-ã5ã0ã0ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãTãeãxãtã ã=ã ã'ãSãeãmã ãNãoãtãaã ãBãaãsãeã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãfãFãmãtã ã=ã ã'ãNã/ãDã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ãiãfã ã(ãrã.ãdãiãfãfã ã>ã=ã ã0ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãCãlãaãsãsã ã=ã ã'ãbãgã-ã[ã#ã1ã0ãBã9ã8ã1ã]ã/ã1ã5ã ãtãeãxãtã-ã[ã#ã1ã0ãBã9ã8ã1ã]ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãTãeãxãtã ã=ã ã'ãCãhãaãnãcãeã ãAãlãtãaã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãfãFãmãtã ã=ã ã'ã+ã'ã ã+ã ãrã.ãdãiãfãfã.ãtãoãFãiãxãeãdã(ã2ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ãiãfã ã(ãrã.ãdãiãfãfã ã>ã=ã ã-ã5ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãCãlãaãsãsã ã=ã ã'ãbãgã-ãyãeãlãlãoãwã-ã5ã0ã0ã/ã1ã5ã ãtãeãxãtã-ãyãeãlãlãoãwã-ã6ã0ã0ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãTãeãxãtã ã=ã ã'ãCãhãaãnãcãeã ãMãéãdãiãaã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãfãFãmãtã ã=ã ãrã.ãdãiãfãfã.ãtãoãFãiãxãeãdã(ã2ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãCãlãaãsãsã ã=ã ã'ãbãgã-ãrãoãsãeã-ã5ã0ã0ã/ã1ã5ã ãtãeãxãtã-ãrãoãsãeã-ã5ã0ã0ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeãTãeãxãtã ã=ã ã'ãCãhãaãnãcãeã ãBãaãiãxãaã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãfãFãmãtã ã=ã ãrã.ãdãiãfãfã.ãtãoãFãiãxãeãdã(ã2ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãrãtãeãDãiãsãpãlãaãyã ã=ã ãrã.ãcãoãrãtãeã ã!ã=ã=ã ãnãuãlãlã ã?ã ãrã.ãcãoãrãtãeã.ãtãoãFãiãxãeãdã(ã2ã)ã ã:ã ã'ã-ã'ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãhãtãmãlã ã+ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr class="border-b border-slatée-50 last:border-0 hover:bg-slatée-50/50 transition-colors group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-6 py-4 font-bold text-[#0B193C]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-1 h-8 rounded-full ${r.diff === null ? 'bg-slatée-300' : (r.diff >ã=ã ã0ã ã?ã ã'ãbãgã-ã[ã#ã1ã0ãBã9ã8ã1ã]ã'ã ã:ã ã(ãrã.ãdãiãfãfã ã>ã=ã ã-ã5ã ã?ã ã'ãbãgã-ãyãeãlãlãoãwã-ã5ã0ã0ã'ã ã:ã ã'ãbãgã-ãrãoãsãeã-ã5ã0ã0ã'ã)ã)ã}ã"ã>ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[14px]">ã$ã{ãrã.ãuãnãiãvã}ã ã<span class="text-xs font-semibold text-slatée-400">ã ã-ã ã$ã{ãrã.ãcãiãdãaãdãeã}ã ã(ã$ã{ãrã.ãuãfã}ã)ã</span></p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-slatée-400 uppercase tracking-widest mt-0.5">ã$ã{ãrã.ãrãeãgãiãaãoã}ã ã•ã ã$ã{ãrã.ãkãmã}ã ãKãMã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-4 py-4 text-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="inline-flex items-center justify-center bg-slatée-100 text-[#0B193C] text-xs font-bold px-2 py-1 rounded border border-slatée-200 shadow-sm">ã$ã{ãrã.ãvãaãgãaãsã}ã ãVãaãgãaãsã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-4 py-4 text-center text-xs font-semibold text-slatée-500 tracking-wide">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-red-500 font-bold">ã$ã{ãrã.ãpãeãsãoãRãeãdã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="opacity-50">ã/ã</span><span class="text-green-600 font-bold">ã$ã{ãrã.ãpãeãsãoãCãnã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="opacity-50">ã/ã</span><span class="text-yellow-600 font-bold">ã$ã{ãrã.ãpãeãsãoãCãhã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="opacity-50">ã/ã</span><span class="text-pink-600 font-bold">ã$ã{ãrã.ãpãeãsãoãLãiãnã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="opacity-50">ã/ã</span><span class="text-blue-600 font-bold">ã$ã{ãrã.ãpãeãsãoãMãaãtãéã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-4 py-4 text-center font-bold text-slatée-500">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãcãoãrãtãeãDãiãsãpãlãaãyã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-4 py-4 text-center font-headline text-[15px] font-extrabold text-[#0B193C]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãrã.ãmãeãdãiãaã.ãtãoãFãiãxãeãdã(ã2ã)ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<td class="px-6 py-4 text-right">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col items-end gap-1">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="px-2.5 py-1 rounded-full text-[10px] font-extrabold tracking-widest uppercase ${badgeClass}">ã$ã{ãbãaãdãgãeãTãeãxãtã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[13px] font-bold ${r.diff === null ? 'text-slatée-400' : (r.diff >ã=ã ã0ã ã?ã ã'ãtãeãxãtã-ã[ã#ã1ã0ãBã9ã8ã1ã]ã'ã ã:ã ã(ãrã.ãdãiãfãfã ã>ã=ã ã-ã5ã ã?ã ã'ãtãeãxãtã-ãyãeãlãlãoãwã-ã6ã0ã0ã'ã ã:ã ã'ãtãeãxãtã-ãrãoãsãeã-ã5ã0ã0ã'ã)ã)ã}ã"ã>ã$ã{ãdãiãfãfãFãmãtã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</td>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãbãoãdãyã.ãiãnãnãeãrãHãTãMãLã ã=ã ãhãtãmãlã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãsãtãaãtãéãuãsãCãoãuãnãtãeãrã'ã)ã.ãiãnãnãeãrãHãTãMãLã ã=ã ã`ã<span class="text-[#10B981] font-bold">ã$ã{ãaãpãrãoãvãaãdãoãsãCãoãuãnãtã}ã</span>ã ãaãpãrãoãvãaãçãõãeãsã ãpãoãsãsãíãvãeãiãsã ãnãaãsã ãrãeãgãrãaãsã ãdãeã ãVãaãgãaãsã ãsãeãlãeãcãiãoãnãaãdãaãsã`ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</script>ã
+ã</body>ã
+ã</html>
 
 
 
