@@ -1326,6 +1326,43 @@
     </script>
 
     <script>
+        // ===============================
+        // ALIASES GLOBAIS - Corrige mismatch de casing
+        // nos onclick do HTML vs definições JS camelCase
+        // ===============================
+        window.switchtab = switchTab;
+        window.abestudo = abEstudo;
+        window.abestudounico = abEstudoUnico;
+        window.flipcard = flipCard;
+        window.nextcard = nextCard;
+        window.fecharmodalestudo = fecharModalEstudo;
+        window.contextmenuaction = contextMenuAction;
+        window.showcontextmenu = showContextMenu;
+        window.toggledeck = toggleDeck;
+        window.renderdeckshome = renderDecksHome;
+        window.renderdropdowns = renderDropdowns;
+        window.renderbrowsertable = renderBrowserTable;
+        window.salvarcard = salvarCard;
+        window.limparformadd = limparFormAdd;
+        window.openquickedit = openQuickEdit;
+        window.fecharquickedit = fecharQuickEdit;
+        window.excluircartao = excluirCartao;
+        window.salvarquickedit = salvarQuickEdit;
+        window.editarcardestudoatual = editarCardEstudoAtual;
+        window.mocksync = mockSync;
+        // Aliases com caracteres corrompidos pela codificação
+        window.abrirmodalnovobaralho = abrirModalNovoBaralho;
+        window.fecharmodalnovobaralho = fecharModalNovoBaralho;
+        window.salvargeralbaralho = salvarGeralBaralho;
+        // Padrão Anki: currentTagFilter
+        window.currenttagfilter = null;
+        Object.defineProperty(window, 'currenttagfilter', {
+            get() { return currentTagFilter; },
+            set(v) { currentTagFilter = v; }
+        });
+    </script>
+
+    <script>
         // Sidebar Toggle
         function toggleSidebar() {
             const aside = document.querySelector('aside');
