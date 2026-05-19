@@ -1247,6 +1247,51 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 100);
         }
     });
+    
+    // Click handler: garante cursor visível ao clicar fora de equação
+    if (editorForDblClick) editorForDblClick.addEventListener('click', function(e) {
+        // Se clicou numa equação, ignorar (o handler do math-field já cuida)
+        if (e.target.closest('.formula-inline-container')) return;
+        if (e.target.tagName === 'MATH-FIELD') return;
+        
+        const editor = this;
+        
+        // Verificar se o editor está vazio ou se o último nó é uma equação
+        const lastChild = editor.lastChild;
+        if (lastChild && lastChild.classList && lastChild.classList.contains('formula-inline-container')) {
+            // Adicionar nó de texto após a última equação
+            const textNode = document.createTextNode('\u200B');
+            editor.appendChild(textNode);
+            const range = document.createRange();
+            range.setStart(textNode, 1);
+            range.collapse(true);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            return;
+        }
+        
+        // Garantir que o cursor esteja visível após clicar
+        setTimeout(() => {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || !editor.contains(sel.anchorNode)) {
+                // Se o cursor não ficou dentro do editor, posicionar no final
+                const range = document.createRange();
+                if (editor.lastChild) {
+                    if (editor.lastChild.nodeType === 3) {
+                        range.setStart(editor.lastChild, editor.lastChild.textContent.length);
+                    } else {
+                        range.setStartAfter(editor.lastChild);
+                    }
+                } else {
+                    range.setStart(editor, 0);
+                }
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+        }, 10);
+    });
 });
 
 // 5. Abertura e Fechamento do Modal Principal de Notas
