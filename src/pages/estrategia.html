@@ -364,40 +364,26 @@
                         </div>
                     </div>
 
-                    <!-- BANCO DE HISTÃ“RICO DE DÃ‰FICITS -->
+                    <!-- ARSENAL ESTRATÉGICO -->
                     <div class="glass-panel rounded-[24px] shadow-premium p-6 flex-1 border border-slate-100 bg-white flex flex-col overflow-hidden min-h-0">
-                        <div class="flex items-center justify-between mb-6">
-                            <h3 class="text-[17px] font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
-                                <span class="material-symbols-outlined text-slate-400 icon-fill">table_chart</span>
-                                Arsenal Estratégico (Déficits Transformados)
-                            </h3>
-                            <div class="text-xs font-bold text-slate-400 bg-slate-50 px-3 py-1 rounded-lg border border-slate-200">
-                                <span id="lblDeficitsCount">0</span> conteúdos em andamento
+                        <div class="flex items-center justify-between mb-5">
+                            <div>
+                                <h3 class="font-headline text-xl font-extrabold text-[#0B193C]">Arsenal Estratégico</h3>
+                                <p class="text-xs text-slate-400 font-medium">Déficits transformados em missões de revisão espaçada.</p>
                             </div>
+                            <div class="bg-indigo-50 text-sinapse-primary text-xs font-bold px-4 py-1.5 rounded-full border border-indigo-100 shadow-sm" id="lblDeficitsCount">0 conteúdos</div>
                         </div>
                         
-                        <div class="w-full overflow-auto rounded-xl border border-slate-100 flex-1 min-h-0 styled-scrollbar">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="bg-slate-50/80 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
-                                        <th class="py-4 px-5 rounded-tl-xl">Lançamento</th>
-                                        <th class="py-4 px-4 w-[25%]">Disciplina</th>
-                                        <th class="py-4 px-4 w-[35%]">Déficit Estratégico</th>
-                                        <th class="py-4 px-4 text-center">Tiro +7</th>
-                                        <th class="py-4 px-4 text-center">Tiro +21</th>
-                                        <th class="py-4 px-4 text-center">Tiro +60</th>
-                                        <th class="py-4 px-4 text-center rounded-tr-xl">Ações</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="deficitsTableBody" class="text-sm font-medium text-slate-600 divide-y divide-slate-50 bg-white">
-                                    <!-- Injection via JS -->
-                                    <tr><td colspan="7" class="text-center py-10 text-slate-400 italic font-medium">Buscando o 100%. Nenhuma demanda cadastrada não momento.</td></tr>
-                                </tbody>
-                            </table>
+                        <div class="flex-1 overflow-y-auto styled-scrollbar flex flex-col gap-3 min-h-0" id="deficitsContainer">
+                            <div class="m-auto text-center opacity-50 flex flex-col items-center py-8">
+                                <span class="material-symbols-outlined text-[48px] mb-2 text-slate-300">auto_stories</span>
+                                <p class="text-sm font-bold text-slate-500">Nenhuma demanda estratégica</p>
+                                <p class="text-xs text-slate-400 max-w-[250px] mt-1">Lance um déficit no painel lateral para criar ciclos de revisão automáticos.</p>
+                            </div>
                         </div>
-                        <div class="mt-4 flex items-center gap-2 px-1 opacity-70">
+                        <div class="mt-3 flex items-center gap-2 px-1 opacity-70 flex-none">
                             <span class="material-symbols-outlined text-sinapse-primary text-[14px]">verified</span>
-                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Todos os itens dessa tabela foram injetados em Metas Diárias com cobrança obrigatéória de 5 questões cada.</span>
+                            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Todos os itens foram injetados em Metas Diárias com cobrança obrigatória de 5 questões cada.</span>
                         </div>
                     </div>
                 </div>
@@ -591,26 +577,38 @@
         }
 
         function renderDeficitsHistory() {
-            const tableBody = document.getElementById('deficitsTableBody');
+            const container = document.getElementById('deficitsContainer');
             const lblCount = document.getElementById('lblDeficitsCount');
             if(!window.db) return;
             let list = window.db.get('deficits') || [];
-            lblCount.innerText = list.length;
+            lblCount.innerText = `${list.length} conteúdos`;
             if(list.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-slate-400 italic mx-auto"><span class="block material-symbols-outlined text-[32px] mb-2 opacity-50 text-center w-full">auto_stories</span> Nenhuma demanda estratégica mapeada.</td></tr>`;
+                container.innerHTML = `
+                    <div class="m-auto text-center opacity-50 flex flex-col items-center py-8">
+                        <span class="material-symbols-outlined text-[48px] mb-2 text-slate-300">auto_stories</span>
+                        <p class="text-sm font-bold text-slate-500">Nenhuma demanda estratégica</p>
+                        <p class="text-xs text-slate-400 max-w-[250px] mt-1">Lance um déficit no painel lateral para criar ciclos de revisão automáticos.</p>
+                    </div>`;
                 return;
             }
             const sorted = [...list].sort((a,b) => new Date(b.date_registered) - new Date(a.date_registered));
-            tableBody.innerHTML = sorted.map(item => `
-                <tr class="hover:bg-slate-50 transition-colors group">
-                    <td class="py-4 px-5 whitespace-nowrap"><span class="bg-white border border-slate-200 text-slate-600 text-[11px] font-bold px-2.5 py-1.5 rounded shadow-sm">${formatBRLDate(item.date_registered)}</span></td>
-                    <td class="py-4 px-4 whitespace-nowrap"><span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2 py-1 rounded max-w-fit uppercase tracking-widest">${item.discipline}</span></td>
-                    <td class="py-4 px-4 w-[35%]"><span class="text-sm font-bold text-[#0B193C] leading-snug line-clamp-2">${item.subject}</span>${item.subsubject ? `<span class="block text-[10px] text-slate-400 font-bold mt-0.5">${item.subsubject}</span>` : ''}</td>
-                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r7).slice(0,5)}</span></span></td>
-                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r21).slice(0,5)}</span></span></td>
-                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r60).slice(0,5)}</span></span></td>
-                    <td class="py-4 px-4 text-center whitespace-nowrap"><button onclick="removerDeficit('${item.id}')" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all" title="Excluir"><span class="material-symbols-outlined text-[18px]">delete</span></button></td>
-                </tr>
+            container.innerHTML = sorted.map(item => `
+                <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200 flex items-center justify-between gap-4 draft-slide-in hover:bg-slate-100/80 transition-colors group">
+                    <div class="flex items-center gap-4 flex-1 min-w-0">
+                        <span class="text-[11px] font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap flex-none">${formatBRLDate(item.date_registered)}</span>
+                        <span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2.5 py-1 rounded tracking-widest uppercase whitespace-nowrap flex-none">${item.discipline}</span>
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-extrabold text-[#0B193C] truncate">${item.subject}</p>
+                            ${item.subsubject ? `<p class="text-[10px] text-slate-400 font-bold uppercase tracking-wide truncate">${item.subsubject}</p>` : ''}
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-3 flex-none">
+                        <div class="flex flex-col items-center"><span class="material-symbols-outlined text-slate-300 text-[16px]">calendar_clock</span><span class="text-[9px] font-bold text-slate-500">${formatBRLDate(item.r7).slice(0,5)}</span></div>
+                        <div class="flex flex-col items-center"><span class="material-symbols-outlined text-slate-300 text-[16px]">calendar_clock</span><span class="text-[9px] font-bold text-slate-500">${formatBRLDate(item.r21).slice(0,5)}</span></div>
+                        <div class="flex flex-col items-center"><span class="material-symbols-outlined text-slate-300 text-[16px]">calendar_clock</span><span class="text-[9px] font-bold text-slate-500">${formatBRLDate(item.r60).slice(0,5)}</span></div>
+                        <button onclick="removerDeficit('${item.id}')" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all ml-2" title="Excluir"><span class="material-symbols-outlined text-[18px]">delete</span></button>
+                    </div>
+                </div>
             `).join('');
         }
 
