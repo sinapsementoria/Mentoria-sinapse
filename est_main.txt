@@ -1,0 +1,29 @@
+﻿<main class="flex-1 flex flex-col h-full relative overflow-hidden bg-slate-300">
+        
+        <!-- Top Decorator Subtle Glow (Removido para cor uniforme) -->
+
+
+
+
+        <!-- DASHBOARD CONTENT (SCROLLABLE AREA) -->
+        <div class="flex-1 flex flex-col h-full px-10 pt-6 pb-6 max-w-[1500px] mx-auto w-full relative z-10 overflow-hidden">
+            
+            <!-- EXCLUSIVE GREETING & HEADER -->
+            <div class="flex items-center justify-between mb-8 mt-2">
+                <div>
+                    <h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2 flex items-center gap-3">
+                        ESTRATÃ‰GIA DE APROVAÃ‡ÃƒO
+                    </h1>
+                    <p class="text-slate-400 font-semibold text-sm">REGISTRE SEUS DÃ‰FICITS DE APRENDIZAGEM E TRANSFORME FRAQUEZAS EM REVISÃƒO ESTRATÃ‰GICA.</p>
+                </div>
+            </div>
+            
+            <!-- SECTION: BUILDER E ESTRATEGIA -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 flex-1 min-h-0 h-full">
+                    
+                <!-- COLUNA ESQUERDA: INPUT PANEL -->
+                <div class="lg:col-span-4 flex flex-col gap-5">
+                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col relative h-full">
+                        <div class="mb-6">
+
+                            <h2 class="font-headline text-[22px] font-extrabold text-[#0B193C] lea

@@ -1,0 +1,27 @@
+﻿<main class="flex-1 flex flex-col h-full relative overflow-y-auto overflow-x-hidden bg-slate-300">
+        
+        <!-- Top Decorator Subtle Glow (Removido para cor uniforme) -->
+
+
+
+
+        <!-- DASHBOARD ELITE CONTENT -->
+        <div class="flex-1 px-10 pt-6 pb-8 max-w-[1500px] mx-auto w-full flex flex-col min-h-0 relative z-10">
+            
+            <!-- EXCLUSIVE GREETING -->
+            <div class="flex-none flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6 mt-2">
+                <div>
+                    <h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight mb-2">Planejamento</h1>
+                    <p class="text-[15px] text-slate-500 font-medium mt-1">Defina metas, organize tarefas e estude com direÃ§Ã£o.</p>
+                </div>
+            </div>
+            
+            <!-- SECTION: BUILDER DE PLANEJAMENTO -->
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-[400px_1fr] gap-8 min-h-0">
+                    
+                    <!-- INPUT PANEL -->
+                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col gap-5 relative self-start">
+                        <div class="space-y-4">
+                            <div class="space-y-1.5">
+                                <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">Data da Meta</label>
+                                <input id="bData"

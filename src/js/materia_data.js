@@ -1,0 +1,2038 @@
+// Auto-generated - Hierarquia completa Matéria > Assunto > Subassunto
+const materiaHierarquia = {
+  "LÍNGUA PORTUGUESA": {
+    "INTERPRETAÇÃO DE TEXTO": [
+      "COMPREENSÃO GLOBAL DO TEXTO",
+      "IDEIA CENTRAL",
+      "TEMA",
+      "TESE",
+      "PONTO DE VISTA",
+      "INFERÊNCIA",
+      "PRESSUPOSTOS",
+      "SUBENTENDIDOS",
+      "IMPLÍCITOS TEXTUAIS",
+      "EXPLÍCITOS TEXTUAIS",
+      "INTENCIONALIDADE DISCURSIVA",
+      "SENTIDO GLOBAL",
+      "RELAÇÃO ENTRE TEXTOS",
+      "RELAÇÃO ENTRE TEXTO VERBAL E NÃO VERBAL",
+      "TEXTO MULTIMODAL",
+      "CHARGES",
+      "TIRINHAS",
+      "CARTUNS",
+      "INFOGRÁFICOS",
+      "GRÁFICOS E TABELAS"
+    ],
+    "TIPOLOGIA TEXTUAL": [
+      "NARRAÇÃO",
+      "DESCRIÇÃO",
+      "DISSERTAÇÃO",
+      "EXPOSIÇÃO",
+      "INJUNÇÃO",
+      "ARGUMENTAÇÃO"
+    ],
+    "GÊNEROS TEXTUAIS": [
+      "ARTIGO DE OPINIÃO",
+      "EDITORIAL",
+      "CRÔNICA",
+      "CONTO",
+      "ROMANCE",
+      "NOTÍCIA",
+      "REPORTAGEM",
+      "ENTREVISTA",
+      "CARTA ABERTA",
+      "CARTA DE SOLICITAÇÃO",
+      "CARTA DO LEITOR",
+      "RESENHA",
+      "RESUMO",
+      "ANÚNCIO PUBLICITÁRIO",
+      "CAMPANHA PUBLICITÁRIA",
+      "POEMA",
+      "TEXTO DRAMÁTICO",
+      "TEXTO CIENTÍFICO",
+      "TEXTO JORNALÍSTICO",
+      "TEXTO INSTRUCIONAL",
+      "TEXTO NORMATIVO",
+      "MEME",
+      "POSTAGEM DIGITAL",
+      "PROPAGANDA",
+      "MANIFESTO",
+      "ABAIXO-ASSINADO"
+    ],
+    "FUNÇÕES DA LINGUAGEM": [
+      "FUNÇÃO REFERENCIAL",
+      "FUNÇÃO EMOTIVA",
+      "FUNÇÃO CONATIVA",
+      "FUNÇÃO FÁTICA",
+      "FUNÇÃO METALINGUÍSTICA",
+      "FUNÇÃO POÉTICA"
+    ],
+    "VARIAÇÃO LINGUÍSTICA": [
+      "VARIAÇÃO REGIONAL",
+      "VARIAÇÃO SOCIAL",
+      "VARIAÇÃO HISTÓRICA",
+      "VARIAÇÃO SITUACIONAL",
+      "PRECONCEITO LINGUÍSTICO",
+      "NORMA CULTA",
+      "NORMA POPULAR"
+    ],
+    "SEMÂNTICA": [
+      "SINONÍMIA",
+      "ANTONÍMIA",
+      "POLISSEMIA",
+      "HOMONÍMIA",
+      "PARONÍMIA",
+      "HIPERONÍMIA",
+      "HIPONÍMIA",
+      "DENOTAÇÃO",
+      "CONOTAÇÃO",
+      "AMBIGUIDADE",
+      "SENTIDO LITERAL",
+      "SENTIDO FIGURADO"
+    ],
+    "FIGURAS DE LINGUAGEM": [
+      "METÁFORA",
+      "COMPARAÇÃO",
+      "METONÍMIA",
+      "CATACRESE",
+      "ANTONOMÁSIA",
+      "SINESTESIA",
+      "PERSONIFICAÇÃO",
+      "HIPÉRBOLE",
+      "EUFEMISMO",
+      "IRONIA",
+      "ANTÍTESE",
+      "PARADOXO",
+      "GRADAÇÃO",
+      "APOSTROFE",
+      "ELIPSE",
+      "ZEUGMA",
+      "PLEONASMO",
+      "ANÁFORA",
+      "ASSÍNDETO",
+      "POLISSÍNDETO",
+      "HIPÉRBATO",
+      "ALITERAÇÃO",
+      "ASSONÂNCIA",
+      "ONOMATOPEIA"
+    ],
+    "TEXTUALIDADE": [
+      "COESÃO TEXTUAL",
+      "COERÊNCIA TEXTUAL",
+      "INTERTEXTUALIDADE",
+      "PROGRESSÃO TEMÁTICA",
+      "CONTINUIDADE TEXTUAL",
+      "REFERENCIAÇÃO",
+      "ANÁFORA TEXTUAL",
+      "CATÁFORA TEXTUAL",
+      "OPERADORES ARGUMENTATIVOS",
+      "CONECTIVOS",
+      "PARÁFRASE",
+      "CITAÇÃO",
+      "PARÓDIA",
+      "ALUSÃO"
+    ],
+    "MORFOLOGIA": [
+      "SUBSTANTIVO",
+      "ADJETIVO",
+      "ARTIGO",
+      "NUMERAL",
+      "PRONOME",
+      "VERBO",
+      "ADVÉRBIO",
+      "PREPOSIÇÃO",
+      "CONJUNÇÃO",
+      "INTERJEIÇÃO",
+      "LOCUÇÕES"
+    ],
+    "VERBOS": [
+      "TEMPOS VERBAIS",
+      "MODOS VERBAIS",
+      "FORMAS NOMINAIS",
+      "VERBOS REGULARES",
+      "VERBOS IRREGULARES",
+      "VERBOS ANÔMALOS",
+      "VERBOS DEFECTIVOS",
+      "VOZ ATIVA",
+      "VOZ PASSIVA",
+      "VOZ REFLEXIVA",
+      "LOCUÇÃO VERBAL"
+    ],
+    "SINTAXE": [
+      "FRASE",
+      "ORAÇÃO",
+      "PERÍODO",
+      "SUJEITO",
+      "PREDICADO",
+      "PREDICAÇÃO VERBAL",
+      "VERBO TRANSITIVO DIRETO",
+      "VERBO TRANSITIVO INDIRETO",
+      "VERBO TRANSITIVO DIRETO E INDIRETO",
+      "VERBO INTRANSITIVO",
+      "VERBO DE LIGAÇÃO",
+      "OBJETO DIRETO",
+      "OBJETO INDIRETO",
+      "COMPLEMENTO NOMINAL",
+      "AGENTE DA PASSIVA",
+      "ADJUNTO ADNOMINAL",
+      "ADJUNTO ADVERBIAL",
+      "APOSTO",
+      "VOCATIVO",
+      "PREDICATIVO DO SUJEITO",
+      "PREDICATIVO DO OBJETO"
+    ],
+    "PERÍODO COMPOSTO": [
+      "ORAÇÕES COORDENADAS ASSINDÉTICAS",
+      "ORAÇÕES COORDENADAS SINDÉTICAS ADITIVAS",
+      "ORAÇÕES COORDENADAS SINDÉTICAS ADVERSATIVAS",
+      "ORAÇÕES COORDENADAS SINDÉTICAS ALTERNATIVAS",
+      "ORAÇÕES COORDENADAS SINDÉTICAS CONCLUSIVAS",
+      "ORAÇÕES COORDENADAS SINDÉTICAS EXPLICATIVAS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS SUBJETIVAS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS OBJETIVAS DIRETAS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS OBJETIVAS INDIRETAS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS COMPLETIVAS NOMINAIS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS PREDICATIVAS",
+      "ORAÇÕES SUBORDINADAS SUBSTANTIVAS APOSITIVAS",
+      "ORAÇÕES SUBORDINADAS ADJETIVAS RESTRITIVAS",
+      "ORAÇÕES SUBORDINADAS ADJETIVAS EXPLICATIVAS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS CAUSAIS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS CONSECUTIVAS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS CONCESSIVAS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS CONDICIONAIS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS CONFORMATIVAS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS COMPARATIVAS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS FINAIS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS PROPORCIONAIS",
+      "ORAÇÕES SUBORDINADAS ADVERBIAIS TEMPORAIS"
+    ],
+    "CONCORDÂNCIA": [
+      "CONCORDÂNCIA VERBAL",
+      "CONCORDÂNCIA NOMINAL"
+    ],
+    "REGÊNCIA": [
+      "REGÊNCIA VERBAL",
+      "REGÊNCIA NOMINAL"
+    ],
+    "CRASE": [
+      "CRASE OBRIGATÓRIA",
+      "CRASE PROIBIDA",
+      "CRASE FACULTATIVA"
+    ],
+    "PONTUAÇÃO": [
+      "VÍRGULA",
+      "PONTO E VÍRGULA",
+      "DOIS-PONTOS",
+      "TRAVESSÃO",
+      "ASPAS",
+      "PARÊNTESES",
+      "RETICÊNCIAS"
+    ],
+    "ORTOGRAFIA": [
+      "ACENTUAÇÃO GRÁFICA",
+      "NOVO ACORDO ORTOGRÁFICO",
+      "USO DOS PORQUÊS",
+      "MAL E MAU",
+      "MAS E MAIS",
+      "ONDE E AONDE",
+      "HÁ E A",
+      "AFIM E A FIM"
+    ],
+    "FORMAÇÃO DE PALAVRAS": [
+      "DERIVAÇÃO PREFIXAL",
+      "DERIVAÇÃO SUFIXAL",
+      "DERIVAÇÃO PARASSINTÉTICA",
+      "DERIVAÇÃO REGRESSIVA",
+      "DERIVAÇÃO IMPRÓPRIA",
+      "COMPOSIÇÃO POR JUSTAPOSIÇÃO",
+      "COMPOSIÇÃO POR AGLUTINAÇÃO"
+    ],
+    "COLOCAÇÃO PRONOMINAL": [
+      "PRÓCLISE",
+      "MESÓCLISE",
+      "ÊNCLISE"
+    ]
+  },
+  "REDAÇÃO": {
+    "ESTRUTURA TEXTUAL": [
+      "INTRODUÇÃO",
+      "DESENVOLVIMENTO",
+      "CONCLUSÃO",
+      "PARÁGRAFO",
+      "TÓPICO FRASAL",
+      "PROGRESSÃO ARGUMENTATIVA"
+    ],
+    "DISSERTAÇÃO ARGUMENTATIVA": [
+      "TEMA",
+      "RECORTE TEMÁTICO",
+      "TESE",
+      "ARGUMENTO",
+      "CONTRA-ARGUMENTO",
+      "PROBLEMATIZAÇÃO",
+      "CAUSA",
+      "CONSEQUÊNCIA",
+      "EXEMPLO",
+      "COMPARAÇÃO",
+      "ANALOGIA",
+      "DADOS ESTATÍSTICOS",
+      "REPERTÓRIO SOCIOCULTURAL",
+      "REPERTÓRIO HISTÓRICO",
+      "REPERTÓRIO FILOSÓFICO",
+      "REPERTÓRIO SOCIOLÓGICO",
+      "REPERTÓRIO LITERÁRIO",
+      "REPERTÓRIO CINEMATOGRÁFICO",
+      "REPERTÓRIO CONSTITUCIONAL"
+    ],
+    "ENEM": [
+      "COMPETÊNCIA 1",
+      "COMPETÊNCIA 2",
+      "COMPETÊNCIA 3",
+      "COMPETÊNCIA 4",
+      "COMPETÊNCIA 5",
+      "PROPOSTA DE INTERVENÇÃO",
+      "AGENTE",
+      "AÇÃO",
+      "MEIO OU MODO",
+      "FINALIDADE",
+      "DETALHAMENTO",
+      "DIREITOS HUMANOS"
+    ],
+    "COESÃO": [
+      "CONECTIVOS",
+      "OPERADORES ARGUMENTATIVOS",
+      "REFERENCIAÇÃO",
+      "SUBSTITUIÇÃO LEXICAL",
+      "PRONOMES REFERENCIAIS"
+    ],
+    "COERÊNCIA": [
+      "UNIDADE TEMÁTICA",
+      "NÃO CONTRADIÇÃO",
+      "RELAÇÃO LÓGICA ENTRE IDEIAS"
+    ],
+    "GÊNEROS TEXTUAIS": [
+      "CARTA ABERTA",
+      "CARTA DE SOLICITAÇÃO",
+      "ARTIGO DE OPINIÃO",
+      "EDITORIAL",
+      "MANIFESTO",
+      "RESENHA",
+      "RELATO",
+      "CRÔNICA ARGUMENTATIVA",
+      "TEXTO DISSERTATIVO"
+    ],
+    "TEMAS SOCIAIS": [
+      "EDUCAÇÃO",
+      "SAÚDE",
+      "SEGURANÇA PÚBLICA",
+      "MEIO AMBIENTE",
+      "TECNOLOGIA",
+      "CULTURA",
+      "DEMOCRACIA",
+      "CIDADANIA",
+      "DESIGUALDADE SOCIAL",
+      "RACISMO",
+      "VIOLÊNCIA CONTRA A MULHER",
+      "POVOS INDÍGENAS",
+      "ENVELHECIMENTO POPULACIONAL",
+      "MOBILIDADE URBANA",
+      "TRABALHO",
+      "CONSUMO",
+      "INFÂNCIA E JUVENTUDE"
+    ]
+  },
+  "LITERATURA": {
+    "TEORIA LITERÁRIA": [
+      "TEXTO LITERÁRIO E NÃO LITERÁRIO",
+      "LINGUAGEM CONOTATIVA",
+      "LINGUAGEM DENOTATIVA",
+      "VEROSSIMILHANÇA",
+      "MIMESIS",
+      "INTERTEXTUALIDADE",
+      "POLIFONIA"
+    ],
+    "GÊNEROS LITERÁRIOS": [
+      "LÍRICO",
+      "ÉPICO",
+      "NARRATIVO",
+      "DRAMÁTICO",
+      "POEMA",
+      "SONETO",
+      "CONTO",
+      "CRÔNICA",
+      "NOVELA",
+      "ROMANCE",
+      "TEATRO"
+    ],
+    "ELEMENTOS DA NARRATIVA": [
+      "NARRADOR",
+      "FOCO NARRATIVO",
+      "PERSONAGEM",
+      "TEMPO",
+      "ESPAÇO",
+      "ENREDO",
+      "CONFLITO"
+    ],
+    "ELEMENTOS DA POESIA": [
+      "EU LÍRICO",
+      "VERSO",
+      "ESTROFE",
+      "RIMA",
+      "MÉTRICA",
+      "RITMO"
+    ],
+    "ESCOLAS LITERÁRIAS": [
+      "TROVADORISMO",
+      "HUMANISMO",
+      "CLASSICISMO",
+      "QUINHENTISMO",
+      "BARROCO",
+      "ARCADISMO",
+      "ROMANTISMO",
+      "REALISMO",
+      "NATURALISMO",
+      "PARNASIANISMO",
+      "SIMBOLISMO",
+      "PRÉ-MODERNISMO",
+      "MODERNISMO",
+      "PRIMEIRA FASE MODERNISTA",
+      "SEGUNDA FASE MODERNISTA",
+      "TERCEIRA FASE MODERNISTA",
+      "LITERATURA CONTEMPORÂNEA"
+    ],
+    "LITERATURA BRASILEIRA": [
+      "LITERATURA COLONIAL",
+      "LITERATURA INDIANISTA",
+      "LITERATURA REGIONALISTA",
+      "LITERATURA URBANA",
+      "LITERATURA PSICOLÓGICA",
+      "LITERATURA AFRO-BRASILEIRA",
+      "LITERATURA INDÍGENA",
+      "LITERATURA MARGINAL"
+    ],
+    "LITERATURA PORTUGUESA": [
+      "CANTIGAS TROVADORESCAS",
+      "GIL VICENTE",
+      "CAMÕES",
+      "EÇA DE QUEIRÓS",
+      "FERNANDO PESSOA"
+    ],
+    "AUTORES": [
+      "MACHADO DE ASSIS",
+      "JOSÉ DE ALENCAR",
+      "ALUÍSIO AZEVEDO",
+      "LIMA BARRETO",
+      "MONTEIRO LOBATO",
+      "MÁRIO DE ANDRADE",
+      "OSWALD DE ANDRADE",
+      "MANUEL BANDEIRA",
+      "CARLOS DRUMMOND DE ANDRADE",
+      "CECÍLIA MEIRELES",
+      "JOÃO CABRAL DE MELO NETO",
+      "CLARICE LISPECTOR",
+      "GRACILIANO RAMOS",
+      "GUIMARÃES ROSA",
+      "CAROLINA MARIA DE JESUS",
+      "CONCEIÇÃO EVARISTO",
+      "RACHEL DE QUEIROZ",
+      "JORGE AMADO"
+    ],
+    "VANGUARDAS EUROPEIAS": [
+      "CUBISMO",
+      "FUTURISMO",
+      "EXPRESSIONISMO",
+      "DADAÍSMO",
+      "SURREALISMO"
+    ]
+  },
+  "MATEMÁTICA": {
+    "CONJUNTOS": [
+      "NOÇÃO DE CONJUNTO",
+      "PERTINÊNCIA",
+      "INCLUSÃO",
+      "UNIÃO",
+      "INTERSECÇÃO",
+      "DIFERENÇA",
+      "COMPLEMENTAR",
+      "DIAGRAMA DE VENN"
+    ],
+    "CONJUNTOS NUMÉRICOS": [
+      "NÚMEROS NATURAIS",
+      "NÚMEROS INTEIROS",
+      "NÚMEROS RACIONAIS",
+      "NÚMEROS IRRACIONAIS",
+      "NÚMEROS REAIS",
+      "INTERVALOS REAIS"
+    ],
+    "ARITMÉTICA": [
+      "OPERAÇÕES FUNDAMENTAIS",
+      "FRAÇÕES",
+      "NÚMEROS DECIMAIS",
+      "DÍZIMAS PERIÓDICAS",
+      "MÚLTIPLOS",
+      "DIVISORES",
+      "NÚMEROS PRIMOS",
+      "MMC",
+      "MDC",
+      "POTENCIAÇÃO",
+      "RADICIAÇÃO"
+    ],
+    "RAZÃO E PROPORÇÃO": [
+      "RAZÃO",
+      "PROPORÇÃO",
+      "GRANDEZAS DIRETAMENTE PROPORCIONAIS",
+      "GRANDEZAS INVERSAMENTE PROPORCIONAIS",
+      "REGRA DE TRÊS SIMPLES",
+      "REGRA DE TRÊS COMPOSTA",
+      "ESCALAS"
+    ],
+    "PORCENTAGEM": [
+      "AUMENTO PERCENTUAL",
+      "DESCONTO PERCENTUAL",
+      "VARIAÇÃO PERCENTUAL"
+    ],
+    "MATEMÁTICA FINANCEIRA": [
+      "JUROS SIMPLES",
+      "JUROS COMPOSTOS",
+      "MONTANTE",
+      "CAPITAL",
+      "TAXA",
+      "TEMPO",
+      "DESCONTOS",
+      "FINANCIAMENTO"
+    ],
+    "ÁLGEBRA": [
+      "EXPRESSÕES ALGÉBRICAS",
+      "PRODUTOS NOTÁVEIS",
+      "FATORAÇÃO",
+      "FRAÇÕES ALGÉBRICAS",
+      "EQUAÇÃO DO 1º GRAU",
+      "EQUAÇÃO DO 2º GRAU",
+      "EQUAÇÕES BIQUADRADAS",
+      "EQUAÇÕES IRRACIONAIS",
+      "EQUAÇÕES EXPONENCIAIS",
+      "EQUAÇÕES LOGARÍTMICAS",
+      "INEQUAÇÕES",
+      "SISTEMAS DE EQUAÇÕES"
+    ],
+    "FUNÇÕES": [
+      "CONCEITO DE FUNÇÃO",
+      "DOMÍNIO",
+      "CONTRADOMÍNIO",
+      "IMAGEM",
+      "FUNÇÃO AFIM",
+      "FUNÇÃO QUADRÁTICA",
+      "FUNÇÃO MODULAR",
+      "FUNÇÃO EXPONENCIAL",
+      "FUNÇÃO LOGARÍTMICA",
+      "FUNÇÃO COMPOSTA",
+      "FUNÇÃO INVERSA",
+      "GRÁFICOS DE FUNÇÕES",
+      "ZEROS DA FUNÇÃO",
+      "CRESCIMENTO E DECRESCIMENTO"
+    ],
+    "SEQUÊNCIAS": [
+      "SEQUÊNCIA NUMÉRICA",
+      "PROGRESSÃO ARITMÉTICA",
+      "PROGRESSÃO GEOMÉTRICA",
+      "SOMA DOS TERMOS DA PA",
+      "SOMA DOS TERMOS DA PG"
+    ],
+    "TRIGONOMETRIA": [
+      "RAZÕES TRIGONOMÉTRICAS",
+      "SENO",
+      "COSSENO",
+      "TANGENTE",
+      "CICLO TRIGONOMÉTRICO",
+      "ARCOS E ÂNGULOS",
+      "IDENTIDADES TRIGONOMÉTRICAS",
+      "EQUAÇÕES TRIGONOMÉTRICAS",
+      "LEI DOS SENOS",
+      "LEI DOS COSSENOS"
+    ],
+    "GEOMETRIA PLANA": [
+      "PONTO",
+      "RETA",
+      "PLANO",
+      "ÂNGULOS",
+      "TRIÂNGULOS",
+      "CONGRUÊNCIA DE TRIÂNGULOS",
+      "SEMELHANÇA DE TRIÂNGULOS",
+      "TEOREMA DE PITÁGORAS",
+      "RELAÇÕES MÉTRICAS NO TRIÂNGULO RETÂNGULO",
+      "QUADRILÁTEROS",
+      "POLÍGONOS",
+      "CIRCUNFERÊNCIA",
+      "CÍRCULO",
+      "ÁREAS",
+      "PERÍMETROS"
+    ],
+    "GEOMETRIA ESPACIAL": [
+      "PRISMAS",
+      "PIRÂMIDES",
+      "CILINDROS",
+      "CONES",
+      "ESFERAS",
+      "POLIEDROS",
+      "RELAÇÃO DE EULER",
+      "VOLUME",
+      "ÁREA LATERAL",
+      "ÁREA TOTAL"
+    ],
+    "GEOMETRIA ANALÍTICA": [
+      "PLANO CARTESIANO",
+      "DISTÂNCIA ENTRE PONTOS",
+      "PONTO MÉDIO",
+      "EQUAÇÃO DA RETA",
+      "COEFICIENTE ANGULAR",
+      "PARALELISMO",
+      "PERPENDICULARIDADE",
+      "DISTÂNCIA DE PONTO A RETA",
+      "CIRCUNFERÊNCIA"
+    ],
+    "MATRIZES": [
+      "TIPOS DE MATRIZES",
+      "OPERAÇÕES COM MATRIZES",
+      "MATRIZ INVERSA"
+    ],
+    "DETERMINANTES": [
+      "DETERMINANTE DE ORDEM 2",
+      "DETERMINANTE DE ORDEM 3",
+      "REGRA DE SARRUS"
+    ],
+    "SISTEMAS LINEARES": [
+      "ESCALONAMENTO",
+      "REGRA DE CRAMER"
+    ],
+    "ANÁLISE COMBINATÓRIA": [
+      "PRINCÍPIO FUNDAMENTAL DA CONTAGEM",
+      "FATORIAL",
+      "PERMUTAÇÃO SIMPLES",
+      "PERMUTAÇÃO COM REPETIÇÃO",
+      "ARRANJO",
+      "COMBINAÇÃO"
+    ],
+    "PROBABILIDADE": [
+      "ESPAÇO AMOSTRAL",
+      "EVENTO",
+      "PROBABILIDADE CONDICIONAL",
+      "EVENTOS INDEPENDENTES",
+      "UNIÃO DE EVENTOS"
+    ],
+    "ESTATÍSTICA": [
+      "TABELAS",
+      "GRÁFICOS",
+      "MÉDIA ARITMÉTICA",
+      "MÉDIA PONDERADA",
+      "MEDIANA",
+      "MODA",
+      "AMPLITUDE",
+      "VARIÂNCIA",
+      "DESVIO PADRÃO"
+    ],
+    "POLINÔMIOS": [
+      "OPERAÇÕES COM POLINÔMIOS",
+      "RAÍZES DE POLINÔMIOS",
+      "TEOREMA DO RESTO"
+    ],
+    "NÚMEROS COMPLEXOS": [
+      "FORMA ALGÉBRICA",
+      "OPERAÇÕES",
+      "PLANO DE ARGAND-GAUSS"
+    ]
+  },
+  "FÍSICA": {
+    "INTRODUÇÃO À FÍSICA": [
+      "GRANDEZAS FÍSICAS",
+      "UNIDADES DE MEDIDA",
+      "SISTEMA INTERNACIONAL",
+      "NOTAÇÃO CIENTÍFICA",
+      "ORDEM DE GRANDEZA"
+    ],
+    "CINEMÁTICA": [
+      "REFERENCIAL",
+      "POSIÇÃO",
+      "DESLOCAMENTO",
+      "VELOCIDADE MÉDIA",
+      "ACELERAÇÃO MÉDIA",
+      "MOVIMENTO UNIFORME",
+      "MOVIMENTO UNIFORMEMENTE VARIADO",
+      "QUEDA LIVRE",
+      "LANÇAMENTO VERTICAL",
+      "LANÇAMENTO HORIZONTAL",
+      "LANÇAMENTO OBLÍQUO",
+      "MOVIMENTO CIRCULAR UNIFORME",
+      "VELOCIDADE ANGULAR",
+      "ACELERAÇÃO CENTRÍPETA"
+    ],
+    "DINÂMICA": [
+      "LEIS DE NEWTON",
+      "FORÇA RESULTANTE",
+      "FORÇA PESO",
+      "FORÇA NORMAL",
+      "FORÇA DE ATRITO",
+      "FORÇA ELÁSTICA",
+      "PLANO INCLINADO",
+      "TRAÇÃO",
+      "SISTEMAS DE CORPOS",
+      "FORÇA CENTRÍPETA"
+    ],
+    "TRABALHO E ENERGIA": [
+      "TRABALHO DE UMA FORÇA",
+      "POTÊNCIA",
+      "RENDIMENTO",
+      "ENERGIA CINÉTICA",
+      "ENERGIA POTENCIAL GRAVITACIONAL",
+      "ENERGIA POTENCIAL ELÁSTICA",
+      "CONSERVAÇÃO DA ENERGIA MECÂNICA"
+    ],
+    "IMPULSO E QUANTIDADE DE MOVIMENTO": [
+      "IMPULSO",
+      "QUANTIDADE DE MOVIMENTO",
+      "CONSERVAÇÃO DA QUANTIDADE DE MOVIMENTO",
+      "COLISÕES"
+    ],
+    "ESTÁTICA": [
+      "EQUILÍBRIO DO PONTO MATERIAL",
+      "EQUILÍBRIO DO CORPO EXTENSO",
+      "MOMENTO DE UMA FORÇA",
+      "TORQUE"
+    ],
+    "HIDROSTÁTICA": [
+      "DENSIDADE",
+      "PRESSÃO",
+      "PRESSÃO ATMOSFÉRICA",
+      "TEOREMA DE STEVIN",
+      "PRINCÍPIO DE PASCAL",
+      "PRINCÍPIO DE ARQUIMEDES",
+      "EMPUXO"
+    ],
+    "TERMOLOGIA": [
+      "TEMPERATURA",
+      "ESCALAS TERMOMÉTRICAS",
+      "DILATAÇÃO LINEAR",
+      "DILATAÇÃO SUPERFICIAL",
+      "DILATAÇÃO VOLUMÉTRICA"
+    ],
+    "CALORIMETRIA": [
+      "CALOR SENSÍVEL",
+      "CALOR LATENTE",
+      "CAPACIDADE TÉRMICA",
+      "EQUILÍBRIO TÉRMICO",
+      "MUDANÇAS DE ESTADO FÍSICO",
+      "PROPAGAÇÃO DE CALOR"
+    ],
+    "TERMODINÂMICA": [
+      "GASES IDEAIS",
+      "TRANSFORMAÇÃO ISOTÉRMICA",
+      "TRANSFORMAÇÃO ISOBÁRICA",
+      "TRANSFORMAÇÃO ISOCÓRICA",
+      "PRIMEIRA LEI DA TERMODINÂMICA",
+      "SEGUNDA LEI DA TERMODINÂMICA"
+    ],
+    "ÓPTICA": [
+      "PRINCÍPIOS DA ÓPTICA GEOMÉTRICA",
+      "REFLEXÃO DA LUZ",
+      "ESPELHOS PLANOS",
+      "ESPELHOS ESFÉRICOS",
+      "REFRAÇÃO DA LUZ",
+      "LENTES ESFÉRICAS",
+      "INSTRUMENTOS ÓPTICOS"
+    ],
+    "ONDULATÓRIA": [
+      "ONDAS MECÂNICAS",
+      "ONDAS ELETROMAGNÉTICAS",
+      "FREQUÊNCIA",
+      "PERÍODO",
+      "COMPRIMENTO DE ONDA",
+      "VELOCIDADE DE PROPAGAÇÃO",
+      "REFLEXÃO",
+      "REFRAÇÃO",
+      "DIFRAÇÃO",
+      "INTERFERÊNCIA",
+      "POLARIZAÇÃO",
+      "EFEITO DOPPLER"
+    ],
+    "ACÚSTICA": [
+      "SOM",
+      "ALTURA",
+      "INTENSIDADE",
+      "TIMBRE",
+      "CORDAS VIBRANTES",
+      "TUBOS SONOROS"
+    ],
+    "ELETROSTÁTICA": [
+      "CARGA ELÉTRICA",
+      "ELETRIZAÇÃO",
+      "LEI DE COULOMB",
+      "CAMPO ELÉTRICO",
+      "POTENCIAL ELÉTRICO",
+      "TRABALHO DA FORÇA ELÉTRICA",
+      "CAPACITORES"
+    ],
+    "ELETRODINÂMICA": [
+      "CORRENTE ELÉTRICA",
+      "RESISTÊNCIA ELÉTRICA",
+      "LEIS DE OHM",
+      "POTÊNCIA ELÉTRICA",
+      "ENERGIA ELÉTRICA",
+      "ASSOCIAÇÃO DE RESISTORES",
+      "CIRCUITOS ELÉTRICOS",
+      "GERADORES",
+      "RECEPTORES"
+    ],
+    "ELETROMAGNETISMO": [
+      "CAMPO MAGNÉTICO",
+      "FORÇA MAGNÉTICA",
+      "INDUÇÃO ELETROMAGNÉTICA",
+      "LEI DE FARADAY",
+      "LEI DE LENZ",
+      "TRANSFORMADORES"
+    ],
+    "FÍSICA MODERNA": [
+      "RELATIVIDADE",
+      "EFEITO FOTOELÉTRICO",
+      "QUANTIZAÇÃO DA ENERGIA",
+      "RADIOATIVIDADE",
+      "FISSÃO NUCLEAR",
+      "FUSÃO NUCLEAR"
+    ]
+  },
+  "QUÍMICA": {
+    "MATÉRIA E ENERGIA": [
+      "MATÉRIA",
+      "CORPO",
+      "OBJETO",
+      "ENERGIA",
+      "PROPRIEDADES GERAIS DA MATÉRIA",
+      "PROPRIEDADES ESPECÍFICAS DA MATÉRIA"
+    ],
+    "ESTADOS FÍSICOS": [
+      "SÓLIDO",
+      "LÍQUIDO",
+      "GASOSO",
+      "MUDANÇAS DE ESTADO FÍSICO"
+    ],
+    "SUBSTÂNCIAS E MISTURAS": [
+      "SUBSTÂNCIA SIMPLES",
+      "SUBSTÂNCIA COMPOSTA",
+      "MISTURA HOMOGÊNEA",
+      "MISTURA HETEROGÊNEA",
+      "SISTEMAS"
+    ],
+    "SEPARAÇÃO DE MISTURAS": [
+      "FILTRAÇÃO",
+      "DECANTAÇÃO",
+      "CENTRIFUGAÇÃO",
+      "DESTILAÇÃO SIMPLES",
+      "DESTILAÇÃO FRACIONADA",
+      "CROMATOGRAFIA",
+      "PENEIRAÇÃO",
+      "IMANTAÇÃO"
+    ],
+    "ATOMÍSTICA": [
+      "MODELOS ATÔMICOS",
+      "MODELO DE DALTON",
+      "MODELO DE THOMSON",
+      "MODELO DE RUTHERFORD",
+      "MODELO DE BOHR",
+      "PRÓTONS",
+      "NÊUTRONS",
+      "ELÉTRONS",
+      "NÚMERO ATÔMICO",
+      "NÚMERO DE MASSA",
+      "ISÓTOPOS",
+      "ISÓBAROS",
+      "ISÓTONOS",
+      "ÍONS"
+    ],
+    "DISTRIBUIÇÃO ELETRÔNICA": [
+      "DIAGRAMA DE LINUS PAULING",
+      "CAMADAS ELETRÔNICAS",
+      "SUBNÍVEIS"
+    ],
+    "TABELA PERIÓDICA": [
+      "ORGANIZAÇÃO DA TABELA",
+      "FAMÍLIAS",
+      "PERÍODOS",
+      "METAIS",
+      "AMETAIS",
+      "GASES NOBRES",
+      "PROPRIEDADES PERIÓDICAS",
+      "RAIO ATÔMICO",
+      "ENERGIA DE IONIZAÇÃO",
+      "ELETRONEGATIVIDADE",
+      "ELETROAFINIDADE"
+    ],
+    "LIGAÇÕES QUÍMICAS": [
+      "LIGAÇÃO IÔNICA",
+      "LIGAÇÃO COVALENTE",
+      "LIGAÇÃO METÁLICA",
+      "GEOMETRIA MOLECULAR",
+      "POLARIDADE",
+      "FORÇAS INTERMOLECULARES"
+    ],
+    "FUNÇÕES INORGÂNICAS": [
+      "ÁCIDOS",
+      "BASES",
+      "SAIS",
+      "ÓXIDOS"
+    ],
+    "REAÇÕES QUÍMICAS": [
+      "EQUAÇÃO QUÍMICA",
+      "BALANCEAMENTO",
+      "SÍNTESE",
+      "DECOMPOSIÇÃO",
+      "SIMPLES TROCA",
+      "DUPLA TROCA",
+      "OXIRREDUÇÃO"
+    ],
+    "ESTEQUIOMETRIA": [
+      "MOL",
+      "MASSA MOLAR",
+      "VOLUME MOLAR",
+      "CONSTANTE DE AVOGADRO",
+      "CÁLCULOS ESTEQUIOMÉTRICOS",
+      "REAGENTE LIMITANTE",
+      "PUREZA",
+      "RENDIMENTO"
+    ],
+    "SOLUÇÕES": [
+      "SOLUTO",
+      "SOLVENTE",
+      "CONCENTRAÇÃO COMUM",
+      "MOLARIDADE",
+      "TÍTULO",
+      "DILUIÇÃO",
+      "MISTURA DE SOLUÇÕES",
+      "PROPRIEDADES COLIGATIVAS"
+    ],
+    "TERMOQUÍMICA": [
+      "ENTALPIA",
+      "REAÇÃO ENDOTÉRMICA",
+      "REAÇÃO EXOTÉRMICA",
+      "LEI DE HESS",
+      "ENERGIA DE LIGAÇÃO"
+    ],
+    "CINÉTICA QUÍMICA": [
+      "VELOCIDADE DAS REAÇÕES",
+      "FATORES QUE ALTERAM A VELOCIDADE",
+      "CATALISADOR",
+      "ENERGIA DE ATIVAÇÃO"
+    ],
+    "EQUILÍBRIO QUÍMICO": [
+      "EQUILÍBRIO DINÂMICO",
+      "CONSTANTE DE EQUILÍBRIO",
+      "PRINCÍPIO DE LE CHATELIER"
+    ],
+    "EQUILÍBRIO IÔNICO": [
+      "PH",
+      "POH",
+      "KA",
+      "KB",
+      "HIDRÓLISE SALINA",
+      "SOLUÇÃO TAMPÃO"
+    ],
+    "ELETROQUÍMICA": [
+      "OXIDAÇÃO",
+      "REDUÇÃO",
+      "NOX",
+      "PILHAS",
+      "ELETRÓLISE ÍGNEA",
+      "ELETRÓLISE AQUOSA",
+      "CORROSÃO"
+    ],
+    "QUÍMICA ORGÂNICA": [
+      "CARBONO",
+      "CADEIAS CARBÔNICAS",
+      "HIDROCARBONETOS",
+      "ÁLCOOIS",
+      "FENÓIS",
+      "ÉTERES",
+      "ALDEÍDOS",
+      "CETONAS",
+      "ÁCIDOS CARBOXÍLICOS",
+      "ÉSTERES",
+      "AMINAS",
+      "AMIDAS",
+      "HALETOS ORGÂNICOS",
+      "NOMENCLATURA ORGÂNICA",
+      "ISOMERIA PLANA",
+      "ISOMERIA ESPACIAL",
+      "REAÇÕES ORGÂNICAS",
+      "POLÍMEROS"
+    ],
+    "QUÍMICA AMBIENTAL": [
+      "CHUVA ÁCIDA",
+      "EFEITO ESTUFA",
+      "CAMADA DE OZÔNIO",
+      "POLUIÇÃO DA ÁGUA",
+      "POLUIÇÃO DO AR",
+      "TRATAMENTO DE ÁGUA",
+      "TRATAMENTO DE ESGOTO"
+    ],
+    "RADIOATIVIDADE": [
+      "EMISSÕES ALFA",
+      "EMISSÕES BETA",
+      "EMISSÕES GAMA",
+      "MEIA-VIDA",
+      "FISSÃO",
+      "FUSÃO"
+    ]
+  },
+  "BIOLOGIA": {
+    "ORIGEM DA VIDA": [
+      "ABIOGÊNESE",
+      "BIOGÊNESE",
+      "EXPERIMENTOS DE REDI",
+      "EXPERIMENTOS DE PASTEUR",
+      "HIPÓTESE HETEROTRÓFICA",
+      "HIPÓTESE AUTOTRÓFICA"
+    ],
+    "BIOQUÍMICA": [
+      "ÁGUA",
+      "SAIS MINERAIS",
+      "CARBOIDRATOS",
+      "LIPÍDIOS",
+      "PROTEÍNAS",
+      "ENZIMAS",
+      "VITAMINAS",
+      "ÁCIDOS NUCLEICOS"
+    ],
+    "CITOLOGIA": [
+      "TEORIA CELULAR",
+      "CÉLULA PROCARIONTE",
+      "CÉLULA EUCARIONTE",
+      "MEMBRANA PLASMÁTICA",
+      "TRANSPORTE PASSIVO",
+      "TRANSPORTE ATIVO",
+      "CITOPLASMA",
+      "RIBOSSOMOS",
+      "RETÍCULO ENDOPLASMÁTICO",
+      "COMPLEXO GOLGIENSE",
+      "LISOSSOMOS",
+      "MITOCÔNDRIAS",
+      "CLOROPLASTOS",
+      "NÚCLEO CELULAR"
+    ],
+    "DIVISÃO CELULAR": [
+      "CICLO CELULAR",
+      "MITOSE",
+      "MEIOSE",
+      "GAMETOGÊNESE"
+    ],
+    "METABOLISMO ENERGÉTICO": [
+      "RESPIRAÇÃO CELULAR",
+      "GLICÓLISE",
+      "CICLO DE KREBS",
+      "CADEIA RESPIRATÓRIA",
+      "FERMENTAÇÃO",
+      "FOTOSSÍNTESE"
+    ],
+    "GENÉTICA": [
+      "DNA",
+      "RNA",
+      "CROMOSSOMOS",
+      "GENES",
+      "ALELOS",
+      "GENÓTIPO",
+      "FENÓTIPO",
+      "HOMOZIGOTO",
+      "HETEROZIGOTO",
+      "PRIMEIRA LEI DE MENDEL",
+      "SEGUNDA LEI DE MENDEL",
+      "HEREDOGRAMAS",
+      "CODOMINÂNCIA",
+      "DOMINÂNCIA INCOMPLETA",
+      "ALELOS MÚLTIPLOS",
+      "SISTEMA ABO",
+      "FATOR RH",
+      "HERANÇA LIGADA AO SEXO",
+      "MUTAÇÕES"
+    ],
+    "BIOTECNOLOGIA": [
+      "DNA RECOMBINANTE",
+      "TRANSGÊNICOS",
+      "CLONAGEM",
+      "TERAPIA GÊNICA",
+      "TESTE DE DNA"
+    ],
+    "EVOLUÇÃO": [
+      "LAMARCKISMO",
+      "DARWINISMO",
+      "NEODARWINISMO",
+      "SELEÇÃO NATURAL",
+      "ADAPTAÇÃO",
+      "ESPECIAÇÃO",
+      "DERIVA GENÉTICA",
+      "FLUXO GÊNICO",
+      "EVIDÊNCIAS EVOLUTIVAS"
+    ],
+    "ECOLOGIA": [
+      "NÍVEIS DE ORGANIZAÇÃO",
+      "POPULAÇÃO",
+      "COMUNIDADE",
+      "ECOSSISTEMA",
+      "BIOSFERA",
+      "CADEIAS ALIMENTARES",
+      "TEIAS ALIMENTARES",
+      "PIRÂMIDES ECOLÓGICAS",
+      "CICLO DA ÁGUA",
+      "CICLO DO CARBONO",
+      "CICLO DO NITROGÊNIO",
+      "CICLO DO OXIGÊNIO",
+      "RELAÇÕES ECOLÓGICAS",
+      "SUCESSÃO ECOLÓGICA",
+      "BIOMAS BRASILEIROS",
+      "IMPACTOS AMBIENTAIS"
+    ],
+    "ZOOLOGIA": [
+      "PORÍFEROS",
+      "CNIDÁRIOS",
+      "PLATELMINTOS",
+      "NEMATELMINTOS",
+      "ANELÍDEOS",
+      "MOLUSCOS",
+      "ARTRÓPODES",
+      "EQUINODERMOS",
+      "CORDADOS"
+    ],
+    "BOTÂNICA": [
+      "BRIÓFITAS",
+      "PTERIDÓFITAS",
+      "GIMNOSPERMAS",
+      "ANGIOSPERMAS",
+      "RAIZ",
+      "CAULE",
+      "FOLHA",
+      "FLOR",
+      "FRUTO",
+      "SEMENTE",
+      "FOTOSSÍNTESE",
+      "TRANSPIRAÇÃO",
+      "HORMÔNIOS VEGETAIS"
+    ],
+    "FISIOLOGIA HUMANA": [
+      "SISTEMA DIGESTÓRIO",
+      "SISTEMA RESPIRATÓRIO",
+      "SISTEMA CIRCULATÓRIO",
+      "SISTEMA EXCRETOR",
+      "SISTEMA NERVOSO",
+      "SISTEMA ENDÓCRINO",
+      "SISTEMA REPRODUTOR",
+      "SISTEMA LOCOMOTOR",
+      "SISTEMA IMUNOLÓGICO"
+    ],
+    "MICROBIOLOGIA": [
+      "VÍRUS",
+      "BACTÉRIAS",
+      "PROTOZOÁRIOS",
+      "FUNGOS"
+    ],
+    "SAÚDE": [
+      "DOENÇAS INFECCIOSAS",
+      "VACINAS",
+      "SANEAMENTO BÁSICO",
+      "EPIDEMIAS",
+      "PARASITOSES",
+      "ISTS"
+    ]
+  },
+  "HISTÓRIA": {
+    "PRÉ-HISTÓRIA": [
+      "PALEOLÍTICO",
+      "NEOLÍTICO",
+      "IDADE DOS METAIS"
+    ],
+    "ANTIGUIDADE ORIENTAL": [
+      "EGITO ANTIGO",
+      "MESOPOTÂMIA",
+      "HEBREUS",
+      "FENÍCIOS",
+      "PERSAS"
+    ],
+    "ANTIGUIDADE CLÁSSICA": [
+      "GRÉCIA ANTIGA",
+      "ATENAS",
+      "ESPARTA",
+      "DEMOCRACIA GREGA",
+      "ROMA ANTIGA",
+      "REPÚBLICA ROMANA",
+      "IMPÉRIO ROMANO",
+      "CRISE DO IMPÉRIO ROMANO"
+    ],
+    "IDADE MÉDIA": [
+      "FEUDALISMO",
+      "IGREJA MEDIEVAL",
+      "CRUZADAS",
+      "RENASCIMENTO COMERCIAL",
+      "RENASCIMENTO URBANO",
+      "CRISE DO FEUDALISMO"
+    ],
+    "IDADE MODERNA": [
+      "RENASCIMENTO CULTURAL",
+      "REFORMAS RELIGIOSAS",
+      "CONTRARREFORMA",
+      "ABSOLUTISMO",
+      "MERCANTILISMO",
+      "EXPANSÃO MARÍTIMA",
+      "COLONIZAÇÃO DA AMÉRICA"
+    ],
+    "BRASIL COLÔNIA": [
+      "POVOS INDÍGENAS",
+      "ADMINISTRAÇÃO COLONIAL",
+      "CAPITANIAS HEREDITÁRIAS",
+      "GOVERNO-GERAL",
+      "ECONOMIA AÇUCAREIRA",
+      "ESCRAVIDÃO AFRICANA",
+      "UNIÃO IBÉRICA",
+      "INVASÕES HOLANDESAS",
+      "BANDEIRANTISMO",
+      "MINERAÇÃO",
+      "REVOLTAS NATIVISTAS",
+      "INCONFIDÊNCIA MINEIRA",
+      "CONJURAÇÃO BAIANA"
+    ],
+    "REVOLUÇÕES BURGUESAS": [
+      "ILUMINISMO",
+      "REVOLUÇÃO INGLESA",
+      "INDEPENDÊNCIA DOS ESTADOS UNIDOS",
+      "REVOLUÇÃO FRANCESA",
+      "ERA NAPOLEÔNICA"
+    ],
+    "REVOLUÇÕES INDUSTRIAIS": [
+      "PRIMEIRA REVOLUÇÃO INDUSTRIAL",
+      "SEGUNDA REVOLUÇÃO INDUSTRIAL",
+      "TERCEIRA REVOLUÇÃO INDUSTRIAL",
+      "MOVIMENTO OPERÁRIO"
+    ],
+    "AMÉRICA": [
+      "INDEPENDÊNCIA DA AMÉRICA ESPANHOLA",
+      "CAUDILHISMO",
+      "REVOLUÇÃO MEXICANA"
+    ],
+    "BRASIL IMPÉRIO": [
+      "PROCESSO DE INDEPENDÊNCIA",
+      "PRIMEIRO REINADO",
+      "PERÍODO REGENCIAL",
+      "SEGUNDO REINADO",
+      "ECONOMIA CAFEEIRA",
+      "GUERRA DO PARAGUAI",
+      "ABOLICIONISMO",
+      "PROCLAMAÇÃO DA REPÚBLICA"
+    ],
+    "BRASIL REPÚBLICA": [
+      "REPÚBLICA DA ESPADA",
+      "REPÚBLICA OLIGÁRQUICA",
+      "CORONELISMO",
+      "POLÍTICA DO CAFÉ COM LEITE",
+      "REVOLTA DA VACINA",
+      "REVOLTA DA CHIBATA",
+      "CANUDOS",
+      "CONTESTADO",
+      "TENENTISMO",
+      "REVOLUÇÃO DE 1930"
+    ],
+    "ERA VARGAS": [
+      "GOVERNO PROVISÓRIO",
+      "GOVERNO CONSTITUCIONAL",
+      "ESTADO NOVO",
+      "TRABALHISMO",
+      "INDUSTRIALIZAÇÃO"
+    ],
+    "MUNDO CONTEMPORÂNEO": [
+      "IMPERIALISMO",
+      "PRIMEIRA GUERRA MUNDIAL",
+      "REVOLUÇÃO RUSSA",
+      "CRISE DE 1929",
+      "NAZIFASCISMO",
+      "SEGUNDA GUERRA MUNDIAL",
+      "GUERRA FRIA",
+      "REVOLUÇÃO CHINESA",
+      "REVOLUÇÃO CUBANA",
+      "GUERRA DO VIETNÃ",
+      "DESCOLONIZAÇÃO AFRO-ASIÁTICA"
+    ],
+    "BRASIL CONTEMPORÂNEO": [
+      "GOVERNO DUTRA",
+      "SEGUNDO GOVERNO VARGAS",
+      "JUSCELINO KUBITSCHEK",
+      "JÂNIO QUADROS",
+      "JOÃO GOULART",
+      "DITADURA MILITAR",
+      "REDEMOCRATIZAÇÃO",
+      "CONSTITUIÇÃO DE 1988",
+      "NOVA REPÚBLICA"
+    ],
+    "HISTÓRIA DA ÁFRICA": [
+      "ÁFRICA ANTIGA",
+      "REINOS AFRICANOS",
+      "ESCRAVIDÃO E DIÁSPORA AFRICANA",
+      "COLONIALISMO NA ÁFRICA",
+      "DESCOLONIZAÇÃO AFRICANA"
+    ],
+    "MOVIMENTOS SOCIAIS": [
+      "MOVIMENTO NEGRO",
+      "IMPRENSA NEGRA",
+      "FEMINISMO",
+      "MOVIMENTO OPERÁRIO",
+      "MOVIMENTO ESTUDANTIL",
+      "MOVIMENTOS INDÍGENAS"
+    ]
+  },
+  "GEOGRAFIA": {
+    "CARTOGRAFIA": [
+      "MAPAS",
+      "ESCALA CARTOGRÁFICA",
+      "COORDENADAS GEOGRÁFICAS",
+      "LATITUDE",
+      "LONGITUDE",
+      "FUSOS HORÁRIOS",
+      "PROJEÇÕES CARTOGRÁFICAS",
+      "SENSORIAMENTO REMOTO",
+      "GEOPROCESSAMENTO"
+    ],
+    "GEOLOGIA": [
+      "ESTRUTURA INTERNA DA TERRA",
+      "PLACAS TECTÔNICAS",
+      "VULCANISMO",
+      "TERREMOTOS",
+      "ROCHAS ÍGNEAS",
+      "ROCHAS SEDIMENTARES",
+      "ROCHAS METAMÓRFICAS"
+    ],
+    "RELEVO": [
+      "AGENTES INTERNOS",
+      "AGENTES EXTERNOS",
+      "INTEMPERISMO",
+      "EROSÃO",
+      "FORMAS DE RELEVO",
+      "RELEVO BRASILEIRO"
+    ],
+    "SOLOS": [
+      "FORMAÇÃO DOS SOLOS",
+      "TIPOS DE SOLOS",
+      "DEGRADAÇÃO DOS SOLOS"
+    ],
+    "CLIMATOLOGIA": [
+      "TEMPO E CLIMA",
+      "ELEMENTOS DO CLIMA",
+      "FATORES DO CLIMA",
+      "MASSAS DE AR",
+      "CLIMAS DO BRASIL",
+      "CLIMAS DO MUNDO",
+      "EL NIÑO",
+      "LA NIÑA"
+    ],
+    "HIDROGRAFIA": [
+      "CICLO DA ÁGUA",
+      "BACIAS HIDROGRÁFICAS",
+      "BACIAS BRASILEIRAS",
+      "AQUÍFEROS",
+      "CRISE HÍDRICA"
+    ],
+    "BIOMAS": [
+      "AMAZÔNIA",
+      "CERRADO",
+      "CAATINGA",
+      "MATA ATLÂNTICA",
+      "PANTANAL",
+      "PAMPA"
+    ],
+    "QUESTÕES AMBIENTAIS": [
+      "AQUECIMENTO GLOBAL",
+      "MUDANÇAS CLIMÁTICAS",
+      "EFEITO ESTUFA",
+      "CHUVA ÁCIDA",
+      "ILHAS DE CALOR",
+      "INVERSÃO TÉRMICA",
+      "DESMATAMENTO",
+      "QUEIMADAS",
+      "POLUIÇÃO DO AR",
+      "POLUIÇÃO DA ÁGUA",
+      "RESÍDUOS SÓLIDOS",
+      "SUSTENTABILIDADE"
+    ],
+    "POPULAÇÃO": [
+      "CRESCIMENTO POPULACIONAL",
+      "TRANSIÇÃO DEMOGRÁFICA",
+      "PIRÂMIDE ETÁRIA",
+      "DENSIDADE DEMOGRÁFICA",
+      "MIGRAÇÕES",
+      "REFUGIADOS"
+    ],
+    "URBANIZAÇÃO": [
+      "CRESCIMENTO URBANO",
+      "METROPOLIZAÇÃO",
+      "CONURBAÇÃO",
+      "REDE URBANA",
+      "HIERARQUIA URBANA",
+      "PROBLEMAS URBANOS",
+      "SEGREGAÇÃO SOCIOESPACIAL"
+    ],
+    "INDUSTRIALIZAÇÃO": [
+      "REVOLUÇÕES INDUSTRIAIS",
+      "INDUSTRIALIZAÇÃO BRASILEIRA",
+      "DESCONCENTRAÇÃO INDUSTRIAL",
+      "TECNOPOLOS"
+    ],
+    "AGROPECUÁRIA": [
+      "AGRICULTURA",
+      "PECUÁRIA",
+      "AGRONEGÓCIO",
+      "AGRICULTURA FAMILIAR",
+      "ESTRUTURA FUNDIÁRIA",
+      "REFORMA AGRÁRIA",
+      "ÊXODO RURAL"
+    ],
+    "FONTES DE ENERGIA": [
+      "PETRÓLEO",
+      "CARVÃO MINERAL",
+      "GÁS NATURAL",
+      "ENERGIA HIDRELÉTRICA",
+      "ENERGIA NUCLEAR",
+      "ENERGIA SOLAR",
+      "ENERGIA EÓLICA",
+      "BIOMASSA"
+    ],
+    "GEOPOLÍTICA": [
+      "NOVA ORDEM MUNDIAL",
+      "GLOBALIZAÇÃO",
+      "CAPITALISMO",
+      "SOCIALISMO",
+      "BLOCOS ECONÔMICOS",
+      "UNIÃO EUROPEIA",
+      "MERCOSUL",
+      "BRICS",
+      "ONU",
+      "OTAN",
+      "CONFLITOS TERRITORIAIS"
+    ],
+    "REGIONALIZAÇÃO": [
+      "REGIONALIZAÇÃO DO BRASIL",
+      "REGIÃO NORTE",
+      "REGIÃO NORDESTE",
+      "REGIÃO CENTRO-OESTE",
+      "REGIÃO SUDESTE",
+      "REGIÃO SUL",
+      "REGIONALIZAÇÃO MUNDIAL"
+    ]
+  },
+  "FILOSOFIA": {
+    "INTRODUÇÃO À FILOSOFIA": [
+      "MITO",
+      "RAZÃO",
+      "ORIGEM DA FILOSOFIA",
+      "COSMOLOGIA"
+    ],
+    "FILOSOFIA ANTIGA": [
+      "PRÉ-SOCRÁTICOS",
+      "SÓCRATES",
+      "PLATÃO",
+      "ARISTÓTELES",
+      "SOFISTAS"
+    ],
+    "FILOSOFIA HELENÍSTICA": [
+      "EPICURISMO",
+      "ESTOICISMO",
+      "CETICISMO",
+      "CINISMO"
+    ],
+    "FILOSOFIA MEDIEVAL": [
+      "PATRÍSTICA",
+      "SANTO AGOSTINHO",
+      "ESCOLÁSTICA",
+      "SÃO TOMÁS DE AQUINO",
+      "FÉ E RAZÃO"
+    ],
+    "FILOSOFIA MODERNA": [
+      "RACIONALISMO",
+      "EMPIRISMO",
+      "DESCARTES",
+      "LOCKE",
+      "HUME",
+      "KANT"
+    ],
+    "KANT": [
+      "FENÔMENO",
+      "NÔMENO",
+      "JUÍZO ANALÍTICO",
+      "JUÍZO SINTÉTICO",
+      "JUÍZO SINTÉTICO A PRIORI",
+      "IMPERATIVO CATEGÓRICO",
+      "LEI MORAL",
+      "ESCLARECIMENTO",
+      "MAIORIDADE INTELECTUAL",
+      "USO PÚBLICO DA RAZÃO",
+      "USO PRIVADO DA RAZÃO"
+    ],
+    "FILOSOFIA POLÍTICA": [
+      "ESTADO",
+      "PODER",
+      "DEMOCRACIA",
+      "CIDADANIA",
+      "JUSTIÇA",
+      "LIBERDADE"
+    ],
+    "CONTRATUALISMO": [
+      "HOBBES",
+      "LOCKE",
+      "ROUSSEAU"
+    ],
+    "FILOSOFIA CONTEMPORÂNEA": [
+      "HEGEL",
+      "MARX",
+      "NIETZSCHE",
+      "SARTRE",
+      "SIMONE DE BEAUVOIR",
+      "HANNAH ARENDT",
+      "FOUCAULT"
+    ],
+    "ESCOLA DE FRANKFURT": [
+      "ADORNO",
+      "HORKHEIMER",
+      "INDÚSTRIA CULTURAL"
+    ],
+    "ÉTICA": [
+      "MORAL",
+      "VALORES",
+      "LIBERDADE",
+      "RESPONSABILIDADE",
+      "BIOÉTICA"
+    ],
+    "LÓGICA": [
+      "PRINCÍPIO DA IDENTIDADE",
+      "PRINCÍPIO DA NÃO CONTRADIÇÃO",
+      "PRINCÍPIO DO TERCEIRO EXCLUÍDO",
+      "ARGUMENTO",
+      "SILOGISMO"
+    ],
+    "EPISTEMOLOGIA": [
+      "CONHECIMENTO",
+      "VERDADE",
+      "OPINIÃO",
+      "CIÊNCIA"
+    ]
+  },
+  "SOCIOLOGIA": {
+    "INTRODUÇÃO À SOCIOLOGIA": [
+      "SURGIMENTO DA SOCIOLOGIA",
+      "REVOLUÇÃO INDUSTRIAL",
+      "REVOLUÇÃO FRANCESA"
+    ],
+    "CLÁSSICOS DA SOCIOLOGIA": [
+      "AUGUSTE COMTE",
+      "POSITIVISMO"
+    ],
+    "DURKHEIM": [
+      "FATO SOCIAL",
+      "COERÇÃO SOCIAL",
+      "SOLIDARIEDADE MECÂNICA",
+      "SOLIDARIEDADE ORGÂNICA",
+      "ANOMIA"
+    ],
+    "MARX": [
+      "MATERIALISMO HISTÓRICO",
+      "LUTA DE CLASSES",
+      "MAIS-VALIA",
+      "ALIENAÇÃO",
+      "IDEOLOGIA",
+      "CAPITALISMO"
+    ],
+    "WEBER": [
+      "AÇÃO SOCIAL",
+      "TIPO IDEAL",
+      "DOMINAÇÃO TRADICIONAL",
+      "DOMINAÇÃO CARISMÁTICA",
+      "DOMINAÇÃO RACIONAL-LEGAL",
+      "BUROCRACIA",
+      "ÉTICA PROTESTANTE"
+    ],
+    "CULTURA": [
+      "CULTURA",
+      "ETNOCENTRISMO",
+      "RELATIVISMO CULTURAL",
+      "IDENTIDADE CULTURAL",
+      "CULTURA DE MASSA",
+      "INDÚSTRIA CULTURAL"
+    ],
+    "SOCIALIZAÇÃO": [
+      "SOCIALIZAÇÃO PRIMÁRIA",
+      "SOCIALIZAÇÃO SECUNDÁRIA",
+      "INSTITUIÇÕES SOCIAIS",
+      "FAMÍLIA",
+      "ESCOLA",
+      "RELIGIÃO",
+      "ESTADO"
+    ],
+    "TRABALHO": [
+      "DIVISÃO SOCIAL DO TRABALHO",
+      "TAYLORISMO",
+      "FORDISMO",
+      "TOYOTISMO",
+      "PRECARIZAÇÃO",
+      "UBERIZAÇÃO"
+    ],
+    "DESIGUALDADE": [
+      "ESTRATIFICAÇÃO SOCIAL",
+      "MOBILIDADE SOCIAL",
+      "POBREZA",
+      "EXCLUSÃO SOCIAL",
+      "RACISMO",
+      "DESIGUALDADE DE GÊNERO",
+      "LGBTQIA+ E SOCIEDADE"
+    ],
+    "MOVIMENTOS SOCIAIS": [
+      "MOVIMENTO NEGRO",
+      "FEMINISMO",
+      "MOVIMENTO OPERÁRIO",
+      "MOVIMENTO ESTUDANTIL",
+      "MOVIMENTOS INDÍGENAS"
+    ],
+    "POLÍTICA": [
+      "ESTADO",
+      "PODER",
+      "DEMOCRACIA",
+      "CIDADANIA",
+      "PARTICIPAÇÃO POLÍTICA",
+      "DIREITOS HUMANOS"
+    ],
+    "VIOLÊNCIA": [
+      "CRIMINALIDADE",
+      "CONTROLE SOCIAL",
+      "VIOLÊNCIA URBANA",
+      "VIOLÊNCIA SIMBÓLICA"
+    ],
+    "MÍDIA E TECNOLOGIA": [
+      "REDES SOCIAIS",
+      "SOCIEDADE DO CONSUMO",
+      "GLOBALIZAÇÃO",
+      "TECNOLOGIA E SOCIEDADE"
+    ]
+  },
+  "INGLÊS": {
+    "READING COMPREHENSION": [
+      "MAIN IDEA",
+      "SPECIFIC INFORMATION",
+      "INFERENCE",
+      "SKIMMING",
+      "SCANNING",
+      "CONTEXT CLUES"
+    ],
+    "VOCABULARY": [
+      "COGNATES",
+      "FALSE COGNATES",
+      "SYNONYMS",
+      "ANTONYMS"
+    ],
+    "WORD FORMATION": [
+      "PREFIXES",
+      "SUFFIXES"
+    ],
+    "GRAMMAR": [
+      "NOUNS",
+      "ADJECTIVES",
+      "ADVERBS",
+      "PRONOUNS",
+      "ARTICLES",
+      "PREPOSITIONS",
+      "CONJUNCTIONS"
+    ],
+    "VERB TENSES": [
+      "SIMPLE PRESENT",
+      "PRESENT CONTINUOUS",
+      "SIMPLE PAST",
+      "PAST CONTINUOUS",
+      "PRESENT PERFECT",
+      "PAST PERFECT",
+      "FUTURE WITH WILL",
+      "FUTURE WITH GOING TO"
+    ],
+    "MODAL VERBS": [
+      "CAN",
+      "COULD",
+      "MAY",
+      "MIGHT",
+      "MUST",
+      "SHOULD",
+      "WOULD"
+    ],
+    "STRUCTURES": [
+      "PASSIVE VOICE",
+      "REPORTED SPEECH",
+      "CONDITIONAL SENTENCES",
+      "COMPARATIVES",
+      "SUPERLATIVES",
+      "PHRASAL VERBS"
+    ],
+    "TEXT GENRES": [
+      "CARTOONS",
+      "COMIC STRIPS",
+      "NEWS",
+      "ADVERTISEMENTS",
+      "SONGS",
+      "POEMS",
+      "SCIENTIFIC TEXTS"
+    ],
+    "DISCOURSE": [
+      "LINKING WORDS",
+      "DISCOURSE MARKERS",
+      "IDIOMS"
+    ]
+  },
+  "ESPANHOL": {
+    "INTERPRETACIÓN TEXTUAL": [
+      "IDEA PRINCIPAL",
+      "INFORMACIÓN ESPECÍFICA",
+      "INFERENCIA",
+      "COMPRENSIÓN LECTORA"
+    ],
+    "VOCABULARIO": [
+      "COGNADOS",
+      "FALSOS COGNADOS",
+      "HETEROSEMÁNTICOS",
+      "HETEROGENÉRICOS",
+      "HETEROTÓNICOS"
+    ],
+    "GRAMÁTICA": [
+      "PRONOMBRES PERSONALES",
+      "PRONOMBRES POSESIVOS",
+      "PRONOMBRES DEMOSTRATIVOS",
+      "ARTÍCULOS DEFINIDOS",
+      "ARTÍCULOS INDEFINIDOS",
+      "SUSTANTIVOS",
+      "ADJETIVOS",
+      "ADVERBIOS",
+      "PREPOSICIONES",
+      "CONJUNCIONES"
+    ],
+    "VERBOS": [
+      "PRESENTE DE INDICATIVO",
+      "PRETÉRITO PERFECTO",
+      "PRETÉRITO INDEFINIDO",
+      "PRETÉRITO IMPERFECTO",
+      "FUTURO",
+      "CONDICIONAL",
+      "IMPERATIVO",
+      "SUBJUNTIVO",
+      "SER",
+      "ESTAR",
+      "HABER"
+    ],
+    "ESTRUCTURAS": [
+      "MUY Y MUCHO",
+      "APÓCOPE",
+      "PERÍFRASIS VERBAL",
+      "CONCORDANCIA NOMINAL",
+      "CONCORDANCIA VERBAL"
+    ],
+    "GÉNEROS TEXTUALES": [
+      "NOTICIAS",
+      "ANUNCIOS",
+      "TIRAS CÓMICAS",
+      "POEMAS",
+      "CANCIONES",
+      "TEXTOS DE OPINIÓN",
+      "ARTÍCULOS"
+    ],
+    "CULTURA": [
+      "AMÉRICA LATINA",
+      "CULTURA HISPÂNICA",
+      "VARIEDADES LINGUÍSTICAS DO ESPANHOL"
+    ]
+  },
+  "ARTES": {
+    "LINGUAGEM ARTÍSTICA": [
+      "ARTE E CULTURA",
+      "ARTE E SOCIEDADE",
+      "PATRIMÔNIO CULTURAL"
+    ],
+    "LINGUAGEM VISUAL": [
+      "PONTO",
+      "LINHA",
+      "FORMA",
+      "COR",
+      "TEXTURA",
+      "VOLUME",
+      "LUZ E SOMBRA",
+      "PERSPECTIVA",
+      "COMPOSIÇÃO",
+      "PROPORÇÃO"
+    ],
+    "ARTES VISUAIS": [
+      "DESENHO",
+      "PINTURA",
+      "ESCULTURA",
+      "GRAVURA",
+      "FOTOGRAFIA",
+      "CINEMA",
+      "HISTÓRIA EM QUADRINHOS",
+      "COLAGEM",
+      "ARTE DIGITAL",
+      "INSTALAÇÃO",
+      "PERFORMANCE"
+    ],
+    "HISTÓRIA DA ARTE": [
+      "ARTE RUPESTRE",
+      "ARTE EGÍPCIA",
+      "ARTE GREGA",
+      "ARTE ROMANA",
+      "ARTE MEDIEVAL",
+      "RENASCIMENTO",
+      "BARROCO",
+      "ROCOCÓ",
+      "NEOCLASSICISMO",
+      "ROMANTISMO",
+      "REALISMO",
+      "IMPRESSIONISMO",
+      "EXPRESSIONISMO",
+      "CUBISMO",
+      "FUTURISMO",
+      "DADAÍSMO",
+      "SURREALISMO",
+      "ABSTRACIONISMO",
+      "POP ART",
+      "MODERNISMO BRASILEIRO",
+      "SEMANA DE ARTE MODERNA"
+    ],
+    "ARTE BRASILEIRA": [
+      "ARTE INDÍGENA",
+      "ARTE AFRICANA",
+      "ARTE AFRO-BRASILEIRA",
+      "ARTE POPULAR",
+      "ARTE CONTEMPORÂNEA"
+    ],
+    "TEATRO": [
+      "TEXTO DRAMÁTICO",
+      "PERSONAGEM",
+      "CENÁRIO",
+      "FIGURINO",
+      "MAQUIAGEM CÊNICA",
+      "ILUMINAÇÃO",
+      "SONOPLASTIA",
+      "ENCENAÇÃO"
+    ],
+    "DANÇA": [
+      "CORPO E MOVIMENTO",
+      "COREOGRAFIA",
+      "RITMO"
+    ],
+    "MÚSICA": [
+      "SOM",
+      "MELODIA",
+      "HARMONIA",
+      "RITMO MUSICAL",
+      "INSTRUMENTOS MUSICAIS"
+    ]
+  },
+  "ATUALIDADES": {
+    "POLÍTICA NACIONAL": [
+      "ELEIÇÕES",
+      "DEMOCRACIA",
+      "CONSTITUIÇÃO",
+      "CONGRESSO NACIONAL",
+      "SUPREMO TRIBUNAL FEDERAL"
+    ],
+    "POLÍTICA INTERNACIONAL": [
+      "GEOPOLÍTICA MUNDIAL",
+      "CONFLITOS INTERNACIONAIS",
+      "GUERRAS CONTEMPORÂNEAS",
+      "CRISES HUMANITÁRIAS",
+      "MIGRAÇÕES E REFUGIADOS"
+    ],
+    "ECONOMIA": [
+      "ECONOMIA BRASILEIRA",
+      "ECONOMIA MUNDIAL",
+      "INFLAÇÃO",
+      "DESEMPREGO",
+      "DESIGUALDADE"
+    ],
+    "TECNOLOGIA": [
+      "INTELIGÊNCIA ARTIFICIAL",
+      "REDES SOCIAIS",
+      "FAKE NEWS",
+      "PRIVACIDADE DIGITAL",
+      "SEGURANÇA DE DADOS"
+    ],
+    "SAÚDE": [
+      "SAÚDE PÚBLICA",
+      "VACINAÇÃO",
+      "PANDEMIAS",
+      "SAÚDE MENTAL"
+    ],
+    "MEIO AMBIENTE": [
+      "MUDANÇAS CLIMÁTICAS",
+      "AQUECIMENTO GLOBAL",
+      "TRANSIÇÃO ENERGÉTICA",
+      "DESMATAMENTO",
+      "AMAZÔNIA",
+      "CRISE HÍDRICA",
+      "SUSTENTABILIDADE"
+    ],
+    "SOCIEDADE": [
+      "DIREITOS HUMANOS",
+      "RACISMO",
+      "VIOLÊNCIA URBANA",
+      "VIOLÊNCIA CONTRA A MULHER",
+      "POVOS INDÍGENAS",
+      "QUESTÕES DE GÊNERO",
+      "EDUCAÇÃO",
+      "CULTURA"
+    ],
+    "ORGANIZAÇÕES INTERNACIONAIS": [
+      "ONU",
+      "OMS",
+      "OTAN",
+      "UNIÃO EUROPEIA",
+      "MERCOSUL",
+      "BRICS"
+    ]
+  },
+  "EDUCAÇÃO FÍSICA": {
+    "CORPO E MOVIMENTO": [
+      "CULTURA CORPORAL",
+      "ATIVIDADE FÍSICA",
+      "EXERCÍCIO FÍSICO",
+      "SEDENTARISMO"
+    ],
+    "SAÚDE": [
+      "QUALIDADE DE VIDA",
+      "SAÚDE INTEGRAL",
+      "SAÚDE MENTAL",
+      "OBESIDADE",
+      "NUTRIÇÃO",
+      "TRANSTORNOS ALIMENTARES"
+    ],
+    "APTIDÃO FÍSICA": [
+      "FORÇA",
+      "RESISTÊNCIA",
+      "FLEXIBILIDADE",
+      "VELOCIDADE",
+      "AGILIDADE",
+      "COORDENAÇÃO MOTORA",
+      "EQUILÍBRIO"
+    ],
+    "ESPORTES": [
+      "FUTEBOL",
+      "VÔLEI",
+      "BASQUETE",
+      "HANDEBOL",
+      "ATLETISMO",
+      "NATAÇÃO",
+      "LUTAS",
+      "GINÁSTICA"
+    ],
+    "PRÁTICAS CORPORAIS": [
+      "DANÇA",
+      "JOGOS E BRINCADEIRAS",
+      "PRÁTICAS CORPORAIS DE AVENTURA"
+    ],
+    "ESPORTE E SOCIEDADE": [
+      "ESPORTE E INCLUSÃO",
+      "ESPORTE E MÍDIA",
+      "ESPORTE E CIDADANIA",
+      "DOPING",
+      "ANABOLIZANTES"
+    ],
+    "ANATOMIA E FISIOLOGIA": [
+      "SISTEMA LOCOMOTOR",
+      "SISTEMA MUSCULAR",
+      "SISTEMA CARDIOVASCULAR",
+      "SISTEMA RESPIRATÓRIO"
+    ],
+    "PREVENÇÃO": [
+      "PRIMEIROS SOCORROS",
+      "LESÕES ESPORTIVAS",
+      "ERGONOMIA",
+      "POSTURA CORPORAL"
+    ]
+  },
+  "PROVA": {
+    "LÍNGUA PORTUGUESA": [
+      "INTERPRETAÇÃO DE TEXTO",
+      "GRAMÁTICA",
+      "SEMÂNTICA",
+      "MORFOLOGIA",
+      "SINTAXE"
+    ],
+    "REDAÇÃO": [
+      "DISSERTAÇÃO ARGUMENTATIVA",
+      "COMPETÊNCIAS DO ENEM",
+      "GÊNEROS TEXTUAIS"
+    ],
+    "LITERATURA": [
+      "ESCOLAS LITERÁRIAS",
+      "AUTORES",
+      "GÊNEROS LITERÁRIOS"
+    ],
+    "MATEMÁTICA": [
+      "ÁLGEBRA",
+      "GEOMETRIA PLANA",
+      "GEOMETRIA ESPACIAL",
+      "TRIGONOMETRIA",
+      "FUNÇÕES",
+      "ESTATÍSTICA E PROBABILIDADE",
+      "ANÁLISE COMBINATÓRIA"
+    ],
+    "FÍSICA": [
+      "CINEMÁTICA",
+      "DINÂMICA",
+      "TERMODINÂMICA",
+      "ÓPTICA",
+      "ONDULATÓRIA",
+      "ELETRICIDADE"
+    ],
+    "QUÍMICA": [
+      "QUÍMICA GERAL",
+      "FÍSICO-QUÍMICA",
+      "QUÍMICA ORGÂNICA",
+      "ESTEQUIOMETRIA"
+    ],
+    "BIOLOGIA": [
+      "ECOLOGIA",
+      "CITOLOGIA",
+      "GENÉTICA",
+      "FISIOLOGIA HUMANA",
+      "EVOLUÇÃO"
+    ],
+    "HISTÓRIA": [
+      "HISTÓRIA DO BRASIL",
+      "HISTÓRIA GERAL",
+      "HISTÓRIA CONTEMPORÂNEA"
+    ],
+    "GEOGRAFIA": [
+      "GEOGRAFIA DO BRASIL",
+      "GEOPOLÍTICA",
+      "QUESTÕES AMBIENTAIS"
+    ],
+    "FILOSOFIA": [
+      "FILOSOFIA GERAL"
+    ],
+    "SOCIOLOGIA": [
+      "SOCIOLOGIA GERAL"
+    ],
+    "INGLÊS": [
+      "READING COMPREHENSION",
+      "GRAMMAR"
+    ],
+    "ESPANHOL": [
+      "COMPRENSIÓN LECTORA",
+      "GRAMÁTICA"
+    ],
+    "SIMULADO": [
+      "SIMULADO COMPLETO",
+      "CIÊNCIAS HUMANAS",
+      "CIÊNCIAS DA NATUREZA",
+      "LINGUAGENS",
+      "MATEMÁTICA"
+    ],
+    "REVISÃO": [
+      "REVISÃO GERAL",
+      "REVISÃO DE ERROS",
+      "REVISÃO DE FÓRMULAS",
+      "REVISÃO DE CONTEÚDO"
+    ]
+  }
+};
+
+// Lista ordenada de matérias para popular o select
+const listaMaterias = ["ARTES", "ATUALIDADES", "BIOLOGIA", "EDUCAÇÃO FÍSICA", "ESPANHOL", "FILOSOFIA", "FÍSICA", "GEOGRAFIA", "HISTÓRIA", "INGLÊS", "LITERATURA", "LÍNGUA PORTUGUESA", "MATEMÁTICA", "PROVA", "QUÍMICA", "REDAÇÃO", "SOCIOLOGIA"];

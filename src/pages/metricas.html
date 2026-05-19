@@ -1,819 +1,1045 @@
-<!DOCTYPE html>ã
-ã<html lang="pt-BR">ã
-ã<head>ã
-ã ã ã ã ã<meta charset="UTF-8">ã
-ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
-ã ã ã ã ã<title>ãMãeãnãtãoãrãiãaã ãSãiãnãaãpãsãeã ã-ã ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</title>ã
-ã ã ã ã ã<script src="https://cdn.tailwindcss.com"></script>ã
-ã ã ã ã ã<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>ã
-ã ã ã ã ã<script>ã
-ã ã ã ã ã ã ã ã ãtãaãiãlãwãiãnãdã.ãcãoãnãfãiãgã ã=ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãtãhãeãmãeã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãxãtãeãnãdã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãiãnãaãpãsãeã:ã ã{ã ãbãlãuãeã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã ãpãrãiãmãaãrãyã:ã ã'ã#ã6ã3ã6ã6ãFã1ã'ã,ã ãaãcãcãeãnãtã:ã ã'ã#ã1ã0ãBã9ã8ã1ã'ã,ã ãlãiãgãhãtã:ã ã'ã#ãFãAãFãAãFãBã'ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtãFãaãmãiãlãyã:ã ã{ã ãsãaãnãsã:ã ã[ã'ãIãnãtãeãrã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã ãhãeãaãdãlãiãnãeã:ã ã[ã'ãMãaãnãrãoãpãeã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxãSãhãaãdãoãwã:ã ã{ã ã'ãpãrãeãmãiãuãmã'ã:ã ã'ã0ã ã1ã0ãpãxã ã4ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã1ã1ã,ã2ã5ã,ã6ã0ã,ã0ã.ã0ã6ã)ã'ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã</script>ã
-ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
-ã ã ã ã ã<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />ã
-ã ã ã ã ã<style>ã
-ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
-ã ã ã ã ã ã ã ã ãbãoãdãyã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãFãAãFãAãFãBã;ã ãcãoãlãoãrã:ã ã#ã1ãEã2ã9ã3ãBã;ã ã}ã
-ã ã ã ã ã ã ã ã ã.ãgãlãaãsãsã-ãpãaãnãeãlã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã9ã5ã)ã;ã ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã1ã2ãpãxã)ã;ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã2ã5ã5ã,ã2ã5ã5ã,ã1ã)ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã.ãiãcãoãnã-ãfãiãlãlã ã{ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã1ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã ã{ã ãwãiãdãtãhã:ã ã4ãpãxã;ã ãhãeãiãgãhãtã:ã ã4ãpãxã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãrãaãcãkã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ãEã2ãEã8ãFã0ã;ã ãbãoãrãdãeãrã-ãrãaãdãiãuãsã:ã ã1ã0ãpãxã;ã ã}ã
-ã ã ã ã ã ã ã ã ã.ãfãaãdãeã-ãiãnã-ãuãpã ã{ã ãaãnãiãmãaãtãéãiãoãnã:ã ãfãaãdãeãIãnãUãpã ã0ã.ã6ãsã ãeãaãsãeã-ãoãuãtã ãfãoãrãwãaãrãdãsã;ã ãoãpãaãcãiãtãyã:ã ã0ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã2ã0ãpãxã)ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã@ãkãeãyãfãrãaãmãeãsã ãfãaãdãeãIãnãUãpã ã{ã ãtãoã ã{ã ãoãpãaãcãiãtãyã:ã ã1ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã0ã)ã;ã ã}ã ã}ã
-ã ã ã ã ã</style>ã
-ã ã ã ã ã<script src="../../src/js/datéabase.js"></script>ã
-ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
-ã</head>ã
-ã<body class="flex h-screen overflow-hidden text-slatée-800 antialiased selection:bg-sinapse-primary selection:text-white">ã
-ã
-ã ã ã ã ã<!-- SIDEBAR ELITE -->ã
-ã ã ã ã ã<aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relatéive bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">ã
-ã ã ã ã ã<!-- Logo Area -->ã
-ã ã ã ã ã<div class="pt-10 pb-6 flex flex-col items-center justify-center shrink-0 relatéive">ã
-ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO VETORIZADA.png" alt="Lion Study" class="h-10 w-auto object-contain" />ã
-ã ã ã ã ã</div>ã
-ã ã ã ã ã
-ã ã ã ã ã<!-- Menu Principal -->ã
-ã ã ã ã ã<nav class="flex-1 overflow-y-auto px-4 space-y-1 relatéive pb-10 custom-scrollbar">ã
-ã ã ã ã ã ã ã ã ã<a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãhãoãmãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãtãaãsã ãDãiãáãrãiãaãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãlãiãsãtã_ãaãlãtã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãPãlãaãnãeãjãaãmãeãnãtãoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="metricas.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relatéive border border-white/10 shadow-sm transition-all">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[22px] text-white leading-nãone block" style="font-variatéion-settings: 'FILL' 1;">ãsãtãaãcãkãeãdã_ãlãiãnãeã_ãcãhãaãrãtã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="tracking-wide">ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="estratéegia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãrãoãuãtãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãEãsãtãrãaãtãéãéãgãiãaã ãAãPã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãqãuãiãzã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãBãaãnãcãoã ãdãeã ãQãuãeãsãtãõãeãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãeãdãiãtã_ãnãããoãtãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãRãeãdãaãçãããoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãmãoãnãiãtãoãrãiãnãgã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãSãiãmãuãlãaãdãoãrã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãcãaãlãeãnãdãaãrã_ãmãoãnãtãhã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãCãrãoãnãããoãgãrãaãmãaã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãyãlãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãFãlãaãsãhãcãaãrãdãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãcãhãoãoãlã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãVãeãsãtãiãbãuãlãaãrãeãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã</nav>ã
-ã ã ã ã ã
-ã ã ã ã ã<!-- User Profile Footer -->ã
-ã ã ã ã ã<div class="p-4 shrink-0 relatéive z-20 border-t border-white/10">ã
-ã ã ã ã ã ã ã ã ã<div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">ãJãOã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 min-w-0">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[13px] font-bold text-white truncatée drop-shadow-sm">ãJãoãhãnãnã ãOãlãiãvãeãiãrãaã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[11px] text-white/70 truncatée group-hover:text-white/90 transition-colors">ãVãeãrã ãpãeãrãfãiãlã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</div>ã
-ã</aside>ã
-ã
-ã ã ã ã ã<main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relatéive overflow-y-auto">ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã<!-- Header -->ã
-ã ã ã ã ã ã ã ã ã<header class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<nav class="flex text-[11px] font-semibold text-slatée-400 uppercase tracking-widest space-x-3 items-center">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</nav>ã
-ã ã ã ã ã ã ã ã ã</header>ã
-ã
-ã ã ã ã ã ã ã ã ã<div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relatéive z-10 pb-20 fade-in-up">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Hero Superior -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6 mb-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h1 class="font-headline text-4xl font-extrabold text-[#0B193C] tracking-tight">ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</h1>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-500 font-medium mt-2 max-w-2xl text-[15px] leading-relaxed">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãcãoãmãpãaãnãhãeã ãsãuãaã ãeãvãoãlãuãçãããoã,ã ãiãdãeãnãtãiãfãiãqãuãeã ãsãeãuãsã ãpãoãnãtãoãsã ãfãoãrãtãeãsã ãeã ãcãoãrãrãiãjãaã ãsãuãaãsã ãfãrãaãgãiãlãiãdãaãdãeãsã ãcãoãmã ãpãrãeãcãiãsãããoã ãcãlãíãnãiãcãaã.ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="abrirModalAtividade()" class="bg-gradient-to-r from-sinapse-primary to-indigo-600 hover:shadow-lg hover:shadow-sinapse-primary/30 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-3 text-[14px] uppercase tracking-wide group shrink-0 active:scale-95">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[20px] group-hover:rotatée-90 transition-transform">ãaãdãdã_ãcãiãrãcãlãeã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãLãaãnãçãaãrã ãNãoãvãaã ãAãtãiãvãiãdãaãdãeã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Panãorama Geral (Cards Elite) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-3xl p-8 border border-slatée-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translatée-y-1 transition-transform group relatéive overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="absolute -right-6 -top-6 text-slatée-50 opacity-50 matéerial-symbols-outlined text-[120px] pointer-events-nãone group-hover:scale-110 transition-transform">ãfãuãnãcãtãiãoãnãsã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-slatée-400 font-extrabold uppercase tracking-widest mb-1 relatéive z-10">ãTãoãtãaãlã ãdãeã ãQãuãeãsãtãõãeãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[44px] font-headline font-extrabold text-[#0B193C] leading-nãone tracking-tight relatéive z-10" id="kpiTotalQ">ã0ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-3xl p-8 border border-slatée-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translatée-y-1 transition-transform group relatéive overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="absolute -right-6 -top-6 text-emerald-50 opacity-40 matéerial-symbols-outlined text-[120px] pointer-events-nãone group-hover:scale-110 transition-transform">ãcãhãeãcãkã_ãcãiãrãcãlãeã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-emerald-600 font-extrabold uppercase tracking-widest mb-1 relatéive z-10">ãTãoãtãaãlã ãdãeã ãAãcãeãrãtãoãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[44px] font-headline font-extrabold text-emerald-600 leading-nãone tracking-tight relatéive z-10" id="kpiTotalA">ã0ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-gradient-to-br from-[#0B193C] to-[#1a2b5e] rounded-3xl p-8 shadow-[0_20px_40px_-10px_rgba(11,25,60,0.3)] hover:-translatée-y-1 transition-transform group relatéive overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="absolute -right-6 -top-6 text-white opacity-[0.03] matéerial-symbols-outlined text-[120px] pointer-events-nãone group-hover:scale-110 transition-transform">ãpãeãrãcãeãnãtã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-blue-200 font-extrabold uppercase tracking-widest mb-1 relatéive z-10">ãPãeãrãcãeãnãtãuãaãlã ãGãeãrãaãlã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-baseline gap-1 relatéive z-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[44px] font-headline font-extrabold text-white leading-nãone tracking-tight" id="kpiPercent">ã0ã.ã0ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-2xl text-white/50 font-medium">ã%ã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-3xl p-8 border border-slatée-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translatée-y-1 transition-transform group relatéive overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="absolute -right-6 -top-6 text-slatée-50 opacity-50 matéerial-symbols-outlined text-[120px] pointer-events-nãone group-hover:scale-110 transition-transform">ãhãiãsãtãoãrãyã_ãeãdãuã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-slatée-400 font-extrabold uppercase tracking-widest mb-1 relatéive z-10">ãAãtãiãvãiãdãaãdãeãsã ãRãeãgãiãsãtãrãaãdãaãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[44px] font-headline font-extrabold text-[#0B193C] leading-nãone tracking-tight relatéive z-10" id="kpiActivities">ã0ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Insights Automáticos Stratégicos -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" id="insightsContainer">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Injetados por JS -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Filtro de Banca (Injetado) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col md:flex-row justify-between items-center bg-white rounded-2xl p-6 border border-slatée-100 shadow-sm mb-6 gap-4">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline font-extrabold text-[#0B193C] text-lg">ãVãiãsãããoã ãAãnãaãlãíãtãiãcãaã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[12px] text-slatée-400 font-medium">ãFãiãlãtãrãeã ãoãsã ãdãaãdãoãsã ãpãoãrã ãtãiãpãoã ãdãeã ãaãvãaãlãiãaãçãããoã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<select id="bancaFilterMetricas" onchange="processAndRenderDashboard()" class="bg-slatée-50 border border-slatée-200 text-[#0B193C] font-bold rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all text-sm cursor-pointer shadow-sm min-w-[200px] appearance-nãone">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="ALL">ãTãoãdãaãsã ãaãsã ãAãtãiãvãiãdãaãdãeãsã ã(ãGãeãrãaãlã)ã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="ENEM">ãAãpãeãnãaãsã ãEãNãEãMã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="SIMULADO">ãAãpãeãnãaãsã ãSãiãmãuãlãaãdãoãsã ã(ãEãsãtãiãlãoã ãEãNãEãMã)ã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="FUVEST">ãAãpãeãnãaãsã ãFãUãVãEãSãTã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNICAMP">ãAãpãeãnãaãsã ãUãnãiãcãaãmãpã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNESP">ãAãpãeãnãaãsã ãUãNãEãSãPã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="VEST-UNB">ãAãpãeãnãaãsã ãVãeãsãtãiãbãuãlãaãrã ãUãnãBã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="PAS-UNB">ãAãpãeãnãaãsã ãPãAãSã ãUãnãBã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFG">ãAãpãeãnãaãsã ãUãFãGã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEG">ãAãpãeãnãaãsã ãUãEãGã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFT">ãAãpãeãnãaãsã ãUãFãTã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</select>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Seção Analítica: Gráficos -->ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Desempenho por Disciplina -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] p-8 border border-slatée-100 shadow-premium flex flex-col">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-2xl font-extrabold text-[#0B193C] mb-2">ãAãpãrãoãvãeãiãtãaãmãeãnãtãoã ã(ã%ã)ã ãpãoãrã ãDãiãsãcãiãpãlãiãnãaã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500 font-medium mb-8">ãTãaãxãaã ãdãeã ãaãcãeãrãtãoã ãgãlãoãbãaãlã ãsãeãpãaãrãaãdãaã ãpãoãrã ãmãaãtãéãrãiãaã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 w-full min-h-[300px] relatéive">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<canvas id="chartDisciplines"></canvas>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Evolução ao longo do tempo -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] p-8 border border-slatée-100 shadow-premium flex flex-col">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-2xl font-extrabold text-[#0B193C] mb-2">ãEãvãoãlãuãçãããoã ãdãeã ãAãcãeãrãtãoãsã ãnãããoã ãTãeãmãpãoã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500 font-medium mb-8">ãTãeãnãdãêãnãcãiãaã ãvãiãsãuãaãlã ãdãaã ãtãaãxãaã ãdãeã ãaãcãeãrãtãoã ãnãaãsã ãúãlãtãiãmãaãsã ãaãtãéãiãvãiãdãaãdãeãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 w-full min-h-[300px] relatéive">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<canvas id="chartEvolution"></canvas>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Melhores e Piores Disciplinas -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Top 3 -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] p-8 border border-slatée-100 shadow-premium">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C] mb-6 flex items-center gap-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-emerald-500 icon-fill">ãaãrãrãoãwã_ãuãpãwãaãrãdã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãMãeãlãhãoãrãeãsã ãDãiãsãcãiãpãlãiãnãaãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-4" id="topDisciplinesContainer">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- JS -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Bottom 3 -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] p-8 border border-slatée-100 shadow-premium">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C] mb-6 flex items-center gap-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-rose-500 icon-fill">ãaãrãrãoãwã_ãdãoãwãnãwãaãrãdã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãtãeãnãçãããoã ãPãrãiãoãrãiãtãáãrãiãaã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-4" id="bottomDisciplinesContainer">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- JS -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- PERFORMANCE POR ASSUNTO -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] overflow-hidden border border-slatée-100 shadow-premium relatéive">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 border-b border-slatée-50 bg-white/50 backdrop-blur-md sticky top-0 z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-2xl font-extrabold text-[#0B193C]">ãPãeãrãfãoãrãmãaãnãcãeã ãpãoãrã ãAãsãsãuãnãtãoã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500 font-medium mt-1">ãNãíãvãeãlã ãdãeã ãdãoãmãíãnãiãoã ãnãããoãsã ãtãóãpãiãcãoãsã ãeãsãtãuãdãaãdãoãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex gap-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-1 rounded uppercase">ãEãxãcãeãlãeãnãtãeã ã(ã+ã9ã0ã)ã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold text-blue-700 bg-blue-50 px-2 py-1 rounded uppercase">ãBãoãmã ã(ã8ã0ã-ã8ã9ã)ã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold text-amber-700 bg-amber-50 px-2 py-1 rounded uppercase">ãAãtãeãnãçãããoã ã(ã7ã0ã-ã7ã9ã)ã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold text-rose-700 bg-rose-50 px-2 py-1 rounded uppercase">ãRãeãvãiãsãaãrã ã(ã<70)</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="overflow-x-auto w-full">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<table class="w-full text-left border-collapse whitespace-nãowrap min-w-[700px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<thead>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr class="text-[10px] text-slatée-400 uppercase tracking-widest bg-slatée-50/50">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold">ãDãiãsãcãiãpãlãiãnãaã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold w-1/3">ãCãoãnãtãeãúãdãoã ã/ã ãAãsãsãuãnãtãoã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold text-center">ãQãuãeãsãtãõãeãsã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold text-center">ãAãcãeãrãtãoãsã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold text-right">ãTãaãxãaã ãdãeã ãAãcãeãrãtãoã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</thead>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tbody class="text-[14px]" id="subjectPerformanceTable">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- JS -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tbody>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</table>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Histórico Recente -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-[32px] overflow-hidden border border-slatée-100 shadow-premium mt-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 border-b border-slatée-50">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-xl font-extrabold text-[#0B193C]">ãAãtãiãvãiãdãaãdãeãsã ãRãeãcãeãnãtãeãsã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500 font-medium mt-1">ãÚãlãtãiãmãoãsã ãrãeãgãiãsãtãrãoãsã ãcãoãmãpãuãtãaãdãoãsã ãnãaã ãpãlãaãtãéãaãfãoãrãmãaã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="overflow-x-auto w-full">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<table class="w-full text-left border-collapse whitespace-nãowrap">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<thead>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tr class="text-[10px] text-slatée-400 uppercase tracking-widest border-b border-slatée-50">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold">ãDãaãtãéãaã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold">ãMãaãtãéãrãiãaã ã&ã ãAãsãsãuãnãtãoã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold text-center">ãDãeãsãeãmãpãeãnãhãoã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<th class="py-4 px-8 font-bold text-right">ãPãeãrãcãeãnãtãuãaãlã</th>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tr>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</thead>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<tbody id="recentHistoryTable" class="text-[13px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- JS -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</tbody>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</table>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="h-10"></div>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</main>ã
-ã
-ã ã ã ã ã<!-- MODAL DE LANÇAMENTO -->ã
-ã ã ã ã ã<div id="modalAtividade" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duratéion-300">ã
-ã ã ã ã ã ã ã ã ã<div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalAtividade()"></div>ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã<div class="absolute top-1/2 left-1/2 -translatée-x-1/2 -translatée-y-1/2 w-11/12 max-w-xl bg-white rounded-[32px] shadow-2xl overflow-hidden transform scale-95 transition-transform duratéion-300 flex flex-col" id="modalAtividadeContent" style="max-height: 90vh;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 border-b border-slatée-100 flex justify-between items-center bg-white sticky top-0 z-10 w-full">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline text-xl font-extrabold text-[#0B193C] flex items-center gap-3">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-sinapse-primary icon-fill">ãaãsãsãiãgãnãmãeãnãtã_ãaãdãdã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãRãeãgãiãsãtãrãaãrã ãAãtãiãvãiãdãaãdãeã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="fecharModalAtividade()" class="text-slatée-400 hover:text-rose-500 transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined">ãcãlãoãsãeã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<form id="formAtividade" class="p-8 space-y-6 overflow-y-auto" onsubmit="event.preventDefault(); handleSaveActivity(event)">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-2 gap-6">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãMãaãtãéãrãiãaã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<select id="modalMaté" required class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium appearance-nãone">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Biologia">ãBãiãoãlãoãgãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Física">ãFãíãsãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Matéemática">ãMãaãtãéãeãmãáãtãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Química">ãQãuãíãmãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="História">ãHãiãsãtãóãrãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Geografia">ãGãeãoãgãrãaãfãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Linguagens">ãLãiãnãgãuãaãgãeãnãsã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Redação">ãRãeãdãaãçãããoã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</select>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãAãsãsãuãnãtãoã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="modalAss" required type="text" placeholder="Ex: Citologia" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium placeholder:text-slatée-400">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãDãaãtãéãaã ãBãaãsãeã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="modalDatéa" required type="datée" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-2 gap-6">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block relatéive">ãTãoãtãaãlã ãdãeã ãQãuãeãsãtãõãeãsã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="modalTot" required type="number" min="1" placeholder="Ex: 30" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-bold text-lg text-center">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block text-emerald-600">ãTãoãtãaãlã ãdãeã ãAãcãeãrãtãoãsã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="modalCert" required type="number" min="0" placeholder="Ex: 25" class="w-full bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-3 outline-nãone focus:border-emerald-500 transition-all font-bold text-lg text-center placeholder:text-emerald-300">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div id="modalError" class="text-rose-500 text-xs font-bold hidden text-center">ãOãsã ãaãcãeãrãtãoãsã ãnãããoã ãpãoãdãeãmã ãuãlãtãrãaãpãaãsãsãaãrã ãoã ãtãoãtãaãlã ãdãeã ãqãuãeãsãtãõãeãsã.ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="pt-4 mt-8 border-t border-slatée-100 flex justify-end">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button type="submit" class="bg-[#0B193C] hover:bg-[#112350] text-white px-8 py-3.5 rounded-xl font-bold shadow-premium-hover transition-all text-[13px] uppercase tracking-wider w-full md:w-auto">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãaãlãvãaãrã ãRãeãgãiãsãtãrãoã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</form>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã<!-- LOGIC SCRIPT INTEGRATION -->ã
-ã ã ã ã ã<script>ã
-ã ã ã ã ã ã ã ã ã/ã/ã ãSãeãtã ãtãoãdãaãyã ãoãnã ãdãaãtãéãeã ãpãiãcãkãeãrã
-ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãDãaãtãéãaã'ã)ã.ãvãaãlãuãeãAãsãDãaãtãéãeã ã=ã ãnãeãwã ãDãaãtãéãeã(ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãaãbãrãiãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãDãaãtãéãaã'ã)ã.ãvãaãlãuãeãAãsãDãaãtãéãeã ã=ã ãnãeãwã ãDãaãtãéãeã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãoãdãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãnãtãeãnãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeãCãoãnãtãeãnãtã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãEãrãrãoãrã'ã)ã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãhãiãdãdãeãnã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãhãiãdãdãeãnã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãTãiãmãeãoãuãtã(ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãoãpãaãcãiãtãyã-ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãsãcãaãlãeã-ã9ã5ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãfãeãcãhãaãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãoãdãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãnãtãeãnãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeãCãoãnãtãeãnãtã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãoãpãaãcãiãtãyã-ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãsãcãaãlãeã-ã9ã5ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãTãiãmãeãoãuãtã(ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãhãiãdãdãeãnã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã ã3ã0ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãhãaãnãdãlãeãSãaãvãeãAãcãtãiãvãiãtãyã(ãeã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãaãtãéã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãMãaãtãéã'ã)ã.ãvãaãlãuãeã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãaãsãsã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãsãsã'ã)ã.ãvãaãlãuãeã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãaã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãDãaãtãéãaã'ã)ã.ãvãaãlãuãeã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãtã ã=ã ãpãaãrãsãeãIãnãtã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãTãoãtã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãeãrãtã ã=ã ãpãaãrãsãeãIãnãtã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãCãeãrãtã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãtãoãtã ã=ã=ã=ã ã0ã)ã ãrãeãtãuãrãnã ãaãlãeãrãtã(ã"ãIãnãsãiãrãaã ãpãeãlãoã ãmãeãnãããoãsã ã1ã ãqãuãeãsãtãããoã.ã"ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãcãeãrãtã ã>ã ãtãoãtã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãEãrãrãoãrã'ã)ã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãhãiãdãdãeãnã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãeãrãcã ã=ã ã(ãcãeãrãtã ã/ã ãtãoãtã)ã ã*ã ã1ã0ã0ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãUãsãiãnãgã ãwãiãnãdãoãwã.ãdãbã ãpãrãoãvãiãdãeãdã ãbãyã ãdãaãtãéãaãbãaãsãeã.ãjãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãdãbã.ãiãnãsãeãrãtã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã,ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãuãsãeãrã_ãiãdã:ã ã1ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãeã:ã ãmãaãtãéã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtã:ã ãaãsãsã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãrãeãaãtãéãeãdã_ãaãtãéã:ã ãdãaãtãéãaã ã+ã ã'ãTã2ã0ã:ã0ã0ã:ã0ã0ã.ã0ã0ã0ãZã'ã,ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã:ã ãtãoãtã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã:ã ãcãeãrãtã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãrãoãnãgã_ãaãnãsãwãeãrãsã:ã ãtãoãtã ã-ã ãcãeãrãtã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãcãuãrãaãcãyã_ãpãeãrãcãeãnãtãaãgãeã:ã ãpãeãrãcã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãuãdãyã_ãtãiãmãeã_ãmãiãnãuãtãeãsã:ã ã0ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãoãrãmãAãtãiãvãiãdãaãdãeã'ã)ã.ãrãeãsãeãtã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãfãeãcãhãaãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeã-ãrãeãnãdãeãrã ãwãhãoãlãeã ãdãaãsãhãbãoãaãrãdã ãdãyãnãaãmãiãcãaãlãlãyã
-ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãnãdãRãeãnãdãeãrãDãaãsãhãbãoãaãrãdã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã/ã/ã ãGãlãoãbãaãlã ãCãhãaãrãtã ãiãnãsãtãaãnãcãeãsã ãtãoã ãdãeãsãtãrãoãyã ãbãeãfãoãrãeã ãrãeãnãdãeãrãiãnãgã ãaãgãaãiãnã
-ã ã ã ã ã ã ã ã ãlãeãtã ãcãhãaãrãtãDãiãsãcãIãnãsãtãaãnãcãeã ã=ã ãnãuãlãlã;ã
-ã ã ã ã ã ã ã ã ãlãeãtã ãcãhãaãrãtãEãvãoãlãIãnãsãtãaãnãcãeã ã=ã ãnãuãlãlã;ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãpãrãoãcãeãsãsãAãnãdãRãeãnãdãeãrãDãaãsãhãbãoãaãrãdã(ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãeãnãtãrãiãeãsã ã=ã ãwãiãnãdãoãwã.ãdãbã.ãgãeãtã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã)ã ã|ã|ã ã[ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãKãPãIã ãVãaãrãiãaãbãlãeãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãgãlãoãbãaãlãTãoãtãaãlã ã=ã ã0ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã ã=ã ã0ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãDãiãsãcãiãpãlãiãnãeã ãAãgãgãrãeãgãaãtãéãiãoãnã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãdãiãsãcãDãaãtãéãaã ã=ã ã{ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãsãuãbãjãeãcãtãDãaãtãéãaã ã=ã ã{ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãEãvãoãlãuãtãiãoãnã ãAãgãgãrãeãgãaãtãéãiãoãnã ã(ãbãyã ãdãaãtãéãeã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãdãaãtãéãeãDãaãtãéãaã ã=ã ã{ã}ã;ã
-ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãaãnãcãaãFãiãlãtãrãoã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãbãaãnãcãaãFãiãlãtãeãrãMãeãtãrãiãcãaãsã'ã)ã ã?ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãbãaãnãcãaãFãiãlãtãeãrãMãeãtãrãiãcãaãsã'ã)ã.ãvãaãlãuãeã ã:ã ã'ãAãLãLã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãFãiãlãtãeãrã ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã ã(ãoãnãlãyã ãaãpãpãlãyã ãfãiãlãtãeãrã ãiãfã ãiãtã'ãsã ãAãLãLã,ã ãeãlãsãeã ãwãeã ãiãgãnãããoãrãeã ãaãvãuãlãsãeã ãqãuãeãsãtãiãoãnãsã ãuãnãlãeãsãsã ãaãpãpãrãoãpãrãiãaãtãéãeã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãfãiãlãtãeãrãeãdãEãnãtãrãiãeãsã ã=ã ãbãaãnãcãaãFãiãlãtãrãoã ã=ã=ã=ã ã'ãAãLãLã'ã ã?ã ãeãnãtãrãiãeãsã ã:ã ã[ã]ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãfãiãlãtãeãrãeãdãEãnãtãrãiãeãsã.ãfãoãrãEãaãcãhã(ãeã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãtãaãlã ã=ã ãNãuãmãbãeãrã(ãeã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã ã|ã|ã ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãaãcãeãrãtãoãsã ã=ã ãNãuãmãbãeãrã(ãeã.ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã ã|ã|ã ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãTãoãtãaãlã ã+ã=ã ãtãoãtãaãlã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã ã+ã=ã ãaãcãeãrãtãoãsã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãDãiãsãcãiãpãlãiãnãeã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãdãiãsãcãDãaãtãéãaã[ãeã.ãdãiãsãcãiãpãlãiãnãeã]ã)ã ãdãiãsãcãDãaãtãéãaã[ãeã.ãdãiãsãcãiãpãlãiãnãeã]ã ã=ã ã{ã ãtãoãtãaãlã:ã ã0ã,ã ãcãoãrãrãeãtãaãsã:ã ã0ã ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãDãaãtãéãaã[ãeã.ãdãiãsãcãiãpãlãiãnãeã]ã.ãtãoãtãaãlã ã+ã=ã ãtãoãtãaãlã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãDãaãtãéãaã[ãeã.ãdãiãsãcãiãpãlãiãnãeã]ã.ãcãoãrãrãeãtãaãsã ã+ã=ã ãaãcãeãrãtãoãsã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãSãuãbãjãeãcãtã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãuãbãKãeãyã ã=ã ãeã.ãdãiãsãcãiãpãlãiãnãeã ã+ã ã'ã:ã:ã'ã ã+ã ãeã.ãsãuãbãjãeãcãtã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãsãuãbãjãeãcãtãDãaãtãéãaã[ãsãuãbãKãeãyã]ã)ã ãsãuãbãjãeãcãtãDãaãtãéãaã[ãsãuãbãKãeãyã]ã ã=ã ã{ã ãdãiãsãcãiãpãlãiãnãeã:ã ãeã.ãdãiãsãcãiãpãlãiãnãeã,ã ãsãuãbãjãeãcãtã:ã ãeã.ãsãuãbãjãeãcãtã,ã ãtãoãtãaãlã:ã ã0ã,ã ãcãoãrãrãeãtãaãsã:ã ã0ã ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtãDãaãtãéãaã[ãsãuãbãKãeãyã]ã.ãtãoãtãaãlã ã+ã=ã ãtãoãtãaãlã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtãDãaãtãéãaã[ãsãuãbãKãeãyã]ã.ãcãoãrãrãeãtãaãsã ã+ã=ã ãaãcãeãrãtãoãsã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãEãvãoãlãuãtãiãoãnã ã(ãbãyã ãuãnãiãqãuãeã ãdãaãtãéãeã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãeã.ãcãrãeãaãtãéãeãdã_ãaãtãéã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãeãKãeãyã ã=ã ãeã.ãcãrãeãaãtãéãeãdã_ãaãtãéã.ãsãpãlãiãtã(ã'ãTã'ã)ã[ã0ã]ã;ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã)ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã ã=ã ã{ã ãtãoãtãaãlã:ã ã0ã,ã ãcãoãrãrãeãtãaãsã:ã ã0ã ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã.ãtãoãtãaãlã ã+ã=ã ãtãoãtãaãlã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã.ãcãoãrãrãeãtãaãsã ã+ã=ã ãaãcãeãrãtãoãsã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãIãNãTãEãGãRãAãÇãÃãOã:ã ãPãRãOãVãAãSã ã(ãTãOãDãAãSã ãAãSã ãBãAãNãCãAãSã ãMãAãPãPãEãDã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãeãxãaãmãsã ã=ã ãwãiãnãdãoãwã.ãdãbã.ãgãeãtã(ã'ãeãxãaãmãsã'ã)ã ã|ã|ã ã[ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãeãxãaãmãsã.ãfãoãrãEãaãcãhã(ãeãxã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeãmãoãvãeã ãPãAãSã ãpãoãsãtãfãiãxãeãsã ãfãoãrã ãfãiãlãtãeãrãiãnãgã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãeãxãBãaãnãcãaã ã=ã ãeãxã.ãbãaãnãcãaã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãeãxãBãaãnãcãaã ã&ã&ã ãeãxãBãaãnãcãaã.ãsãtãaãrãtãsãWãiãtãhã(ã'ãPãAãSã-ãUãNãBã'ã)ã)ã ãeãxãBãaãnãcãaã ã=ã ã'ãPãAãSã-ãUãNãBã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãbãaãnãcãaãFãiãlãtãrãoã ã!ã=ã=ã ã'ãAãLãLã'ã ã&ã&ã ãeãxãBãaãnãcãaã ã!ã=ã=ã ãbãaãnãcãaãFãiãlãtãrãoã)ã ãrãeãtãuãrãnã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãrãoãcãeãsãsãAãrãeãaã ã=ã ã(ãmãaãtãéãeãrãiãaã,ã ãnãããoãtãaãVãaãlã,ã ãmãaãxãQãtãdã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãnãããoãtãaãVãaãlã ã!ã=ã=ã ãuãnãdãeãfãiãnãeãdã ã&ã&ã ãnãããoãtãaãVãaãlã ã!ã=ã=ã ãnãuãlãlã ã&ã&ã ãnãããoãtãaãVãaãlã ã!ã=ã=ã ã'ã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãããoãtãaã ã=ã ãpãaãrãsãeãIãnãtã(ãnãããoãtãaãVãaãlã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãiãsãNãaãNã(ãnãããoãtãaã)ã)ã ãrãeãtãuãrãnã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãTãoãtãaãlã ã+ã=ã ãmãaãxãQãtãdã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã ã+ã=ã ãnãããoãtãaã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãdãiãsãcãDãaãtãéãaã[ãmãaãtãéãeãrãiãaã]ã)ã ãdãiãsãcãDãaãtãéãaã[ãmãaãtãéãeãrãiãaã]ã ã=ã ã{ã ãtãoãtãaãlã:ã ã0ã,ã ãcãoãrãrãeãtãaãsã:ã ã0ã ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãDãaãtãéãaã[ãmãaãtãéãeãrãiãaã]ã.ãtãoãtãaãlã ã+ã=ã ãmãaãxãQãtãdã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãDãaãtãéãaã[ãmãaãtãéãeãrãiãaã]ã.ãcãoãrãrãeãtãaãsã ã+ã=ã ãnãããoãtãaã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãeãxã.ãcãrãeãaãtãéãeãdã_ãaãtãéã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãeãKãeãyã ã=ã ãeãxã.ãcãrãeãaãtãéãeãdã_ãaãtãéã.ãsãpãlãiãtã(ã'ãTã'ã)ã[ã0ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã)ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã ã=ã ã{ã ãtãoãtãaãlã:ã ã0ã,ã ãcãoãrãrãeãtãaãsã:ã ã0ã ã}ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã.ãtãoãtãaãlã ã+ã=ã ãmãaãxãQãtãdã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãeãDãaãtãéãaã[ãdãaãtãéãeãKãeãyã]ã.ãcãoãrãrãeãtãaãsã ã+ã=ã ãnãããoãtãaã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãoãuãtãiãnãgã ãBãyã ãEãxãaãmã ãBãoãaãrãdã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãEãNãEãMã'ã ã|ã|ã ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãSãIãMãUãLãAãDãOã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãiãnãgãuãaãgãeãnãsã'ã,ã ãeãxã.ãnãããoãtãaãLãiãnã,ã ã4ã5ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãHãuãmãaãnãaãsã'ã,ã ãeãxã.ãnãããoãtãaãHãuãmã,ã ã4ã5ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãNãaãtãéãuãrãeãzãaã'ã,ã ãeãxã.ãnãããoãtãaãNãaãtãéã,ã ã4ã5ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã ãeãxã.ãnãããoãtãaãMãaãtãéã,ã ã4ã5ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãUãNãIãCãAãMãPã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã ãeãxã.ãnãããoãtãaãUã_ãMãaãtãéã,ã ã1ã2ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãiãnãgãuãaãgãeãnãsã'ã,ã ã(ãpãaãrãsãeãIãnãtã(ãeãxã.ãnãããoãtãaãUã_ãPãoãrãtã)ã|ã|ã0ã)ã ã+ã ã(ãpãaãrãsãeãIãnãtã(ãeãxã.ãnãããoãtãaãUã_ãIãnãgã)ã|ã|ã0ã)ã,ã ã2ã0ã)ã;ã ã/ã/ã ã1ã3ã ãpãtã ã+ã ã7ã ãiãnãgã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãHãuãmãaãnãaãsã'ã,ã ãeãxã.ãnãããoãtãaãUã_ãHãuãmã,ã ã2ã3ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãNãaãtãéãuãrãeãzãaã'ã,ã ãeãxã.ãnãããoãtãaãUã_ãNãaãtãéã,ã ã2ã2ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãFãUãVãEãSãTã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãGãeãrãaãiãsã ã(ãFãUãVãEãSãTã)ã'ã,ã ãeãxã.ãnãããoãtãaãFãuãvãeãsãtã,ã ã9ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãUãNãEãSãPã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãGãeãrãaãiãsã ã(ãUãNãEãSãPã)ã'ã,ã ãeãxã.ãnãããoãtãaãUãnãeãsãpã,ã ã9ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãVãEãSãTã-ãUãNãBã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãiãnãgãuãaãgãeãnãsã'ã,ã ãeãxã.ãnãããoãtãaãVã_ãLãEã,ã ã3ã0ã)ã;ã ã/ã/ã ãaãpãrãoãxã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãHãuãmãaãnãaãsã'ã,ã ãeãxã.ãnãããoãtãaãVã_ãHãuãmã,ã ã1ã2ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãCãiãêãnãcãiãaãsã ãeã ãEãxãaãtãéãaãsã'ã,ã ãeãxã.ãnãããoãtãaãVã_ãEãxãaã,ã ã1ã5ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãPãAãSã-ãUãNãBã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãíãnãgãuãaãsã'ã,ã ãeãxã.ãnãããoãtãaãPã_ãLãEã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãEãxãaãtãéãaãsã ãeã ãHãuãmãaãnãaãsã'ã,ã ãeãxã.ãnãããoãtãaãPã_ãEãxãaãHãuãmã,ã ã1ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãUãFãGã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãiãnãgãuãaãgãeãnãsã'ã,ã ãeãxã.ãnãããoãtãaãUãFãGã_ãLãiãnã,ã ã3ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãNãaãtãéãuãrãeãzãaã'ã,ã ãeãxã.ãnãããoãtãaãUãFãGã_ãNãaãtãéã,ã ã3ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã ãeãxã.ãnãããoãtãaãUãFãGã_ãMãaãtãéã,ã ã3ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãUãEãGã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãGãeãrãaãiãsã ã(ãUãEãGã)ã'ã,ã ãeãxã.ãnãããoãtãaãUãEãGã,ã ã5ã2ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãeãxãBãaãnãcãaã ã=ã=ã=ã ã'ãUãFãTã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãLãiãnãgãuãaãgãeãnãsã'ã,ã ãeãxã.ãnãããoãtãaãUãFãTã_ãLãiãnã,ã ã2ã4ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã ãeãxã.ãnãããoãtãaãUãFãTã_ãMãaãtãéã,ã ã8ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãHãuãmãaãnãaãsã'ã,ã ãeãxã.ãnãããoãtãaãUãFãTã_ãHãuãmã,ã ã1ã6ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãoãcãeãsãsãAãrãeãaã(ã'ãNãaãtãéãuãrãeãzãaã'ã,ã ãeãxã.ãnãããoãtãaãUãFãTã_ãNãaãtãéã,ã ã1ã6ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãIãNãTãEãGãRãAãÇãÃãOã ãGãLãOãBãAãLã:ã ãBãAãNãCãOã ãDãEã ãQãUãEãSãTãÕãEãSã ãAãVãUãLãSãAãSã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãbãaãnãcãaãFãiãlãtãrãoã ã=ã=ã=ã ã'ãAãLãLã'ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãqãHãiãtãsã ã=ã ãpãaãrãsãeãIãnãtã(ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãhãiãtãsã'ã)ã ã|ã|ã ã'ã0ã'ã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãqãMãiãsãsãeãsã ã=ã ãpãaãrãsãeãIãnãtã(ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãmãiãsãsãeãsã'ã)ã ã|ã|ã ã'ã0ã'ã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãbãqãHãiãtãsã ã>ã ã0ã ã|ã|ã ãbãqãMãiãsãsãeãsã ã>ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãTãoãtãaãlã ã+ã=ã ã(ãbãqãHãiãtãsã ã+ã ãbãqãMãiãsãsãeãsã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã ã+ã=ã ãbãqãHãiãtãsã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãNãããoã ãaãdãiãcãiãoãnãaãmãoãsã ãàãsã ãmãaãtãéãrãiãaãsã ãpãoãiãsã ãoã ãbãaãnãcãoã ãgãeãrãaãlã ãaãvãuãlãsãoã ãnãããoã ãtãeãmã ãaã ãdãiãsãcã ãvãiãnãcãuãlãaãdãaã ãrãeãtãrãoãaãtãéãiãvãaãmãeãnãtãeã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãUãPãDãAãTãEã ãKãPãIãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãkãpãiãTãoãtãaãlãQã'ã)ã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãlãTãoãtãaãlã.ãtãoãLãoãcãaãlãeãSãtãrãiãnãgã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãkãpãiãTãoãtãaãlãAã'ã)ã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã.ãtãoãLãoãcãaãlãeãSãtãrãiãnãgã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãkãpãiãPãeãrãcãeãnãtã'ã)ã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãlãTãoãtãaãlã ã>ã ã0ã ã?ã ã(ã(ãgãlãoãbãaãlãCãoãrãrãeãcãtãsã/ãgãlãoãbãaãlãTãoãtãaãlã)ã*ã1ã0ã0ã)ã.ãtãoãFãiãxãeãdã(ã1ã)ã ã:ã ã"ã0ã.ã0ã"ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãkãpãiãAãcãtãiãvãiãtãiãeãsã'ã)ã.ãiãnãnãeãrãTãeãxãtã ã=ã ãeãnãtãrãiãeãsã.ãlãeãnãgãtãhã.ãtãoãLãoãcãaãlãeãSãtãrãiãnãgã(ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãDãiãsãcãiãpãlãiãnãeã ãSãtãaãtãéãsã ã(ãAãrãrãaãyã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãdãiãsãcãAãrãrã ã=ã ã[ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãrã ã(ãlãeãtã ãdã ãiãnã ãdãiãsãcãDãaãtãéãaã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãdãiãsãcãDãaãtãéãaã[ãdã]ã.ãtãoãtãaãlã ã>ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãAãrãrã.ãpãuãsãhã(ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãnãaãmãeã:ã ãdã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãoãtãaãlã:ã ãdãiãsãcãDãaãtãéãaã[ãdã]ã.ãtãoãtãaãlã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãeãrãtãoãsã:ã ãdãiãsãcãDãaãtãéãaã[ãdã]ã.ãcãoãrãrãeãtãaãsã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãeãrãcã:ã ã(ãdãiãsãcãDãaãtãéãaã[ãdã]ã.ãcãoãrãrãeãtãaãsã ã/ã ãdãiãsãcãDãaãtãéãaã[ãdã]ã.ãtãoãtãaãlã)ã ã*ã ã1ã0ã0ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãSãoãrãtã ãDãeãsãcãeãnãdãiãnãgã ãbãyã ãpãeãrãcã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãAãrãrã.ãsãoãrãtã(ã(ãaã,ãbã)ã ã=ã>ã ãbã.ãpãeãrãcã ã-ã ãaã.ãpãeãrãcã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãIãNãSãIãGãHãTãSã ãAãUãTãOãMãÁãTãIãCãOãSã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãiãnãsãiãgãhãtãsãCã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãiãnãsãiãgãhãtãsãCãoãnãtãaãiãnãeãrã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãnãsãiãgãhãtãsãCã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãrãeãaãtãéãeãIãnãsãiãgãhãtã ã=ã ã(ãiãcãoã,ã ãcãoãlãoãrã,ã ãtãiãtãlãeã,ã ãdãeãsãcã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ã'ã<div class="bg-white p-5 rounded-2xl border border-slatée-100 flex items-center gap-4 hover:shadow-md transition-shadow">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background-color: ' + color + '15; color: ' + color + ';">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="matéerial-symbols-outlined text-[20px] icon-fill">ã'ã ã+ã ãiãcãoã ã+ã ã'ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<h4 class="text-[10px] font-extrabold uppercase tracking-widest text-[#0B193C] mb-0.5">ã'ã ã+ã ãtãiãtãlãeã ã+ã ã'ã</h4>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<p class="text-[12px] font-semibold text-slatée-500 leading-snug">ã'ã ã+ã ãdãeãsãcã ã+ã ã'ã</p>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãdãiãsãcãAãrãrã.ãlãeãnãgãtãhã ã>ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãeãsãtã ã=ã ãdãiãsãcãAãrãrã[ã0ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãwãoãrãsãtã ã=ã ãdãiãsãcãAãrãrã[ãdãiãsãcãAãrãrã.ãlãeãnãgãtãhã ã-ã ã1ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãnãsãiãgãhãtãsãCã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãrãeãaãtãéãeãIãnãsãiãgãhãtã(ã'ãeãmãoãjãiã_ãeãvãeãnãtãsã'ã,ã ã'ã#ã1ã0ãBã9ã8ã1ã'ã,ã ã'ãSãeãuã ãDãoãmãíãnãiãoã ãOãuãrãoã'ã,ã ã'ãSãeãuã ãmãeãlãhãoãrã ãdãeãsãeãmãpãeãnãhãoã ãaãtãéãuãaãlã ãeãsãtãáã ãeãmã ã<b>ã'ã ã+ã ãbãeãsãtã.ãnãaãmãeã ã+ã ã'ã</b>ã ãcãoãmã ã<b>ã'ã+ã ãbãeãsãtã.ãpãeãrãcã.ãtãoãFãiãxãeãdã(ã1ã)ã ã+ã ã'ã%ã</b>ã.ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãwãoãrãsãtã.ãpãeãrãcã ã< 70 && worst.name !== best.name) {
-                     insightsC.innerHTML += creatéeInsight('warning', '#F43F5E', 'Alerta Estratégico', 'Atenção: <b>ã'ã ã+ã ãwãoãrãsãtã.ãnãaãmãeã ã+ã ã'ã</b>ã ãeãxãiãgãeã ãrãeãfãoãrãçãoã ãiãmãeãdãiãaãtãéãoã ã(ã'ã+ãwãoãrãsãtã.ãpãeãrãcã.ãtãoãFãiãxãeãdã(ã1ã)ã+ã'ã%ã)ã.ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ãiãfã(ãwãoãrãsãtã.ãnãaãmãeã ã!ã=ã=ã ãbãeãsãtã.ãnãaãmãeã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãnãsãiãgãhãtãsãCã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãrãeãaãtãéãeãIãnãsãiãgãhãtã(ã'ãtãrãeãnãdãiãnãgã_ãuãpã'ã,ã ã'ã#ã3ãBã8ã2ãFã6ã'ã,ã ã'ãCãoãnãsãtãâãnãcãiãaã'ã,ã ã'ãOã ãdãeãsãeãmãpãeãnãhãoã ãbãaãsãeã ãeãmã ã<b>ã'ã ã+ã ãwãoãrãsãtã.ãnãaãmãeã ã+ã ã'ã</b>ã ãeãsãtãáã ãsãeãgãuãrãoã,ã ãfãoãcãoã ãnãaã ãcãoãnãtãiãnãuãiãdãaãdãeã.ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãEãxãtãrãaã ãiãnãfãoã:ã ãvãoãlãuãmãeãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãvãoãlãAãrãrã ã=ã ã[ã.ã.ã.ãdãiãsãcãAãrãrã]ã.ãsãoãrãtã(ã(ãaã,ãbã)ã ã=ã>ã ãbã.ãtãoãtãaãlã ã-ã ãaã.ãtãoãtãaãlã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãvãoãlãAãrãrã[ã0ã]ã.ãtãoãtãaãlã ã>ã ã2ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãnãsãiãgãhãtãsãCã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãrãeãaãtãéãeãIãnãsãiãgãhãtã(ã'ãlãoãcãaãlã_ãfãiãrãeã_ãdãeãpãaãrãtãmãeãnãtã'ã,ã ã'ã#ãFã5ã9ãEã0ãBã'ã,ã ã'ãMãaãiãoãrã ãVãoãlãuãmãeã'ã,ã ã'ãVãoãcãêãêã ãfãoãcãaã ãbãaãsãtãaãnãtãeã ãeãmã ã<b>ã'ã ã+ã ãvãoãlãAãrãrã[ã0ã]ã.ãnãaãmãeã ã+ã'ã</b>ã ã(ã'ã ã+ã ãvãoãlãAãrãrã[ã0ã]ã.ãtãoãtãaãlã ã+ã ã'ã ãqã)ã.ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãnãsãiãgãhãtãsãCã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<div class="col-span-full p-6 bg-slatée-50 rounded-xl text-center text-[13px] font-bold text-slatée-400 shadow-inner">ãNãeãnãhãuãmã ãdãaãdãoã ãlãaãnãçãaãdãoã.ã ãRãeãgãiãsãtãrãeã ãaãtãéãiãvãiãdãaãdãeãsã ãpãaãrãaã ãvãiãsãuãaãlãiãzãaãrã ãaãnãáãlãiãsãeãsã ãdãeã ãmãeãnãtãoãrãiãaã ãaãvãaãnãçãaãdãaã.ã</div>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãTãOãPã ã3ã ã&ã ãBãOãTãTãOãMã ã3ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãpãCã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãtãoãpãDãiãsãcãiãpãlãiãnãeãsãCãoãnãtãaãiãnãeãrã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãoãtãCã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãbãoãtãtãoãmãDãiãsãcãiãpãlãiãnãeãsãCãoãnãtãaãiãnãeãrã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãtãoãpãCã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã ãbãoãtãCã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãrãeãaãtãéãeãDãiãsãcãRãoãwã ã=ã ã(ãiãtãeãmã,ã ãcãoãlãoãrãCãlãaãsãsã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ã'ã<div class="flex items-center justify-between p-4 bg-slatée-50 rounded-xl hover:bg-slatée-100 transition-colors">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="font-bold text-[#0B193C] text-[15px]">ã'ã ã+ã ãiãtãeãmã.ãnãaãmãeã ã+ã ã'ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<div class="flex items-center gap-5">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<div class="text-right">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<p class="text-[9px] font-extrabold text-slatée-400 uppercase">ãAãcãeãrãtãoãsã</p>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<p class="text-xs font-bold text-slatée-600">ã'ã ã+ã ãiãtãeãmã.ãaãcãeãrãtãoãsã ã+ã ã'ã/ã'ã ã+ã ãiãtãeãmã.ãtãoãtãaãlã ã+ã ã'ã</p>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="text-sm w-16 text-center font-extrabold ' + colorClass + ' bg-white px-3 py-1.5 rounded-lg border border-slatée-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)]">ã'ã ã+ã ãiãtãeãmã.ãpãeãrãcã.ãtãoãFãiãxãeãdã(ã0ã)ã ã+ã ã'ã%ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãpãsã ã=ã ãdãiãsãcãAãrãrã.ãsãlãiãcãeã(ã0ã,ã ã3ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãoãtãsã ã=ã ã[ã.ã.ã.ãdãiãsãcãAãrãrã]ã.ãrãeãvãeãrãsãeã(ã)ã.ãsãlãiãcãeã(ã0ã,ã ã3ã)ã.ãfãiãlãtãeãrã(ãxã ã=ã>ã ã!ãtãoãpãsã.ãfãiãnãdã(ãtã=ã>ãtã.ãnãaãmãeã ã=ã=ã=ã ãxã.ãnãaãmãeã)ã ã|ã|ã ãdãiãsãcãAãrãrã.ãlãeãnãgãtãhã ã< 2);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Meu Desempenho</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: { blue: '#0B193C', primary: '#6366F1', accent: '#10B981', light: '#FAFAFB'}
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], headline: ['Manrope', 'sans-serif'] },
+                    boxShadow: { 'premium': '0 10px 40px -10px rgba(11,25,60,0.06)' }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        ::-webkit-scrollbar { width: 4px; height: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .fade-in-up { animation: fadeInUp 0.6s ease-out forwards; opacity: 0; transform: translateY(20px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+    
+        /* Sidebar Toggle */
+        aside { transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
+    </style>
+    <script src="../../src/js/database.js"></script>
+    <script src="../../src/js/materia_data.js?v=5"></script>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relative bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">
+    <!-- Logo Area -->
+    <div class="pt-7 pb-5 px-5 flex items-center gap-4 shrink-0">
+        <!-- Botão Hamburger -->
+        <button onclick="toggleSidebar()" class="w-8 h-8 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:opacity-80 flex-shrink-0" title="Recolher menu">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+        <!-- Logo -->
+        <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+    </div>
+    
+    <!-- Menu Principal -->
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1 relative pb-10 custom-scrollbar">
+        <a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">home</span> 
+            </div>
+            <span>Home</span>
+        </a>
+        <a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">list_alt</span> 
+            </div>
+            <span>Planejamento</span>
+        </a>
+        <a href="metricas.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relative border border-white/10 shadow-sm transition-all">
+            <div class="absolute -left-[3px] top-1/2 -translate-y-1/2 w-[6px] h-[60%] bg-white rounded-full shadow-md"></div>
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined icon-fill text-[22px] text-white leading-none block" style="font-variation-settings: 'FILL' 1;">stacked_line_chart</span> 
+            </div>
+            <span class="tracking-wide">Meu Desempenho</span>
+        </a>
+        <a href="estrategia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">route</span> 
+            </div>
+            <span>Estratégia</span>
+        </a>
+        <a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">quiz</span> 
+            </div>
+            <span>Banco de Questões</span>
+        </a>
+        <a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">edit_note</span> 
+            </div>
+            <span>Redação</span>
+        </a>
+        <a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">monitoring</span> 
+            </div>
+            <span>Simulador</span>
+        </a>
+        <a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">calendar_month</span> 
+            </div>
+            <span>Cronograma</span>
+        </a>
+        <a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">style</span> 
+            </div>
+            <span>Flashcards</span>
+        </a>
+        <a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">school</span> 
+            </div>
+            <span>Vestibulares</span>
+        </a>
+    </nav>
+    
+    <!-- User Profile Footer -->
+    <div class="p-4 shrink-0 relative z-20 border-t border-white/10">
+        <div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                <span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">JO</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="text-[13px] font-bold text-white truncate drop-shadow-sm">Johnn Oliveira</h3>
+                <p class="text-[11px] text-white/70 truncate group-hover:text-white/90 transition-colors">Ver perfil</p>
+            </div>
+            <span class="material-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">chevron_right</span>
+        </div>
+    </div>
+</aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#E4F1F5] relative overflow-y-auto">
+        <!-- Top Header Bar (appears when sidebar is hidden) -->
+        <div id="topHeaderBar" class="w-full px-6 py-4 flex items-center gap-4 relative z-20 hidden">
+            <button onclick="toggleSidebar()" class="w-12 h-12 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-[16px] shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed 2.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+        </div>
+
+        <!-- Page Title -->
+        <div class="mx-8 mt-6 mb-2 pb-4 border-b-2 border-[#00B5B5]/40 relative z-10">
+            <h1 class="text-[28px] font-bold text-[#3a3a3a] tracking-tight">Meu Desempenho</h1>
+        </div>
+
+
+        <div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relative z-10 pb-20 fade-in-up">
             
-            tops.forEach(t =>ã ãtãoãpãCã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãrãeãaãtãéãeãDãiãsãcãRãoãwã(ãtã,ã ã'ãtãeãxãtã-ãeãmãeãrãaãlãdã-ã6ã0ã0ã'ã)ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãbãoãtãsã.ãlãeãnãgãtãhã ã>ã ã0ã)ã ãbãoãtãsã.ãfãoãrãEãaãcãhã(ãbã ã=ã>ã ãbãoãtãCã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãrãeãaãtãéãeãDãiãsãcãRãoãwã(ãbã,ã ã'ãtãeãxãtã-ãrãoãsãeã-ã6ã0ã0ã'ã)ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãbãoãtãCã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<p class="text-[13px] text-slatée-400 font-bold p-2">ãSãeãmã ãzãoãnãaãsã ãdãeã ãrãiãsãcãoã ãdãeãtãeãcãtãaãdãaãsã.ã</p>ã'ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãSãUãBãJãEãCãTã ãPãEãRãFãOãRãMãAãNãCãEã
-ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãsãuãbãAãrãrã ã=ã ã[ã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãrã ã(ãlãeãtã ãkã ãiãnã ãsãuãbãjãeãcãtãDãaãtãéãaã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãsãuãbãjãeãcãtãDãaãtãéãaã[ãkã]ã.ãtãoãtãaãlã ã>ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãAãrãrã.ãpãuãsãhã(ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã.ã.ã.ãsãuãbãjãeãcãtãDãaãtãéãaã[ãkã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãeãrãcã:ã ã(ãsãuãbãjãeãcãtãDãaãtãéãaã[ãkã]ã.ãcãoãrãrãeãtãaãsã ã/ã ãsãuãbãjãeãcãtãDãaãtãéãaã[ãkã]ã.ãtãoãtãaãlã)ã ã*ã ã1ã0ã0ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãAãrãrã.ãsãoãrãtã(ã(ãaã,ãbã)ã ã=ã>ã ãbã.ãpãeãrãcã ã-ã ãaã.ãpãeãrãcã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãuãbãTãBã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãsãuãbãjãeãcãtãPãeãrãfãoãrãmãaãnãcãeãTãaãbãlãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãTãBã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãAãrãrã.ãfãoãrãEãaãcãhã(ãsã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãbãaãdãgãeã ã=ã ã'ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãsã.ãpãeãrãcã ã>ã=ã ã9ã0ã)ã ãbãaãdãgãeã ã=ã ã'ã<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-emerald-50 text-emerald-700 rounded-md uppercase border border-emerald-100 shadow-sm">ãEãxãcãeãlãeãnãtãeã</span>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãsã.ãpãeãrãcã ã>ã=ã ã8ã0ã)ã ãbãaãdãgãeã ã=ã ã'ã<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-blue-50 text-blue-700 rounded-md uppercase border border-blue-100 shadow-sm">ãBãoãmã</span>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã(ãsã.ãpãeãrãcã ã>ã=ã ã7ã0ã)ã ãbãaãdãgãeã ã=ã ã'ã<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-amber-50 text-amber-700 rounded-md uppercase border border-amber-100 shadow-sm">ãAãtãeãnãçãããoã</span>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãbãaãdãgãeã ã=ã ã'ã<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-rose-50 text-rose-700 rounded-md uppercase border border-rose-100 shadow-sm">ãRãeãvãiãsãaãrã</span>ã'ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãTãBã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ã'ã<tr class="border-b border-slatée-50 last:border-0 hover:bg-slatée-50/50 transition-colors">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 font-extrabold text-[#0B193C]">ã'ã ã+ã ãsã.ãdãiãsãcãiãpãlãiãnãeã ã+ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 font-semibold text-slatée-500">ã'ã ã+ã ãsã.ãsãuãbãjãeãcãtã ã+ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 font-bold text-center text-slatée-500">ã'ã ã+ã ãsã.ãtãoãtãaãlã ã+ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 font-bold text-center text-emerald-600">ã'ã ã+ã ãsã.ãcãoãrãrãeãtãaãsã ã+ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 text-right">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<div class="flex items-center justify-end gap-4">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="font-headline font-extrabold text-[#0B193C] text-[16px]">ã'ã ã+ã ãsã.ãpãeãrãcã.ãtãoãFãiãxãeãdã(ã1ã)ã ã+ã ã'ã%ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãdãgãeã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</div>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</tr>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãsãuãbãAãrãrã.ãlãeãnãgãtãhã ã=ã=ã=ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãTãBã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<tr><td colspan="5" class="py-8 text-center text-[13px] text-slatée-400 font-bold">ãNãeãnãhãuãmãaã ãaãtãéãiãvãiãdãaãdãeã ãlãoãcãaãlãiãzãaãdãaã.ã ãLãaãnãcãeã ãuãmã ãnãããoãvãoã ãrãeãsãuãlãtãaãdãoã ãpãaãrãaã ãgãeãrãaãrã ãcãáãlãcãuãlãoãsã.ã</td></tr>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãEãCãEãNãTã ãHãIãSãTãOãRãYã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãrãeãcãTãBã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãrãeãcãeãnãtãHãiãsãtãoãrãyãTãaãbãlãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãcãTãBã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãrãeãcãeãnãtã ã=ã ã[ã.ã.ã.ãeãnãtãrãiãeãsã]ã.ãrãeãvãeãrãsãeã(ã)ã.ãsãlãiãcãeã(ã0ã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãcãeãnãtã.ãfãoãrãEãaãcãhã(ãrã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãfãmãtãDãaãtãéãeã ã=ã ã"ãNã/ãAã"ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãrã.ãcãrãeãaãtãéãeãdã_ãaãtãéã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãeãPãaãrãtãsã ã=ã ãrã.ãcãrãeãaãtãéãeãdã_ãaãtãéã.ãsãpãlãiãtã(ã'ãTã'ã)ã[ã0ã]ã.ãsãpãlãiãtã(ã'ã-ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãmãtãDãaãtãéãeã ã=ã ãdãaãtãéãeãPãaãrãtãsã.ãlãeãnãgãtãhã ã=ã=ã=ã ã3ã ã?ã ãdãaãtãéãeãPãaãrãtãsã[ã2ã]ã+ã'ã/ã'ã+ãdãaãtãéãeãPãaãrãtãsã[ã1ã]ã ã:ã ãrã.ãcãrãeãaãtãéãeãdã_ãaãtãéã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãeãrãcã ã=ã ãrã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã ã>ã ã0ã ã?ã ã(ã(ãrã.ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã ã/ã ãrã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã)ã*ã1ã0ã0ã)ã.ãtãoãFãiãxãeãdã(ã1ã)ã ã:ã ã"ã0ã.ã0ã"ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãcãTãBã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ã'ã<tr class="border-b border-slatée-50 last:border-0 hover:bg-slatée-50/50">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 text-xs font-bold text-slatée-400">ã'ã ã+ã ãfãmãtãDãaãtãéãeã ã+ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="block font-bold text-[#0B193C] text-[14px] leading-tight">ã'ã ã+ã ã(ãrã.ãdãiãsãcãiãpãlãiãnãeã|ã|ã'ã'ã)ã ã+ã ã'ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="block text-[11px] text-slatée-400 font-semibold">ã'ã ã+ã ã(ãrã.ãsãuãbãjãeãcãtã|ã|ã'ã'ã)ã ã+ã ã'ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 text-center text-[13px] font-bold text-slatée-500">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="text-emerald-500">ã'ã ã+ã ã(ãrã.ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã|ã|ã0ã)ã ã+ã ã'ã</span>ã ã/ã ã'ã ã+ã ã(ãrã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã|ã|ã0ã)ã ã+ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<td class="py-5 px-8 text-right">ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã<span class="text-sm font-extrabold text-[#0B193C] bg-white border border-slatée-100 px-3 py-1.5 rounded-lg shadow-sm w-20 inline-block text-center">ã'ã ã+ã ãpãeãrãcã ã+ã ã'ã%ã</span>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</td>ã'ã ã+ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ã</tr>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãrãeãcãeãnãtã.ãlãeãnãgãtãhã ã=ã=ã=ã ã0ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãcãTãBã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<tr><td colspan="4" class="py-8 text-center text-[13px] text-slatée-400 font-bold">ãHãiãsãtãóãrãiãcãoã ãlãiãmãpãoã.ã</td></tr>ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãCãHãAãRãTãSã ãSãEãCãTãIãOãNã
-ã ã ã ã ã ã ã ã ã ã ã ã ãCãhãaãrãtã.ãdãeãfãaãuãlãtãsã.ãfãoãnãtã.ãfãaãmãiãlãyã ã=ã ã"ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã"ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãCãhãaãrãtã.ãdãeãfãaãuãlãtãsã.ãcãoãlãoãrã ã=ã ã"ã#ã9ã4ãAã3ãBã8ã"ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãBãaãrã ãCãhãaãrãtã ã(ãDãiãsãcãiãpãlãiãnãaãsã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãlãaãbãeãlãsãDãiãsãcã ã=ã ãdãiãsãcãAãrãrã.ãmãaãpã(ãdã ã=ã>ã ãdã.ãnãaãmãeã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãaãDãiãsãcã ã=ã ãdãiãsãcãAãrãrã.ãmãaãpã(ãdã ã=ã>ã ãpãaãrãsãeãFãlãoãaãtãéã(ãdã.ãpãeãrãcã.ãtãoãFãiãxãeãdã(ã1ã)ã)ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãhãaãrãtãDãiãsãcãIãnãsãtãaãnãcãeã)ã ãcãhãaãrãtãDãiãsãcãIãnãsãtãaãnãcãeã.ãdãeãsãtãrãoãyã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãtãxãDãiãsãcã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãcãhãaãrãtãDãiãsãcãiãpãlãiãnãeãsã'ã)ã.ãgãeãtãCãoãnãtãeãxãtã(ã'ã2ãdã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãhãaãrãtãDãiãsãcãIãnãsãtãaãnãcãeã ã=ã ãnãeãwã ãCãhãaãrãtã(ãcãtãxãDãiãsãcã,ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãyãpãeã:ã ã'ãbãaãrã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãaãbãeãlãsã:ã ãlãaãbãeãlãsãDãiãsãcã.ãlãeãnãgãtãhã ã?ã ãlãaãbãeãlãsãDãiãsãcã ã:ã ã[ã'ãGãeãnãéãrãiãcãoã'ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaãsãeãtãsã:ã ã[ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãaãbãeãlã:ã ã'ãTãaãxãaã ãdãeã ãAãcãeãrãtãoã ã(ã%ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaã:ã ãdãaãtãéãaãDãiãsãcã.ãlãeãnãgãtãhã ã?ã ãdãaãtãéãaãDãiãsãcã ã:ã ã[ã0ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdãCãoãlãoãrã:ã ã'ã#ã6ã3ã6ã6ãFã1ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrãRãaãdãiãuãsã:ã ã6ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãrãPãeãrãcãeãnãtãaãgãeã:ã ã0ã.ã6ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã]ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãoãpãtãiãoãnãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãpãoãnãsãiãvãeã:ã ãtãrãuãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãaãiãnãtãaãiãnãAãsãpãeãcãtãRãaãtãéãiãoã:ã ãfãaãlãsãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãlãuãgãiãnãsã:ã ã{ã ãlãeãgãeãnãdã:ã ã{ã ãdãiãsãpãlãaãyã:ã ãfãaãlãsãeã ã}ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãcãaãlãeãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãyã:ã ã{ã ãbãeãgãiãnãAãtãZãeãrãoã:ã ãtãrãuãeã,ã ãmãaãxã:ã ã1ã0ã0ã,ã ãgãrãiãdã:ã ã{ã ãbãoãrãdãeãrãDãaãsãhã:ã ã[ã4ã,ã4ã]ã,ã ãcãoãlãoãrã:ã ã'ã#ãFã1ãFã5ãFã9ã'ã ã}ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãxã:ã ã{ã ãgãrãiãdã:ã ã{ã ãdãiãsãpãlãaãyã:ã ãfãaãlãsãeã ã}ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãLãiãnãeã ãCãhãaãrãtã ã(ãEãvãoãlãuãçãããoã)ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãoãrãtãeãdãDãaãtãéãeãsã ã=ã ãOãbãjãeãcãtã.ãkãeãyãsã(ãdãaãtãéãeãDãaãtãéãaã)ã.ãsãoãrãtã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãeãvãoãLãaãbãeãlãsã ã=ã ãsãoãrãtãeãdãDãaãtãéãeãsã.ãmãaãpã(ãdã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpã ã=ã ãdã.ãsãpãlãiãtã(ã'ã-ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ãpã.ãlãeãnãgãtãhã=ã=ã=ã3ã ã?ã ãpã[ã2ã]ã+ã'ã/ã'ã+ãpã[ã1ã]ã ã:ã ãdã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãeãvãoãPãeãrãcãeãnãtãsã ã=ã ãsãoãrãtãeãdãDãaãtãéãeãsã.ãmãaãpã(ãdã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãoãbãjã ã=ã ãdãaãtãéãeãDãaãtãéãaã[ãdã]ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ãpãaãrãsãeãFãlãoãaãtãéã(ã(ã(ãoãbãjã.ãcãoãrãrãeãtãaãsã ã/ã ãoãbãjã.ãtãoãtãaãlã)ã ã*ã ã1ã0ã0ã)ã.ãtãoãFãiãxãeãdã(ã1ã)ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãhãaãrãtãEãvãoãlãIãnãsãtãaãnãcãeã)ã ãcãhãaãrãtãEãvãoãlãIãnãsãtãaãnãcãeã.ãdãeãsãtãrãoãyã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãtãxãEãvãoãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãcãhãaãrãtãEãvãoãlãuãtãiãoãnã'ã)ã.ãgãeãtãCãoãnãtãeãxãtã(ã'ã2ãdã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãhãaãrãtãEãvãoãlãIãnãsãtãaãnãcãeã ã=ã ãnãeãwã ãCãhãaãrãtã(ãcãtãxãEãvãoãlã,ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãyãpãeã:ã ã'ãlãiãnãeã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãaãbãeãlãsã:ã ãeãvãoãLãaãbãeãlãsã.ãlãeãnãgãtãhã ã?ã ãeãvãoãLãaãbãeãlãsã ã:ã ã[ã'ãSã1ã'ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaãsãeãtãsã:ã ã[ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãaãbãeãlã:ã ã'ãAãcãeãrãtãoãsã ãDãiãáãrãiãoãsã ã(ã%ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaã:ã ãeãvãoãPãeãrãcãeãnãtãsã.ãlãeãnãgãtãhã ã?ã ãeãvãoãPãeãrãcãeãnãtãsã ã:ã ã[ã0ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrãCãoãlãoãrã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdãCãoãlãoãrã:ã ã'ãrãgãbãaã(ã1ã1ã,ã ã2ã5ã,ã ã6ã0ã,ã ã0ã.ã0ã5ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãnãsãiãoãnã:ã ã0ã.ã4ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrãWãiãdãtãhã:ã ã3ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãiãlãlã:ã ãtãrãuãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãoãiãnãtãBãaãcãkãgãrãoãuãnãdãCãoãlãoãrã:ã ã'ã#ãfãfãfã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãoãiãnãtãBãoãrãdãeãrãCãoãlãoãrã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãoãiãnãtãBãoãrãdãeãrãWãiãdãtãhã:ã ã2ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãoãiãnãtãRãaãdãiãuãsã:ã ã4ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã]ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãoãpãtãiãoãnãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãpãoãnãsãiãvãeã:ã ãtãrãuãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãaãiãnãtãaãiãnãAãsãpãeãcãtãRãaãtãéãiãoã:ã ãfãaãlãsãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãlãuãgãiãnãsã:ã ã{ã ãlãeãgãeãnãdã:ã ã{ã ãdãiãsãpãlãaãyã:ãfãaãlãsãeã ã}ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãcãaãlãeãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãyã:ã ã{ã ãbãeãgãiãnãAãtãZãeãrãoã:ã ãtãrãuãeã,ã ãmãaãxã:ã ã1ã0ã0ã,ã ãgãrãiãdã:ã ã{ã ãbãoãrãdãeãrãDãaãsãhã:ã[ã4ã,ã4ã]ã,ã ãcãoãlãoãrã:ã'ã#ãFã1ãFã5ãFã9ã'ã ã}ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãxã:ã ã{ã ãgãrãiãdã:ã ã{ã ãdãiãsãpãlãaãyã:ã ãfãaãlãsãeã ã}ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã/ã/ã ãIãNãIãTã
-ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãDãOãMãCãoãnãtãeãnãtãLãoãaãdãeãdã'ã,ã ãpãrãoãcãeãsãsãAãnãdãRãeãnãdãeãrãDãaãsãhãbãoãaãrãdã)ã;ã
-ã
-ã ã ã ã ã</script>ã
-ã</body>ã
-ã</html>
+            <!-- Actions -->
+            <div class="flex justify-end mb-6">
+                
+                <button onclick="abrirModalAtividade()" class="bg-gradient-to-r from-sinapse-primary to-indigo-600 hover:shadow-lg hover:shadow-sinapse-primary/30 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center gap-3 text-[14px] uppercase tracking-wide group shrink-0 active:scale-95">
+                    <span class="material-symbols-outlined text-[20px] group-hover:rotate-90 transition-transform">add_circle</span>
+                    Lançar Nova Atividade
+                </button>
+            </div>
+
+            <!-- Panãorama Geral (Cards Elite) -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform group relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-slate-50 opacity-50 material-symbols-outlined text-[120px] pointer-events-none group-hover:scale-110 transition-transform">functions</div>
+                    <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1 relative z-10">Total de Questões</p>
+                    <h3 class="text-[44px] font-headline font-extrabold text-[#0B193C] leading-none tracking-tight relative z-10" id="kpiTotalQ">0</h3>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform group relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-emerald-50 opacity-40 material-symbols-outlined text-[120px] pointer-events-none group-hover:scale-110 transition-transform">check_circle</div>
+                    <p class="text-[10px] text-emerald-600 font-extrabold uppercase tracking-widest mb-1 relative z-10">Total de Acertos</p>
+                    <h3 class="text-[44px] font-headline font-extrabold text-emerald-600 leading-none tracking-tight relative z-10" id="kpiTotalA">0</h3>
+                </div>
+
+                <div class="bg-gradient-to-br from-[#0B193C] to-[#1a2b5e] rounded-3xl p-8 shadow-[0_20px_40px_-10px_rgba(11,25,60,0.3)] hover:-translate-y-1 transition-transform group relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-white opacity-[0.03] material-symbols-outlined text-[120px] pointer-events-none group-hover:scale-110 transition-transform">percent</div>
+                    <p class="text-[10px] text-blue-200 font-extrabold uppercase tracking-widest mb-1 relative z-10">Percentual Geral</p>
+                    <div class="flex items-baseline gap-1 relative z-10">
+                        <h3 class="text-[44px] font-headline font-extrabold text-white leading-none tracking-tight" id="kpiPercent">0.0</h3>
+                        <span class="text-2xl text-white/50 font-medium">%</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 transition-transform group relative overflow-hidden">
+                    <div class="absolute -right-6 -top-6 text-slate-50 opacity-50 material-symbols-outlined text-[120px] pointer-events-none group-hover:scale-110 transition-transform">history_edu</div>
+                    <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-1 relative z-10">Atividades Registradas</p>
+                    <h3 class="text-[44px] font-headline font-extrabold text-[#0B193C] leading-none tracking-tight relative z-10" id="kpiActivities">0</h3>
+                </div>
+            </div>
+
+            <!-- Insights Automáticos Stratégicos -->
+            <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4" id="insightsContainer">
+                <!-- Injetados por JS -->
+            </div>
+
+            
+            <!-- Filtro de Banca (Injetado) -->
+            <div class="flex flex-col md:flex-row justify-between items-center bg-white rounded-2xl p-6 border border-slate-100 shadow-sm mb-6 gap-4">
+                <div>
+                    <h3 class="font-headline font-extrabold text-[#0B193C] text-lg">Visão Analítica</h3>
+                    <p class="text-[12px] text-slate-400 font-medium">Filtre os dados por tipo de avaliação</p>
+                </div>
+                <select id="bancaFilterMetricas" onchange="processAndRenderDashboard()" class="bg-slate-50 border border-slate-200 text-[#0B193C] font-bold rounded-xl px-4 py-3 outline-none focus:border-sinapse-primary transition-all text-sm cursor-pointer shadow-sm min-w-[200px] appearance-none">
+                    <option value="ALL">Todas as Atividades (Geral)</option>
+                    <option value="ENEM">Apenas ENEM</option>
+                    <option value="SIMULADO">Apenas Simulados (Estilo ENEM)</option>
+                    <option value="FUVEST">Apenas FUVEST</option>
+                    <option value="UNICAMP">Apenas Unicamp</option>
+                    <option value="UNESP">Apenas UNESP</option>
+                    <option value="VEST-UNB">Apenas Vestibular UnB</option>
+                    <option value="PAS-UNB">Apenas PAS UnB</option>
+                    <option value="UFG">Apenas UFG</option>
+                    <option value="UEG">Apenas UEG</option>
+                    <option value="UFT">Apenas UFT</option>
+                </select>
+            </div>
+
+            <!-- Seção Analítica: Gráficos -->
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Desempenho por Disciplina -->
+                <div class="bg-white rounded-[32px] p-8 border border-slate-100 shadow-premium flex flex-col">
+                    <h2 class="font-headline text-2xl font-extrabold text-[#0B193C] mb-2">Aproveitamento (%) por Disciplina</h2>
+                    <p class="text-[13px] text-slate-500 font-medium mb-8">Taxa de acerto global separada por matéria</p>
+                    <div class="flex-1 w-full min-h-[300px] relative">
+                        <canvas id="chartDisciplines"></canvas>
+                    </div>
+                </div>
+
+                <!-- Evolução ao longo do tempo -->
+                <div class="bg-white rounded-[32px] p-8 border border-slate-100 shadow-premium flex flex-col">
+                    <h2 class="font-headline text-2xl font-extrabold text-[#0B193C] mb-2">Evolução de Acertos não Tempo</h2>
+                    <p class="text-[13px] text-slate-500 font-medium mb-8">Tendência visual da taxa de acerto nas últimas atéividades</p>
+                    <div class="flex-1 w-full min-h-[300px] relative">
+                        <canvas id="chartEvolution"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Melhores e Piores Disciplinas -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <!-- Top 3 -->
+                <div class="bg-white rounded-[32px] p-8 border border-slate-100 shadow-premium">
+                    <h2 class="font-headline text-xl font-extrabold text-[#0B193C] mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-emerald-500 icon-fill">arrow_upward</span>
+                        Melhores Disciplinas
+                    </h2>
+                    <div class="space-y-4" id="topDisciplinesContainer">
+                       <!-- JS -->
+                    </div>
+                </div>
+                <!-- Bottom 3 -->
+                <div class="bg-white rounded-[32px] p-8 border border-slate-100 shadow-premium">
+                    <h2 class="font-headline text-xl font-extrabold text-[#0B193C] mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-rose-500 icon-fill">arrow_downward</span>
+                        Atenção Prioritária
+                    </h2>
+                    <div class="space-y-4" id="bottomDisciplinesContainer">
+                        <!-- JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFORMANCE POR ASSUNTO -->
+            <div class="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-premium relative">
+                <div class="p-8 border-b border-slate-50 bg-white/50 backdrop-blur-md sticky top-0 z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                    <div>
+                        <h2 class="font-headline text-2xl font-extrabold text-[#0B193C]">Performance por Assunto</h2>
+                        <p class="text-[13px] text-slate-500 font-medium mt-1">Nível de domínio nãos tópicos estudados</p>
+                    </div>
+                    <div class="flex gap-2">
+                        <span class="text-[9px] font-extrabold text-emerald-700 bg-emerald-50 px-2 py-1 rounded uppercase">Excelente (+90)</span>
+                        <span class="text-[9px] font-extrabold text-blue-700 bg-blue-50 px-2 py-1 rounded uppercase">Bom (80-89)</span>
+                        <span class="text-[9px] font-extrabold text-amber-700 bg-amber-50 px-2 py-1 rounded uppercase">Atenção (70-79)</span>
+                        <span class="text-[9px] font-extrabold text-rose-700 bg-rose-50 px-2 py-1 rounded uppercase">Revisar (<70)</span>
+                    </div>
+                </div>
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left border-collapse whitespace-nãowrap min-w-[700px]">
+                        <thead>
+                            <tr class="text-[10px] text-slate-400 uppercase tracking-widest bg-slate-50/50">
+                                <th class="py-4 px-8 font-bold">Disciplina</th>
+                                <th class="py-4 px-8 font-bold w-1/3">Conteúdo / Assunto</th>
+                                <th class="py-4 px-8 font-bold text-center">Questões</th>
+                                <th class="py-4 px-8 font-bold text-center">Acertos</th>
+                                <th class="py-4 px-8 font-bold text-right">Taxa de Acerto</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-[14px]" id="subjectPerformanceTable">
+                            <!-- JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Histórico Recente -->
+            <div class="bg-white rounded-[32px] overflow-hidden border border-slate-100 shadow-premium mt-10">
+                 <div class="p-8 border-b border-slate-50">
+                    <h2 class="font-headline text-xl font-extrabold text-[#0B193C]">Atividades Recentes</h2>
+                    <p class="text-[13px] text-slate-500 font-medium mt-1">Últimos registros computados na plataforma</p>
+                </div>
+                <div class="overflow-x-auto w-full">
+                    <table class="w-full text-left border-collapse whitespace-nãowrap">
+                        <thead>
+                            <tr class="text-[10px] text-slate-400 uppercase tracking-widest border-b border-slate-50">
+                                <th class="py-4 px-8 font-bold">Data</th>
+                                <th class="py-4 px-8 font-bold">Matéria & Assunto</th>
+                                <th class="py-4 px-8 font-bold text-center">Desempenho</th>
+                                <th class="py-4 px-8 font-bold text-right">Percentual</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentHistoryTable" class="text-[13px]">
+                            <!-- JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="h-10"></div>
+        </div>
+    </main>
+
+    <!-- MODAL DE LANÇAMENTO -->
+    <div id="modalAtividade" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalAtividade()"></div>
+        
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-xl bg-white rounded-[32px] shadow-2xl overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col" id="modalAtividadeContent" style="max-height: 90vh;">
+            
+            <div class="p-8 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10 w-full">
+                <h3 class="font-headline text-xl font-extrabold text-[#0B193C] flex items-center gap-3">
+                    <span class="material-symbols-outlined text-sinapse-primary icon-fill">assignment_add</span>
+                    Registrar Atividade
+                </h3>
+                <button onclick="fecharModalAtividade()" class="text-slate-400 hover:text-rose-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="formAtividade" class="p-8 space-y-6 overflow-y-auto" onsubmit="event.preventDefault(); handleSaveActivity(event)">
+                
+                <div class="grid grid-cols-1 gap-5">
+                    <!-- MATÉRIA -->
+                    <div class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">MATÉRIA</label>
+                        <select id="modalMaté" class="hidden"></select>
+                        <div id="mCustomDisciplinaWrap" class="relative">
+                            <button type="button" id="mCustomDisciplinaBtn" onclick="mToggleDropdown('Disciplina')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="mCustomDisciplinaLabel">SELECIONE A MATÉRIA</span>
+                                <svg id="mCustomDisciplinaArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="mCustomDisciplinaList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                    </div>
+                    <!-- ASSUNTO -->
+                    <div class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">ASSUNTO</label>
+                        <select id="modalAss" class="hidden"></select>
+                        <div id="mCustomAssuntoWrap" class="relative">
+                            <button type="button" id="mCustomAssuntoBtn" onclick="mToggleDropdown('Assunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="mCustomAssuntoLabel">SELECIONE A MATÉRIA PRIMEIRO...</span>
+                                <svg id="mCustomAssuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="mCustomAssuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                        <input id="mAssuntoTexto" type="text" placeholder="DIGITE O ASSUNTO..." oninput="this.value=this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm hover:border-indigo-200 uppercase hidden">
+                    </div>
+                    <!-- SUBASSUNTO -->
+                    <div id="mWrapSubassunto" class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">SUBASSUNTO</label>
+                        <select id="modalSub" class="hidden"></select>
+                        <div id="mCustomSubassuntoWrap" class="relative">
+                            <button type="button" id="mCustomSubassuntoBtn" onclick="mToggleDropdown('Subassunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="mCustomSubassuntoLabel">SELECIONE O ASSUNTO PRIMEIRO...</span>
+                                <svg id="mCustomSubassuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="mCustomSubassuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Datéa Base</label>
+                    <input id="modalDatéa" required type="date" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 outline-none focus:border-sinapse-primary transition-all font-medium">
+                </div>
+
+                <div class="grid grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block relative">Total de Questões</label>
+                        <input id="modalTot" required type="number" min="1" placeholder="Ex: 30" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 outline-none focus:border-sinapse-primary transition-all font-bold text-lg text-center">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block text-emerald-600">Total de Acertos</label>
+                        <input id="modalCert" required type="number" min="0" placeholder="Ex: 25" class="w-full bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl px-4 py-3 outline-none focus:border-emerald-500 transition-all font-bold text-lg text-center placeholder:text-emerald-300">
+                    </div>
+                </div>
+                
+                <div id="modalError" class="text-rose-500 text-xs font-bold hidden text-center">Os acertos não podem ultrapassar o total de questões.</div>
+
+                <div class="pt-4 mt-8 border-t border-slate-100 flex justify-end">
+                    <button type="submit" class="bg-[#0B193C] hover:bg-[#112350] text-white px-8 py-3.5 rounded-xl font-bold shadow-premium-hover transition-all text-[13px] uppercase tracking-wider w-full md:w-auto">
+                        Salvar Registro
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- LOGIC SCRIPT INTEGRATION -->
+    <script>
+        // ══════════════════════════════════════════════
+        // DROPDOWN CASCATA — Matéria → Assunto → Subassunto (espelho do Planejamento)
+        // ══════════════════════════════════════════════
+        function mToggleDropdown(nome) {
+            ['Disciplina','Assunto','Subassunto'].forEach(n => {
+                if (n !== nome) {
+                    const l = document.getElementById('mCustom' + n + 'List');
+                    const a = document.getElementById('mCustom' + n + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+            const list = document.getElementById('mCustom' + nome + 'List');
+            const arrow = document.getElementById('mCustom' + nome + 'Arrow');
+            if (!list) return;
+            const isHidden = list.classList.contains('hidden');
+            if (isHidden) { list.classList.remove('hidden'); arrow.style.transform = 'rotate(180deg)'; }
+            else { list.classList.add('hidden'); arrow.style.transform = 'rotate(0deg)'; }
+        }
+
+        function mSelectItem(nome, selectId, value, label) {
+            const sel = document.getElementById(selectId);
+            if (sel) sel.value = value;
+            document.getElementById('mCustom' + nome + 'Label').textContent = label || value;
+            document.getElementById('mCustom' + nome + 'List').classList.add('hidden');
+            document.getElementById('mCustom' + nome + 'Arrow').style.transform = 'rotate(0deg)';
+            document.querySelectorAll('#mCustom' + nome + 'List div').forEach(d => {
+                d.classList.remove('bg-indigo-50','text-sinapse-primary');
+                d.classList.add('text-[#0B193C]');
+            });
+            const selected = document.querySelector(`#mCustom${nome}List div[data-value="${value}"]`);
+            if (selected) { selected.classList.add('bg-indigo-50','text-sinapse-primary'); selected.classList.remove('text-[#0B193C]'); }
+            if (sel) sel.dispatchEvent(new Event('change'));
+        }
+
+        function mBuildList(nome, items, selectId, specialItems) {
+            const list = document.getElementById('mCustom' + nome + 'List');
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.setAttribute('data-value', item);
+                div.className = 'px-4 py-2.5 text-sm font-bold text-[#0B193C] cursor-pointer hover:bg-indigo-50 hover:text-sinapse-primary transition-colors';
+                div.textContent = item;
+                div.onclick = function() { mSelectItem(nome, selectId, item, item); };
+                list.appendChild(div);
+            });
+            if (specialItems) {
+                specialItems.forEach(si => {
+                    const div = document.createElement('div');
+                    div.setAttribute('data-value', si.value);
+                    div.className = 'px-4 py-2.5 text-sm font-extrabold cursor-pointer hover:bg-blue-50 transition-colors';
+                    div.style.color = '#1E40AF';
+                    div.textContent = si.label;
+                    div.onclick = function() { mSelectItem(nome, selectId, si.value, si.label); };
+                    list.appendChild(div);
+                });
+            }
+        }
+
+        // Fechar ao clicar fora
+        document.addEventListener('click', function(e) {
+            ['Disciplina','Assunto','Subassunto'].forEach(nome => {
+                const wrap = document.getElementById('mCustom' + nome + 'Wrap');
+                if (wrap && !wrap.contains(e.target)) {
+                    const l = document.getElementById('mCustom' + nome + 'List');
+                    const a = document.getElementById('mCustom' + nome + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        function mPopularMaterias() {
+            if (typeof listaMaterias === 'undefined') return;
+            mBuildList('Disciplina', listaMaterias, 'modalMaté');
+        }
+
+        function mPopularAssuntos(materia) {
+            const assSel = document.getElementById('modalAss');
+            const subSel = document.getElementById('modalSub');
+            if (assSel) assSel.innerHTML = '';
+            if (subSel) subSel.innerHTML = '';
+            document.getElementById('mCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+            document.getElementById('mCustomSubassuntoList').innerHTML = '';
+
+            if (materia && materiaHierarquia[materia]) {
+                const assuntos = Object.keys(materiaHierarquia[materia]);
+                document.getElementById('mCustomAssuntoLabel').textContent = 'SELECIONE O ASSUNTO';
+                mBuildList('Assunto', assuntos, 'modalAss', [{value:'__OUTROS__', label:'✏️ OUTROS (DIGITAR)'}]);
+            } else {
+                document.getElementById('mCustomAssuntoLabel').textContent = 'SELECIONE A MATÉRIA PRIMEIRO...';
+                document.getElementById('mCustomAssuntoList').innerHTML = '';
+            }
+        }
+
+        function mPopularSubassuntos(materia, assunto) {
+            const subSel = document.getElementById('modalSub');
+            if (!subSel) return;
+            subSel.innerHTML = '';
+
+            if (materia && assunto && materiaHierarquia[materia] && materiaHierarquia[materia][assunto]) {
+                const subs = materiaHierarquia[materia][assunto];
+                document.getElementById('mCustomSubassuntoLabel').textContent = 'SELECIONE O SUBASSUNTO';
+                mBuildList('Subassunto', subs, 'modalSub');
+            } else {
+                document.getElementById('mCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+                document.getElementById('mCustomSubassuntoList').innerHTML = '';
+            }
+        }
+
+        function mResetDropdowns() {
+            document.getElementById('modalMaté').value = '';
+            document.getElementById('modalAss').value = '';
+            document.getElementById('modalSub').value = '';
+            document.getElementById('mCustomDisciplinaLabel').textContent = 'SELECIONE A MATÉRIA';
+            document.getElementById('mCustomAssuntoLabel').textContent = 'SELECIONE A MATÉRIA PRIMEIRO...';
+            document.getElementById('mCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+            document.getElementById('mCustomAssuntoList').innerHTML = '';
+            document.getElementById('mCustomSubassuntoList').innerHTML = '';
+            const assTexto = document.getElementById('mAssuntoTexto');
+            if (assTexto) { assTexto.classList.add('hidden'); assTexto.value = ''; }
+            document.getElementById('mCustomAssuntoWrap').classList.remove('hidden');
+            document.getElementById('mWrapSubassunto').classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            mPopularMaterias();
+
+            // Listener Matéria → Assunto
+            const discSel = document.getElementById('modalMaté');
+            if (discSel) {
+                discSel.addEventListener('change', (e) => {
+                    const val = e.target.value;
+                    const assWrap = document.getElementById('mCustomAssuntoWrap');
+                    const assTxt = document.getElementById('mAssuntoTexto');
+                    const wrapSub = document.getElementById('mWrapSubassunto');
+                    assWrap.classList.remove('hidden');
+                    assTxt.classList.add('hidden');
+                    wrapSub.classList.remove('hidden');
+                    mPopularAssuntos(val);
+                });
+            }
+
+            // Listener Assunto → Subassunto
+            const assSel = document.getElementById('modalAss');
+            if (assSel) {
+                assSel.addEventListener('change', (e) => {
+                    const materia = document.getElementById('modalMaté').value;
+                    const assWrap = document.getElementById('mCustomAssuntoWrap');
+                    const assTxt = document.getElementById('mAssuntoTexto');
+                    const wrapSub = document.getElementById('mWrapSubassunto');
+
+                    if (e.target.value === '__OUTROS__') {
+                        assWrap.classList.add('hidden');
+                        assTxt.classList.remove('hidden');
+                        assTxt.value = '';
+                        assTxt.focus();
+                        wrapSub.classList.add('hidden');
+                    } else {
+                        assWrap.classList.remove('hidden');
+                        assTxt.classList.add('hidden');
+                        wrapSub.classList.remove('hidden');
+                        mPopularSubassuntos(materia, e.target.value);
+                    }
+                });
+            }
+        });
+
+        // Set today on date picker
+        document.getElementById('modalDatéa').valueAsDate = new Date();
+
+        function abrirModalAtividade() {
+            document.getElementById('modalDatéa').valueAsDate = new Date();
+            const modal = document.getElementById('modalAtividade');
+            const content = document.getElementById('modalAtividadeContent');
+            document.getElementById('modalError').classList.add('hidden');
+            modal.classList.remove('hidden');
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function fecharModalAtividade() {
+            const modal = document.getElementById('modalAtividade');
+            const content = document.getElementById('modalAtividadeContent');
+            
+            modal.classList.add('opacity-0');
+            content.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        function handleSaveActivity(e) {
+            const maté = document.getElementById('modalMaté').value;
+            // Assunto: pode vir do dropdown OU do input de texto
+            const assTexto = document.getElementById('mAssuntoTexto');
+            let ass = '';
+            if (assTexto && !assTexto.classList.contains('hidden')) {
+                ass = assTexto.value.trim();
+            } else {
+                ass = document.getElementById('modalAss').value;
+            }
+            const sub = document.getElementById('modalSub') ? document.getElementById('modalSub').value : '';
+            const datéa = document.getElementById('modalDatéa').value;
+            const tot = parseInt(document.getElementById('modalTot').value) || 0;
+            const cert = parseInt(document.getElementById('modalCert').value) || 0;
+
+            if (!maté) return alert("Selecione uma matéria.");
+            if (!ass) return alert("Selecione ou digite um assunto.");
+            if (tot === 0) return alert("Insira pelo menos 1 questão.");
+            if (cert > tot) {
+                document.getElementById('modalError').classList.remove('hidden');
+                return;
+            }
+
+            const perc = (cert / tot) * 100;
+            const fullSubject = sub ? ass + ' — ' + sub : ass;
+
+            window.db.insert('metrics_entries', {
+                user_id: 1,
+                discipline: maté,
+                subject: fullSubject,
+                created_até: datéa + 'T20:00:00.000Z', 
+                questions_total: tot,
+                correct_answers: cert,
+                wrong_answers: tot - cert,
+                accuracy_percentage: perc,
+                study_time_minutes: 0
+            });
+
+            // Reset modal
+            document.getElementById('formAtividade').reset();
+            mResetDropdowns();
+            fecharModalAtividade();
+            processAndRenderDashboard();
+        }
+
+        // Global Chart instances to destroy before rendering again
+        let chartDiscInstance = null;
+        let chartEvolInstance = null;
+
+        function processAndRenderDashboard() {
+            const entries = window.db.get('metrics_entries') || [];
+            
+            // KPI Variables
+            let globalTotal = 0;
+            let globalCorrects = 0;
+            
+            // Discipline Aggregatéion
+            let discDatéa = {};
+            let subjectDatéa = {};
+            
+            // Evolution Aggregatéion (by date)
+            let dateDatéa = {};
+
+
+            const bancaFiltro = document.getElementById('bancaFilterMetricas') ? document.getElementById('bancaFilterMetricas').value : 'ALL';
+            
+            // Filter metrics_entries (only apply filter if it's ALL, else we ignãore avulse questions unless appropriatée)
+            const filteredEntries = bancaFiltro === 'ALL' ? entries : [];
+
+            filteredEntries.forEach(e => {
+                const total = Number(e.questions_total || 0);
+                const acertos = Number(e.correct_answers || 0);
+                
+                globalTotal += total;
+                globalCorrects += acertos;
+
+                // Discipline
+                if (!discDatéa[e.discipline]) discDatéa[e.discipline] = { total: 0, corretas: 0 };
+                discDatéa[e.discipline].total += total;
+                discDatéa[e.discipline].corretas += acertos;
+
+                // Subject
+                const subKey = e.discipline + '::' + e.subject;
+                if (!subjectDatéa[subKey]) subjectDatéa[subKey] = { discipline: e.discipline, subject: e.subject, total: 0, corretas: 0 };
+                subjectDatéa[subKey].total += total;
+                subjectDatéa[subKey].corretas += acertos;
+
+                // Evolution (by unique date)
+                if(e.created_até) {
+                    const dateKey = e.created_até.split('T')[0]; 
+                    if (!dateDatéa[dateKey]) dateDatéa[dateKey] = { total: 0, corretas: 0 };
+                    dateDatéa[dateKey].total += total;
+                    dateDatéa[dateKey].corretas += acertos;
+                }
+            });
+
+            // INTEGRAÇÃO: PROVAS (TODAS AS BANCAS MAPPED)
+            const exams = window.db.get('exams') || [];
+            
+            exams.forEach(ex => {
+                // Remove PAS postfixes for filtering
+                let exBanca = ex.banca;
+                if(exBanca && exBanca.startsWith('PAS-UNB')) exBanca = 'PAS-UNB';
+                
+                if(bancaFiltro !== 'ALL' && exBanca !== bancaFiltro) return;
+                
+                const processArea = (matéeria, notaVal, maxQtd) => {
+                    if (notaVal !== undefined && notaVal !== null && notaVal !== '') {
+                        const nota = parseInt(notaVal);
+                        if(isNaN(nota)) return;
+                        
+                        globalTotal += maxQtd;
+                        globalCorrects += nota;
+
+                        if (!discDatéa[matéeria]) discDatéa[matéeria] = { total: 0, corretas: 0 };
+                        discDatéa[matéeria].total += maxQtd;
+                        discDatéa[matéeria].corretas += nota;
+
+                        if (ex.created_até) {
+                            const dateKey = ex.created_até.split('T')[0];
+                            if (!dateDatéa[dateKey]) dateDatéa[dateKey] = { total: 0, corretas: 0 };
+                            dateDatéa[dateKey].total += maxQtd;
+                            dateDatéa[dateKey].corretas += nota;
+                        }
+                    }
+                };
+
+                // Routing By Exam Board
+                if(exBanca === 'ENEM' || exBanca === 'SIMULADO') {
+                    processArea('Linguagens', ex.notaLin, 45);
+                    processArea('Humanas', ex.notaHum, 45);
+                    processArea('Natéureza', ex.notaNaté, 45);
+                    processArea('Matemática', ex.notaMaté, 45);
+                } 
+                else if(exBanca === 'UNICAMP') {
+                    processArea('Matemática', ex.notaU_Maté, 12);
+                    processArea('Linguagens', (parseInt(ex.notaU_Port)||0) + (parseInt(ex.notaU_Ing)||0), 20); // 13 pt + 7 ing
+                    processArea('Humanas', ex.notaU_Hum, 23);
+                    processArea('Natéureza', ex.notaU_Naté, 22);
+                }
+                else if(exBanca === 'FUVEST') {
+                    processArea('Gerais (FUVEST)', ex.notaFuvest, 90);
+                }
+                else if(exBanca === 'UNESP') {
+                    processArea('Gerais (UNESP)', ex.notaUnesp, 90);
+                }
+                else if(exBanca === 'VEST-UNB') {
+                    processArea('Linguagens', ex.notaV_LE, 30); // aprox
+                    processArea('Humanas', ex.notaV_Hum, 120);
+                    processArea('Ciências e Exatéas', ex.notaV_Exa, 150);
+                }
+                else if(exBanca === 'PAS-UNB') {
+                    processArea('Línguas', ex.notaP_LE, 10);
+                    processArea('Exatéas e Humanas', ex.notaP_ExaHum, 110);
+                }
+                else if(exBanca === 'UFG') {
+                    processArea('Linguagens', ex.notaUFG_Lin, 30);
+                    processArea('Natéureza', ex.notaUFG_Naté, 30);
+                    processArea('Matemática', ex.notaUFG_Maté, 30);
+                }
+                else if(exBanca === 'UEG') {
+                    processArea('Gerais (UEG)', ex.notaUEG, 52);
+                }
+                else if(exBanca === 'UFT') {
+                    processArea('Linguagens', ex.notaUFT_Lin, 24);
+                    processArea('Matemática', ex.notaUFT_Maté, 8);
+                    processArea('Humanas', ex.notaUFT_Hum, 16);
+                    processArea('Natéureza', ex.notaUFT_Naté, 16);
+                }
+            });
+
+            // INTEGRAÇÃO GLOBAL: BANCO DE QUESTÕES AVULSAS
+            if(bancaFiltro === 'ALL') {
+                const bqHits = parseInt(localStorage.getItem('sinapse_hits') || '0', 10);
+                const bqMisses = parseInt(localStorage.getItem('sinapse_misses') || '0', 10);
+                if(bqHits > 0 || bqMisses > 0) {
+                    globalTotal += (bqHits + bqMisses);
+                    globalCorrects += bqHits;
+                    // Não adicionamos às matérias pois o banco geral avulso não tem a disc vinculada retroatéivamente
+                }
+            }
+
+            // UPDATE KPIs
+            document.getElementById('kpiTotalQ').innerText = globalTotal.toLocaleString();
+            document.getElementById('kpiTotalA').innerText = globalCorrects.toLocaleString();
+            document.getElementById('kpiPercent').innerText = globalTotal > 0 ? ((globalCorrects/globalTotal)*100).toFixed(1) : "0.0";
+            document.getElementById('kpiActivities').innerText = entries.length.toLocaleString();
+
+            // Discipline Statés (Array)
+            let discArr = [];
+            for (let d in discDatéa) {
+                if (discDatéa[d].total > 0) {
+                    discArr.push({
+                        name: d,
+                        total: discDatéa[d].total,
+                        acertos: discDatéa[d].corretas,
+                        perc: (discDatéa[d].corretas / discDatéa[d].total) * 100
+                    });
+                }
+            }
+            // Sort Descending by perc
+            discArr.sort((a,b) => b.perc - a.perc);
+
+            // INSIGHTS AUTOMÁTICOS
+            const insightsC = document.getElementById('insightsContainer');
+            insightsC.innerHTML = '';
+            
+            const createInsight = (ico, color, title, desc) => {
+                return '<div class="bg-white p-5 rounded-2xl border border-slate-100 flex items-center gap-4 hover:shadow-md transition-shadow">' +
+                    '<div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style="background-color: ' + color + '15; color: ' + color + ';">' +
+                        '<span class="material-symbols-outlined text-[20px] icon-fill">' + ico + '</span>' +
+                    '</div>' +
+                    '<div>' +
+                        '<h4 class="text-[10px] font-extrabold uppercase tracking-widest text-[#0B193C] mb-0.5">' + title + '</h4>' +
+                        '<p class="text-[12px] font-semibold text-slate-500 leading-snug">' + desc + '</p>' +
+                    '</div>' +
+                '</div>';
+            };
+
+            if (discArr.length > 0) {
+                const best = discArr[0];
+                const worst = discArr[discArr.length - 1];
+                
+                insightsC.innerHTML += createInsight('emoji_events', '#10B981', 'Seu Domínio Ouro', 'Seu melhor desempenho atéual está em <b>' + best.name + '</b> com <b>'+ best.perc.toFixed(1) + '%</b>.');
+                
+                if(worst.perc < 70 && worst.name !== best.name) {
+                     insightsC.innerHTML += createInsight('warning', '#F43F5E', 'Alerta Estratégico', 'Atenção: <b>' + worst.name + '</b> exige reforço imediatéo ('+worst.perc.toFixed(1)+'%).');
+                } else if(worst.name !== best.name) {
+                     insightsC.innerHTML += createInsight('trending_up', '#3B82F6', 'Constância', 'O desempenho base em <b>' + worst.name + '</b> está seguro, foco na continuidade.');
+                }
+                
+                // Extra info: volumes
+                let volArr = [...discArr].sort((a,b) => b.total - a.total);
+                if(volArr[0].total > 20) {
+                    insightsC.innerHTML += createInsight('local_fire_department', '#F59E0B', 'Maior Volume', 'Você foca bastante em <b>' + volArr[0].name +'</b> (' + volArr[0].total + ' q).');
+                }
+                
+            } else {
+                 insightsC.innerHTML = '<div class="col-span-full p-6 bg-slate-50 rounded-xl text-center text-[13px] font-bold text-slate-400 shadow-inner">Nenhum dado lançado. Registre atéividades para visualizar análises de mentoria avançada.</div>';
+            }
+
+            // TOP 3 & BOTTOM 3 
+            const topC = document.getElementById('topDisciplinesContainer');
+            const botC = document.getElementById('bottomDisciplinesContainer');
+            topC.innerHTML = ''; botC.innerHTML = '';
+
+            const createDiscRow = (item, colorClass) => {
+                return '<div class="flex items-center justify-between p-4 bg-slate-50 rounded-xl hover:bg-slate-100 transition-colors">' +
+                    '<span class="font-bold text-[#0B193C] text-[15px]">' + item.name + '</span>' +
+                    '<div class="flex items-center gap-5">' +
+                        '<div class="text-right">' +
+                            '<p class="text-[9px] font-extrabold text-slate-400 uppercase">Acertos</p>' +
+                            '<p class="text-xs font-bold text-slate-600">' + item.acertos + '/' + item.total + '</p>' +
+                        '</div>' +
+                        '<span class="text-sm w-16 text-center font-extrabold ' + colorClass + ' bg-white px-3 py-1.5 rounded-lg border border-slate-100 shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)]">' + item.perc.toFixed(0) + '%</span>' +
+                    '</div>' +
+                '</div>';
+            };
+
+            const tops = discArr.slice(0, 3);
+            const bots = [...discArr].reverse().slice(0, 3).filter(x => !tops.find(t=>t.name === x.name) || discArr.length < 2);
+            
+            tops.forEach(t => topC.innerHTML += createDiscRow(t, 'text-emerald-600'));
+            if(bots.length > 0) bots.forEach(b => botC.innerHTML += createDiscRow(b, 'text-rose-600'));
+            else botC.innerHTML = '<p class="text-[13px] text-slate-400 font-bold p-2">Sem zonas de risco detectadas.</p>';
+
+            // SUBJECT PERFORMANCE
+            let subArr = [];
+            for (let k in subjectDatéa) {
+                if (subjectDatéa[k].total > 0) {
+                    subArr.push({
+                        ...subjectDatéa[k],
+                        perc: (subjectDatéa[k].corretas / subjectDatéa[k].total) * 100
+                    });
+                }
+            }
+            subArr.sort((a,b) => b.perc - a.perc);
+            
+            const subTB = document.getElementById('subjectPerformanceTable');
+            subTB.innerHTML = '';
+            
+            subArr.forEach(s => {
+                let badge = '';
+                if(s.perc >= 90) badge = '<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-emerald-50 text-emerald-700 rounded-md uppercase border border-emerald-100 shadow-sm">Excelente</span>';
+                else if(s.perc >= 80) badge = '<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-blue-50 text-blue-700 rounded-md uppercase border border-blue-100 shadow-sm">Bom</span>';
+                else if(s.perc >= 70) badge = '<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-amber-50 text-amber-700 rounded-md uppercase border border-amber-100 shadow-sm">Atenção</span>';
+                else badge = '<span class="text-[10px] w-20 text-center font-extrabold px-2 py-1 bg-rose-50 text-rose-700 rounded-md uppercase border border-rose-100 shadow-sm">Revisar</span>';
+
+                subTB.innerHTML += '<tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50/50 transition-colors">' +
+                    '<td class="py-5 px-8 font-extrabold text-[#0B193C]">' + s.discipline + '</td>' +
+                    '<td class="py-5 px-8 font-semibold text-slate-500">' + s.subject + '</td>' +
+                    '<td class="py-5 px-8 font-bold text-center text-slate-500">' + s.total + '</td>' +
+                    '<td class="py-5 px-8 font-bold text-center text-emerald-600">' + s.corretas + '</td>' +
+                    '<td class="py-5 px-8 text-right">' +
+                        '<div class="flex items-center justify-end gap-4">' +
+                            '<span class="font-headline font-extrabold text-[#0B193C] text-[16px]">' + s.perc.toFixed(1) + '%</span>' +
+                            badge +
+                        '</div>' +
+                    '</td>' +
+                '</tr>';
+            });
+            if(subArr.length === 0) {
+                 subTB.innerHTML = '<tr><td colspan="5" class="py-8 text-center text-[13px] text-slate-400 font-bold">Nenhuma atéividade localizada. Lance um nãovo resultado para gerar cálculos.</td></tr>';
+            }
+
+            // RECENT HISTORY
+            const recTB = document.getElementById('recentHistoryTable');
+            recTB.innerHTML = '';
+            const recent = [...entries].reverse().slice(0, 10);
+            
+            recent.forEach(r => {
+                let fmtDate = "N/A";
+                if(r.created_até) {
+                    const dateParts = r.created_até.split('T')[0].split('-');
+                    fmtDate = dateParts.length === 3 ? dateParts[2]+'/'+dateParts[1] : r.created_até;
+                }
+                const perc = r.questions_total > 0 ? ((r.correct_answers / r.questions_total)*100).toFixed(1) : "0.0";
+                
+                recTB.innerHTML += '<tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50/50">' +
+                    '<td class="py-5 px-8 text-xs font-bold text-slate-400">' + fmtDate + '</td>' +
+                    '<td class="py-5 px-8">' +
+                        '<span class="block font-bold text-[#0B193C] text-[14px] leading-tight">' + (r.discipline||'') + '</span>' +
+                        '<span class="block text-[11px] text-slate-400 font-semibold">' + (r.subject||'') + '</span>' +
+                    '</td>' +
+                    '<td class="py-5 px-8 text-center text-[13px] font-bold text-slate-500">' +
+                        '<span class="text-emerald-500">' + (r.correct_answers||0) + '</span> / ' + (r.questions_total||0) + 
+                    '</td>' +
+                    '<td class="py-5 px-8 text-right">' +
+                        '<span class="text-sm font-extrabold text-[#0B193C] bg-white border border-slate-100 px-3 py-1.5 rounded-lg shadow-sm w-20 inline-block text-center">' + perc + '%</span>' +
+                    '</td>' +
+                '</tr>';
+            });
+            if(recent.length === 0) {
+                 recTB.innerHTML = '<tr><td colspan="4" class="py-8 text-center text-[13px] text-slate-400 font-bold">Histórico limpo.</td></tr>';
+            }
+
+            // CHARTS SECTION
+            Chart.defaults.font.family = "'Inter', sans-serif";
+            Chart.defaults.color = "#94A3B8";
+
+            // Bar Chart (Disciplinas)
+            const labelsDisc = discArr.map(d => d.name);
+            const datéaDisc = discArr.map(d => parseFloaté(d.perc.toFixed(1)));
+            
+            if(chartDiscInstance) chartDiscInstance.destroy();
+            const ctxDisc = document.getElementById('chartDisciplines').getContext('2d');
+            chartDiscInstance = new Chart(ctxDisc, {
+                type: 'bar',
+                datéa: {
+                    labels: labelsDisc.length ? labelsDisc : ['Genérico'],
+                    datéasets: [{
+                        label: 'Taxa de Acerto (%)',
+                        datéa: datéaDisc.length ? datéaDisc : [0],
+                        backgroundColor: '#6366F1',
+                        borderRadius: 6,
+                        barPercentage: 0.6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatéio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, grid: { borderDash: [4,4], color: '#F1F5F9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Line Chart (Evolução)
+            const sortedDates = Object.keys(dateDatéa).sort();
+            const evoLabels = sortedDates.map(d => {
+                const p = d.split('-');
+                return p.length===3 ? p[2]+'/'+p[1] : d;
+            });
+            const evoPercents = sortedDates.map(d => {
+                const obj = dateDatéa[d];
+                return parseFloaté(((obj.corretas / obj.total) * 100).toFixed(1));
+            });
+
+            if(chartEvolInstance) chartEvolInstance.destroy();
+            const ctxEvol = document.getElementById('chartEvolution').getContext('2d');
+            chartEvolInstance = new Chart(ctxEvol, {
+                type: 'line',
+                datéa: {
+                    labels: evoLabels.length ? evoLabels : ['S1'],
+                    datéasets: [{
+                        label: 'Acertos Diários (%)',
+                        datéa: evoPercents.length ? evoPercents : [0],
+                        borderColor: '#0B193C',
+                        backgroundColor: 'rgba(11, 25, 60, 0.05)',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        fill: true,
+                        pointBackgroundColor: '#fff',
+                        pointBorderColor: '#0B193C',
+                        pointBorderWidth: 2,
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatéio: false,
+                    plugins: { legend: { display:false } },
+                    scales: {
+                        y: { beginAtZero: true, max: 100, grid: { borderDash:[4,4], color:'#F1F5F9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', processAndRenderDashboard);
+
+    </script>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            const topBar = document.getElementById('topHeaderBar');
+            aside.classList.toggle('sidebar-hidden');
+            const isHidden = aside.classList.contains('sidebar-hidden');
+            if (isHidden) {
+                topBar.classList.remove('hidden');
+            } else {
+                topBar.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
 
 
 

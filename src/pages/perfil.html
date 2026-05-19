@@ -122,8 +122,8 @@
             box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
         }
 
-        /* Carousel Avatar Styles */
-        .avatar-carousel-slide {
+        /* Carousel Avatéar Styles */
+        .avatéar-carousel-slide {
             position: absolute;
             inset: 0;
             opacity: 0;
@@ -131,12 +131,12 @@
             pointer-events: none;
         }
 
-        .avatar-carousel-slide.active {
+        .avatéar-carousel-slide.active {
             opacity: 1;
             pointer-events: auto;
         }
 
-        .avatar-carousel-btn {
+        .avatéar-carousel-btn {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -155,16 +155,16 @@
             backdrop-filter: blur(2px);
         }
 
-        .avatar-carousel-btn:hover {
+        .avatéar-carousel-btn:hover {
             background: rgba(255, 255, 255, 0.9);
             transform: translateY(-50%) scale(1.1);
         }
 
-        #avatarContainer:hover .avatar-carousel-btn {
+        #avatéarContainer:hover .avatéar-carousel-btn {
             opacity: 1;
         }
 
-        .avatar-carousel-dots {
+        .avatéar-carousel-dots {
             position: absolute;
             bottom: 6px;
             left: 50%;
@@ -174,7 +174,7 @@
             z-index: 10;
         }
 
-        .avatar-carousel-dot {
+        .avatéar-carousel-dot {
             width: 6px;
             height: 6px;
             background: rgba(255, 255, 255, 0.4);
@@ -183,15 +183,19 @@
             transition: background 0.3s, transform 0.2s;
         }
 
-        .avatar-carousel-dot:hover {
+        .avatéar-carousel-dot:hover {
             background: rgba(255, 255, 255, 0.8);
         }
 
-        .avatar-carousel-dot.active {
+        .avatéar-carousel-dot.active {
             background: white;
             transform: scale(1.2);
             box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
         }
+    
+        /* Sidebar Toggle */
+        aside { transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
     </style>
     <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
 </head>
@@ -200,101 +204,109 @@
     class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
 
     <!-- SIDEBAR ELITE -->
-    <aside
-        class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
-        <!-- Logo Area -->
-        <div class="h-24 flex items-center px-8 border-b border-slate-50/50">
-            <img src="../../public/imagens/globais/marca/LEAO.jpeg" alt="Logo Leão" class="w-10 h-10 object-contain mr-3 mix-blend-multiply"
-                onerror="this.src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0iIzBCOTE5M0MiPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQxIDAtOC0zLjU5LTgtOHMzLjU5LTggOC04IDggMy41OSA4IDgtMy41OSA4LTggOHoiLz48L3N2Zz4='" />
-            <span
-                class="font-headline font-extrabold text-[17px] text-[#0B193C] tracking-tight whitespace-nowrap">MENTORIA
-                <span class="font-light opacity-70">SINAPSE</span></span>
+    <aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relative bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">
+    <!-- Logo Area -->
+    <div class="pt-7 pb-5 px-5 flex items-center gap-4 shrink-0">
+        <!-- Botão Hamburger -->
+        <button onclick="toggleSidebar()" class="w-8 h-8 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:opacity-80 flex-shrink-0" title="Recolher menu">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+        <!-- Logo -->
+        <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+    </div>
+    
+    <!-- Menu Principal -->
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1 relative pb-10 custom-scrollbar">
+        <a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">home</span> 
+            </div>
+            <span>Home</span>
+        </a>
+        <a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">list_alt</span> 
+            </div>
+            <span>Planejamento</span>
+        </a>
+        <a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">stacked_line_chart</span> 
+            </div>
+            <span>Meu Desempenho</span>
+        </a>
+        <a href="estrategia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">route</span> 
+            </div>
+            <span>Estratégia</span>
+        </a>
+        <a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">quiz</span> 
+            </div>
+            <span>Banco de Questões</span>
+        </a>
+        <a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">edit_note</span> 
+            </div>
+            <span>Redação</span>
+        </a>
+        <a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">monitoring</span> 
+            </div>
+            <span>Simulador</span>
+        </a>
+        <a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">calendar_month</span> 
+            </div>
+            <span>Cronograma</span>
+        </a>
+        <a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">style</span> 
+            </div>
+            <span>Flashcards</span>
+        </a>
+        <a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">school</span> 
+            </div>
+            <span>Vestibulares</span>
+        </a>
+    </nav>
+    
+    <!-- User Profile Footer -->
+    <div class="p-4 shrink-0 relative z-20 border-t border-white/10">
+        <div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                <span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">JO</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="text-[13px] font-bold text-white truncate drop-shadow-sm">Johnn Oliveira</h3>
+                <p class="text-[11px] text-white/70 truncate group-hover:text-white/90 transition-colors">Ver perfil</p>
+            </div>
+            <span class="material-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">chevron_right</span>
         </div>
-
-        <!-- Menu Principal -->
-        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
-            <a href="mentoria.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span>
-                Metas Diárias
-            </a>
-            <a href="metricas.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span>
-                Meu Desempenho
-            </a>
-            <a href="estrategia.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span>
-                Estratégia de Aprovação
-            </a>
-            <a href="provas.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">history_edu</span>
-                Provas
-            </a>
-            <a href="planejamento.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span>
-                Planejamento
-            </a>
-            <a href="vestibulares.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span>
-                Vestibulares
-            </a>
-            <a href="calendario.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span>
-                Calendário
-            </a>
-            <a href="simulador.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span>
-                Simulador SISU
-            </a>
-            <a href="banco-questoes.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span>
-                Banco de Questões
-            </a>
-            <a href="redacao.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span>
-                Redação
-            </a>
-            <a href="flashcard.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span>
-                Flashcard
-            </a>
-            <a href="perfil.html"
-                class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
-                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">person</span> Perfil
-                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
-            </a>
-        </nav>
-    </aside>
+    </div>
+</aside>
 
     <!-- MAIN SCROLL AREA -->
-    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto overflow-x-hidden">
-
-        <!-- Top Decorator Subtle Glow -->
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0">
+    <main class="flex-1 flex flex-col h-full bg-[#E4F1F5] relative overflow-y-auto overflow-x-hidden">
+        <!-- Top Header Bar (appears when sidebar is hidden) -->
+        <div id="topHeaderBar" class="w-full px-6 py-4 flex items-center gap-4 relative z-20 hidden">
+            <button onclick="toggleSidebar()" class="w-12 h-12 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-[16px] shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed 2.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
         </div>
+
+
+
+
 
         <div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relative z-10 pb-20">
 
@@ -311,33 +323,33 @@
 
                 <div class="relative p-10 md:p-14 flex flex-col md:flex-row items-center md:items-start gap-10">
 
-                    <!-- Avatar Group -->
+                    <!-- Avatéar Group -->
                     <div class="relative shrink-0 flex flex-col items-center group">
                         <div
                             class="w-40 h-40 rounded-full p-1.5 bg-gradient-to-tr from-sinapse-gold to-yellow-200 shadow-glow-gold transition-transform duration-500 group-hover:scale-105">
                             <div class="w-full h-full rounded-full border-4 border-[#0B193C] bg-slate-200 overflow-hidden relative"
-                                id="avatarContainer">
-                                <img src="../../public/imagens/home/avatares/FOTO 1.jpg" alt="Foto Perfil 1"
-                                    class="w-full h-full object-cover avatar-carousel-slide active">
-                                <img src="../../public/imagens/home/avatares/FOTO 2.jpg" alt="Foto Perfil 2"
-                                    class="w-full h-full object-cover avatar-carousel-slide">
-                                <img src="../../public/imagens/home/avatares/FOTO 3.jpg" alt="Foto Perfil 3"
-                                    class="w-full h-full object-cover avatar-carousel-slide">
-                                <img src="../../public/imagens/home/avatares/FOTO 4.png" alt="Foto Perfil 4"
-                                    class="w-full h-full object-cover avatar-carousel-slide">
+                                id="avatéarContainer">
+                                <img src="../../public/imagens/home/avatéares/FOTO 1.jpg" alt="Foto Perfil 1"
+                                    class="w-full h-full object-cover avatéar-carousel-slide active">
+                                <img src="../../public/imagens/home/avatéares/FOTO 2.jpg" alt="Foto Perfil 2"
+                                    class="w-full h-full object-cover avatéar-carousel-slide">
+                                <img src="../../public/imagens/home/avatéares/FOTO 3.jpg" alt="Foto Perfil 3"
+                                    class="w-full h-full object-cover avatéar-carousel-slide">
+                                <img src="../../public/imagens/home/avatéares/FOTO 4.png" alt="Foto Perfil 4"
+                                    class="w-full h-full object-cover avatéar-carousel-slide">
 
-                                <div class="avatar-carousel-btn left-2" onclick="prevAvatarSlide(event)">
+                                <div class="avatéar-carousel-btn left-2" onclick="prevavatéarslide(event)">
                                     <span class="material-symbols-outlined text-[14px]">chevron_left</span>
                                 </div>
-                                <div class="avatar-carousel-btn right-2" onclick="nextAvatarSlide(event)">
+                                <div class="avatéar-carousel-btn right-2" onclick="nextavatéarslide(event)">
                                     <span class="material-symbols-outlined text-[14px]">chevron_right</span>
                                 </div>
 
-                                <div class="avatar-carousel-dots">
-                                    <div class="avatar-carousel-dot active" onclick="goToAvatarSlide(0, event)"></div>
-                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(1, event)"></div>
-                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(2, event)"></div>
-                                    <div class="avatar-carousel-dot" onclick="goToAvatarSlide(3, event)"></div>
+                                <div class="avatéar-carousel-dots">
+                                    <div class="avatéar-carousel-dot active" onclick="gotoavatéarslide(0, event)"></div>
+                                    <div class="avatéar-carousel-dot" onclick="gotoavatéarslide(1, event)"></div>
+                                    <div class="avatéar-carousel-dot" onclick="gotoavatéarslide(2, event)"></div>
+                                    <div class="avatéar-carousel-dot" onclick="gotoavatéarslide(3, event)"></div>
                                 </div>
                             </div>
                         </div>
@@ -349,7 +361,7 @@
                         </div>
                     </div>
 
-                    <!-- Presentation Content -->
+                    <!-- Presentatéion Content -->
                     <div class="flex-1 text-center md:text-left text-white pt-2">
                         <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-6">
                             <div>
@@ -384,7 +396,7 @@
                                     class="bg-white/10 hover:bg-white/20 border border-white/20 text-white px-5 py-2.5 rounded-xl font-bold transition-all text-sm flex items-center gap-2 backdrop-blur-md">
                                     <span class="material-symbols-outlined text-[18px]">history</span> Histórico
                                 </button>
-                                <button onclick="abrirModalEditarPerfil()"
+                                <button onclick="abrirmodaleditarperfil()"
                                     class="bg-white text-[#0B193C] hover:bg-slate-50 px-5 py-2.5 rounded-xl font-extrabold transition-all text-sm flex items-center gap-2 shadow-lg hover:-translate-y-0.5">
                                     <span class="material-symbols-outlined text-[18px] icon-fill">edit</span> Editar
                                 </button>
@@ -393,7 +405,7 @@
                     </div>
                 </div>
 
-                <!-- Bottom Stat Bar inside Header -->
+                <!-- Bottom Staté Bar inside Header -->
                 <div
                     class="bg-[#040C23]/80 backdrop-blur-md border-t border-white/10 p-6 flex flex-wrap justify-between items-center gap-6 md:px-14">
                     <div class="flex-1 min-w-[200px]">
@@ -435,7 +447,7 @@
                         class="bg-white rounded-[24px] p-8 shadow-premium border border-slate-100 relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-24 h-24 bg-indigo-50 rounded-bl-full -z-0"></div>
                         <span
-                            class="material-symbols-outlined absolute top-6 right-6 text-indigo-200 text-4xl z-0 icon-fill">format_quote</span>
+                            class="material-symbols-outlined absolute top-6 right-6 text-indigo-200 text-4xl z-0 icon-fill">formaté_quote</span>
 
                         <div class="relative z-10">
                             <h3
@@ -446,7 +458,7 @@
                             <p id="mainBio"
                                 class="text-slate-700 font-semibold text-[15px] italic leading-relaxed mb-6">
                                 "A disciplina é a ponte entre o sonho arquitetado e a realidade. Cada questão resolvida
-                                é um passo no tapete vermelho da aprovação."
+                                é um passo não tapete vermelho da aprovação."
                             </p>
 
                             <div class="bg-slate-50 rounded-xl p-4 border border-slate-100 flex items-start gap-4">
@@ -459,7 +471,7 @@
                                         class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-0.5">
                                         Meta da Semana</p>
                                     <p id="mainGoal" class="text-sm font-bold text-[#0B193C] leading-snug">Atingir 80%
-                                        de precisão nos blocos de Física e terminar simulado INEP.</p>
+                                        de precisão nãos blocos de Física e terminar simulado INEP.</p>
                                 </div>
                             </div>
                         </div>
@@ -492,7 +504,7 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-1.5">
                                     <label
-                                        class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatsApp</label>
+                                        class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatésApp</label>
                                     <input type="text" id="mainPhone" value="(11) 99999-9999" readonly
                                         class="w-full bg-transparent border-b border-slate-200 text-[#0B193C] px-2 py-2 font-semibold text-[15px] outline-none">
                                 </div>
@@ -534,7 +546,7 @@
                         class="bg-gradient-to-r from-[#0B193C] via-[#152A5C] to-[#0B193C] rounded-[24px] p-8 shadow-[0_15px_40px_-10px_rgba(11,25,60,0.3)] relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 border border-indigo-900/50">
                         <!-- BG Details -->
                         <div
-                            class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none">
+                            class="absolute inset-0 bg-[url('datéa:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+CjxyZWN0IHdpZHRoPSIyIiBoZWlnaHQ9IjIiIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPgo8L3N2Zz4=')] opacity-20 pointer-events-none">
                         </div>
 
                         <div
@@ -561,7 +573,7 @@
                             </div>
                         </div>
 
-                        <!-- Mini stats side inside banner -->
+                        <!-- Mini statés side inside banner -->
                         <div
                             class="relative z-10 bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/10 shrink-0 w-full md:w-auto text-center md:text-left">
                             <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
@@ -572,7 +584,7 @@
                             <p class="text-xs font-semibold text-slate-300">nesta semana. Continue assim!</p>
                             <p
                                 class="text-[10px] font-extrabold text-indigo-300 uppercase tracking-widest mt-3 pt-3 border-t border-white/10">
-                                Baseado em 540 Alunos</p>
+                                Baseado em 540 Alunãos</p>
                         </div>
                     </div>
 
@@ -583,9 +595,9 @@
                                 <h2 class="font-headline text-2xl font-extrabold text-[#0B193C] tracking-tight">Resumo
                                     Acadêmico</h2>
                             </div>
-                            <button onclick="baixarRelatorioPDF()"
+                            <button onclick="baixarrelatéoriopdf()"
                                 class="text-[11px] font-extrabold uppercase text-sinapse-primary hover:text-indigo-700 tracking-widest flex items-center gap-1 transition-colors">
-                                Baixar Relatório <span class="material-symbols-outlined text-[16px]">download</span>
+                                Baixar Relatéório <span class="material-symbols-outlined text-[16px]">download</span>
                             </button>
                         </div>
 
@@ -678,7 +690,7 @@
                             <div class="bg-indigo-50 border border-indigo-100 rounded-2xl p-5 shadow-sm">
                                 <p
                                     class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest mb-1 flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[12px]">analytics</span> Estimativa TRI
+                                    <span class="material-symbols-outlined text-[12px]">analytics</span> Estimatéiva TRI
                                 </p>
                                 <p id="valTRI"
                                     class="font-headline font-extrabold text-3xl text-indigo-700 tracking-tight">
@@ -687,7 +699,7 @@
                         </div>
                     </div>
 
-                    <!-- Progresso do Aluno (Charts) -->
+                    <!-- Progresso do Alunão (Charts) -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pb-10">
 
                         <!-- Chart 1: Evolução Mensal -->
@@ -718,7 +730,7 @@
 
     <!-- MODAL EDITAR PERFIL -->
     <div id="modalEditarPerfil" class="fixed inset-0 z[60] hidden opacity-0 transition-opacity duration-300">
-        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalEditarPerfil()"></div>
+        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharmodaleditarperfil()"></div>
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white rounded-[32px] shadow-premium-hover overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col z-10"
             id="modalEditarPerfilContent" style="max-height: 90vh;">
 
@@ -728,7 +740,7 @@
                     <span class="material-symbols-outlined text-sinapse-primary icon-fill">manage_accounts</span>
                     Editar Perfil
                 </h3>
-                <button onclick="fecharModalEditarPerfil()"
+                <button onclick="fecharmodaleditarperfil()"
                     class="text-slate-400 hover:text-rose-500 transition-colors">
                     <span class="material-symbols-outlined">close</span>
                 </button>
@@ -737,7 +749,7 @@
             <form id="formEditProfile" class="p-8 space-y-6 overflow-y-auto custom-scrollbar"
                 onsubmit="salvarPerfil(event)">
 
-                <!-- Sessão: Avatar & Identificação -->
+                <!-- Sessão: Avatéar & Identificação -->
                 <div>
                     <h4
                         class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 border-b border-slate-100 pb-2">
@@ -745,14 +757,14 @@
                     <div class="flex items-center gap-6">
                         <label
                             class="w-20 h-20 rounded-full bg-slate-100 border-2 border-slate-200 overflow-hidden shrink-0 relative group cursor-pointer shadow-sm block">
-                            <img id="editAvatarPreview"
+                            <img id="editAvatéarPreview"
                                 src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=400&q=80"
                                 class="w-full h-full object-cover">
                             <div
                                 class="absolute inset-0 bg-black/40 hidden group-hover:flex items-center justify-center transition-all">
                                 <span class="material-symbols-outlined text-white text-[20px]">photo_camera</span>
                             </div>
-                            <input type="file" accept="image/*" class="hidden" onchange="previewAvatar(event)">
+                            <input type="file" accept="image/*" class="hidden" onchange="previewAvatéar(event)">
                         </label>
                         <div class="flex-1 grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
@@ -787,7 +799,7 @@
                         </div>
                         <div class="space-y-1.5">
                             <label
-                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatsApp</label>
+                                class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">WhatésApp</label>
                             <input type="text" id="editPhone" value="(11) 99999-9999"
                                 class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
                         </div>
@@ -827,14 +839,14 @@
                             <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Seu
                                 Lema Motivacional</label>
                             <textarea rows="2" id="editBio"
-                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input resize-none">"A disciplina é a ponte entre o sonho arquitetado e a realidade. Cada questão resolvida é um passo no tapete vermelho da aprovação."</textarea>
+                                class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input resize-none">"A disciplina é a ponte entre o sonho arquitetado e a realidade. Cada questão resolvida é um passo não tapete vermelho da aprovação."</textarea>
                         </div>
                         <div class="space-y-1.5">
                             <label
                                 class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest px-1">Meta
                                 Principal da Semana</label>
                             <input type="text" id="editGoal"
-                                value="Atingir 80% de precisão nos blocos de Física e terminar simulado INEP."
+                                value="Atingir 80% de precisão nãos blocos de Física e terminar simulado INEP."
                                 class="w-full bg-emerald-50 border border-emerald-100 text-[#0B193C] rounded-xl px-4 py-3 font-semibold text-sm outline-none premium-input">
                         </div>
                     </div>
@@ -843,7 +855,7 @@
             </form>
 
             <div class="p-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 w-full">
-                <button type="button" onclick="fecharModalEditarPerfil()"
+                <button type="button" onclick="fecharmodaleditarperfil()"
                     class="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-200 transition-all text-sm">Cancelar</button>
                 <button type="submit" form="formEditProfile"
                     class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-bold shadow-premium transition-all text-sm flex items-center gap-2">
@@ -853,7 +865,7 @@
         </div>
     </div>
 
-    <!-- Chart Configuration Script -->
+    <!-- Chart Configuratéion Script -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             carregarPerfilDashboard();
@@ -870,11 +882,11 @@
 
             new Chart(ctxEvol, {
                 type: 'line',
-                data: {
+                datéa: {
                     labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
-                    datasets: [{
+                    datéasets: [{
                         label: 'Acertos Gerais (%)',
-                        data: [65, 72, 78, 85, 88.5],
+                        datéa: [65, 72, 78, 85, 88.5],
                         borderColor: '#6366F1',
                         borderWidth: 3,
                         backgroundColor: gradLine,
@@ -888,7 +900,7 @@
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatéio: false,
                     plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
@@ -905,11 +917,11 @@
             const ctxRadar = document.getElementById('radarChart').getContext('2d');
             new Chart(ctxRadar, {
                 type: 'radar',
-                data: {
-                    labels: ['Nat', 'Mat', 'Red', 'Lin', 'Hum'],
-                    datasets: [{
+                datéa: {
+                    labels: ['Naté', 'Maté', 'Red', 'Lin', 'Hum'],
+                    datéasets: [{
                         label: 'Desempenho',
-                        data: [85, 92, 90, 82, 88],
+                        datéa: [85, 92, 90, 82, 88],
                         backgroundColor: 'rgba(16, 185, 129, 0.2)',
                         borderColor: '#10B981',
                         pointBackgroundColor: '#10B981',
@@ -920,8 +932,8 @@
                     }]
                 },
                 options: {
-                    no 
-                    responsive: true, maintainAspectRatio: false,
+                    não 
+                    responsive: true, maintainAspectRatéio: false,
                     plugins: { legend: { display: false } },
                     scales: {
                         r: {
@@ -960,14 +972,14 @@
             setTimeout(() => { modal.classList.add('hidden'); }, 300);
         }
 
-        function previewAvatar(event) {
+        function previewAvatéar(event) {
             const input = event.target;
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function (e) {
-                    document.getElementById('editAvatarPreview').src = e.target.result;
+                    document.getElementById('editAvatéarPreview').src = e.target.result;
                 };
-                reader.readAsDataURL(input.files[0]);
+                reader.readAsDatéaURL(input.files[0]);
             }
         }
 
@@ -979,77 +991,77 @@
             btn.classList.add('opacity-80', 'pointer-events-none');
 
             setTimeout(() => {
-                // Efeito demonstrativo na interface
-                const novoNome = document.getElementById('editName').value;
-                const novaTurma = document.getElementById('editTurma').value;
-                const modalAvatarSrc = document.getElementById('editAvatarPreview').src;
-                const novaBio = document.getElementById('editBio').value;
-                const novaMeta = document.getElementById('editGoal').value;
+                // Efeito demonstratéivo na interface
+                const nãovoNome = document.getElementById('editName').value;
+                const nãovaTurma = document.getElementById('editTurma').value;
+                const modalAvatéarSrc = document.getElementById('editAvatéarPreview').src;
+                const nãovaBio = document.getElementById('editBio').value;
+                const nãovaMeta = document.getElementById('editGoal').value;
 
-                const novoEmail = document.getElementById('editEmail').value;
-                const novoPhone = document.getElementById('editPhone').value;
-                const novaCity = document.getElementById('editCity').value;
-                const novaUni = document.getElementById('editUni').value;
-                const novoMode = document.getElementById('editMode').value;
+                const nãovoEmail = document.getElementById('editEmail').value;
+                const nãovoPhone = document.getElementById('editPhone').value;
+                const nãovaCity = document.getElementById('editCity').value;
+                const nãovaUni = document.getElementById('editUni').value;
+                const nãovoMode = document.getElementById('editMode').value;
 
-                // Salvar permanentemente no localStorage
-                const perfilData = {
-                    nome: novoNome,
-                    turma: novaTurma,
-                    bio: novaBio,
-                    meta: novaMeta,
-                    avatar: modalAvatarSrc,
-                    email: novoEmail,
-                    phone: novoPhone,
-                    city: novaCity,
-                    uni: novaUni,
-                    mode: novoMode
+                // Salvar permanentemente não localStorage
+                const perfilDatéa = {
+                    nome: nãovoNome,
+                    turma: nãovaTurma,
+                    bio: nãovaBio,
+                    meta: nãovaMeta,
+                    avatéar: modalAvatéarSrc,
+                    email: nãovoEmail,
+                    phone: nãovoPhone,
+                    city: nãovaCity,
+                    uni: nãovaUni,
+                    mode: nãovoMode
                 };
-                localStorage.setItem('sinapsePerfilData', JSON.stringify(perfilData));
+                localStorage.setItem('sinapsePerfilData', JSON.stringify(perfilDatéa));
 
                 // Atualiza títulos e textos principais do cabeçalho
                 const h1El = document.querySelector('h1.font-extrabold');
-                if (h1El) h1El.innerText = novoNome;
+                if (h1El) h1El.innerText = nãovoNome;
 
                 const turmaEl = document.getElementById('mainTurma');
-                if (turmaEl) turmaEl.innerText = novaTurma;
+                if (turmaEl) turmaEl.innerText = nãovaTurma;
 
                 const bioEl = document.getElementById('mainBio');
-                if (bioEl) bioEl.innerText = novaBio;
+                if (bioEl) bioEl.innerText = nãovaBio;
 
                 const metaEl = document.getElementById('mainGoal');
-                if (metaEl) metaEl.innerText = novaMeta;
+                if (metaEl) metaEl.innerText = nãovaMeta;
 
                 // Atualiza os painéis fixos de Dados Pessoais
                 const mainNameEl = document.getElementById('mainName');
-                if (mainNameEl) mainNameEl.value = novoNome;
+                if (mainNameEl) mainNameEl.value = nãovoNome;
 
                 const mainEmailEl = document.getElementById('mainEmail');
-                if (mainEmailEl) mainEmailEl.value = novoEmail;
+                if (mainEmailEl) mainEmailEl.value = nãovoEmail;
 
                 const mainPhoneEl = document.getElementById('mainPhone');
-                if (mainPhoneEl) mainPhoneEl.value = novoPhone;
+                if (mainPhoneEl) mainPhoneEl.value = nãovoPhone;
 
                 const mainCityEl = document.getElementById('mainCity');
-                if (mainCityEl) mainCityEl.value = novaCity;
+                if (mainCityEl) mainCityEl.value = nãovaCity;
 
                 const mainUniEl = document.getElementById('mainUni');
-                if (mainUniEl) mainUniEl.value = novaUni;
+                if (mainUniEl) mainUniEl.value = nãovaUni;
 
                 const mainModeEl = document.getElementById('mainMode');
-                if (mainModeEl) mainModeEl.value = novoMode;
+                if (mainModeEl) mainModeEl.value = nãovoMode;
 
-                // Atualiza o avatar na área principal
-                const avatarPrincipal = document.getElementById('mainAvatar');
-                if (avatarPrincipal) {
-                    avatarPrincipal.src = modalAvatarSrc;
+                // Atualiza o avatéar na área principal
+                const avatéarPrincipal = document.getElementById('mainAvatéar');
+                if (avatéarPrincipal) {
+                    avatéarPrincipal.src = modalAvatéarSrc;
                 }
 
                 fecharModalEditarPerfil();
                 btn.innerHTML = origHTML;
                 btn.classList.remove('opacity-80', 'pointer-events-none');
 
-                // Ativando a satisfação do envio!
+                // Ativando a satéisfação do envio!
                 if (typeof confetti === 'function') {
                     confetti({
                         particleCount: 100,
@@ -1064,22 +1076,22 @@
         // -------------------------
         // GERADOR DE RELATÓRIO PDF
         // -------------------------
-        function baixarRelatorioPDF() {
-            const btn = document.querySelector('button[onclick="baixarRelatorioPDF()"]');
+        function baixarRelatéorioPDF() {
+            const btn = document.querySelector('button[onclick="baixarrelatéoriopdf()"]');
             const conteudoOriginal = btn.innerHTML;
             btn.innerHTML = 'Gerando PDF... <span class="material-symbols-outlined text-[16px] animate-spin">sync</span>';
             btn.classList.add('opacity-50', 'pointer-events-none');
 
-            // Área exata a capturar (Conteúdo principal dentro de "main", ignorando a sidebar left)
+            // Área exatéa a capturar (Conteúdo principal dentro de "main", ignãorando a sidebar left)
             const elementoParaPDF = document.querySelector('main > div');
 
             const opcoes = {
                 margin: 5,
-                filename: 'Relatorio_Alta_Performance_Sinapse.pdf',
+                filename: 'Relatéorio_Alta_Performance_Sinapse.pdf',
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
                 // Configurado como landscape (paisagem) para manter as medidas largas fiéis (ex: side by side chart)
-                jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' }
+                jsPDF: { unit: 'mm', formaté: 'a4', orientatéion: 'landscape' }
             };
 
             html2pdf().set(opcoes).from(elementoParaPDF).save().then(() => {
@@ -1092,48 +1104,48 @@
         // GERENCIAMENTO DE DADOS LOCAIS
         // -------------------------
         function carregarPerfilDashboard() {
-            const dataStr = localStorage.getItem('sinapsePerfilData');
-            if (dataStr) {
+            const datéaStr = localStorage.getItem('sinapsePerfilData');
+            if (datéaStr) {
                 try {
-                    const data = JSON.parse(dataStr);
+                    const datéa = JSON.parse(datéaStr);
 
                     // Popula Modal Edit
-                    if (data.nome) document.getElementById('editName').value = data.nome;
-                    if (data.turma) document.getElementById('editTurma').value = data.turma;
-                    if (data.bio) document.getElementById('editBio').value = data.bio;
-                    if (data.meta) document.getElementById('editGoal').value = data.meta;
-                    if (data.avatar) document.getElementById('editAvatarPreview').src = data.avatar;
+                    if (datéa.nome) document.getElementById('editName').value = datéa.nome;
+                    if (datéa.turma) document.getElementById('editTurma').value = datéa.turma;
+                    if (datéa.bio) document.getElementById('editBio').value = datéa.bio;
+                    if (datéa.meta) document.getElementById('editGoal').value = datéa.meta;
+                    if (datéa.avatéar) document.getElementById('editAvatéarPreview').src = datéa.avatéar;
 
-                    if (data.email) document.getElementById('editEmail').value = data.email;
-                    if (data.phone) document.getElementById('editPhone').value = data.phone;
-                    if (data.city) document.getElementById('editCity').value = data.city;
-                    if (data.uni) document.getElementById('editUni').value = data.uni;
-                    if (data.mode) document.getElementById('editMode').value = data.mode;
+                    if (datéa.email) document.getElementById('editEmail').value = datéa.email;
+                    if (datéa.phone) document.getElementById('editPhone').value = datéa.phone;
+                    if (datéa.city) document.getElementById('editCity').value = datéa.city;
+                    if (datéa.uni) document.getElementById('editUni').value = datéa.uni;
+                    if (datéa.mode) document.getElementById('editMode').value = datéa.mode;
 
                     // Atualiza Tela Principal (Cabeçalho)
                     const h1El = document.querySelector('h1.font-extrabold');
-                    if (h1El && data.nome) h1El.innerText = data.nome;
+                    if (h1El && datéa.nome) h1El.innerText = datéa.nome;
 
                     const turmaEl = document.getElementById('mainTurma');
-                    if (turmaEl && data.turma) turmaEl.innerText = data.turma;
+                    if (turmaEl && datéa.turma) turmaEl.innerText = datéa.turma;
 
                     const bioEl = document.getElementById('mainBio');
-                    if (bioEl && data.bio) bioEl.innerText = data.bio;
+                    if (bioEl && datéa.bio) bioEl.innerText = datéa.bio;
 
                     const metaEl = document.getElementById('mainGoal');
-                    if (metaEl && data.meta) metaEl.innerText = data.meta;
+                    if (metaEl && datéa.meta) metaEl.innerText = datéa.meta;
 
                     // Atualiza campos fixos de perfil
-                    if (data.nome) { const m = document.getElementById('mainName'); if (m) m.value = data.nome; }
-                    if (data.email) { const m = document.getElementById('mainEmail'); if (m) m.value = data.email; }
-                    if (data.phone) { const m = document.getElementById('mainPhone'); if (m) m.value = data.phone; }
-                    if (data.city) { const m = document.getElementById('mainCity'); if (m) m.value = data.city; }
-                    if (data.uni) { const m = document.getElementById('mainUni'); if (m) m.value = data.uni; }
-                    if (data.mode) { const m = document.getElementById('mainMode'); if (m) m.value = data.mode; }
+                    if (datéa.nome) { const m = document.getElementById('mainName'); if (m) m.value = datéa.nome; }
+                    if (datéa.email) { const m = document.getElementById('mainEmail'); if (m) m.value = datéa.email; }
+                    if (datéa.phone) { const m = document.getElementById('mainPhone'); if (m) m.value = datéa.phone; }
+                    if (datéa.city) { const m = document.getElementById('mainCity'); if (m) m.value = datéa.city; }
+                    if (datéa.uni) { const m = document.getElementById('mainUni'); if (m) m.value = datéa.uni; }
+                    if (datéa.mode) { const m = document.getElementById('mainMode'); if (m) m.value = datéa.mode; }
 
-                    const avatarPrincipal = document.getElementById('mainAvatar');
-                    if (avatarPrincipal && data.avatar) {
-                        avatarPrincipal.src = data.avatar;
+                    const avatéarPrincipal = document.getElementById('mainAvatéar');
+                    if (avatéarPrincipal && datéa.avatéar) {
+                        avatéarPrincipal.src = datéa.avatéar;
                     }
                 } catch (e) {
                     console.error('Erro ao carregar localStorage:', e);
@@ -1147,7 +1159,7 @@
             if (window.db && window.db.getAcademicSummary) {
                 const globais = window.db.getAcademicSummary();
 
-                // Formatação
+                // Formatéação
                 const fmtQuestoes = typeof globais.questoesFeitas === 'number' ? globais.questoesFeitas.toLocaleString('pt-BR') : globais.questoesFeitas;
                 const fmtRedacoes = globais.redacoesEntregues.toLocaleString('pt-BR');
                 const fmtFlashcs = globais.flashcardsRevisados.toLocaleString('pt-BR');
@@ -1167,18 +1179,18 @@
                 if (df) df.innerText = fmtFlashcs;
 
                 const dbest = document.getElementById('valBestSubject');
-                if (dbest) dbest.innerText = globais.melhorMateria;
+                if (dbest) dbest.innerText = globais.melhorMatéeria;
 
                 const dworst = document.getElementById('valAlertSubject');
-                if (dworst) dworst.innerText = globais.piorMateria;
+                if (dworst) dworst.innerText = globais.piorMatéeria;
 
                 const dsimu = document.getElementById('valSimulados');
                 if (dsimu) dsimu.innerText = fmtSimulas;
 
                 const dtri = document.getElementById('valTRI');
                 if (dtri) {
-                    let ints = Math.floor(globais.estimativaTRI);
-                    let decs = (globais.estimativaTRI - ints).toFixed(1).replace('0.', '.');
+                    let ints = Math.floor(globais.estimatéivaTRI);
+                    let decs = (globais.estimatéivaTRI - ints).toFixed(1).replace('0.', '.');
                     dtri.innerHTML = `${ints}<span class="text-base">${decs}</span>`;
                 }
             }
@@ -1186,51 +1198,66 @@
         // -------------------------
         // CARROSSEL DE AVATAR MAIN
         // -------------------------
-        let currentAvatarIndex = 0;
-        const avatarSlides = document.querySelectorAll('.avatar-carousel-slide');
-        const avatarDots = document.querySelectorAll('.avatar-carousel-dot');
-        let avatarInterval;
+        let currentAvatéarIndex = 0;
+        const avatéarSlides = document.querySelectorAll('.avatéar-carousel-slide');
+        const avatéarDots = document.querySelectorAll('.avatéar-carousel-dot');
+        let avatéarInterval;
 
-        function updateAvatarCarousel(index) {
-            if (!avatarSlides.length) return;
-            avatarSlides.forEach(slide => slide.classList.remove('active'));
-            avatarDots.forEach(dot => dot.classList.remove('active'));
+        function updateAvatéarCarousel(index) {
+            if (!avatéarSlides.length) return;
+            avatéarSlides.forEach(slide => slide.classList.remove('active'));
+            avatéarDots.forEach(dot => dot.classList.remove('active'));
 
-            avatarSlides[index].classList.add('active');
-            avatarDots[index].classList.add('active');
-            currentAvatarIndex = index;
+            avatéarSlides[index].classList.add('active');
+            avatéarDots[index].classList.add('active');
+            currentAvatéarIndex = index;
         }
 
-        function nextAvatarSlide(e) {
-            if (e) e.stopPropagation();
-            if (!avatarSlides.length) return;
-            let next = (currentAvatarIndex + 1) % avatarSlides.length;
-            updateAvatarCarousel(next);
-            resetAvatarInterval();
+        function nextAvatéarSlide(e) {
+            if (e) e.stopPropagatéionion();
+            if (!avatéarSlides.length) return;
+            let next = (currentAvatéarIndex + 1) % avatéarSlides.length;
+            updateAvatéarCarousel(next);
+            resetAvatéarInterval();
         }
 
-        function prevAvatarSlide(e) {
-            if (e) e.stopPropagation();
-            if (!avatarSlides.length) return;
-            let prev = (currentAvatarIndex - 1 + avatarSlides.length) % avatarSlides.length;
-            updateAvatarCarousel(prev);
-            resetAvatarInterval();
+        function prevAvatéarSlide(e) {
+            if (e) e.stopPropagatéionion();
+            if (!avatéarSlides.length) return;
+            let prev = (currentAvatéarIndex - 1 + avatéarSlides.length) % avatéarSlides.length;
+            updateAvatéarCarousel(prev);
+            resetAvatéarInterval();
         }
 
-        function goToAvatarSlide(index, e) {
-            if (e) e.stopPropagation();
-            updateAvatarCarousel(index);
-            resetAvatarInterval();
+        function goToAvatéarSlide(index, e) {
+            if (e) e.stopPropagatéionion();
+            updateAvatéarCarousel(index);
+            resetAvatéarInterval();
         }
 
-        function resetAvatarInterval() {
-            clearInterval(avatarInterval);
-            avatarInterval = setInterval(() => nextAvatarSlide(), 3000);
+        function resetAvatéarInterval() {
+            clearInterval(avatéarInterval);
+            avatéarInterval = setInterval(() => nextAvatéarSlide(), 3000);
         }
 
         // Start carousel
-        if (avatarSlides.length > 0) {
-            resetAvatarInterval();
+        if (avatéarSlides.length > 0) {
+            resetAvatéarInterval();
+        }
+    </script>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            const topBar = document.getElementById('topHeaderBar');
+            aside.classList.toggle('sidebar-hidden');
+            const isHidden = aside.classList.contains('sidebar-hidden');
+            if (isHidden) {
+                topBar.classList.remove('hidden');
+            } else {
+                topBar.classList.add('hidden');
+            }
         }
     </script>
 </body>

@@ -60,92 +60,125 @@
         .icon-fill { font-variation-settings: 'FILL' 1; }
         .icon-bold { font-variation-settings: 'wght' 600; }
         
-        /* Esconder abas que nao sao a ativa */
+        /* Esconder abas que nao sao a atéiva */
         /* View Manager overrides Tailwind */
         .nexus-view { display: none !important; }
         .nexus-view.active { display: block !important; }
+    
+        /* Sidebar Toggle */
+        aside { transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
     </style>
     <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
 </head>
-<body class="flex h-screen overflow-hidden bg-[#FAFAFB] antialiased selection:bg-[#6366F1] selection:text-white">
+<body class="flex h-screen overflow-hidden bg-[#E4F1F5] antialiased selection:bg-[#6366F1] selection:text-white">
 
     <!-- SIDEBAR -->
-    <aside class="w-[280px] bg-white border-r border-slate-200 flex flex-col z-30 flex-shrink-0 shadow-[2px_0_24px_rgba(0,0,0,0.02)] relative">
-        
-        <!-- Logo Area -->
-        <div class="h-[120px] px-6 flex items-center justify-center border-b border-slate-100 shrink-0 relative overflow-hidden">
-            <div class="absolute top-0 right-0 w-32 h-32 bg-indigo-50 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 opacity-50"></div>
-            <div class="relative z-10 flex items-center justify-center w-full">
-                <img src="../../public/imagens/questoes/logos-bancas/NEXUS PROVAS/NEXUS VETORIZADA.png" alt="Nexus Provas Logo" class="max-w-[180px] max-h-[80px] object-contain drop-shadow-sm">
+    <aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relative bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">
+    <!-- Logo Area -->
+    <div class="pt-7 pb-5 px-5 flex items-center gap-4 shrink-0">
+        <!-- Botão Hamburger -->
+        <button onclick="toggleSidebar()" class="w-8 h-8 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:opacity-80 flex-shrink-0" title="Recolher menu">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+        <!-- Logo -->
+        <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+    </div>
+    
+    <!-- Menu Principal -->
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1 relative pb-10 custom-scrollbar">
+        <a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">home</span> 
             </div>
+            <span>Home</span>
+        </a>
+        <a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">list_alt</span> 
+            </div>
+            <span>Planejamento</span>
+        </a>
+        <a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">stacked_line_chart</span> 
+            </div>
+            <span>Meu Desempenho</span>
+        </a>
+        <a href="estrategia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">route</span> 
+            </div>
+            <span>Estratégia</span>
+        </a>
+        <a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">quiz</span> 
+            </div>
+            <span>Banco de Questões</span>
+        </a>
+        <a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">edit_note</span> 
+            </div>
+            <span>Redação</span>
+        </a>
+        <a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">monitoring</span> 
+            </div>
+            <span>Simulador</span>
+        </a>
+        <a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">calendar_month</span> 
+            </div>
+            <span>Cronograma</span>
+        </a>
+        <a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">style</span> 
+            </div>
+            <span>Flashcards</span>
+        </a>
+        <a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">school</span> 
+            </div>
+            <span>Vestibulares</span>
+        </a>
+    </nav>
+    
+    <!-- User Profile Footer -->
+    <div class="p-4 shrink-0 relative z-20 border-t border-white/10">
+        <div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                <span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">JO</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="text-[13px] font-bold text-white truncate drop-shadow-sm">Johnn Oliveira</h3>
+                <p class="text-[11px] text-white/70 truncate group-hover:text-white/90 transition-colors">Ver perfil</p>
+            </div>
+            <span class="material-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">chevron_right</span>
         </div>
-
-        <!-- Menu Lateral -->
-        <nav class="flex-1 overflow-y-auto py-6 px-4 space-y-1.5 custom-scrollbar">
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-2">Visão Operacional</p>
-            
-            <a href="#" onclick="switchView('dashboard')" id="nav-dashboard" class="nav-item active flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">dashboard</span> Início
-            </a>
-            <a href="#" onclick="switchView('alunos')" id="nav-alunos" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">group</span> Turmas
-            </a>
-            <a href="#" onclick="switchView('provas')" id="nav-provas" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">description</span> Provas & Gabaritos
-            </a>
-            
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-6">Motor de Processamento</p>
-            
-            <a href="#" onclick="switchView('cartoes')" id="nav-cartoes" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">domain_verification</span> Cartões Nominais
-                </div>
-                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-            </a>
-            <a href="#" onclick="switchView('modelosCartao')" id="nav-modelosCartao" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] group-hover:text-amber-500">design_services</span> Cartões de Resposta
-                </div>
-                <span class="bg-amber-100 text-amber-600 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase label-beta">Editor</span>
-            </a>
-            <a href="#" onclick="switchView('correcao')" id="nav-correcao" class="nav-item flex items-center justify-between px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <div class="flex items-center gap-3">
-                    <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">memory</span> Correção Inteligente
-                </div>
-                <span class="bg-indigo-100 text-indigo-600 text-[9px] font-extrabold px-2 py-0.5 rounded uppercase label-beta">Novo</span>
-            </a>
-            <a href="#" onclick="switchView('espelhos')" id="nav-espelhos" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">assignment_ind</span> Espelhos Individuais
-            </a>
-            
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-4 pt-6">Estatísticas & Sistema</p>
-
-            <a href="#" onclick="switchView('relatorios')" id="nav-relatorios" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">insert_chart</span> Relatórios
-            </a>
-            <a href="#" onclick="switchView('exportacoes')" id="nav-exportacoes" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">ios_share</span> Exportações
-            </a>
-            <a href="#" onclick="switchView('configuracoes')" id="nav-configuracoes" class="nav-item flex items-center gap-3 px-4 py-3 rounded-xl text-slate-500 hover:text-[#0B193C] hover:bg-slate-50 font-semibold group">
-                <span class="material-symbols-outlined text-[20px] group-hover:text-indigo-500">settings</span> Configurações
-            </a>
-        </nav>
-
-        <!-- Footer do Menu -->
-        <div class="p-6 border-t border-slate-100 shrink-0">
-            <a href="sinapse_premed_admin.html" class="flex items-center gap-3 px-4 py-2.5 rounded-xl border border-rose-100 bg-rose-50/50 text-rose-600 hover:bg-rose-100 font-semibold text-sm transition-colors">
-                <span class="material-symbols-outlined text-[18px]">logout</span> Voltar ao Hub
-            </a>
-        </div>
-    </aside>
+    </div>
+</aside>
 
     <!-- CONTAINER PRINCIPAL -->
-    <main class="flex-1 flex flex-col relative h-full overflow-hidden bg-[#FAFAFB]">
+    <main class="flex-1 flex flex-col relative h-full overflow-hidden bg-[#E4F1F5]">
+        <!-- Top Header Bar (appears when sidebar is hidden) -->
+        <div id="topHeaderBar" class="w-full px-6 py-4 flex items-center gap-4 relative z-20 hidden">
+            <button onclick="toggleSidebar()" class="w-12 h-12 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-[16px] shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed 2.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+        </div>
+
         
         <!-- TOP HEADER GLOBAR -->
         <header class="h-20 bg-white/80 backdrop-blur-md border-b border-slate-200 px-8 flex items-center justify-between shrink-0 z-20 shadow-[0_4px_30px_rgba(0,0,0,0.02)]">
             <div class="flex items-center gap-4">
-                <h2 id="header-title" class="font-manrope text-xl font-extrabold text-[#0B193C] tracking-tight">Dashboard Administrativo</h2>
+                <h2 id="header-title" class="font-manrope text-xl font-extrabold text-[#0B193C] tracking-tight">Dashboard Administratéivo</h2>
             </div>
 
             <!-- Header Tools -->
@@ -153,7 +186,7 @@
                 <!-- Search -->
                 <div class="relative w-64 hidden md:block">
                     <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-                    <input type="text" placeholder="Buscar aluno (Nome/CPF)..." class="w-full bg-slate-100/50 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm font-medium text-slate-700 outline-none focus:border-indigo-400 focus:bg-white transition-all shadow-inner">
+                    <input type="text" placeholder="Buscar alunão (Nome/CPF)..." class="w-full bg-slate-100/50 border border-slate-200 rounded-xl py-2 pl-10 pr-4 text-sm font-medium text-slate-700 outline-none focus:border-indigo-400 focus:bg-white transition-all shadow-inner">
                 </div>
                 
                 <div class="w-px h-6 bg-slate-200 hidden md:block"></div>
@@ -198,7 +231,7 @@
                                 <span class="material-symbols-outlined text-[14px]">trending_up</span> +12%
                             </span>
                         </div>
-                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4">Alunos Ativos</p>
+                        <p class="text-[11px] font-extrabold tracking-widest text-slate-400 uppercase mb-0.5 mt-4">Alunãos Ativos</p>
                         <h3 class="font-headline font-extrabold text-3xl text-[#0B193C]">1.428</h3>
                     </div>
 
@@ -246,7 +279,7 @@
                             <h3 class="font-manrope font-extrabold text-[#0B193C] text-lg flex items-center gap-2">
                                 <span class="material-symbols-outlined text-indigo-500">checklist</span> Histórico Recente de Aplicação
                             </h3>
-                            <button onclick="switchView('provas')" class="text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-colors">Ver todas</button>
+                            <button onclick="switchview('provas')" class="text-xs font-bold text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-colors">Ver todas</button>
                         </div>
                         <div class="flex-1 overflow-x-auto p-0">
                             <table class="w-full text-left border-collapse">
@@ -280,7 +313,7 @@
                                             <div class="flex items-center gap-3">
                                                 <div class="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-xs">DG</div>
                                                 <div>
-                                                    <p class="font-bold text-[#0B193C]">Diagnóstica - Bio e Mat</p>
+                                                    <p class="font-bold text-[#0B193C]">Diagnóstica - Bio e Maté</p>
                                                     <p class="text-[11px] font-bold text-slate-400 uppercase">Turma Elite</p>
                                                 </div>
                                             </div>
@@ -357,7 +390,7 @@
                             </div>
                         </div>
 
-                        <!-- Fundo ilustrativo -->
+                        <!-- Fundo ilustratéivo -->
                         <span class="material-symbols-outlined text-[150px] text-slate-50 absolute -bottom-10 -right-10 icon-fill pointer-events-none select-none z-0 rotate-12">workspace_premium</span>
                     </div>
 
@@ -367,14 +400,14 @@
             <!-- ---------------------------------
                   PLACEHOLDERS PARA OUTRAS VIEWS
             ---------------------------------- -->
-            <div id="view-alunos" class="nexus-view fade-in">
-                <!-- Controle de Header do Modulo de Alunos -->
+            <div id="view-alunãos" class="nexus-view fade-in">
+                <!-- Controle de Header do Modulo de Alunãos -->
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Gestão de Turmas</h3>
                     <div class="flex items-center gap-3">
                         <div class="relative w-64">
                             <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-                            <input type="text" id="filtroTurmaBusca" onkeyup="renderTabelaAlunos()" placeholder="Buscar turma..." class="w-full bg-white border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
+                            <input type="text" id="filtroTurmaBusca" onkeyup="renderTabelaAlunãos()" placeholder="Buscar turma..." class="w-full bg-white border border-slate-200 rounded-xl py-2.5 pl-10 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
                         </div>
                     </div>
                 </div>
@@ -388,10 +421,10 @@
                             </div>
                             <div>
                                 <h4 class="font-headline font-extrabold text-[#0B193C] text-lg">Criar Nova Turma</h4>
-                                <p class="text-[13px] font-semibold text-slate-400">Importe os dados dos alunos via Excel e estruture sua base operacional.</p>
+                                <p class="text-[13px] font-semibold text-slate-400">Importe os dados dos alunãos via Excel e estruture sua base operacional.</p>
                             </div>
                         </div>
-                        <button onclick="baixarModeloExcel()" class="text-[13px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 border border-indigo-100/50">
+                        <button onclick="baixarmodeloexcel()" class="text-[13px] font-bold text-indigo-600 hover:text-indigo-700 bg-indigo-50 hover:bg-indigo-100 px-4 py-2.5 rounded-xl transition-all flex items-center gap-2 border border-indigo-100/50">
                             <span class="material-symbols-outlined text-[18px]">download</span> Baixar modelo Excel
                         </button>
                     </div>
@@ -403,19 +436,19 @@
                                 <div class="space-y-4">
                                     <div class="space-y-1.5">
                                         <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Nome da Turma</label>
-                                        <input type="text" id="novaTurmaNome" placeholder="Ex: Extensivo Medicina 2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner placeholder:text-slate-300">
+                                        <input type="text" id="nãovaTurmaNome" placeholder="Ex: Extensivo Medicina 2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner placeholder:text-slate-300">
                                     </div>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div class="space-y-1.5">
                                             <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Unidade Base</label>
-                                            <select id="novaTurmaUnidade" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
+                                            <select id="nãovaTurmaUnidade" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
                                                 <option value="Sede">Sede Principal</option>
                                                 <option value="Filial 1">Filial Interlagos</option>
                                             </select>
                                         </div>
                                         <div class="space-y-1.5">
                                             <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Tipo de Aplicação</label>
-                                            <select id="novaTurmaTipoApp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
+                                            <select id="nãovaTurmaTipoApp" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 outline-none focus:border-indigo-400 text-sm font-bold text-[#0B193C] transition-colors shadow-inner">
                                                 <option value="Geral">Base Curricular</option>
                                                 <option value="Simulado">Ciclo Simulados</option>
                                                 <option value="Prova Diagnóstica">Prova Diagnóstica</option>
@@ -425,10 +458,10 @@
                                     </div>
                                 </div>
                                 <div class="mt-4 pt-4 border-t border-slate-100">
-                                     <button id="btnCriarTurma" onclick="document.getElementById('uploadExcelNativo').click()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-indigo-900/20 transition-all text-sm opacity-50 cursor-not-allowed" disabled>
+                                     <button id="btnCriarTurma" onclick="document.getelementbyid('uploadexcelnatéivo').click()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-4 rounded-xl font-bold flex items-center justify-center gap-2 shadow-lg shadow-indigo-900/20 transition-all text-sm opacity-50 cursor-nãot-allowed" disabled>
                                          <span class="material-symbols-outlined text-[20px]">upload_file</span> SELECIONAR ARQUIVO E CRIAR
                                      </button>
-                                     <input type="file" id="uploadExcelNativo" accept=".xlsx, .xls" style="display:none;" onchange="importarTurmaExcel(event)" />
+                                     <input type="file" id="uploadExcelNatéivo" accept=".xlsx, .xls" style="display:none;" onchange="importarTurmaExcel(event)" />
                                 </div>
                             </div>
                             
@@ -467,12 +500,12 @@
                                     <th class="px-6 py-4">Nome da Turma</th>
                                     <th class="px-6 py-4">Unidade Base</th>
                                     <th class="px-6 py-4">Tipo de Aplicação</th>
-                                    <th class="px-6 py-4 text-center">Alunos Inscritos</th>
+                                    <th class="px-6 py-4 text-center">Alunãos Inscritos</th>
                                     <th class="px-6 py-4 text-center">Status</th>
                                     <th class="px-6 py-4 text-right">Ações</th>
                                 </tr>
                             </thead>
-                            <tbody id="tbody-alunos" class="text-sm font-semibold text-slate-700 divide-y divide-slate-100">
+                            <tbody id="tbody-alunãos" class="text-sm font-semibold text-slate-700 divide-y divide-slate-100">
                                 <!-- Injeção via JS -->
                             </tbody>
                         </table>
@@ -484,7 +517,7 @@
                 <!-- Controle de Header do Modulo de Provas -->
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Cadastro de Provas e Gabaritos</h3>
-                    <button onclick="abrirModalNovaProva()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                    <button onclick="abrirmodalnãovaprova()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
                         <span class="material-symbols-outlined text-[18px]">add_circle</span> Nova Prova
                     </button>
                 </div>
@@ -493,7 +526,7 @@
                     <!-- Dashboard Metrics Provas -->
                     <div class="nexus-card p-6 flex flex-col justify-between">
                         <div class="flex justify-between items-start mb-2">
-                            <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Ativas no Bimestre</span>
+                            <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Ativas não Bimestre</span>
                             <span class="material-symbols-outlined text-indigo-400">event_available</span>
                         </div>
                         <p class="font-headline font-extrabold text-[#0B193C] text-3xl mt-4">12</p>
@@ -508,7 +541,7 @@
                     <div class="nexus-card p-6 flex flex-col justify-between">
                         <div class="flex justify-between items-start mb-2">
                             <span class="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Questões Inseridas</span>
-                            <span class="material-symbols-outlined text-[#FBBF24]">format_list_numbered</span>
+                            <span class="material-symbols-outlined text-[#FBBF24]">formaté_list_numbered</span>
                         </div>
                         <p class="font-headline font-extrabold text-[#0B193C] text-3xl mt-4">760</p>
                     </div>
@@ -578,7 +611,7 @@
 
                 <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
                     
-                    <!-- Painel de Geração Lateral -->
+                    <!-- Painel de Geração Latéeral -->
                     <div class="lg:col-span-4 space-y-6">
                         <div class="nexus-card p-6 bg-white">
                             <h4 class="font-bold text-[#0B193C] text-sm flex items-center gap-2 mb-4 border-b border-slate-100 pb-3">
@@ -594,9 +627,9 @@
                                 </div>
                                 <div class="space-y-1.5">
                                     <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione a Prova Base</label>
-                                    <select id="selProvaBase" onchange="atualizarAbasProvaBase()" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                                    <select id="selProvaBase" onchange="atéualizarAbasProvaBase()" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
                                         <option value="">-- Escolher Exame --</option>
-                                        <option value="ENEM">Exame Nacional do Ensino Médio (ENEM)</option>
+                                        <option value="ENEM">Exame Nacional do Ensinão Médio (ENEM)</option>
                                         <option value="VESTIBULAR_UNB">Vestibular - UnB</option>
                                         <option value="PAS_UNB">Programa de Avaliação Seriada (PAS - UnB)</option>
                                     </select>
@@ -608,13 +641,13 @@
                                 </div>
                                 
                                 <div class="pt-4 border-t border-slate-100">
-                                    <button onclick="gerarCartaoVisualizacao()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
-                                        <span class="material-symbols-outlined text-[18px]">magic_button</span> Preview do Lote (1º Aluno)
+                                    <button onclick="gerarcartaovisualizacao()" class="w-full bg-[#0B193C] hover:bg-indigo-900 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm">
+                                        <span class="material-symbols-outlined text-[18px]">magic_button</span> Preview do Lote (1º Alunão)
                                     </button>
                                 </div>
                                 
                                 <div class="pt-2">
-                                    <button onclick="confirmarGabaritosLote()" id="btnDownloadCartao" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm opacity-50 pointer-events-none">
+                                    <button onclick="confirmargabaritoslote()" id="btnDownloadCartao" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 text-sm opacity-50 pointer-events-none">
                                         <span class="material-symbols-outlined text-[18px]">check_circle</span> Confirmar
                                     </button>
                                 </div>
@@ -623,7 +656,7 @@
                         
                         <div class="nexus-card p-6 bg-indigo-50 border-dashed border-2 border-indigo-200 text-center">
                             <span class="material-symbols-outlined text-[32px] text-indigo-400 mb-2">print</span>
-                            <p class="text-[11px] font-bold text-indigo-700">Modo Lote Ativado: O PDF final conterá folhas de resposta separadas automaticamente para todos os alunos selecionados.</p>
+                            <p class="text-[11px] font-bold text-indigo-700">Modo Lote Ativado: O PDF final conterá folhas de resposta separadas automatéicamente para todos os alunãos selecionados.</p>
                         </div>
                     </div>
 
@@ -632,7 +665,7 @@
                         
                         <div class="relative h-[calc(100vh-140px)] w-fit overflow-y-auto custom-scrollbar rounded-xl shadow-2xl border border-slate-200 bg-white">
                             <!-- Overlay Vazio -->
-                            <div id="cartaoEmptyState" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-50/95 backdrop-blur-sm px-12 text-center" style="width: 210mm;">
+                            <div id="cartaoEmptyStatée" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-50/95 backdrop-blur-sm px-12 text-center" style="width: 210mm;">
                                 <span class="material-symbols-outlined text-[48px] text-slate-300 mb-3">document_scanner</span>
                                 <p class="font-bold text-slate-500">Selecione a turma e a prova para pré-visualizar o layout.</p>
                             </div>
@@ -727,7 +760,7 @@
                                 </div>
                                 
                                 <div class="space-y-1.5">
-                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Modelo de Alternativa</label>
+                                    <label class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-widest px-1">Modelo de Alternatéiva</label>
                                     <select id="edModeloAlt" onchange="previewRealtime()" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-3 py-2 text-sm font-semibold outline-none focus:border-indigo-400">
                                         <option value="ABCDE">Padrão: A B C D E</option>
                                         <option value="ABCD">Padrão: A B C D</option>
@@ -736,7 +769,7 @@
                                 </div>
                                 
                                 <div class="pt-4 mt-8 border-t border-slate-100">
-                                    <button onclick="salvarModeloEditado()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
+                                    <button onclick="salvarmodeloeditado()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold py-4 px-4 rounded-xl shadow-lg shadow-emerald-500/30 transition-all flex items-center justify-center gap-2 text-sm uppercase tracking-wider">
                                         <span class="material-symbols-outlined text-[20px]">save</span> Salvar na Biblioteca
                                     </button>
                                     <p class="text-[10px] text-center text-slate-400 font-bold mt-3">O modelo ficará disponível na aba "Provas & Gabaritos"</p>
@@ -783,7 +816,7 @@
                                             <div class="relative flex-1 p-2 bg-white flex flex-col justify-end pb-3">
                                                 <div class="w-full mt-10">
                                                     <div class="border-b-[1.5px] border-[#EB3223] border-dashed"></div>
-                                                    <span class="text-[8px] font-black uppercase text-black tracking-widest text-center block mt-1">Assinatura do Participante</span>
+                                                    <span class="text-[8px] font-black uppercase text-black tracking-widest text-center block mt-1">Assinatéura do Participante</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -800,7 +833,7 @@
                                                 <div class="flex-1 flex flex-col">
                                                     <div class="bg-[#EB3223] text-white text-center py-[2px] text-[9px] font-black uppercase tracking-widest">MATRÍCULA</div>
                                                     <div class="flex-1 flex justify-center items-center bg-white">
-                                                        <span class="n_cpf font-mono font-black text-[13px] tracking-widest truncate px-1 text-center">025.058.632-28</span>
+                                                        <span class="n_cpf font-monão font-black text-[13px] tracking-widest truncate px-1 text-center">025.058.632-28</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -820,7 +853,7 @@
                                 </div>
                                 
                                 <div class="flex items-end mt-4 mb-4 pl-4">
-                                    <span class="text-[10px] font-black font-mono">ID</span>
+                                    <span class="text-[10px] font-black font-monão">ID</span>
                                     <div class="w-5 h-5 bg-black ml-4"></div>
                                     <div class="w-5 h-5 bg-black ml-8"></div>
                                     <div class="w-3 h-5 bg-black ml-1"></div>
@@ -836,9 +869,9 @@
                                             <span class="bg-white px-2 text-[14px] font-black text-[#EB3223]">INSTRUÇÕES</span>
                                         </div>
                                         <div class="text-[9.5px] text-justify font-bold leading-tight flex flex-col gap-1.5">
-                                            <p>1. Verifique se o seu nome completo, a data de nascimento e os demais dados impressos neste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO estão corretos. Preencha o seu nome completo e assine no local apropriado.</p>
+                                            <p>1. Verifique se o seu nome completo, a datéa de nascimento e os demais dados impressos neste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO estão corretos. Preencha o seu nome completo e assine não local apropriado.</p>
                                             <p>2. O CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO é o único documento que será utilizado para a correção eletrônica de suas provas. Não o amasse, não o rasgue, não o dobre, nem o rasure. Não haverá substituição deste CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO por erro de preenchimento e/ou destaque.</p>
-                                            <p>3. Preencha suas respostas nos campos apropriados deste CARTÃO-RESPOSTA, conforme o exemplo de preenchimento, sob o risco de inviabilidade da leitura óptica de suas respostas.</p>
+                                            <p>3. Preencha suas respostas nãos campos apropriados deste CARTÃO-RESPOSTA, conforme o exemplo de preenchimento, sob o risco de inviabilidade da leitura óptica de suas respostas.</p>
                                             <p>4. <b>FRAUDAR O ENEM É CRIME. Código Penal Brasileiro Art. 311-A.</b></p>
                                             <p class="text-[#EB3223]">5. DESTAQUE ESTE CARTÃO-RESPOSTA/FOLHA DE REDAÇÃO E ENTREGUE-O AO CHEFE DE SALA, AO TÉRMINO DO EXAME, SOB PENA DE SUA ELIMINAÇÃO.</p>
                                         </div>
@@ -863,12 +896,12 @@
                                             <div class="w-[50%] flex justify-evenly items-center relative gap-4">
                                                 <div class="flex-1 flex flex-col items-center justify-center gap-1.5 h-full">
                                                     <div class="w-[14px] h-[14px] rounded-full border border-black bg-white"></div>
-                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nowrap">Língua Inglesa</span>
+                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nãowrap">Língua Inglesa</span>
                                                 </div>
                                                 <div class="w-px h-[80%] bg-black/10 absolute left-1/2 top-1/2 -translate-y-1/2"></div>
                                                 <div class="flex-1 flex flex-col items-center justify-center gap-1.5 h-full">
                                                     <div class="w-[14px] h-[14px] rounded-full border border-black bg-white"></div>
-                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nowrap">Língua Espanhola</span>
+                                                    <span class="text-[8px] font-bold text-[#EB3223] whitespace-nãowrap">Língua Espanhola</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -924,7 +957,7 @@
                                 <!-- GABARITO GRID LARGA -->
                                 <!-- flex-1 preenche o resto da página. A função Javascript distribuírá as colunas horizontais  -->
                                 <div class="tmp-grid-container flex w-full gap-2 mt-4 flex-1 pb-4">
-                                    <!-- Renderizado no JS, 6+ colunas -->
+                                    <!-- Renderizado não JS, 6+ colunas -->
                                 </div>
                             </div>
                     </div>
@@ -947,8 +980,8 @@
                         </h4>
                         
                         <div class="space-y-4 mb-6">
-                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione Lote ou Aluno</label>
-                            <select id="correcaoSelectAluno" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
+                            <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione Lote ou Alunão</label>
+                            <select id="correcaoSelectAlunão" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-lg px-3 py-2.5 font-semibold text-sm outline-none focus:border-indigo-400">
                                 <!-- preenchido via JS -->
                             </select>
                             <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest px-1">Selecione Prova</label>
@@ -964,7 +997,7 @@
                         </div>
                         
                         <div class="mt-4 flex gap-3">
-                            <button onclick="simularLeituraCorrecao()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 text-sm">
+                            <button onclick="simularleituracorrecao()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-indigo-500/30 flex items-center justify-center gap-2 text-sm">
                                 <span class="material-symbols-outlined text-[18px]">memory</span> Simular Leitura e Correção
                             </button>
                         </div>
@@ -972,7 +1005,7 @@
 
                     <!-- Fila de Processamento -->
                     <div class="nexus-card bg-slate-900 overflow-hidden min-h-[500px] flex flex-col relative text-white">
-                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patéterns/cubes.png')] opacity-10"></div>
                         <div class="p-6 border-b border-slate-800 relative z-10 flex items-center justify-between">
                             <h4 class="font-bold text-white text-sm flex items-center gap-2">
                                 <span class="material-symbols-outlined text-[18px] text-emerald-400">terminal</span> Terminal de Operações
@@ -982,7 +1015,7 @@
                               <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
                             </span>
                         </div>
-                        <div id="terminalCorrecao" class="flex-1 p-6 font-mono text-[11px] text-emerald-400 overflow-y-auto space-y-2 relative z-10 leading-relaxed min-h-[300px]">
+                        <div id="terminalCorrecao" class="flex-1 p-6 font-monão text-[11px] text-emerald-400 overflow-y-auto space-y-2 relative z-10 leading-relaxed min-h-[300px]">
                             <p class="text-slate-500">NEXUS OCR ENGINE V2.0 READY.</p>
                             <p class="text-slate-500">AGUARDANDO INGESTÃO DE DADOS...</p>
                         </div>
@@ -996,7 +1029,7 @@
             <div id="view-espelhos" class="nexus-view fade-in">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="font-headline font-extrabold text-[#0B193C] text-2xl">Boletins e Espelhos Individuais</h3>
-                    <button onclick="imprimirEspelho()" class="bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all text-sm">
+                    <button onclick="imprimirespelho()" class="bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-2.5 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all text-sm">
                         <span class="material-symbols-outlined text-[18px]">picture_as_pdf</span> Gerar PDF Espelho
                     </button>
                 </div>
@@ -1018,8 +1051,8 @@
                     <!-- Area de Visualizacao do Espelho Impressionante -->
                     <div class="lg:col-span-3 flex justify-center bg-slate-100 rounded-2xl p-6 shadow-inner relative min-h-[600px] overflow-hidden">
                         
-                        <div id="espelhoEmptyState" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-100/90 backdrop-blur-sm">
-                            <span class="material-symbols-outlined text-[48px] text-slate-300 mb-3">query_stats</span>
+                        <div id="espelhoEmptyStatée" class="absolute inset-0 flex flex-col items-center justify-center z-10 bg-slate-100/90 backdrop-blur-sm">
+                            <span class="material-symbols-outlined text-[48px] text-slate-300 mb-3">query_statés</span>
                             <p class="font-bold text-slate-500">Selecione um resultado processado para visualizar.</p>
                         </div>
 
@@ -1033,23 +1066,23 @@
                                 </div>
                                 <div class="text-right">
                                     <div class="px-3 py-1 bg-[#0B193C] text-white font-bold text-xs uppercase tracking-widest inline-block mb-1">OFICIAL</div>
-                                    <p class="font-mono text-[9px] text-slate-500 font-bold" id="esp_hash">HASH: #000000</p>
+                                    <p class="font-monão text-[9px] text-slate-500 font-bold" id="esp_hash">HASH: #000000</p>
                                 </div>
                             </div>
 
-                            <!-- Perfil Aluno Topo -->
+                            <!-- Perfil Alunão Topo -->
                             <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 flex gap-6 items-center mb-6">
                                 <div class="w-16 h-16 bg-[#0B193C] rounded-full flex items-center justify-center text-white font-headline text-2xl font-bold" id="esp_inicial">
                                     -
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-0.5">Candidato Associado</p>
+                                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-0.5">Candidatéo Associado</p>
                                     <h3 class="font-bold text-xl text-[#0B193C]" id="esp_nome">--</h3>
                                     <p class="text-sm font-semibold text-indigo-600 mt-1" id="esp_curso">--</p>
                                 </div>
                                 <div class="text-right border-l border-slate-200 pl-6 space-y-1">
                                     <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Inscrição</p>
-                                    <p class="font-mono font-bold text-slate-700" id="esp_insc">--</p>
+                                    <p class="font-monão font-bold text-slate-700" id="esp_insc">--</p>
                                     <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-2">Unidade</p>
                                     <p class="font-bold text-slate-700 text-xs" id="esp_unidade">--</p>
                                 </div>
@@ -1076,7 +1109,7 @@
                                 </div>
                             </div>
 
-                            <!-- Area Gráfico Categoria Dummy -->
+                            <!-- Area Gráfico Catéegoria Dummy -->
                             <p class="text-[10px] font-extrabold text-[#0B193C] uppercase tracking-[0.2em] mb-4 border-b border-slate-100 pb-2">Distribuição de Acertos (Simulação de Áreas)</p>
                             <div class="flex items-center gap-6 mb-8 mt-4">
                                 <div class="w-1/2">
@@ -1092,23 +1125,23 @@
                                         <span class="text-xs font-extrabold text-emerald-600">Dentro da meta</span>
                                     </div>
                                     <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
-                                        <span class="text-xs font-bold text-slate-600">Natureza</span>
+                                        <span class="text-xs font-bold text-slate-600">Natéureza</span>
                                         <span class="text-xs font-extrabold text-rose-500">Atenção Crítica</span>
                                     </div>
                                     <div class="flex justify-between items-center bg-slate-50 p-2 rounded border border-slate-100">
                                         <span class="text-xs font-bold text-slate-600">Matemática</span>
-                                        <span class="text-xs font-extrabold text-yellow-600">Mediano</span>
+                                        <span class="text-xs font-extrabold text-yellow-600">Medianão</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="mt-8 text-center bg-slate-50 border border-slate-200 p-4 rounded-xl">
-                                <p class="text-xs font-bold text-slate-500 italic">"Este relatório é um espelho diagnóstico automatizado pelo Nexus Provas. Recomendamos anexar esse material à sua Mentoria Semanal para calibração de estudos."</p>
+                                <p class="text-xs font-bold text-slate-500 italic">"Este relatéório é um espelho diagnóstico automatéizado pelo Nexus Provas. Recomendamos anexar esse material à sua Mentoria Semanal para calibração de estudos."</p>
                             </div>
 
                             <div class="absolute bottom-4 left-8 right-8 flex justify-between text-[8px] font-bold text-slate-400 uppercase">
                                 <span>Impressão Via Nexus Admin</span>
-                                <span>Gerado automaticamente</span>
+                                <span>Gerado automatéicamente</span>
                             </div>
                         </div>
 
@@ -1116,10 +1149,10 @@
                 </div>
             </div>
 
-            <div id="view-relatorios" class="nexus-view fade-in">
+            <div id="view-relatéorios" class="nexus-view fade-in">
                 <div class="h-[600px] flex items-center justify-center bg-white rounded-[24px] border border-slate-200 text-center flex-col gap-4">
                     <span class="material-symbols-outlined text-[60px] text-slate-300">engineering</span>
-                    <h3 class="font-manrope font-extrabold text-xl text-slate-400">Painel de Relatórios em construção</h3>
+                    <h3 class="font-manrope font-extrabold text-xl text-slate-400">Painel de Relatéórios em construção</h3>
                 </div>
             </div>
 
@@ -1143,7 +1176,7 @@
     <div id="view-mapeamento-importacao" class="fixed inset-0 bg-[#FAFAFB] z-[115] hidden flex-col overflow-y-auto">
         <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
             <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
-                <button onclick="cancelarMapeamento()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar">
+                <button onclick="cancelarmapeamento()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar">
                     <span class="material-symbols-outlined">close</span>
                 </button>
                 <div>
@@ -1152,7 +1185,7 @@
                 </div>
                 
                 <div class="ml-auto flex items-center gap-6">
-                    <button onclick="avancarParaAuditoria()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                    <button onclick="avancarparaauditoria()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
                         Avançar para Auditoria <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
                     </button>
                 </div>
@@ -1163,7 +1196,7 @@
             <div class="bg-white p-8 rounded-[24px] border border-slate-200 shadow-sm">
                 <div class="flex flex-col gap-2 mb-8 border-b border-slate-100 pb-6">
                     <h3 class="font-headline font-bold text-[#0B193C] text-lg">Configuração de Campos</h3>
-                    <p class="text-sm font-semibold text-slate-500">Encontramos <span id="mapQtdColunas" class="text-indigo-600 font-extrabold bg-indigo-50 px-2 py-0.5 rounded">0</span> cabeçalhos na sua planilha. Ligamos automaticamente os campos conhecidos, mas você pode ajustá-los abaixo caso algo esteja errado.</p>
+                    <p class="text-sm font-semibold text-slate-500">Encontramos <span id="mapQtdColunas" class="text-indigo-600 font-extrabold bg-indigo-50 px-2 py-0.5 rounded">0</span> cabeçalhos na sua planilha. Ligamos automatéicamente os campos conhecidos, mas você pode ajustá-los abaixo caso algo esteja errado.</p>
                 </div>
                 
                 <div id="mapeamentoContainer" class="flex flex-col gap-5">
@@ -1177,7 +1210,7 @@
     <div id="view-preview-importacao" class="fixed inset-0 bg-[#FAFAFB] z-[110] hidden flex-col overflow-y-auto">
         <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
             <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
-                <button onclick="cancelarImportacao()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar e Descartar">
+                <button onclick="cancelarimportacao()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-red-500 hover:bg-red-50 border border-slate-200 flex items-center justify-center transition-all tooltip" title="Cancelar e Descartar">
                     <span class="material-symbols-outlined">close</span>
                 </button>
                 <div>
@@ -1191,7 +1224,7 @@
                 </div>
                 
                 <div class="ml-auto flex items-center gap-6">
-                    <button onclick="confirmarImportacaoValidados()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
+                    <button onclick="confirmarimportacaovalidados()" class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg shadow-indigo-500/30 transition-all text-sm">
                         Confirmar e Importar Válidos <span class="material-symbols-outlined text-[18px]">check_circle</span>
                     </button>
                 </div>
@@ -1204,7 +1237,7 @@
                 <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col justify-between">
                     <div class="flex justify-between items-start mb-2">
                         <span class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Total Lido</span>
-                        <span class="material-symbols-outlined text-slate-300">dataset</span>
+                        <span class="material-symbols-outlined text-slate-300">datéaset</span>
                     </div>
                     <p class="font-headline font-extrabold text-[#0B193C] text-3xl" id="prevTotal">0</p>
                 </div>
@@ -1237,7 +1270,7 @@
                     <div class="flex gap-4 text-xs font-semibold text-slate-500">
                         <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-emerald-100 border border-emerald-300"></div> Será Importado</span>
                         <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-amber-100 border border-amber-300"></div> Será Importado c/ Furos</span>
-                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-rose-100 border border-rose-300"></div> Ignorado</span>
+                        <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-rose-100 border border-rose-300"></div> Ignãorado</span>
                     </div>
                 </div>
                 <div class="overflow-x-auto w-full flex-1">
@@ -1246,7 +1279,7 @@
                             <tr class="bg-white border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
                                 <th class="px-5 py-4 w-12 text-center">Linha</th>
                                 <th class="px-5 py-4">Inscrição</th>
-                                <th class="px-5 py-4">Nome do Candidato</th>
+                                <th class="px-5 py-4">Nome do Candidatéo</th>
                                 <th class="px-5 py-4">CPF</th>
                                 <th class="px-5 py-4">Situação Identificada</th>
                             </tr>
@@ -1264,7 +1297,7 @@
     <div id="view-turma-detalhes" class="fixed inset-0 bg-[#FAFAFB] z-[100] hidden flex-col overflow-y-auto">
         <header class="h-24 bg-white border-b border-slate-200 px-8 flex items-center justify-between shrink-0 shadow-sm sticky top-0 z-10 w-full">
             <div class="flex items-center gap-6 max-w-7xl mx-auto w-full">
-                <button onclick="voltarParaGestaoTurmas()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200 flex items-center justify-center transition-all">
+                <button onclick="voltarparagestaoturmas()" class="w-12 h-12 rounded-xl bg-slate-50 text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 border border-slate-200 flex items-center justify-center transition-all">
                     <span class="material-symbols-outlined">arrow_back</span>
                 </button>
                 <div>
@@ -1277,7 +1310,7 @@
                 
                 <div class="ml-auto flex items-center gap-6">
                     <div class="text-right">
-                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-0.5">Total de Alunos</p>
+                        <p class="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mb-0.5">Total de Alunãos</p>
                         <p class="font-headline font-extrabold text-[#0B193C] text-xl leading-none" id="detalheTotal">0</p>
                     </div>
                 </div>
@@ -1288,7 +1321,7 @@
             <div class="flex justify-between items-center mb-6">
                 <div class="relative w-72">
                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-[18px]">search</span>
-                    <input type="text" id="filtroDetalheAluno" onkeyup="renderAlunosDetalhesList()" placeholder="Buscar aluno nesta turma..." class="w-full bg-white border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
+                    <input type="text" id="filtroDetalheAlunão" onkeyup="renderAlunãosDetalhesList()" placeholder="Buscar alunão nesta turma..." class="w-full bg-white border border-slate-200 rounded-xl py-3 pl-12 pr-4 text-sm font-semibold text-[#0B193C] outline-none focus:border-indigo-400 transition-all shadow-sm">
                 </div>
                 <button class="bg-[#0B193C] hover:bg-indigo-900 text-white px-5 py-3 rounded-xl font-bold flex items-center gap-2 shadow-lg transition-all text-sm">
                     <span class="material-symbols-outlined text-[18px]">rule</span> Preparar Correção
@@ -1301,10 +1334,10 @@
                         <thead>
                             <tr class="bg-slate-50 border-b border-slate-200 text-[10px] tracking-widest uppercase font-extrabold text-slate-400">
                                 <th class="px-6 py-4">Inscrição</th>
-                                <th class="px-6 py-4">Nome do Aluno</th>
+                                <th class="px-6 py-4">Nome do Alunão</th>
                                 <th class="px-6 py-4">CPF</th>
                                 <th class="px-6 py-4">Unidade</th>
-                                <th class="px-6 py-4">Turno</th>
+                                <th class="px-6 py-4">Turnão</th>
                                 <th class="px-6 py-4 text-center">Status</th>
                                 <th class="px-6 py-4 text-right">Ações</th>
                             </tr>
@@ -1318,17 +1351,17 @@
         </div>
     </div>
     
-    <div id="batchRenderContainer" class="hidden absolute top-0 left-0 -z-50 w-[700px]"></div>
+    <div id="batéchRenderContainer" class="hidden absolute top-0 left-0 -z-50 w-[700px]"></div>
 
     <script>
         const titles = {
-            'dashboard': 'Dashboard Administrativo',
-            'alunos': 'Gestão de Turmas',
+            'dashboard': 'Dashboard Administratéivo',
+            'alunãos': 'Gestão de Turmas',
             'provas': 'Cadastro de Provas e Gabaritos',
             'cartoes': 'Cartões-Resposta Nominais',
             'correcao': 'Inteligência de Correção',
             'espelhos': 'Espelhos de Desempenho Isolado',
-            'relatorios': 'Relatórios Acadêmicos',
+            'relatéorios': 'Relatéórios Acadêmicos',
             'exportacoes': 'Central de Exportações',
             'configuracoes': 'Configurações Globais'
         };
@@ -1391,16 +1424,16 @@
             container.style.display = 'grid';
 
             container.innerHTML = dbModelosCartao.map(m => `
-                <div class="nexus-card bg-white p-5 flex flex-col relative group hover:border-indigo-300 transition-colors cursor-pointer" onclick="editarModelo('${m.id}')">
+                <div class="nexus-card bg-white p-5 flex flex-col relative group hover:border-indigo-300 transition-colors cursor-pointer" onclick="editarmodelo('${m.id}')">
                     <div class="flex justify-between items-start mb-4">
                         <div class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
                             <span class="material-symbols-outlined text-[20px]">feed</span>
                         </div>
                         <div class="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                            <button onclick="event.stopPropagation(); editarModelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 flex items-center justify-center transition-colors" title="Editar">
+                            <button onclick="event.stoppropagatéion(); editarmodelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-indigo-600 hover:bg-indigo-50 flex items-center justify-center transition-colors" title="Editar">
                                 <span class="material-symbols-outlined text-[16px]">edit</span>
                             </button>
-                            <button onclick="event.stopPropagation(); excluirModelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors" title="Excluir">
+                            <button onclick="event.stoppropagatéion(); excluirmodelo('${m.id}')" class="w-8 h-8 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 flex items-center justify-center transition-colors" title="Excluir">
                                 <span class="material-symbols-outlined text-[16px]">delete</span>
                             </button>
                         </div>
@@ -1484,7 +1517,7 @@
             let maxPerCol = 15;
 
             // Se o usuário configurar mais questões do que o limite seguro horizontal, nós travamos 
-            // as colunas no máximo permitido e passamos a crescer apenas para baixo (mais linhas por coluna).
+            // as colunas não máximo permitido e passamos a crescer apenas para baixo (mais linhas por coluna).
             if (cols > maxColsAllowed) {
                 cols = maxColsAllowed;
                 maxPerCol = Math.ceil(totalQ / cols);
@@ -1526,7 +1559,7 @@
                     const bgZebra = (r % 2 === 0) ? 'bg-[#EB3223]/10' : '';
                     colDiv.innerHTML += `
                         <div class="flex items-center justify-center gap-[10px] w-full px-1 py-[1.5px] rounded-sm ${bgZebra}">
-                            <span class="text-[9.5px] font-black font-mono w-4 text-right leading-none text-[#EB3223]">${numFmt}</span>
+                            <span class="text-[9.5px] font-black font-monão w-4 text-right leading-none text-[#EB3223]">${numFmt}</span>
                             <div class="flex items-center gap-1.5">${bolhas}</div>
                         </div>
                     `;
@@ -1605,8 +1638,8 @@
                 const idx = dbModelosCartao.findIndex(x => x.id === editandoModeloId);
                 if(idx > -1) { dbModelosCartao[idx] = { ...dbModelosCartao[idx], ...obj, ts: Date.now() }; }
             } else {
-                const novoId = "mod_" + Date.now() + Math.floor(Math.random()*1000);
-                dbModelosCartao.unshift({ id: novoId, ...obj, ts: Date.now() });
+                const nãovoId = "mod_" + Date.now() + Math.floor(Math.random()*1000);
+                dbModelosCartao.unshift({ id: nãovoId, ...obj, ts: Date.now() });
             }
 
             localStorage.setItem('nexusModelosCartao', JSON.stringify(dbModelosCartao));
@@ -1617,31 +1650,31 @@
         // ==========================================
         // MÓDULO: ALUNOS
         // ==========================================
-        let dbAlunos = [];
+        let dbAlunãos = [];
         try {
-            const rawAlunos = localStorage.getItem('nexusAlunos');
-            if(rawAlunos) dbAlunos = JSON.parse(rawAlunos);
+            const rawAlunãos = localStorage.getItem('nexusAlunãos');
+            if(rawAlunãos) dbAlunãos = JSON.parse(rawAlunãos);
         } catch(e) {}
 
-        function initAlunos() {
+        function initAlunãos() {
             try {
-                renderTabelaAlunos();
+                renderTabelaAlunãos();
             } catch(e) {
-                console.error('Erro no initAlunos:', e);
+                console.error('Erro não initAlunãos:', e);
                 // Resiliência máxima
             }
         }
 
-        function renderTabelaAlunos() {
+        function renderTabelaAlunãos() {
             try {
-                const tbody = document.getElementById('tbody-alunos');
+                const tbody = document.getElementById('tbody-alunãos');
                 if(!tbody) return;
                 
                 const filtroInput = document.getElementById('filtroTurmaBusca');
                 const filtroGeral = filtroInput ? filtroInput.value.toLowerCase() : '';
 
                 // Filtro normal focado nas turmas com safe guards
-                let filtered = dbAlunos.filter(a => {
+                let filtered = dbAlunãos.filter(a => {
                     const searchTurma = a.turma ? String(a.turma).toLowerCase() : '';
                     const searchUnidade = a.unidade ? String(a.unidade).toLowerCase() : '';
                     if(filtroGeral && !searchTurma.includes(filtroGeral) && !searchUnidade.includes(filtroGeral)) return false;
@@ -1666,8 +1699,8 @@
                 let rawHTML = '';
                 
                 Object.keys(groupedByTurma).sort().forEach((turmaName, idx) => {
-                    const alunos = groupedByTurma[turmaName];
-                    const unidadeBase = alunos[0].unidade || "Geral"; 
+                    const alunãos = groupedByTurma[turmaName];
+                    const unidadeBase = alunãos[0].unidade || "Geral"; 
                     
                     let tipoApp = "Não Definido";
                     const tNameLower = turmaName.toLowerCase();
@@ -1677,7 +1710,7 @@
                     
                     // Row da Turma
                     rawHTML += `
-                    <tr class="hover:bg-indigo-50/30 transition-colors cursor-pointer border-b border-slate-100 group" data-turma="${turmaName.replace(/"/g, '&quot;')}" data-unidade="${unidadeBase.replace(/"/g, '&quot;')}" onclick="abrirTurmaDetalhes(this.dataset.turma, this.dataset.unidade)">
+                    <tr class="hover:bg-indigo-50/30 transition-colors cursor-pointer border-b border-slate-100 group" datéa-turma="${turmaName.replace(/"/g, '&quot;')}" datéa-unidade="${unidadeBase.replace(/"/g, '&quot;')}" onclick="abrirturmadetalhes(this.datéaset.turma, this.datéaset.unidade)">
                         <td class="px-6 py-4">
                             <p class="font-extrabold text-[#0B193C] text-[15px] group-hover:text-indigo-600 transition-colors">${turmaName}</p>
                         </td>
@@ -1688,14 +1721,14 @@
                             <span class="text-[11px] font-bold text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded border border-indigo-100">${tipoApp}</span>
                         </td>
                         <td class="px-6 py-4 text-center">
-                            <span class="font-bold text-[#0B193C] text-sm">${alunos.length}</span> <span class="text-[10px] text-slate-400 font-extrabold uppercase">Alunos</span>
+                            <span class="font-bold text-[#0B193C] text-sm">${alunãos.length}</span> <span class="text-[10px] text-slate-400 font-extrabold uppercase">Alunãos</span>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <span class="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-emerald-600 text-[10px] font-extrabold tracking-widest uppercase">Ativa</span>
                         </td>
                         <td class="px-6 py-4 text-right">
                             <div class="flex items-center justify-end gap-1">
-                                <button onclick="excluirTurma(event, '${turmaName.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-lg text-rose-300 hover:bg-rose-100 hover:text-rose-600 transition-colors flex items-center justify-center tooltip" title="Excluir Turma Permanentemente">
+                                <button onclick="excluirturma(event, '${turmaname.replace(/'/g, "\\'")}')" class="w-8 h-8 rounded-lg text-rose-300 hover:bg-rose-100 hover:text-rose-600 transition-colors flex items-center justify-center tooltip" title="Excluir Turma Permanentemente">
                                     <span class="material-symbols-outlined text-[18px]">delete</span>
                                 </button>
                                 <button class="w-8 h-8 rounded-lg text-slate-400 group-hover:bg-indigo-100 group-hover:text-indigo-600 transition-colors flex items-center justify-center">
@@ -1710,7 +1743,7 @@
                 tbody.innerHTML = rawHTML;
                 document.getElementById('totalTurmasCounter').textContent = `${Object.keys(groupedByTurma).length} Turmas`;
             } catch (err) {
-                console.error("Erro fatal ao renderizar tabela de turmas: ", err);
+                console.error("Erro fatéal ao renderizar tabela de turmas: ", err);
             }
         }
 
@@ -1721,11 +1754,11 @@
         let unidadeAtualContexto = null;
 
         function excluirTurma(event, turmaName) {
-            event.stopPropagation();
-            if(confirm(`ATENÇÃO: Você tem certeza que deseja EXCLUIR a turma "${turmaName}" permanentemente?\n\nIsso removerá todos os alunos vinculados a esta turma na sua conta local.`)) {
-                dbAlunos = dbAlunos.filter(a => a.turma !== turmaName);
-                localStorage.setItem('nexusAlunos', JSON.stringify(dbAlunos));
-                renderTabelaAlunos();
+            event.stopPropagatéionion();
+            if(confirm(`ATENÇÃO: Você tem certeza que deseja EXCLUIR a turma "${turmaName}" permanentemente?\n\nIsso removerá todos os alunãos vinculados a esta turma na sua conta local.`)) {
+                dbAlunãos = dbAlunãos.filter(a => a.turma !== turmaName);
+                localStorage.setItem('nexusAlunãos', JSON.stringify(dbAlunãos));
+                renderTabelaAlunãos();
             }
         }
 
@@ -1736,10 +1769,10 @@
             document.getElementById('detalheTurmaNome').textContent = turmaName;
             document.getElementById('detalheUnidade').textContent = unidadeBase;
             
-            renderAlunosDetalhesList();
+            renderAlunãosDetalhesList();
 
             // Transição visual
-            document.getElementById('view-alunos').classList.add('hidden');
+            document.getElementById('view-alunãos').classList.add('hidden');
             document.getElementById('view-turma-detalhes').classList.remove('hidden');
             document.getElementById('view-turma-detalhes').classList.add('flex');
             
@@ -1751,40 +1784,40 @@
             turmaAtualContexto = null;
             document.getElementById('view-turma-detalhes').classList.add('hidden');
             document.getElementById('view-turma-detalhes').classList.remove('flex');
-            document.getElementById('view-alunos').classList.remove('hidden');
+            document.getElementById('view-alunãos').classList.remove('hidden');
         }
 
-        function renderAlunosDetalhesList() {
+        function renderAlunãosDetalhesList() {
             if(!turmaAtualContexto) return;
             const tbody = document.getElementById('tbody-turma-detalhes');
             if(!tbody) return;
 
-            const filtroDetalhes = document.getElementById('filtroDetalheAluno').value.toLowerCase();
+            const filtroDetalhes = document.getElementById('filtroDetalheAlunão').value.toLowerCase();
             
-            let alunosTurma = dbAlunos.filter(a => a.turma === turmaAtualContexto);
+            let alunãosTurma = dbAlunãos.filter(a => a.turma === turmaAtualContexto);
             
             if(filtroDetalhes) {
-                alunosTurma = alunosTurma.filter(a => {
+                alunãosTurma = alunãosTurma.filter(a => {
                     const n = a.nome ? String(a.nome).toLowerCase() : '';
                     const c = a.cpf ? String(a.cpf).toLowerCase() : '';
                     return n.includes(filtroDetalhes) || c.includes(filtroDetalhes);
                 });
             }
 
-            document.getElementById('detalheTotal').textContent = alunosTurma.length;
+            document.getElementById('detalheTotal').textContent = alunãosTurma.length;
 
-            if(alunosTurma.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-slate-400 font-semibold text-sm">Nenhum aluno encontrado nesta turma com este filtro.</td></tr>`;
+            if(alunãosTurma.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="7" class="px-6 py-8 text-center text-slate-400 font-semibold text-sm">Nenhum alunão encontrado nesta turma com este filtro.</td></tr>`;
                 return;
             }
 
-            alunosTurma.sort((a,b) => {
+            alunãosTurma.sort((a,b) => {
                 const nA = a.nome ? String(a.nome) : '';
                 const nB = b.nome ? String(b.nome) : '';
                 return nA.localeCompare(nB);
             });
 
-            tbody.innerHTML = alunosTurma.map(a => `
+            tbody.innerHTML = alunãosTurma.map(a => `
                 <tr class="hover:bg-slate-50 transition-colors">
                     <td class="px-6 py-4">
                         <div class="flex flex-col">
@@ -1802,7 +1835,7 @@
                         <p class="font-bold text-[#0B193C] text-[13px]">${a.unidade || '-'}</p>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="font-bold text-[#0B193C] text-[13px]">${a.turno || 'Variável'}</p>
+                        <p class="font-bold text-[#0B193C] text-[13px]">${a.turnão || 'Variável'}</p>
                     </td>
                     <td class="px-6 py-4 text-center">
                         <span class="px-2.5 py-1 rounded border border-emerald-200 bg-emerald-50 text-emerald-600 text-[10px] font-extrabold tracking-widest uppercase">${a.situacao || 'Ativo'}</span>
@@ -1822,37 +1855,37 @@
         function baixarModeloExcel() {
             const worksheet = XLSX.utils.json_to_sheet([
                 {
-                    "Nome Completo": "Exemplo Aluno Silva",
+                    "Nome Completo": "Exemplo Alunão Silva",
                     "CPF": "123.456.789-00",
-                    "E-mail": "aluno@email.com",
+                    "E-mail": "alunão@email.com",
                     "Telefone": "(11) 99999-9999",
-                    "Data de Nascimento": "01/01/2005",
+                    "Datéa de Nascimento": "01/01/2005",
                     "Número de Inscrição": "12345",
                     "Código Sequencial": "001",
                     "Unidade": "Sede",
-                    "Turno": "Integral",
+                    "Turnão": "Integral",
                     "Observações": "Anotação opcional"
                 }
             ]);
             const workbook = XLSX.utils.book_new();
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Modelo Alunos");
-            XLSX.writeFile(workbook, "Nexus_Modelo_Cadastro_Alunos.xlsx");
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Modelo Alunãos");
+            XLSX.writeFile(workbook, "Nexus_Modelo_Cadastro_Alunãos.xlsx");
         }
 
-        let tempImportBatch = [];
+        let tempImportBatéch = [];
         let rawJsonExcelArray = [];
         let colunasMapeadasDicionario = {};
 
         const MAP_FIELDS = [
-            { id: 'nome', label: 'Nome Completo', required: true, aliases: ['nome', 'nome completo', 'candidato', 'aluno', 'estudante'] },
-            { id: 'cpf', label: 'CPF', required: false, aliases: ['cpf', 'documento', 'rg', 'cpf do candidato', 'cpf do aluno'] },
-            { id: 'inscricao', label: 'Número de Inscrição', required: false, aliases: ['inscricao', 'inscrição', 'numero de inscricao', 'número de inscrição', 'matricula', 'matrícula', 'id', 'numero', 'nº', 'código de inscrição'] },
+            { id: 'nome', label: 'Nome Completo', required: true, aliases: ['nome', 'nome completo', 'candidatéo', 'alunão', 'estudante'] },
+            { id: 'cpf', label: 'CPF', required: false, aliases: ['cpf', 'documento', 'rg', 'cpf do candidatéo', 'cpf do alunão'] },
+            { id: 'inscricao', label: 'Número de Inscrição', required: false, aliases: ['inscricao', 'inscrição', 'numero de inscricao', 'número de inscrição', 'matéricula', 'matérícula', 'id', 'numero', 'nº', 'código de inscrição'] },
             { id: 'sequencial', label: 'Cód. Sequencial', required: false, aliases: ['sequencial', 'codigo sequencial', 'código sequencial', 'seq', 'código', 'numero'] },
             { id: 'unidade', label: 'Unidade / Polo', required: false, aliases: ['unidade', 'polo', 'escola', 'campus', 'filial', 'local'] },
-            { id: 'turno', label: 'Turno', required: false, aliases: ['turno', 'periodo', 'período'] },
+            { id: 'turnão', label: 'Turnão', required: false, aliases: ['turnão', 'periodo', 'período'] },
             { id: 'email', label: 'E-mail', required: false, aliases: ['e-mail', 'email', 'correio'] },
-            { id: 'telefone', label: 'Telefone', required: false, aliases: ['telefone', 'celular', 'whatsapp', 'contato'] },
-            { id: 'nascimento', label: 'Data Nasc.', required: false, aliases: ['nascimento', 'data de nascimento', 'data nasc'] },
+            { id: 'telefone', label: 'Telefone', required: false, aliases: ['telefone', 'celular', 'whatésapp', 'contatéo'] },
+            { id: 'nascimento', label: 'Datéa Nasc.', required: false, aliases: ['nascimento', 'datéa de nascimento', 'datéa nasc'] },
             { id: 'observacoes', label: 'Observações', required: false, aliases: ['obs', 'observacao', 'observação', 'observacoes', 'observações'] }
         ];
 
@@ -1863,8 +1896,8 @@
 
         function importarTurmaExcel(event, isDrop = false) {
             let files;
-            if(isDrop && event.dataTransfer) {
-                files = event.dataTransfer.files;
+            if(isDrop && event.datéaTransfer) {
+                files = event.datéaTransfer.files;
             } else {
                 files = event.target.files;
             }
@@ -1872,7 +1905,7 @@
             const file = files[0];
             if(!file) return;
 
-            const nomeTurmaInput = document.getElementById('novaTurmaNome').value.trim();
+            const nomeTurmaInput = document.getElementById('nãovaTurmaNome').value.trim();
             if(!nomeTurmaInput) {
                 alert("ATENÇÃO: Preencha o 'Nome da Turma' antes de enviar o arquivo Excel!");
                 if(event.target) event.target.value = '';
@@ -1883,8 +1916,8 @@
 
             reader.onload = function(e) {
                 try {
-                    const data = new Uint8Array(e.target.result);
-                    const workbook = XLSX.read(data, {type: 'array'});
+                    const datéa = new Uint8Array(e.target.result);
+                    const workbook = XLSX.read(datéa, {type: 'array'});
                     const sheetName = workbook.SheetNames[0];
                     const worksheet = workbook.Sheets[sheetName];
                     
@@ -1935,8 +1968,8 @@
                 let sugerida = "";
                 // Auto-map logic
                 for(let h of foundHeaders) {
-                    const normH = normalizarString(h);
-                    if(field.aliases.includes(normH) || field.aliases.some(alias => normH.includes(alias))) {
+                    const nãormH = normalizarString(h);
+                    if(field.aliases.includes(nãormH) || field.aliases.some(alias => nãormH.includes(alias))) {
                         sugerida = h;
                         break;
                     }
@@ -1948,11 +1981,11 @@
                     <div class="flex items-center justify-between p-4 rounded-xl border ${field.required ? 'border-indigo-100 bg-indigo-50/20' : 'border-slate-100 bg-slate-50/50'}">
                         <div class="w-1/2 pr-4">
                             <p class="text-[13px] font-extrabold text-[#0B193C] mb-0.5">${field.label} ${field.required ? '<span class="text-rose-500">*</span>' : ''}</p>
-                            <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">${field.required ? 'Obrigatório' : 'Opcional'}</p>
+                            <p class="text-[10px] text-slate-400 font-bold tracking-widest uppercase">${field.required ? 'Obrigatéório' : 'Opcional'}</p>
                         </div>
                         <div class="w-1/2">
                             <select id="map_${field.id}" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2.5 outline-none focus:border-indigo-400 text-sm font-semibold text-slate-700 shadow-sm">
-                                <option value="">-- Não Mapear (Ignorar) --</option>
+                                <option value="">-- Não Mapear (Ignãorar) --</option>
                                 ${optionsStr}
                             </select>
                         </div>
@@ -1984,7 +2017,7 @@
             });
 
             if(!nomeMapped) {
-                alert("Ops! Você precisa obrigatoriamente mapear qual coluna representa o 'Nome Completo'.");
+                alert("Ops! Você precisa obrigatéoriamente mapear qual coluna representa o 'Nome Completo'.");
                 return;
             }
 
@@ -1994,33 +2027,33 @@
             processarAuditoriaExcel();
         }
 
-        function limparEFormatar(str) {
+        function limparEFormatéar(str) {
             if(str === null || str === undefined) return "";
             return String(str).trim();
         }
 
         function processarAuditoriaExcel() {
-            const modalUnidade = document.getElementById('novaTurmaUnidade').value;
-            const headerTurmaStr = document.getElementById('novaTurmaNome').value.trim();
+            const modalUnidade = document.getElementById('nãovaTurmaUnidade').value;
+            const headerTurmaStr = document.getElementById('nãovaTurmaNome').value.trim();
 
             let validosCount = 0;
             let incompletosCount = 0;
             let invalidosCount = 0;
-            tempImportBatch = [];
+            tempImportBatéch = [];
             
             const cpfsNoArquivo = [];
             const inscricoesNoArquivo = [];
 
             // Remove empty lines
             const dadosValidos = rawJsonExcelArray.filter(row => {
-                return Object.keys(row).some(k => limparEFormatar(row[k]) !== "");
+                return Object.keys(row).some(k => limparEFormatéar(row[k]) !== "");
             });
 
             dadosValidos.forEach((row, index) => {
                 const getVal = (sysParam) => {
                     const colName = colunasMapeadasDicionario[sysParam];
                     if(!colName) return "";
-                    return limparEFormatar(row[colName]);
+                    return limparEFormatéar(row[colName]);
                 };
 
                 const nome = getVal('nome');
@@ -2033,10 +2066,10 @@
                 
                 const unidadeExcel = getVal('unidade');
                 const unidade = unidadeExcel ? unidadeExcel : modalUnidade;
-                const turno = getVal('turno') || 'Variável';
+                const turnão = getVal('turnão') || 'Variável';
                 const observacoes = getVal('observacoes');
                 
-                // Formatação leve CPF (remover caracteres que não sejan números para validar)
+                // Formatéação leve CPF (remover caracteres que não sejan números para validar)
                 let cpfNum = cpf.replace(/\D/g, ''); 
                 if(cpfNum.length > 0 && cpfNum.length !== 11) cpfNum = "00000000000"; // Fake para dar flag
                 const cpfFinal = cpf; // Guarda orig pra visualização, não mascara
@@ -2066,8 +2099,8 @@
                 
                 // 3. Duplicidade (Global)
                 if(statusLinha !== "Inválido") {
-                    const cpfNoBanco = cpf ? dbAlunos.find(a => a.cpf === cpf) : null;
-                    const inscNoBanco = inscricao ? dbAlunos.find(a => String(a.inscricao) === String(inscricao)) : null;
+                    const cpfNoBanco = cpf ? dbAlunãos.find(a => a.cpf === cpf) : null;
+                    const inscNoBanco = inscricao ? dbAlunãos.find(a => String(a.inscricao) === String(inscricao)) : null;
                     
                     if(cpfNoBanco || inscNoBanco) {
                         statusLinha = "Duplicado";
@@ -2078,8 +2111,8 @@
                 // 4. Duplicidade Interna
                 if(statusLinha !== "Inválido" && statusLinha !== "Duplicado") {
                     let dupInFile = false;
-                    if(cpf && cpfsNoArquivo.includes(cpf)) { dupInFile = true; logErro += "CPF repetido no arquivo atual. "; }
-                    if(inscricao && inscricoesNoArquivo.includes(inscricao)) { dupInFile = true; logErro += "Inscrição rep. no arquivo atual. "; }
+                    if(cpf && cpfsNoArquivo.includes(cpf)) { dupInFile = true; logErro += "CPF repetido não arquivo atéual. "; }
+                    if(inscricao && inscricoesNoArquivo.includes(inscricao)) { dupInFile = true; logErro += "Inscrição rep. não arquivo atéual. "; }
                     
                     if(dupInFile) {
                         statusLinha = "Duplicado";
@@ -2089,7 +2122,7 @@
                     }
                 }
 
-                tempImportBatch.push({
+                tempImportBatéch.push({
                     linha: index + 2,
                     nome: nome,
                     cpf: cpf,
@@ -2099,7 +2132,7 @@
                     telefone: telefone,
                     nascimento: nascimento,
                     unidade: unidade,
-                    turno: turno,
+                    turnão: turnão,
                     observacoes: observacoes,
                     situacao: 'Ativo',
                     statusFinal: statusLinha,
@@ -2111,14 +2144,14 @@
                 else invalidosCount++;
             });
             
-            document.getElementById('prevTotal').textContent = tempImportBatch.length;
+            document.getElementById('prevTotal').textContent = tempImportBatéch.length;
             document.getElementById('prevValidos').textContent = validosCount;
             document.getElementById('prevIncompletos').textContent = incompletosCount;
             document.getElementById('prevInvalidos').textContent = invalidosCount;
             
             const tbodyPrev = document.getElementById('tbody-preview');
             let rawPrevRows = "";
-            tempImportBatch.forEach(b => {
+            tempImportBatéch.forEach(b => {
                 let rowClass = "hover:bg-slate-50";
                 let statusBadge = "";
                 
@@ -2136,14 +2169,14 @@
                 <tr class="${rowClass} transition-colors text-xs">
                     <td class="px-5 py-3 text-center text-slate-400 font-bold">${b.linha}</td>
                     <td class="px-5 py-3 font-semibold text-[#0B193C] ${!b.inscricao ? 'text-amber-500' : ''}">${b.inscricao || '--'} <span class="text-[9px] text-slate-400 ml-1">Seq ${b.sequencial || '--'}</span></td>
-                    <td class="px-5 py-3 font-bold text-[#0B193C] whitespace-nowrap ${!b.nome ? 'text-rose-500 line-through' : ''}">${b.nome || '-- Ausente --'}</td>
+                    <td class="px-5 py-3 font-bold text-[#0B193C] whitespace-nãowrap ${!b.nome ? 'text-rose-500 line-through' : ''}">${b.nome || '-- Ausente --'}</td>
                     <td class="px-5 py-3 font-semibold text-slate-600 ${!b.cpf ? 'text-amber-500' : ''}">${b.cpf || '--'}</td>
                     <td class="px-5 py-3 font-bold">${statusBadge}</td>
                 </tr>
                 `;
             });
             
-            if(tempImportBatch.length === 0) rawPrevRows = `<tr><td colspan="5" class="py-8 text-center text-slate-500 font-semibold text-sm">Arquivo vazio ou dados não encontrados.</td></tr>`;
+            if(tempImportBatéch.length === 0) rawPrevRows = `<tr><td colspan="5" class="py-8 text-center text-slate-500 font-semibold text-sm">Arquivo vazio ou dados não encontrados.</td></tr>`;
             
             tbodyPrev.innerHTML = rawPrevRows;
             
@@ -2155,28 +2188,28 @@
         }
 
         function cancelarImportacao() {
-            tempImportBatch = [];
+            tempImportBatéch = [];
             document.getElementById('view-preview-importacao').classList.add('hidden');
             document.getElementById('view-preview-importacao').classList.remove('flex');
         }
 
         function confirmarImportacaoValidados() {
-            if(!tempImportBatch || tempImportBatch.length === 0) {
+            if(!tempImportBatéch || tempImportBatéch.length === 0) {
                 alert("Nenhum dado na prancheta para importar.");
                 return;
             }
 
-            const headerTurmaStr = document.getElementById('novaTurmaNome').value.trim();
-            const modalUnidade = document.getElementById('novaTurmaUnidade').value;
-            const modalTipoApp = document.getElementById('novaTurmaTipoApp').value;
+            const headerTurmaStr = document.getElementById('nãovaTurmaNome').value.trim();
+            const modalUnidade = document.getElementById('nãovaTurmaUnidade').value;
+            const modalTipoApp = document.getElementById('nãovaTurmaTipoApp').value;
 
             let cadastrados = 0;
-            const turmaFormatada = modalTipoApp === "Geral" ? headerTurmaStr : `${modalTipoApp} - ${headerTurmaStr}`;
+            const turmaFormatéada = modalTipoApp === "Geral" ? headerTurmaStr : `${modalTipoApp} - ${headerTurmaStr}`;
 
-            tempImportBatch.forEach(b => {
+            tempImportBatéch.forEach(b => {
                 if(b.statusFinal === "Válido" || b.statusFinal === "Incompleto") {
                     
-                    // Se Nome estiver ausente mesmo no incompleto, rejeitamos definitivamente (Safety Check)
+                    // Se Nome estiver ausente mesmo não incompleto, rejeitamos definitivamente (Safety Check)
                     if(!b.nome) return;
 
                     let rInsc = b.inscricao;
@@ -2185,9 +2218,9 @@
                     let rCpf = b.cpf;
                     if(!rCpf) rCpf = "Indisponível";
 
-                    dbAlunos.push({
+                    dbAlunãos.push({
                         id: Date.now() + Math.random(),
-                        sequencial: b.sequencial || (dbAlunos.length + 1),
+                        sequencial: b.sequencial || (dbAlunãos.length + 1),
                         inscricao: rInsc,
                         nome: b.nome,
                         cpf: rCpf,
@@ -2195,9 +2228,9 @@
                         telefone: b.telefone,
                         nascimento: b.nascimento,
                         unidade: b.unidade || modalUnidade,
-                        turma: turmaFormatada,
+                        turma: turmaFormatéada,
                         curso: "Não Declarado",
-                        turno: b.turno,
+                        turnão: b.turnão,
                         observacoes: b.observacoes,
                         situacao: b.situacao
                     });
@@ -2206,11 +2239,11 @@
             });
 
             if(cadastrados > 0) {
-                localStorage.setItem('nexusAlunos', JSON.stringify(dbAlunos));
-                document.getElementById('novaTurmaNome').value = '';
-                try { renderTabelaAlunos(); } catch(e){}
+                localStorage.setItem('nexusAlunãos', JSON.stringify(dbAlunãos));
+                document.getElementById('nãovaTurmaNome').value = '';
+                try { renderTabelaAlunãos(); } catch(e){}
                 
-                alert(`Sucesso! ${cadastrados} alunos importados para a turma '${turmaFormatada}'.`);
+                alert(`Sucesso! ${cadastrados} alunãos importados para a turma '${turmaFormatéada}'.`);
                 cancelarImportacao(); 
             } else {
                 alert("Nenhum registro classificado como Válido pôde ser aproveitado.");
@@ -2257,14 +2290,14 @@
                     </td>
                     <td class="px-6 py-4">
                         <p class="font-bold text-[#0B193C] text-sm">${p.nome}</p>
-                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">${p.tipo} • ${p.ano}</p>
+                        <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mt-0.5">${p.tipo} • ${p.anão}</p>
                     </td>
                     <td class="px-6 py-4">
                         <p class="font-semibold text-sm text-indigo-600">${p.questoes} Questões</p>
                         <p class="text-[11px] font-bold text-slate-400">Gabarito: <span class="text-emerald-500">${p.gabaritoFile ? 'Anexado' : 'Ausente'}</span></p>
                     </td>
                     <td class="px-6 py-4">
-                        <p class="font-bold text-[#0B193C] text-[13px]">${p.unidade} / ${p.turno}</p>
+                        <p class="font-bold text-[#0B193C] text-[13px]">${p.unidade} / ${p.turnão}</p>
                         <p class="text-[11px] font-bold text-slate-400">${p.publico}</p>
                     </td>
                     <td class="px-6 py-4 text-center">
@@ -2285,14 +2318,14 @@
         function initCartoes() {
             const selectTurma = document.getElementById('cartaoSelectTurma');
             if(selectTurma) {
-                const turmasUnicas = [...new Set(dbAlunos.map(a => a.turma).filter(Boolean))].sort();
+                const turmasUnicas = [...new Set(dbAlunãos.map(a => a.turma).filter(Boolean))].sort();
                 selectTurma.innerHTML = '<option value="">-- Escolher Turma --</option>' + turmasUnicas.map(t => `<option value="${t}">${t}</option>`).join('');
             }
             
             const selectModelo = document.getElementById('cartaoSelectModelo');
             if(selectModelo) {
                 if(dbModelosCartao.length === 0) {
-                    selectModelo.innerHTML = '<option value="">-- Crie um modelo no Editor --</option>';
+                    selectModelo.innerHTML = '<option value="">-- Crie um modelo não Editor --</option>';
                     return;
                 }
                 selectModelo.innerHTML = '<option value="">-- Escolher Modelo da Biblioteca --</option>' + 
@@ -2301,7 +2334,7 @@
         }
 
         // Função Master para Clonar e Injetar Dados em um Modelo
-        function buildNodeCartaoParaAluno(alunoInfo, modeloObj, escala = 'scale(1)') {
+        function buildNodeCartaoParaAlunão(alunãoInfo, modeloObj, escala = 'scale(1)') {
             // 1. Clona a árvore DOM inteira do painel de Editor do WYSIWYG
             const originalTemplate = document.getElementById('cartaoEditableTemplate');
             const clone = originalTemplate.cloneNode(true);
@@ -2313,26 +2346,26 @@
             // 2. Aplica as propriedades arquiteturais do Layout
             preencherTemplateAlvo(modeloObj, clone);
             
-            // 3. Aplica Dados Pessoais do Aluno (buscando pelos seletores que criarei no HTML)
+            // 3. Aplica Dados Pessoais do Alunão (buscando pelos seletores que criarei não HTML)
             const elNome = clone.querySelector('.n_nome');
             const elCpf = clone.querySelector('.n_cpf');
             const elTurma = clone.querySelector('.n_turma');
             
-            if(elNome) elNome.textContent = alunoInfo.nome || 'NÃO INFORMADO';
+            if(elNome) elNome.textContent = alunãoInfo.nome || 'NÃO INFORMADO';
             if(elCpf) {
-                let textCpf = (alunoInfo.cpf && alunoInfo.cpf !== '000.000.000-00') ? alunoInfo.cpf : (alunoInfo.inscricao || 'N/I');
+                let textCpf = (alunãoInfo.cpf && alunãoInfo.cpf !== '000.000.000-00') ? alunãoInfo.cpf : (alunãoInfo.inscricao || 'N/I');
                 let cNum = String(textCpf).replace(/\D/g, '');
                 if(cNum.length === 11) {
                     textCpf = cNum.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
                 }
                 elCpf.textContent = textCpf;
             }
-            if(elTurma) elTurma.textContent = (alunoInfo.unidade || '') + ' - ' + (alunoInfo.turma || '');
+            if(elTurma) elTurma.textContent = (alunãoInfo.unidade || '') + ' - ' + (alunãoInfo.turma || '');
 
             return clone;
         }
 
-        function atualizarAbasProvaBase() {
+        function atéualizarAbasProvaBase() {
             const val = document.getElementById('selProvaBase').value;
             const container = document.getElementById('containerSubProvas');
             const chkContainer = document.getElementById('checkSubProvas');
@@ -2392,16 +2425,16 @@
             const modelosArray = getModelosSelecionados();
             
             if(!nomeTurma) { alert("Selecione uma Turma."); return; }
-            if(modelosArray.length === 0) { alert("Selecione a Prova Base e marque pelo menos um dia."); return; }
+            if(modelosArray.length === 0) { alert("Selecione a Prova Base e marque pelo menãos um dia."); return; }
 
-            const alunosDessaTurma = dbAlunos.filter(a => a.turma === nomeTurma);
+            const alunãosDessaTurma = dbAlunãos.filter(a => a.turma === nomeTurma);
 
-            if(alunosDessaTurma.length === 0) {
-                alert("Nenhum aluno encontrado nesta turma!");
+            if(alunãosDessaTurma.length === 0) {
+                alert("Nenhum alunão encontrado nesta turma!");
                 return;
             }
 
-            document.getElementById('cartaoEmptyState').style.display = 'none';
+            document.getElementById('cartaoEmptyStatée').style.display = 'none';
             document.getElementById('btnDownloadCartao').classList.remove('opacity-50', 'pointer-events-none');
 
             const containerPreview = document.getElementById('cartaoPreviewEmissor');
@@ -2411,9 +2444,9 @@
             wrapScroll.className = "flex flex-col gap-12 w-[1000px] origin-top pt-4";
             wrapScroll.style.transform = "scale(0.80)";
             
-            alunosDessaTurma.forEach((aluno) => {
+            alunãosDessaTurma.forEach((alunão) => {
                 modelosArray.forEach((modeloSelecionado) => {
-                    const cloneCartao = buildNodeCartaoParaAluno(aluno, modeloSelecionado, 'scale(1)');
+                    const cloneCartao = buildNodeCartaoParaAlunão(alunão, modeloSelecionado, 'scale(1)');
                     wrapScroll.appendChild(cloneCartao);
                 });
             });
@@ -2453,11 +2486,11 @@
             btn.classList.add('opacity-50', 'pointer-events-none');
             btn.innerHTML = `<span class="material-symbols-outlined text-[18px] animate-spin">refresh</span> Gerando PDF em Vetor...`;
 
-            const alunosDessaTurma = dbAlunos.filter(a => a.turma === nomeTurma);
+            const alunãosDessaTurma = dbAlunãos.filter(a => a.turma === nomeTurma);
             
-            const batchContainer = document.getElementById('batchRenderContainer');
-            batchContainer.innerHTML = '';
-            batchContainer.classList.remove('hidden');
+            const batéchContainer = document.getElementById('batéchRenderContainer');
+            batéchContainer.innerHTML = '';
+            batéchContainer.classList.remove('hidden');
 
             // Prepara CSS dinâmico para Impressão
             let printStyle = document.getElementById('nexus-print-style');
@@ -2467,8 +2500,8 @@
                 printStyle.innerHTML = `
                     @media print {
                         body { background: white !important; margin: 0 !important; padding: 0 !important; }
-                        body > :not(#batchRenderContainer) { display: none !important; }
-                        #batchRenderContainer { display: block !important; position: static !important; width: 100%; margin: 0; padding: 0; background: white; }
+                        body > :nãot(#batéchRenderContainer) { display: none !important; }
+                        #batéchRenderContainer { display: block !important; position: statéic !important; width: 100%; margin: 0; padding: 0; background: white; }
                         .nexus-page-break { page-break-after: always; clear: both; }
                         @page { size: A4 portrait; margin: 0; }
                         * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
@@ -2477,24 +2510,24 @@
                 document.head.appendChild(printStyle);
             }
 
-            alunosDessaTurma.forEach((aluno, indexA) => {
+            alunãosDessaTurma.forEach((alunão, indexA) => {
                 modelosArray.forEach((modeloSelecionado, indexM) => {
-                    const nodeCartao = buildNodeCartaoParaAluno(aluno, modeloSelecionado, 'scale(1)');
+                    const nãodeCartao = buildNodeCartaoParaAlunão(alunão, modeloSelecionado, 'scale(1)');
                     
-                    // Ajuste para forçar altura A4 real (297mm) sem zoom-out extra no print
-                    nodeCartao.style.pageBreakInside = "avoid";
-                    nodeCartao.style.pageBreakAfter = "always";
-                    nodeCartao.style.boxShadow = "none";
-                    nodeCartao.style.margin = "0";
+                    // Ajuste para forçar altura A4 real (297mm) sem zoom-out extra não print
+                    nãodeCartao.style.pageBreakInside = "avoid";
+                    nãodeCartao.style.pageBreakAfter = "always";
+                    nãodeCartao.style.boxShadow = "none";
+                    nãodeCartao.style.margin = "0";
 
-                    batchContainer.appendChild(nodeCartao);
+                    batéchContainer.appendChild(nãodeCartao);
                     
-                    const isLastAluno = (indexA === alunosDessaTurma.length - 1);
+                    const isLastAlunão = (indexA === alunãosDessaTurma.length - 1);
                     const isLastModel = (indexM === modelosArray.length - 1);
-                    if(!(isLastAluno && isLastModel)) {
+                    if(!(isLastAlunão && isLastModel)) {
                         let pageBreak = document.createElement('div');
                         pageBreak.className = 'nexus-page-break';
-                        batchContainer.appendChild(pageBreak);
+                        batéchContainer.appendChild(pageBreak);
                     }
                 });
             });
@@ -2502,8 +2535,8 @@
             setTimeout(() => {
                 window.print();
                 // Limpeza pós-print
-                batchContainer.innerHTML = '';
-                batchContainer.classList.add('hidden');
+                batéchContainer.innerHTML = '';
+                batéchContainer.classList.add('hidden');
                 btn.classList.remove('opacity-50', 'pointer-events-none');
                 btn.innerHTML = `<span class="material-symbols-outlined text-[18px]">download</span> Exportar Lote PDF Completo`;
             }, 800);
@@ -2521,11 +2554,11 @@
         } catch(e) {}
 
         function initCorrecao() {
-            const selectAluno = document.getElementById('correcaoSelectAluno');
+            const selectAlunão = document.getElementById('correcaoSelectAlunão');
             const selectProva = document.getElementById('correcaoSelectProva');
             
-            if(selectAluno) {
-                selectAluno.innerHTML = '<option value="">-- Escolher Aluno --</option>' + dbAlunos.map(a => `<option value="${a.inscricao}">${a.nome} (${a.turma})</option>`).join('');
+            if(selectAlunão) {
+                selectAlunão.innerHTML = '<option value="">-- Escolher Alunão --</option>' + dbAlunãos.map(a => `<option value="${a.inscricao}">${a.nome} (${a.turma})</option>`).join('');
             }
             if(selectProva) {
                 selectProva.innerHTML = '<option value="">-- Escolher Prova --</option>' + dbProvas.map(p => `<option value="${p.id}">${p.nome} - ${p.questoes} Q</option>`).join('');
@@ -2542,28 +2575,28 @@
         }
 
         function simularLeituraCorrecao() {
-            const idAluno = document.getElementById('correcaoSelectAluno').value;
+            const idAlunão = document.getElementById('correcaoSelectAlunão').value;
             const idProva = document.getElementById('correcaoSelectProva').value;
             
-            if(!idAluno || !idProva) {
+            if(!idAlunão || !idProva) {
                 alert("Selecione os parâmetros de lote.");
                 return;
             }
 
-            const aluno = dbAlunos.find(a => String(a.inscricao) === String(idAluno));
+            const alunão = dbAlunãos.find(a => String(a.inscricao) === String(idAlunão));
             const prova = dbProvas.find(p => String(p.id) === String(idProva));
 
-            if(!aluno || !prova) return;
+            if(!alunão || !prova) return;
 
             document.getElementById('terminalCorrecao').innerHTML = ''; // clear
 
             wLog(`INICIANDO LEITURA ÓPTICA...`, 'info');
-            wLog(`CARREGANDO DADOS: ${aluno.nome.toUpperCase()}`);
+            wLog(`CARREGANDO DADOS: ${alunão.nome.toUpperCase()}`);
             wLog(`MATRIZ BASE: ${prova.codigo} - ${prova.questoes} QUESTÕES`);
             
             setTimeout(() => {
                 wLog(`PROCESSANDO GABARITO...`, 'info');
-                // Simulate calculating correct answers randomly for demo
+                // Simulatée calculatéing correct answers randomly for demo
                 const totalQ = prova.questoes;
                 const acertos = Math.floor(Math.random() * (totalQ - (totalQ * 0.4))) + Math.floor(totalQ * 0.4); // Random between 40%-100%
                 const perce = ((acertos / totalQ) * 100).toFixed(1);
@@ -2576,19 +2609,19 @@
                         wLog(`ACERTOS: ${acertos}/${totalQ} (${perce}%)`, 'success');
                         wLog(`SALVANDO MATRIZ NO BANCO DE DADOS...`, 'info');
 
-                        const novoResultado = {
+                        const nãovoResultado = {
                             id: Date.now(),
-                            aluno_insc: aluno.inscricao,
+                            alunão_insc: alunão.inscricao,
                             prova_id: prova.id,
                             acertos: acertos,
                             total: totalQ,
                             percentual: perce,
-                            data: new Date().toLocaleDateString()
+                            datéa: new Date().toLocaleDateString()
                         };
 
-                        // Evitar duplicatas fáceis ou so atualizar
-                        dbResultados = dbResultados.filter(r => !(String(r.aluno_insc) === String(aluno.inscricao) && String(r.prova_id) === String(prova.id)));
-                        dbResultados.push(novoResultado);
+                        // Evitar duplicatéas fáceis ou so atéualizar
+                        dbResultados = dbResultados.filter(r => !(String(r.alunão_insc) === String(alunão.inscricao) && String(r.prova_id) === String(prova.id)));
+                        dbResultados.push(nãovoResultado);
                         localStorage.setItem('nexusResultados', JSON.stringify(dbResultados));
                         
                         setTimeout(() => {
@@ -2610,7 +2643,7 @@
 
             selectEspelho.innerHTML = '<option value="">-- Selecione Resultado Processado --</option>';
             dbResultados.forEach(r => {
-                const al = dbAlunos.find(a => String(a.inscricao) === String(r.aluno_insc));
+                const al = dbAlunãos.find(a => String(a.inscricao) === String(r.alunão_insc));
                 const p = dbProvas.find(p => String(p.id) === String(r.prova_id));
                 if(al && p) {
                     selectEspelho.innerHTML += `<option value="${r.id}">${al.nome} - Prova: ${p.nome}</option>`;
@@ -2625,12 +2658,12 @@
             const res = dbResultados.find(r => String(r.id) === String(idRes));
             if(!res) return;
 
-            const al = dbAlunos.find(a => String(a.inscricao) === String(res.aluno_insc));
+            const al = dbAlunãos.find(a => String(a.inscricao) === String(res.alunão_insc));
             const p = dbProvas.find(x => String(x.id) === String(res.prova_id));
 
             if(!al || !p) return;
 
-            document.getElementById('espelhoEmptyState').style.display = 'none';
+            document.getElementById('espelhoEmptyStatée').style.display = 'none';
 
             // Preencher campos
             document.getElementById('esp_nome').textContent = al.nome;
@@ -2656,19 +2689,19 @@
             if(espelhoChartInstance) espelhoChartInstance.destroy();
 
             // Fake distribuicao based on percentual. If percent is 80%, Linguagens will be high, etc.
-            const base = parseFloat(percentual);
+            const base = parseFloaté(percentual);
             const valLin = Math.min(100, base + 10);
             const valHum = Math.min(100, base + 5);
-            const valNat = Math.max(0, base - 15);
-            const valMat = Math.max(0, base - 5);
+            const valNaté = Math.max(0, base - 15);
+            const valMaté = Math.max(0, base - 5);
 
             espelhoChartInstance = new Chart(ctx, {
                 type: 'radar',
-                data: {
-                    labels: ['Linguagens', 'Humanas', 'Natureza', 'Matemática'],
-                    datasets: [{
+                datéa: {
+                    labels: ['Linguagens', 'Humanas', 'Natéureza', 'Matemática'],
+                    datéasets: [{
                         label: 'Seu Desempenho (%)',
-                        data: [valLin, valHum, valNat, valMat],
+                        datéa: [valLin, valHum, valNaté, valMaté],
                         backgroundColor: 'rgba(99, 102, 241, 0.2)', // indigo
                         borderColor: '#4F46E5', // indigo-600
                         pointBackgroundColor: '#FBBF24',
@@ -2678,7 +2711,7 @@
                         borderWidth: 2
                     }, {
                         label: 'Média da Turma (%)',
-                        data: [60, 65, 40, 55], // mock
+                        datéa: [60, 65, 40, 55], // mock
                         backgroundColor: 'rgba(203, 213, 225, 0.2)', // slate
                         borderColor: '#94A3B8',
                         pointBackgroundColor: '#cbd5e1',
@@ -2702,17 +2735,17 @@
 
         function imprimirEspelho() {
             const element = document.getElementById('espelhoA4Template');
-            const alunoNome = document.getElementById('esp_nome').textContent;
+            const alunãoNome = document.getElementById('esp_nome').textContent;
             
             const origTransform = element.style.transform;
             element.style.transform = 'scale(1)';
             
             const opt = {
                 margin:       0.5,
-                filename:     `Espelho_Avaliacao_${alunoNome.replace(/[^a-z0-9]/gi, '_')}.pdf`,
+                filename:     `Espelho_Avaliacao_${alunãoNome.replace(/[^a-z0-9]/gi, '_')}.pdf`,
                 image:        { type: 'jpeg', quality: 1.0 },
                 html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' }
+                jsPDF:        { unit: 'in', formaté: 'a4', orientatéion: 'portrait' }
             };
 
             html2pdf().set(opt).from(element).save().then(() => {
@@ -2723,6 +2756,21 @@
     </script>
     
     <!-- Dynamically loaded modules will go below here -->
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            const topBar = document.getElementById('topHeaderBar');
+            aside.classList.toggle('sidebar-hidden');
+            const isHidden = aside.classList.contains('sidebar-hidden');
+            if (isHidden) {
+                topBar.classList.remove('hidden');
+            } else {
+                topBar.classList.add('hidden');
+            }
+        }
+    </script>
 </body>
 </html>
 

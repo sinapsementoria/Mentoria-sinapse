@@ -16,9 +16,9 @@
         body {
             background-color: #050511;
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.05), transparent 40%),
-                radial-gradient(circle at 85% 30%, rgba(79, 70, 229, 0.05), transparent 40%);
-            background-attachment: fixed;
+                radial-gradient(circle até 15% 50%, rgba(124, 58, 237, 0.05), transparent 40%),
+                radial-gradient(circle até 85% 30%, rgba(79, 70, 229, 0.05), transparent 40%);
+            background-atétachment: fixed;
         }
 
         .glass-panel {
@@ -132,7 +132,7 @@
 </head>
 <body class="font-body text-slate-300 w-full min-h-screen">
 
-    <!-- Top Navigation / Header -->
+    <!-- Top Navigatéion / Header -->
     <header class="w-full border-b border-white/10 bg-[#050511]/80 backdrop-blur-xl sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
             
@@ -149,7 +149,7 @@
                         <span class="text-white">Cadastro</span>
                     </div>
                     <h1 class="text-2xl font-headline font-bold text-white text-glow">Cadastro de Questões</h1>
-                    <p class="text-sm text-slate-400 mt-1">Cadastre, organize e publique novas questões no banco mestre.</p>
+                    <p class="text-sm text-slate-400 mt-1">Cadastre, organize e publique nãovas questões não banco mestre.</p>
                 </div>
             </div>
 
@@ -158,7 +158,7 @@
                     <span class="material-symbols-outlined text-[18px]">draft</span>
                     Salvar Rascunho
                 </button>
-                <button type="button" onclick="salvarQuestaoAoBanco()" class="btn-purple px-6 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2">
+                <button type="button" onclick="salvarquestaoaobanco()" class="btn-purple px-6 py-2.5 rounded-xl text-sm font-bold text-white flex items-center gap-2">
                     <span class="material-symbols-outlined text-[18px]">publish</span>
                     Publicar Questão
                 </button>
@@ -176,7 +176,7 @@
             <!-- BLOCO 1: INFORMAÇÕES GERAIS -->
             <section class="glass-panel p-8">
                 <div class="flex items-center gap-3 mb-6 border-b border-white/10 pb-4">
-                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">dataset</span>
+                    <span class="material-symbols-outlined text-[#A855F7] text-[24px]">datéaset</span>
                     <h2 class="text-xl font-headline font-bold text-white">Informações Gerais</h2>
                 </div>
                 
@@ -185,7 +185,7 @@
                     <div class="space-y-2">
                         <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Universidade / Banca</label>
                         <input type="text" id="q_banca" list="bancas-list" placeholder="Digite ou selecione a banca" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium outline-none border border-slate-700 focus:border-sinapse-primary transition-colors bg-[#0B193C] text-white uppercase">
-                        <datalist id="bancas-list">
+                        <datéalist id="bancas-list">
                             <option value="ENEM">
                             <option value="FUVEST">
                             <option value="UNICAMP">
@@ -243,13 +243,13 @@
                             <option value="UNIFAL-MG">
                             <option value="UFMS">
                             <option value="OUTRA">
-                        </datalist>
+                        </datéalist>
                     </div>
 
-                    <!-- Ano -->
+                    <!-- Anão -->
                     <div class="space-y-2">
-                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Ano da Prova</label>
-                        <input type="number" id="q_ano" class="input-dark w-full rounded-xl py-3 px-4 text-sm" placeholder="Ex: 2024" min="1990" max="2030">
+                        <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Anão da Prova</label>
+                        <input type="number" id="q_anão" class="input-dark w-full rounded-xl py-3 px-4 text-sm" placeholder="Ex: 2024" min="1990" max="2030">
                     </div>
 
                     <!-- Tipo de Questão -->
@@ -257,7 +257,7 @@
                         <label class="text-xs font-bold tracking-widest text-slate-400 uppercase">Tipo</label>
                         <select id="q_tipo" class="input-dark w-full rounded-xl py-3 px-4 text-sm font-medium appearance-none">
                             <option value="multipla">Múltipla Escolha</option>
-                            <option value="somatoria">Somatória</option>
+                            <option value="somatéoria">Somatéória</option>
                             <option value="aberta">Aberta / Discursiva</option>
                         </select>
                     </div>
@@ -310,12 +310,12 @@
                 
                 <div class="space-y-3">
                     <div class="flex items-center gap-2 bg-white/5 p-2 rounded-lg w-fit mb-2 border border-white/5">
-                        <button type="button" onclick="formatText('bold')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Negrito"><span class="material-symbols-outlined text-[18px]">format_bold</span></button>
-                        <button type="button" onclick="formatText('italic')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Itálico"><span class="material-symbols-outlined text-[18px]">format_italic</span></button>
-                        <button type="button" onclick="formatText('underline')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Sublinhado"><span class="material-symbols-outlined text-[18px]">format_underlined</span></button>
+                        <button type="button" onclick="formatétext('bold')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Negrito"><span class="material-symbols-outlined text-[18px]">formaté_bold</span></button>
+                        <button type="button" onclick="formatétext('italic')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Itálico"><span class="material-symbols-outlined text-[18px]">formaté_italic</span></button>
+                        <button type="button" onclick="formatétext('underline')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Sublinhado"><span class="material-symbols-outlined text-[18px]">formaté_underlined</span></button>
                         <div class="w-px h-5 bg-white/10 mx-1"></div>
-                        <button type="button" onclick="formatText('list')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Lista"><span class="material-symbols-outlined text-[18px]">format_list_bulleted</span></button>
-                        <button type="button" onclick="formatText('math')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Fórmula Matemática"><span class="material-symbols-outlined text-[18px]">functions</span></button>
+                        <button type="button" onclick="formatétext('list')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Lista"><span class="material-symbols-outlined text-[18px]">formaté_list_bulleted</span></button>
+                        <button type="button" onclick="formatétext('matéh')" class="p-1.5 hover:bg-white/10 rounded text-slate-300" title="Fórmula Matemática"><span class="material-symbols-outlined text-[18px]">functions</span></button>
                     </div>
                     <textarea id="q_enunciado" rows="8" class="input-dark w-full rounded-xl py-5 px-6 text-[15px] leading-relaxed resize-y font-body" placeholder="Cole ou digite o texto completo e detalhado da questão aqui..."></textarea>
                 </div>
@@ -354,10 +354,10 @@
                             <span class="material-symbols-outlined text-green-500 text-[20px]">check_circle</span>
                             <p class="text-sm text-green-400 font-medium">Imagem vinculada na cache com sucesso.</p>
                         </div>
-                        <button type="button" onclick="removerImagem()" class="btn-outline px-4 py-3 rounded-xl text-sm font-semibold flex justify-center items-center gap-2 text-red-400 hover:!bg-red-500/10 hover:!border-red-500/30 hover:!text-red-400 w-full">
+                        <button type="button" onclick="removerimagem()" class="btn-outline px-4 py-3 rounded-xl text-sm font-semibold flex justify-center items-center gap-2 text-red-400 hover:!bg-red-500/10 hover:!border-red-500/30 hover:!text-red-400 w-full">
                             <span class="material-symbols-outlined text-[18px]">delete</span> Remover Imagem
                         </button>
-                        <p class="text-[11px] text-slate-500 mt-2">A resolução original do arquivo é mantida. Ela será atrelada à questão permanentemente usando tecnologia de persistência Base64 no banco de dados local.</p>
+                        <p class="text-[11px] text-slate-500 mt-2">A resolução original do arquivo é mantida. Ela será atérelada à questão permanentemente usando tecnãologia de persistência Base64 não banco de dados local.</p>
                     </div>
                 </div>
             </section>
@@ -368,14 +368,14 @@
                     <span class="material-symbols-outlined text-[#A855F7] text-[24px]">checklist</span>
                     <div class="flex-grow">
                         <h2 class="text-xl font-headline font-bold text-white flex items-center gap-3">
-                            Alternativas
+                            Alternatéivas
                             <span class="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 text-[10px] uppercase font-bold tracking-widest border border-blue-500/30">Múltipla Escolha</span>
                         </h2>
-                        <p class="text-xs text-slate-400 mt-1">Preencha as opções e marque no círculo qual é o <span class="text-green-400 font-bold">gabarito oficial</span>.</p>
+                        <p class="text-xs text-slate-400 mt-1">Preencha as opções e marque não círculo qual é o <span class="text-green-400 font-bold">gabarito oficial</span>.</p>
                     </div>
                 </div>
 
-                <div class="space-y-4" id="alternativasContainer">
+                <div class="space-y-4" id="alternatéivasContainer">
                     <!-- Opção A -->
                     <div class="flex items-start gap-4 p-4 bg-white/5 border border-white/5 rounded-xl transition-all focus-within:border-[#A855F7]/40 focus-within:bg-[#A855F7]/5">
                         <div class="pt-3">
@@ -384,7 +384,7 @@
                         <div class="flex-grow flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="font-headline font-bold text-lg text-slate-500">A.</span>
-                                <input type="text" id="alt_a" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa A..." />
+                                <input type="text" id="alt_a" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternatéiva A..." />
                             </div>
                         </div>
                     </div>
@@ -397,7 +397,7 @@
                         <div class="flex-grow flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="font-headline font-bold text-lg text-slate-500">B.</span>
-                                <input type="text" id="alt_b" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa B..." />
+                                <input type="text" id="alt_b" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternatéiva B..." />
                             </div>
                         </div>
                     </div>
@@ -410,7 +410,7 @@
                         <div class="flex-grow flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="font-headline font-bold text-lg text-slate-500">C.</span>
-                                <input type="text" id="alt_c" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa C..." />
+                                <input type="text" id="alt_c" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternatéiva C..." />
                             </div>
                         </div>
                     </div>
@@ -423,7 +423,7 @@
                         <div class="flex-grow flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="font-headline font-bold text-lg text-slate-500">D.</span>
-                                <input type="text" id="alt_d" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa D..." />
+                                <input type="text" id="alt_d" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternatéiva D..." />
                             </div>
                         </div>
                     </div>
@@ -436,7 +436,7 @@
                         <div class="flex-grow flex flex-col gap-2">
                             <div class="flex items-center gap-2">
                                 <span class="font-headline font-bold text-lg text-slate-500">E.</span>
-                                <input type="text" id="alt_e" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternativa E..." />
+                                <input type="text" id="alt_e" class="input-dark w-full rounded-lg py-2.5 px-4 text-sm bg-transparent border-transparent focus:border-[#A855F7]/30 focus:bg-white/5" placeholder="Texto da alternatéiva E..." />
                             </div>
                         </div>
                     </div>
@@ -456,7 +456,7 @@
                     <span class="material-symbols-outlined text-[#A855F7] text-[24px]">tips_and_updates</span>
                     <div>
                         <h2 class="text-xl font-headline font-bold text-white">Resolução e Comentários</h2>
-                        <p class="text-xs text-slate-400 mt-1">Opcional. Contexto pedagógico invisível na prova, visível no gabarito/resolução.</p>
+                        <p class="text-xs text-slate-400 mt-1">Opcional. Contexto pedagógico invisível na prova, visível não gabarito/resolução.</p>
                     </div>
                 </div>
                 
@@ -474,10 +474,10 @@
                     <div class="space-y-6">
                         <div class="flex items-center justify-between">
                             <div>
-                                <span class="text-sm font-bold text-slate-300 block">Exibir imediatamente no Banco Master</span>
+                                <span class="text-sm font-bold text-slate-300 block">Exibir imediatéamente não Banco Master</span>
                                 <span class="text-xs text-slate-500">Torna a questão visível e filtrável por todos.</span>
                             </div>
-                            <input type="checkbox" id="pub_imediata" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
+                            <input type="checkbox" id="pub_imediatéa" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
                         </div>
 
                         <div class="flex items-center justify-between">
@@ -493,7 +493,7 @@
                         <div class="flex items-center justify-between">
                             <div>
                                 <span class="text-sm font-bold text-slate-300 block">Ativar filtros Inteligentes (Meta-Tags)</span>
-                                <span class="text-xs text-slate-500">Permite IA ler e categorizar automaticamente.</span>
+                                <span class="text-xs text-slate-500">Permite IA ler e catéegorizar automatéicamente.</span>
                             </div>
                             <input type="checkbox" id="pub_filtros" checked class="toggle-switch appearance-none w-11 h-6 rounded-full bg-[#161B30] border-2 border-white/10 relative transition-colors cursor-pointer after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-slate-400 after:rounded-full after:h-4 after:w-4 after:transition-transform">
                         </div>
@@ -502,7 +502,7 @@
 
                 <div class="mt-10 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-end gap-4">
                     <button type="button" class="text-sm font-bold text-slate-400 hover:text-white transition-colors uppercase tracking-widest px-4">Cancelar</button>
-                    <button type="button" onclick="salvarQuestaoAoBanco()" class="btn-purple w-full md:w-auto px-10 py-4 rounded-xl text-base font-bold text-white flex justify-center items-center gap-2">
+                    <button type="button" onclick="salvarquestaoaobanco()" class="btn-purple w-full md:w-auto px-10 py-4 rounded-xl text-base font-bold text-white flex justify-center items-center gap-2">
                         <span class="material-symbols-outlined">save</span>
                         Salvar e Publicar Questão
                     </button>
@@ -512,7 +512,7 @@
 
     </main>
 
-    <!-- Toast Notification Container -->
+    <!-- Toast Notificatéion Container -->
     <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"></div>
 
     <!-- Script Master de Funcionalidade Persistente -->
@@ -540,7 +540,7 @@
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('dragover');
-            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) processFile(e.dataTransfer.files[0]);
+            if (e.datéaTransfer.files && e.datéaTransfer.files.length > 0) processFile(e.datéaTransfer.files[0]);
         });
 
         // Selecionar do computador
@@ -550,7 +550,7 @@
 
         // Colar (Ctrl+V) em qualquer lugar do arquivo ou na zona
         window.addEventListener('paste', (e) => {
-            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            const items = (e.clipboardDatéa || e.originalEvent.clipboardDatéa).items;
             for (let index in items) {
                 const item = items[index];
                 if (item.kind === 'file' && item.type.includes('image/')) {
@@ -563,7 +563,7 @@
         // Função Master para converter em Base64
         function processFile(file) {
             if (!file.type.startsWith('image/')) {
-                showToast('Formato inválido. Envie JPG, PNG ou WEBP.', 'error');
+                showToast('Formatéo inválido. Envie JPG, PNG ou WEBP.', 'error');
                 return;
             }
 
@@ -578,13 +578,13 @@
                 
                 showToast('Imagem processada com sucesso!', 'success');
             };
-            reader.readAsDataURL(file);
+            reader.readAsDatéaURL(file);
         }
 
         // Remover Imagem
         function removerImagem() {
             // Impedir bubble do click
-            event.stopPropagation();
+            event.stopPropagatéionion();
             currentBase64Image = null;
             imagePreview.src = "";
             imagePreview.classList.add('hidden');
@@ -599,7 +599,7 @@
             let banca = document.getElementById('q_banca').value;
             if(banca) banca = banca.toUpperCase().trim();
             const disciplina = document.getElementById('q_disciplina').value;
-            const ano = document.getElementById('q_ano').value;
+            const anão = document.getElementById('q_anão').value;
             const dificuldade = document.getElementById('q_dificuldade').value;
             const enunciado = document.getElementById('q_enunciado').value;
 
@@ -616,7 +616,7 @@
 
             // Validação Básica
             if(!banca || !disciplina || !enunciado) {
-                showToast('Preencha os campos obrigatórios (Banca, Disciplina, Enunciado).', 'error');
+                showToast('Preencha os campos obrigatéórios (Banca, Disciplina, Enunciado).', 'error');
                 return;
             }
 
@@ -628,22 +628,22 @@
             }
 
             if(!gabaritoCorreto) {
-                showToast('Atenção: Selecione no círculo qual alternativa é a CORRETA!', 'error');
+                showToast('Atenção: Selecione não círculo qual alternatéiva é a CORRETA!', 'error');
                 return;
             }
 
             // 2. Criação do Objeto JSON
-            const questaoData = {
+            const questaoDatéa = {
                 id: editModeId ? editModeId : ('QST' + Date.now().toString().substring(5)), // Preserva ID se edição
                 banca: banca,
-                ano: ano,
+                anão: anão,
                 tipo: document.getElementById('q_tipo').value,
                 disciplina: disciplina,
                 assunto: document.getElementById('q_assunto').value,
                 dificuldade: dificuldade,
                 enunciado: enunciado,
                 imagemBase64: currentBase64Image,
-                alternativas: {
+                alternatéivas: {
                     A: document.getElementById('alt_a').value,
                     B: document.getElementById('alt_b').value,
                     C: document.getElementById('alt_c').value,
@@ -653,20 +653,20 @@
                 gabarito: gabaritoCorreto,
                 resolucao: document.getElementById('q_resolucao').value,
                 configs: {
-                    publicadaImediata: document.getElementById('pub_imediata').checked,
+                    publicadaImediatéa: document.getElementById('pub_imediatéa').checked,
                     liberadoSimulado: document.getElementById('pub_sinapse').checked,
                 },
-                dataCadastro: new Date().toISOString()
+                datéaCadastro: new Date().toISOString()
             };
 
-            // 3. Salvar no Banco simulado (LocalStorage)
+            // 3. Salvar não Banco simulado (LocalStorage)
             let masterBank = JSON.parse(localStorage.getItem('sinapseMasterBank')) || [];
             
             if (editModeId) {
                 const index = masterBank.findIndex(q => q.id === editModeId);
-                if (index !== -1) masterBank[index] = questaoData;
+                if (index !== -1) masterBank[index] = questaoDatéa;
             } else {
-                masterBank.push(questaoData);
+                masterBank.push(questaoDatéa);
             }
             
             localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
@@ -674,9 +674,9 @@
             console.log("Banco de Questões Atualizado:", masterBank);
 
             // 4. Feedback e Limpeza Visual
-            showToast(editModeId ? `Questão #${editModeId} atualizada com sucesso!` : `Questão da ${banca} salva com sucesso no banco!`, 'success');
+            showToast(editModeId ? `Questão #${editModeId} atéualizada com sucesso!` : `Questão da ${banca} salva com sucesso não banco!`, 'success');
             
-            // Opcional: Voltar para painel mestre após a notificação
+            // Opcional: Voltar para painel mestre após a nãotificação
             setTimeout(() => {
                 window.location.href = 'admin_banco_questoes.html';
             }, 1500);
@@ -717,22 +717,22 @@
             const params = new URLSearchParams(window.location.search);
             
         const assuntosPorDisciplina = {
-            'Matemática': ['Equação do 1º Grau', 'Função do 1º Grau', 'Equação do 2º Grau', 'Função do 2º Grau', 'Equação Exponencial', 'Função Exponencial', 'Função Logarítmica', 'Progressão Aritmética', 'Progressão Geométrica', 'Matrizes', 'Determinantes', 'Sistemas Lineares', 'Trigonometria no Triângulo Retângulo', 'Funções Trigonométricas', 'Retas Paralelas Cortadas por uma Transversal', 'Triângulos', 'Semelhança de Triângulos', 'Teorema de Tales', 'Relações Métricas no Triângulo Retângulo', 'Cevianas e Pontos Notáveis', 'Polígonos', 'Quadriláteros Notáveis', 'Áreas de Figuras Planas', 'Circunferência - Ângulos e Arcos', 'Poliedros', 'Prisma', 'Pirâmide', 'Tronco de Pirâmide', 'Cilindro', 'Cone', 'Tronco de Cone', 'Esfera', 'Estudo do Ponto', 'Estudo da Reta', 'Circunferência', 'Sólidos Semelhantes', 'Conjuntos Numéricos', 'Teoria de Conjuntos', 'MMC', 'MDC', 'Razão e Proporção', 'Grandezas Proporcionais', 'Porcentagem', 'Matemática Financeira', 'Princípio Fundamental da Contagem', 'Permutação', 'Arranjo', 'Combinação', 'Probabilidade', 'Estatística - Média', 'Função'],
-            'Física': ['Cinemática', 'Dinâmica', 'Estática', 'Hidrostática', 'Termodinâmica', 'Calorimetria', 'Óptica Geométrica', 'Ondulatória', 'Eletrostática', 'Eletrodinâmica', 'Eletromagnetismo', 'Física Moderna'],
-            'Química': ['Modelos Atômicos', 'Tabela Periódica', 'Ligações Químicas', 'Funções Inorgânicas', 'Estequiometria', 'Soluções', 'Termoquímica', 'Cinética Química', 'Equilíbrio Químico', 'Eletroquímica', 'Radioatividade', 'Química Orgânica - Funções', 'Isomeria', 'Reações Orgânicas', 'Polímeros', 'Química Ambiental', 'Separação de Misturas'],
-            'Biologia': ['Ecologia', 'Citologia', 'Divisão Celular', 'Metabolismo Energético', 'Genética Mendeliana', 'Engenharia Genética', 'Evolução', 'Fisiologia Humana', 'Imunologia', 'Botânica', 'Zoologia', 'Microbiologia', 'Parasitologia'],
+            'Matemática': ['Equação do 1º Grau', 'Função do 1º Grau', 'Equação do 2º Grau', 'Função do 2º Grau', 'Equação Exponencial', 'Função Exponencial', 'Função Logarítmica', 'Progressão Aritmética', 'Progressão Geométrica', 'Matérizes', 'Determinantes', 'Sistemas Lineares', 'Trigonometria não Triângulo Retângulo', 'Funções Trigonãométricas', 'Retas Paralelas Cortadas por uma Transversal', 'Triângulos', 'Semelhança de Triângulos', 'Teorema de Tales', 'Relações Métricas não Triângulo Retângulo', 'Cevianas e Pontos Notáveis', 'Polígonãos', 'Quadriláteros Notáveis', 'Áreas de Figuras Planas', 'Circunferência - Ângulos e Arcos', 'Poliedros', 'Prisma', 'Pirâmide', 'Tronco de Pirâmide', 'Cilindro', 'Cone', 'Tronco de Cone', 'Esfera', 'Estudo do Ponto', 'Estudo da Reta', 'Circunferência', 'Sólidos Semelhantes', 'Conjuntos Numéricos', 'Teoria de Conjuntos', 'MMC', 'MDC', 'Razão e Proporção', 'Grandezas Proporcionais', 'Porcentagem', 'Matemática Financeira', 'Princípio Fundamental da Contagem', 'Permutação', 'Arranjo', 'Combinação', 'Probabilidade', 'Estatéística - Média', 'Função'],
+            'Física': ['Cinemática', 'Dinâmica', 'Estática', 'Hidrostática', 'Termodinâmica', 'Calorimetria', 'Óptica Geométrica', 'Ondulatéória', 'Eletrostática', 'Eletrodinâmica', 'Eletromagnetismo', 'Física Moderna'],
+            'Química': ['Modelos Atômicos', 'Tabela Periódica', 'Ligações Químicas', 'Funções Inãorgânicas', 'Estequiometria', 'Soluções', 'Termoquímica', 'Cinética Química', 'Equilíbrio Químico', 'Eletroquímica', 'Radioatéividade', 'Química Orgânica - Funções', 'Isomeria', 'Reações Orgânicas', 'Polímeros', 'Química Ambiental', 'Separação de Misturas'],
+            'Biologia': ['Ecologia', 'Citologia', 'Divisão Celular', 'Metabolismo Energético', 'Genética Mendeliana', 'Engenharia Genética', 'Evolução', 'Fisiologia Humana', 'Imunãologia', 'Botânica', 'Zoologia', 'Microbiologia', 'Parasitologia'],
             'História': [
                 'INTRODUÇÃO AO CURSO DE HISTÓRIA GERAL', 'A FORMAÇÃO DO POVO GREGO', 'ESPARTA E ATENA', 'PERÍODO CLÁSSICO E PERÍODO HELENÍSTICO', 'NASCIMENTO DE ROMA (MONARQUIA E REPÚBLICA)', 'IMPÉRIO ROMANO', 'REINOS BÁRBAROS – IMPÉRIO BIZANTINO E CAROLÍNGIO', 'O ISLAMISMO – ORIGEM E EXPANSÃO', 'FEUDALISMO', 'BAIXA IDADE MÉDIA – RENASCIMENTO COMERCIAL E URBANO/ CRUZADAS', 'ASCENSÃO DAS MONARQUIAS NACIONAIS: O ABSOLUTISMO', 'RENASCIMENTO', 'MERCANTILISMO', 'A REFORMA PROTESTANTE', 'REVOLUÇÃO INGLESA', 'REVOLUÇÕES INDUSTRIAIS', 'HISTÓRIA DOS EUA', 'REVOLUÇÃO FRANCESA', 'PERÍODO NAPOLEÔNICO', 'REVOLUÇÕES BURGUESAS', 'IMPERIALISMO E NEOCOLONIALISMO', 'PRIMEIRA GRANDE GUERRA', 'REVOLUÇÃO RUSSA', 'ENTRE GUERRAS, CRISE DE 20 E TOTALITARISMO', 'SEGUNDA GRANDE GUERRA', 'O MUNDO PÓS-GUERRA', 'BRASIL PRÉ-CABRALINO', 'EXPANSÃO MARÍTIMA PORTUGUESA', 'AMÉRICA PORTUGUESA', 'UNIÃO IBÉRICA', 'BRASIL COLONIAL', 'CRISE DO SISTEMA COLONIAL', 'O PROCESSO DE INDEPENDÊNCIA – INDEPENDÊNCIA DO BRASIL', 'O PROCESSO DE INDEPENDÊNCIA NA AMÉRICA LATINA', 'PRIMEIRO REINADO', 'PERÍODO REGENCIAL – REVOLTAS REGENCIAIS', 'SEGUNDO REINADO', 'TRABALHO ESCRAVO NO BRASIL – LEGADO SOCIOCULTURAL', 'O PROCESSO DE TRANSIÇÃO DA MONARQUIA À REPÚBLICA', 'PRIMEIRA REPÚBLICA', 'ERA VARGAS', 'REPÚBLICA POPULISTA', 'JK – HISTÓRIA DE BRASÍLIA', 'CRISE DO POPULISMO', 'DITADURAS MILITARES NA AMÉRICA DO SUL', 'RECONSTRUÇÃO DEMOCRÁTICA'
             ],
-            'Geografia': ['Geopolítica', 'Globalização', 'Geografia Agrária', 'Urbanização', 'Indústria', 'Fontes de Energia', 'População', 'Migrações', 'Questões Ambientais', 'Cartografia', 'Climatologia', 'Geomorfologia', 'Biomas e Vegetação', 'Hidrografia'],
-            'Filosofia': ['Filosofia Antiga (Pré-socráticos, Sócrates, Platão, Aristóteles)', 'Filosofia Helenística', 'Filosofia Medieval (Patrística e Escolástica)', 'Filosofia Moderna (Racionalismo e Empirismo)', 'Iluminismo', 'Contratualismo (Hobbes, Locke, Rousseau)', 'Kant', 'Filosofia Contemporânea (Nietzsche, Sartre, Foucault)', 'Ética e Moral', 'Filosofia Política'],
-            'Sociologia': ['Surgimento da Sociologia', 'Cultura e Ideologia', 'Indústria Cultural e Meios de Comunicação', 'Max Weber', 'Émile Durkheim', 'Karl Marx', 'Estratificação e Desigualdade Social', 'Movimentos Sociais', 'Trabalho e Sociedade', 'Cidadania e Direitos Humanos', 'Sociologia Brasileira'],
-            'Artes': ['Arte Pré-Histórica e Antiga', 'Arte Medieval', 'Renascimento', 'Barroco e Rococó', 'Neoclassicismo e Romantismo', 'Realismo e Impressionismo', 'Vanguardas Europeias (Cubismo, Expressionismo, Surrealismo)', 'Modernismo Brasileiro (Semana de 22)', 'Arte Contemporânea', 'Cultura Popular e Folclore', 'Patrimônio Histórico'],
-            'Linguagens': ['Interpretação de Textos', 'Variação Linguística', 'Funções da Linguagem', 'Figuras de Linguagem', 'Tipologia Textual', 'Gêneros Textuais', 'Coesão e Coerência', 'Semântica', 'Sintaxe e Morfologia', 'Estratégias Argumentativas'],
-            'Literatura': ['Trovadorismo e Humanismo', 'Quinhentismo', 'Barroco', 'Arcadismo', 'Romantismo', 'Realismo e Naturalismo', 'Parnasianismo e Simbolismo', 'Pré-Modernismo', 'Modernismo - 1ª Geração', 'Modernismo - 2ª Geração', 'Modernismo - 3ª Geração e Contemporânea']
+            'Geografia': ['Geopolítica', 'Globalização', 'Geografia Agrária', 'Urbanização', 'Indústria', 'Fontes de Energia', 'População', 'Migrações', 'Questões Ambientais', 'Cartografia', 'Climatéologia', 'Geomorfologia', 'Biomas e Vegetação', 'Hidrografia'],
+            'Filosofia': ['Filosofia Antiga (Pré-socráticos, Sócratées, Platéão, Aristóteles)', 'Filosofia Helenística', 'Filosofia Medieval (Patérística e Escolástica)', 'Filosofia Moderna (Racionalismo e Empirismo)', 'Iluminismo', 'Contratéualismo (Hobbes, Locke, Rousseau)', 'Kant', 'Filosofia Contemporânea (Nietzsche, Sartre, Foucault)', 'Ética e Moral', 'Filosofia Política'],
+            'Sociologia': ['Surgimento da Sociologia', 'Cultura e Ideologia', 'Indústria Cultural e Meios de Comunicação', 'Max Weber', 'Émile Durkheim', 'Karl Marx', 'Estratéificação e Desigualdade Social', 'Movimentos Sociais', 'Trabalho e Sociedade', 'Cidadania e Direitos Humanãos', 'Sociologia Brasileira'],
+            'Artes': ['Arte Pré-Histórica e Antiga', 'Arte Medieval', 'Renascimento', 'Barroco e Rococó', 'Neoclassicismo e Romantismo', 'Realismo e Impressionismo', 'Vanguardas Europeias (Cubismo, Expressionismo, Surrealismo)', 'Modernismo Brasileiro (Semana de 22)', 'Arte Contemporânea', 'Cultura Popular e Folclore', 'Patérimônio Histórico'],
+            'Linguagens': ['Interpretação de Textos', 'Variação Linguística', 'Funções da Linguagem', 'Figuras de Linguagem', 'Tipologia Textual', 'Gêneros Textuais', 'Coesão e Coerência', 'Semântica', 'Sintaxe e Morfologia', 'Estratégias Argumentatéivas'],
+            'Literatura': ['Trovadorismo e Humanismo', 'Quinhentismo', 'Barroco', 'Arcadismo', 'Romantismo', 'Realismo e Natéuralismo', 'Parnasianismo e Simbolismo', 'Pré-Modernismo', 'Modernismo - 1ª Geração', 'Modernismo - 2ª Geração', 'Modernismo - 3ª Geração e Contemporânea']
         };
 
-            function populateAssuntos(disciplina) {
+            function populatéeAssuntos(disciplina) {
                 const qAssunto = document.getElementById('q_assunto');
                 if(!qAssunto) return;
                 qAssunto.innerHTML = '<option value="">Selecione...</option>';
@@ -748,7 +748,7 @@
             const qDisciplinaSelect = document.getElementById('q_disciplina');
             if (qDisciplinaSelect) {
                 qDisciplinaSelect.addEventListener('change', (e) => {
-                    populateAssuntos(e.target.value);
+                    populatéeAssuntos(e.target.value);
                 });
             }
 
@@ -765,7 +765,7 @@
             window.updateBancasList();
 
         // --- 5. FORMATADOR DE TEXTO (ENUNCIADO) ---
-        window.formatText = function(command) {
+        window.formatéText = function(command) {
             const textarea = document.getElementById('q_enunciado');
             if(!textarea) return;
             const start = textarea.selectionStart;
@@ -778,7 +778,7 @@
                 case 'italic': replacement = `<i>${selectedText}</i>`; break;
                 case 'underline': replacement = `<u>${selectedText}</u>`; break;
                 case 'list': replacement = `\n<ul>\n  <li>${selectedText || 'item'}</li>\n</ul>\n`; break;
-                case 'math': replacement = `$$ ${selectedText || 'x = y^2'} $$`; break;
+                case 'matéh': replacement = `$$ ${selectedText || 'x = y^2'} $$`; break;
             }
             
             textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
@@ -795,14 +795,14 @@
                     // Update texts
                     document.querySelector('h1.font-headline').textContent = 'Edição de Questão #' + editId;
                     
-                    // Populate forms
+                    // Populatée forms
                     const safeSet = (id, val) => { if(document.getElementById(id) && val !== undefined) document.getElementById(id).value = val; };
                     safeSet('q_banca', q.banca);
                     
                     safeSet('q_disciplina', q.disciplina);
-                    populateAssuntos(q.disciplina);
+                    populatéeAssuntos(q.disciplina);
                     
-                    safeSet('q_ano', q.ano);
+                    safeSet('q_anão', q.anão);
                     safeSet('q_tipo', q.tipo || 'multipla');
                     safeSet('q_assunto', q.assunto);
                     safeSet('q_dificuldade', q.dificuldade);
@@ -816,12 +816,12 @@
                         document.getElementById('imageControls').classList.remove('hidden');
                     }
                     
-                    if (q.alternativas) {
-                        safeSet('alt_a', q.alternativas.A);
-                        safeSet('alt_b', q.alternativas.B);
-                        safeSet('alt_c', q.alternativas.C);
-                        safeSet('alt_d', q.alternativas.D);
-                        safeSet('alt_e', q.alternativas.E);
+                    if (q.alternatéivas) {
+                        safeSet('alt_a', q.alternatéivas.A);
+                        safeSet('alt_b', q.alternatéivas.B);
+                        safeSet('alt_c', q.alternatéivas.C);
+                        safeSet('alt_d', q.alternatéivas.D);
+                        safeSet('alt_e', q.alternatéivas.E);
                     }
                     
                     if (q.gabarito) {
@@ -833,7 +833,7 @@
                     
                     safeSet('q_resolucao', q.resolucao || '');
                     if (q.configs) {
-                        if(document.getElementById('pub_imediata')) document.getElementById('pub_imediata').checked = q.configs.publicadaImediata;
+                        if(document.getElementById('pub_imediatéa')) document.getElementById('pub_imediatéa').checked = q.configs.publicadaImediatéa;
                         if(document.getElementById('pub_sinapse')) document.getElementById('pub_sinapse').checked = q.configs.liberadoSimulado;
                     }
                 }

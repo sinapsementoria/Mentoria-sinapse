@@ -43,7 +43,7 @@ function insertItem(tableName, item) {
     if (!db[tableName]) db[tableName] = [];
     
     item.id = item.id || generateUUID();
-    item.created_at = item.created_at || new Date().toISOString();
+    item.created_at= item.created_at|| new Date().toISOString();
     
     db[tableName].push(item);
     localStorage.setItem(DB_KEY, JSON.stringify(db));
@@ -75,7 +75,7 @@ function setTable(tableName, data) {
 }
 
 function getDayOfWeekStr(dateStr) {
-    const dateObj = new Date(dateStr + 'T00:00:00');
+    const datObj = new Date(dateStr + 'T00:00:00');
     const dias = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
     return dias[dateObj.getDay()];
 }
@@ -112,8 +112,8 @@ function getAcademicSummary() {
     let totalQuestions = realHits + realMisses;
     let totalHits = realHits;
 
-    // Processamento analítico de Melhor/Pior Matéria originado da tabela metrics_entries registrada das sessões
-    let subjectStats = {};
+    // Processamento analítico de Melhor/Pior Mathria originado da tabela metrics_entries registrada das sessões
+    let subjectStat = {};
     
     // 2. Registros de Sessões de Desempenho (metrics_entries)
     const metrics = db['metrics_entries'] || [];
@@ -127,37 +127,74 @@ function getAcademicSummary() {
         totalQuestions += qTotal;
         totalHits += cTotal;
         
-        if(!subjectStats[m.discipline]) {
-            subjectStats[m.discipline] = { questions: 0, correct: 0 };
+        if(!subjectStat[m.discipline]) {
+            subjectStat[m.discipline] = { questions: 0, correct: 0 };
         }
-        subjectStats[m.discipline].questions += qTotal;
-        subjectStats[m.discipline].correct += cTotal;
+        subjectStat[m.discipline].questions += qTotal;
+        subjectStat[m.discipline].correct += cTotal;
     });
 
     // 3. Registros de Exames Oficiais (exams)
     const exams = db['exams'] || [];
     exams.forEach(ex => {
-        if(ex.banca !== 'ENEM' && ex.banca !== 'SIMULADO') return;
-        
-        const processArea = (materia, notaVal) => {
+        let exBanca = ex.banca || '';
+        if(exBanca.startsWith('PAS-UNB')) exBanca = 'PAS-UNB';
+
+        const processArea = (materia, notaVal, maxQtd) => {
             if (notaVal !== undefined && notaVal !== null && notaVal !== '') {
                 const nota = parseInt(notaVal);
                 if(isNaN(nota)) return;
                 
-                const qArea = 45; 
-                totalQuestions += qArea;
+                totalQuestions += maxQtd;
                 totalHits += nota;
 
-                if (!subjectStats[materia]) subjectStats[materia] = { questions: 0, correct: 0 };
-                subjectStats[materia].questions += qArea;
-                subjectStats[materia].correct += nota;
+                if (!subjectStat[materia]) subjectStat[materia] = { questions: 0, correct: 0 };
+                subjectStat[materia].questions += maxQtd;
+                subjectStat[materia].correct += nota;
             }
         };
 
-        processArea('Linguagens', ex.notaLin);
-        processArea('Humanas', ex.notaHum);
-        processArea('Natureza', ex.notaNat);
-        processArea('Matemática', ex.notaMat);
+        if(exBanca === 'ENEM' || exBanca === 'SIMULADO') {
+            processArea('Linguagens', ex.notaLin, 45);
+            processArea('Humanas', ex.notaHum, 45);
+            processArea('Natureza', ex.notaNat, 45);
+            processArea('Matemática', ex.notaMat, 45);
+        }
+        else if(exBanca === 'UNICAMP') {
+            processArea('Matemática', ex.notaU_Mat, 12);
+            processArea('Linguagens', (parseInt(ex.notaU_Port)||0) + (parseInt(ex.notaU_Ing)||0), 20);
+            processArea('Humanas', ex.notaU_Hum, 23);
+            processArea('Natureza', ex.notaU_Nat, 22);
+        }
+        else if(exBanca === 'FUVEST') {
+            processArea('Gerais (FUVEST)', ex.notaFuvest, 90);
+        }
+        else if(exBanca === 'UNESP') {
+            processArea('Gerais (UNESP)', ex.notaUnesp, 90);
+        }
+        else if(exBanca === 'VEST-UNB') {
+            processArea('Linguagens', ex.notaV_LE, 30);
+            processArea('Humanas', ex.notaV_Hum, 120);
+            processArea('Ciências e Exatas', ex.notaV_Exa, 150);
+        }
+        else if(exBanca === 'PAS-UNB') {
+            processArea('Linguagens', ex.notaP_LE, 10);
+            processArea('Exatas e Humanas', ex.notaP_ExaHum, 110);
+        }
+        else if(exBanca === 'UFG') {
+            processArea('Linguagens', ex.notaUFG_Lin, 30);
+            processArea('Natureza', ex.notaUFG_Nat, 30);
+            processArea('Matemática', ex.notaUFG_Mat, 30);
+        }
+        else if(exBanca === 'UEG') {
+            processArea('Gerais (UEG)', ex.notaUEG, 52);
+        }
+        else if(exBanca === 'UFT') {
+            processArea('Linguagens', ex.notaUFT_Lin, 24);
+            processArea('Matemática', ex.notaUFT_Mat, 8);
+            processArea('Humanas', ex.notaUFT_Hum, 16);
+            processArea('Natureza', ex.notaUFT_Nat, 16);
+        }
     });
     
     // 4. Conclusão de Metas (activities)
@@ -171,7 +208,7 @@ function getAcademicSummary() {
         acertosGlobal: 0,
         conclusaoMetas: conclusaoPercent,
         redacoesEntregues: redacoes.length, // Respeitando a base de dados
-        flashcardsRevisados: parseInt(localStorage.getItem('sinapse_flash_metrics') || '0', 10), // Exato a plataforma
+        flashcardsRevisados: parseInt(localStorage.getItem('sinapse_flash_metrics') || '0', 10), // Exato da plataforma
         melhorMateria: 'ND',
         piorMateria: 'ND',
         provasFeitas: exams.length,
@@ -183,7 +220,7 @@ function getAcademicSummary() {
     };
 
     if (totalQuestions > 0) {
-        summary.acertosGlobal = Math.round((totalHits / totalQuestions) * 100);
+        summary.acertosGlobal = Number(((totalHits / totalQuestions) * 100).toFixed(1));
     }
     
     // ----------- MOTOR DE GAMIFICAÇÃO & XP -----------
@@ -209,10 +246,10 @@ function getAcademicSummary() {
     let worstSubject = 'ND';
     let lowestAcc = 101;
 
-    Object.keys(subjectStats).forEach(disc => {
-        let stats = subjectStats[disc];
-        if (stats.questions > 0) {
-            let acc = (stats.correct / stats.questions) * 100;
+    Object.keys(subjectStat).forEach(disc => {
+        let stat = subjectStat[disc];
+        if (stat.questions > 0) {
+            let acc = (stat.correct / stat.questions) * 100;
             if (acc > highestAcc) {
                 highestAcc = acc;
                 bestSubject = disc;
@@ -227,7 +264,7 @@ function getAcademicSummary() {
     if(bestSubject !== 'ND') summary.melhorMateria = bestSubject;
     if(worstSubject !== 'ND') summary.piorMateria = worstSubject;
 
-    // Calculadora da Estimativa TRI Suprema
+    // Calculadora da Estimathva TRI Suprema
     if (summary.acertosGlobal > 0) {
         let acc = summary.acertosGlobal; // Porcentagem
         let notaBase = 300;
@@ -307,8 +344,31 @@ function getAcademicSummary() {
                 localStorage.setItem('sinapse_storage', JSON.stringify(dbData));
                 console.log("Flashcards limpos para o novo schema SRS (Anki Clone v3).");
             }
+            if (!dbData._performance_purged_v1) {
+                dbData.metrics_entries = []; 
+                localStorage.removeItem('sinapse_hits');
+                localStorage.removeItem('sinapse_misses');
+                dbData._performance_purged_v1 = true;
+                localStorage.setItem('sinapse_storage', JSON.stringify(dbData));
+                console.log("Performance por assuntos foi resetada com sucesso a pedido.");
+            }
+            if (!dbData._ufu_test_purged_v2) {
+                if (dbData.exams) {
+                    dbData.exams = dbData.exams.filter(e => e.banca !== 'UFU');
+                }
+                dbData._ufu_test_purged_v2 = true;
+                localStorage.setItem(DB_KEY, JSON.stringify(dbData));
+                console.log("Testes da UFU limpos com sucesso.");
+            }
+        } else {
+            // Caso o banco esteja vazio ou corrompido por erro anterior, força inicialização
+            initDB();
+            location.reload();
         }
     } catch(e) {
         console.error(e);
+        localStorage.removeItem(DB_KEY);
+        initDB();
+        location.reload();
     }
 })();

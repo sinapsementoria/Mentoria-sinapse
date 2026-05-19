@@ -1,0 +1,1019 @@
+<!DOCTYPE html>ã
+ã<html lang="pt-BR">ã
+ã<head>ã
+ã ã ã ã ã<meta charset="UTF-8">ã
+ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
+ã ã ã ã ã<title>ãMãeãnãtãoãrãiãaã ãSãiãnãaãpãsãeã ã-ã ãBãaãnãcãoã ãdãeã ãQãuãeãsãtãõãeãsã ãEãlãiãtãeã</title>ã
+ã ã ã ã ã<!-- Tailwind CSS -->ã
+ã ã ã ã ã<script src="https://cdn.tailwindcss.com"></script>ã
+ã ã ã ã ã<script>ã
+ã ã ã ã ã ã ã ã ãtãaãiãlãwãiãnãdã.ãcãoãnãfãiãgã ã=ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãhãeãmãeã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãxãtãeãnãdã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãiãnãaãpãsãeã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãlãuãeã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã ã/ã/ã ãEãsãcãuãrãoã ãIãnãsãtãiãtãuãcãiãoãnãaãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãiãmãaãrãyã:ã ã'ã#ã6ã3ã6ã6ãFã1ã'ã,ã ã/ã/ã ãIãnãdãiãgãoã ãPãrãeãmãiãuãmã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãgãhãtã:ã ã'ã#ãFãAãFãAãFãBã'ã,ã ã/ã/ã ãFãuãnãdãoã ãPãrãiãnãcãiãpãaãlã ãSãuãpãeãrã ãCãlãeãaãnã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtãFãaãmãiãlãyã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãaãnãsã:ã ã[ã'ãIãnãtãeãrã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãhãeãaãdãlãiãnãeã:ã ã[ã'ãMãaãnãrãoãpãeã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxãSãhãaãdãoãwã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãpãrãeãmãiãuãmã'ã:ã ã'ã0ã ã8ãpãxã ã3ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã1ã1ã,ã2ã5ã,ã6ã0ã,ã0ã.ã0ã6ã)ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãqãuãeãsãtãiãoãnã'ã:ã ã'ã0ã ã4ãpãxã ã1ã5ãpãxã ã-ã3ãpãxã ãrãgãbãaã(ã0ã,ã0ã,ã0ã,ã0ã.ã0ã3ã)ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</script>ã
+ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
+ã ã ã ã ã<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />ã
+ã ã ã ã ã<style>ã
+ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
+ã ã ã ã ã ã ã ã ãbãoãdãyã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãFãAãFãAãFãBã;ã ãcãoãlãoãrã:ã ã#ã1ãEã2ã9ã3ãBã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãSãmãoãoãtãhã ãRãeãnãdãeãrã ã*ã/ã
+ã ã ã ã ã ã ã ã ã.ãfãaãdãeã-ãiãnã ã{ã ãaãnãiãmãaãtãéãiãoãnã:ã ãfãaãdãeãIãnã ã0ã.ã4ãsã ãeãaãsãeã-ãoãuãtã ãfãoãrãwãaãrãdãsã;ã ã}ã
+ã ã ã ã ã ã ã ã ã@ãkãeãyãfãrãaãmãeãsã ãfãaãdãeãIãnã ã{ã ãfãrãoãmã ã{ã ãoãpãaãcãiãtãyã:ã ã0ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã1ã0ãpãxã)ã;ã ã}ã ãtãoã ã{ã ãoãpãaãcãiãtãyã:ã ã1ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã0ã)ã;ã ã}ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãCãuãsãtãoãmã ãSãcãrãoãlãlãbãaãrã ã*ã/ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã ã{ã ãwãiãdãtãhã:ã ã5ãpãxã;ã ã}ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãrãaãcãkã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã ã}ã
+ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ãCãBãDã5ãEã1ã;ã ãbãoãrãdãeãrã-ãrãaãdãiãuãsã:ã ã1ã0ãpãxã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãmãaãtãéãeãrãiãaãlã-ãsãyãmãbãoãlãsã-ãoãuãtãlãiãnãeãdã ã{ã ãfãoãnãtã-ãsãiãzãeã:ã ã2ã0ãpãxã;ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã0ã,ã ã'ãwãgãhãtã'ã ã3ã0ã0ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãiãcãoãnã-ãfãiãlãlã ã{ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã1ã;ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãCãoãmãpãoãnãeãnãtãeãsã ãdãeã ãAãlãtãeãrãnãaãtãéãiãvãaãsã ã*ã/ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã ã{ã ãtãrãaãnãsãiãtãiãoãnã:ã ãaãlãlã ã0ã.ã2ãsã ãeãaãsãeã;ã ãcãuãrãsãoãrã:ã ãpãoãiãnãtãeãrã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãsãeãlãeãcãtãeãdã ã{ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ã6ã3ã6ã6ãFã1ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãEãEãFã2ãFãFã ã!ãiãmãpãoãrãtãaãnãtã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãsãeãlãeãcãtãeãdã ã.ãaãlãtã-ãlãeãtãtãeãrã ã{ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ã6ã3ã6ã6ãFã1ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãcãoãlãoãrã:ã ãwãhãiãtãeã ã!ãiãmãpãoãrãtãaãnãtã;ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ã6ã3ã6ã6ãFã1ã ã!ãiãmãpãoãrãtãaãnãtã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãEãsãtãaãdãoãsã ãdãeã ãRãeãsãpãoãsãtãaã ã*ã/ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãcãoãrãrãeãcãtã ã{ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ã1ã0ãBã9ã8ã1ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãEãCãFãDãFã5ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãcãoãlãoãrã:ã ã#ã0ã6ã5ãFã4ã6ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãpãoãiãnãtãeãrã-ãeãvãeãnãtãsã:ã ãnãããoãnãeã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãcãoãrãrãeãcãtã ã.ãaãlãtã-ãlãeãtãtãeãrã ã{ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ã1ã0ãBã9ã8ã1ã;ã ãcãoãlãoãrã:ã ãwãhãiãtãeã;ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ã1ã0ãBã9ã8ã1ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãwãrãoãnãgã ã{ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ãEãFã4ã4ã4ã4ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãFãEãFã2ãFã2ã ã!ãiãmãpãoãrãtãaãnãtã;ã ãcãoãlãoãrã:ã ã#ã9ã9ã1ãBã1ãBã ã!ãiãmãpãoãrãtãaãnãtã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãaãlãtã-ãbãuãtãtãoãnã.ãwãrãoãnãgã ã.ãaãlãtã-ãlãeãtãtãeãrã ã{ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãEãFã4ã4ã4ã4ã;ã ãcãoãlãoãrã:ã ãwãhãiãtãeã;ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ãEãFã4ã4ã4ã4ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãlãoãcãkãeãdã ã{ã ãpãoãiãnãtãeãrã-ãeãvãeãnãtãsã:ã ãnãããoãnãeã;ã ãoãpãaãcãiãtãyã:ã ã0ã.ã7ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãeãxãpãlãaãnãaãtãéãiãoãnã-ãbãoãxã ã{ã ãdãiãsãpãlãaãyã:ã ãnãããoãnãeã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãeãxãpãlãaãnãaãtãéãiãoãnã-ãbãoãxã.ãsãhãoãwã ã{ã ãdãiãsãpãlãaãyã:ã ãbãlãoãcãkã;ã ãaãnãiãmãaãtãéãiãoãnã:ã ãfãaãdãeãIãnã ã0ã.ã5ãsã ãeãaãsãeã-ãoãuãtã ãfãoãrãwãaãrãdãsã;ã ã}ã
+ã ã ã ã ã</style>ã
+ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
+ã</head>ã
+ã<body class="flex h-screen overflow-hidden antialiased">ã
+ã
+ã ã ã ã ã<!-- SIDEBAR -->ã
+ã ã ã ã ã<aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relatéive bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">ã
+ã ã ã ã ã<!-- Logo Area -->ã
+ã ã ã ã ã<div class="pt-10 pb-6 flex flex-col items-center justify-center shrink-0 relatéive">ã
+ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO VETORIZADA.png" alt="Lion Study" class="h-10 w-auto object-contain" />ã
+ã ã ã ã ã</div>ã
+ã ã ã ã ã
+ã ã ã ã ã<!-- Menu Principal -->ã
+ã ã ã ã ã<nav class="flex-1 overflow-y-auto px-4 space-y-1 relatéive pb-10 custom-scrollbar">ã
+ã ã ã ã ã ã ã ã ã<a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãhãoãmãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãtãaãsã ãDãiãáãrãiãaãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãlãiãsãtã_ãaãlãtã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãPãlãaãnãeãjãaãmãeãnãtãoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãaãcãkãeãdã_ãlãiãnãeã_ãcãhãaãrãtã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="estratéegia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãrãoãuãtãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãEãsãtãrãaãtãéãéãgãiãaã ãAãPã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="banco-questoes.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relatéive border border-white/10 shadow-sm transition-all">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[22px] text-white leading-nãone block" style="font-variatéion-settings: 'FILL' 1;">ãqãuãiãzã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="tracking-wide">ãBãaãnãcãoã ãdãeã ãQãuãeãsãtãõãeãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãeãdãiãtã_ãnãããoãtãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãRãeãdãaãçãããoã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãmãoãnãiãtãoãrãiãnãgã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãSãiãmãuãlãaãdãoãrã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãcãaãlãeãnãdãaãrã_ãmãoãnãtãhã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãCãrãoãnãããoãgãrãaãmãaã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãyãlãeã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãFãlãaãsãhãcãaãrãdãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã<a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãcãhãoãoãlã</span>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãVãeãsãtãiãbãuãlãaãrãeãsã</span>ã
+ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã</nav>ã
+ã ã ã ã ã
+ã ã ã ã ã<!-- User Profile Footer -->ã
+ã ã ã ã ã<div class="p-4 shrink-0 relatéive z-20 border-t border-white/10">ã
+ã ã ã ã ã ã ã ã ã<div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">ãJãOã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 min-w-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[13px] font-bold text-white truncatée drop-shadow-sm">ãJãoãhãnãnã ãOãlãiãvãeãiãrãaã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[11px] text-white/70 truncatée group-hover:text-white/90 transition-colors">ãVãeãrã ãpãeãrãfãiãlã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã</div>ã
+ã</aside>ã
+ã
+ã ã ã ã ã<!-- CONTENT -->ã
+ã ã ã ã ã<main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relatéive">ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- TOPBAR -->ã
+ã ã ã ã ã ã ã ã ã<header class="h-24 bg-white/90 backdrop-blur-md border-b border-slatée-100 px-10 flex items-center justify-between sticky top-0 z-20 shadow-[0_4px_20px_rgba(0,0,0,0.01)] flex-shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 max-w-2xl">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Search Bar -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="relatéive group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined absolute left-4 top-1/2 -translatée-y-1/2 text-slatée-400 group-focus-within:text-sinapse-primary transition-colors">ãsãeãaãrãcãhã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="text" id="global-search" placeholder="Buscar palavra-chave, código da questão, ou assunto explícito..." class="w-full bg-slatée-50 border border-slatée-200 text-sm rounded-xl pl-12 pr-4 py-3 outline-nãone focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all font-medium text-slatée-700 placeholder-slatée-400">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-6 ml-8">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Performance Dropdown Placeholder -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="hidden md:flex flex-col items-end mr-4">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold uppercase tracking-[0.2em] text-slatée-400">ãHãoãjãeã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm font-bold text-[#0B193C]"><span id="header-hits">ã0ã</span>ã ãAãcãeãrãtãoãsã ã/ã ã<span id="header-misses">ã0ã</span>ã ãEãrãrãoãsã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="h-10 w-10 bg-slatée-100 rounded-full border-2 border-slatée-200 shadow-sm overflow-hidden cursor-pointer">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<img src="https://ui-avatéars.com/api/?name=Lucas+M&background=0B193C&color=fff&font-size=0.35" class="w-full h-full object-cover">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã</header>ã
+ã ã ã ã ã ã ã ã ã<!-- MAIN APP GRID -->ã
+ã ã ã ã ã ã ã ã ã<div class="flex-1 overflow-hidden flex flex-col">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- TOP PANEL: FILTERS -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-full bg-white border-b border-slatée-100 flex-shrink-0 z-10 sticky top-0 shadow-sm">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-4 px-8 border-b border-slatée-100 flex items-center justify-between bg-slatée-50">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline font-bold text-[#0B193C] flex items-center gap-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[18px]">ãtãuãnãeã</span>ã ãFãiãlãtãrãoãsã ãEãsãtãrãaãtãéãgãiãcãoãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="clearfilters()" class="text-[10px] text-sinapse-primary font-bold uppercase tracking-widest hover:bg-indigo-50 px-3 py-1.5 rounded transition-colors">ãLãiãmãpãaãrã ãFãiãlãtãrãoãsã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-6 px-8 flex flex-row items-end gap-6 bg-white overflow-x-auto">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Filter: Disciplina -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-64 flex-shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] font-extrabold text-slatée-400 uppercase tracking-widest mb-2">ãDãiãsãcãiãpãlãiãnãaãsã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<select id="filter-disc" class="w-full bg-slatée-50 border border-slatée-200 rounded-lg p-2.5 text-sm font-semibold text-slatée-700 outline-nãone focus:border-sinapse-primary">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="">ãTãOãDãAãSã ãAãSã ãDãIãSãCãIãPãLãIãNãAãSã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Matéemática">ãMãAãTãEãMãÁãTãIãCãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Física">ãFãÍãSãIãCãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Química">ãQãUãÍãMãIãCãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Biologia">ãBãIãOãLãOãGãIãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="História">ãHãIãSãTãÓãRãIãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Geografia">ãGãEãOãGãRãAãFãIãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Filosofia">ãFãIãLãOãSãOãFãIãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Sociologia">ãSãOãCãIãOãLãOãGãIãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Artes">ãAãRãTãEãSã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Linguagens">ãLãIãNãGãUãAãGãEãNãSã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Literatéura">ãLãIãTãEãRãAãTãUãRãAã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</select>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Filter: Assunto -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-72 flex-shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] font-extrabold text-slatée-400 uppercase tracking-widest mb-2">ãAãsãsãuãnãtãoãsã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<select id="filter-assunto" class="w-full bg-slatée-50 border border-slatée-200 rounded-lg p-2.5 text-sm font-semibold text-slatée-700 outline-nãone focus:border-sinapse-primary">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="">ãSãeãlãeãcãiãoãnãeã ãaã ãDãiãsãcãiãpãlãiãnãaã ãpãrãiãmãeãiãrãoã.ã.ã.ã</option>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</select>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Filter: Banca -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-56 flex-shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] font-extrabold text-slatée-400 uppercase tracking-widest mb-2">ãIãnãsãtãiãtãuãiãçãããoã ã(ãBãaãnãcãaã)ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="text" id="filter-banca" list="bancas-list" placeholder="Todas as Bancas" class="w-full bg-slatée-50 border border-slatée-200 rounded-lg p-2.5 text-sm font-semibold text-slatée-700 outline-nãone focus:border-sinapse-primary uppercase">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<datéalist id="bancas-list">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="ENEM">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="FUVEST">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNICAMP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNESP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFU">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFSCAR">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNB">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFT">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEM">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFOP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNIFESP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFRGS">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFSC">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFPR">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFAM">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFPA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFRR">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFGD">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNIRIO">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="USP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UERJ">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UENF">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UDESC">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UECE">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="URCA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UVA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEMA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEMASUL">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNITINS">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEMG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNEMAT">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEL">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEPG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNESPAR">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UENP">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNIÃOESTE">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNICENTRO">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UPE">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEPB">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UESB">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UEFS">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNEB">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UESC">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UERR">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNDF">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFJF">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFLA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFCSPA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="FURG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNILA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFFS">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UNIFAL-MG">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="UFMS">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="OUTRA">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</datéalist>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Statéus -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 min-w-[200px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] font-extrabold text-slatée-400 uppercase tracking-widest mb-3">ãSãtãaãtãéãuãsã ãdãeã ãRãeãsãoãlãuãçãããoã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex gap-4 bg-slatée-50 p-2.5 rounded-lg border border-slatée-100">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="flex items-center gap-2 text-xs font-semibold text-slatée-600 cursor-pointer">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="radio" name="statéus" value="all" checked class="w-4 h-4 text-sinapse-primary focus:ring-sinapse-primary">ã ãTãoãdãaãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="flex items-center gap-2 text-xs font-semibold text-slatée-600 cursor-pointer">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="radio" name="statéus" value="unanswered" class="w-4 h-4 text-sinapse-primary focus:ring-sinapse-primary">ã ãIãnãéãdãiãtãaãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Botão Filtrar -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-shrink-0 flex items-end">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="renderquestions()" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-2.5 h-[42px] rounded-lg font-bold text-sm shadow-premium transition-all flex items-center justify-center gap-2 mb-0.5 w-full md:w-auto">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãFãIãLãTãRãAãRã ã<span class="matéerial-symbols-outlined text-[18px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- RIGHT PANEL / BOTTOM PANEL: FEED DE QUESTÕES -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 overflow-y-auto bg-[#FAFAFB] p-8 md:p-12 relatéive" id="questions-feed-container">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="max-w-3xl mx-auto">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Feed Header -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center justify-between mb-8">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm font-medium text-slatée-500 mt-1">ãEãxãiãbãiãnãdãoã ã<span id="q-count" class="font-bold text-[#0B193C]">ã0ã</span>ã ãQãuãeãsãtãõãeãsã ãdãiãsãpãoãnãíãvãeãiãsã ãnãããoã ãbãaãnãcãoã ãlãoãcãaãlã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- CONTAINER DINÂMICO PARA INJEÇÃO DAS QUESTÕES -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div id="questions-list" class="space-y-8 pb-32">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Questions will be injected here by Javascript -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã</main>ã
+ã
+ã ã ã ã ã<!-- JS ENGINE (THE "BACKEND" & LOGIC) -->ã
+ã ã ã ã ã<script>ã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãeãfãaãuãlãtãQãuãeãsãtãiãoãnãsã ã=ã ã[ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã0ã9ã-ãQã0ã1ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãQãuãíãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãMãeãiãoã ãAãmãbãiãeãnãtãeã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã0ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAã ãaãtãéãmãoãsãfãeãrãaã ãtãeãrãrãeãsãtãrãeã ãéã ãcãoãmãpãoãsãtãaã ãpãeãlãoãsã ãgãaãsãeãsã ãnãiãtãrãoãgãêãnãiãoã ã(ãNã2ã)ã ãeã ãoãxãiãgãêãnãiãoã ã(ãOã2ã)ã,ã ãqãuãeã ãsãoãmãaãmã ãcãeãrãcãaã ãdãeã ã9ã9ã%ã,ã ãeã ãpãoãrã ãgãaãsãeãsã ãtãrãaãçãoãsã,ã ãeãnãtãrãeã ãeãlãeãsã ãoã ãgãáãsã ãcãaãrãbãôãnãiãcãoã ã(ãCãOã2ã)ã,ã ãmãeãtãaãnãããoã ã(ãCãHã4ã)ã,ã ãoãzãôãnãiãoã ã(ãOã3ã)ã ãeã ãoã ãóãxãiãdãoã ãnãiãtãrãoãsãoã ã(ãNã2ãOã)ã.ã.ã.ã ãAã ãpãaãrãtãiãrã ãdãaã ãRãeãvãoãlãuãçãããoã ãIãnãdãuãsãtãrãiãaãlã,ã ãaã ãcãoãnãcãeãnãtãrãaãçãããoã ãdãeã ãgãaãsãeãsã ãtãrãaãçãoãsã ãtãeãmã ãaãuãmãeãnãtãaãdãoã ãsãiãgãnãiãfãiãcãaãtãéãiãvãaãmãeãnãtãeã.ã ãMãaãiãsã ãrãeãcãeãnãtãeãmãeãnãtãeã,ã ãoãuãtãrãoã ãfãaãtãéãoãrã ãtãoãrãnãããoãuã-ãsãeã ãdãiãrãeãtãaãmãeãnãtãeã ãeãnãvãoãlãvãiãdãoã.ã.ã.ã ãoã ãdãeãsãmãaãtãéãaãmãeãnãtãoã.ã ã<br><br><b>ã(ãBãRãOãWãNã,ã ãIã.ã ãFã)ã</b><br><br>ãCãoãnãsãiãdãeãrãaãnãdãoã ãoã ãtãeãxãtãoã,ã ãuãmãaã ãaãlãtãeãrãnãaãtãéãiãvãaã ãvãiãáãvãeãlã ãpãaãrãaã ãcãoãmãbãaãtãéãeãrã ãoã ãeãfãeãiãtãoã ãeãsãtãuãfãaã ãéã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAã:ã ã'ãrãeãdãuãzãiãrã ãoã ãcãaãlãoãrã ãiãrãrãaãdãiãaãdãoã ãpãeãlãaã ãTãeãrãrãaã ãmãeãdãiãaãnãtãeã ãaã ãsãuãbãsãtãiãtãuãiãçãããoã ãdãaã ãpãrãoãdãuãçãããoã ãpãrãiãmãáãrãiãaã ãpãeãlãaã ãiãnãdãuãsãtãrãiãaãlãiãzãaãçãããoã ãrãeãfãrãiãgãeãrãaãdãaã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãBã:ã ã'ãpãrãoãmãoãvãeãrã ãaã ãqãuãeãiãmãaã ãdãaã ãbãiãoãmãaãsãsãaã ãvãeãgãeãtãaãlã,ã ãrãeãsãpãoãnãsãáãvãeãlã ãpãeãlãoã ãaãuãmãeãnãtãoã ãdãoã ãeãfãeãiãtãoã ãeãsãtãuãfãaã ãdãeãvãiãdãoã ãàã ãpãrãoãdãuãçãããoã ãdãeã ãCãHã4ã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCã:ã ã'ãrãeãdãuãzãiãrã ãoã ãdãeãsãmãaãtãéãaãmãeãnãtãoã,ã ãmãaãnãtãeãnãdãoã-ãsãeã,ã ãaãsãsãiãmã,ã ãoã ãpãoãtãeãnãcãiãaãlã ãdãaã ãvãeãgãeãtãaãçãããoã ãeãmã ãaãbãsãoãrãvãeãrã ãoã ãCãOã2ã ãdãaã ãaãtãéãmãoãsãfãeãrãaã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãDã:ã ã'ãaãuãmãeãnãtãaãrã ãaã ãcãoãnãcãeãnãtãrãaãçãããoã ãaãtãéãmãoãsãfãéãrãiãcãaã ãdãeã ãHã2ãOã,ã ãmãoãlãéãcãuãlãaã ãcãaãpãaãzã ãdãeã ãaãbãsãoãrãvãeãrã ãgãrãaãnãdãeã ãqãuãaãnãtãiãdãaãdãeã ãdãeã ãcãaãlãoãrã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãEã:ã ã'ãrãeãmãoãvãeãrã ãmãoãlãéãcãuãlãaãsã ãoãrãgãâãnãiãcãaãsã ãpãoãlãaãrãeãsã ãdãaã ãaãtãéãmãoãsãfãeãrãaã,ã ãdãiãmãiãnãuãiãnãdãoã ãaã ãcãaãpãaãcãiãdãaãdãeã ãdãeãlãaãsã ãdãeã ãrãeãtãeãrã ãcãaãlãoãrã.ã'ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãCã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ã<b>ãHãaãbãiãlãiãdãaãdãeã ã(ãCãoãmãpãeãtãêãnãcãiãaã ã3ã)ã:ã</b>ã ãAãvãaãlãiãaãrã ãpãrãoãpãoãsãtãaãsã ãdãeã ãiãnãtãeãrãvãeãnãçãããoã ãnãããoã ãmãeãiãoã ãaãmãbãiãeãnãtãeã.ã<br><br><b>ãCãoãmãeãnãtãáãrãiãoã ãdãoã ãMãeãnãtãoãrã:ã</b>ã ãOã ãdãeãsãmãaãtãéãaãmãeãnãtãoã ãeãlãiãmãiãnãaã ãáãrãvãoãrãeãsã ãqãuãeã ãsãeãqãuãeãsãtãrãaãmã ãnãaãtãéãuãrãaãlãmãeãnãtãeã ãoã ãDãiãóãxãiãdãoã ãdãeã ãCãaãrãbãoãnãããoã ã(ãCãOã2ã)ã ãdãuãrãaãnãtãeã ãaã ãfãoãtãoãsãsãíãnãtãeãsãeã.ã ãRãeãdãuãzãiãrã ãaãsã ãqãuãeãiãmãaãdãaãsã ãeã ãmãoãtãoãsãsãeãrãrãaãsã ãéã ãoã ãpãaãsãsãoã ãmãaãcãrãoãcãrãíãtãiãcãoã ãpãaãrãaã ãcãoãnãtãeãrã ãaã ãlãiãbãeãrãaãçãããoã ãdãeãsãcãoãnãtãrãoãlãaãdãaã ãdãoã ãgãáãsã ãeãsãtãuãfãaã ãnãaã ãaãtãéãmãoãsãfãeãrãaã ãtãeãrãrãeãsãtãrãeã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã0ã9ã-ãQã0ã2ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãFãiãsãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã0ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAãnãaãlãiãsãeã ãuãmãaã ãfãiãgãuãrãaã ãcãaãrãtãeãsãiãaãnãaã ãiãmãaãgãiãnãáãrãiãaã ãoãnãdãeã ãoã ãEãiãxãoã ãYã ãaãpãrãeãsãeãnãtãaã ãaã ã"ãCãoãnãcãeãnãtãrãaãçãããoã ãdãeã ãáãlãcãoãoãlã ãnãããoã ãsãaãnãgãuãeã ã(ãmãgã%ã)ã"ã ãeã ãoã ãEãiãxãoã ãXã ãmãoãsãtãrãaã ãoã ã"ãTãeãmãpãoã"ã ãaãvãaãnãçãaãnãdãoã ãeãmã ãHãoãrãaãsã ãaãpãóãsã ãoã ãcãoãnãsãuãmãoã.ã ãAãsã ãdãiãvãeãrãsãaãsã ãlãiãnãhãaãsã ãnãããoã ãgãrãáãfãiãcãoã ãcãaãeãmã ãdãeã ãuãmã ãpãiãcãoã ãmãáãxãiãmãoã ãeãmã ãdãiãrãeãçãããoã ãaãoã ãzãeãrãoã ãcãoãmã ãoã ãpãaãsãsãaãrã ãdãoã ãdãiãaã.ã<br><br>ãSãuãpãoãnãdãoã ãqãuãeã ãsãeãjãaã ãnãeãcãeãsãsãáãrãiãoã ãdãaãrã ãuãmã ãtãíãtãuãlãoã ãpãaãrãaã ãeãsãsãaã ãfãiãgãuãrãaã,ã ãaã ãaãlãtãeãrãnãaãtãéãiãvãaã ãqãuãeã ãmãeãlãhãoãrã ãtãrãaãdãuãzãiãrãiãaã ãoã ãpãrãoãcãeãsãsãoã ãrãeãpãrãeãsãeãnãtãaãdãoã ãsãeãrãiãaã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAã:ã ã'ãCãoãnãcãeãnãtãrãaãçãããoã ãmãéãdãiãaã ãdãeã ãáãlãcãoãoãlã ãnãããoã ãsãaãnãgãuãeã ãaãoã ãlãoãnãgãoã ãdãoã ãdãiãaã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãBã:ã ã'ãVãaãrãiãaãçãããoã ãdãaã ãfãrãeãqãuãêãnãcãiãaã ãdãaã ãiãnãgãeãsãtãããoã ãdãeã ãáãlãcãoãoãlã ãaãoã ãlãoãnãgãoã ãdãaãsã ãhãoãrãaãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCã:ã ã'ãCãoãnãcãeãnãtãrãaãçãããoã ãmãíãnãiãmãaã ãdãeã ãáãlãcãoãoãlã ãnãããoã ãsãaãnãgãuãeã ãaã ãpãaãrãtãiãrã ãdãeã ãdãiãfãeãrãeãnãtãeãsã ãdãoãsãaãgãeãnãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãDã:ã ã'ãEãsãtãiãmãaãtãéãiãvãaã ãdãeã ãtãeãmãpãoã ãnãeãcãeãsãsãáãrãiãoã ãpãaãrãaã ãmãeãtãaãbãoãlãiãzãaãrã ãdãiãfãeãrãeãnãtãeãsã ãqãuãaãnãtãiãdãaãdãeãsã ãdãeã ãáãlãcãoãoãlã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãEã:ã ã'ãRãeãpãrãeãsãeãnãtãaãçãããoã ãgãrãáãfãiãcãaã ãdãaã ãdãiãsãtãrãiãbãuãiãçãããoã ãdãeã ãfãrãeãqãuãêãnãcãiãaã ãdãeã ãáãlãcãoãoãlã ãeãmã ãdãeãtãeãrãmãiãnãaãdãaã ãhãoãrãaã ãdãoã ãdãiãaã.ã'ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãDã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ã<b>ãCãoãmãeãnãtãáãrãiãoã ãCãlãíãnãiãcãoã:ã</b>ã ãOã ãfãíãgãaãdãoã ãhãuãmãaãnãããoã ã(ãvãiãaã ãÁãlãcãoãoãlã ãDãeãsãiãdãrãoãgãeãnãaãsãeã)ã ãpãrãeãcãiãsãaã ãdãeã ãuãmãaã ãjãaãnãeãlãaã ãdãeã ãtãeãmãpãoã ãfãíãsãiãcãoã ãpãaãrãaã ãdãeãcãaãiãrã ãoãsã ãpãiãcãoãsã ãdãeã ãmãiãlãiãgãrãaãmãaãgãeãmã.ã ãAãsã ãcãuãrãvãaãsã ãdãeãsãcãeãnãdãeãnãtãeãsã ãmãoãsãtãrãaãmã ãmãaãtãéãeãmãaãÉãtãiãcãaãmãeãnãtãeã ãoã ã"ãTãeãmãpãoã ãdãeã ãCãlãeãaãrãaãnãcãeã"ã,ã ãaã ãqãuãeã ãtãaãxãaã ãsãeãuã ãcãoãrãpãoã ãeãlãiãmãiãnãaã ãdãoãsãaãgãeãnãsã ãaãgãrãeãsãsãiãvãaãsã ãdãeãsãsãaã ãtãoãxãiãnãaã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã0ã9ã-ãQã0ã3ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãIãmãuãnãããoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã0ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãEãsãtãiãmãaã-ãsãeã ãqãuãeã ãhãaãjãaã ãaãtãéãuãaãlãmãeãnãtãeã ãnãããoã ãmãuãnãdãoã ã4ã0ã ãmãiãlãhãõãeãsã ãdãeã ãpãeãsãsãoãaãsã ãiãnãfãeãcãtãaãdãaãsã ãpãeãlãoã ãHãIãVã ã(ãoã ãvãíãrãuãsã ãqãuãeã ãcãaãuãsãaã ãaã ãAãIãDãSã)ã.ã ãNãeãsãsãeã ãcãeãnãáãrãiãoã ãdãeã ãpãaãnãdãeãmãiãaã,ã ãuãmãaã ãvãaãcãiãnãaã ãcãoãnãtãrãaã ãoã ãHãIãVã ãtãeãrãiãaã ãiãmãeãnãsãoã ãiãmãpãaãcãtãoã,ã ãpãoãiãsã ãsãaãlãvãaãrãiãaã ãmãiãlãhãõãeãsã ãdãeã ãvãiãdãaãsã.ã ãCãeãrãtãaãmãeãnãtãeã ãsãeãrãiãaã ãuãmã ãmãaãrãcãoã ãnãaã ãhãiãsãtãóãrãiãaã ãpãlãaãnãeãtãáãrãiãaã ãeã ãuãmãaã ãeãsãpãeãrãaãnãçãaã ãpãaãrãaã ãoã ãtãrãaãtãéãaãmãeãnãtãoã ãaãnãtãiãvãiãrãaãlã.ã<br><br>ãUãmãaã ãvãaãcãiãnãaã ãeãfãiãcãiãeãnãtãeã ãcãoãnãtãrãaã ãoã ãHãIãVã ãdãeãvãeãrãiãaã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAã:ã ã'ãiãnãdãuãzãiãrã ãaã ãiãmãuãnãiãdãaãdãeã ãcãeãlãuãlãaãrã,ã ãpãaãrãaã ãpãrãoãtãeãgãeãrã ãoã ãoãrãgãaãnãiãsãmãoã ãdãaã ãcãoãnãtãaãmãiãnãaãçãããoã ãrãeãtãrãoãvãiãrãaãlã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãBã:ã ã'ãsãeãrã ãcãaãpãaãzã ãdãeã ãaãlãtãeãrãaãrã ãoã ãgãeãnãããoãmãaã ãdãoã ãoãrãgãaãnãiãsãmãoã ãpãoãrãtãaãdãoãrã,ã ãiãnãdãuãzãiãnãdãoã ãaã ãsãíãnãtãeãsãeã ãdãeã ãeãnãzãiãmãaãsã ãpãrãoãtãeãtãoãrãaãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCã:ã ã'ãpãrãoãdãuãzãiãrã ãaãnãtãíãgãeãnãããoãsã ãcãaãpãaãzãeãsã ãdãeã ãsãeã ãlãiãgãaãrãeãmã ãaãoã ãvãíãrãuãsã,ã ãiãmãpãeãdãiãnãdãoã ãqãuãeã ãeãsãtãeã ãeãnãtãrãeã ãnãaãsã ãcãéãlãuãlãaãsã ãdãoã ãoãrãgãaãnãiãsãmãoã ãhãuãmãaãnãããoã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãDã:ã ã'ãsãeãrã ãaãmãpãlãaãmãeãnãtãeã ãaãpãlãiãcãaãdãaã ãeãmã ãaãnãiãmãaãiãsã,ã ãvãiãsãtãoã ãqãuãeã ãeãsãsãeãsã ãsãããoã ãoãsã ãpãrãiãnãcãiãpãaãiãsã ãtãrãaãnãsãmãiãsãsãoãrãeãsã ãdãoã ãrãeãtãrãoãvãíãrãuãsã ãpãaãrãaã ãoãsã ãsãeãrãeãsã ãhãuãmãaãnãããoãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãEã:ã ã'ãeãsãtãiãmãuãlãaãrã ãaã ãiãmãuãnãiãdãaãdãeã,ã ãmãiãnãiãmãiãzãaãnãdãoã ãaã ãtãrãaãnãsãmãiãsãsãããoã ãdãoã ãvãíãrãuãsã ãpãoãrã ãgãoãtãíãcãuãlãaãsã ãeãsãpãaãlãhãaãdãaãsã ãnãaã ãsãaãlãiãvãaã.ã'ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãAã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ã<b>ãVãiãsãããoã ãBãiãoãlãóãgãiãcãaã:ã</b>ã ãOã ãpãrãiãnãcãíãpãiãoã ãmãaãtãéãrãiãzã ãaãbãsãoãlãuãtãoã ãdãeã ãuãmãaã ã"ãVãaãcãiãnãaã"ã ãnãããoã ãéã ãcãuãrãaãrã ãoãsã ãdãoãeãnãtãeãsã ãeã ãnãããoã ãéã ãmãaãtãéãaãrã ãoã ãvãíãrãuãsã ãiãnãjãeãtãaãnãdãoã ã"ãaãnãtãíãgãeãnãããoãsã"ã ã(ãoã ãvãíãrãuãsã ãpãrãóãpãrãiãoã ãJãÁã ãÉã ãoã ãaãnãtãíãgãeãnãããoã)ã.ã ãAã ãvãaãcãiãnãaã ãiãnãtãrãoãdãuãzãiãrãiãaã ãfãrãaãgãmãeãnãtãoãsã ã(ãpãaãrãtãíãcãuãlãaãsã ãvãiãrãaãiãsã ãmãoãrãtãaãsã ãoãuã ãsãiãnãtãéãÉãtãiãcãaãsã)ã ãnãããoã ãpãaãcãiãeãnãtãeã ãsãaãdãiãoã,ã ãeãnãgãaãtãéãiãlãhãaãnãdãoã ãoãsã ãlãiãnãfãóãcãiãtãoãsã ãaã ãmãeãmãoãrãiãzãaãrãeãmã ãeã ãcãrãiãaãrãeãmã ã<b>ãaãnãtãiãcãoãrãpãoãsã</b>ã ãpãrãéãvãiãoãsã ã(ãiãnãdãuãzãiãnãdãoã ãiãmãuãnãiãdãaãdãeã ãaãtãéãiãvãaã ãaãrãtãiãfãiãcãiãaãlã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã0ã9ã-ãQã0ã4ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãGãeãnãéãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã0ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãEãmã ãuãmã ãeãxãpãeãrãiãmãeãnãtãoã ãlãaãbãoãrãaãtãéãoãrãiãaãlã,ã ãpãrãeãpãaãrãoãuã-ãsãeã ãuãmã ãcãoãnãjãuãnãtãoã ãdãeã ãpãlãaãnãtãaãsã ãpãoãrã ãtãéãcãnãiãcãaã ãdãeã ãcãlãoãnãaãgãeãmã ã(ãmãuãdãaãsã ãiãdãêãnãÉãtãiãcãaãsã)ã ãaã ãpãaãrãtãiãrã ãdãeã ãuãmãaã ãpãlãaãnãtãaã ãoãrãiãgãiãnãaãlã ãqãuãeã ãaãpãrãeãsãeãnãtãaãvãaã ãfãoãlãhãaãsã ãiãnãtãeãnãsãaãmãeãnãtãeã ãvãeãrãdãeãsã.ã ã<br><br>ãEãsãsãeã ãcãoãnãjãuãnãtãoã ãfãoãiã ãdãiãvãiãdãiãdãoã ãeãmã ãdãoãiãsã ãgãrãuãpãoãsã ãmãaãnãtãiãdãoãsã ãhãiãdãrãaãtãéãaãdãoãsã ãcãoãmã ãrãiãgãoãrã ãaãcãaãdãêãmãiãcãoã,ã ãcãoãmã ãeãxãcãeãçãããoã ãdãaã ãlãuãzã:ã ãuãmã ãgãrãuãpãoã ãfãoãiã ãeãxãpãoãsãtãoã ãaãoã ãsãoãlã ãpãlãeãnãããoã ãdãiãaãtãéãoã ãeã ãoãuãtãrãoã ãfãoãiã ãsãeãlãaãdãoã ãeãmã ãaãbãsãoãlãuãtãoã ãeãsãcãuãrãoã.ã<br>ãAãpãóãsã ãaãlãgãuãnãsã ãdãiãaãsã,ã ãoã ãgãrãuãpãoã ãeãxãpãoãsãtãoã ãàã ãlãuãzã ãpãeãrãmãaãnãeãcãiãaã ãvãeãrãdãeã,ã ãjãáã ãoã ãdãoã ãeãsãcãuãrãoã ãaãmãaãrãeãlãoãuã ãhãoãrãrãiãvãeãlãmãeãnãtãeã.ã<br><br>ãAãoã ãfãiãnãaãlã ãdãoã ãeãxãpãeãrãiãmãeãnãtãoã,ã ãcãoãnãcãlãuãiã-ãsãeã ãqãuãeã ãoãsã ãdãoãiãsã ãgãrãuãpãoãsã ãrãeãsãuãlãtãaãnãtãeãsã ãaãpãrãeãsãeãnãtãaãrãaãmã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAã:ã ã'ãoãsã ãgãeãnãóãtãiãpãoãsã ãeã ãoãsã ãfãeãnãóãtãiãpãoãsã ãiãdãêãnãtãiãcãoãsã ãeãnãtãrãeã ãsãiã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãBã:ã ã'ãoãsã ãgãeãnãóãtãiãpãoãsã ãiãdãêãnãtãiãcãoãsã,ã ãcãoãnãtãuãdãoã ãoãsã ãfãeãnãóãtãiãpãoãsã ãmãaãnãiãfãeãsãtãaãrãaãmã-ãsãeã ãdãeã ãfãoãrãmãaãsã ãdãiãfãeãrãeãnãtãeãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCã:ã ã'ãdãiãfãeãrãeãnãçãaãsã ãnãããoãsã ãgãeãnãóãtãiãpãoãsã ãeã ãdãrãáãsãÉãtãiãcãaãsã ãdãiãfãeãrãeãnãçãaãsã ãnãããoãsã ãfãeãnãóãtãiãpãoãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãDã:ã ã'ãoã ãmãeãsãmãoã ãfãeãnãóãtãiãpãoã,ã ãmãaãsã ãaãbãeãrãtãaãmãeãnãtãeã ãoãpãeãrãaãvãaãmã ãsãoãbã ãdãoãiãsã ãgãeãnãóãtãiãpãoãsã ãcãlãiãvãaãdãoãsã ãdãiãfãeãrãeãnãtãeãsã.ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãEã:ã ã'ãuãmãaã ãgãrãaãnãdãeã ãeã ãiãmãpãrãeãvãiãsãíãvãeãlã ãvãaãrãiãeãdãaãdãeã ãlãeãtãaãlã ãeãmã ãsãeãuãsã ãgãeãnãóãtãiãpãoãsã.ã'ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ã<b>ãRãeãgãrãaã ãdãeã ãOãuãrãoã ãGãeãnãéãtãiãcãaã ã(ãFã ã=ã ãGã ã+ã ãAã)ã</b>ã:ã<br>ãPãoãrã ãtãrãaãtãéãaãrãeãmã-ãsãeã ãdãeã ãpãlãaãnãtãaãsã ãcãlãoãnãaãdãaãsã ãdãaã ãmãeãsãmãíãsãsãiãmãaã ãcãéãlãuãlãaã-ãmãããeã,ã ãsãeãuã ãDãNãAã ãiãnãtãeãrãnãããoã ã(ãGãeãnãóãtãiãpãoã)ã ãéã ãaãbãsãoãlãuãtãaãmãeãnãtãeã ãiãgãuãaãlã ã(ã1ã0ã0ã%ã ãiãdãêãnãtãiãcãoãsã)ã.ã ãPãoãrãéãmã ãaã ãaãuãsãêãnãcãiãaã ãdãeã ãfãóãtãoãnãsã ãbãlãoãqãuãeãoãuã ãaã ãvãiãaã ãbãiãoãqãuãíãmãiãcãaã ãdãaã ãCãlãoãrãoãfãiãlãaã,ã ãeãnãtãããoã ãfãiãsãiãcãaãmãeãnãtãeã ãeãlãaã ãfãiãcãoãuã ãaãmãaãrãeãlãaã ã(ãfãeãnãóãtãiãpãoã ãdãiãfãeãrãeãnãtãeã)ã.ã ãGãeãnãóãtãiãpãoãsã ãFãiãxãoãsã,ã ãFãeãnãóãtãiãpãoãsã ãMãuãtãáãvãeãiãsã ãaãoã ãMãeãiãoã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã2ã4ã-ãQã1ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãFãíãsãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãTãeãrãmãoãdãiãnãâãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã2ã4ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãOã ãuãsãoã ãdãeã ãpãaãiãnãéãiãsã ãsãoãlãaãrãeãsã ãtãéãrãmãiãcãoãsã ãeãmã ãrãeãsãiãdãêãnãcãiãaãsã ãvãiãsãaã ãeãcãoãnãããoãmãiãzãaãrã ãeãnãeãrãgãiãaã ãnãããoã ãaãqãuãeãcãiãmãeãnãtãoã ãdãeã ãáãgãuãaã.ã ãCãoãnãsãiãdãeãrãeã ãuãmã ãsãiãsãtãeãmãaã ãoãnãdãeã ãaã ãáãgãuãaã ãeãnãtãrãaã ãaã ã2ã0ã°ãCã ãeã ãdãeãvãeã ãsãaãiãrã ãaã ã4ã0ã°ãCã.ã ãOã ãqãuãeã ãoãcãoãrãrãeã ãpãrãeãdãoãmãiãnãaãnãtãeãmãeãnãtãeã ãcãoãmã ãaãsã ãmãoãlãéãcãuãlãaãsã ãdãeã ãáãgãuãaã ãdãuãrãaãnãtãeã ãaã ãpãaãsãsãaãgãeãmã ãpãeãlãoã ãcãoãlãeãtãoãrã ãsãoãlãaãrã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãAãuãmãeãnãtãoã ãdãaã ãeãnãeãrãgãiãaã ãcãiãnãéãÉãtãiãcãaã ãmãéãdãiãaã.ã'ã,ã ãBã:ã ã'ãDãiãmãiãnãuãiãçãããoã ãdãaã ãlãiãgãaãçãããoã ãdãeã ãhãiãdãrãoãgãêãnãiãoã.ã'ã,ã ãCã:ã ã'ãEãxãpãaãnãsãããoã ãiãôãnãiãcãaã ãrãeãvãeãrãsãíãvãeãlã.ã'ã,ã ãDã:ã ã'ãSãuãbãlãiãmãaãçãããoã ãeãmã ãmãiãcãrãoãeãsãcãaãlãaã.ã'ã,ã ãEã:ã ã'ãRãeãsãfãrãiãaãmãeãnãtãoã ãaãdãiãaãbãáãtãiãcãoã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãAã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãAãoã ãrãeãcãeãbãeãrã ãoã ãcãaãlãoãrã,ã ãaã ãtãeãmãpãeãrãaãtãéãuãrãaã ãdãaã ãáãgãuãaã ãaãuãmãeãnãtãaã ãdãeã ã2ã0ã°ãCã ãpãaãrãaã ã4ã0ã°ãCã.ã ãAã ãtãeãmãpãeãrãaãtãéãuãrãaã ãmãaãcãrãoãsãcãóãpãiãcãaã ãrãeãfãlãeãtãeã ãdãiãrãeãtãaãmãeãnãtãeã ãoã ãaãuãmãeãnãtãoã ãdãaã ãeãnãeãrãgãiãaã ãcãiãnãéãÉãtãiãcãaã ãmãéãdãiãaã ãdãaãsã ãmãoãlãéãcãuãlãaãsã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã2ã3ã-ãQã4ã5ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãcãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã2ã3ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãOã ãdãeãsãmãaãtãéãaãmãeãnãtãoã ãnãaã ãAãmãaãzãôãnãiãaã ãcãoãnãtãrãiãbãuãiã ãsãeãvãeãrãaãmãeãnãtãeã ãpãaãrãaã ãoã ãaãqãuãeãcãiãmãeãnãtãoã ãgãlãoãbãaãlã ãpãoãrãqãuãeã ãaãsã ãáãrãvãoãrãeãsã ãrãeãmãoãvãiãdãaãsã ãdãeãiãxãaãmã ãdãeã ãrãeãaãlãiãzãaãrã ãuãmã ãiãmãpãoãrãtãaãnãtãeã ãpãrãoãcãeãsãsãoã ãbãiãoãlãóãgãiãcãoã.ã ãEãsãsãeã ãpãrãoãcãeãsãsãoã ãéã ãaã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãRãeãsãpãiãrãaãçãããoã ãcãeãlãuãlãaãrã ãaãeãrãóãbãiãaã.ã'ã,ã ãBã:ã ã'ãFãoãtãoãsãsãíãnãtãeãsãeã,ã ãqãuãeã ãsãeãqãuãeãsãtãrãaã ãcãaãrãbãoãnãããoã.ã'ã,ã ãCã:ã ã'ãFãiãxãaãçãããoã ãdãeã ãnãiãtãrãoãgãêãnãiãoã ãnãããoã ãsãoãlãoã.ã'ã,ã ãDã:ã ã'ãTãrãaãnãsãpãiãrãaãçãããoã ãpãeãlãaãsã ãfãoãlãhãaãsã.ã'ã,ã ãEã:ã ã'ãFãeãrãmãeãnãtãaãçãããoã ãlãáãÉãtãiãcãaã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãAã ãfãoãtãoãsãsãíãnãtãeãsãeã ãéã ãrãeãsãpãoãnãsãáãvãeãlã ãpãoãrã ãsãeãqãuãeãsãtãrãaãrã ãoã ãCãOã2ã ãaãtãéãmãoãsãfãéãrãiãcãoã ãeã ãcãoãnãvãeãrãtãêã-ãlãoã ãeãmã ãbãiãoãmãaãsãsãaã.ã ãMãeãnãããoãsã ãáãrãvãoãrãeãsã ãrãeãsãuãlãtãaã ãeãmã ãmãaãiãsã ãCãOã2ã ã(ãgãáãsã ãeãsãtãuãfãaã)ã ãsãoãlãtãoã ãnãaã ãaãtãéãmãoãsãfãeãrãaã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã2ã2ã-ãQã9ã2ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãHãiãsãtãóãrãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãrãaã ãVãaãrãgãaãsã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã2ã2ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãDãiãfãíãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãDãuãrãaãnãtãeã ãoã ãEãsãtãaãdãoã ãNãoãvãoã ã(ã1ã9ã3ã7ã-ã1ã9ã4ã5ã)ã,ã ãGãeãtãúãlãiãoã ãVãaãrãgãaãsã ãcãrãiãoãuã ãoã ãDãeãpãaãrãtãaãmãeãnãtãoã ãdãeã ãIãmãpãrãeãnãsãaã ãeã ãPãrãoãpãaãgãaãnãdãaã ã(ãDãIãPã)ã ãcãoãmã ãoã ãgãrãaãnãdãeã ãoãbãjãeãtãiãvãoã ãcãeãnãtãrãaãlã ãdãeã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãCãeãnãsãuãrãaãrã ãaã ãiãmãpãrãeãnãsãaã,ã ãcãoãnãtãrãoãlãaãrã ãaã ãcãuãlãtãuãrãaã ãeã ãcãoãnãsãtãrãuãiãrã ãaã ãiãmãaãgãeãmã ãmãíãÉãtãiãcãaã ãdãoã ãpãrãeãsãiãdãeãnãtãeã.ã'ã,ã ãBã:ã ã'ãEãxãpãaãnãdãiãrã ãoã ãaãcãeãsãsãoã ãdãaãsã ãuãnãiãvãeãrãsãiãdãaãdãeãsã ãpãúãbãlãiãcãaãsã ãaãoãsã ãcãaãmãpãoãnãeãsãeãsã.ã'ã,ã ãCã:ã ã'ãDãeãmãoãcãrãaãtãéãiãzãaãrã ãaã ãrãáãdãiãoã ãnãããoã ãiãnãtãeãrãiãoãrã ãdãoã ãBãrãaãsãiãlã.ã'ã,ã ãDã:ã ã'ãFãaãcãiãlãiãtãaãrã ãaã ãeãnãtãrãaãdãaã ãdãeã ãfãiãlãmãeãsã ãdãeã ãHãoãlãlãyãwãoãoãdã ãnãããoã ãmãeãrãcãaãdãoã ãnãaãcãiãoãnãaãlã.ã'ã,ã ãEã:ã ã'ãGãaãrãaãnãtãiãrã ãaã ãlãiãbãeãrãdãaãdãeã ãdãeã ãeãxãpãrãeãsãsãããoã ãdãoãsã ãsãiãnãdãiãcãaãtãéãoãsã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãAã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãOã ãDãIãPã ãfãoãiã ãaã ãfãeãrãrãaãmãeãnãtãaã ãmãáãxãiãmãaã ãdãaã ãdãiãtãaãdãuãrãaã ãVãaãrãgãaãsã ãpãaãrãaã ãcãeãnãsãuãrãaãrã ãoãpãoãsãiãtãoãrãeãsã,ã ãfãiãsãcãaãlãiãzãaãrã ãoã ãrãáãdãiãoã ãeã ãeãxãaãlãtãaãrã ãaã ãfãiãgãuãrãaã ãdãoã ãlãíãdãeãrã ãcãoãmãoã ã'ãPãaãiã ãdãoãsã ãPãoãbãrãeãsã'ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã2ã1ã-ãQã1ã2ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãQãuãíãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãSãeãpãaãrãaãçãããoã ãdãeã ãMãiãsãtãuãrãaãsã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã2ã1ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãPãaãrãaã ãsãeãpãaãrãaãrã ãoãsã ãcãoãmãpãoãnãeãnãtãeãsã ãdãoã ãlãiãxãoã ãrãeãcãiãcãlãáãvãeãlã ãqãuãeã ãcãoãnãtãêãmã ãlãaãtãéãaãsã ãdãeã ãaãlãuãmãíãnãiãoã ãeã ãgãaãrãrãaãfãaãsã ãPãEãTã,ã ãuãtãiãlãiãzãaã-ãsãeã ãcãoãmãuãmãeãnãtãeã ãeãmã ãuãsãiãnãaãsã ãqãuãaãlã ãmãéãtãoãdãoã ãnãaãsã ãpãrãiãmãeãiãrãaãsã ãeãsãtãeãiãrãaãsã,ã ãsãeã ãqãuãiãsãeãrãmãoãsã ãsãeãpãaãrãaãrã ãoãsã ãmãeãtãaãiãsã ãcãoãmã ãpãrãeãsãeãnãçãaã ãdãeã ãfãeãrãrãoã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãDãeãcãaãnãtãaãçãããoã'ã,ã ãBã:ã ã'ãCãaãtãéãaãçãããoã'ã,ã ãCã:ã ã'ãSãeãpãaãrãaãçãããoã ãMãaãgãnãéãÉãtãiãcãaã'ã,ã ãDã:ã ã'ãFãiãlãtãrãaãçãããoã'ã,ã ãEã:ã ã'ãSãuãbãlãiãmãaãçãããoã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãCã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãMãeãtãaãiãsã ãfãeãrãrãoãmãaãgãnãéãtãiãcãoãsã ã(ãcãoãmãoã ãlãaãtãéãaãsã ãmãiãsãtãuãrãaãdãaãsã ãrãiãcãaãsã ãeãmã ãfãeãrãrãoã)ã ãsãããoã ãfãaãcãiãlãmãeãnãtãeã ãaãtãéãrãaãíãdãoãsã ãpãoãrã ãgãrãaãnãdãeãsã ãíãmãããsã ãnãaã ãeãsãtãeãiãrãaã,ã ãaãgãiãlãiãzãaãnãdãoã ãoã ãpãrãoãcãeãsãsãoã ã(ãSãeãpãaãrãaãçãããoã ãMãaãgãnãéãÉãtãiãcãaã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã2ã0ã-ãQã1ã3ã0ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãsãtãaãtãéãíãsãtãiãcãaã ã-ã ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã2ã0ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãUãmã ãaãlãuãnãããoã ãoãbãtãeãvãeã ãaãsã ãsãeãgãuãiãnãtãeãsã ãnãããoãtãaãsã ãnãããoãsã ãbãiãmãeãsãtãrãeãsã:ã ã6ã.ã0ã,ã ã7ã.ã5ã,ã ã8ã.ã0ã ãeã ã8ã.ã5ã.ã ãQãuãaãlã ãaã ãmãéãdãiãaã ãaãrãiãtãmãéãÉãtãiãcãaã ãoãbãtãiãdãaã ãpãoãrã ãeãsãtãeã ãaãlãuãnãããoã ãnãããoã ãaãnãããoã ãlãeãtãiãvãoã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ã7ã.ã0ã'ã,ã ãBã:ã ã'ã7ã.ã5ã'ã,ã ãCã:ã ã'ã8ã.ã0ã'ã,ã ãDã:ã ã'ã8ã.ã5ã'ã,ã ãEã:ã ã'ã9ã.ã0ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãMãéãdãiãaã ã=ã ã(ã6ã.ã0ã ã+ã ã7ã.ã5ã ã+ã ã8ã.ã0ã ã+ã ã8ã.ã5ã)ã ã/ã ã4ã ã=ã ã3ã0ã ã/ã ã4ã ã=ã ã7ã.ã5ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã9ã-ãQã6ã6ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãCãiãtãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAã ãoãrãgãaãnãeãlãaã ãcãeãlãuãlãaãrã ãrãeãsãpãoãnãsãáãvãeãlã ãpãoãrã ãrãeãaãlãiãzãaãrã ãaã ãrãeãsãpãiãrãaãçãããoã ãcãeãlãuãlãaãrã ãeã ãgãeãrãaãrã ãaã ãmãaãiãoãrã ãpãaãrãtãeã ãdãoã ãAãTãPã ãnãeãcãeãsãsãáãrãiãoã ãpãaãrãaã ãaã ãcãéãlãuãlãaã ãéã ãaã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãCãoãmãpãlãeãxãoã ãdãeã ãGãoãlãgãiã.ã'ã,ã ãBã:ã ã'ãCãlãoãrãoãpãlãaãsãtãoã.ã'ã,ã ãCã:ã ã'ãMãiãtãoãcãôãnãdãrãiãaã.ã'ã,ã ãDã:ã ã'ãLãiãsãoãsãsãoãmãoã.ã'ã,ã ãEã:ã ã'ãRãiãbãoãsãsãoãmãoã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãCã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãAãsã ãmãiãtãoãcãôãnãdãrãiãaãsã ãsãããoã ãaãsã ãuãsãiãnãaãsã ãdãeã ãeãnãeãrãgãiãaã ãdãaãsã ãcãéãlãuãlãaãsã ãeãuãcãaãrãiãoãnãtãeãsã,ã ãpãrãoãdãuãzãiãnãdãoã ãAãTãPã ãvãiãaã ãrãeãsãpãiãrãaãçãããoã ãaãeãrãóãbãiãaã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã8ã-ãQã8ã2ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãFãíãsãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãCãiãnãeãmãáãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã8ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãUãmã ãvãeãíãcãuãlãoã ãpãeãrãcãoãrãrãeã ãuãmãaã ãdãiãsãtãâãnãcãiãaã ãdãeã ã1ã2ã0ã ãkãmã ãeãmã ã2ã ãhãoãrãaãsã.ã ãAã ãvãeãlãoãcãiãdãaãdãeã ãmãéãdãiãaã ãdãeãsãsãeã ãvãeãíãcãuãlãoã ãeãmã ãkãmã/ãhã ãeã ãmã/ãsã ãéã ãaãpãrãoãxãiãmãaãdãaãmãeãnãtãeã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ã6ã0ã ãkãmã/ãhã ãeã ã1ã6ã,ã6ã ãmã/ãsã'ã,ã ãBã:ã ã'ã6ã0ã ãkãmã/ãhã ãeã ã2ã0ã ãmã/ãsã'ã,ã ãCã:ã ã'ã1ã2ã0ã ãkãmã/ãhã ãeã ã1ã6ã ãmã/ãsã'ã,ã ãDã:ã ã'ã3ã0ã ãkãmã/ãhã ãeã ã8ã,ã3ã ãmã/ãsã'ã,ã ãEã:ã ã'ã2ã4ã0ã ãkãmã/ãhã ãeã ã3ã3ã ãmã/ãsã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãAã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãVã ã=ã ãdã/ãtã ã=ã ã1ã2ã0ã/ã2ã ã=ã ã6ã0ã ãkãmã/ãhã.ã ãPãaãrãaã ãcãoãnãvãeãrãtãeãrã ãeãmã ãmã/ãsã,ã ãdãiãvãiãdãiãmãoãsã ãpãoãrã ã3ã,ã6ã:ã ã6ã0ã ã/ã ã3ã,ã6ã ã=ã ã~ã1ã6ã,ã6ã ãmã/ãsã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã7ã-ãQã4ã1ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãHãiãsãtãóãrãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãBãrãaãsãiãlã ãCãoãlãôãnãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã7ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãNãoã ãcãiãcãlãoã ãdãoã ãaãçãúãcãaãrã ãnãããoã ãBãrãaãsãiãlã,ã ãaã ãmãããoã ãdãeã ãoãbãrãaã ãuãtãiãlãiãzãaãdãaã ãcãaãrãaãcãtãeãrãiãzãoãuã-ãsãeã ãmãaãjãoãrãiãtãaãrãiãaãmãeãnãtãeã ãpãeãlãoã(ãaã)ã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãTãrãaãbãaãlãhãoã ãaãsãsãaãlãaãrãiãaãdãoã ãdãeã ãiãmãiãgãrãaãnãtãeãsã ãeãuãrãoãpãeãuãsã.ã'ã,ã ãBã:ã ã'ãEãsãcãrãaãvãiãdãããoã ãiãnãdãíãgãeãnãaã.ã'ã,ã ãCã:ã ã'ãSãiãsãtãeãmãaã ãdãeã ãpãaãrãcãeãrãiãaã.ã'ã,ã ãDã:ã ã'ãEãsãcãrãaãvãiãdãããoã ãaãfãrãiãcãaãnãaã.ã'ã,ã ãEã:ã ã'ãSãiãsãtãeãmãaã ãdãeã ãmãiãtãaã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãDã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãOã ãcãoãmãpãlãeãxãoã ãaãçãuãcãaãrãeãiãrãoã ãnãããoãrãdãeãsãtãiãnãããoã ãfãoãiã ãfãuãnãdãaãmãeãnãtãaãlãmãeãnãtãeã ãmãaãnãtãiãdãoã ãpãeãlãaã ãeãnãtãrãaãdãaã ãbãrãuãtãaãlã ãdãeã ãmãããoã ãdãeã ãoãbãrãaã ãeãsãcãrãaãvãiãzãaãdãaã ãoãrãiãgãiãnãáãrãiãaã ãdãoã ãcãoãnãtãiãnãeãnãtãeã ãaãfãrãiãcãaãnãããoã,ã ãgãeãrãiãnãdãoã ãaãlãtãíãsãsãiãmãoãsã ãlãuãcãrãoãsã ãcãoãmã ãoã ãtãrãáãfãiãcãoã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã6ã-ãQã0ã5ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãQãuãíãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãsãtãeãqãuãiãoãmãeãtãrãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã6ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãDãiãfãíãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãSãaãbãeãnãdãoã ãqãuãeã ãaã ãmãaãsãsãaã ãmãoãlãaãrã ãdãoã ãCãaãrãbãoãnãããoã ãéã ã1ã2ãgã/ãmãoãlã ãeã ãdãoã ãOãxãiãgãêãnãiãoã ãéã ã1ã6ãgã/ãmãoãlã.ã ãUãmãaã ãaãmãoãsãtãrãaã ãcãoãnãtãéãmã ã4ã4ãgã ãdãeã ãCãOã2ã.ã ãQãuãaãnãtãoãsã ãmãoãlãsã ãdãeãsãsãaã ãmãoãlãéãcãuãlãaã ãeãxãiãsãtãeãmã ãnãaã ãaãmãoãsãtãrãaã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ã0ã,ã5ã ãmãoãlã'ã,ã ãBã:ã ã'ã1ã ãmãoãlã'ã,ã ãCã:ã ã'ã2ã ãmãoãlãsã'ã,ã ãDã:ã ã'ã3ã ãmãoãlãsã'ã,ã ãEã:ã ã'ã4ã ãmãoãlãsã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãAã ãmãaãsãsãaã ãdãeã ã1ã ãmãoãlã ãdãeã ãCãOã2ã ãéã:ã ã1ã2ã ã+ã ã(ã1ã6ã*ã2ã)ã ã=ã ã4ã4ã ãgã/ãmãoãlã.ã ãSãeã ãaã ãaãmãoãsãtãrãaã ãpãeãsãaã ã4ã4ãgã,ã ãeãnãtãããoã ãhãáã ãeãxãaãtãéãaãmãeãnãtãeã ã1ã ãmãoãlã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã5ã-ãQã9ã0ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãMãaãtãéãeãmãáãtãiãcãaã ãFãiãnãaãnãcãeãiãrãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã5ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãUãmã ãpãrãoãdãuãtãoã ãcãuãsãtãaãvãaã ãRã$ã ã2ã0ã0ã,ã0ã0ã ãeã ãsãoãfãrãeãuã ãuãmã ãaãcãrãéãsãcãiãmãoã ãdãeã ã1ã0ã%ã.ã ãUãmãaã ãsãeãmãaãnãaã ãdãeãpãoãiãsã,ã ãeãnãtãrãoãuã ãeãmã ãpãrãoãmãoãçãããoã ãcãoãmã ã1ã0ã%ã ãdãeã ãdãeãsãcãoãnãtãoã.ã ãQãuãaãlã ãéã ãoã ãvãaãlãoãrã ãfãiãnãaãlã ãdãoã ãpãrãoãdãuãtãoã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãRã$ã ã2ã0ã0ã,ã0ã0ã'ã,ã ãBã:ã ã'ãRã$ã ã1ã9ã8ã,ã0ã0ã'ã,ã ãCã:ã ã'ãRã$ã ã2ã0ã2ã,ã0ã0ã'ã,ã ãDã:ã ã'ãRã$ã ã2ã2ã0ã,ã0ã0ã'ã,ã ãEã:ã ã'ãRã$ã ã2ã1ã0ã,ã0ã0ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ã1ã0ã%ã ãdãeã ãRã$ã ã2ã0ã0ã ã=ã ãRã$ã ã2ã0ã.ã ãNãoãvãoã ãpãrãeãçãoã ã=ã ãRã$ã ã2ã2ã0ã.ã ãOã ãdãeãsãcãoãnãtãoã ãdãeã ã1ã0ã%ã ãiãnãcãiãdãeã ãsãoãbãrãeã ã2ã2ã0ã.ã ã1ã0ã%ã ãdãeã ãRã$ã ã2ã2ã0ã ã=ã ãRã$ã ã2ã2ã.ã ãVãaãlãoãrã ãfãiãnãaãlã:ã ã2ã2ã0ã ã-ã ã2ã2ã ã=ã ãRã$ã ã1ã9ã8ã,ã0ã0ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã4ã-ãQã1ã5ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãBãiãoãlãoãgãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãvãoãlãuãçãããoã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã4ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãOã ãpãrãiãnãcãíãpãiãoã ãdãaã ãSãeãlãeãçãããoã ãNãaãtãéãuãrãaãlã,ã ãpãrãoãpãoãsãtãoã ãpãoãrã ãDãaãrãwãiãnã,ã ãbãaãsãeãiãaã-ãsãeã ãnãaã ãiãdãeãiãaã ãdãeã ãqãuãeã ãoãsã ãiãnãdãiãvãíãdãuãoãsã ãqãuãeã ãsãoãbãrãeãvãiãvãeãmã ãeã ãdãeãiãxãaãmã ãdãeãsãcãeãnãdãeãnãtãeãsã ãsãããoã ãoãsã ãqãuãeã ãpãoãsãsãuãeãmã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãCãaãrãaãcãtãeãrãíãsãÉãtãiãcãaãsã ãiãnãdãuãzãiãdãaãsã ãpãeãlãoã ãaãmãbãiãeãnãtãeã ãeã ãpãaãsãsãaãdãaãsã ãgãeãnãeãÉãtãiãcãaãmãeãnãtãeã.ã'ã,ã ãBã:ã ã'ãVãaãnãtãaãgãeãnãsã ãaãdãaãpãtãaãtãéãiãvãaãsã ãiãnãaãtãéãaãsã ãfãrãeãnãtãeã ãàãsã ãpãrãeãsãsãõãeãsã ãdãaãqãuãeãlãeã ãaãmãbãiãeãnãtãeã.ã'ã,ã ãCã:ã ã'ãMãaãiãsã ãfãoãrãçãaã ãfãíãsãiãcãaã ãbãrãuãtãaã ãiãnãdãeãpãeãnãdãeãnãtãeãmãeãnãtãeã ãdãoã ãmãeãiãoã.ã'ã,ã ãDã:ã ã'ãIãmãuãnãiãdãaãdãeã ãiãnãaãlãtãeãrãáãvãeãlã ãeã ãeãtãeãrãnãaã ãaã ãvãíãrãuãsã.ã'ã,ã ãEã:ã ã'ãDãNãAã ãqãuãeã ãnãããoã ãsãoãfãrãeã ãmãuãtãaãçãããoã ãaãoã ãlãoãnãgãoã ãdãaã ãvãiãdãaã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãNãaã ãSãeãlãeãçãããoã ãNãaãtãéãuãrãaãlã,ã ãoã ãmãeãiãoã ã"ãdãeãlãeãtãaã"ã ãaãsã ãvãaãrãiãaãnãtãeãsã ãrãuãiãnãsã ãeã ã"ãsãaãlãvãaã"ã ãaãsã ãvãaãrãiãaãnãtãeãsã ãqãuãeã ãaãcãiãdãeãnãtãaãlãmãeãnãtãeã ãjãáã ãpãoãsãsãuãíãaãmã ãaãlãgãuãmãaã ãvãaãnãtãaãgãeãmã ãaãdãaãpãtãaãtãéãiãvãaã ã(ãsãoãbãrãeãvãiãvãêãnãcãiãaã ãdãoã ãmãaãiãsã ãaãpãtãoã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã3ã-ãQã7ã7ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãFãíãsãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãEãlãeãtãrãoãdãiãnãâãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã3ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãDãiãfãíãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAã ãpãoãtãêãnãcãiãaã ãdãiãsãsãiãpãaãdãaã ãpãoãrã ãuãmã ãcãhãuãvãeãiãrãoã ãeãlãéãtãrãiãcãoã ãpãoãdãeã ãsãeãrã ãcãaãlãcãuãlãaãdãaã ãpãoãrã ãPã ã=ã ãUã²ã/ãRã.ã ãNãoã ãiãnãvãeãrãnãããoã ãeãuãrãoãpãeãuã ãpãeãsãaãdãoã,ã ãsãeã ãoãsã ãmãoãrãaãdãoãrãeãsã ãsãuãbãsãtãiãtãuãíãrãeãmã ãeãsãsãeã ãrãeãsãiãsãtãoãrã ãpãoãrã ãuãmã ãcãuãjãaã ãrãeãsãiãsãtãêãnãcãiãaã ãsãeãjãaã ãeãqãuãiãvãaãlãeãnãtãeã ãàã ãMãEãTãAãDãEã ãdãaã ãRã ãoãrãiãgãiãnãaãlã ãdãeã ãfãáãbãrãiãcãaã,ã ãaãsãsãuãmãiãnãdãoã ãaã ãtãeãnãsãããoã ãcãoãnãsãtãaãnãtãeã,ã ãoã ãqãuãeã ãoãcãoãrãrãeãrãáã ãcãoãmã ãaã ãpãoãtãêãnãcãiãaã ãqãuãeã ãaãqãuãeãcãeã ãaã ãáãgãuãaã?ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãCãaãiãrãáã ãpãeãlãaã ãmãeãtãaãdãeã.ã'ã,ã ãBã:ã ã'ãFãiãcãaãrãáã ãiãgãuãaãlã.ã'ã,ã ãCã:ã ã'ãSãeãrãáã ãrãeãdãuãzãiãdãaã ãeãmã ãqãuãaãtãéãrãoã ãvãeãzãeãsã.ã'ã,ã ãDã:ã ã'ãDãoãbãrãaãrãáã.ã'ã,ã ãEã:ã ã'ãQãuãaãdãrãuãpãlãiãcãaãrãáã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãDã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãSãeãnãdãoã ãPã ã=ã ãUã²ã/ãRã,ã ãaã ãPãoãtãêãnãcãiãaã ã(ãPã)ã ãeã ãaã ãRãeãsãiãsãtãêãnãcãiãaã ã(ãRã)ã ãsãããoã ãgãrãaãnãdãeãzãaãsã ãiãnãvãeãrãsãaãmãeãnãtãeã ãpãrãoãpãoãrãcãiãoãnãaãiãsã.ã ãRãeãdãuãzãiãrã ãaã ãrãeãsãiãsãtãêãnãcãiãaã ãpãeãlãaã ãmãeãtãaãdãeã ãfãaãrãáã ãaã ãpãoãtãêãnãcãiãaã ãdãiãsãsãiãpãaãdãaã ãdãoãbãrãaãrã,ã ãeãnãtãrãeãgãaãnãdãoã ãáãgãuãaã ãmãaãiãsã ãqãuãeãnãtãeã,ã ãpãoãrãéãmã ãtãoãrãrãaãnãdãoã ãmãuãiãtãoã ãrãaãpãiãdãaãmãeãnãtãeã ãaã ãrãeãsãiãsãtãêãnãcãiãaã ãàã ãlãoãnãgãoã ãpãrãaãzãoã ãoãuã ãdãeãsãaãrãmãaãnãdãoã ãdãiãsãjãuãnãtãoãrãeãsã ãmãaãlã ãcãaãlãcãuãlãaãdãoãsã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã2ã-ãQã6ã3ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãQãuãíãmãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãTãaãbãeãlãaã ãPãeãrãiãóãdãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã2ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãFãáãcãiãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãOãsã ãgãaãsãeãsã ãnãããoãbãrãeãsã,ã ãnãaã ãTãaãbãeãlãaã ãPãeãrãiãóãdãiãcãaã,ã ãsãããoã ãcãoãnãhãeãcãiãdãoãsã ãpãoãrã ãsãuãaã ãbãaãiãxãaã ãrãeãaãtãéãiãvãiãdãaãdãeã ãqãuãíãmãiãcãaã.ã ãIãsãsãoã ãsãeã ãdãeãvãeã ãpãrãiãnãcãiãpãaãlãmãeãnãtãeã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãAãoã ãpãeãqãuãeãnãããoã ãtãaãmãaãnãhãoã ãdãoã ãnãúãcãlãeãoã.ã'ã,ã ãBã:ã ã'ãÀã ãcãoãnãfãiãgãuãrãaãçãããoã ãeãlãeãtãrãôãnãiãcãaã ãeãsãtãáãvãeãlã ãdãeã ãmãáãxãiãmãaã ãvãaãlãêãnãcãiãaã ãcãoãmãpãlãeãtãaã.ã'ã,ã ãCã:ã ã'ãÀã ãsãuãaã ãeãlãeãvãaãdãaã ãeãlãeãtãrãoãpãoãsãiãtãiãvãiãdãaãdãeã.ã'ã,ã ãDã:ã ã'ãAãoã ãfãaãtãéãoã ãdãeã ãsãeãrãeãmã ãgãaãsãoãsãoãsã ãnãaã ãtãeãmãpãeãrãaãtãéãuãrãaã ãaãmãbãiãeãnãtãeã.ã'ã,ã ãEã:ã ã'ãAãoãsã ãsãeãuãsã ãaãlãtãoãsã ãiãsãóãtãoãpãoãsã ãiãnãsãtãáãvãeãiãsã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãCãoãmã ãrãaãrãíãsãsãiãmãaãsã ãeãxãcãeãçãõãeãsã,ã ãaã ãcãaãmãaãdãaã ãdãeã ãvãaãlãêãnãcãiãaã ã(ãnãíãvãeãlã ãaãtãéãôãmãiãcãoã ãeã ãoãrãbãiãtãaãlã ãqãuãíãmãiãcãoã)ã ãcãoãmã ãoãcãtãeãtãoã ãcãoãmãpãlãeãtãoã ãcãoãnãfãeãrãeã ãaãlãtãaã ãeãsãtãaãbãiãlãiãdãaãdãeã ãaãoã ãáãtãoãmãoã ã(ãrãeãgãrãaã ãdãoã ãoãcãtãeãtãoã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã1ã-ãQã8ã0ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãHãiãsãtãóãrãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãIãdãaãdãeã ãAãnãtãiãgãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã1ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAã ãdãeãmãoãcãrãaãcãiãaã ãaãtãéãeãnãiãeãnãsãeã,ã ãnãaã ãGãrãéãcãiãaã ãCãlãáãsãsãiãcãaã,ã ãdãiãfãeãrãeã ãpãrãoãfãuãnãdãaãmãeãnãtãeã ãdãaãsã ãdãeãmãoãcãrãaãcãiãaãsã ãrãeãpãrãeãsãeãnãtãaãtãéãiãvãaãsã ãmãoãdãeãrãnãaãsã.ã ãAã ãpãrãiãnãcãiãpãaãlã ãcãaãrãaãcãtãeãrãíãsãÉãtãiãcãaã ãdãaã ãdãeãmãoãcãrãaãcãiãaã ãeãmã ãAãtãeãnãaãsã ãeãrãaã ãoã ãfãaãtãéãoã ãdãeã ãsãeãrã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãIãnãdãiãrãeãtãaã ãeã ãbãaãsãeãaãdãaã ãeãmã ãcãoãnãsãtãiãtãuãiãçãããoã.ã'ã,ã ãBã:ã ã'ãEãxãcãlãuãsãiãvãaã ãpãaãrãaã ãaã ãeãlãiãtãeã ãgãuãeãrãrãeãiãrãaã ãeãsãpãaãrãtãaãnãaã.ã'ã,ã ãCã:ã ã'ãDãiãrãeãtãaã ãeã ãrãeãsãtãrãiãtãaã ãaã ãcãiãdãaãdãããoãsã ã(ãhãoãmãeãnãsã ãlãiãvãrãeãsã,ã ãaãtãéãeãnãiãeãnãsãeãsã ãmãaãiãoãrãeãsã ãdãeã ãiãdãaãdãeã)ã.ã'ã,ã ãDã:ã ã'ãUãnãiãvãeãrãsãaãlã,ã ãpãeãrãmãiãtãiãnãdãoã ãmãuãlãhãeãrãeãsã ãnãããoã ãÁãgãoãrãaã.ã'ã,ã ãEã:ã ã'ãDãoãmãiãnãaãdãaã ãpãeãlãoã ãcãlãeãrãoã ãrãeãlãiãgãiãoãsãoã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãCã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãNãããoã ãeãxãiãsãtãiãaãmã ã"ãrãeãpãrãeãsãeãnãtãaãnãtãeãsã"ã.ã ãOã ãpãrãóãpãrãiãoã ãcãiãdãaãdãããoã ãiãaã ãàã ãpãrãaãçãaã ãpãúãbãlãiãcãaã ã(ãÁãgãoãrãaã)ã ãdãiãsãcãuãtãiãrã ãeã ãvãoãtãaãrã,ã ãmãaãsã ãMãUãLãHãEãRãEãSã,ã ãMãEãTãEãCãOãSã ã(ãeãsãtãrãaãnãgãeãiãrãoãsã)ã ãeã ãEãSãCãRãAãVãOãSã ãjãaãmãaãiãsã ãpãuãdãeãrãaãmã ãvãoãtãaãrã ã(ãnãããoã ãeãrãaãmã ãcãiãdãaãdãããoãsã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã1ã0ã-ãQã0ã3ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãGãeãoãmãeãtãrãiãaã ãEãsãpãaãcãiãaãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã1ã0ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãQãuãaãlã ãéã ãoã ãvãoãlãuãmãeã ãdãeã ãuãmã ãcãiãlãiãnãdãrãoã ãrãeãtãoã,ã ãcãuãjãaã ãbãaãsãeã ãpãoãsãsãuãiã ãrãaãiãoã ãdãeã ã2ã ãcãmã ãeã ãaã ãaãlãtãuãrãaã ãéã ãiãgãuãaãlã ãaã ã1ã0ã ãcãmã?ã ã(ãCãoãnãsãiãdãeãrãeã ãπã ã=ã ã3ã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ã6ã0ã ãcãmã³ã'ã,ã ãBã:ã ã'ã1ã2ã0ã ãcãmã³ã'ã,ã ãCã:ã ã'ã4ã0ã ãcãmã³ã'ã,ã ãDã:ã ã'ã8ã0ã ãcãmã³ã'ã,ã ãEã:ã ã'ã1ã0ã0ã ãcãmã³ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãVãoãlãuãmãeã ãdãoã ãCãiãlãiãnãdãrãoã ã=ã ãÁãrãeãaã ãdãaã ãBãaãsãeã ã*ã ãAãlãtãuãrãaã.ã ãVã ã=ã ã(ãπã ã*ã ãrã²ã)ã ã*ã ãhã.ã ãVã ã=ã ã(ã3ã ã*ã ã2ã²ã)ã ã*ã ã1ã0ã ã=ã ã(ã3ã ã*ã ã4ã)ã ã*ã ã1ã0ã ã=ã ã1ã2ã ã*ã ã1ã0ã ã=ã ã1ã2ã0ã ãcãmã³ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ã'ãEãNãEãMã-ã2ã0ã0ã9ã-ãQã0ã2ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ãFãíãsãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ãÓãpãtãiãcãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ãEãNãEãMã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ã2ã0ã0ã9ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ãMãéãdãiãaã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ã`ãAã ãmãiãoãpãiãaã ãéã ãuãmã ãeãrãrãoã ãdãeã ãrãeãfãrãaãçãããoã ãnãããoã ãqãuãaãlã ãaã ãiãmãaãgãeãmã ãdãeã ãoãbãjãeãtãoãsã ãdãiãsãtãaãnãtãeãsã ãéã ãfãoãrãmãaãdãaã ãaãnãtãeãsã ãdãaã ãrãeãtãiãnãaã.ã ãPãaãrãaã ãcãoãrãrãiãgãiãrã ãeãsãsãeã ãdãeãfãeãiãtãoã ãvãiãsãuãaãlã,ã ãuãtãiãlãiãzãaãmã-ãsãeã ãlãeãnãtãeãsã:ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ã{ã ãAã:ã ã'ãCãoãnãvãeãrãgãeãnãtãeãsã.ã'ã,ã ãBã:ã ã'ãDãiãvãeãrãgãeãnãtãeãsã.ã'ã,ã ãCã:ã ã'ãCãiãlãíãnãdãrãiãcãaãsã.ã'ã,ã ãDã:ã ã'ãBãiãfãoãcãaãiãsã ãpãlãaãnãaãsã.ã'ã,ã ãEã:ã ã'ãCãôãnãcãaãvãoã-ãcãoãnãvãeãxãaãsã ãeãsãpãeãcãiãaãiãsã ãmãaãgãnãéãÉãtãiãcãaãsã.ã'ã ã}ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ã'ãBã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ã`ãLãeãnãtãeãsã ãdãiãvãeãrãgãeãnãtãeãsã ãaãjãuãdãaãmã ãaã ã"ãsãeãpãaãrãaãrã"ã ãoãsã ãrãaãiãoãsã ãdãeã ãlãuãzã ãpãaãrãaã ãqãuãeã ãeãlãeãsã ãcãoãnãvãiãrãjãaãmã ãpãoãsãtãeãrãiãoãrãmãeãnãtãeã ãaãpãeãnãaãsã ãnãaã ãpãrãóãpãrãiãaã ãrãeãtãiãnãaã,ã ãrãeãpãaãrãaãnãdãoã ãoã ãeãrãrãoã ãfãoãcãaãlã ãaãdãiãaãnãtãaãdãoã ã(ãoãlãhãoã ãaãlãoãnãgãaãdãoã)ã.ã`ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã]ã;ã
+ã
+ã ã ã ã ã ã ã ã ãlãeãtã ãqãuãeãsãtãiãoãnãsãDãBã ã=ã ã[ã.ã.ã.ãdãeãfãaãuãlãtãQãuãeãsãtãiãoãnãsã]ã;ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ã-ã-ã-ã ãMãEãRãGãEã ãCãOãMã ãBãAãNãCãOã ãMãEãSãTãRãEã ã(ãLãoãcãaãlãSãtãoãrãaãgãeã)ã ã-ã-ã-ã
+ã ã ã ã ã ã ã ã ãtãrãyã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãaãsãtãeãrãBãaãnãkãSãtãrã ã=ã ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeãMãaãsãtãeãrãBãaãnãkã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãmãaãsãtãeãrãBãaãnãkãSãtãrã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãaãsãtãeãrãBãaãnãkã ã=ã ãJãSãOãNã.ãpãaãrãsãeã(ãmãaãsãtãeãrãBãaãnãkãSãtãrã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãFãiãlãtãrãaã ãqãuãeãsãtãõãeãsã ãqãuãeã ãaã ãdãiãrãeãtãoãrãiãaã ãlãiãbãeãrãoãuã ãpãaãrãaã ãaãcãeãsãsãoã ãdãoãsã ãaãlãuãnãããoãsã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãuãbãlãiãcãaãdãaãsã ã=ã ãmãaãsãtãeãrãBãaãnãkã.ãfãiãlãtãeãrã(ãqã ã=ã>ã ãqã.ãcãoãnãfãiãgãsã ã&ã&ã ãqã.ãcãoãnãfãiãgãsã.ãpãuãbãlãiãcãaãdãaãIãmãeãdãiãaãtãéãaã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãuãbãlãiãcãaãdãaãsã.ãfãoãrãEãaãcãhã(ãmãqã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãiãfãfãCãaãpãiãtãaãlãiãzãeãdã ã=ã ãmãqã.ãdãiãfãiãcãuãlãdãaãdãeã ã=ã=ã=ã ã'ãfãaãcãiãlã'ã ã?ã ã'ãFãáãcãiãlã'ã ã:ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãqã.ãdãiãfãiãcãuãlãdãaãdãeã ã=ã=ã=ã ã'ãmãeãdãiãaã'ã ã?ã ã'ãMãéãdãiãaã'ã ã:ã ã'ãDãiãfãíãcãiãlã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãqãuãeãsãtãiãoãnãsãDãBã.ãuãnãsãhãiãfãtã(ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ãmãqã.ãiãdã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ãmãqã.ãdãiãsãcãiãpãlãiãnãaã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ãmãqã.ãaãsãsãuãnãtãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ãmãqã.ãbãaãnãcãaã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ãmãqã.ãaãnãããoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ãdãiãfãfãCãaãpãiãtãaãlãiãzãeãdã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ãmãqã.ãeãnãuãnãcãiãaãdãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãmãaãgãeãmãBãaãsãeã6ã4ã:ã ãmãqã.ãiãmãaãgãeãmãBãaãsãeã6ã4ã ã|ã|ã ãnãuãlãlã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ãmãqã.ãaãlãtãeãrãnãaãtãéãiãvãaãsã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ãmãqã.ãgãaãbãaãrãiãtãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ãmãqã.ãrãeãsãoãlãuãçãããoã ã|ã|ã ãmãqã.ãrãeãsãoãlãuãcãaãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã}ã ãcãaãtãéãcãhã(ãeã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãoãlãeã.ãeãrãrãoãrã(ã"ãEãrãrãoã ãaãoã ãmãeãsãcãlãaãrã ãcãoãmã ãBãaãnãcãoã ãMãeãsãtãrãeã:ã ã"ã,ã ãeã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ãGãlãoãbãaãlã ãSãtãaãtãéãeã ã&ã ãTãrãaãcãkãiãnãgã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãaãsãsãuãnãtãoãsãPãoãrãDãiãsãcãiãpãlãiãnãaã ã=ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãMãaãtãéãeãmãáãtãiãcãaã'ã:ã ã[ã'ãEãqãuãaãçãããoã ãdãoã ã1ãºã ãGãrãaãuã'ã,ã ã'ãFãuãnãçãããoã ãdãoã ã1ãºã ãGãrãaãuã'ã,ã ã'ãEãqãuãaãçãããoã ãdãoã ã2ãºã ãGãrãaãuã'ã,ã ã'ãFãuãnãçãããoã ãdãoã ã2ãºã ãGãrãaãuã'ã,ã ã'ãEãqãuãaãçãããoã ãEãxãpãoãnãeãnãcãiãaãlã'ã,ã ã'ãFãuãnãçãããoã ãEãxãpãoãnãeãnãcãiãaãlã'ã,ã ã'ãFãuãnãçãããoã ãLãoãgãaãrãíãtãmãiãcãaã'ã,ã ã'ãPãrãoãgãrãeãsãsãããoã ãAãrãiãtãmãéãtãiãcãaã'ã,ã ã'ãPãrãoãgãrãeãsãsãããoã ãGãeãoãmãéãtãrãiãcãaã'ã,ã ã'ãMãaãtãéãrãiãzãeãsã'ã,ã ã'ãDãeãtãeãrãmãiãnãaãnãtãeãsã'ã,ã ã'ãSãiãsãtãeãmãaãsã ãLãiãnãeãaãrãeãsã'ã,ã ã'ãTãrãiãgãoãnãããoãmãeãtãrãiãaã ãnãããoã ãTãrãiãâãnãgãuãlãoã ãRãeãtãâãnãgãuãlãoã'ã,ã ã'ãFãuãnãçãõãeãsã ãTãrãiãgãoãnãããoãmãéãtãrãiãcãaãsã'ã,ã ã'ãRãeãtãaãsã ãPãaãrãaãlãeãlãaãsã ãCãoãrãtãaãdãaãsã ãpãoãrã ãuãmãaã ãTãrãaãnãsãvãeãrãsãaãlã'ã,ã ã'ãTãrãiãâãnãgãuãlãoãsã'ã,ã ã'ãSãeãmãeãlãhãaãnãçãaã ãdãeã ãTãrãiãâãnãgãuãlãoãsã'ã,ã ã'ãTãeãoãrãeãmãaã ãdãeã ãTãaãlãeãsã'ã,ã ã'ãRãeãlãaãçãõãeãsã ãMãéãtãrãiãcãaãsã ãnãããoã ãTãrãiãâãnãgãuãlãoã ãRãeãtãâãnãgãuãlãoã'ã,ã ã'ãCãeãvãiãaãnãaãsã ãeã ãPãoãnãtãoãsã ãNãoãtãáãvãeãiãsã'ã,ã ã'ãPãoãlãíãgãoãnãããoãsã'ã,ã ã'ãQãuãaãdãrãiãlãáãtãeãrãoãsã ãNãoãtãáãvãeãiãsã'ã,ã ã'ãÁãrãeãaãsã ãdãeã ãFãiãgãuãrãaãsã ãPãlãaãnãaãsã'ã,ã ã'ãCãiãrãcãuãnãfãeãrãêãnãcãiãaã ã-ã ãÂãnãgãuãlãoãsã ãeã ãAãrãcãoãsã'ã,ã ã'ãPãoãlãiãeãdãrãoãsã'ã,ã ã'ãPãrãiãsãmãaã'ã,ã ã'ãPãiãrãâãmãiãdãeã'ã,ã ã'ãTãrãoãnãcãoã ãdãeã ãPãiãrãâãmãiãdãeã'ã,ã ã'ãCãiãlãiãnãdãrãoã'ã,ã ã'ãCãoãnãeã'ã,ã ã'ãTãrãoãnãcãoã ãdãeã ãCãoãnãeã'ã,ã ã'ãEãsãfãeãrãaã'ã,ã ã'ãEãsãtãuãdãoã ãdãoã ãPãoãnãtãoã'ã,ã ã'ãEãsãtãuãdãoã ãdãaã ãRãeãtãaã'ã,ã ã'ãCãiãrãcãuãnãfãeãrãêãnãcãiãaã'ã,ã ã'ãSãóãlãiãdãoãsã ãSãeãmãeãlãhãaãnãtãeãsã'ã,ã ã'ãCãoãnãjãuãnãtãoãsã ãNãuãmãéãrãiãcãoãsã'ã,ã ã'ãTãeãoãrãiãaã ãdãeã ãCãoãnãjãuãnãtãoãsã'ã,ã ã'ãMãMãCã'ã,ã ã'ãMãDãCã'ã,ã ã'ãRãaãzãããoã ãeã ãPãrãoãpãoãrãçãããoã'ã,ã ã'ãGãrãaãnãdãeãzãaãsã ãPãrãoãpãoãrãcãiãoãnãaãiãsã'ã,ã ã'ãPãoãrãcãeãnãtãaãgãeãmã'ã,ã ã'ãMãaãtãéãeãmãáãtãiãcãaã ãFãiãnãaãnãcãeãiãrãaã'ã,ã ã'ãPãrãiãnãcãíãpãiãoã ãFãuãnãdãaãmãeãnãtãaãlã ãdãaã ãCãoãnãtãaãgãeãmã'ã,ã ã'ãPãeãrãmãuãtãaãçãããoã'ã,ã ã'ãAãrãrãaãnãjãoã'ã,ã ã'ãCãoãmãbãiãnãaãçãããoã'ã,ã ã'ãPãrãoãbãaãbãiãlãiãdãaãdãeã'ã,ã ã'ãEãsãtãaãtãéãíãsãtãiãcãaã ã-ã ãMãéãdãiãaã'ã,ã ã'ãFãuãnãçãããoã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãFãíãsãiãcãaã'ã:ã ã[ã'ãCãiãnãeãmãáãtãiãcãaã'ã,ã ã'ãDãiãnãâãmãiãcãaã'ã,ã ã'ãEãsãtãáãtãiãcãaã'ã,ã ã'ãHãiãdãrãoãsãtãáãtãiãcãaã'ã,ã ã'ãTãeãrãmãoãdãiãnãâãmãiãcãaã'ã,ã ã'ãCãaãlãoãrãiãmãeãtãrãiãaã'ã,ã ã'ãÓãpãtãiãcãaã ãGãeãoãmãéãtãrãiãcãaã'ã,ã ã'ãOãnãdãuãlãaãtãéãóãrãiãaã'ã,ã ã'ãEãlãeãtãrãoãsãtãáãtãiãcãaã'ã,ã ã'ãEãlãeãtãrãoãdãiãnãâãmãiãcãaã'ã,ã ã'ãEãlãeãtãrãoãmãaãgãnãeãtãiãsãmãoã'ã,ã ã'ãFãíãsãiãcãaã ãMãoãdãeãrãnãaã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãQãuãíãmãiãcãaã'ã:ã ã[ã'ãMãoãdãeãlãoãsã ãAãtãôãmãiãcãoãsã'ã,ã ã'ãTãaãbãeãlãaã ãPãeãrãiãóãdãiãcãaã'ã,ã ã'ãLãiãgãaãçãõãeãsã ãQãuãíãmãiãcãaãsã'ã,ã ã'ãFãuãnãçãõãeãsã ãIãnãããoãrãgãâãnãiãcãaãsã'ã,ã ã'ãEãsãtãeãqãuãiãoãmãeãtãrãiãaã'ã,ã ã'ãSãoãlãuãçãõãeãsã'ã,ã ã'ãTãeãrãmãoãqãuãíãmãiãcãaã'ã,ã ã'ãCãiãnãéãtãiãcãaã ãQãuãíãmãiãcãaã'ã,ã ã'ãEãqãuãiãlãíãbãrãiãoã ãQãuãíãmãiãcãoã'ã,ã ã'ãEãlãeãtãrãoãqãuãíãmãiãcãaã'ã,ã ã'ãRãaãdãiãoãaãtãéãiãvãiãdãaãdãeã'ã,ã ã'ãQãuãíãmãiãcãaã ãOãrãgãâãnãiãcãaã ã-ã ãFãuãnãçãõãeãsã'ã,ã ã'ãIãsãoãmãeãrãiãaã'ã,ã ã'ãRãeãaãçãõãeãsã ãOãrãgãâãnãiãcãaãsã'ã,ã ã'ãPãoãlãíãmãeãrãoãsã'ã,ã ã'ãQãuãíãmãiãcãaã ãAãmãbãiãeãnãtãaãlã'ã,ã ã'ãSãeãpãaãrãaãçãããoã ãdãeã ãMãiãsãtãuãrãaãsã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãBãiãoãlãoãgãiãaã'ã:ã ã[ã'ãEãcãoãlãoãgãiãaã'ã,ã ã'ãCãiãtãoãlãoãgãiãaã'ã,ã ã'ãDãiãvãiãsãããoã ãCãeãlãuãlãaãrã'ã,ã ã'ãMãeãtãaãbãoãlãiãsãmãoã ãEãnãeãrãgãéãtãiãcãoã'ã,ã ã'ãGãeãnãéãtãiãcãaã ãMãeãnãdãeãlãiãaãnãaã'ã,ã ã'ãEãnãgãeãnãhãaãrãiãaã ãGãeãnãéãtãiãcãaã'ã,ã ã'ãEãvãoãlãuãçãããoã'ã,ã ã'ãFãiãsãiãoãlãoãgãiãaã ãHãuãmãaãnãaã'ã,ã ã'ãIãmãuãnãããoãlãoãgãiãaã'ã,ã ã'ãBãoãtãâãnãiãcãaã'ã,ã ã'ãZãoãoãlãoãgãiãaã'ã,ã ã'ãMãiãcãrãoãbãiãoãlãoãgãiãaã'ã,ã ã'ãPãaãrãaãsãiãtãoãlãoãgãiãaã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãHãiãsãtãóãrãiãaã'ã:ã ã[ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãIãNãTãRãOãDãUãÇãÃãOã ãAãOã ãCãUãRãSãOã ãDãEã ãHãIãSãTãÓãRãIãAã ãGãEãRãAãLã'ã,ã ã'ãAã ãFãOãRãMãAãÇãÃãOã ãDãOã ãPãOãVãOã ãGãRãEãGãOã'ã,ã ã'ãEãSãPãAãRãTãAã ãEã ãAãTãEãNãAã'ã,ã ã'ãPãEãRãÍãOãDãOã ãCãLãÁãSãSãIãCãOã ãEã ãPãEãRãÍãOãDãOã ãHãEãLãEãNãÍãSãTãIãCãOã'ã,ã ã'ãNãAãSãCãIãMãEãNãTãOã ãDãEã ãRãOãMãAã ã(ãMãOãNãAãRãQãUãIãAã ãEã ãRãEãPãÚãBãLãIãCãAã)ã'ã,ã ã'ãIãMãPãÉãRãIãOã ãRãOãMãAãNãOã'ã,ã ã'ãRãEãIãNãOãSã ãBãÁãRãBãAãRãOãSã ã–ã ãIãMãPãÉãRãIãOã ãBãIãZãAãNãTãIãNãOã ãEã ãCãAãRãOãLãÍãNãGãIãOã'ã,ã ã'ãOã ãIãSãLãAãMãIãSãMãOã ã–ã ãOãRãIãGãEãMã ãEã ãEãXãPãAãNãSãÃãOã'ã,ã ã'ãFãEãUãDãAãLãIãSãMãOã'ã,ã ã'ãBãAãIãXãAã ãIãDãAãDãEã ãMãÉãDãIãAã ã–ã ãRãEãNãAãSãCãIãMãEãNãTãOã ãCãOãMãEãRãCãIãAãLã ãEã ãUãRãBãAãNãOã/ã ãCãRãUãZãAãDãAãSã'ã,ã ã'ãAãSãCãEãNãSãÃãOã ãDãAãSã ãMãOãNãAãRãQãUãIãAãSã ãNãAãCãIãOãNãAãIãSã:ã ãOã ãAãBãSãOãLãUãTãIãSãMãOã'ã,ã ã'ãRãEãNãAãSãCãIãMãEãNãTãOã'ã,ã ã'ãMãEãRãCãAãNãTãIãLãIãSãMãOã'ã,ã ã'ãAã ãRãEãFãOãRãMãAã ãPãRãOãTãEãSãTãAãNãTãEã'ã,ã ã'ãRãEãVãOãLãUãÇãÃãOã ãIãNãGãLãEãSãAã'ã,ã ã'ãRãEãVãOãLãUãÇãÕãEãSã ãIãNãDãUãSãTãRãIãAãIãSã'ã,ã ã'ãHãIãSãTãÓãRãIãAã ãDãOãSã ãEãUãAã'ã,ã ã'ãRãEãVãOãLãUãÇãÃãOã ãFãRãAãNãCãEãSãAã'ã,ã ã'ãPãEãRãÍãOãDãOã ãNãAãPãOãLãEãÔãNãIãCãOã'ã,ã ã'ãRãEãVãOãLãUãÇãÕãEãSã ãBãUãRãGãUãEãSãAãSã'ã,ã ã'ãIãMãPãEãRãIãAãLãIãSãMãOã ãEã ãNãEãOãCãOãLãOãNãIãAãLãIãSãMãOã'ã,ã ã'ãPãRãIãMãEãIãRãAã ãGãRãAãNãDãEã ãGãUãEãRãRãAã'ã,ã ã'ãRãEãVãOãLãUãÇãÃãOã ãRãUãSãSãAã'ã,ã ã'ãEãNãTãRãEã ãGãUãEãRãRãAãSã,ã ãCãRãIãSãEã ãDãEã ã2ã0ã ãEã ãTãOãTãAãLãIãTãAãRãIãSãMãOã'ã,ã ã'ãSãEãGãUãNãDãAã ãGãRãAãNãDãEã ãGãUãEãRãRãAã'ã,ã ã'ãOã ãMãUãNãDãOã ãPãÓãSã-ãGãUãEãRãRãAã'ã,ã ã'ãBãRãAãSãIãLã ãPãRãÉã-ãCãAãBãRãAãLãIãNãOã'ã,ã ã'ãEãXãPãAãNãSãÃãOã ãMãAãRãÍãTãIãMãAã ãPãOãRãTãUãGãUãEãSãAã'ã,ã ã'ãAãMãÉãRãIãCãAã ãPãOãRãTãUãGãUãEãSãAã'ã,ã ã'ãUãNãIãÃãOã ãIãBãÉãRãIãCãAã'ã,ã ã'ãBãRãAãSãIãLã ãCãOãLãOãNãIãAãLã'ã,ã ã'ãCãRãIãSãEã ãDãOã ãSãIãSãTãEãMãAã ãCãOãLãOãNãIãAãLã'ã,ã ã'ãOã ãPãRãOãCãEãSãSãOã ãDãEã ãIãNãDãEãPãEãNãDãÊãNãCãIãAã ã–ã ãIãNãDãEãPãEãNãDãÊãNãCãIãAã ãDãOã ãBãRãAãSãIãLã'ã,ã ã'ãOã ãPãRãOãCãEãSãSãOã ãDãEã ãIãNãDãEãPãEãNãDãÊãNãCãIãAã ãNãAã ãAãMãÉãRãIãCãAã ãLãAãTãIãNãAã'ã,ã ã'ãPãRãIãMãEãIãRãOã ãRãEãIãNãAãDãOã'ã,ã ã'ãPãEãRãÍãOãDãOã ãRãEãGãEãNãCãIãAãLã ã–ã ãRãEãVãOãLãTãAãSã ãRãEãGãEãNãCãIãAãIãSã'ã,ã ã'ãSãEãGãUãNãDãOã ãRãEãIãNãAãDãOã'ã,ã ã'ãTãRãAãBãAãLãHãOã ãEãSãCãRãAãVãOã ãNãOã ãBãRãAãSãIãLã ã–ã ãLãEãGãAãDãOã ãSãOãCãIãOãCãUãLãTãUãRãAãLã'ã,ã ã'ãOã ãPãRãOãCãEãSãSãOã ãDãEã ãTãRãAãNãSãIãÇãÃãOã ãDãAã ãMãOãNãAãRãQãUãIãAã ãÀã ãRãEãPãÚãBãLãIãCãAã'ã,ã ã'ãPãRãIãMãEãIãRãAã ãRãEãPãÚãBãLãIãCãAã'ã,ã ã'ãEãRãAã ãVãAãRãGãAãSã'ã,ã ã'ãRãEãPãÚãBãLãIãCãAã ãPãOãPãUãLãIãSãTãAã'ã,ã ã'ãJãKã ã–ã ãHãIãSãTãÓãRãIãAã ãDãEã ãBãRãAãSãÍãLãIãAã'ã,ã ã'ãCãRãIãSãEã ãDãOã ãPãOãPãUãLãIãSãMãOã'ã,ã ã'ãDãIãTãAãDãUãRãAãSã ãMãIãLãIãTãAãRãEãSã ãNãAã ãAãMãÉãRãIãCãAã ãDãOã ãSãUãLã'ã,ã ã'ãRãEãCãOãNãSãTãRãUãÇãÃãOã ãDãEãMãOãCãRãÁãTãIãCãAã'ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãGãeãoãgãrãaãfãiãaã'ã:ã ã[ã'ãGãeãoãpãoãlãíãtãiãcãaã'ã,ã ã'ãGãlãoãbãaãlãiãzãaãçãããoã'ã,ã ã'ãGãeãoãgãrãaãfãiãaã ãAãgãrãáãrãiãaã'ã,ã ã'ãUãrãbãaãnãiãzãaãçãããoã'ã,ã ã'ãIãnãdãúãsãtãrãiãaã'ã,ã ã'ãFãoãnãtãeãsã ãdãeã ãEãnãeãrãgãiãaã'ã,ã ã'ãPãoãpãuãlãaãçãããoã'ã,ã ã'ãMãiãgãrãaãçãõãeãsã'ã,ã ã'ãQãuãeãsãtãõãeãsã ãAãmãbãiãeãnãtãaãiãsã'ã,ã ã'ãCãaãrãtãoãgãrãaãfãiãaã'ã,ã ã'ãCãlãiãmãaãtãéãoãlãoãgãiãaã'ã,ã ã'ãGãeãoãmãoãrãfãoãlãoãgãiãaã'ã,ã ã'ãBãiãoãmãaãsã ãeã ãVãeãgãeãtãaãçãããoã'ã,ã ã'ãHãiãdãrãoãgãrãaãfãiãaã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãFãiãlãoãsãoãfãiãaã'ã:ã ã[ã'ãFãiãlãoãsãoãfãiãaã ãAãnãtãiãgãaã ã(ãPãrãéã-ãsãoãcãrãáãtãiãcãoãsã,ã ãSãóãcãrãaãtãéãeãsã,ã ãPãlãaãtãéãããoã,ã ãAãrãiãsãtãóãtãeãlãeãsã)ã'ã,ã ã'ãFãiãlãoãsãoãfãiãaã ãHãeãlãeãnãíãsãtãiãcãaã'ã,ã ã'ãFãiãlãoãsãoãfãiãaã ãMãeãdãiãeãvãaãlã ã(ãPãaãtãéãrãíãsãtãiãcãaã ãeã ãEãsãcãoãlãáãsãtãiãcãaã)ã'ã,ã ã'ãFãiãlãoãsãoãfãiãaã ãMãoãdãeãrãnãaã ã(ãRãaãcãiãoãnãaãlãiãsãmãoã ãeã ãEãmãpãiãrãiãsãmãoã)ã'ã,ã ã'ãIãlãuãmãiãnãiãsãmãoã'ã,ã ã'ãCãoãnãtãrãaãtãéãuãaãlãiãsãmãoã ã(ãHãoãbãbãeãsã,ã ãLãoãcãkãeã,ã ãRãoãuãsãsãeãaãuã)ã'ã,ã ã'ãKãaãnãtã'ã,ã ã'ãFãiãlãoãsãoãfãiãaã ãCãoãnãtãeãmãpãoãrãâãnãeãaã ã(ãNãiãeãtãzãsãcãhãeã,ã ãSãaãrãtãrãeã,ã ãFãoãuãcãaãuãlãtã)ã'ã,ã ã'ãÉãtãiãcãaã ãeã ãMãoãrãaãlã'ã,ã ã'ãFãiãlãoãsãoãfãiãaã ãPãoãlãíãtãiãcãaã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãSãoãcãiãoãlãoãgãiãaã'ã:ã ã[ã'ãSãuãrãgãiãmãeãnãtãoã ãdãaã ãSãoãcãiãoãlãoãgãiãaã'ã,ã ã'ãCãuãlãtãuãrãaã ãeã ãIãdãeãoãlãoãgãiãaã'ã,ã ã'ãIãnãdãúãsãtãrãiãaã ãCãuãlãtãuãrãaãlã ãeã ãMãeãiãoãsã ãdãeã ãCãoãmãuãnãiãcãaãçãããoã'ã,ã ã'ãMãaãxã ãWãeãbãeãrã'ã,ã ã'ãÉãmãiãlãeã ãDãuãrãkãhãeãiãmã'ã,ã ã'ãKãaãrãlã ãMãaãrãxã'ã,ã ã'ãEãsãtãrãaãtãéãiãfãiãcãaãçãããoã ãeã ãDãeãsãiãgãuãaãlãdãaãdãeã ãSãoãcãiãaãlã'ã,ã ã'ãMãoãvãiãmãeãnãtãoãsã ãSãoãcãiãaãiãsã'ã,ã ã'ãTãrãaãbãaãlãhãoã ãeã ãSãoãcãiãeãdãaãdãeã'ã,ã ã'ãCãiãdãaãdãaãnãiãaã ãeã ãDãiãrãeãiãtãoãsã ãHãuãmãaãnãããoãsã'ã,ã ã'ãSãoãcãiãoãlãoãgãiãaã ãBãrãaãsãiãlãeãiãrãaã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãAãrãtãeãsã'ã:ã ã[ã'ãAãrãtãeã ãPãrãéã-ãHãiãsãtãóãrãiãcãaã ãeã ãAãnãtãiãgãaã'ã,ã ã'ãAãrãtãeã ãMãeãdãiãeãvãaãlã'ã,ã ã'ãRãeãnãaãsãcãiãmãeãnãtãoã'ã,ã ã'ãBãaãrãrãoãcãoã ãeã ãRãoãcãoãcãóã'ã,ã ã'ãNãeãoãcãlãaãsãsãiãcãiãsãmãoã ãeã ãRãoãmãaãnãtãiãsãmãoã'ã,ã ã'ãRãeãaãlãiãsãmãoã ãeã ãIãmãpãrãeãsãsãiãoãnãiãsãmãoã'ã,ã ã'ãVãaãnãgãuãaãrãdãaãsã ãEãuãrãoãpãeãiãaãsã ã(ãCãuãbãiãsãmãoã,ã ãEãxãpãrãeãsãsãiãoãnãiãsãmãoã,ã ãSãuãrãrãeãaãlãiãsãmãoã)ã'ã,ã ã'ãMãoãdãeãrãnãiãsãmãoã ãBãrãaãsãiãlãeãiãrãoã ã(ãSãeãmãaãnãaã ãdãeã ã2ã2ã)ã'ã,ã ã'ãAãrãtãeã ãCãoãnãtãeãmãpãoãrãâãnãeãaã'ã,ã ã'ãCãuãlãtãuãrãaã ãPãoãpãuãlãaãrã ãeã ãFãoãlãcãlãoãrãeã'ã,ã ã'ãPãaãtãéãrãiãmãôãnãiãoã ãHãiãsãtãóãrãiãcãoã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãLãiãnãgãuãaãgãeãnãsã'ã:ã ã[ã'ãIãnãtãeãrãpãrãeãtãaãçãããoã ãdãeã ãTãeãxãtãoãsã'ã,ã ã'ãVãaãrãiãaãçãããoã ãLãiãnãgãuãíãsãtãiãcãaã'ã,ã ã'ãFãuãnãçãõãeãsã ãdãaã ãLãiãnãgãuãaãgãeãmã'ã,ã ã'ãFãiãgãuãrãaãsã ãdãeã ãLãiãnãgãuãaãgãeãmã'ã,ã ã'ãTãiãpãoãlãoãgãiãaã ãTãeãxãtãuãaãlã'ã,ã ã'ãGãêãnãeãrãoãsã ãTãeãxãtãuãaãiãsã'ã,ã ã'ãCãoãeãsãããoã ãeã ãCãoãeãrãêãnãcãiãaã'ã,ã ã'ãSãeãmãâãnãtãiãcãaã'ã,ã ã'ãSãiãnãtãaãxãeã ãeã ãMãoãrãfãoãlãoãgãiãaã'ã,ã ã'ãEãsãtãrãaãtãéãéãgãiãaãsã ãAãrãgãuãmãeãnãtãaãtãéãiãvãaãsã'ã]ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã'ãLãiãtãeãrãaãtãéãuãrãaã'ã:ã ã[ã'ãTãrãoãvãaãdãoãrãiãsãmãoã ãeã ãHãuãmãaãnãiãsãmãoã'ã,ã ã'ãQãuãiãnãhãeãnãtãiãsãmãoã'ã,ã ã'ãBãaãrãrãoãcãoã'ã,ã ã'ãAãrãcãaãdãiãsãmãoã'ã,ã ã'ãRãoãmãaãnãtãiãsãmãoã'ã,ã ã'ãRãeãaãlãiãsãmãoã ãeã ãNãaãtãéãuãrãaãlãiãsãmãoã'ã,ã ã'ãPãaãrãnãaãsãiãaãnãiãsãmãoã ãeã ãSãiãmãbãoãlãiãsãmãoã'ã,ã ã'ãPãrãéã-ãMãoãdãeãrãnãiãsãmãoã'ã,ã ã'ãMãoãdãeãrãnãiãsãmãoã ã-ã ã1ãªã ãGãeãrãaãçãããoã'ã,ã ã'ãMãoãdãeãrãnãiãsãmãoã ã-ã ã2ãªã ãGãeãrãaãçãããoã'ã,ã ã'ãMãoãdãeãrãnãiãsãmãoã ã-ã ã3ãªã ãGãeãrãaãçãããoã ãeã ãCãoãnãtãeãmãpãoãrãâãnãeãaã'ã]ã
+ã ã ã ã ã ã ã ã ã}ã;ã
+ã
+ã ã ã ã ã ã ã ã ãlãeãtã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã ã=ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ã'ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ã'ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãaãtãéãuãsã:ã ã'ãaãlãlã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãaãrãcãhã:ã ã'ã'ã
+ã ã ã ã ã ã ã ã ã}ã;ã
+ã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãtãuãdãeãnãtãSãtãaãtãéãsã ã=ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãhãiãtãsã:ã ãpãaãrãsãeãIãnãtã(ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãhãiãtãsã'ã)ã ã|ã|ã ã'ã0ã'ã)ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãmãiãsãsãeãsã:ã ãpãaãrãsãeãIãnãtã(ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãmãiãsãsãeãsã'ã)ã ã|ã|ã ã'ã0ã'ã)ã
+ã ã ã ã ã ã ã ã ã}ã;ã
+ã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãlãiãsãtãDãiãvã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãqãuãeãsãtãiãoãnãsã-ãlãiãsãtã'ã)ã;ã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãuãnãtãSãpãaãnã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãqã-ãcãoãuãnãtã'ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ãIãnãiãtã
+ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãDãOãMãCãoãnãtãeãnãtãLãoãaãdãeãdã'ã,ã ã(ã)ã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãuãpãdãaãtãéãeãBãaãnãcãaãsãLãiãsãtã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãuãpãdãaãtãéãeãSãtãaãtãéãsãUãIã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãuãpãEãvãeãnãtãLãiãsãtãeãnãeãrãsã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãnãdãeãrãQãuãeãsãtãiãoãnãsã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãuãpãdãaãtãéãeãBãaãnãcãaãsãLãiãsãtã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãlãiãsãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãbãaãnãcãaãsã-ãlãiãsãtã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ã!ãlãiãsãtã)ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãuãsãtãoãmãBãaãnãcãaãsã ã=ã ãJãSãOãNã.ãpãaãrãsãeã(ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeãCãuãsãtãoãmãBãaãnãcãaãsã'ã)ã ã|ã|ã ã'ã[ã]ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãuãsãtãoãmãBãaãnãcãaãsã.ãfãoãrãEãaãcãhã(ãbã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãlãiãsãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrã(ã`ãoãpãtãiãoãnã[ãvãaãlãuãeã=ã"ã$ã{ãbã}ã"ã]ã`ã)ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãsãtã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ã`ã<option value="${b}">ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãsãeãtãuãpãEãvãeãnãtãLãiãsãtãeãnãeãrãsã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãiãsãcãSãeãlãeãcãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãdãiãsãcã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãaãsãsãuãnãtãoãSãeãlãeãcãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãaãsãsãuãnãtãoã'ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãiãsãcãSãeãlãeãcãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãSãeãlãeãcãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãcãhãaãnãgãeã'ã,ã ã(ãeã)ã ã=ã>ã ã{ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãdãiãsãcãiãpãlãiãnãaã ã=ã ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã;ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãaãsãsãuãnãtãoã ã=ã ã'ã'ã;ã ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<option value="">ãTãoãdãoãsã ãoãsã ãAãsãsãuãnãtãoãsã</option>ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã ã&ã&ã ãaãsãsãuãnãtãoãsãPãoãrãDãiãsãcãiãpãlãiãnãaã[ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã]ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãpãiãcãsã ã=ã ãaãsãsãuãnãtãoãsãPãoãrãDãiãsãcãiãpãlãiãnãaã[ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãoãpãiãcãsã.ãfãoãrãEãaãcãhã(ãtã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ã`ã<option value="${t}">ã$ã{ãtã}ã</option>ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ãiãfã ã(ã!ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<option value="">ãSãeãlãeãcãiãoãnãeã ãaã ãDãiãsãcãiãpãlãiãnãaã ãpãrãiãmãeãiãrãoã.ã.ã.ã</option>ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãAãvãiãsãoã:ã ãbãoãtãããoã ã"ãFãIãLãTãRãAãRã"ã ãdãeãvãeã ãsãeãrã ãpãrãeãsãsãiãoãnãaãdãoã ãpãaãrãaã ãrãeãnãdãeãrãiãzãaãrã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãaãsãsãuãnãtãoãSãeãlãeãcãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãcãhãaãnãgãeã'ã,ã ã(ãeã)ã ã=ã>ã ã{ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãaãsãsãuãnãtãoã ã=ã ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã;ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãbãaãnãcãaã'ã)ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãbãaãnãcãaã'ã)ã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãcãhãaãnãgãeã'ã,ã ã(ãeã)ã ã=ã>ã ã{ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãbãaãnãcãaã ã=ã ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã;ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrãAãlãlã(ã'ãiãnãpãuãtã[ãnãaãmãeã=ã"ãsãtãaãtãéãuãsã"ã]ã'ã)ã.ãfãoãrãEãaãcãhã(ãrãaãdã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãaãdã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãcãhãaãnãgãeã'ã,ã ã(ãeã)ã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãsãtãaãtãéãuãsã ã=ã ãeã.ãtãaãrãgãeãtã.ãvãaãlãuãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãcãlãeãaãrãFãiãlãtãeãrãsã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã ã=ã ã{ã ãdãiãsãcãiãpãlãiãnãaã:ã ã'ã'ã,ã ãaãsãsãuãnãtãoã:ã ã'ã'ã,ã ãbãaãnãcãaã:ã ã'ã'ã,ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ã'ã'ã,ã ãsãtãaãtãéãuãsã:ã ã'ãaãlãlã'ã,ã ãsãeãaãrãcãhã:ã ã'ã'ã ã}ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãdãiãsãcã'ã)ã)ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãdãiãsãcã'ã)ã.ãvãaãlãuãeã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãaãsãsãuãnãtãoãSãeãlãeãcãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãaãsãsãuãnãtãoã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãaãsãsãuãnãtãoãSãeãlãeãcãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<option value="">ãSãeãlãeãcãiãoãnãeã ãaã ãDãiãsãcãiãpãlãiãnãaã ãpãrãiãmãeãiãrãoã.ã.ã.ã</option>ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoãSãeãlãeãcãtã.ãvãaãlãuãeã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãbãaãnãcãaã'ã)ã)ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãiãlãtãeãrã-ãbãaãnãcãaã'ã)ã.ãvãaãlãuãeã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãtãaãtãéãuãsãRãaãdãiãoã ã=ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrã(ã'ãiãnãpãuãtã[ãnãaãmãeã=ã"ãsãtãaãtãéãuãsã"ã]ã[ãvãaãlãuãeã=ã"ãaãlãlã"ã]ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãsãtãaãtãéãuãsãRãaãdãiãoã)ã ãsãtãaãtãéãuãsãRãaãdãiãoã.ãcãhãeãcãkãeãdã ã=ã ãtãrãuãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãnãdãeãrãQãuãeãsãtãiãoãnãsã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ã-ã-ã-ã ã2ã.ã ãEãNãGãIãNãEã ãFãIãLãTãEãRãIãNãGã ã-ã-ã-ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãfãiãlãtãeãrãDãaãtãéãaã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ã🔄ã ãRãeã-ãhãiãdãrãaãtãéãaãrã ãqãuãeãsãtãoãeãsã ãIãNãÉãDãIãTãAãSã ãfãrãeãsãqãuãiãnãhãaãsã ãdãoã ãbãaãnãcãoã ãdãoã ãuãsãuãaãrãiãoã ã(ãTãeãmãpãoã ãRãeãaãlã)ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãyã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãaãsãtãeãrãBãaãnãkãSãtãrã ã=ã ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeãMãaãsãtãeãrãBãaãnãkã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãmãaãsãtãeãrãBãaãnãkãSãtãrã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãaãsãtãeãrãBãaãnãkã ã=ã ãJãSãOãNã.ãpãaãrãsãeã(ãmãaãsãtãeãrãBãaãnãkãSãtãrã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãuãbãlãiãcãaãdãaãsã ã=ã ãmãaãsãtãeãrãBãaãnãkã.ãfãiãlãtãeãrã(ãqã ã=ã>ã ãqã.ãcãoãnãfãiãgãsã ã&ã&ã ãqã.ãcãoãnãfãiãgãsã.ãpãuãbãlãiãcãaãdãaãIãmãeãdãiãaãtãéãaã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãuãbãlãiãcãaãdãaãsã.ãfãoãrãEãaãcãhã(ãmãqã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãqãuãeãsãtãiãoãnãsãDãBã.ãfãiãnãdã(ãgãqã ã=ã>ã ãgãqã.ãiãdã ã=ã=ã=ã ãmãqã.ãiãdã)ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãiãfãfãCãaãpãiãtãaãlãiãzãeãdã ã=ã ãmãqã.ãdãiãfãiãcãuãlãdãaãdãeã ã=ã=ã=ã ã'ãfãaãcãiãlã'ã ã?ã ã'ãFãáãcãiãlã'ã ã:ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãqã.ãdãiãfãiãcãuãlãdãaãdãeã ã=ã=ã=ã ã'ãmãeãdãiãaã'ã ã?ã ã'ãMãéãdãiãaã'ã ã:ã ã'ãDãiãfãíãcãiãlã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãqãuãeãsãtãiãoãnãsãDãBã.ãuãnãsãhãiãfãtã(ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãdã:ã ãmãqã.ãiãdã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãaã:ã ãmãqã.ãdãiãsãcãiãpãlãiãnãaã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãsãsãuãnãtãoã:ã ãmãqã.ãaãsãsãuãnãtãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãnãcãaã:ã ãmãqã.ãbãaãnãcãaã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãnãããoã:ã ãmãqã.ãaãnãããoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãfãiãcãuãlãdãaãdãeã:ã ãdãiãfãfãCãaãpãiãtãaãlãiãzãeãdã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãeãxãtãoã:ã ãmãqã.ãeãnãuãnãcãiãaãdãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãmãaãgãeãmãBãaãsãeã6ã4ã:ã ãmãqã.ãiãmãaãgãeãmãBãaãsãeã6ã4ã ã|ã|ã ãnãuãlãlã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãeãrãnãaãtãéãiãvãaãsã:ã ãmãqã.ãaãlãtãeãrãnãaãtãéãiãvãaãsã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãtãaã:ã ãmãqã.ãgãaãbãaãrãiãtãoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãmãeãnãtãaãrãiãoã:ã ãmãqã.ãrãeãsãoãlãuãcãaãoã ã|ã|ã ãmãqã.ãrãeãsãoãlãuãçãããoã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãoãlãvãiãdãoã:ã ãnãuãlãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãcãaãtãéãcãhã(ãeã)ã ã{ã ãcãoãnãsãoãlãeã.ãeãrãrãoãrã(ãeã)ã;ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ãqãuãeãsãtãiãoãnãsãDãBã.ãfãiãlãtãeãrã(ãqã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãdãiãsãcãiãpãlãiãnãaã ã&ã&ã ãqã.ãdãiãsãcãiãpãlãiãnãaã ã!ã=ã=ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãdãiãsãcãiãpãlãiãnãaã)ã ãrãeãtãuãrãnã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãaãsãsãuãnãtãoã ã&ã&ã ã!ãqã.ãaãsãsãuãnãtãoã.ãiãnãcãlãuãdãeãsã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãaãsãsãuãnãtãoã)ã)ã ãrãeãtãuãrãnã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãbãaãnãcãaã ã&ã&ã ãqã.ãbãaãnãcãaã ã!ã=ã=ã ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãbãaãnãcãaã)ã ãrãeãtãuãrãnã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãsãtãaãtãéãuãsã ã=ã=ã=ã ã'ãuãnãaãnãsãwãeãrãeãdã'ã ã&ã&ã ãqã.ãrãeãsãoãlãvãiãdãoã ã!ã=ã=ã ãnãuãlãlã)ã ãrãeãtãuãrãnã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãsãtãaãtãéãuãsã ã=ã=ã=ã ã'ãeãrãrãoãrãsã'ã ã&ã&ã ãqã.ãrãeãsãoãlãvãiãdãoã ã!ã=ã=ã ã'ãwãrãoãnãgã'ã)ã ãrãeãtãuãrãnã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã ãtãrãuãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ã-ã-ã-ã ã3ã.ã ãRãEãNãDãEãRã ãCãOãRãEã ã-ã-ã-ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãrãeãnãdãeãrãQãuãeãsãtãiãoãnãsã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãlãiãsãtãDãiãvã)ã ãrãeãtãuãrãnã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãdãiãsãcãiãpãlãiãnãaã ã&ã&ã ã!ãcãuãrãrãeãnãtãFãiãlãtãeãrãsã.ãbãaãnãcãaã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãoãuãnãtãSãpãaãnã)ã ãcãoãuãnãtãSãpãaãnã.ãtãeãxãtãCãoãnãtãeãnãtã ã=ã ã"ã0ã"ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãsãtãDãiãvã.ãiãnãnãeãrãHãTãMãLã ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-2xl p-10 text-center border border-slatée-100 shadow-sm mt-12 flex flex-col items-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-16 h-16 bg-indigo-50/50 rounded-full flex items-center justify-center mb-4">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[32px] text-sinapse-primary mt-1">ãcãhãeãcãkãlãiãsãtã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline font-bold text-xl text-[#0B193C] mb-2">ãPãrãoãnãtãoã ãpãaãrãaã ãtãrãeãiãnãaãrã?ã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm text-slatée-500 max-w-sm mx-auto">ãUãtãiãlãiãzãeã ãoãsã ãFãiãlãtãrãoãsã ãEãsãtãrãaãtãéãgãiãcãoãsã ãnãããoã ãtãoãpãoã ãdãaã ãpãáãgãiãnãaã ãsãeãlãeãcãiãoãnãaãnãdãoã ãuãmãaã ã<b>ãDãiãsãcãiãpãlãiãnãaã</b>ã ãoãuã ã<b>ãBãaãnãcãaã</b>ã ãpãaãrãaã ãcãaãrãrãeãgãaãrã ãsãeãuã ãCãaãdãeãrãnãããoã ãdãeã ãEãxãeãrãcãíãcãiãoãsã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãaã ã=ã ãfãiãlãtãeãrãDãaãtãéãaã(ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãoãuãnãtãSãpãaãnã)ã ãcãoãuãnãtãSãpãaãnã.ãtãeãxãtãCãoãnãtãeãnãtã ã=ã ãdãaãtãéãaã.ãlãeãnãgãtãhã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãsãtãDãiãvã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã'ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãaãtãéãaã.ãlãeãnãgãtãhã ã=ã=ã=ã ã0ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãsãtãDãiãvã.ãiãnãnãeãrãHãTãMãLã ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-2xl p-10 text-center border border-slatée-100 shadow-sm mt-8">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[48px] text-slatée-300 mb-4 block">ãsãeãaãrãcãhã_ãoãfãfã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline font-bold text-lg text-[#0B193C]">ãNãeãnãhãuãmãaã ãQãuãeãsãtãããoã ãLãoãcãaãlãiãzãaãdãaã</h3>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm text-slatée-400 mt-2">ãNãaãoã ãeãnãcãoãnãtãrãaãmãoãsã ãqãuãeãsãtãoãeãsã ãcãoãmã ãeãsãsãeãsã ãfãiãlãtãrãoãsã ãnãããoã ãbãaãnãcãoã ãaãtãéãuãaãlã.ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãLãoãoãpã ãaãnãdã ãbãuãiãlãdã ãUãIã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãaã.ãfãoãrãEãaãcãhã(ã(ãqã,ã ãiãnãdãeãxã)ã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãiãsãLãoãcãkãeãdã ã=ã ãqã.ãrãeãsãoãlãvãiãdãoã ã?ã ã'ãlãoãcãkãeãdã'ã ã:ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãaãlãtãsãHãTãMãLã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãrã(ãcãoãnãsãtã ã[ãlãeãtãtãeãrã,ã ãtãeãxãtã]ã ãoãfã ãOãbãjãeãcãtã.ãeãnãtãrãiãeãsã(ãqã.ãaãlãtãeãrãnãaãtãéãiãvãaãsã ã|ã|ã ã{ã}ã)ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ã!ãtãeãxãtã ã|ã|ã ãtãeãxãtã.ãtãrãiãmã(ã)ã ã=ã=ã=ã ã'ã'ã)ã ãcãoãnãtãiãnãuãeã;ã ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãcãlãaãsãsãSãtãaãtãéãeã ã=ã ã'ã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãqã.ãrãeãsãoãlãvãiãdãoã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãlãeãtãtãeãrã ã=ã=ã=ã ãqã.ãcãoãrãrãeãtãaã)ã ãcãlãaãsãsãSãtãaãtãéãeã ã=ã ã'ãcãoãrãrãeãcãtã ãbãoãrãdãeãrã-ãgãrãeãeãnã-ã5ã0ã0ã ãbãgã-ãgãrãeãeãnã-ã5ã0ã'ã;ã ã/ã/ã ãcãoãrãrãeãtãaã ãeãmã ãvãeãrãdãeã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãiãfã ã(ãqã.ãcãhãuãtãeã ã=ã=ã=ã ãlãeãtãtãeãrã ã&ã&ã ãqã.ãcãhãuãtãeã ã!ã=ã=ã ãqã.ãcãoãrãrãeãtãaã)ã ãcãlãaãsãsãSãtãaãtãéãeã ã=ã ã'ãwãrãoãnãgã ãbãoãrãdãeãrã-ãrãeãdã-ã5ã0ã0ã ãbãgã-ãrãeãdã-ã5ã0ã'ã;ã ã/ã/ã ãeãrãrãaãdãaã ãeãmã ãvãeãrãmãeãlãhãoã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãtãsãHãTãMãLã ã+ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div id="alt-btn-${q.id}-${letter}" datéa-letter="${letter}" onclick="selectalternatéive('${q.id}', '${letter}')" class="alt-button ${isLocked} ${classStatée} w-full text-left p-4 rounded-xl border-2 border-slatée-100 bg-white hover:border-sinapse-primary/50 cursor-pointer flex gap-4 mt-3 transition-colors">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="alt-letter w-8 h-8 rounded-lg border-2 border-slatée-200 flex items-center justify-center font-bold text-slatée-500 font-headline flex-shrink-0 bg-white pointer-events-nãone">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãlãeãtãtãeãrã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="text-sm text-slatée-600 font-medium leading-relaxed my-auto pointer-events-nãone">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãtãeãxãtã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãaãrãdãHãTãMãLã ã=ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white rounded-2xl border border-slatée-200 shadow-question p-8 fade-in question-card" id="card-${q.id}" style="animatéion-delay: ${index * 0.05}s">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-wrap items-center justify-between gap-4 mb-6 border-b border-slatée-100 pb-5">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-xs font-extrabold text-[#0B193C] uppercase tracking-widest">ã$ã{ãqã.ãiãdã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-slatée-300">ã|ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-xs font-bold text-slatée-500">ã$ã{ãqã.ãbãaãnãcãaã}ã ã-ã ã$ã{ãqã.ãaãnãããoã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-slatée-300">ã|ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-xs font-bold text-sinapse-primary">ã$ã{ãqã.ãdãiãsãcãiãpãlãiãnãaã}ã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button class="w-8 h-8 rounded border border-slatée-200 flex items-center justify-center text-slatée-400 hover:text-rose-500 hover:border-rose-200 transition-colors tooltip" title="Salvar Ouro">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[16px]">ãbãoãoãkãmãaãrãkã_ãbãoãrãdãeãrã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="prose prose-sm max-w-nãone text-slatée-700 font-medium leading-relaxed mb-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãqã.ãtãeãxãtãoã ã?ã ãqã.ãtãeãxãtãoã.ãrãeãpãlãaãcãeã(ã/ã\ã\ãnã/ãgã,ã ã'ã<br>ã'ã)ã ã:ã ã'ã'ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãqã.ãiãmãaãgãeãmãBãaãsãeã6ã4ã ã?ã ã`ã<div class="mb-6 rounded-xl overflow-hidden border border-slatée-200 flex justify-center bg-slatée-50 p-4"><img src="${q.imagemBase64}" class="max-w-full h-auto rounded-lg shadow-sm" alt="Imagem auxiliar"></div>ã`ã ã:ã ã'ã'ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-4 mb-6" id="alts-${q.id}">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãaãlãtãsãHãTãMãLã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ã ã!ãqã.ãrãeãsãoãlãvãiãdãoã ã?ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="mt-6 flex justify-end border-t border-slatée-100 pt-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button id="btn-resp-${q.id}" disabled onclick="answerquestion('${q.id}')" class="bg-sinapse-primary hover:bg-[#4F46E5] text-white px-10 py-3.5 rounded-xl font-bold text-sm shadow-premium transition-all active:scale-95 flex items-center gap-2 opacity-50 cursor-nãot-allowed">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãRãEãSãPãOãNãDãEãRã ã<span class="matéerial-symbols-outlined text-[18px]">ãsãeãnãdã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã`ã ã:ã ã`ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="mt-6 flex justify-end gap-3 border-t border-slatée-100 pt-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="document.getelementbyid('exp-${q.id}').classlist.toggle('show'); this.innerhtml = this.innerhtml.includes('abrir') ? 'fechar comentario <span class=\\'matéerial-symbols-outlined text-[18px]\\'>ãcãlãoãsãeã</span>ã'ã ã:ã ã'ãaãbãrãiãrã ãcãoãmãeãnãtãaãrãiãoã ã<span class=\\'matéerial-symbols-outlined text-[18px]\\'>ãcãhãaãtãéã</span>ã'ã"ã ãcãlãaãsãsã=ã"ãbãgã-ãwãhãiãtãeã ãtãeãxãtã-ãsãlãaãtãéãeã-ã5ã0ã0ã ãhãoãvãeãrã:ãtãeãxãtã-ã[ã#ã0ãBã1ã9ã3ãCã]ã ãhãoãvãeãrã:ãbãoãrãdãeãrã-ã[ã#ã0ãBã1ã9ã3ãCã]ã ãhãoãvãeãrã:ãbãgã-ãsãlãaãtãéãeã-ã5ã0ã ãpãxã-ã6ã ãpãyã-ã2ã.ã5ã ãrãoãuãnãdãeãdã-ãxãlã ãbãoãrãdãeãrã ãbãoãrãdãeãrã-ãsãlãaãtãéãeã-ã2ã0ã0ã ãfãoãnãtã-ãbãoãlãdã ãtãeãxãtã-ãxãsã ãtãrãaãcãkãiãnãgã-ãwãiãdãeãsãtã ãtãrãaãnãsãiãtãiãoãnã-ãaãlãlã ãfãlãeãxã ãiãtãeãmãsã-ãcãeãnãtãeãrã ãgãaãpã-ã2ã ãsãhãaãdãoãwã-ãsãmã"ã>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãBãRãIãRã ãCãOãMãEãNãTãÁãRãIãOã ã<span class="matéerial-symbols-outlined text-[18px]">ãcãhãaãtãéã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã`ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="explanatéion-box border-t border-slatée-100 pt-6 mt-6" id="exp-${q.id}">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h4 class="font-headline font-extrabold text-[#0B193C] flex items-center gap-2 mb-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-amber-500 icon-fill">ãlãiãgãhãtãbãuãlãbã</span>ã ãCãoãmãeãnãtãáãrãiãoã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h4>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-indigo-50/50 rounded-xl p-5 border border-indigo-100 text-[13px] text-slatée-600 leading-relaxed">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã$ã{ãqã.ãcãoãmãeãnãtãaãrãiãoã ã?ã ãqã.ãcãoãmãeãnãtãaãrãiãoã.ãrãeãpãlãaãcãeã(ã/ã\ãnã/ãgã,ã ã'ã<br>ã'ã)ã ã:ã ã'ã'ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã`ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãsãtãDãiãvã.ãiãnãnãeãrãHãTãMãLã ã+ã=ã ãcãaãrãdãHãTãMãLã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã/ã/ã ã-ã-ã-ã ã4ã.ã ãEãNãGãIãNãEã ãVãAãLãIãDãAãTãIãOãNã ã-ã-ã-ã
+ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãsãeãlãeãcãtãAãlãtãeãrãnãaãtãéãiãvãeã ã=ã ãfãuãnãcãtãiãoãnã(ãqãIãdã,ã ãlãeãtãtãeãrã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãqãIãnãdãeãxã ã=ã ãqãuãeãsãtãiãoãnãsãDãBã.ãfãiãnãdãIãnãdãeãxã(ãxã ã=ã>ã ãxã.ãiãdã ã=ã=ã=ã ãqãIãdã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãqãIãnãdãeãxã ã=ã=ã=ã ã-ã1ã ã|ã|ã ãqãuãeãsãtãiãoãnãsãDãBã[ãqãIãnãdãeãxã]ã.ãrãeãsãoãlãvãiãdãoã)ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeãmãoãvãeã ãsãeãlãeãçãããoã ãaãnãtãeãrãiãoãrã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrãAãlãlã(ã'ã#ãaãlãtãsã-ã'ã ã+ã ãqãIãdã ã+ã ã'ã ã.ãaãlãtã-ãbãuãtãtãoãnã'ã)ã.ãfãoãrãEãaãcãhã(ãbãtãnã ã=ã>ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãsãeãlãeãcãtãeãdã'ã,ã ã'ãbãoãrãdãeãrã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãbãgã-ãiãnãdãiãgãoã-ã5ã0ã/ã5ã0ã'ã,ã ã'ãrãiãnãgã-ã2ã'ã,ã ã'ãrãiãnãgã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã/ã2ã0ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãAãdãiãcãiãoãnãaã ãnãããoãvãaã ãsãeãlãeãçãããoã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãlãiãcãkãeãdã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã`ãaãlãtã-ãbãtãnã-ã$ã{ãqãIãdã}ã-ã$ã{ãlãeãtãtãeãrã}ã`ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãcãlãiãcãkãeãdã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãlãiãcãkãeãdã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãsãeãlãeãcãtãeãdã'ã,ã ã'ãbãoãrãdãeãrã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã'ã,ã ã'ãbãgã-ãiãnãdãiãgãoã-ã5ã0ã/ã5ã0ã'ã,ã ã'ãrãiãnãgã-ã2ã'ã,ã ã'ãrãiãnãgã-ãsãiãnãaãpãsãeã-ãpãrãiãmãaãrãyã/ã2ã0ã'ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãHãaãbãiãlãiãtãaã ãBãoãtãããoã ãRãeãsãpãoãnãdãeãrã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãrãeãsãpãBãtãnã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã`ãbãtãnã-ãrãeãsãpã-ã$ã{ãqãIãdã}ã`ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãrãeãsãpãBãtãnã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãpãBãtãnã.ãdãiãsãaãbãlãeãdã ã=ã ãfãaãlãsãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãsãpãBãtãnã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãoãpãaãcãiãtãyã-ã5ã0ã'ã,ã ã'ãcãuãrãsãoãrã-ãnãããoãtã-ãaãlãlãoãwãeãdã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã}ã;ã
+ã
+ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãaãnãsãwãeãrãQãuãeãsãtãiãoãnã ã=ã ãfãuãnãcãtãiãoãnã(ãqãIãdã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãFãiãnãdã ãQãuãeãsãtãiãoãnã ãOãbãjã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãqãIãnãdãeãxã ã=ã ãqãuãeãsãtãiãoãnãsãDãBã.ãfãiãnãdãIãnãdãeãxã(ãxã ã=ã>ã ãxã.ãiãdã ã=ã=ã=ã ãqãIãdã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãqãIãnãdãeãxã ã=ã=ã=ã ã-ã1ã ã|ã|ã ãqãuãeãsãtãiãoãnãsãDãBã[ãqãIãnãdãeãxã]ã.ãrãeãsãoãlãvãiãdãoã)ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãtãnã ã=ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrã(ã`ã#ãaãlãtãsã-ã$ã{ãqãIãdã}ã ã.ãsãeãlãeãcãtãeãdã`ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ã!ãbãtãnã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãlãeãrãtã(ã"ãPãoãrã ãfãaãvãoãrã,ã ãsãeãlãeãcãiãoãnãeã ãuãmãaã ãaãlãtãeãrãnãaãtãéãiãvãaã ãaãnãtãeãsã ãdãeã ãrãeãsãpãoãnãdãeãrã!ã"ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãtãuãrãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãeãlãeãcãtãeãdãLãeãtãtãeãrã ã=ã ãbãtãnã.ãdãaãtãéãaãsãeãtã.ãlãeãtãtãeãrã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãqã ã=ã ãqãuãeãsãtãiãoãnãsãDãBã[ãqãIãnãdãeãxã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãiãsãCãoãrãrãeãcãtã ã=ã ã(ãsãeãlãeãcãtãeãdãLãeãtãtãeãrã ã=ã=ã=ã ãqã.ãcãoãrãrãeãtãaã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãGãrãaãvãaã ãEãsãtãaãdãoã
+ã ã ã ã ã ã ã ã ã ã ã ã ãqã.ãrãeãsãoãlãvãiãdãoã ã=ã ãiãsãCãoãrãrãeãcãtã ã?ã ã'ãcãoãrãrãeãcãtã'ã ã:ã ã'ãwãrãoãnãgã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãqã.ãcãhãuãtãeã ã=ã ãsãeãlãeãcãtãeãdãLãeãtãtãeãrã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãAãnãaãlãyãtãiãcãsã ãCãoãrãeã ã(ãVãiãrãtãuãaãlã)ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãiãsãCãoãrãrãeãcãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãhãiãtãsã+ã+ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãoãcãaãlãSãtãoãrãaãgãeã.ãsãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãhãiãtãsã'ã,ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãhãiãtãsã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãmãiãsãsãeãsã+ã+ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãoãcãaãlãSãtãoãrãaãgãeã.ãsãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeã_ãmãiãsãsãeãsã'ã,ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãmãiãsãsãeãsã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãuãpãdãaãtãéãeãSãtãaãtãéãsãUãIã(ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãIãnãtãeãgãrãaãçãããoã ãcãoãmã ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã ã(ãDãaãsãhãbãoãaãrãdã ãgãlãoãbãaãlã)ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãwãiãnãdãoãwã.ãdãbã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãdãaãyãPãrãeãfãiãxã ã=ã ãnãeãwã ãDãaãtãéãeã(ã)ã.ãtãoãIãSãOãSãtãrãiãnãgã(ã)ã.ãsãpãlãiãtã(ã'ãTã'ã)ã[ã0ã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãeãnãtãrãiãeãsã ã=ã ãwãiãnãdãoãwã.ãdãbã.ãgãeãtã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã)ã ã|ã|ã ã[ã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãeãxãiãsãtãiãnãgãEãnãtãrãyãIãnãdãeãxã ã=ã ãeãnãtãrãiãeãsã.ãfãiãnãdãIãnãdãeãxã(ãeã ã=ã>ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeã.ãdãiãsãcãiãpãlãiãnãeã ã=ã=ã=ã ãqã.ãdãiãsãcãiãpãlãiãnãaã ã&ã&ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeã.ãsãuãbãjãeãcãtã ã=ã=ã=ã ã(ãqã.ãaãsãsãuãnãtãoã ã|ã|ã ã'ãDãiãvãeãrãsãoãsã'ã)ã ã&ã&ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeã.ãcãrãeãaãtãéãeãdã_ãaãtãéã ã&ã&ã ãeã.ãcãrãeãaãtãéãeãdã_ãaãtãéã.ãsãtãaãrãtãsãWãiãtãhã(ãtãoãdãaãyãPãrãeãfãiãxã)ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãeãxãiãsãtãiãnãgãEãnãtãrãyãIãnãdãeãxã ã!ã=ã=ã ã-ã1ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãeãtã ãeãnãtãrãyã ã=ã ãeãnãtãrãiãeãsã[ãeãxãiãsãtãiãnãgãEãnãtãrãyãIãnãdãeãxã]ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãnãtãrãyã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã ã+ã=ã ã1ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãiãsãCãoãrãrãeãcãtã)ã ãeãnãtãrãyã.ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã ã+ã=ã ã1ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãlãsãeã ãeãnãtãrãyã.ãwãrãoãnãgã_ãaãnãsãwãeãrãsã ã+ã=ã ã1ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãnãtãrãyã.ãaãcãcãuãrãaãcãyã_ãpãeãrãcãeãnãtãaãgãeã ã=ã ã(ãeãnãtãrãyã.ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã ã/ã ãeãnãtãrãyã.ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã)ã ã*ã ã1ã0ã0ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãdãbã.ãuãpãdãaãtãéãeã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã,ã ãeãnãtãrãyã.ãiãdã,ã ãeãnãtãrãyã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãdãbã.ãiãnãsãeãrãtã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã,ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãuãsãeãrã_ãiãdã:ã ã1ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãeã:ã ãqã.ãdãiãsãcãiãpãlãiãnãaã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtã:ã ãqã.ãaãsãsãuãnãtãoã ã|ã|ã ã'ãDãiãvãeãrãsãoãsã'ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãrãeãaãtãéãeãdã_ãaãtãéã:ã ãtãoãdãaãyãPãrãeãfãiãxã ã+ã ã'ãTã2ã0ã:ã0ã0ã:ã0ã0ã.ã0ã0ã0ãZã'ã,ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã:ã ã1ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã:ã ãiãsãCãoãrãrãeãcãtã ã?ã ã1ã ã:ã ã0ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãrãoãnãgã_ãaãnãsãwãeãrãsã:ã ãiãsãCãoãrãrãeãcãtã ã?ã ã0ã ã:ã ã1ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãcãuãrãaãcãyã_ãpãeãrãcãeãnãtãaãgãeã:ã ãiãsãCãoãrãrãeãcãtã ã?ã ã1ã0ã0ã ã:ã ã0ã,ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãuãdãyã_ãtãiãmãeã_ãmãiãnãuãtãeãsã:ã ã0ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ã/ã/ã ãFãeãcãhãaãmãeãnãtãoã ãdãoã ãiãfã ã(ãwãiãnãdãoãwã.ãdãbã)ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãrãeãnãdãeãrãQãuãeãsãtãiãoãnãsã(ã)ã;ã ã/ã/ã ãIãnã ãaã ãhãeãaãvãyã ãfãrãaãmãeãwãoãrãkã,ã ãwãeã'ãdã ãoãnãlãyã ãuãpãdãaãtãéãeã ãtãhãeã ãsãpãeãcãiãfãiãcã ãDãOãMã ãeãlãeãmãeãnãtãsã ãtãoã ãsãaãvãeã ãpãaãiãnãtã.ã ãFãoãrã ãtãhãiãsã ãMãVãPã ãaãrãrãaãyã,ã ãrãeã-ãrãeãnãdãeãrãiãnãgã ãeãnãtãiãrãeãlãyã ãiãsã ãiãnãsãtãaãnãtãaãnãeãoãuãsã ãaãnãdã ãsãaãfãeã.ã
+ã ã ã ã ã ã ã ã ã}ã;ã
+ã
+ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãuãpãdãaãtãéãeãSãtãaãtãéãsãUãIã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãeãaãdãeãrã-ãhãiãtãsã'ã)ã.ãtãeãxãtãCãoãnãtãeãnãtã ã=ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãhãiãtãsã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãeãaãdãeãrã-ãmãiãsãsãeãsã'ã)ã.ãtãeãxãtãCãoãnãtãeãnãtã ã=ã ãsãtãuãdãeãnãtãSãtãaãtãéãsã.ãmãiãsãsãeãsã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãeãaãdãeãrã-ãhãiãtãsã'ã)ã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãtãeãxãtã-ãeãmãeãrãaãlãdã-ã5ã0ã0ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãeãaãdãeãrã-ãmãiãsãsãeãsã'ã)ã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãtãeãxãtã-ãrãoãsãeã-ã5ã0ã0ã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</script>ã
+ã</body>ã
+ã</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

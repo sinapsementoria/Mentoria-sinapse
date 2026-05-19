@@ -1,0 +1,422 @@
+ GABARITO COMENTADO V2 ===
+let dbQuestoesV2 = [];
+let idxCounterV2 = 0;
+
+function goToGabV2Step(num) {
+    document.querySelectorAll('.vGabStep').forEach(s => { s.classList.add('hidden'); s.classList.remove('block'); });
+    const target = document.getElementById(`vGabStep${num}`);
+    if(target) { target.classList.remove('hidden'); target.classList.add('block'); }
+    
+    document.querySelectorAll('.step-gabV2-btn').forEach((btn, index) => {
+        let span = btn.querySelector('span');
+        let i = index + 1;
+        if(i <= num) {
+            btn.classList.add('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
+            btn.classList.remove('text-slate-400', 'bg-transparent', 'border-transparent');
+            span.classList.add('bg-indigo-600', 'text-white');
+            span.classList.remove('bg-slate-100');
+        } else {
+            btn.classList.remove('bg-indigo-50', 'text-indigo-700', 'border-indigo-200');
+            btn.classList.add('text-slate-400', 'bg-transparent', 'border-transparent');
+            span.classList.remove('bg-indigo-600', 'text-white');
+            span.classList.add('bg-slate-100');
+        }
+    });
+    
+    // Atualiza listas quando entra nos passos
+    if(num === 2) renderListaLeitura();
+    if(num === 3) renderListaGabaritos();
+    if(num === 4) renderListaMetadados();
+    if(num === 5) renderListaComentarios();
+    if(num === 6) renderRevisaoFinal();
+    if(num === 7) renderGabV2RenderPDF();
+}
+
+function iniciarProcessamentoFalsoPDF(input) {
+    if(!input.files || input.files.length === 0) return;
+    document.getElementById('gabV2-dropzone').classList.add('hidden');
+    let proc = document.getElementById('gabV2-processing');
+    proc.classList.remove('hidden');
+    
+    let msgs = [
+        "Iniciando Módulo OCR Neural...",
+        "Quebrando blocos de texto (1/4)...",
+        "Identificando áreas de Múltipla Escolha...",
+        "Distinguindo Linguagem Estrangeira (Inglês/Espanhol)...",
+        "Extraindo imagens e figuras...",
+        "Montando grade estrutural. Quase pronto..."
+    ];
+    let msgEl = document.getElementById('gabV2-procMsg');
+    let barEl = document.getElementById('gabV2-procBar');
+    
+    let c = 0;
+    let ival = setInterval(() => {
+        c++;
+        if(c >= msgs.length) {
+            clearInterval(ival);
+            // Geração Dinâmica de Questões para Simulação de OCR do PDF
+            let nomeArq = input.files[0] ? input.files[0].name : 'Prova.pdf';
+            let numStr = prompt("O módulo Nexus AI detectou a leitura de " + nomeArq + "
+Para a simulação visual agora, quantas questões você deseja que sejam lidas/extraídas deste PDF?", "90");
+            let numDesejado = parseInt(numStr) || 5;
+            
+            dbQuestoesV2 = [];
+            for (let i = 1; i <= numDesejado; i++) {
+                let area = 'Conhecimentos Gerais';
+                let origin = 'Geral';
+                let mat = '';
+                
+                // Distribuição ENEM
+                if(i <= 5) {
+                    origin = 'Língua Inglesa'; mat = 'Inglês';
+                    dbQuestoesV2.push({ id: ++idxCounterV2, origemLinguagem: origin, numero: String(i).padStart(2,'0'), alt: '', mat: mat, ass: '', comp: '', hab: '', enun: 'Questão extraída do documento PDF ('+nomeArq+')...', coment: '', img: null });
+                    
+                    origin = 'Língua Espanhola'; mat = 'Espanhol';
+                    dbQuestoesV2.push({ id: ++idxCounterV2, origemLinguagem: origin, numero: String(i).padStart(2,'0'), alt: '', mat: mat, ass: '', comp: '', hab: '', enun: 'Questão extraída do documento PDF ('+nomeArq+')...', coment: '', img: null });
+                    continue;
+                } else if(i <= 45) {
+                    area = 'Linguagens';
+                    mat = 'Português e Literatura';
+                } else if(i <= 90) {
+                    area = 'Humanas';
+                    mat = 'História/Geografia/Filo/Socio';
+                } else if(i <= 135) {
+                    area = 'Natureza';
+                    mat = 'Biologia/Química/Física';
+                } else {
+                    area = 'Matemática';
+                    mat = 'Matemática';
+                }
+                
+                dbQuestoesV2.push({ id: ++idxCounterV2, origemLinguagem: area, numero: String(i).padStart(2,'0'), alt: '', mat: mat, ass: '', comp: '', hab: '', enun: 'Texto extraído do documento PDF ('+nomeArq+')...', coment: '', img: null });
+            }
+            goToGabV2Step(2);
+        } else {
+            msgEl.innerText = msgs[c];
+            barEl.style.width = ((c / msgs.length)*100) + '%';
+        }
+    }, 800);
+}
+
+// ---------------- ETAPA 2 ----------------
+function renderListaLeitura() {
+    let html = '';
+    dbQuestoesV2.forEach((q, i) => {
+        html += `
+        <div class="bg-white rounded-2xl border border-slate-200 p-5 shadow-sm transition-all hover:border-indigo-300">
+            <div class="flex justify-between items-center mb-3">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-[#0B193C] text-white flex items-center justify-center font-black">${String(q.numero).padStart(2,'0')}</div>
+                    <div>
+                        <h6 class="font-bold text-sm text-[#0B193C]">Questão Extraída</h6>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest bg-slate-100 rounded px-1.5 py-0.5 inline-block">${q.origemLinguagem}</p>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-3 py-1.5 text-xs font-bold text-slate-500 hover:text-[#0B193C] border border-slate-200 rounded-lg flex gap-1"><span class="material-symbols-outlined text-[16px]">edit</span> Editar Enunciado</button>
+                    <button onclick="dbQuestoesV2.splice(${i}, 1); renderListaLeitura();" class="px-3 py-1.5 text-xs font-bold text-rose-500 hover:bg-rose-50 border border-slate-200 hover:border-rose-200 rounded-lg"><span class="material-symbols-outlined text-[16px]">delete</span></button>
+                </div>
+            </div>
+            <p class="text-xs text-slate-600 bg-slate-50 p-3 rounded-xl border border-slate-100 line-clamp-3">${q.enun || 'Sem texto extraído. (Requer revisão)'}</p>
+        </div>`;
+    });
+    if(html==='') html = `<div class="p-10 text-center text-slate-400 font-bold bg-slate-50 rounded-xl border-dashed border-2 border-slate-200">Nenhuma questão mapeada.</div>`;
+    document.getElementById('gabV2-list-leituras').innerHTML = html;
+}
+
+function gabAddQuestaoVazia() {
+    dbQuestoesV2.push({ id: ++idxCounterV2, origemLinguagem: 'Geral', numero: (dbQuestoesV2.length+1).toString(), alt: '', mat: '', ass: '', comp: '', hab: '', enun: 'Questão inserida manualmente.', coment: '', img: null });
+    renderListaLeitura();
+}
+
+// ---------------- ETAPA 3 ----------------
+function renderListaGabaritos() {
+    let hist = 0;
+    let html = '';
+    dbQuestoesV2.forEach((q, i) => {
+        if(!q.alt) hist++;
+        html += `
+        <div class="flex items-center gap-4 bg-white p-3 rounded-xl border border-slate-200 shadow-sm hover:border-indigo-300 transition-colors">
+            <div class="w-12 h-12 shrink-0 rounded-lg bg-slate-100 text-[#0B193C] flex flex-col items-center justify-center font-black">
+                <span class="text-[16px] leading-tight">${String(q.numero).padStart(2,'0')}</span>
+                <span class="text-[8px] uppercase tracking-tighter w-full text-center overflow-hidden">${q.origemLinguagem.slice(0,3)}</span>
+            </div>
+            <div class="flex-1 overflow-hidden">
+                <p class="text-xs text-slate-500 line-clamp-1 italic">${q.enun}</p>
+            </div>
+            <div class="shrink-0 flex items-center gap-2 pr-2">
+                <label class="text-[10px] font-bold text-slate-400 uppercase">Resp:</label>
+                <select id="gabSel-${q.id}" class="bg-indigo-50 border border-indigo-200 text-indigo-700 font-black text-sm rounded-lg px-3 py-1.5 outline-none cursor-pointer focus:ring-2 focus:ring-indigo-400 text-center" onchange="updateAltValue(${q.id}, this)">
+                    <option value="" ${!q.alt?'selected':''}>-</option>
+                    <option value="A" ${q.alt==='A'?'selected':''}>A</option>
+                    <option value="B" ${q.alt==='B'?'selected':''}>B</option>
+                    <option value="C" ${q.alt==='C'?'selected':''}>C</option>
+                    <option value="D" ${q.alt==='D'?'selected':''}>D</option>
+                    <option value="E" ${q.alt==='E'?'selected':''}>E</option>
+                    <option value="ANULADA" ${q.alt==='ANULADA'?'selected':''}>ANULADA</option>
+                </select>
+            </div>
+        </div>`;
+    });
+    document.getElementById('gabV2-list-gabaritos').innerHTML = html;
+    document.getElementById('gabV2-pendentesGab').innerText = hist;
+}
+function updateAltValue(id, selectEl) {
+    let f = dbQuestoesV2.find(x => x.id === id);
+    if(f) f.alt = selectEl.value;
+    document.getElementById('gabV2-pendentesGab').innerText = dbQuestoesV2.filter(x=>!x.alt).length;
+}
+
+function applyMassGabarito() {
+    let t = document.getElementById('gabV2-massImport').value;
+    if(!t) return;
+    // Padrão ex: "01-A", "2 B", "3C", "45 Anulada"
+    let linhas = t.split('\n');
+    linhas.forEach(linha => {
+        let str = linha.trim().toUpperCase();
+        let match = str.match(/(?:^|\b)(\d+)[\s\-\)\]]*([A-E]|ANULADA)/);
+        if(match) {
+            let n = match[1]; // numero string
+            let a = match[2];
+            let qs = dbQuestoesV2.filter(x => Number(x.numero) === Number(n));
+            qs.forEach(q => q.alt = a); // Se houver Inglês 01 e Espanhol 01, ele injeta nas duas se importar "1-A". Admin depois reajusta.
+        }
+    });
+    renderListaGabaritos();
+}
+
+// ---------------- ETAPA 4 ----------------
+function renderListaMetadados() {
+    let html = '';
+    dbQuestoesV2.forEach((q, i) => {
+        html += `
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 shadow-sm relative group overflow-hidden">
+            <div class="absolute left-0 top-0 bottom-0 w-1 bg-indigo-200 group-hover:bg-indigo-500 transition-colors"></div>
+            <div class="flex gap-4 mb-3">
+                <div class="w-10 h-10 rounded-lg bg-[#0B193C] text-white flex items-center justify-center font-black shrink-0 relative">
+                    ${String(q.numero).padStart(2,'0')}
+                    <div class="absolute -bottom-2 -right-2 w-5 h-5 rounded-full bg-slate-100 border border-slate-300 text-slate-800 flex items-center justify-center text-[10px] font-black">${q.alt||'-'}</div>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 flex-1">
+                    <div>
+                        <label class="block text-[9px] font-black uppercase tracking-widest text-[#0B193C] mb-1">Matéria</label>
+                        <input type="text" value="${q.mat}" onchange="qMeta(${i}, 'mat', this)" placeholder="História..." class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:border-indigo-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-black uppercase tracking-widest text-[#0B193C] mb-1">Assunto</label>
+                        <input type="text" value="${q.ass}" onchange="qMeta(${i}, 'ass', this)" placeholder="Guerra Fria..." class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:border-indigo-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-black uppercase tracking-widest text-[#0B193C] mb-1">Competência</label>
+                        <input type="text" value="${q.comp}" onchange="qMeta(${i}, 'comp', this)" placeholder="C2" class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:border-indigo-400 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-[9px] font-black uppercase tracking-widest text-[#0B193C] mb-1">Habilidade</label>
+                        <input type="text" value="${q.hab}" onchange="qMeta(${i}, 'hab', this)" placeholder="H8" class="w-full text-xs font-bold bg-slate-50 border border-slate-200 rounded-lg px-2 py-1.5 focus:border-indigo-400 outline-none">
+                    </div>
+                </div>
+            </div>
+        </div>`;
+    });
+    document.getElementById('gabV2-list-metadados').innerHTML = html;
+}
+function qMeta(idx, field, el) { dbQuestoesV2[idx][field] = el.value; }
+
+function sugerirMetadadosIA() {
+    dbQuestoesV2.forEach(q => {
+        if(!q.mat) q.mat = q.origemLinguagem !== 'Geral' ? q.origemLinguagem : 'Conhecimentos Gerais';
+        if(!q.ass) q.ass = 'Leitura e Interpretação de Textos';
+        if(!q.comp) q.comp = '1';
+        if(!q.hab) q.hab = '3';
+    });
+    renderListaMetadados();
+}
+
+// ---------------- ETAPA 5 ----------------
+function renderListaComentarios() {
+    let ht = '';
+    let completados = dbQuestoesV2.filter(x=>x.coment).length;
+    document.getElementById('gabV2-coment-progress').innerText = `${completados}/${dbQuestoesV2.length} Gerados`;
+    
+    dbQuestoesV2.forEach((q, i) => {
+        ht += `
+        <div class="border border-slate-200 rounded-xl p-4 bg-slate-50">
+            <div class="flex justify-between items-center mb-2">
+                <span class="font-extrabold text-[#0B193C] text-sm flex gap-2 items-center"><div class="w-6 h-6 rounded bg-indigo-600 text-white font-black flex items-center justify-center text-xs">${String(q.numero).padStart(2,'0')}</div> ${q.alt ? 'Resp: ' + q.alt : '<span class="text-red-500">SEM RESPOSTA</span>'}</span>
+                <span class="${q.coment ? 'text-emerald-500' : 'text-amber-500'} text-[10px] font-black uppercase bg-white px-2 py-1 rounded shadow-sm border border-slate-100">${q.coment ? 'Revisado via Akili' : 'Pendente...'}</span>
+            </div>
+            <textarea id="gabC-${q.id}" onchange="dbQuestoesV2[${i}].coment = this.value; renderListaComentarios();" class="w-full bg-white p-3 rounded-lg border border-indigo-100 text-xs font-medium text-slate-600 resize-none outline-none custom-scrollbar" rows="3" placeholder="Comentário da questão... Aguardando execução Akili.">${q.coment||''}</textarea>
+        </div>`;
+    });
+    document.getElementById('gabV2-list-comentarios').innerHTML = ht;
+}
+
+function runAkiliMassComents() {
+    let consoleBox = document.getElementById('gabV2-console-ia');
+    let btn = document.getElementById('btn-gabV2-abili');
+    btn.innerHTML = `<span class="material-symbols-outlined animate-spin">sync</span> Injetando Módulo de Análise Pedagógica...`;
+    consoleBox.innerHTML += `<div><span class="text-slate-500">>></span> Inicializando processamento de linguagem natural...</div>`;
+    
+    setTimeout(() => {
+        let i = 0;
+        let p = setInterval(() => {
+            if(i >= dbQuestoesV2.length) {
+                clearInterval(p);
+                btn.innerHTML = `<span class="material-symbols-outlined text-emerald-500">task_alt</span> Inteligência Pedagógica Aplicada`;
+                consoleBox.innerHTML += `<div class="text-emerald-400 mt-2">>> Operação finalizada com sucesso! Todos os gabaritos receberam fundamentos pedagógicos.</div>`;
+                consoleBox.scrollTop = consoleBox.scrollHeight;
+                return;
+            }
+            if(!dbQuestoesV2[i].coment) {
+                let text = "";
+                if(dbQuestoesV2[i].alt === 'ANULADA') {
+                    text = `Questão anulada conforme revisão do gabarito oficial e banca julgadora.`;
+                } else if(!dbQuestoesV2[i].alt) {
+                    text = `[AVISO] Não foi possível gerar comentário defensivo assertivo pois a Alternativa Correta não foi informada pelo administrador.`;
+                } else {
+                    text = `O texto base discute os fenômenos estruturais do tema em análise.
+A alternativa correta é a letra ${dbQuestoesV2[i].alt} porque ela sintetiza, de forma acurada, a linha interpretativa central requerida pela habilidade ${dbQuestoesV2[i].hab || 'avaliada'}. O candidato deveria inferir do enunciado que as demais opções apresentam falhas factuais pontuais.`;
+                }
+                dbQuestoesV2[i].coment = text;
+                
+                consoleBox.innerHTML += `<div class="text-indigo-200">>> Q${String(dbQuestoesV2[i].numero).padStart(2,'0')} > Elaborando defesa para Alternativa [${dbQuestoesV2[i].alt||'None'}]... Sucesso.</div>`;
+                consoleBox.scrollTop = consoleBox.scrollHeight;
+                renderListaComentarios();
+            }
+            i++;
+        }, 600);
+    }, 1500);
+}
+
+// ---------------- ETAPA 6 ----------------
+function renderRevisaoFinal() {
+    let c = document.getElementById('gabV2-alerts-container');
+    let sm = document.getElementById('gabV2-success-msg');
+    
+    let semAlt = dbQuestoesV2.filter(x => !x.alt).length;
+    let semMat = dbQuestoesV2.filter(x => !x.mat || !x.ass).length;
+    let semComent = dbQuestoesV2.filter(x => !x.coment).length;
+    
+    let html = '';
+    
+    if(semAlt > 0) {
+        html += `<div class="p-4 bg-rose-50 border border-rose-200 rounded-2xl flex gap-3 text-rose-800">
+            <span class="material-symbols-outlined shrink-0 text-rose-500">error</span>
+            <div><p class="font-black text-sm">Existem ${semAlt} questões sem resposta!</p><p class="text-xs mt-0.5 opacity-80">Por favor, retorne à aba de Gabarito.</p></div>
+        </div>`;
+    }
+    if(semComent > 0) {
+        html += `<div class="p-4 bg-amber-50 border border-amber-200 rounded-2xl flex gap-3 text-amber-800">
+            <span class="material-symbols-outlined shrink-0 text-amber-500">warning</span>
+            <div><p class="font-black text-sm">Existem ${semComent} comentários pendentes.</p><p class="text-xs mt-0.5 opacity-80">Ative o Agente IA na tela anterior.</p></div>
+        </div>`;
+    }
+    if(semMat > 0) {
+        html += `<div class="p-4 bg-yellow-50 border border-yellow-200 rounded-2xl flex gap-3 text-yellow-800">
+            <span class="material-symbols-outlined shrink-0 text-yellow-500">lightbulb</span>
+            <div><p class="font-black text-sm">Metadados Ausentes.</p><p class="text-xs mt-0.5 opacity-80">${semMat} questões não possuem C/H, Matéria ou Assunto.</p></div>
+        </div>`;
+    }
+    
+    if(html !== '') {
+        c.innerHTML = html;
+        sm.classList.add('hidden');
+    } else {
+        c.innerHTML = '';
+        sm.classList.remove('hidden');
+    }
+}
+
+// ---------------- ETAPA 7 ----------------
+function renderGabV2RenderPDF() {
+    const box = document.getElementById('pdf-v2-folhaA4');
+    const docName = document.getElementById('gabV2-pdfDocName').value || "Simulado";
+    
+    // Agrupando questões por "origemLinguagem" ou "matéria" global
+    let grades = {};
+    dbQuestoesV2.forEach(q => {
+        let rootGroup = q.origemLinguagem; 
+        if(!grades[rootGroup]) grades[rootGroup] = [];
+        grades[rootGroup].push(q);
+    });
+
+    let renderHtml = `
+    <!-- HEADER REFERÊNCIA NEXUS -->
+    <div style="background-color: #0B193C; width: 100%; height: 110px; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; border-bottom: 8px solid #6366F1; box-sizing: border-box;">
+        <div style="display: flex; flex-direction: column;">
+            <span style="color: #6366F1; font-weight: 900; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2px;">DOCUMENTO OFICIAL DA PLATAFORMA NEXUS PROVAS</span>
+            <span style="color: white; font-weight: 800; font-size: 26px; text-transform: uppercase;">GABARITO COMENTADO</span>
+            <span style="color: #cbd5e1; font-weight: 600; font-size: 12px; margin-top: 2px;">${docName}</span>
+        </div>
+        <div style="background: rgba(255,255,255,0.1); width: 60px; height: 60px; border-radius: 12px; display: flex; justify-content: center; align-items: center; border: 1px solid rgba(255,255,255,0.2);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+        </div>
+    </div>
+    <div style="padding: 40px; box-sizing: border-box;">
+    `;
+
+    Object.keys(grades).forEach(key => {
+        let areaNome = key.toUpperCase();
+        
+        renderHtml += `
+        <!-- FAIXA DA MATERIA -->
+        <div style="width: 100%; background-color: #f1f5f9; border-left: 5px solid #0B193C; padding: 12px 20px; font-weight: 900; font-family: 'Inter', sans-serif; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: #0B193C; margin-bottom: 25px; margin-top: 30px; box-sizing: border-box; page-break-after: avoid;">
+            ${areaNome}
+        </div>
+        `;
+        
+        grades[key].forEach(q => {
+            let altA = q.alt === 'ANULADA' ? 'ANULADA' : `Resposta: ${q.alt||'?'}`;
+            let classAnul = q.alt === 'ANULADA' ? 'color: #e11d48; border-color:#fda4af;' : 'color: #0B193C; border-color:#e2e8f0;';
+            
+            renderHtml += `
+            <!-- CARD DE QUESTÃO -->
+            <div style="border: 2px solid #e2e8f0; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-sizing: border-box; font-family: 'Inter', sans-serif; page-break-inside: avoid;">
+                
+                <!-- TOP BAR -->
+                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 15px;">
+                    <span style="font-weight: 900; font-size: 15px; color: #0B193C; border-left: 4px solid #6366F1; padding-left: 8px;">Questão ${String(q.numero).padStart(2,'0')}</span>
+                    <span style="font-weight: 900; font-size: 14px; ${classAnul}">${altA}</span>
+                </div>
+                
+                <!-- METADADOS -->
+                <div style="display: flex; flex-direction: column; gap: 8px; margin-bottom: 18px;">
+                    <div style="display: flex; background: #fafafa; border: 1px solid #f1f5f9; padding: 8px 12px; border-radius: 6px;">
+                        <span style="font-size: 11px; font-weight: 800; color: #475569; width: 140px; text-transform: uppercase;">Matéria / Assunto:</span>
+                        <span style="font-size: 11px; font-weight: 600; color: #0f172a;">${q.mat||'-'} | Assunto: ${q.ass||'-'}</span>
+                    </div>
+                    <div style="display: flex; background: #fafafa; border: 1px solid #f1f5f9; padding: 8px 12px; border-radius: 6px;">
+                        <span style="font-size: 11px; font-weight: 800; color: #475569; width: 140px; text-transform: uppercase;">C / H:</span>
+                        <span style="font-size: 11px; font-weight: 600; color: #0f172a;">Competência: ${q.comp||'-'} | Habilidade: ${q.hab||'-'}</span>
+                    </div>
+                </div>
+                
+                <!-- COMENTÁRIO TEXTO -->
+                <div>
+                    <span style="display: block; font-size: 12px; font-weight: 900; color: #6366F1; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px;">Comentário pedagógico:</span>
+                    <p style="font-size: 12.5px; line-height: 1.6; color: #334155; margin: 0; text-align: justify; font-weight: 500; white-space: pre-wrap;">${q.coment || 'Ocorreu um erro e não há comentário registrado.'}</p>
+                </div>
+            </div>
+            `;
+        });
+    });
+
+    renderHtml += `</div>
+    
+    <!-- Footer Fixed Mock -->
+    <div style="position: absolute; bottom: 20px; left: 40px; right: 40px; display: flex; justify-content: space-between; border-top: 1px solid #e2e8f0; padding-top: 15px;">
+        <span style="font-size: 10px; font-weight: 700; color: #94a3b8; font-family:'Inter'; text-transform:uppercase;">NEXUS PROVAS v2.0 - GERAÇÃO AUTOMATIZADA</span>
+    </div>
+    `;
+    
+    box.innerHTML = renderHtml;
+}
+
+// Inicialização Limpa
+document.addEventListener('DOMContentLoaded', () => {
+    // Ao iniciar Nexus Provas module, garante start correto.
+    setTimeout(() => { if(typeof dbQuestoesV2 !== 'undefined') goToGabV2Step(1); }, 300);
+});
+</script>
+</body>
+</html>

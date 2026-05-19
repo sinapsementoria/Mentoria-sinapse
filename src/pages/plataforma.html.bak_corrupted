@@ -1,0 +1,168 @@
+<!DOCTYPE html>ã
+ã<html lang="pt-br">ã
+ã<head>ã
+ã ã ã ã ã<meta charset="UTF-8">ã
+ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
+ã ã ã ã ã<title>ãSãiãnãaãpãsãeã ãPãrãéã-ãMãeãdã ã-ã ãPãlãaãtãéãaãfãoãrãmãaã ãdãeã ãAãlãtãaã ãPãeãrãfãoãrãmãaãnãcãeã</title>ã
+ã ã ã ã ã<script src="https://cdn.tailwindcss.com"></script>ã
+ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
+ã ã ã ã ã<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />ã
+ã ã ã ã ã<style>ã
+ã ã ã ã ã ã ã ã ãbãoãdãyã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ã0ã7ã1ãaã4ãdã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrã:ã ã#ãFãFãFãFãFãFã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãmãiãnã-ãhãeãiãgãhãtã:ã ã1ã0ã0ãvãhã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãpãlãaãyã:ã ãfãlãeãxã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãfãlãeãxã-ãdãiãrãeãcãtãiãoãnã:ã ãcãoãlãuãmãnã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãpãrãeãmãiãuãmã-ãcãaãrãdã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã3ã0ã,ã ã3ã4ã,ã ã5ã3ã,ã ã0ã.ã4ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã2ã0ãpãxã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã0ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãtãoãpã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã1ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãiãtãiãoãnã:ã ãaãlãlã ã0ã.ã3ãsã ãcãuãbãiãcã-ãbãeãzãiãeãrã(ã0ã.ã2ã5ã,ã ã0ã.ã8ã,ã ã0ã.ã2ã5ã,ã ã1ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã2ã0ãpãxã ã4ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã0ã,ã ã0ã,ã ã0ã,ã ã0ã.ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãpãrãeãmãiãuãmã-ãcãaãrãdã:ãhãoãvãeãrã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã-ã8ãpãxã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã3ã0ãpãxã ã6ã0ãpãxã ã-ã1ã5ãpãxã ãrãgãbãaã(ã0ã,ã ã0ã,ã ã0ã,ã ã0ã.ã8ã)ã,ã ã0ã ã0ã ã2ã0ãpãxã ãrãgãbãaã(ã1ã4ã0ã,ã ã8ã7ã,ã ã2ã5ã5ã,ã ã0ã.ã1ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ãrãgãbãaã(ã1ã4ã0ã,ã ã8ã7ã,ã ã2ã5ã5ã,ã ã0ã.ã3ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã.ãbãtãnã-ãpãrãeãmãiãuãmã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãlãiãnãeãaãrã-ãgãrãaãdãiãeãnãtã(ã1ã3ã5ãdãeãgã,ã ã#ã1ãAã2ã2ã4ã2ã,ã ã#ã1ã0ã1ã6ã2ãBã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã1ã4ã0ã,ã ã8ã7ã,ã ã2ã5ã5ã,ã ã0ã.ã4ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã4ãpãxã ã1ã5ãpãxã ãrãgãbãaã(ã0ã,ã ã0ã,ã ã0ã,ã ã0ã.ã3ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãiãtãiãoãnã:ã ãaãlãlã ã0ã.ã3ãsã ãeãaãsãeã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã
+ã ã ã ã ã ã ã ã ã.ãbãtãnã-ãpãrãeãmãiãuãmã:ãhãoãvãeãrã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãlãiãnãeãaãrã-ãgãrãaãdãiãeãnãtã(ã1ã3ã5ãdãeãgã,ã ã#ãAã8ã5ã5ãFã7ã,ã ã#ã4ãFã4ã6ãEã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã1ã0ãpãxã ã2ã5ãpãxã ã-ã4ãpãxã ãrãgãbãaã(ã1ã2ã4ã,ã ã5ã8ã,ã ã2ã3ã7ã,ã ã0ã.ã6ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãfãoãrãmã:ã ãsãcãaãlãeã(ã1ã.ã0ã2ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrã:ã ãwãhãiãtãeã ã!ãiãmãpãoãrãtãaãnãtã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã.ãgãlãoãwã-ãtãeãxãtã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãlãiãnãeãaãrã-ãgãrãaãdãiãeãnãtã(ãtãoã ãrãiãgãhãtã,ã ã#ãfãfãfã,ã ã#ãaã8ã8ã1ãfãfã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã-ãwãeãbãkãiãtã-ãbãaãcãkãgãrãoãuãnãdã-ãcãlãiãpã:ã ãtãeãxãtã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã-ãwãeãbãkãiãtã-ãtãeãxãtã-ãfãiãlãlã-ãcãoãlãoãrã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</style>ã
+ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
+ã</head>ã
+ã<body class="antialiased relatéive overflow-hidden h-[100dvh] flex flex-col">ã
+ã
+ã ã ã ã ã<!-- Fundo Cinematéográfico Premium (Estilo Fintech) -->ã
+ã ã ã ã ã<div class="fixed inset-0 z-[-1] pointer-events-nãone w-full h-full bg-[#071a4d] overflow-hidden">ã
+ã ã ã ã ã ã ã ã ã<!-- Gradiente Base Misto (Marinho, Petróleo e toque Violeta na base) -->ã
+ã ã ã ã ã ã ã ã ã<div class="absolute inset-0 bg-gradient-to-br from-transparent via-[#061230]/70 to-[#0c0828] opacity-90"></div>ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Iluminação radial sutil atérás do título -->ã
+ã ã ã ã ã ã ã ã ã<div class="absolute -top-[10%] left-1/2 -translatée-x-1/2 w-[70vw] h-[40vh] bg-gradient-to-b from-[#2563eb]/10 to-transparent blur-[120px] rounded-[100%]"></div>ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Vinheta suave nas bordas -->ã
+ã ã ã ã ã ã ã ã ã<div class="absolute inset-0 shadow-[inset_0_0_150px_rgba(2,6,23,0.9)] mix-blend-multiply"></div>ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Halos discretos atérás dos cards (Esquerda=Petróleo/Azul, Direita=Violeta) -->ã
+ã ã ã ã ã ã ã ã ã<div class="absolute top-[60%] left-[20%] -translatée-y-1/2 w-[40vw] h-[50vh] bg-[#0ea5e9]/[0.04] blur-[100px] rounded-full"></div>ã
+ã ã ã ã ã ã ã ã ã<div class="absolute top-[60%] right-[20%] -translatée-y-1/2 w-[40vw] h-[50vh] bg-[#8b5cf6]/[0.05] blur-[100px] rounded-full"></div>ã
+ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã<!-- Header Simples -->ã
+ã ã ã ã ã<header class="w-full py-4 px-6 flex justify-between items-center max-w-7xl mx-auto z-10 relatéive shrink-0">ã
+ã ã ã ã ã ã ã ã ã<div class="flex items-center">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Tamanho escalado massivamente e sem filtros para máxima resolução -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO SINAPSE FUNDO PRETO FINAL.png" alt="Logo Sinapse" class="h-[70px] md:h-[90px] w-auto object-contain transform origin-left scale-100 md:scale-125" onerror="this.onerror=null; this.src='https://placehold.co/300x120/transparent/FFF?text=🩺';"/>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã<div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<a href="alunão.html" class="text-sm text-slatée-400 hover:text-white transition-colors flex items-center gap-2 group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[18px] group-hover:-translatée-x-1 transition-transform">ãaãrãrãoãwã_ãbãaãcãkã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãaãiãrã ãdãaã ãCãoãnãtãaã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</a>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã</header>ã
+ã
+ã ã ã ã ã<!-- Estrutura Principal -->ã
+ã ã ã ã ã<main class="flex-grow flex flex-col items-center justify-center px-6 py-2 min-h-0 z-10 relatéive">ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Textos Introdutórios -->ã
+ã ã ã ã ã ã ã ã ã<div class="text-center absolute top-2 md:top-4 left-1/2 -translatée-x-1/2 w-full px-4 max-w-[1600px]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<h1 class="font-headline text-2xl md:text-[2.5rem] leading-tight font-extrabold text-white mb-3 tracking-widest md:tracking-[0.18em] relatéive z-10 w-full animatée-fade-in uppercase">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãVãoãcãêãêã ãeãsãtãáã ãuãmã ãpãaãsãsãoã ãdãeã ãmãuãdãaãrã ãsãuãaã ã<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#8C57FF] to-[#3B82F6]">ãhãiãsãtãóãrãiãaã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</h1>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-400 text-sm md:text-base max-w-2xl mx-auto font-light mb-2 animatée-fade-in tracking-wider" style="animatéion-delay: 0.1s;">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãuãaã ãjãoãrãnãaãdãaã ãrãuãmãoã ãàã ãaãpãrãoãvãaãçãããoã ãeãmã ãMãeãdãiãcãiãnãaã ãcãoãmãeãçãaã ãaãqãuãiã.ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã<!-- Grid de Platéaformas -->ã
+ã ã ã ã ã ã ã ã ã<div class="w-full max-w-[1050px] grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mx-auto min-h-0 mt-16 md:mt-28">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Card 1: SINASPRIME -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="premium-card rounded-2xl flex flex-col group cursor-pointer overflow-hidden" onclick="window.locatéion.href='prime'">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Imagem "Tela" Borda-a-Borda com ajuste de scale -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-full h-[180px] md:h-[220px] bg-[#0B193C] overflow-hidden flex items-center justify-center shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/SINASPRIME.jpeg" alt="SINASPRIME" class="w-full h-full object-cover group-hover:scale-110 transition-transform duratéion-700" onerror="this.style.display='nãone';"/>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 md:p-10 flex flex-col flex-grow">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-2xl md:text-3xl font-bold mb-3 tracking-wide text-white">ãSãIãNãAãSãPãRãIãMãEã</h2>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-400 text-sm md:text-[15px] leading-relaxed mb-6 flex-grow">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCãoãnãtãeãúãdãoãsã ãeãxãcãlãuãsãiãvãoãsã,ã ãaãuãlãaãsã ãeãsãtãrãaãtãéãgãiãcãaãsã ãeã ãaãpãrãoãfãuãnãdãaãmãeãnãtãoã ãcãoãmãpãlãeãtãoã ãpãaãrãaã ãaãlãtãaã ãpãeãrãfãoãrãmãaãnãcãeã ãnãããoã ãEãNãEãMã ãeã ãvãeãsãtãiãbãuãlãaãrãeãsã.ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button class="w-full btn-premium font-semibold text-[#A855F7] py-3.5 rounded-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2 mt-auto">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãCãEãSãSãAãRã ãAãGãOãRãAã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[16px]">ãaãrãrãoãwã_ãfãoãrãwãaãrãdã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Card 2: LION MENTORIA -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="premium-card rounded-2xl flex flex-col group cursor-pointer overflow-hidden" onclick="window.locatéion.href='mentoria.html'">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Imagem "Tela" Borda-a-Borda com ajuste de scale -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-full h-[180px] md:h-[220px] bg-[#0B193C] overflow-hidden flex items-center justify-center shrink-0">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/MENTORIA SINAPSE.jpeg" alt="LION MENTORIA" class="w-full h-full object-cover object-[center_35%] group-hover:scale-110 transition-transform duratéion-700" onerror="this.style.display='nãone';"/>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 md:p-10 flex flex-col flex-grow">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-2xl md:text-3xl font-bold mb-3 tracking-wide text-white">ãLãIãOãNã ãMãEãNãTãOãRãIãAã</h2>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-400 text-sm md:text-[15px] leading-relaxed mb-6 flex-grow">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãcãoãmãpãaãnãhãaãmãeãnãtãoã ãiãnãdãiãvãiãdãuãaãlã,ã ãdãiãrãeãcãiãoãnãaãmãeãnãtãoã ãeãsãtãrãaãtãéãgãiãcãoã ãeã ãoãrãgãaãnãiãzãaãçãããoã ãdãeã ãeãsãtãuãdãoãsã ãpãaãrãaã ãaãpãrãoãvãaãçãããoã ãeãmã ãMãeãdãiãcãiãnãaã.ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button class="w-full btn-premium font-semibold text-[#6366F1] py-3.5 rounded-lg uppercase tracking-wider text-xs flex items-center justify-center gap-2 mt-auto">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãQãUãEãRãOã ãMãIãNãHãAã ãAãPãRãOãVãAãÇãÃãOã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[16px]">ãaãrãrãoãwã_ãfãoãrãwãaãrãdã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã</main>ã
+ã
+ã ã ã ã ã<!-- Footer Frase -->ã
+ã ã ã ã ã<footer class="w-full py-4 text-center relatéive z-10 shrink-0">ã
+ã ã ã ã ã ã ã ã ã<p class="font-headline text-slatée-500 font-medium tracking-widest uppercase text-[11px] md:text-xs">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã"ãQãuãaãnãdãoã ãoã ãmãéãtãoãdãoã ãeãnãcãoãnãtãrãaã ãdãiãsãcãiãpãlãiãnãaã,ã ã<span class="text-slatée-400/90 drop-shadow-sm">ãaã ãaãpãrãoãvãaãçãããoã ãsãeã ãtãoãrãnãaã ãiãnãeãvãiãtãáãvãeãlã.ã</span>ã"ã
+ã ã ã ã ã ã ã ã ã</p>ã
+ã ã ã ã ã</footer>ã
+ã
+ã ã ã ã ã<!-- Assistente Akili -->ã
+ã ã ã ã ã<script src="../js/akili.js"></script>ã
+ã</body>ã
+ã</html>
+
+
+
+
+
+
+
+

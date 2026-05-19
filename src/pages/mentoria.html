@@ -1,470 +1,1790 @@
-<!DOCTYPE html>ã
-ã<html lang="pt-BR">ã
-ã<head>ã
-ã ã ã ã ã<meta charset="UTF-8">ã
-ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
-ã ã ã ã ã<title>ãMãeãnãtãoãrãiãaã ãSãiãnãaãpãsãeã ã-ã ãDãaãsãhãbãoãaãrãdã ãEãlãiãtãeã</title>ã
-ã ã ã ã ã<!-- Tailwind CSS -->ã
-ã ã ã ã ã<script src="https://cdn.tailwindcss.com"></script>ã
-ã ã ã ã ã<script>ã
-ã ã ã ã ã ã ã ã ãtãaãiãlãwãiãnãdã.ãcãoãnãfãiãgã ã=ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãtãhãeãmãeã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãeãxãtãeãnãdã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãlãoãrãsã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãiãnãaãpãsãeã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãlãuãeã:ã ã'ã#ã0ãBã1ã9ã3ãCã'ã,ã ã/ã/ã ãEãsãcãuãrãoã ãIãnãsãtãiãtãuãcãiãoãnãaãlã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãiãmãaãrãyã:ã ã'ã#ã6ã3ã6ã6ãFã1ã'ã,ã ã/ã/ã ãIãnãdãiãgãoã ãPãrãeãmãiãuãmã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãcãeãnãtã:ã ã'ã#ã1ã0ãBã9ã8ã1ã'ã,ã ã/ã/ã ãVãeãrãdãeã ãcãeãnãtãrãaãlã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãlãiãgãhãtã:ã ã'ã#ãFãAãFãAãFãBã'ã,ã ã/ã/ã ãFãuãnãdãoã ãPãrãiãnãcãiãpãaãlã ãSãuãpãeãrã ãCãlãeãaãnã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãoãnãtãFãaãmãiãlãyã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãaãnãsã:ã ã[ã'ãIãnãtãeãrã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãhãeãaãdãlãiãnãeã:ã ã[ã'ãMãaãnãrãoãpãeã'ã,ã ã'ãsãaãnãsã-ãsãeãrãiãfã'ã]ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxãSãhãaãdãoãwã:ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãpãrãeãmãiãuãmã'ã:ã ã'ã0ã ã1ã0ãpãxã ã4ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã1ã1ã,ã2ã5ã,ã6ã0ã,ã0ã.ã0ã6ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãpãrãeãmãiãuãmã-ãhãoãvãeãrã'ã:ã ã'ã0ã ã2ã0ãpãxã ã4ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã1ã1ã,ã2ã5ã,ã6ã0ã,ã0ã.ã1ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã'ãgãlãoãwã-ãpãrãiãmãaãrãyã'ã:ã ã'ã0ã ã0ã ã2ã0ãpãxã ãrãgãbãaã(ã9ã9ã,ã1ã0ã2ã,ã2ã4ã1ã,ã0ã.ã2ã)ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã</script>ã
-ã ã ã ã ã<!-- Fonts -->ã
-ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">ã
-ã ã ã ã ã<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />ã
-ã ã ã ã ã<style>ã
-ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
-ã ã ã ã ã ã ã ã ãbãoãdãyã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ã#ãFãAãFãAãFãBã;ã ãcãoãlãoãrã:ã ã#ã1ãEã2ã9ã3ãBã;ã ã}ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã/ã*ã ãUãlãtãrãaã ãSãmãoãoãtãhã ãAãnãiãmãaãtãéãiãoãnãsã ã*ã/ã
-ã ã ã ã ã ã ã ã ã.ãfãaãdãeã-ãiãnã-ãuãpã ã{ã ãaãnãiãmãaãtãéãiãoãnã:ã ãfãaãdãeãIãnãUãpã ã0ã.ã7ãsã ãcãuãbãiãcã-ãbãeãzãiãeãrã(ã0ã.ã1ã6ã,ã ã1ã,ã ã0ã.ã3ã,ã ã1ã)ã ãfãoãrãwãaãrãdãsã;ã ãoãpãaãcãiãtãyã:ã ã0ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã1ã5ãpãxã)ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã@ãkãeãyãfãrãaãmãeãsã ãfãaãdãeãIãnãUãpã ã{ã ãtãoã ã{ã ãoãpãaãcãiãtãyã:ã ã1ã;ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã0ã)ã;ã ã}ã ã}ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã/ã*ã ãPãrãeãmãiãuãmã ãCãuãsãtãoãmã ãSãcãrãoãlãlãbãaãrã ã*ã/ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã ã{ã ãwãiãdãtãhã:ã ã4ãpãxã;ã ãhãeãiãgãhãtã:ã ã8ãpãxã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãrãaãcãkã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ãEã2ãEã8ãFã0ã;ã ãbãoãrãdãeãrã-ãrãaãdãiãuãsã:ã ã1ã0ãpãxã;ã ãbãoãrãdãeãrã:ã ã2ãpãxã ãsãoãlãiãdã ãtãrãaãnãsãpãaãrãeãnãtã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãlãiãpã:ã ãpãaãdãdãiãnãgã-ãbãoãxã;ã ã}ã
-ã ã ã ã ã ã ã ã ã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã:ãhãoãvãeãrã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ãCãBãDã5ãEã1ã;ã ãbãoãrãdãeãrã:ã ã2ãpãxã ãsãoãlãiãdã ãtãrãaãnãsãpãaãrãeãnãtã;ã ãbãaãcãkãgãrãoãuãnãdã-ãcãlãiãpã:ã ãpãaãdãdãiãnãgã-ãbãoãxã;ã ã}ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã/ã*ã ãMãaãtãéãeãrãiãaãlã ãsãyãmãbãoãlãsã ãrãeãfãiãnãeãmãeãnãtã ã*ã/ã
-ã ã ã ã ã ã ã ã ã.ãmãaãtãéãeãrãiãaãlã-ãsãyãmãbãoãlãsã-ãoãuãtãlãiãnãeãdã ã{ã ãfãoãnãtã-ãsãiãzãeã:ã ã2ã0ãpãxã;ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã0ã,ã ã'ãwãgãhãtã'ã ã3ã0ã0ã,ã ã'ãGãRãAãDã'ã ã0ã,ã ã'ãoãpãsãzã'ã ã2ã4ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã.ãiãcãoãnã-ãfãiãlãlã ã{ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãFãIãLãLã'ã ã1ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã.ãiãcãoãnã-ãtãhãiãnã ã{ã ãfãoãnãtã-ãvãaãrãiãaãtãéãiãoãnã-ãsãeãtãtãiãnãgãsã:ã ã'ãwãgãhãtã'ã ã2ã0ã0ã;ã ã}ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã/ã*ã ãGãlãaãsãsã ãUãtãiãlãiãtãiãeãsã ã*ã/ã
-ã ã ã ã ã ã ã ã ã.ãgãlãaãsãsã-ãpãaãnãeãlã ã{ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã9ã5ã)ã;ã ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã1ã2ãpãxã)ã;ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã2ã5ã5ã,ã2ã5ã5ã,ã1ã)ã;ã ã}ã
-ã ã ã ã ã</style>ã
-ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
-ã</head>ã
-ã<body class="flex h-screen overflow-hidden text-slatée-800 antialiased selection:bg-sinapse-primary selection:text-white">ã
-ã
-ã ã ã ã ã<!-- SIDEBAR ELITE -->ã
-ã ã ã ã ã<aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relatéive bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">ã
-ã ã ã ã ã<!-- Logo Area -->ã
-ã ã ã ã ã<div class="pt-10 pb-6 flex flex-col items-center justify-center shrink-0 relatéive">ã
-ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO VETORIZADA.png" alt="Lion Study" class="h-10 w-auto object-contain" />ã
-ã ã ã ã ã</div>ã
-ã ã ã ã ã
-ã ã ã ã ã<!-- Menu Principal -->ã
-ã ã ã ã ã<nav class="flex-1 overflow-y-auto px-4 space-y-1 relatéive pb-10 custom-scrollbar">ã
-ã ã ã ã ã ã ã ã ã<a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relatéive border border-white/10 shadow-sm transition-all">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[22px] text-white leading-nãone block" style="font-variatéion-settings: 'FILL' 1;">ãhãoãmãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="tracking-wide">ãMãeãtãaãsã ãDãiãáãrãiãaãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãlãiãsãtã_ãaãlãtã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãPãlãaãnãeãjãaãmãeãnãtãoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãaãcãkãeãdã_ãlãiãnãeã_ãcãhãaãrãtã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãMãeãuã ãDãeãsãeãmãpãeãnãhãoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="estratéegia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãrãoãuãtãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãEãsãtãrãaãtãéãéãgãiãaã ãAãPã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãqãuãiãzã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãBãaãnãcãoã ãdãeã ãQãuãeãsãtãõãeãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãeãdãiãtã_ãnãããoãtãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãRãeãdãaãçãããoã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãmãoãnãiãtãoãrãiãnãgã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãSãiãmãuãlãaãdãoãrã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãcãaãlãeãnãdãaãrã_ãmãoãnãtãhã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãCãrãoãnãããoãgãrãaãmãaã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãtãyãlãeã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãFãlãaãsãhãcãaãrãdãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã ã ã ã ã<a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duratéion-300 font-medium text-[14px]">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-nãone block">ãsãcãhãoãoãlã</span>ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span>ãVãeãsãtãiãbãuãlãaãrãeãsã</span>ã
-ã ã ã ã ã ã ã ã ã</a>ã
-ã ã ã ã ã</nav>ã
-ã ã ã ã ã
-ã ã ã ã ã<!-- User Profile Footer -->ã
-ã ã ã ã ã<div class="p-4 shrink-0 relatéive z-20 border-t border-white/10">ã
-ã ã ã ã ã ã ã ã ã<div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">ãJãOã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-1 min-w-0">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[13px] font-bold text-white truncatée drop-shadow-sm">ãJãoãhãnãnã ãOãlãiãvãeãiãrãaã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[11px] text-white/70 truncatée group-hover:text-white/90 transition-colors">ãVãeãrã ãpãeãrãfãiãlã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</div>ã
-ã</aside>ã
-ã
-ã ã ã ã ã<!-- MAIN SCROLL AREA -->ã
-ã ã ã ã ã<main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relatéive overflow-y-auto overflow-x-hidden">ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã<!-- Top Decoratéor Subtle Glow -->ã
-ã ã ã ã ã ã ã ã ã<div class="absolute top-0 left-1/2 -translatée-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-nãone z-0"></div>ã
-ã
-ã ã ã ã ã ã ã ã ã
-ã
-ã ã ã ã ã ã ã ã ã<!-- DASHBOARD ELITE CONTENT -->ã
-ã ã ã ã ã ã ã ã ã<div class="p-10 max-w-[1500px] mx-auto w-full space-y-10 relatéive z-10">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- GREETING HERO -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="fade-in-up" style="animatéion-delay: 0.05s;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h1 class="text-4xl md:text-[54px] text-[#0B193C] mb-4 leading-[1.05] tracking-tight antialiased" style="font-family: 'DM Serif Display', serif;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãVãoãcãêãêã ãnãããoã ãeãnãtãrãoãuã ãaãqãuãiã ãpãoãrã ãaãcãaãsãoã.ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h1>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-slatée-500 font-light text-lg md:text-xl tracking-wide">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãÉã ãaãqãuãiã ãqãuãeã ãsãuãaã ãaãpãrãoãvãaãçãããoã ãcãoãmãeãçãaã ãaã ãsãeãrã ãcãoãnãsãtãrãuãíãdãaã,ã ã<span class="font-semibold text-sinapse-primary user-name-display">ãJãoãhãnãnã</span>ã.ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- EXECUTIVE KPIS (2 CARDS MICRO-TYPOGRAPHY) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-3 gap-6 fade-in-up" style="animatéion-delay: 0.1s;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- KPI 1: Conclusão de Metas (Slatée - Frio) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white/80 backdrop-blur-md rounded-[24px] p-8 shadow-sm hover:shadow-md hover:-translatée-y-1 transition-all duratéion-300 group border-2 border-sky-400 text-center flex flex-col items-center hover:border-sky-500 hover:shadow-sky-400/20">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center justify-center mb-4 gap-3">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-12 h-12 rounded-2xl bg-sky-50 text-sky-500 border border-sky-100 flex items-center justify-center transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[24px]">ãtãaãrãgãeãtã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[9px] font-extrabold text-sky-500 bg-sky-100 px-3 py-1.5 rounded-lg uppercase tracking-widest shadow-sm">ãAãlãcãaãnãçãaãdãoã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-slatée-400 font-extrabold uppercase tracking-[0.15em] mb-2">ãCãoãnãcãlãuãsãããoã ãdãeã ãMãeãtãaãsã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[40px] font-headline font-extrabold text-slatée-700 leading-nãone tracking-tight"><span id="hubDisplayMetas">ã-ã-ã-ã</span><span class="text-[20px] text-slatée-300 ml-1 font-bold">ã%ã</span></h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- KPI 2: Desempenho Geral (Zinc - Minimalista) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white/80 backdrop-blur-md rounded-[24px] p-8 shadow-sm hover:shadow-md hover:-translatée-y-1 transition-all duratéion-300 group border-2 border-emerald-400 text-center flex flex-col items-center hover:border-emerald-500 hover:shadow-emerald-400/20">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center justify-center mb-4">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-500 border border-emerald-100 flex items-center justify-center transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[24px]">ãaãnãaãlãyãtãiãcãsã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-emerald-500 font-extrabold uppercase tracking-[0.15em] mb-2">ãDãeãsãeãmãpãeãnãhãoã ãGãeãrãaãlã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[40px] font-headline font-extrabold text-zinc-700 leading-nãone tracking-tight"><span id="hubDisplayDesempenho">ã-ã-ã-ã</span><span class="text-[20px] text-zinc-300 ml-1 font-bold">ã%ã</span></h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- KPI 3: Estimatéiva TRI (Stone - Quente/Elegante) -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-white/80 backdrop-blur-md rounded-[24px] p-8 shadow-sm hover:shadow-md hover:-translatée-y-1 transition-all duratéion-300 group border-2 border-fuchsia-400 text-center flex flex-col items-center hover:border-fuchsia-500 hover:shadow-fuchsia-400/20">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center justify-center mb-4">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-12 h-12 rounded-2xl bg-fuchsia-50 text-fuchsia-500 border border-fuchsia-100 flex items-center justify-center transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined icon-fill text-[24px]">ãtãrãoãuãbãlãeãsãhãoãoãtã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[10px] text-fuchsia-500 font-extrabold uppercase tracking-[0.15em] mb-2">ãEãsãtãiãmãaãtãéãiãvãaã ãTãRãIã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="text-[40px] font-headline font-extrabold text-stone-700 leading-nãone tracking-tight"><span id="hubDisplayTRI">ã-ã-ã-ã</span><span class="text-[14px] font-extrabold text-stone-300 ml-1 tracking-widest uppercase align-top mt-1 inline-block">ã ãPãTãSã</span></h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- SECTION: KANBAN WEEKLY PLANNER -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="mt-8 fade-in-up" style="animatéion-delay: 0.2s;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Planner Header -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h2 class="font-headline text-3xl font-extrabold text-[#0B193C] tracking-tight">ãMãeãtãaãsã ãDãiãáãrãiãaãsã</h2>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm font-semibold text-slatée-400 mt-1 flex items-center gap-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãcãoãmãpãaãnãhãeã ãeã ãcãoãnãcãlãuãaã ãsãuãaãsã ãtãaãrãeãfãaãsã ãdãaã ãsãeãmãaãnãaã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-4 bg-white p-2 rounded-2xl shadow-premium border border-slatée-100">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="agendaPrev()" class="w-10 h-10 flex items-center justify-center text-slatée-400 hover:text-[#0B193C] hover:bg-slatée-50 rounded-xl transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[20px]">ãcãhãeãvãrãoãnã_ãlãeãfãtã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="px-4 text-center">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span id="lblSemana" class="block text-[10px] font-extrabold text-sinapse-primary uppercase tracking-widest">ãSãeãmãaãnãaã ãAãtãuãaãlã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span id="weekDatéeRange" class="block text-sm font-bold text-[#0B193C]">ã0ã6ã/ã0ã4ã/ã2ã0ã2ã6ã ã<span class="text-slatée-300 font-nãormal mx-1">ãaã</span>ã ã1ã2ã/ã0ã4ã/ã2ã0ã2ã6ã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="agendaNext()" class="w-10 h-10 flex items-center justify-center text-slatée-400 hover:text-[#0B193C] hover:bg-slatée-50 rounded-xl transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[20px]">ãcãhãeãvãrãoãnã_ãrãiãgãhãtã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="w-px h-6 bg-slatée-200 mx-1"></div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="agendatéoday()" class="px-4 py-2 text-[11px] font-extrabold text-slatée-500 hover:text-[#0B193C] uppercase tracking-widest transition-colors rounded-lg hover:bg-slatée-50">ãHãoãjãeã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Kanban Grid JS Mount Point -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex overflow-x-auto snap-x snap-mandatéory pb-8 pt-2 gap-6" style="scrollbar-width: thin;" id="weeklyAgendaGrid">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Javascript will inject the 7 columns here -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<style>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã.ãcãuãsãtãoãmã-ãsãcãrãoãlãlãbãaãrã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãiãdãtãhã:ã ã4ãpãxã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãtãrãaãnãsãpãaãrãeãnãtã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã.ãcãuãsãtãoãmã-ãsãcãrãoãlãlãbãaãrã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã2ã0ã3ã,ã ã2ã1ã3ã,ã ã2ã2ã5ã,ã ã0ã.ã4ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãrãaãdãiãuãsã:ã ã4ãpãxã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã.ãcãuãsãtãoãmã-ãsãcãrãoãlãlãbãaãrã:ãhãoãvãeãrã:ã:ã-ãwãeãbãkãiãtã-ãsãcãrãoãlãlãbãaãrã-ãtãhãuãmãbã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãrãgãbãaã(ã1ã4ã8ã,ã ã1ã6ã3ã,ã ã1ã8ã4ã,ã ã0ã.ã6ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</style>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Safe Space -->ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="h-16"></div>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</main>ã
-ã
-ã ã ã ã ã<!-- Modal Atividades -->ã
-ã ã ã ã ã<div id="modalAtividade" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duratéion-300">ã
-ã ã ã ã ã ã ã ã ã<!-- Overlay -->ã
-ã ã ã ã ã ã ã ã ã<div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalAtividade()"></div>ã
-ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã<!-- Modal Content -->ã
-ã ã ã ã ã ã ã ã ã<div class="absolute top-1/2 left-1/2 -translatée-x-1/2 -translatée-y-1/2 w-11/12 max-w-2xl bg-white rounded-[32px] shadow-premium-hover overflow-hidden transform scale-95 transition-transform duratéion-300 flex flex-col" id="modalAtividadeContent" style="max-height: 90vh;">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 border-b border-slatée-100 flex justify-between items-center bg-white sticky top-0 z-10 w-full">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<h3 class="font-headline text-xl font-extrabold text-[#0B193C] flex items-center gap-3">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-sinapse-primary icon-fill">ãaãsãsãiãgãnãmãeãnãtã_ãaãdãdã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãLãaãnãçãaãmãeãnãtãoã ãdãeã ãAãtãiãvãiãdãaãdãeã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</h3>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="fecharModalAtividade()" class="text-slatée-400 hover:text-rose-500 transition-colors">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined">ãcãlãoãsãeã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<form id="formAtividade" class="p-8 space-y-6 overflow-y-auto" onsubmit="event.preventDefault(); registrarAtividade(event)">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-1 md:grid-cols-2 gap-6">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãMãaãtãéãrãiãaã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<select id="actDiscipline" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium appearance-nãone">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Biologia">ãBãiãoãlãoãgãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Física">ãFãíãsãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Matéemática">ãMãaãtãéãeãmãáãtãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Química">ãQãuãíãmãiãcãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="História">ãHãiãsãtãóãrãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Geografia">ãGãeãoãgãrãaãfãiãaã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Linguagens">ãLãiãnãgãuãaãgãeãnãsã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<option value="Nenhuma">ãNãeãnãhãuãmãaã ãEãsãpãeãcãiãaãlã</option>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</select>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãAãsãsãuãnãtãoã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="actSubject" required type="text" placeholder="Ex: Leis de Newton" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium placeholder:text-slatée-400">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãDãaãtãéãaã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="actDatée" required type="datée" class="w-full bg-slatée-50 border border-slatée-200 text-slatée-700 rounded-xl px-4 py-3 outline-nãone focus:border-sinapse-primary transition-all font-medium">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="bg-indigo-50/50 p-6 rounded-[24px] border border-indigo-100">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-sm font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="matéerial-symbols-outlined text-[18px] text-sinapse-primary">ãmãoãnãiãtãoãrãiãnãgã</span>ã ãAãpãuãrãaãçãããoã ãdãeã ãDãeãsãeãmãpãeãnãhãoã</p>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="grid grid-cols-2 gap-6">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãTãoãtãaãlã ãQãuãeãsãtãõãeãsã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="actTotalQ" type="number" min="0" placeholder="0" class="w-full bg-white border border-indigo-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-sinapse-primary outline-nãone">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-extrabold text-slatée-400 uppercase tracking-widest block">ãAãcãeãrãtãoãsã</label>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input id="actCorrectQ" type="number" min="0" placeholder="0" class="w-full bg-[#10B981]/5 border border-[#10B981]/30 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-[#10B981] outline-nãone">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</form>ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="p-8 py-5 bg-slatée-50 border-t border-slatée-100 flex justify-end gap-3 w-full">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button onclick="fecharModalAtividade()" class="px-6 py-3 rounded-xl font-bold text-slatée-500 hover:bg-slatée-200 hover:text-[#0B193C] transition-all text-sm">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãCãaãnãcãeãlãaãrã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button type="submit" form="formAtividade" id="btnSubmitForm" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-bold shadow-premium transition-all text-sm flex items-center gap-2">ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[18px]">ãsãaãvãeã</span>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãSãaãlãvãaãrã ãRãeãgãiãsãtãrãoã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã ã ã ã ã</div>ã
-ã ã ã ã ã</div>ã
-ã
-ã ã ã ã ã<!-- Scripts -->ã
-ã ã ã ã ã<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>ã
-ã ã ã ã ã<script src="../../src/js/datéabase.js"></script>ã
-ã ã ã ã ã<script src="../../src/js/agenda_dinamica.js"></script>ã
-ã ã ã ã ã<script>ã
-ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãDãOãMãCãoãnãtãeãnãtãLãoãaãdãeãdã'ã,ã ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãdã ã=ã ãnãeãwã ãDãaãtãéãeã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãaãtãéãeãSãtãrã ã=ã ã`ã$ã{ãtãoãdã.ãgãeãtãFãuãlãlãYãeãaãrã(ã)ã}ã-ã$ã{ãSãtãrãiãnãgã(ãtãoãdã.ãgãeãtãMãoãnãtãhã(ã)ã+ã1ã)ã.ãpãaãdãSãtãaãrãtã(ã2ã,ã'ã0ã'ã)ã}ã-ã$ã{ãSãtãrãiãnãgã(ãtãoãdã.ãgãeãtãDãaãtãéãeã(ã)ã)ã.ãpãaãdãSãtãaãrãtã(ã2ã,ã'ã0ã'ã)ã}ã`ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãtãIãnãpãuãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãaãtãéãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãtãIãnãpãuãtã)ã ãdãtãIãnãpãuãtã.ãvãaãlãuãeã ã=ã ãdãaãtãéãeãSãtãrã;ã
-ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãaãbãrãiãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeãPãaãrãaãDãaãtãéãaã ã=ã ãfãuãnãcãtãiãoãnã(ãdãaãtãéãeãSãtãrã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãaãtãéãeã'ã)ã.ãvãaãlãuãeã ã=ã ãdãaãtãéãeãSãtãrã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãaãbãrãiãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãaãbãrãiãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãoãdãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãnãtãeãnãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeãCãoãnãtãeãnãtã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãhãiãdãdãeãnã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãTãiãmãeãoãuãtã(ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãoãpãaãcãiãtãyã-ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãsãcãaãlãeã-ã9ã5ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãsãcãaãlãeã-ã1ã0ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã ã1ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãfãeãcãhãaãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãoãdãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãnãtãeãnãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãmãoãdãaãlãAãtãiãvãiãdãaãdãeãCãoãnãtãeãnãtã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãoãpãaãcãiãtãyã-ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãsãcãaãlãeã-ã1ã0ã0ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãtãeãnãtã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãsãcãaãlãeã-ã9ã5ã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãTãiãmãeãoãuãtã(ã(ã)ã ã=ã>ã ã{ã ãmãoãdãaãlã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãhãiãdãdãeãnã'ã)ã;ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãfãoãrãmãAãtãiãvãiãdãaãdãeã'ã)ã.ãrãeãsãeãtã(ã)ã;ã ã}ã,ã ã3ã0ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ãfãuãnãcãtãiãoãnã ãrãeãgãiãsãtãrãaãrãAãtãiãvãiãdãaãdãeã(ãeãvãeãnãtã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãbãtãnã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãbãtãnãSãuãbãmãiãtãFãoãrãmã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãoãrãiãgãiãnãaãlãCãoãnãtãeãnãtã ã=ã ãbãtãnã.ãiãnãnãeãrãHãTãMãLã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãiãnãnãeãrãHãTãMãLã ã=ã ã'ã<span class="matéerial-symbols-outlined animatée-spin text-[18px]">ãhãoãuãrãgãlãaãsãsã_ãeãmãpãtãyã</span>ã ãSãaãlãvãaãnãdãoã.ã.ã.ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãoãpãaãcãiãtãyã-ã8ã0ã'ã,ã ã'ãpãoãiãnãtãeãrã-ãeãvãeãnãtãsã-ãnãããoãnãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãsãeãtãTãiãmãeãoãuãtã(ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãtãaãlãQã ã=ã ãpãaãrãsãeãIãnãtã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãTãoãtãaãlãQã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãoãrãrãeãcãtãQã ã=ã ãpãaãrãsãeãIãnãtã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãCãoãrãrãeãcãtãQã'ã)ã.ãvãaãlãuãeã)ã ã|ã|ã ã0ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãwãrãoãnãgãQã ã=ã ãtãoãtãaãlãQã ã-ã ãcãoãrãrãeãcãtãQã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãuãbãjãeãcãtãVãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãSãuãbãjãeãcãtã'ã)ã.ãvãaãlãuãeã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãiãsãcãiãpãlãiãnãeãVãaãlã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãiãsãcãiãpãlãiãnãeã'ã)ã.ãvãaãlãuãeã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãwãiãnãdãoãwã.ãdãbã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãeãwãAãcãtã ã=ã ãwãiãnãdãoãwã.ãdãbã.ãiãnãsãeãrãtã(ã'ãaãcãtãiãvãiãtãiãeãsã'ã,ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãuãsãeãrã_ãiãdã:ã ã1ã,ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãiãtãlãeã:ã ãdãiãsãcãiãpãlãiãnãeãVãaãlã ã+ã ã'ã ã-ã ã'ã ã+ã ãsãuãbãjãeãcãtãVãaãlã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãeãsãcãrãiãpãtãiãoãnã:ã ã'ã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãaãtãéãeã:ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãaãtãéãeã'ã)ã.ãvãaãlãuãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãiãmãeã:ã ã'ã1ã4ã:ã0ã0ã'ã,ã ã/ã/ã ãDãeãfãaãuãlãtã ãpãaãrãaã ãCãaãlãeãnãdãáãrãiãoã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãeãeãkãdãaãyã:ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãaãtãéãeã'ã)ã.ãvãaãlãuãeã ã?ã ãnãeãwã ãDãaãtãéãeã(ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãaãcãtãDãaãtãéãeã'ã)ã.ãvãaãlãuãeã ã+ã ã'ãTã0ã0ã:ã0ã0ã:ã0ã0ã'ã)ã.ãgãeãtãDãaãyã(ã)ã ã:ã ã0ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãtãiãvãiãtãyã_ãtãyãpãeã:ã ã'ãLãiãsãtãaã ãdãeã ãQãuãeãsãtãõãeãsã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãeã:ã ãdãiãsãcãiãpãlãiãnãeãVãaãlã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtã:ã ãsãuãbãjãeãcãtãVãaãlã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãrãiãoãrãiãtãyã:ã ã'ãmãéãdãiãaã'ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãaãtãéãuãsã:ã ã'ãpãeãnãdãeãnãtãeã'ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãiãnãdãoãwã.ãdãbã.ãiãnãsãeãrãtã(ã'ãmãeãtãrãiãcãsã_ãeãnãtãrãiãeãsã'ã,ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãuãsãeãrã_ãiãdã:ã ã1ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãaãcãtãiãvãiãtãyã_ãiãdã:ã ãnãeãwãAãcãtã.ãiãdã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãiãsãcãiãpãlãiãnãeã:ã ãnãeãwãAãcãtã.ãdãiãsãcãiãpãlãiãnãeã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãuãbãjãeãcãtã:ã ãnãeãwãAãcãtã.ãsãuãbãjãeãcãtã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãqãuãeãsãtãiãoãnãsã_ãtãoãtãaãlã:ã ãtãoãtãaãlãQã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãrãrãeãcãtã_ãaãnãsãwãeãrãsã:ã ãcãoãrãrãeãcãtãQã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãwãrãoãnãgã_ãaãnãsãwãeãrãsã:ã ãwãrãoãnãgãQã ã< 0 ? 0 : wrongQ,
-                        accuracy_percentage: totalQ >ã ã0ã ã?ã ã(ã(ãcãoãrãrãeãcãtãQã/ãtãoãtãaãlãQã)ã*ã1ã0ã0ã)ã.ãtãoãFãiãxãeãdã(ã1ã)ã ã:ã ã0ã,ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãsãtãuãdãyã_ãtãiãmãeã_ãmãiãnãuãtãeãsã:ã ã6ã0ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãwãiãnãdãoãwã.ãrãeãnãdãeãrãWãeãeãkãlãyãAãgãeãnãdãaã)ã ãwãiãnãdãoãwã.ãrãeãnãdãeãrãWãeãeãkãlãyãAãgãeãnãdãaã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãfãeãcãhãaãrãMãoãdãaãlãAãtãiãvãiãdãaãdãeã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãiãnãnãeãrãHãTãMãLã ã=ã ãoãrãiãgãiãnãaãlãCãoãnãtãeãnãtã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãbãtãnã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãoãpãaãcãiãtãyã-ã8ã0ã'ã,ã ã'ãpãoãiãnãtãeãrã-ãeãvãeãnãtãsã-ãnãããoãnãeã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã,ã ã5ã0ã0ã)ã;ã
-ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã</script>ã
-ã ã ã ã ã<!-- Engine Base -->ã
-ã ã ã ã ã<script src="../../src/js/datéabase.js"></script>ã
-ã ã ã ã ã<!-- Script para Carregamento de Perfil Global e Interligação -->ã
-ã ã ã ã ã<script>ã
-ã ã ã ã ã ã ã ã ãdãoãcãuãmãeãnãtã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãDãOãMãCãoãnãtãeãnãtãLãoãaãdãeãdã'ã,ã ã(ã)ã ã=ã>ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ã1ã.ã ãSãiãnãcãrãoãnãiãzãaãnãdãoã ãoã ãnãããoãmãeã ãdãiãnãâãmãiãcãoã ãdãaã ãpãlãaãtãéãaãfãoãrãmãaã
-ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãsãaãvãeãdãDãaãtãéãaã ã=ã ãlãoãcãaãlãSãtãoãrãaãgãeã.ãgãeãtãIãtãeãmã(ã'ãsãiãnãaãpãsãeãPãeãrãfãiãlãDãaãtãéãaã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãsãaãvãeãdãDãaãtãéãaã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãyã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãaãrãsãeãdã ã=ã ãJãSãOãNã.ãpãaãrãsãeã(ãsãaãvãeãdãDãaãtãéãaã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãpãaãrãsãeãdã.ãnãããoãmãeã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãRãeãsãpãeãiãtãaã ãoã ãiãnãpãuãtã ãdãoã ãuãsãuãáãrãiãoã ãeã ãeãxãiãbãeã ãsãeãuã ãnãããoãmãeã ãeã ãsãoãbãrãeãnãããoãmãeã ãfãiãdãeãdãiãgãnãããoãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãfãuãlãlãNãaãmãeã ã=ã ãpãaãrãsãeãdã.ãnãããoãmãeã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãaãmãeãDãiãsãpãlãaãyãsã ã=ã ãdãoãcãuãmãeãnãtã.ãqãuãeãrãyãSãeãlãeãcãtãoãrãAãlãlã(ã'ã.ãuãsãeãrã-ãnãaãmãeã-ãdãiãsãpãlãaãyã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãnãaãmãeãDãiãsãpãlãaãyãsã.ãfãoãrãEãaãcãhã(ãeãlã ã=ã>ã ãeãlã.ãiãnãnãeãrãTãeãxãtã ã=ã ãfãuãlãlãNãaãmãeã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãcãaãtãéãcãhã(ãeã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãoãlãeã.ãeãrãrãoãrã(ã"ãFãaãlãhãaã ãaãoã ãaãnãaãlãiãsãaãrã ãoã ãpãeãrãfãiãlã"ã,ã ãeã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ã2ã.ã ãCãáãlãcãuãlãoã ãeã ãAãtãuãaãlãiãzãaãçãããoã ãdãoãsã ã3ã ãKãPãIãsã ãDãiãnãâãmãiãcãoãsã ãIãgãuãaãiãsã ãaãoã ãPãeãrãfãiãlã/ãBãaãnãcãoã
-ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãwãiãnãdãoãwã.ãdãbã ã&ã&ã ãwãiãnãdãoãwã.ãdãbã.ãgãeãtãAãcãaãdãeãmãiãcãSãuãmãmãaãrãyã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãgãlãoãbãaãiãsã ã=ã ãwãiãnãdãoãwã.ãdãbã.ãgãeãtãAãcãaãdãeãmãiãcãSãuãmãmãaãrãyã(ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãCãoãnãcãlãuãsãããoã ãdãeã ãMãeãtãaãsã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãmãeãtãaãsãNãoãdãeã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãuãbãDãiãsãpãlãaãyãMãeãtãaãsã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãmãeãtãaãsãNãoãdãeã ã&ã&ã ãgãlãoãbãaãiãsã.ãcãoãnãcãlãuãsãaãoãMãeãtãaãsã ã!ã=ã=ã ãuãnãdãeãfãiãnãeãdã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãmãeãtãaãsãNãoãdãeã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãiãsã.ãcãoãnãcãlãuãsãaãoãMãeãtãaãsã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãDãeãsãeãmãpãeãnãhãoã ãGãeãrãaãlã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãdãeãsãeãmãpãeãnãhãoãNãoãdãeã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãuãbãDãiãsãpãlãaãyãDãeãsãeãmãpãeãnãhãoã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãdãeãsãeãmãpãeãnãhãoãNãoãdãeã ã&ã&ã ãgãlãoãbãaãiãsã.ãaãcãeãrãtãoãsãGãlãoãbãaãlã ã!ã=ã=ã ãuãnãdãeãfãiãnãeãdã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãdãeãsãeãmãpãeãnãhãoãNãoãdãeã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãiãsã.ãaãcãeãrãtãoãsãGãlãoãbãaãlã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãEãsãtãiãmãaãtãéãiãvãaã ãTãRãIã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãrãiãNãoãdãeã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãhãuãbãDãiãsãpãlãaãyãTãRãIã'ã)ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã(ãtãrãiãNãoãdãeã ã&ã&ã ãgãlãoãbãaãiãsã.ãeãsãtãiãmãaãtãéãiãvãaãTãRãIã ã!ã=ã=ã ãuãnãdãeãfãiãnãeãdã)ã ã{ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãiãNãoãdãeã.ãiãnãnãeãrãTãeãxãtã ã=ã ãgãlãoãbãaãiãsã.ãeãsãtãiãmãaãtãéãiãvãaãTãRãIã ã>ã ã0ã ã?ã ãgãlãoãbãaãiãsã.ãeãsãtãiãmãaãtãéãiãvãaãTãRãIã ã:ã ã'ã0ã'ã;ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
-ã ã ã ã ã ã ã ã ã}ã)ã;ã
-ã ã ã ã ã</script>ã
-ã ã ã ã ã<script src="../../src/js/akili.js"></script>ã
-ã</body>ã
-ã</html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mentoria Sinapse - Dashboard Elite</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            accent: '#10B981', // Verde central
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.06)',
+                        'premium-hover': '0 20px 40px -10px rgba(11,25,60,0.1)',
+                        'glow-primary': '0 0 20px rgba(99,102,241,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Roboto:wght@400;500;700&family=Open+Sans:wght@400;600;700&family=Lato:wght@400;700&family=Montserrat:wght@400;600;700&family=Nunito:wght@400;600;700&family=Raleway:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&family=Ubuntu:wght@400;500;700&family=Merriweather:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Oswald:wght@400;600;700&family=Bebas+Neue&family=Anton&family=Cabin:wght@400;600;700&family=Quicksand:wght@400;600;700&family=Work+Sans:wght@400;600;700&family=Mulish:wght@400;600;700&family=DM+Sans:wght@400;500;700&family=PT+Sans:wght@400;700&family=PT+Serif:wght@400;700&family=Noto+Sans:wght@400;600;700&family=Noto+Serif:wght@400;700&family=Rubik:wght@400;500;700&family=Exo+2:wght@400;600;700&family=Josefin+Sans:wght@400;600;700&family=Abril+Fatface&family=Dancing+Script:wght@400;700&family=Pacifico&family=Caveat:wght@400;700&family=Lobster&family=Fira+Code:wght@400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        
+        /* Ultra Smooth Animations */
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; border: 2px solid transparent; background-clip: padding-box; }
+        
+        /* Material symbols refinement */
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .icon-thin { font-variation-settings: 'wght' 200; }
+        
+        /* Glass Utilities */
+        .glass-panel { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,1); }
+
+        /* Premium Gradient Borders for KPI Cards */
+        .kpi-border-teal { border: 1.5px solid transparent; background-clip: padding-box; position: relative; }
+        .kpi-border-teal::before { content: ''; position: absolute; inset: -1.5px; border-radius: 22px; padding: 1.5px; background: linear-gradient(135deg, rgba(0,181,181,0.3), rgba(0,212,170,0.1), rgba(255,255,255,0.6)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.5s; }
+        .group:hover .kpi-border-teal::before, .kpi-border-teal:hover::before { background: linear-gradient(135deg, rgba(0,181,181,0.6), rgba(0,212,170,0.3), rgba(255,255,255,0.8)); }
+
+        .kpi-border-indigo { border: 1.5px solid transparent; background-clip: padding-box; position: relative; }
+        .kpi-border-indigo::before { content: ''; position: absolute; inset: -1.5px; border-radius: 22px; padding: 1.5px; background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(129,140,248,0.1), rgba(255,255,255,0.6)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.5s; }
+        .group:hover .kpi-border-indigo::before, .kpi-border-indigo:hover::before { background: linear-gradient(135deg, rgba(99,102,241,0.6), rgba(129,140,248,0.3), rgba(255,255,255,0.8)); }
+
+        .kpi-border-emerald { border: 1.5px solid transparent; background-clip: padding-box; position: relative; }
+        .kpi-border-emerald::before { content: ''; position: absolute; inset: -1.5px; border-radius: 22px; padding: 1.5px; background: linear-gradient(135deg, rgba(16,185,129,0.3), rgba(52,211,153,0.1), rgba(255,255,255,0.6)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.5s; }
+        .group:hover .kpi-border-emerald::before, .kpi-border-emerald:hover::before { background: linear-gradient(135deg, rgba(16,185,129,0.6), rgba(52,211,153,0.3), rgba(255,255,255,0.8)); }
+
+        .kpi-border-navy { border: 1.5px solid transparent; background-clip: padding-box; position: relative; }
+        .kpi-border-navy::before { content: ''; position: absolute; inset: -1.5px; border-radius: 22px; padding: 1.5px; background: linear-gradient(135deg, rgba(11,25,60,0.25), rgba(30,58,95,0.1), rgba(255,255,255,0.6)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: all 0.5s; }
+        .group:hover .kpi-border-navy::before, .kpi-border-navy:hover::before { background: linear-gradient(135deg, rgba(11,25,60,0.5), rgba(30,58,95,0.25), rgba(255,255,255,0.8)); }
+
+        /* Agenda Day Column */
+        .agenda-day-column { min-width: 155px; flex: 1; }
+
+        /* Hourglass Animation */
+        .animate-hourglass-premium { animation: hourglass-flow 3s infinite linear; }
+        @keyframes hourglass-flow {
+            0% { transform: rotate(0deg); }
+            45% { transform: rotate(0deg); }
+            55% { transform: rotate(180deg); }
+            100% { transform: rotate(180deg); }
+        }
+        /* Sidebar Toggle */
+        aside { transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relative bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">
+    <!-- Logo Area -->
+    <div class="pt-7 pb-5 px-5 flex items-center gap-4 shrink-0">
+        <!-- Botão Hamburger -->
+        <button onclick="toggleSidebar()" class="w-8 h-8 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:opacity-80 flex-shrink-0" title="Recolher menu">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+        <!-- Logo -->
+        <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+    </div>
+    
+    <!-- Menu Principal -->
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1 relative pb-10 custom-scrollbar">
+        <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 bg-white/20 text-white rounded-[12px] font-bold text-[14px] relative border border-white/10 shadow-sm transition-all">
+            <div class="absolute -left-[3px] top-1/2 -translate-y-1/2 w-[6px] h-[60%] bg-white rounded-full shadow-md"></div>
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined icon-fill text-[22px] text-white leading-none block" style="font-variation-settings: 'FILL' 1;">home</span> 
+            </div>
+            <span class="tracking-wide">Home</span>
+        </a>
+        <a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">list_alt</span> 
+            </div>
+            <span>Planejamento</span>
+        </a>
+        <a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">stacked_line_chart</span> 
+            </div>
+            <span>Meu Desempenho</span>
+        </a>
+        <a href="estrategia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">route</span> 
+            </div>
+            <span>Estratégia</span>
+        </a>
+        <a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">quiz</span> 
+            </div>
+            <span>Banco de Questões</span>
+        </a>
+        <a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">edit_note</span> 
+            </div>
+            <span>Redação</span>
+        </a>
+        <a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">monitoring</span> 
+            </div>
+            <span>Simulador</span>
+        </a>
+        <a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">calendar_month</span> 
+            </div>
+            <span>Cronograma</span>
+        </a>
+        <a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">style</span> 
+            </div>
+            <span>Flashcards</span>
+        </a>
+        <a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">school</span> 
+            </div>
+            <span>Vestibulares</span>
+        </a>
+    </nav>
+    
+    <!-- User Profile Footer -->
+    <div class="p-4 shrink-0 relative z-20 border-t border-white/10">
+        <div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                <span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">JO</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="text-[13px] font-bold text-white truncate drop-shadow-sm">Johnn Oliveira</h3>
+                <p class="text-[11px] text-white/70 truncate group-hover:text-white/90 transition-colors">Ver perfil</p>
+            </div>
+            <span class="material-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">chevron_right</span>
+        </div>
+    </div>
+</aside>
+
+    <!-- MAIN SCROLL AREA -->
+    <main class="flex-1 flex flex-col h-full bg-[#E4F1F5] relative overflow-y-auto overflow-x-hidden">
+        
+        <!-- Top Decorator Subtle Glow -->
+        
+
+        <!-- Top Header Bar (appears when sidebar is hidden) -->
+        <div id="topHeaderBar" class="w-full px-6 py-4 flex items-center gap-4 relative z-20 hidden">
+            <button onclick="toggleSidebar()" class="w-12 h-12 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-[16px] shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed 2.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+        </div>
+
+        
+
+        <!-- DASHBOARD ELITE CONTENT -->
+        <div class="p-6 lg:p-8 max-w-[1600px] mx-auto w-full space-y-5 relative z-10">
+            
+            <!-- EXECUTIVE KPI CARDS (Premium Glass Row) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5 fade-in-up" style="animation-delay: 0.05s;">
+                
+                <!-- KPI 1: Conclusão de Metas -->
+                <div class="group bg-white/80 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_24px_rgba(0,181,181,0.08)] hover:shadow-[0_12px_40px_rgba(0,181,181,0.15)] transition-all duration-500 flex items-center gap-4 kpi-border-teal hover:-translate-y-1 cursor-default relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#00B5B5]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#00B5B5] to-[#00D4AA] flex items-center justify-center flex-shrink-0 shadow-[0_6px_16px_rgba(0,181,181,0.3)] group-hover:scale-105 transition-transform duration-300 relative z-10">
+                        <span class="material-symbols-outlined icon-fill text-[24px] text-white drop-shadow-sm">target</span>
+                    </div>
+                    <div class="flex-1 min-w-0 relative z-10 text-center">
+                        <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Conclusão de Metas</p>
+                        <h3 class="text-[32px] font-extrabold text-[#0B193C] leading-none tracking-tight">
+                            <span id="hubDisplayMetas">---</span>
+                            <span class="text-[13px] text-slate-300 ml-0.5 font-bold">%</span>
+                        </h3>
+                        <div class="w-full h-[3px] bg-slate-100 rounded-full mt-2.5 overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-[#00B5B5] to-[#00D4AA] rounded-full transition-all duration-1000" id="kpiBarMetas" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- KPI 2: Desempenho Geral -->
+                <div class="group bg-white/80 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_24px_rgba(99,102,241,0.06)] hover:shadow-[0_12px_40px_rgba(99,102,241,0.12)] transition-all duration-500 flex items-center gap-4 kpi-border-indigo hover:-translate-y-1 cursor-default relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#6366F1] to-[#818CF8] flex items-center justify-center flex-shrink-0 shadow-[0_6px_16px_rgba(99,102,241,0.3)] group-hover:scale-105 transition-transform duration-300 relative z-10">
+                        <span class="material-symbols-outlined icon-fill text-[24px] text-white drop-shadow-sm">analytics</span>
+                    </div>
+                    <div class="flex-1 min-w-0 relative z-10 text-center">
+                        <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Desempenho Geral</p>
+                        <h3 class="text-[32px] font-extrabold text-[#0B193C] leading-none tracking-tight">
+                            <span id="hubDisplayDesempenho">---</span>
+                            <span class="text-[13px] text-slate-300 ml-0.5 font-bold">%</span>
+                        </h3>
+                        <div class="w-full h-[3px] bg-slate-100 rounded-full mt-2.5 overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-[#6366F1] to-[#818CF8] rounded-full transition-all duration-1000" id="kpiBarDesempenho" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- KPI 3: Estimativa TRI -->
+                <div class="group bg-white/80 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_24px_rgba(16,185,129,0.06)] hover:shadow-[0_12px_40px_rgba(16,185,129,0.12)] transition-all duration-500 flex items-center gap-4 kpi-border-emerald hover:-translate-y-1 cursor-default relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#10B981] to-[#34D399] flex items-center justify-center flex-shrink-0 shadow-[0_6px_16px_rgba(16,185,129,0.3)] group-hover:scale-105 transition-transform duration-300 relative z-10">
+                        <span class="material-symbols-outlined icon-fill text-[24px] text-white drop-shadow-sm">troubleshoot</span>
+                    </div>
+                    <div class="flex-1 min-w-0 relative z-10 text-center">
+                        <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">Estimativa TRI</p>
+                        <div class="flex items-baseline justify-center gap-1.5">
+                            <span id="hubDisplayTRI" class="text-[34px] font-extrabold leading-none tracking-tight" style="background: linear-gradient(135deg, #10B981, #059669); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">---</span>
+                            <span class="text-[9px] font-extrabold text-white bg-gradient-to-r from-[#10B981] to-[#34D399] px-2 py-0.5 rounded-md uppercase tracking-widest shadow-sm">PTS</span>
+                        </div>
+                        <div class="flex items-center gap-1 mt-2.5 justify-center">
+                            <span class="text-[8px] font-bold text-slate-300">0</span>
+                            <div class="flex-1 max-w-[100px] h-[3px] bg-slate-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-gradient-to-r from-[#10B981] to-[#34D399] rounded-full transition-all duration-1000" id="kpiBarTRI" style="width: 0%"></div>
+                            </div>
+                            <span class="text-[8px] font-bold text-slate-300">1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 4: ENEM 2026 Countdown -->
+                <div class="group bg-white/80 backdrop-blur-md rounded-[20px] p-5 shadow-[0_4px_24px_rgba(11,25,60,0.06)] hover:shadow-[0_12px_40px_rgba(11,25,60,0.1)] transition-all duration-500 flex items-center gap-4 kpi-border-navy hover:-translate-y-1 cursor-default relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#0B193C]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#0B193C] to-[#1E3A5F] flex items-center justify-center flex-shrink-0 shadow-[0_6px_16px_rgba(11,25,60,0.3)] group-hover:scale-105 transition-transform duration-300 relative z-10">
+                        <span class="material-symbols-outlined text-[24px] text-white drop-shadow-sm animate-hourglass-premium">hourglass_top</span>
+                    </div>
+                    <div class="flex-1 min-w-0 relative z-10 text-center">
+                        <p class="text-[12px] font-bold text-slate-400 uppercase tracking-[0.1em] mb-2.5">ENEM 2026</p>
+                        <div class="flex items-end gap-5 justify-center">
+                            <div class="text-center">
+                                <span id="enemDia1" class="text-[28px] font-extrabold text-[#0B193C] leading-none tracking-tight">---</span>
+                                <p class="text-[7px] font-extrabold text-slate-400 uppercase tracking-[0.15em] mt-1">1º DIA</p>
+                            </div>
+                            <div class="text-center">
+                                <span id="enemDia2" class="text-[28px] font-extrabold text-[#0B193C] leading-none tracking-tight">---</span>
+                                <p class="text-[7px] font-extrabold text-slate-400 uppercase tracking-[0.15em] mt-1">2º DIA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- METAS DIÁRIAS PANEL -->
+            <div class="bg-white rounded-3xl shadow-md border border-slate-100 fade-in-up relative" style="animation-delay: 0.15s;">
+                
+                <!-- Panel Header -->
+                <div class="flex flex-col md:flex-row md:items-center justify-between px-8 py-5 border-b border-slate-100 gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-[#E6F7F7] rounded-xl flex items-center justify-center">
+                            <span class="material-symbols-outlined icon-fill text-[22px] text-[#00B5B5]">calendar_month</span>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-extrabold text-[#0B193C] tracking-tight" style="font-family: 'Inter', sans-serif;">Home</h2>
+                            <div class="flex items-center gap-1.5 mt-0.5">
+                                <span class="w-2 h-2 rounded-full bg-[#10B981] animate-pulse"></span>
+                                <span id="lblSemana" class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">SEMANA ATUAL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Week Navigation -->
+                    <div class="flex items-center gap-2">
+                        <button onclick="agendaPrev()" class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-[#00B5B5] hover:bg-[#E6F7F7] rounded-lg transition-all border border-slate-200">
+                            <span class="material-symbols-outlined text-[18px]">chevron_left</span>
+                        </button>
+                        <span id="weekDateRange" class="text-[12px] font-bold text-[#0B193C] tracking-wide min-w-[180px] text-center">---</span>
+                        <button onclick="agendaNext()" class="w-9 h-9 flex items-center justify-center text-slate-400 hover:text-[#00B5B5] hover:bg-[#E6F7F7] rounded-lg transition-all border border-slate-200">
+                            <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Kanban Grid -->
+                <div class="px-5 py-5">
+                    <div class="flex gap-3 overflow-x-auto pb-4 pt-1" style="scrollbar-width: thin;" id="weeklyAgendaGrid">
+                        <!-- Javascript will inject the 7 columns here -->
+                    </div>
+                </div>
+
+                <style>
+                    .custom-scrollbar::-webkit-scrollbar { width: 4px; background: transparent; }
+                    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(203, 213, 225, 0.4); border-radius: 4px; }
+                    .custom-scrollbar:hover::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.6); }
+                </style>
+            </div>
+
+            <!-- Floating Add Button -->
+            <a href="planejamento.html" class="fixed bottom-8 right-8 w-14 h-14 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-2xl shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-110 z-50 group" title="Adicionar nova meta">
+                <span class="material-symbols-outlined text-[28px] group-hover:rotate-90 transition-transform">add</span>
+            </a>
+
+            <!-- Safe Space -->
+            <div class="h-8"></div>
+        </div>
+    </main>
+
+    <!-- Modal Atividades -->
+    <div id="modalAtividade" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-[#0B193C]/40 backdrop-blur-sm" onclick="fecharModalAtividade()"></div>
+        
+        <!-- Modal Content -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white rounded-[32px] shadow-premium-hover overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col" id="modalAtividadeContent" style="max-height: 90vh;">
+            
+            <div class="p-8 border-b border-slate-100 flex justify-between items-center bg-white sticky top-0 z-10 w-full">
+                <h3 class="font-headline text-xl font-extrabold text-[#0B193C] flex items-center gap-3">
+                    <span class="material-symbols-outlined text-sinapse-primary icon-fill">assignment_add</span>
+                    Lançamento de Atividade
+                </h3>
+                <button onclick="fecharModalAtividade()" class="text-slate-400 hover:text-rose-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="formAtividade" class="p-8 space-y-6 overflow-y-auto" onsubmit="event.preventDefault(); registrarAtividade(event)">
+                
+                <div class="grid grid-cols-1 gap-5">
+                    <!-- MATÉRIA -->
+                    <div class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">MATÉRIA</label>
+                        <select id="actDiscipline" class="hidden"></select>
+                        <div id="aCustomDisciplinaWrap" class="relative">
+                            <button type="button" onclick="aToggleDropdown('Disciplina')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="aCustomDisciplinaLabel">SELECIONE A MATÉRIA</span>
+                                <svg id="aCustomDisciplinaArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="aCustomDisciplinaList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                    </div>
+                    <!-- ASSUNTO -->
+                    <div class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">ASSUNTO</label>
+                        <select id="actSubject" class="hidden"></select>
+                        <div id="aCustomAssuntoWrap" class="relative">
+                            <button type="button" onclick="aToggleDropdown('Assunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="aCustomAssuntoLabel">SELECIONE A MATÉRIA PRIMEIRO...</span>
+                                <svg id="aCustomAssuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="aCustomAssuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                        <input id="aAssuntoTexto" type="text" placeholder="DIGITE O ASSUNTO..." oninput="this.value=this.value.toUpperCase()" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm hover:border-indigo-200 uppercase hidden">
+                    </div>
+                    <!-- SUBASSUNTO -->
+                    <div id="aWrapSubassunto" class="space-y-1.5 relative">
+                        <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">SUBASSUNTO</label>
+                        <select id="actSubassunto" class="hidden"></select>
+                        <div id="aCustomSubassuntoWrap" class="relative">
+                            <button type="button" onclick="aToggleDropdown('Subassunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                <span id="aCustomSubassuntoLabel">SELECIONE O ASSUNTO PRIMEIRO...</span>
+                                <svg id="aCustomSubassuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                            <div id="aCustomSubassuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Data</label>
+                    <input id="actDate" required type="date" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-3 outline-none focus:border-sinapse-primary transition-all font-medium">
+                </div>
+
+                <div class="bg-indigo-50/50 p-6 rounded-[24px] border border-indigo-100">
+                    <p class="text-sm font-extrabold text-[#0B193C] mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[18px] text-sinapse-primary">monitoring</span> Apuração de Desempenho</p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Total Questões</label>
+                            <input id="actTotalQ" type="number" min="0" placeholder="0" class="w-full bg-white border border-indigo-200 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-sinapse-primary outline-none">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Acertos</label>
+                            <input id="actCorrectQ" type="number" min="0" placeholder="0" class="w-full bg-[#10B981]/5 border border-[#10B981]/30 text-[#0B193C] rounded-xl px-4 py-3 font-bold focus:border-[#10B981] outline-none">
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="p-8 py-5 bg-slate-50 border-t border-slate-100 flex justify-end gap-3 w-full">
+                <button onclick="fecharModalAtividade()" class="px-6 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-200 hover:text-[#0B193C] transition-all text-sm">
+                    Cancelar
+                </button>
+                <button type="submit" form="formAtividade" id="btnSubmitForm" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-bold shadow-premium transition-all text-sm flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[18px]">save</span>
+                    Salvar Registro
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="../../src/js/database.js"></script>
+    <script src="../../src/js/materia_data.js?v=5"></script>
+    <script type="module" src="https://unpkg.com/mathlive"></script>
+    <script src="../../src/js/agenda_dinamica.js"></script>
+    <script>
+        // ══════ DROPDOWN CASCATA — Matéria → Assunto → Subassunto (Metas Diárias) ══════
+        function aToggleDropdown(nome) {
+            ['Disciplina','Assunto','Subassunto'].forEach(n => {
+                if (n !== nome) {
+                    const l = document.getElementById('aCustom' + n + 'List');
+                    const a = document.getElementById('aCustom' + n + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+            const list = document.getElementById('aCustom' + nome + 'List');
+            const arrow = document.getElementById('aCustom' + nome + 'Arrow');
+            if (!list) return;
+            const isHidden = list.classList.contains('hidden');
+            if (isHidden) { list.classList.remove('hidden'); arrow.style.transform = 'rotate(180deg)'; }
+            else { list.classList.add('hidden'); arrow.style.transform = 'rotate(0deg)'; }
+        }
+
+        function aSelectItem(nome, selectId, value, label) {
+            const sel = document.getElementById(selectId);
+            if (sel) sel.value = value;
+            document.getElementById('aCustom' + nome + 'Label').textContent = label || value;
+            document.getElementById('aCustom' + nome + 'List').classList.add('hidden');
+            document.getElementById('aCustom' + nome + 'Arrow').style.transform = 'rotate(0deg)';
+            document.querySelectorAll('#aCustom' + nome + 'List div').forEach(d => {
+                d.classList.remove('bg-indigo-50','text-sinapse-primary');
+                d.classList.add('text-[#0B193C]');
+            });
+            const selected = document.querySelector(`#aCustom${nome}List div[data-value="${value}"]`);
+            if (selected) { selected.classList.add('bg-indigo-50','text-sinapse-primary'); selected.classList.remove('text-[#0B193C]'); }
+            if (sel) sel.dispatchEvent(new Event('change'));
+        }
+
+        function aBuildList(nome, items, selectId, specialItems) {
+            const list = document.getElementById('aCustom' + nome + 'List');
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.setAttribute('data-value', item);
+                div.className = 'px-4 py-2.5 text-sm font-bold text-[#0B193C] cursor-pointer hover:bg-indigo-50 hover:text-sinapse-primary transition-colors';
+                div.textContent = item;
+                div.onclick = function() { aSelectItem(nome, selectId, item, item); };
+                list.appendChild(div);
+            });
+            if (specialItems) {
+                specialItems.forEach(si => {
+                    const div = document.createElement('div');
+                    div.setAttribute('data-value', si.value);
+                    div.className = 'px-4 py-2.5 text-sm font-extrabold cursor-pointer hover:bg-blue-50 transition-colors';
+                    div.style.color = '#1E40AF';
+                    div.textContent = si.label;
+                    div.onclick = function() { aSelectItem(nome, selectId, si.value, si.label); };
+                    list.appendChild(div);
+                });
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            ['Disciplina','Assunto','Subassunto'].forEach(nome => {
+                const wrap = document.getElementById('aCustom' + nome + 'Wrap');
+                if (wrap && !wrap.contains(e.target)) {
+                    const l = document.getElementById('aCustom' + nome + 'List');
+                    const a = document.getElementById('aCustom' + nome + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        function aPopularMaterias() {
+            if (typeof listaMaterias === 'undefined') return;
+            aBuildList('Disciplina', listaMaterias, 'actDiscipline');
+        }
+
+        function aPopularAssuntos(materia) {
+            const assSel = document.getElementById('actSubject');
+            const subSel = document.getElementById('actSubassunto');
+            if (assSel) assSel.innerHTML = '';
+            if (subSel) subSel.innerHTML = '';
+            document.getElementById('aCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+            document.getElementById('aCustomSubassuntoList').innerHTML = '';
+
+            if (materia && materiaHierarquia[materia]) {
+                const assuntos = Object.keys(materiaHierarquia[materia]);
+                document.getElementById('aCustomAssuntoLabel').textContent = 'SELECIONE O ASSUNTO';
+                aBuildList('Assunto', assuntos, 'actSubject', [{value:'__OUTROS__', label:'✏️ OUTROS (DIGITAR)'}]);
+            } else {
+                document.getElementById('aCustomAssuntoLabel').textContent = 'SELECIONE A MATÉRIA PRIMEIRO...';
+                document.getElementById('aCustomAssuntoList').innerHTML = '';
+            }
+        }
+
+        function aPopularSubassuntos(materia, assunto) {
+            const subSel = document.getElementById('actSubassunto');
+            if (!subSel) return;
+            subSel.innerHTML = '';
+            if (materia && assunto && materiaHierarquia[materia] && materiaHierarquia[materia][assunto]) {
+                const subs = materiaHierarquia[materia][assunto];
+                document.getElementById('aCustomSubassuntoLabel').textContent = 'SELECIONE O SUBASSUNTO';
+                aBuildList('Subassunto', subs, 'actSubassunto');
+            } else {
+                document.getElementById('aCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+                document.getElementById('aCustomSubassuntoList').innerHTML = '';
+            }
+        }
+
+        function aResetDropdowns() {
+            document.getElementById('actDiscipline').value = '';
+            document.getElementById('actSubject').value = '';
+            document.getElementById('actSubassunto').value = '';
+            document.getElementById('aCustomDisciplinaLabel').textContent = 'SELECIONE A MATÉRIA';
+            document.getElementById('aCustomAssuntoLabel').textContent = 'SELECIONE A MATÉRIA PRIMEIRO...';
+            document.getElementById('aCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+            document.getElementById('aCustomAssuntoList').innerHTML = '';
+            document.getElementById('aCustomSubassuntoList').innerHTML = '';
+            const assTxt = document.getElementById('aAssuntoTexto');
+            if (assTxt) { assTxt.classList.add('hidden'); assTxt.value = ''; }
+            document.getElementById('aCustomAssuntoWrap').classList.remove('hidden');
+            document.getElementById('aWrapSubassunto').classList.remove('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tod = new Date();
+            const dateStr = `${tod.getFullYear()}-${String(tod.getMonth()+1).padStart(2,'0')}-${String(tod.getDate()).padStart(2,'0')}`;
+            const dtInput = document.getElementById('actDate');
+            if(dtInput) dtInput.value = dateStr;
+
+            aPopularMaterias();
+
+            // Listener Matéria → Assunto
+            const discSel = document.getElementById('actDiscipline');
+            if (discSel) {
+                discSel.addEventListener('change', (e) => {
+                    const val = e.target.value;
+                    document.getElementById('aCustomAssuntoWrap').classList.remove('hidden');
+                    document.getElementById('aAssuntoTexto').classList.add('hidden');
+                    document.getElementById('aWrapSubassunto').classList.remove('hidden');
+                    aPopularAssuntos(val);
+                });
+            }
+
+            // Listener Assunto → Subassunto
+            const assSel = document.getElementById('actSubject');
+            if (assSel) {
+                assSel.addEventListener('change', (e) => {
+                    const materia = document.getElementById('actDiscipline').value;
+                    if (e.target.value === '__OUTROS__') {
+                        document.getElementById('aCustomAssuntoWrap').classList.add('hidden');
+                        document.getElementById('aAssuntoTexto').classList.remove('hidden');
+                        document.getElementById('aAssuntoTexto').value = '';
+                        document.getElementById('aAssuntoTexto').focus();
+                        document.getElementById('aWrapSubassunto').classList.add('hidden');
+                    } else {
+                        document.getElementById('aCustomAssuntoWrap').classList.remove('hidden');
+                        document.getElementById('aAssuntoTexto').classList.add('hidden');
+                        document.getElementById('aWrapSubassunto').classList.remove('hidden');
+                        aPopularSubassuntos(materia, e.target.value);
+                    }
+                });
+            }
+        });
+
+        window.abrirModalAtividadeParaData = function(dateStr) {
+            document.getElementById('actDate').value = dateStr;
+            abrirModalAtividade();
+        }
+
+        function abrirModalAtividade() {
+            const modal = document.getElementById('modalAtividade');
+            const content = document.getElementById('modalAtividadeContent');
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                content.classList.remove('scale-95');
+                content.classList.add('scale-100');
+            }, 10);
+        }
+
+        function fecharModalAtividade() {
+            const modal = document.getElementById('modalAtividade');
+            const content = document.getElementById('modalAtividadeContent');
+            modal.classList.add('opacity-0');
+            content.classList.remove('scale-100');
+            content.classList.add('scale-95');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                document.getElementById('formAtividade').reset();
+                aResetDropdowns();
+            }, 300);
+        }
+
+        function registrarAtividade(event) {
+            const btn = document.getElementById('btnSubmitForm');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = '<span class="material-symbols-outlined animate-spin text-[18px]">hourglass_empty</span> Salvando...';
+            btn.classList.add('opacity-80', 'pointer-events-none');
+            
+            setTimeout(() => {
+                const totalQ = parseInt(document.getElementById('actTotalQ').value) || 0;
+                const correctQ = parseInt(document.getElementById('actCorrectQ').value) || 0;
+                const wrongQ = totalQ - correctQ;
+                
+                const disciplineVal = document.getElementById('actDiscipline').value;
+                const assTxt = document.getElementById('aAssuntoTexto');
+                let subjectVal = '';
+                if (assTxt && !assTxt.classList.contains('hidden')) {
+                    subjectVal = assTxt.value.trim();
+                } else {
+                    subjectVal = document.getElementById('actSubject').value;
+                }
+                const subVal = document.getElementById('actSubassunto') ? document.getElementById('actSubassunto').value : '';
+                const fullSubject = subVal ? subjectVal + ' — ' + subVal : subjectVal;
+
+                if (!disciplineVal) { alert('Selecione uma matéria.'); btn.innerHTML = originalContent; btn.classList.remove('opacity-80','pointer-events-none'); return; }
+                if (!subjectVal) { alert('Selecione ou digite um assunto.'); btn.innerHTML = originalContent; btn.classList.remove('opacity-80','pointer-events-none'); return; }
+
+                if (window.db) {
+                    const newAct = window.db.insert('activities', {
+                        user_id: 1, 
+                        title: disciplineVal + ' - ' + fullSubject,
+                        description: '',
+                        date: document.getElementById('actDate').value,
+                        time: '14:00',
+                        weekday: document.getElementById('actDate').value ? new Date(document.getElementById('actDate').value + 'T00:00:00').getDay() : 0,
+                        activity_type: 'Lista de Questões',
+                        discipline: disciplineVal,
+                        subject: fullSubject,
+                        priority: 'media',
+                        status: 'pendente' 
+                    });
+
+                    window.db.insert('metrics_entries', {
+                        user_id: 1,
+                        activity_id: newAct.id,
+                        discipline: newAct.discipline,
+                        subject: newAct.subject,
+                        questions_total: totalQ,
+                        correct_answers: correctQ,
+                        wrong_answers: wrongQ < 0 ? 0 : wrongQ,
+                        accuracy_percentage: totalQ > 0 ? ((correctQ/totalQ)*100).toFixed(1) : 0,
+                        study_time_minutes: 60
+                    });
+
+                    if(window.renderWeeklyAgenda) window.renderWeeklyAgenda();
+                }
+
+                fecharModalAtividade();
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-80', 'pointer-events-none');
+                
+            }, 500);
+        }
+    </script>
+    <!-- Engine Base já carregado acima -->
+    <!-- Script para Carregamento de Perfil Global e Interligação -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Sincronizando o nome dinâmico da plataforma
+            const savedData = localStorage.getItem('sinapsePerfilData');
+            if (savedData) {
+                try {
+                    const parsed = JSON.parse(savedData);
+                    if (parsed.nome) {
+                        // Respeita o input do usuário e exibe seu nome e sobrenome fidedignos
+                        const fullName = parsed.nome;
+                        const nameDisplays = document.querySelectorAll('.user-name-display');
+                        nameDisplays.forEach(el => el.innerText = fullName);
+                    }
+                } catch(e) {
+                    console.error("Falha ao analisar o perfil", e);
+                }
+            }
+            
+            // 2. Cálculo e Atualização dos 3 KPIs Dinâmicos Iguais ao Perfil/Banco
+            if(window.db && window.db.getAcademicSummary) {
+                const globais = window.db.getAcademicSummary();
+                
+                // Conclusão de Metas
+                const metasNode = document.getElementById('hubDisplayMetas');
+                const metasBar = document.getElementById('kpiBarMetas');
+                if(metasNode && globais.conclusaoMetas !== undefined) {
+                    metasNode.innerText = globais.conclusaoMetas;
+                    if(metasBar) metasBar.style.width = Math.min(parseFloat(globais.conclusaoMetas) || 0, 100) + '%';
+                }
+                
+                // Desempenho Geral
+                const desempenhoNode = document.getElementById('hubDisplayDesempenho');
+                const desempenhoBar = document.getElementById('kpiBarDesempenho');
+                if(desempenhoNode && globais.acertosGlobal !== undefined) {
+                    desempenhoNode.innerText = globais.acertosGlobal;
+                    if(desempenhoBar) desempenhoBar.style.width = Math.min(parseFloat(globais.acertosGlobal) || 0, 100) + '%';
+                }
+                
+                // Estimativa TRI
+                const triNode = document.getElementById('hubDisplayTRI');
+                const triBar = document.getElementById('kpiBarTRI');
+                if(triNode && globais.estimativaTRI !== undefined) {
+                    triNode.innerText = globais.estimativaTRI > 0 ? globais.estimativaTRI : '0';
+                    if(triBar) triBar.style.width = Math.min((parseFloat(globais.estimativaTRI) / 1000) * 100, 100) + '%';
+                }
+            }
+
+            // 3. ENEM 2026 Countdown
+            const enem1 = new Date(2026, 10, 1);  // 1 Nov 2026 (1º Dia)
+            const enem2 = new Date(2026, 10, 8);  // 8 Nov 2026 (2º Dia)
+            const hoje = new Date(); hoje.setHours(0,0,0,0);
+            const dias1 = Math.ceil((enem1 - hoje) / (1000*60*60*24));
+            const dias2 = Math.ceil((enem2 - hoje) / (1000*60*60*24));
+            const el1 = document.getElementById('enemDia1');
+            const el2 = document.getElementById('enemDia2');
+            if(el1) el1.innerText = dias1 > 0 ? dias1 : '0';
+            if(el2) el2.innerText = dias2 > 0 ? dias2 : '0';
+        });
+    </script>
+    <!-- Akili removido desta página -->
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            const topBar = document.getElementById('topHeaderBar');
+            aside.classList.toggle('sidebar-hidden');
+            const isHidden = aside.classList.contains('sidebar-hidden');
+            if (isHidden) {
+                topBar.classList.remove('hidden');
+            } else {
+                topBar.classList.add('hidden');
+            }
+        }
+    </script>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- MODAL: NOTAS DE ESTUDO (Rich Text Editor Premium)            -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <style>
+        /* ── Font Picker Premium ── */
+        .font-picker-dropdown { position: fixed; z-index: 99999; background: #fff; border: 1px solid #c0c0c0; border-radius: 4px; box-shadow: 0 8px 32px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.08); width: 150px; max-height: 440px; overflow-y: auto; scrollbar-width: thin; }
+        .font-picker-dropdown.hidden { display: none; }
+        .font-picker-dropdown::-webkit-scrollbar { width: 6px; }
+        .font-picker-dropdown::-webkit-scrollbar-thumb { background: #a0a0a0; border-radius: 3px; }
+        .font-picker-dropdown::-webkit-scrollbar-track { background: #f0f0f0; }
+        .font-picker-group { padding: 2px 0; }
+        .font-picker-group:not(:last-child) { border-bottom: 1px solid #e0e0e0; }
+        .font-picker-group-label { padding: 6px 10px 3px; font-size: 9px; font-weight: 700; color: #333; font-family: 'Inter', sans-serif !important; }
+        .font-picker-item { padding: 4px 10px; font-size: 13px; cursor: pointer; transition: background 0.08s; display: block; color: #1a1a1a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; line-height: 1.4; }
+        .font-picker-item:hover { background: #d6e4ff; }
+        .font-picker-item.active { background: #0B193C; color: #fff; }
+        .font-picker-search { width: 100%; padding: 8px 12px; border: none; border-bottom: 1px solid #d0d0d0; outline: none; font-size: 13px; font-family: 'Inter', sans-serif; color: #333; background: #f8f8f8; }
+        .font-picker-search::placeholder { color: #999; }
+
+
+
+        /* ── Editor Styles ── */
+        #editorContent { min-height: 320px; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.7; color: #1e293b; padding: 24px 28px; }
+        #editorContent:empty::before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; }
+        #editorContent img { max-width: 100%; border-radius: 8px; margin: 8px 0; }
+        #editorContent ul, #editorContent ol { padding-left: 24px; margin: 4px 0; }
+        #editorContent li { margin: 2px 0; }
+
+        /* List style classes */
+        .list-decimal { list-style-type: decimal !important; }
+        .list-decimal-paren li { list-style-type: none !important; }
+        .list-decimal-paren { counter-reset: dp; }
+        .list-decimal-paren li::before { counter-increment: dp; content: counter(dp) ") "; font-weight: 600; }
+        .list-upper-roman { list-style-type: upper-roman !important; }
+        .list-upper-alpha { list-style-type: upper-alpha !important; }
+        .list-upper-alpha-paren { counter-reset: uap; list-style-type: none !important; }
+        .list-upper-alpha-paren li::before { counter-increment: uap; content: counter(uap, upper-alpha) ") "; font-weight: 600; }
+        .list-lower-alpha-paren { counter-reset: lap; list-style-type: none !important; }
+        .list-lower-alpha-paren li::before { counter-increment: lap; content: counter(lap, lower-alpha) ") "; font-weight: 600; }
+        .list-lower-alpha { list-style-type: lower-alpha !important; }
+        .list-lower-roman { list-style-type: lower-roman !important; }
+        .list-check { list-style-type: none !important; }
+        .list-check li::before { content: "✓ "; color: #10b981; font-weight: 700; }
+        .list-arrow { list-style-type: none !important; }
+        .list-arrow li::before { content: "→ "; color: #6366f1; font-weight: 700; }
+        .list-diamond { list-style-type: none !important; }
+        .list-diamond li::before { content: "◆ "; color: #f59e0b; }
+
+        /* Toolbar */
+        .editor-toolbar-btn { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; border-radius: 6px; cursor: pointer; transition: all 0.15s; border: none; background: transparent; color: #475569; font-size: 18px; }
+        .editor-toolbar-btn:hover { background: #f1f5f9; color: #0f172a; }
+        .editor-toolbar-btn.active, .editor-toolbar-btn.bg-indigo-50 { background: #eef2ff; color: #4f46e5; }
+        .toolbar-divider { width: 1px; height: 24px; background: #e2e8f0; margin: 0 4px; flex-shrink: 0; }
+
+        /* Color Picker Premium (Word-Style) */
+        .color-picker-dropdown { position: fixed; z-index: 99999; background: #fff; border: 1px solid #b0b0b0; border-radius: 4px; padding: 8px 10px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); min-width: 220px; }
+        .color-picker-dropdown.hidden { display: none; }
+        .cp-section-label { font-size: 12px; font-weight: 700; color: #1a1a1a; margin: 10px 0 5px; font-family: 'Inter', sans-serif; }
+        .cp-auto-btn { display: flex; align-items: center; gap: 8px; width: 100%; padding: 6px 4px; border: 1px solid transparent; border-radius: 3px; background: transparent; cursor: pointer; font-size: 12px; font-weight: 400; color: #1a1a1a; transition: all 0.1s; font-family: 'Inter', sans-serif; margin-bottom: 2px; }
+        .cp-auto-btn:hover { background: #d6e4ff; border-color: #91a7ff; }
+        .cp-auto-icon { width: 16px; height: 16px; border-radius: 2px; border: 1px solid #888; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 900; line-height: 1; }
+        .cp-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+        .cp-swatch { width: 17px; height: 17px; border-radius: 1px; cursor: pointer; border: 1px solid rgba(0,0,0,0.12); transition: all 0.08s; box-sizing: border-box; }
+        .cp-swatch:hover { transform: scale(1.3); border-color: #ff6600; box-shadow: 0 0 0 1px #ff6600; z-index: 2; position: relative; }
+        .cp-divider { height: 1px; background: #d0d0d0; margin: 8px 0; }
+        .cp-nocolor { width: 16px; height: 16px; border-radius: 2px; cursor: pointer; border: 2px dashed #aaa; transition: all 0.1s; box-sizing: border-box; display: flex; align-items: center; justify-content: center; }
+        .cp-nocolor:hover { border-color: #ef4444; transform: scale(1.25); }
+        .cp-nocolor::after { content: '✕'; font-size: 8px; color: #aaa; font-weight: 700; }
+        .cp-nocolor:hover::after { color: #ef4444; }
+
+        /* List Picker */
+        /* List Picker Premium (Word-Style) */
+        .list-picker-dropdown { position: fixed; z-index: 99999; background: #fff; border: 1px solid #b0b0b0; border-radius: 4px; padding: 8px 10px 10px; box-shadow: 0 4px 16px rgba(0,0,0,0.18); min-width: 260px; }
+        .list-picker-dropdown.hidden { display: none; }
+        .lp-section-label { font-size: 12px; font-weight: 700; color: #1a1a1a; margin: 8px 0 5px; font-family: 'Inter', sans-serif; }
+        .lp-section-label:first-child { margin-top: 0; }
+        .lp-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+        .lp-option { border: 2px solid #e0e0e0; border-radius: 3px; padding: 6px 5px; cursor: pointer; font-size: 11px; line-height: 1.35; font-weight: 500; color: #333; transition: all 0.1s; text-align: left; min-height: 48px; display: flex; flex-direction: column; justify-content: center; font-family: 'Inter', sans-serif; background: #fafafa; }
+        .lp-option:hover { border-color: #ff6600; background: #fff5ee; }
+        .lp-option.active { border-color: #4472C4; background: #e8f0fe; }
+        .lp-option-none { border: 2px solid #e0e0e0; border-radius: 3px; padding: 8px; cursor: pointer; font-size: 11px; font-weight: 600; color: #888; transition: all 0.1s; text-align: center; font-family: 'Inter', sans-serif; background: #fafafa; grid-column: span 4; }
+        .lp-option-none:hover { border-color: #ef4444; color: #ef4444; background: #fef2f2; }
+        .lp-divider { height: 1px; background: #d0d0d0; margin: 8px 0; }
+        .lp-bullet-icon { font-size: 16px; line-height: 1; margin-bottom: 2px; color: #1a1a1a; }
+
+        /* List Styles (OL) */
+        #editorContent ol.list-decimal { list-style-type: decimal !important; }
+        #editorContent ol.list-decimal-paren { list-style-type: none !important; counter-reset: lp-counter; }
+        #editorContent ol.list-decimal-paren > li { counter-increment: lp-counter; }
+        #editorContent ol.list-decimal-paren > li::before { content: counter(lp-counter) ") "; font-weight: 500; }
+        #editorContent ol.list-upper-roman { list-style-type: upper-roman !important; }
+        #editorContent ol.list-upper-alpha { list-style-type: upper-alpha !important; }
+        #editorContent ol.list-upper-alpha-paren { list-style-type: none !important; counter-reset: lp-counter; }
+        #editorContent ol.list-upper-alpha-paren > li { counter-increment: lp-counter; }
+        #editorContent ol.list-upper-alpha-paren > li::before { content: counter(lp-counter, upper-alpha) ") "; font-weight: 500; }
+        #editorContent ol.list-lower-alpha-paren { list-style-type: none !important; counter-reset: lp-counter; }
+        #editorContent ol.list-lower-alpha-paren > li { counter-increment: lp-counter; }
+        #editorContent ol.list-lower-alpha-paren > li::before { content: counter(lp-counter, lower-alpha) ") "; font-weight: 500; }
+        #editorContent ol.list-lower-alpha { list-style-type: lower-alpha !important; }
+        #editorContent ol.list-lower-roman { list-style-type: lower-roman !important; }
+
+        /* List Styles (UL) */
+        #editorContent ul.list-disc { list-style-type: disc !important; }
+        #editorContent ul.list-circle { list-style-type: circle !important; }
+        #editorContent ul.list-square { list-style-type: square !important; }
+        #editorContent ul.list-diamond { list-style-type: none !important; }
+        #editorContent ul.list-diamond > li::before { content: "◆ "; color: #1a1a1a; }
+        #editorContent ul.list-arrow { list-style-type: none !important; }
+        #editorContent ul.list-arrow > li::before { content: "➤ "; color: #1a1a1a; }
+        #editorContent ul.list-check { list-style-type: none !important; }
+        #editorContent ul.list-check > li::before { content: "✔ "; color: #22c55e; }
+        #editorContent ul.list-star { list-style-type: none !important; }
+        #editorContent ul.list-star > li::before { content: "★ "; color: #eab308; }
+        #editorContent ul.list-dash { list-style-type: none !important; }
+        #editorContent ul.list-dash > li::before { content: "— "; color: #1a1a1a; }
+
+        /* Equações Inline (MathLive) — Zero spacing */
+        .formula-inline-container { display: inline !important; margin: 0 !important; padding: 0 !important; border: none !important; background: none !important; line-height: 1; }
+        .formula-inline-container.is-editing { border: 1.5px solid #818cf8 !important; border-radius: 4px; background: #f5f3ff !important; }
+        .formula-inline-container math-field { display: inline-block; margin: 0 !important; padding: 0 !important; border: none; outline: none; min-width: 15px; vertical-align: middle; --_padding-left: 0px; --_padding-right: 0px; }
+        .formula-inline-container.is-editing math-field { padding: 1px 2px !important; }
+        /* Esconder ícones internos do MathLive */
+        math-field::part(virtual-keyboard-toggle) { display: none !important; }
+        math-field::part(menu-toggle) { display: none !important; }
+        math-field::part(container) { min-height: auto !important; }
+        math-field .ML__virtual-keyboard-toggle, math-field .ML__menu-toggle { display: none !important; }
+
+        /* Math Categories Word-Style */
+        .math-cat { position: relative; display: inline-block; }
+        .math-cat-btn { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 3px 8px; border: none; background: none; cursor: pointer; border-radius: 6px; transition: all 0.15s; min-width: 48px; }
+        .math-cat-btn:hover { background: #eef2ff; }
+        .math-cat-icon { font-size: 16px; line-height: 1.2; color: #1e293b; font-family: 'Cambria Math', 'Times New Roman', serif; }
+        .math-cat-label { font-size: 8px; color: #64748b; white-space: nowrap; line-height: 1; }
+        .math-arrow { font-size: 7px; margin-left: 1px; }
+        .math-cat-dropdown { display: none; position: absolute; top: 100%; left: 0; min-width: 220px; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,0.12); padding: 10px; z-index: 9999; }
+        .math-cat-dropdown.show { display: block; }
+        .math-cat-dropdown-wide { min-width: 340px; }
+        .math-cat-title { font-size: 11px; font-weight: 600; color: #6366f1; margin-bottom: 6px; font-style: italic; }
+        .math-cat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; }
+        .math-cat-grid-6 { grid-template-columns: repeat(6, 1fr); }
+        .math-cat-grid-wide { grid-template-columns: repeat(2, 1fr); }
+        .math-tpl { display: flex; align-items: center; justify-content: center; min-height: 42px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fafbfc; cursor: pointer; font-size: 13px; font-family: 'Cambria Math', 'Times New Roman', serif; color: #1e293b; transition: all 0.15s; padding: 4px; line-height: 1.2; text-align: center; }
+        .math-tpl:hover { border-color: #818cf8; background: #eef2ff; box-shadow: 0 2px 6px rgba(99,102,241,0.12); }
+        .math-tpl-wide { min-height: 52px; font-size: 11px; }
+        .math-sym-grid { display: grid; grid-template-columns: repeat(16, 1fr); gap: 2px; }
+        .math-sym { display: flex; align-items: center; justify-content: center; width: 100%; aspect-ratio: 1; border: 1px solid #e8e8e8; border-radius: 4px; background: #fafbfc; cursor: pointer; font-size: 13px; font-family: 'Cambria Math', 'Times New Roman', serif; color: #1e293b; transition: all 0.12s; padding: 0; }
+        .math-sym:hover { border-color: #818cf8; background: #eef2ff; }
+
+        /* Teclado Virtual MathLive — Premium Compact */
+        math-virtual-keyboard {
+            --keyboard-zindex: 10000;
+            max-width: 420px !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            right: auto !important;
+            bottom: 20px !important;
+            border-radius: 16px !important;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18), 0 2px 8px rgba(99,102,241,0.12) !important;
+            border: 1px solid rgba(255,255,255,0.2) !important;
+            overflow: hidden !important;
+            backdrop-filter: blur(12px) !important;
+        }
+
+        /* Attachments */
+        .attachment-card { display: flex; align-items: center; gap: 10px; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; margin-bottom: 6px; }
+        .attachment-icon { width: 36px; height: 36px; background: #eef2ff; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6366f1; flex-shrink: 0; }
+        .attachment-info { flex: 1; min-width: 0; }
+        .attachment-name { font-size: 11px; font-weight: 700; color: #1e293b; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .attachment-size { font-size: 9px; color: #94a3b8; font-weight: 600; }
+        .attachment-delete { cursor: pointer; color: #94a3b8; transition: color 0.15s; }
+        .attachment-delete:hover { color: #ef4444; }
+
+        /* Recording pulse */
+        .recording-pulse { animation: recPulse 1s infinite; }
+        @keyframes recPulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+
+        /* Formula inline */
+        .formula-inline-container { display: inline-flex; align-items: center; background: #fefce8; border: 1px solid #fde68a; border-radius: 6px; padding: 2px 4px; margin: 0 2px; vertical-align: middle; }
+        .formula-inline-container.is-editing { border-color: #6366f1; box-shadow: 0 0 0 2px rgba(99,102,241,0.2); }
+        .formula-handle { font-size: 10px; color: #94a3b8; cursor: grab; padding: 0 2px; user-select: none; }
+        .formula-dropdown-icon { font-size: 8px; color: #94a3b8; padding: 0 2px; cursor: pointer; }
+    </style>
+
+    <div id="notesModal" class="fixed inset-0 z-[100] hidden" style="backdrop-filter: blur(6px);">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-[#0B193C]/50" onclick="closeNotesModal()"></div>
+
+        <!-- Modal Content -->
+        <div id="notesModalContent" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95%] max-w-[820px] bg-white rounded-[28px] shadow-2xl flex flex-col scale-95 opacity-0 transition-all duration-300" style="max-height: 92vh;">
+
+            <!-- Header -->
+            <div class="flex items-center justify-between px-7 py-5 border-b border-slate-100 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#F97316] to-[#FB923C] flex items-center justify-center shadow-lg shadow-orange-200/50">
+                        <span class="material-symbols-outlined icon-fill text-[24px] text-white">edit_note</span>
+                    </div>
+                    <div>
+                        <h3 class="text-[18px] font-black text-[#0B193C] tracking-tight">NOTAS DE ESTUDO</h3>
+                        <p id="notesSubjectTitle" class="text-[12px] font-bold text-[#F97316] uppercase tracking-widest">ASSUNTO</p>
+                    </div>
+                </div>
+                <button onclick="closeNotesModal()" class="w-9 h-9 rounded-xl hover:bg-slate-100 flex items-center justify-center transition-all text-slate-400 hover:text-slate-600">
+                    <span class="material-symbols-outlined text-[20px]">close</span>
+                </button>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="px-5 py-2 border-b border-slate-100 flex-shrink-0 overflow-x-auto">
+                <!-- Row 1: Font, Size, Case, Format -->
+                <div class="flex items-center gap-1 flex-wrap mb-1.5">
+                    <!-- Custom Font Dropdown Premium -->
+                    <select id="fontFamilySelect" class="hidden"><option value="Inter">Inter</option></select>
+                    <div id="fontPickerWrap" class="relative" style="min-width: 150px;">
+                        <button type="button" id="fontPickerBtn" onclick="toggleFontPicker()" class="h-8 px-3 text-[11px] font-bold text-slate-700 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer hover:border-indigo-300 transition-all flex items-center justify-between gap-2 w-full">
+                            <span id="fontPickerLabel" style="font-family:'Inter',sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Inter</span>
+                            <svg class="w-3 h-3 text-slate-400 flex-shrink-0 transition-transform" id="fontPickerArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-0 bg-slate-50 border border-slate-200 rounded-lg h-8 px-1">
+                        <button onclick="changeFontSize(-1)" class="w-5 h-6 flex items-center justify-center text-slate-400 hover:text-slate-700 text-[10px] font-bold">−</button>
+                        <select id="fontSizeSelect" onchange="formatDoc('fontSize', this.value)" class="w-10 text-center text-[11px] font-bold text-slate-600 bg-transparent outline-none cursor-pointer border-none">
+                            <option value="8px">8</option><option value="9px">9</option><option value="10px">10</option>
+                            <option value="11px" selected>11</option><option value="12px">12</option><option value="14px">14</option>
+                            <option value="16px">16</option><option value="18px">18</option><option value="20px">20</option>
+                            <option value="22px">22</option><option value="24px">24</option><option value="26px">26</option>
+                            <option value="28px">28</option><option value="36px">36</option><option value="48px">48</option>
+                            <option value="72px">72</option>
+                        </select>
+                        <button onclick="changeFontSize(1)" class="w-5 h-6 flex items-center justify-center text-slate-400 hover:text-slate-700 text-[10px] font-bold">+</button>
+                    </div>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Case buttons -->
+                    <button onclick="changeCase('upper')" class="editor-toolbar-btn text-[12px] font-black" title="MAIÚSCULAS">Tt</button>
+                    <button onclick="changeCase('lower')" class="editor-toolbar-btn text-[12px] font-black" title="minúsculas" style="font-variant: small-caps;">tT</button>
+                    <button onclick="changeCase('capitalize')" class="editor-toolbar-btn text-[12px] font-black" title="Capitalizar">Tt</button>
+                    <button onclick="formatDoc('removeFormat')" class="editor-toolbar-btn" title="Limpar Formatação">
+                        <span class="material-symbols-outlined text-[17px] text-rose-400">format_clear</span>
+                    </button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Format buttons -->
+                    <button id="btn-bold" onclick="formatDoc('bold')" class="editor-toolbar-btn font-black text-[15px]" title="Negrito (Ctrl+B)">B</button>
+                    <button id="btn-italic" onclick="formatDoc('italic')" class="editor-toolbar-btn italic text-[15px]" title="Itálico (Ctrl+I)">I</button>
+                    <button id="btn-underline" onclick="formatDoc('underline')" class="editor-toolbar-btn underline text-[15px]" title="Sublinhado (Ctrl+U)">U</button>
+                    <button id="btn-strikethrough" onclick="formatDoc('strikeThrough')" class="editor-toolbar-btn line-through text-[14px]" title="Tachado">abc</button>
+                    <button id="btn-subscript" onclick="formatDoc('subscript')" class="editor-toolbar-btn text-[12px]" title="Subscrito">X<sub class="text-[8px]">₂</sub></button>
+                    <button id="btn-superscript" onclick="formatDoc('superscript')" class="editor-toolbar-btn text-[12px]" title="Sobrescrito">X<sup class="text-[8px]">²</sup></button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Color pickers -->
+                    <div class="relative">
+                        <button onclick="toggleColorPicker('textColorPalette')" class="editor-toolbar-btn flex-col gap-0" title="Cor do Texto">
+                            <span class="material-symbols-outlined text-[16px]">format_color_text</span>
+                            <div id="textColorPreview" class="w-4 h-1 rounded-full mt-[-2px]" style="background-color: #000;"></div>
+                        </button>
+                        <div id="textColorPalette" class="color-picker-dropdown hidden">
+                            <!-- Automático -->
+                            <button class="cp-auto-btn" onclick="applyColor('#000000','foreColor')">
+                                <div class="cp-auto-icon" style="background:#000; color:#fff;">A</div>
+                                Automático
+                            </button>
+                            <!-- Cores do Tema -->
+                            <div class="cp-section-label">Cores do Tema</div>
+                            <div class="cp-grid">
+                                <div class="cp-swatch" style="background:#FFFFFF" onclick="applyColor('#FFFFFF','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#000000" onclick="applyColor('#000000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#E7E6E6" onclick="applyColor('#E7E6E6','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#44546A" onclick="applyColor('#44546A','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#4472C4" onclick="applyColor('#4472C4','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#ED7D31" onclick="applyColor('#ED7D31','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#A5A5A5" onclick="applyColor('#A5A5A5','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFC000" onclick="applyColor('#FFC000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#5B9BD5" onclick="applyColor('#5B9BD5','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#70AD47" onclick="applyColor('#70AD47','foreColor')"></div>
+                                <!-- Row 2: 80% lighter -->
+                                <div class="cp-swatch" style="background:#F2F2F2" onclick="applyColor('#F2F2F2','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#7F7F7F" onclick="applyColor('#7F7F7F','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#D0CECE" onclick="applyColor('#D0CECE','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#D6DCE4" onclick="applyColor('#D6DCE4','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#D9E2F3" onclick="applyColor('#D9E2F3','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FCE4D6" onclick="applyColor('#FCE4D6','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#EDEDED" onclick="applyColor('#EDEDED','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFF2CC" onclick="applyColor('#FFF2CC','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#DEEAF6" onclick="applyColor('#DEEAF6','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#E2EFDA" onclick="applyColor('#E2EFDA','foreColor')"></div>
+                                <!-- Row 3: 60% lighter -->
+                                <div class="cp-swatch" style="background:#D8D8D8" onclick="applyColor('#D8D8D8','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#595959" onclick="applyColor('#595959','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#AEABAB" onclick="applyColor('#AEABAB','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#ADB9CA" onclick="applyColor('#ADB9CA','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#B4C6E7" onclick="applyColor('#B4C6E7','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#F8CBAD" onclick="applyColor('#F8CBAD','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#DBDBDB" onclick="applyColor('#DBDBDB','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFE699" onclick="applyColor('#FFE699','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#BDD7EE" onclick="applyColor('#BDD7EE','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#C5E0B3" onclick="applyColor('#C5E0B3','foreColor')"></div>
+                                <!-- Row 4: 40% lighter -->
+                                <div class="cp-swatch" style="background:#BFBFBF" onclick="applyColor('#BFBFBF','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#3F3F3F" onclick="applyColor('#3F3F3F','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#757070" onclick="applyColor('#757070','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#8496B0" onclick="applyColor('#8496B0','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#8EAADB" onclick="applyColor('#8EAADB','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#F4B183" onclick="applyColor('#F4B183','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#C9C9C9" onclick="applyColor('#C9C9C9','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFD966" onclick="applyColor('#FFD966','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#9DC3E6" onclick="applyColor('#9DC3E6','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#A9D18E" onclick="applyColor('#A9D18E','foreColor')"></div>
+                                <!-- Row 5: 25% darker -->
+                                <div class="cp-swatch" style="background:#A5A5A5" onclick="applyColor('#A5A5A5','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#262626" onclick="applyColor('#262626','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#3A3838" onclick="applyColor('#3A3838','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#323F4F" onclick="applyColor('#323F4F','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#2F5496" onclick="applyColor('#2F5496','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#C55A11" onclick="applyColor('#C55A11','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#7B7B7B" onclick="applyColor('#7B7B7B','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#BF8F00" onclick="applyColor('#BF8F00','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#2E75B6" onclick="applyColor('#2E75B6','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#538135" onclick="applyColor('#538135','foreColor')"></div>
+                                <!-- Row 6: 50% darker -->
+                                <div class="cp-swatch" style="background:#7F7F7F" onclick="applyColor('#7F7F7F','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#0D0D0D" onclick="applyColor('#0D0D0D','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#161616" onclick="applyColor('#161616','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#222A35" onclick="applyColor('#222A35','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#1F3864" onclick="applyColor('#1F3864','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#833C0B" onclick="applyColor('#833C0B','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#525252" onclick="applyColor('#525252','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#806000" onclick="applyColor('#806000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#1F4E79" onclick="applyColor('#1F4E79','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#375623" onclick="applyColor('#375623','foreColor')"></div>
+                            </div>
+                            <div class="cp-divider"></div>
+                            <!-- Cores Padrão -->
+                            <div class="cp-section-label">Cores Padrão</div>
+                            <div class="cp-grid">
+                                <div class="cp-swatch" style="background:#C00000" onclick="applyColor('#C00000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FF0000" onclick="applyColor('#FF0000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFC000" onclick="applyColor('#FFC000','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#FFFF00" onclick="applyColor('#FFFF00','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#92D050" onclick="applyColor('#92D050','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#00B050" onclick="applyColor('#00B050','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#00B0F0" onclick="applyColor('#00B0F0','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#0070C0" onclick="applyColor('#0070C0','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#002060" onclick="applyColor('#002060','foreColor')"></div>
+                                <div class="cp-swatch" style="background:#7030A0" onclick="applyColor('#7030A0','foreColor')"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <button onclick="toggleColorPicker('highlightPalette')" class="editor-toolbar-btn flex-col gap-0" title="Cor de Destaque">
+                            <span class="material-symbols-outlined text-[16px]">ink_highlighter</span>
+                            <div id="highlightPreview" class="w-4 h-1 rounded-full mt-[-2px]" style="background-color: #ffff00;"></div>
+                        </button>
+                        <div id="highlightPalette" class="color-picker-dropdown hidden">
+                            <!-- Sem Cor -->
+                            <button class="cp-auto-btn" onclick="applyColor('transparent','hiliteColor')">
+                                <div class="cp-nocolor" style="width:18px;height:18px;border-radius:3px;"></div>
+                                Sem Destaque
+                            </button>
+                            <div class="cp-section-label">Cores de Destaque</div>
+                            <div class="cp-grid">
+                                <div class="cp-swatch" style="background:#FFFF00" onclick="applyColor('#FFFF00','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#00FF00" onclick="applyColor('#00FF00','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#00FFFF" onclick="applyColor('#00FFFF','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FF00FF" onclick="applyColor('#FF00FF','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#0000FF" onclick="applyColor('#0000FF','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FF0000" onclick="applyColor('#FF0000','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#000080" onclick="applyColor('#000080','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#008080" onclick="applyColor('#008080','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#008000" onclick="applyColor('#008000','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#800080" onclick="applyColor('#800080','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#800000" onclick="applyColor('#800000','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#808000" onclick="applyColor('#808000','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#808080" onclick="applyColor('#808080','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#C0C0C0" onclick="applyColor('#C0C0C0','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#000000" onclick="applyColor('#000000','hiliteColor')"></div>
+                            </div>
+                            <div class="cp-divider"></div>
+                            <div class="cp-section-label">Tons Suaves</div>
+                            <div class="cp-grid">
+                                <div class="cp-swatch" style="background:#FEF08A" onclick="applyColor('#FEF08A','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#BBF7D0" onclick="applyColor('#BBF7D0','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#A5F3FC" onclick="applyColor('#A5F3FC','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FECDD3" onclick="applyColor('#FECDD3','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#BFDBFE" onclick="applyColor('#BFDBFE','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FED7AA" onclick="applyColor('#FED7AA','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#DDD6FE" onclick="applyColor('#DDD6FE','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FBCFE8" onclick="applyColor('#FBCFE8','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#E2E8F0" onclick="applyColor('#E2E8F0','hiliteColor')"></div>
+                                <div class="cp-swatch" style="background:#FDE68A" onclick="applyColor('#FDE68A','hiliteColor')"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Alignment, Lists, Tools -->
+                <div class="flex items-center gap-1 flex-wrap">
+                    <button id="btn-justifyLeft" onclick="formatDoc('justifyLeft')" class="editor-toolbar-btn" title="Alinhar à Esquerda">
+                        <span class="material-symbols-outlined text-[17px]">format_align_left</span>
+                    </button>
+                    <button id="btn-justifyCenter" onclick="formatDoc('justifyCenter')" class="editor-toolbar-btn" title="Centralizar">
+                        <span class="material-symbols-outlined text-[17px]">format_align_center</span>
+                    </button>
+                    <button id="btn-justifyRight" onclick="formatDoc('justifyRight')" class="editor-toolbar-btn" title="Alinhar à Direita">
+                        <span class="material-symbols-outlined text-[17px]">format_align_right</span>
+                    </button>
+                    <button id="btn-justifyFull" onclick="formatDoc('justifyFull')" class="editor-toolbar-btn" title="Justificar">
+                        <span class="material-symbols-outlined text-[17px]">format_align_justify</span>
+                    </button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Attachment -->
+                    <button onclick="triggerFileAttach()" class="editor-toolbar-btn" title="Anexar Arquivo">
+                        <span class="material-symbols-outlined text-[17px]">attach_file</span>
+                    </button>
+                    <input id="editorFileInput" type="file" multiple class="hidden" onchange="handleFileAttach(this)">
+
+                    <!-- Audio -->
+                    <button id="audioRecordBtn" onclick="toggleAudioRecording()" class="editor-toolbar-btn" title="Gravar Áudio">
+                        <span class="material-symbols-outlined text-[17px]">mic</span>
+                    </button>
+
+                    <!-- Formula -->
+                    <button id="sigmaBtn" onclick="toggleMathRibbon()" class="editor-toolbar-btn bg-indigo-50/50 text-indigo-600 rounded-lg font-black text-[15px]" title="Equações Matemáticas">
+                        Σ
+                    </button>
+
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Lists: Marcadores -->
+                    <div class="relative" style="display:flex;align-items:center;">
+                        <button id="btn-unorderedList" onclick="formatDoc('insertUnorderedList')" class="editor-toolbar-btn" title="Lista com Marcadores" style="border-radius:6px 0 0 6px;padding-right:2px;">
+                            <span class="material-symbols-outlined text-[17px]">format_list_bulleted</span>
+                        </button>
+                        <button onclick="toggleListPicker('bulletListPicker')" class="editor-toolbar-btn" title="Estilos de Marcadores" style="border-radius:0 6px 6px 0;padding-left:2px;padding-right:3px;min-width:16px;">
+                            <span class="material-symbols-outlined text-[10px]">arrow_drop_down</span>
+                        </button>
+                        <div id="bulletListPicker" class="list-picker-dropdown hidden">
+                            <div class="lp-section-label">Biblioteca de Marcadores</div>
+                            <div class="lp-grid">
+                                <div class="lp-option-none" onclick="applyListStyle('UL','none')">Nenhum</div>
+                                <div class="lp-option" onclick="applyListStyle('UL','disc')">
+                                    <span class="lp-bullet-icon">●</span>
+                                    <span style="font-size:9px;color:#888;">Disco</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','circle')">
+                                    <span class="lp-bullet-icon">○</span>
+                                    <span style="font-size:9px;color:#888;">Círculo</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','square')">
+                                    <span class="lp-bullet-icon">■</span>
+                                    <span style="font-size:9px;color:#888;">Quadrado</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','diamond')">
+                                    <span class="lp-bullet-icon">◆</span>
+                                    <span style="font-size:9px;color:#888;">Losango</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','arrow')">
+                                    <span class="lp-bullet-icon">➤</span>
+                                    <span style="font-size:9px;color:#888;">Seta</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','check')">
+                                    <span class="lp-bullet-icon">✔</span>
+                                    <span style="font-size:9px;color:#888;">Check</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','star')">
+                                    <span class="lp-bullet-icon">★</span>
+                                    <span style="font-size:9px;color:#888;">Estrela</span>
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('UL','dash')">
+                                    <span class="lp-bullet-icon">—</span>
+                                    <span style="font-size:9px;color:#888;">Traço</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Lists: Numerada -->
+                    <div class="relative" style="display:flex;align-items:center;">
+                        <button id="btn-orderedList" onclick="formatDoc('insertOrderedList')" class="editor-toolbar-btn" title="Lista Numerada" style="border-radius:6px 0 0 6px;padding-right:2px;">
+                            <span class="material-symbols-outlined text-[17px]">format_list_numbered</span>
+                        </button>
+                        <button onclick="toggleListPicker('numberListPicker')" class="editor-toolbar-btn" title="Estilos de Numeração" style="border-radius:0 6px 6px 0;padding-left:2px;padding-right:3px;min-width:16px;">
+                            <span class="material-symbols-outlined text-[10px]">arrow_drop_down</span>
+                        </button>
+                        <div id="numberListPicker" class="list-picker-dropdown hidden">
+                            <div class="lp-section-label">Biblioteca de Numeração</div>
+                            <div class="lp-grid">
+                                <div class="lp-option-none" onclick="applyListStyle('OL','none')">Nenhum</div>
+                                <div class="lp-option" onclick="applyListStyle('OL','decimal')">
+                                    1. __<br>2. __<br>3. __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','decimal-paren')">
+                                    1) __<br>2) __<br>3) __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','upper-roman')">
+                                    I. __<br>II. __<br>III. __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','upper-alpha')">
+                                    A. __<br>B. __<br>C. __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','upper-alpha-paren')">
+                                    A) __<br>B) __<br>C) __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','lower-alpha-paren')">
+                                    a) __<br>b) __<br>c) __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','lower-alpha')">
+                                    a. __<br>b. __<br>c. __
+                                </div>
+                                <div class="lp-option" onclick="applyListStyle('OL','lower-roman')">
+                                    i. __<br>ii. __<br>iii. __
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Math Ribbon Word-Style (hidden by default) -->
+            <div id="math-ribbon" class="hidden border-b border-slate-100 bg-slate-50/50 flex-shrink-0" style="overflow:visible; position:relative; z-index:100;">
+                <div class="flex items-center gap-0 px-3 py-1 flex-wrap" style="overflow:visible;">
+                    <button onmousedown="event.preventDefault()" onclick="insertInlineEquation()" class="px-3 py-1.5 bg-indigo-600 text-white text-[9px] font-bold rounded-lg hover:bg-indigo-700 transition-all mr-2 whitespace-nowrap">+ Equação</button>
+                    <div class="toolbar-divider"></div>
+
+                    <!-- Fração -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon">⅟</span>
+                            <span class="math-cat-label">Fração<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Fração</div>
+                            <div class="math-cat-grid">
+                                <button onclick="insertToWorkspace('\\frac{}{}')" class="math-tpl" title="Fração empilhada"><span style="font-size:18px">▫<br>─<br>▫</span></button>
+                                <button onclick="insertToWorkspace('{}/{}'" class="math-tpl" title="Fração linear"><span>▫/▫</span></button>
+                                <button onclick="insertToWorkspace('\\frac{\\partial}{\\partial x}')" class="math-tpl" title="Derivada parcial"><span style="font-size:11px">∂▫<br>─<br>∂x</span></button>
+                                <button onclick="insertToWorkspace('\\frac{d}{dx}')" class="math-tpl" title="Derivada"><span style="font-size:11px">d▫<br>─<br>dx</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Subscrito/Sobrescrito -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:14px">e<sup style="font-size:9px">x</sup></span>
+                            <span class="math-cat-label">Sub/Sobre<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Subscritos e Sobrescritos</div>
+                            <div class="math-cat-grid">
+                                <button onclick="insertToWorkspace('x^{}')" class="math-tpl" title="Sobrescrito">x<sup>▫</sup></button>
+                                <button onclick="insertToWorkspace('x_{}')" class="math-tpl" title="Subscrito">x<sub>▫</sub></button>
+                                <button onclick="insertToWorkspace('x_{}^{}')" class="math-tpl" title="Ambos">x<sub>▫</sub><sup>▫</sup></button>
+                                <button onclick="insertToWorkspace('{}^{}_{}'" class="math-tpl" title="Pré-escrito"><sup>▫</sup><sub>▫</sub>x</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Radical -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:16px">√</span>
+                            <span class="math-cat-label">Radical<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Radicais</div>
+                            <div class="math-cat-grid">
+                                <button onclick="insertToWorkspace('\\sqrt{}')" class="math-tpl" title="Raiz quadrada">√▫</button>
+                                <button onclick="insertToWorkspace('\\sqrt[n]{}')" class="math-tpl" title="Raiz n-ésima"><sup>n</sup>√▫</button>
+                                <button onclick="insertToWorkspace('\\sqrt[3]{}')" class="math-tpl" title="Raiz cúbica"><sup>3</sup>√▫</button>
+                                <button onclick="insertToWorkspace('\\sqrt[4]{}')" class="math-tpl" title="Raiz quarta"><sup>4</sup>√▫</button>
+                            </div>
+                            <div class="math-cat-title" style="margin-top:6px">Radicais Comuns</div>
+                            <div class="math-cat-grid math-cat-grid-wide">
+                                <button onclick="insertToWorkspace('\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}')" class="math-tpl math-tpl-wide" title="Bhaskara" style="font-size:10px">−b±√(b²−4ac)<br>─────<br>2a</button>
+                                <button onclick="insertToWorkspace('\\sqrt{a^2+b^2}')" class="math-tpl math-tpl-wide" title="Pitágoras">√(a²+b²)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Integral -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:18px">∫</span>
+                            <span class="math-cat-label">Integral<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Integrais</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\int{}')" class="math-tpl" title="Integral">∫▫</button>
+                                <button onclick="insertToWorkspace('\\int_{}^{}')" class="math-tpl" title="Integral definida">∫<sub>▫</sub><sup>▫</sup></button>
+                                <button onclick="insertToWorkspace('\\iint{}')" class="math-tpl" title="Integral dupla">∬▫</button>
+                                <button onclick="insertToWorkspace('\\iiint{}')" class="math-tpl" title="Integral tripla">∭▫</button>
+                                <button onclick="insertToWorkspace('\\oint{}')" class="math-tpl" title="Integral de contorno">∮▫</button>
+                                <button onclick="insertToWorkspace('\\int_{-\\infty}^{\\infty}')" class="math-tpl" title="Integral -∞ a ∞">∫<sub>-∞</sub><sup>∞</sup></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Operador Grande -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:16px">Σ</span>
+                            <span class="math-cat-label">Operador<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Operadores Grandes</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\sum_{i=1}^{n}')" class="math-tpl" title="Somatório">Σ<sub>i=1</sub><sup>n</sup></button>
+                                <button onclick="insertToWorkspace('\\sum{}')" class="math-tpl" title="Soma simples">Σ▫</button>
+                                <button onclick="insertToWorkspace('\\prod_{i=1}^{n}')" class="math-tpl" title="Produtório">∏<sub>i=1</sub><sup>n</sup></button>
+                                <button onclick="insertToWorkspace('\\prod{}')" class="math-tpl" title="Produto simples">∏▫</button>
+                                <button onclick="insertToWorkspace('\\bigcup_{i=1}^{n}')" class="math-tpl" title="União">⋃<sub>i=1</sub><sup>n</sup></button>
+                                <button onclick="insertToWorkspace('\\bigcap_{i=1}^{n}')" class="math-tpl" title="Interseção">⋂<sub>i=1</sub><sup>n</sup></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chaves -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:14px">{&nbsp;}</span>
+                            <span class="math-cat-label">Chaves<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Parênteses e Chaves</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\left(\\right)')" class="math-tpl" title="Parênteses">(▫)</button>
+                                <button onclick="insertToWorkspace('\\left[\\right]')" class="math-tpl" title="Colchetes">[▫]</button>
+                                <button onclick="insertToWorkspace('\\left\\{\\right\\}')" class="math-tpl" title="Chaves">{▫}</button>
+                                <button onclick="insertToWorkspace('\\left|\\right|')" class="math-tpl" title="Módulo">|▫|</button>
+                                <button onclick="insertToWorkspace('\\left\\|\\right\\|')" class="math-tpl" title="Norma">‖▫‖</button>
+                                <button onclick="insertToWorkspace('\\left\\langle\\right\\rangle')" class="math-tpl" title="Ângulo">⟨▫⟩</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Função -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:12px">sinθ</span>
+                            <span class="math-cat-label">Função<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Funções Trigonométricas</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\sin{}')" class="math-tpl">sin</button>
+                                <button onclick="insertToWorkspace('\\cos{}')" class="math-tpl">cos</button>
+                                <button onclick="insertToWorkspace('\\tan{}')" class="math-tpl">tan</button>
+                                <button onclick="insertToWorkspace('\\sec{}')" class="math-tpl">sec</button>
+                                <button onclick="insertToWorkspace('\\csc{}')" class="math-tpl">csc</button>
+                                <button onclick="insertToWorkspace('\\cot{}')" class="math-tpl">cot</button>
+                            </div>
+                            <div class="math-cat-title" style="margin-top:6px">Inversas</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\arcsin{}')" class="math-tpl" style="font-size:10px">arcsin</button>
+                                <button onclick="insertToWorkspace('\\arccos{}')" class="math-tpl" style="font-size:10px">arccos</button>
+                                <button onclick="insertToWorkspace('\\arctan{}')" class="math-tpl" style="font-size:10px">arctan</button>
+                                <button onclick="insertToWorkspace('\\log{}')" class="math-tpl">log</button>
+                                <button onclick="insertToWorkspace('\\ln{}')" class="math-tpl">ln</button>
+                                <button onclick="insertToWorkspace('\\exp{}')" class="math-tpl">exp</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ênfase / Acentos -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:16px">ä</span>
+                            <span class="math-cat-label">Ênfase<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Acentos Matemáticos</div>
+                            <div class="math-cat-grid math-cat-grid-6">
+                                <button onclick="insertToWorkspace('\\hat{}')" class="math-tpl" title="Chapéu">â</button>
+                                <button onclick="insertToWorkspace('\\bar{}')" class="math-tpl" title="Barra">ā</button>
+                                <button onclick="insertToWorkspace('\\vec{}')" class="math-tpl" title="Vetor">a⃗</button>
+                                <button onclick="insertToWorkspace('\\dot{}')" class="math-tpl" title="Ponto">ȧ</button>
+                                <button onclick="insertToWorkspace('\\ddot{}')" class="math-tpl" title="Dois pontos">ä</button>
+                                <button onclick="insertToWorkspace('\\tilde{}')" class="math-tpl" title="Til">ã</button>
+                                <button onclick="insertToWorkspace('\\overline{}')" class="math-tpl" title="Sobrelinha" style="font-size:10px;text-decoration:overline">abc</button>
+                                <button onclick="insertToWorkspace('\\underline{}')" class="math-tpl" title="Sublinha" style="font-size:10px;text-decoration:underline">abc</button>
+                                <button onclick="insertToWorkspace('\\overbrace{}')" class="math-tpl" title="Chave superior" style="font-size:11px">⏞</button>
+                                <button onclick="insertToWorkspace('\\underbrace{}')" class="math-tpl" title="Chave inferior" style="font-size:11px">⏟</button>
+                                <button onclick="insertToWorkspace('\\widehat{}')" class="math-tpl" title="Chapéu largo" style="font-size:11px">◠</button>
+                                <button onclick="insertToWorkspace('\\widetilde{}')" class="math-tpl" title="Til largo">∼</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Limite e Logaritmo -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:11px;font-weight:700">lim</span>
+                            <span class="math-cat-label">Limite<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown">
+                            <div class="math-cat-title">Limites e Logaritmos</div>
+                            <div class="math-cat-grid">
+                                <button onclick="insertToWorkspace('\\lim_{x\\to}')" class="math-tpl" title="Limite" style="font-size:10px">lim<sub>x→▫</sub></button>
+                                <button onclick="insertToWorkspace('\\lim_{x\\to\\infty}')" class="math-tpl" title="Limite infinito" style="font-size:10px">lim<sub>x→∞</sub></button>
+                                <button onclick="insertToWorkspace('\\lim_{x\\to 0}')" class="math-tpl" title="Limite zero" style="font-size:10px">lim<sub>x→0</sub></button>
+                                <button onclick="insertToWorkspace('\\log_{}')" class="math-tpl" title="Log base" style="font-size:11px">log<sub>▫</sub></button>
+                                <button onclick="insertToWorkspace('\\min{}')" class="math-tpl" title="Mínimo" style="font-size:11px">min</button>
+                                <button onclick="insertToWorkspace('\\max{}')" class="math-tpl" title="Máximo" style="font-size:11px">max</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Símbolos Básicos -->
+                    <div class="math-cat" onmousedown="event.preventDefault()">
+                        <button onclick="toggleMathCat(this)" class="math-cat-btn">
+                            <span class="math-cat-icon" style="font-size:14px">±</span>
+                            <span class="math-cat-label">Símbolos<span class="math-arrow">▾</span></span>
+                        </button>
+                        <div class="math-cat-dropdown math-cat-dropdown-wide">
+                            <div class="math-cat-title">Matemática Básica</div>
+                            <div class="math-sym-grid">
+                                <button onclick="insertToWorkspace('\\pm')" class="math-sym">±</button>
+                                <button onclick="insertToWorkspace('\\infty')" class="math-sym">∞</button>
+                                <button onclick="insertToWorkspace('=')" class="math-sym">=</button>
+                                <button onclick="insertToWorkspace('\\neq')" class="math-sym">≠</button>
+                                <button onclick="insertToWorkspace('\\approx')" class="math-sym">≈</button>
+                                <button onclick="insertToWorkspace('\\times')" class="math-sym">×</button>
+                                <button onclick="insertToWorkspace('\\div')" class="math-sym">÷</button>
+                                <button onclick="insertToWorkspace('\\leq')" class="math-sym">≤</button>
+                                <button onclick="insertToWorkspace('\\geq')" class="math-sym">≥</button>
+                                <button onclick="insertToWorkspace('\\ll')" class="math-sym">≪</button>
+                                <button onclick="insertToWorkspace('\\gg')" class="math-sym">≫</button>
+                                <button onclick="insertToWorkspace('\\equiv')" class="math-sym">≡</button>
+                                <button onclick="insertToWorkspace('\\sim')" class="math-sym">∼</button>
+                                <button onclick="insertToWorkspace('\\propto')" class="math-sym">∝</button>
+                                <button onclick="insertToWorkspace('\\forall')" class="math-sym">∀</button>
+                                <button onclick="insertToWorkspace('\\exists')" class="math-sym">∃</button>
+                                <button onclick="insertToWorkspace('\\nexists')" class="math-sym">∄</button>
+                                <button onclick="insertToWorkspace('\\in')" class="math-sym">∈</button>
+                                <button onclick="insertToWorkspace('\\notin')" class="math-sym">∉</button>
+                                <button onclick="insertToWorkspace('\\subset')" class="math-sym">⊂</button>
+                                <button onclick="insertToWorkspace('\\supset')" class="math-sym">⊃</button>
+                                <button onclick="insertToWorkspace('\\cup')" class="math-sym">∪</button>
+                                <button onclick="insertToWorkspace('\\cap')" class="math-sym">∩</button>
+                                <button onclick="insertToWorkspace('\\emptyset')" class="math-sym">∅</button>
+                                <button onclick="insertToWorkspace('\\partial')" class="math-sym">∂</button>
+                                <button onclick="insertToWorkspace('\\nabla')" class="math-sym">∇</button>
+                                <button onclick="insertToWorkspace('\\to')" class="math-sym">→</button>
+                                <button onclick="insertToWorkspace('\\Rightarrow')" class="math-sym">⇒</button>
+                                <button onclick="insertToWorkspace('\\Leftrightarrow')" class="math-sym">⇔</button>
+                                <button onclick="insertToWorkspace('\\therefore')" class="math-sym">∴</button>
+                                <button onclick="insertToWorkspace('\\because')" class="math-sym">∵</button>
+                                <button onclick="insertToWorkspace('\\%')" class="math-sym">%</button>
+                            </div>
+                            <div class="math-cat-title" style="margin-top:6px">Letras Gregas</div>
+                            <div class="math-sym-grid">
+                                <button onclick="insertToWorkspace('\\alpha')" class="math-sym">α</button>
+                                <button onclick="insertToWorkspace('\\beta')" class="math-sym">β</button>
+                                <button onclick="insertToWorkspace('\\gamma')" class="math-sym">γ</button>
+                                <button onclick="insertToWorkspace('\\delta')" class="math-sym">δ</button>
+                                <button onclick="insertToWorkspace('\\epsilon')" class="math-sym">ε</button>
+                                <button onclick="insertToWorkspace('\\zeta')" class="math-sym">ζ</button>
+                                <button onclick="insertToWorkspace('\\eta')" class="math-sym">η</button>
+                                <button onclick="insertToWorkspace('\\theta')" class="math-sym">θ</button>
+                                <button onclick="insertToWorkspace('\\lambda')" class="math-sym">λ</button>
+                                <button onclick="insertToWorkspace('\\mu')" class="math-sym">μ</button>
+                                <button onclick="insertToWorkspace('\\pi')" class="math-sym">π</button>
+                                <button onclick="insertToWorkspace('\\rho')" class="math-sym">ρ</button>
+                                <button onclick="insertToWorkspace('\\sigma')" class="math-sym">σ</button>
+                                <button onclick="insertToWorkspace('\\tau')" class="math-sym">τ</button>
+                                <button onclick="insertToWorkspace('\\phi')" class="math-sym">φ</button>
+                                <button onclick="insertToWorkspace('\\omega')" class="math-sym">ω</button>
+                                <button onclick="insertToWorkspace('\\Delta')" class="math-sym">Δ</button>
+                                <button onclick="insertToWorkspace('\\Gamma')" class="math-sym">Γ</button>
+                                <button onclick="insertToWorkspace('\\Theta')" class="math-sym">Θ</button>
+                                <button onclick="insertToWorkspace('\\Lambda')" class="math-sym">Λ</button>
+                                <button onclick="insertToWorkspace('\\Phi')" class="math-sym">Φ</button>
+                                <button onclick="insertToWorkspace('\\Psi')" class="math-sym">Ψ</button>
+                                <button onclick="insertToWorkspace('\\Omega')" class="math-sym">Ω</button>
+                                <button onclick="insertToWorkspace('\\Sigma')" class="math-sym">Σ</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Area -->
+            <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
+                <div id="editorContent" contenteditable="true" data-placeholder="Comece a digitar suas anotações..." spellcheck="true"></div>
+
+                <!-- Attachments Area -->
+                <div id="editorAttachments" class="px-6 pb-4"></div>
+            </div>
+
+            <!-- Footer -->
+            <div class="flex items-center justify-between px-6 py-4 border-t border-slate-100 bg-slate-50/30 rounded-b-[28px] flex-shrink-0">
+                <button onclick="closeNotesModal()" class="px-7 py-3 rounded-xl font-bold text-slate-500 hover:bg-slate-200 hover:text-[#0B193C] transition-all text-[12px] uppercase tracking-widest border border-slate-200">
+                    CANCELAR
+                </button>
+                <button onclick="saveTaskNotes()" class="bg-amber-500 hover:bg-amber-600 text-white px-10 py-3 rounded-xl font-black shadow-lg shadow-amber-200/50 transition-all text-[12px] uppercase tracking-widest flex items-center gap-2 hover:scale-[1.02]">
+                    <span class="material-symbols-outlined text-[18px]">save</span>
+                    SALVAR ANOTAÇÕES
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Font Picker Premium Engine -->
+    <script>
+    (function() {
+        var ALL_FONTS = [
+            { name: 'Inter', family: "'Inter', sans-serif" },
+            { name: 'Poppins', family: "'Poppins', sans-serif" },
+            { name: 'Roboto', family: "'Roboto', sans-serif" },
+            { name: 'Open Sans', family: "'Open Sans', sans-serif" },
+            { name: 'Lato', family: "'Lato', sans-serif" },
+            { name: 'Montserrat', family: "'Montserrat', sans-serif" },
+            { name: 'Nunito', family: "'Nunito', sans-serif" },
+            { name: 'Raleway', family: "'Raleway', sans-serif" },
+            { name: 'Source Sans 3', family: "'Source Sans 3', sans-serif" },
+            { name: 'Ubuntu', family: "'Ubuntu', sans-serif" },
+            { name: 'Cabin', family: "'Cabin', sans-serif" },
+            { name: 'Quicksand', family: "'Quicksand', sans-serif" },
+            { name: 'Work Sans', family: "'Work Sans', sans-serif" },
+            { name: 'Mulish', family: "'Mulish', sans-serif" },
+            { name: 'Manrope', family: "'Manrope', sans-serif" },
+            { name: 'DM Sans', family: "'DM Sans', sans-serif" },
+            { name: 'PT Sans', family: "'PT Sans', sans-serif" },
+            { name: 'Noto Sans', family: "'Noto Sans', sans-serif" },
+            { name: 'Rubik', family: "'Rubik', sans-serif" },
+            { name: 'Exo 2', family: "'Exo 2', sans-serif" },
+            { name: 'Josefin Sans', family: "'Josefin Sans', sans-serif" },
+            { name: 'Arial', family: "Arial, sans-serif" },
+            { name: 'Helvetica', family: "Helvetica, Arial, sans-serif" },
+            { name: 'Verdana', family: "Verdana, sans-serif" },
+            { name: 'Tahoma', family: "Tahoma, sans-serif" },
+            { name: 'Trebuchet MS', family: "'Trebuchet MS', sans-serif" },
+            { name: 'Segoe UI', family: "'Segoe UI', sans-serif" },
+            { name: 'Merriweather', family: "'Merriweather', serif" },
+            { name: 'Playfair Display', family: "'Playfair Display', serif" },
+            { name: 'Libre Baskerville', family: "'Libre Baskerville', serif" },
+            { name: 'PT Serif', family: "'PT Serif', serif" },
+            { name: 'Noto Serif', family: "'Noto Serif', serif" },
+            { name: 'Georgia', family: "Georgia, serif" },
+            { name: 'Times New Roman', family: "'Times New Roman', serif" },
+            { name: 'Garamond', family: "Garamond, 'Times New Roman', serif" },
+            { name: 'Cambria', family: "Cambria, Georgia, serif" },
+            { name: 'Courier New', family: "'Courier New', monospace" },
+            { name: 'Consolas', family: "Consolas, monospace" },
+            { name: 'Monaco', family: "Monaco, monospace" },
+            { name: 'Fira Code', family: "'Fira Code', monospace" },
+            { name: 'JetBrains Mono', family: "'JetBrains Mono', monospace" },
+            { name: 'Oswald', family: "'Oswald', sans-serif" },
+            { name: 'Bebas Neue', family: "'Bebas Neue', sans-serif" },
+            { name: 'Anton', family: "'Anton', sans-serif" },
+            { name: 'Abril Fatface', family: "'Abril Fatface', serif" },
+            { name: 'Impact', family: "Impact, sans-serif" },
+            { name: 'Comic Sans MS', family: "'Comic Sans MS', cursive" },
+            { name: 'Dancing Script', family: "'Dancing Script', cursive" },
+            { name: 'Pacifico', family: "'Pacifico', cursive" },
+            { name: 'Caveat', family: "'Caveat', cursive" },
+            { name: 'Lobster', family: "'Lobster', cursive" }
+        ];
+
+        var currentFont = 'Inter';
+        var pickerOpen = false;
+        var recentFonts = [];
+        try { recentFonts = JSON.parse(localStorage.getItem('recentFonts') || '[]'); } catch(e) {}
+
+        function addRecent(name) {
+            recentFonts = recentFonts.filter(function(n) { return n !== name; });
+            recentFonts.unshift(name);
+            if (recentFonts.length > 5) recentFonts = recentFonts.slice(0, 5);
+            try { localStorage.setItem('recentFonts', JSON.stringify(recentFonts)); } catch(e) {}
+        }
+
+        // Create floating dropdown directly in body
+        var floatingDD = document.createElement('div');
+        floatingDD.id = 'fontPickerFloating';
+        floatingDD.className = 'font-picker-dropdown hidden';
+        document.body.appendChild(floatingDD);
+
+        function buildDropdown(filter) {
+            floatingDD.innerHTML = '';
+            var si = document.createElement('input');
+            si.type = 'text';
+            si.className = 'font-picker-search';
+            si.placeholder = '\uD83D\uDD0D Buscar fonte...';
+            si.value = filter || '';
+            si.addEventListener('input', function(e) {
+                e.stopPropagation();
+                renderFontList(e.target.value.toLowerCase());
+            });
+            si.addEventListener('mousedown', function(e) { e.stopPropagation(); });
+            floatingDD.appendChild(si);
+            renderFontList((filter || '').toLowerCase());
+            setTimeout(function() { si.focus(); }, 60);
+        }
+
+        function makeItem(font) {
+            var item = document.createElement('div');
+            item.className = 'font-picker-item' + (font.name === currentFont ? ' active' : '');
+            item.style.fontFamily = font.family;
+            item.textContent = font.name;
+            item.addEventListener('mousedown', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                addRecent(font.name);
+                selectFont(font.name, font.family);
+            });
+            return item;
+        }
+
+        function renderFontList(q) {
+            var old = floatingDD.querySelectorAll('.font-picker-group');
+            for (var i = 0; i < old.length; i++) old[i].remove();
+            if (!q && recentFonts.length > 0) {
+                var rg = document.createElement('div'); rg.className = 'font-picker-group';
+                var rl = document.createElement('div'); rl.className = 'font-picker-group-label';
+                rl.textContent = 'Fontes Usadas Recentemente'; rg.appendChild(rl);
+                recentFonts.forEach(function(n) {
+                    var f = ALL_FONTS.find(function(x) { return x.name === n; });
+                    if (f) rg.appendChild(makeItem(f));
+                });
+                floatingDD.appendChild(rg);
+            }
+            var ag = document.createElement('div'); ag.className = 'font-picker-group';
+            var al = document.createElement('div'); al.className = 'font-picker-group-label';
+            al.textContent = q ? 'Resultados' : 'Todas as Fontes'; ag.appendChild(al);
+            var c = 0;
+            ALL_FONTS.forEach(function(font) {
+                if (!q || font.name.toLowerCase().indexOf(q) !== -1) { ag.appendChild(makeItem(font)); c++; }
+            });
+            if (c > 0) floatingDD.appendChild(ag);
+        }
+
+        function selectFont(name, family) {
+            currentFont = name;
+            var label = document.getElementById('fontPickerLabel');
+            if (label) { label.textContent = name; label.style.fontFamily = family; }
+            closePicker();
+            var editor = document.getElementById('editorContent');
+            if (editor) editor.focus();
+            if (typeof window.restoreSelection === 'function') window.restoreSelection();
+            if (typeof window.formatDoc === 'function') window.formatDoc('fontName', name);
+        }
+
+        window.toggleFontPicker = function() {
+            if (pickerOpen) closePicker(); else openPicker();
+        };
+
+        function openPicker() {
+            if (typeof window.saveSelection === 'function') window.saveSelection();
+            var btn = document.getElementById('fontPickerBtn');
+            var arrow = document.getElementById('fontPickerArrow');
+            if (!btn) return;
+            floatingDD.classList.remove('hidden');
+            if (arrow) arrow.style.transform = 'rotate(180deg)';
+            var rect = btn.getBoundingClientRect();
+            floatingDD.style.left = rect.left + 'px';
+            floatingDD.style.top = (rect.bottom + 4) + 'px';
+            var avail = window.innerHeight - rect.bottom - 12;
+            floatingDD.style.maxHeight = Math.max(180, Math.min(440, avail)) + 'px';
+            pickerOpen = true;
+            buildDropdown('');
+        }
+
+        function closePicker() {
+            floatingDD.classList.add('hidden');
+            var arrow = document.getElementById('fontPickerArrow');
+            if (arrow) arrow.style.transform = '';
+            pickerOpen = false;
+        }
+
+        document.addEventListener('mousedown', function(e) {
+            if (!pickerOpen) return;
+            if (e.target.closest('#fontPickerFloating') || e.target.closest('#fontPickerWrap')) return;
+            closePicker();
+        });
+
+        var origUpdate = window.updateToolbarState;
+        if (typeof origUpdate === 'function') {
+            window.updateToolbarState = function() {
+                origUpdate.apply(this, arguments);
+                try {
+                    var fn = document.queryCommandValue('fontName').replace(/"/g, '');
+                    if (fn) {
+                        var label = document.getElementById('fontPickerLabel');
+                        if (label) {
+                            var matched = null;
+                            ALL_FONTS.forEach(function(f) {
+                                if (fn.toLowerCase().indexOf(f.name.toLowerCase()) !== -1) matched = f;
+                            });
+                            if (matched) {
+                                label.textContent = matched.name;
+                                label.style.fontFamily = matched.family;
+                                currentFont = matched.name;
+                            }
+                        }
+                    }
+                } catch(e) {}
+            };
+        }
+    })();
+    </script>
+
+
+</body>
+</html>
 
 
 

@@ -1,0 +1,18 @@
+===== COMO RODAR A PLATAFORMA NEXUS PROVAS =====
+
+ATENÇÃO: Nunca abra o arquivo HTML diretamente clicando nele no Windows! Isso faz com que o navegador use o caminho "file:///" e bloqueie a geração de PDFs por motivos de segurança rigorosos do Google Chrome.
+
+Siga os passos abaixo para usar a plataforma corretamente:
+
+1. Na pasta principal da plataforma, dê dois cliques no arquivo "iniciar_servidor.bat".
+2. Uma tela preta (terminal do Windows) vai abrir. MANTENHA ESTA TELA ABERTA ENQUANTO ESTIVER USANDO A PLATAFORMA.
+3. Abra o Google Chrome.
+4. Digite na barra de endereços (ou copie e cole):
+   http://localhost:8000/src/pages/nexus_provas.html
+5. A plataforma vai carregar via servidor local. Você verá "localhost" na URL.
+6. Agora você pode gerar os espelhos de desempenho individuais, e o gerador de PDF funcionará perfeitamente sem o erro de tela branca.
+7. Quando terminar de usar a plataforma, você pode fechar a tela preta.
+
+SE A PORTA 8000 ESTIVER OCUPADA (O site não carregar):
+- Abra a tela preta (terminal) na pasta e digite manualmente: python -m http.server 8080
+- E acesse no Chrome: http://localhost:8080/src/pages/nexus_provas.html

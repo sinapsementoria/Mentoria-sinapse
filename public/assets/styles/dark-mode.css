@@ -1,0 +1,147 @@
+/* --- DARK MODE ESTÉTICA PREMIUM GLOBAL --- */
+body.dark-mode {
+    background-color: #020408 !important; /* Quase preto absoluto */
+    background-image: none !important;
+    color: #F8FAFC !important;
+}
+
+/* Sidebar and Global Areas */
+body.dark-mode aside {
+    background-color: #04070D !important;
+    border-right-color: #121826 !important;
+}
+body.dark-mode header, 
+body.dark-mode nav {
+    background-color: rgba(4, 7, 13, 0.95) !important;
+    border-bottom-color: #121826 !important;
+}
+body.dark-mode .bg-white\/70.backdrop-blur-xl {
+    background-color: rgba(4, 7, 13, 0.85) !important;
+}
+
+/* Cards & Modals */
+body.dark-mode .bg-white, 
+body.dark-mode .glass-panel {
+    background-color: #0A0F1A !important;
+    border-color: #1A2234 !important;
+    box-shadow: 0 10px 40px -5px rgba(0, 0, 0, 0.8), 0 4px 10px -2px rgba(0, 0, 0, 0.6) !important;
+}
+
+body.dark-mode .bg-slate-50, 
+body.dark-mode .bg-gray-50,
+body.dark-mode .bg-indigo-50\/30,
+body.dark-mode .bg-slate-100 {
+    background-color: #05080E !important;
+    border-color: #121826 !important;
+}
+
+/* Typography Overrides */
+body.dark-mode .text-\[\#0B193C\],
+body.dark-mode .text-gray-900,
+body.dark-mode h1, 
+body.dark-mode h2, 
+body.dark-mode h3, 
+body.dark-mode h4 {
+    color: #FFFFFF !important;
+}
+
+body.dark-mode .text-slate-600,
+body.dark-mode .text-slate-500,
+body.dark-mode .text-gray-600 {
+    color: #A1A1AA !important; /* Zinc 400 */
+}
+
+body.dark-mode .text-slate-400 {
+    color: #71717A !important; /* Zinc 500 */
+}
+
+/* Component Borders */
+body.dark-mode .border-white,
+body.dark-mode .border-slate-100 {
+    border-color: #1A2234 !important;
+}
+body.dark-mode .border-slate-200,
+body.dark-mode .border-slate-200\/60 {
+    border-color: #1E293B !important;
+}
+body.dark-mode .border-white\/50 {
+    border-color: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Interactive & Hover Effects */
+body.dark-mode .hover\:bg-slate-50:hover,
+body.dark-mode .group-hover\:bg-slate-50:hover {
+    background-color: #0E1522 !important;
+}
+body.dark-mode .hover\:border-slate-200:hover {
+    border-color: #334155 !important;
+}
+
+/* Adjustments for Indigo primary contrast in dark backgrounds */
+body.dark-mode .bg-indigo-50 {
+    background-color: rgba(99, 102, 241, 0.05) !important;
+}
+body.dark-mode .text-indigo-600 {
+    color: #818CF8 !important;
+}
+
+/* --- AGGRESSIVE VIVID COLOR MUTE FOR ALL PAGES --- */
+body.dark-mode .bg-\[\#265CB5\],
+body.dark-mode .bg-\[\#1B9A59\],
+body.dark-mode .bg-\[\#84439C\],
+body.dark-mode .bg-\[\#BA1A1A\],
+body.dark-mode .bg-\[\#388cae\],
+body.dark-mode .bg-\[\#246b8a\] {
+    background-color: #05080E !important;
+    border-color: #1A2234 !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.8) !important;
+}
+
+/* Agenda Dinamica Pastels and Inner Containers */
+body.dark-mode .bg-\[\#E9DCCF\],
+body.dark-mode .bg-\[\#ECCAC4\],
+body.dark-mode .bg-\[\#CBEBCE\],
+body.dark-mode .bg-\[\#CDDFE6\],
+body.dark-mode .bg-\[\#C2E9D9\],
+body.dark-mode .bg-\[\#DAC6EF\],
+body.dark-mode .bg-\[\#E6D0D3\],
+body.dark-mode .bg-blue-50\/40 {
+    background-color: #0A0F1A !important;
+    border-color: #1E293B !important;
+}
+
+/* Task states from JS */
+body.dark-mode .bg-\[\#87c49b\] {
+    background-color: #03140A !important; /* dark green */
+    border-color: #06401E !important;
+}
+body.dark-mode .bg-\[\#eb9e9e\] {
+    background-color: #1F0D0D !important; /* dark red */
+    border-color: #4A1010 !important;
+}
+
+body.dark-mode .bg-slate-300,
+body.dark-mode .bg-slate-200,
+body.dark-mode .bg-slate-100 {
+    background-color: #020408 !important;
+}
+
+/* Ensure text inside those is light */
+body.dark-mode .text-\[\#111\],
+body.dark-mode .text-black,
+body.dark-mode .text-\[\#333\] {
+    color: #F8FAFC !important;
+}
+
+body.dark-mode .text-black\/50,
+body.dark-mode .text-black\/60 {
+    color: #71717A !important;
+}
+
+body.dark-mode .border-\[\#4daccf\] {
+    border-color: #1A2234 !important;
+}
+
+body.dark-mode .border-black\/5 {
+    border-color: #1E293B !important;
+}

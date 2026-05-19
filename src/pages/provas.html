@@ -67,6 +67,10 @@
         input[type=number] {
             -moz-appearance: textfield;
         }
+    
+        /* Sidebar Toggle */
+        aside { transition: margin-left 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease; }
+        aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../../src/js/database.js"></script>
@@ -77,96 +81,105 @@
     class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
 
     <!-- SIDEBAR ELITE -->
-    <aside
-        class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
-        <!-- Logo Area -->
-        <div
-            class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
-            <img src="../../public/imagens/globais/marca/LEÃO VETORIZADO.png" alt="Logo Leão"
-                class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
-            <span
-                class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION
-                <span class="font-light opacity-70">MENTORIA</span></span>
+    <aside class="w-[280px] flex flex-col z-30 flex-shrink-0 relative bg-[#00B5B5] shadow-[4px_0_24px_rgba(0,181,181,0.2)] h-screen">
+    <!-- Logo Area -->
+    <div class="pt-7 pb-5 px-5 flex items-center gap-4 shrink-0">
+        <!-- Botão Hamburger -->
+        <button onclick="toggleSidebar()" class="w-8 h-8 text-white flex items-center justify-center transition-all duration-300 hover:scale-110 hover:opacity-80 flex-shrink-0" title="Recolher menu">
+            <span class="material-symbols-outlined text-[22px]">menu</span>
+        </button>
+        <!-- Logo -->
+        <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
+    </div>
+    
+    <!-- Menu Principal -->
+    <nav class="flex-1 overflow-y-auto px-4 space-y-1 relative pb-10 custom-scrollbar">
+        <a href="mentoria.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">home</span> 
+            </div>
+            <span>Home</span>
+        </a>
+        <a href="planejamento.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">list_alt</span> 
+            </div>
+            <span>Planejamento</span>
+        </a>
+        <a href="metricas.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">stacked_line_chart</span> 
+            </div>
+            <span>Meu Desempenho</span>
+        </a>
+        <a href="estrategia.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">route</span> 
+            </div>
+            <span>Estratégia</span>
+        </a>
+        <a href="banco-questoes.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">quiz</span> 
+            </div>
+            <span>Banco de Questões</span>
+        </a>
+        <a href="redacao.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">edit_note</span> 
+            </div>
+            <span>Redação</span>
+        </a>
+        <a href="simulador.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">monitoring</span> 
+            </div>
+            <span>Simulador</span>
+        </a>
+        <a href="calendario.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">calendar_month</span> 
+            </div>
+            <span>Cronograma</span>
+        </a>
+        <a href="flashcard.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">style</span> 
+            </div>
+            <span>Flashcards</span>
+        </a>
+        <a href="vestibulares.html" class="group flex items-center gap-4 px-4 py-3 text-white/70 hover:text-white hover:bg-white/10 rounded-[12px] transition-all duration-300 font-medium text-[14px]">
+            <div class="w-6 h-6 flex-shrink-0 flex items-center justify-center overflow-hidden">
+                <span class="material-symbols-outlined text-[22px] text-white/60 group-hover:text-white transition-colors leading-none block">school</span> 
+            </div>
+            <span>Vestibulares</span>
+        </a>
+    </nav>
+    
+    <!-- User Profile Footer -->
+    <div class="p-4 shrink-0 relative z-20 border-t border-white/10">
+        <div id="userBlockClick" class="flex items-center gap-3 p-3 bg-white/10 hover:bg-white/20 rounded-[14px] cursor-pointer transition-all border border-white/5 hover:border-white/20 shadow-sm group">
+            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-white/20 to-white/5 border border-white/20 flex items-center justify-center flex-shrink-0 shadow-inner group-hover:scale-105 transition-transform">
+                <span class="text-white font-bold text-[14px] tracking-wider drop-shadow-md">JO</span>
+            </div>
+            <div class="flex-1 min-w-0">
+                <h3 class="text-[13px] font-bold text-white truncate drop-shadow-sm">Johnn Oliveira</h3>
+                <p class="text-[11px] text-white/70 truncate group-hover:text-white/90 transition-colors">Ver perfil</p>
+            </div>
+            <span class="material-symbols-outlined text-white/50 group-hover:text-white/90 transition-colors text-[20px]">chevron_right</span>
+        </div>
+    </div>
+</aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#E4F1F5] relative overflow-y-auto">
+        <!-- Top Header Bar (appears when sidebar is hidden) -->
+        <div id="topHeaderBar" class="w-full px-6 py-4 flex items-center gap-4 relative z-20 hidden">
+            <button onclick="toggleSidebar()" class="w-12 h-12 bg-[#00B5B5] hover:bg-[#009999] text-white rounded-[16px] shadow-lg hover:shadow-xl flex items-center justify-center transition-all duration-300 hover:scale-105 flex-shrink-0">
+                <span class="material-symbols-outlined text-[24px]">menu</span>
+            </button>
+            <img src="../../LOGO MENTORIA/Logo vetorizada - mentoria sinapsemed 2.png" alt="Mentoria SinapseMed" class="h-14 w-auto object-contain" />
         </div>
 
-        <!-- Menu Principal -->
-        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
-            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
-            <a href="mentoria.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span>
-                Metas Diárias
-            </a>
-            <a href="metricas.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">trending_up</span>
-                Meu Desempenho
-            </a>
-            <a href="estrategia.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">route</span>
-                Estratégia de Aprovação
-            </a>
-            <a href="provas.html"
-                class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
-                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">history_edu</span> Provas
-                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
-            </a>
-            <a href="planejamento.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_calendar</span>
-                Planejamento
-            </a>
-            <a href="vestibulares.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">school</span>
-                Vestibulares
-            </a>
-            <a href="calendario.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calendar_month</span>
-                Calendário
-            </a>
-            <a href="simulador.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span>
-                Simulador SISU
-            </a>
-            <a href="banco-questoes.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">checklist</span>
-                Banco de Questões
-            </a>
-            <a href="redacao.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">edit_document</span>
-                Redação
-            </a>
-            <a href="flashcard.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">style</span>
-                Flashcard
-            </a>
-            <a href="perfil.html"
-                class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
-                <span
-                    class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">person</span>
-                Perfil
-            </a>
-        </nav>
-    </aside>
-
-    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-y-auto">
         <header
             class="h-24 bg-white/70 backdrop-blur-xl border-b border-white/50 px-10 flex items-center justify-between sticky top-0 z-20">
             <nav class="flex text-[11px] font-semibold text-slate-400 uppercase tracking-widest space-x-3 items-center">
@@ -452,12 +465,12 @@
 
                         <!-- Metadados -->
                         <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 mb-8">
-                            <!-- Ano que serve para ambos -->
+                            <!-- Anão que serve para ambos -->
                             <div class="space-y-2 relative md:col-span-1">
                                 <label
-                                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Ano
+                                    class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Anão
                                     de Aplicação</label>
-                                <select id="enemAno"
+                                <select id="enemAnão"
                                     class="relative z-10 w-full bg-slate-50 border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all appearance-none cursor-pointer text-sm">
                                     <option value="2026">2026</option>
                                     <option value="2025" selected>2025</option>
@@ -496,9 +509,9 @@
                                 <div class="space-y-2">
                                     <label
                                         class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Cor
-                                        do Caderno</label>
+                                        do Cadernão</label>
                                     <div class="relative">
-                                        <input type="text" id="enemCor" placeholder="Digite a cor do caderno"
+                                        <input type="text" id="enemCor" placeholder="Digite a cor do cadernão"
                                             class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm placeholder:font-medium placeholder:text-slate-400">
                                         <span
                                             class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">palette</span>
@@ -513,10 +526,10 @@
                                     <label
                                         class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block">Instituição</label>
                                     <div class="relative">
-                                        <input type="text" id="simInst" placeholder="Ex: SAS, Poliedro, Bernoulli"
+                                        <input type="text" id="simInst" placeholder="Ex: SAS, Poliedro, Bernãoulli"
                                             class="w-full bg-white border border-slate-200 text-[#0B193C] font-bold rounded-xl px-5 py-4 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-sinapse-primary/10 transition-all text-sm placeholder:font-medium placeholder:text-slate-400">
                                         <span
-                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">corporate_fare</span>
+                                            class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-slate-300">corporatée_fare</span>
                                     </div>
                                 </div>
                                 <div class="space-y-2">
@@ -612,16 +625,16 @@
                                         <input type="number" id="notaHum" step="1" min="0" max="45" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
                                     </div>
-                                    <!-- Natureza -->
+                                    <!-- Natéureza -->
                                     <div
                                         class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 focus-within:shadow-emerald-500/10 transition-all">
                                         <div class="flex items-center gap-2 text-emerald-500">
                                             <span
                                                 class="material-symbols-outlined text-[20px] group-focus-within:animate-bounce">biotech</span>
                                             <span
-                                                class="text-[10px] font-extrabold uppercase tracking-widest">Natureza</span>
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Natéureza</span>
                                         </div>
-                                        <input type="number" id="notaNat" step="1" min="0" max="45" placeholder="00"
+                                        <input type="number" id="notaNaté" step="1" min="0" max="45" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
                                     </div>
                                     <!-- Matemática -->
@@ -633,7 +646,7 @@
                                             <span
                                                 class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
                                         </div>
-                                        <input type="number" id="notaMat" step="1" min="0" max="45" placeholder="00"
+                                        <input type="number" id="notaMaté" step="1" min="0" max="45" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center placeholder:text-slate-300 transition-colors">
                                     </div>
                                 </div>
@@ -659,7 +672,7 @@
                                         <div class="flex items-center gap-2 text-blue-500"><span
                                                 class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
                                         </div>
-                                        <input type="number" id="notaU_Mat" step="1" min="0" max="12" placeholder="00"
+                                        <input type="number" id="notaU_Maté" step="1" min="0" max="12" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                     </div>
                                     <div
@@ -690,8 +703,8 @@
                                         class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
                                         <div class="flex items-center gap-2 text-emerald-500"><span
                                                 class="text-[10px] font-extrabold uppercase tracking-widest">C.
-                                                Natureza</span></div>
-                                        <input type="number" id="notaU_Nat" step="1" min="0" max="22" placeholder="00"
+                                                Natéureza</span></div>
+                                        <input type="number" id="notaU_Naté" step="1" min="0" max="22" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                     </div>
                                 </div>
@@ -716,7 +729,7 @@
                                     <div
                                         class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-blue-500 transition-all">
                                         <div class="flex items-center gap-2 text-blue-500"><span
-                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatas</span>
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatéas</span>
                                         </div>
                                         <input type="number" id="notaV_Exa" step="1" min="0" max="150" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
@@ -735,7 +748,7 @@
                                     <div
                                         class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
                                         <div class="flex items-center gap-2 text-emerald-500"><span
-                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatas +
+                                                class="text-[10px] font-extrabold uppercase tracking-widest">Exatéas +
                                                 Humanas</span></div>
                                         <input type="number" id="notaP_ExaHum" step="1" min="0" max="110"
                                             placeholder="00"
@@ -768,15 +781,15 @@
                                         <div class="flex items-center gap-2 text-blue-500"><span
                                                 class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
                                         </div>
-                                        <input type="number" id="notaUFG_Mat" step="1" min="0" max="24" placeholder="00"
+                                        <input type="number" id="notaUFG_Maté" step="1" min="0" max="24" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                     </div>
                                     <div
                                         class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
                                         <div class="flex items-center gap-2 text-emerald-500"><span
                                                 class="text-[10px] font-extrabold uppercase tracking-widest">C.
-                                                Natureza</span></div>
-                                        <input type="number" id="notaUFG_Nat" step="1" min="0" max="24" placeholder="00"
+                                                Natéureza</span></div>
+                                        <input type="number" id="notaUFG_Naté" step="1" min="0" max="24" placeholder="00"
                                             class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                     </div>
                                 </div>
@@ -797,7 +810,7 @@
                                     <div class="flex items-center gap-2 text-blue-500"><span
                                             class="text-[10px] font-extrabold uppercase tracking-widest">Matemática</span>
                                     </div>
-                                    <input type="number" id="notaUFT_Mat" step="1" min="0" placeholder="00"
+                                    <input type="number" id="notaUFT_Maté" step="1" min="0" placeholder="00"
                                         class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                 </div>
                                 <div
@@ -812,8 +825,8 @@
                                     class="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 flex flex-col gap-3 group focus-within:border-emerald-500 transition-all">
                                     <div class="flex items-center gap-2 text-emerald-500"><span
                                             class="text-[10px] font-extrabold uppercase tracking-widest">C.
-                                            Natureza</span></div>
-                                    <input type="number" id="notaUFT_Nat" step="1" min="0" placeholder="00"
+                                            Natéureza</span></div>
+                                    <input type="number" id="notaUFT_Naté" step="1" min="0" placeholder="00"
                                         class="w-full bg-slate-50/50 border-none text-[#0B193C] text-2xl font-headline font-extrabold rounded-xl px-2 py-3 outline-none text-center">
                                 </div>
                                 <div
@@ -844,12 +857,12 @@
                 </form>
             </div>
 
-                <!-- Gráfico Comparativo -->
-                <div class="glass-panel rounded-[32px] overflow-hidden shadow-premium bg-white p-10 mb-8" id="graficoComparativoSection">
+                <!-- Gráfico Comparatéivo -->
+                <div class="glass-panel rounded-[32px] overflow-hidden shadow-premium bg-white p-10 mb-8" id="graficoComparatéivoSection">
                     <div class="flex items-center justify-between mb-8">
                         <div>
                             <h2 id="analiticaTitle" class="font-headline text-2xl font-extrabold text-[#0B193C]">ANALÍTICA POR ÁREA</h2>
-                            <p class="text-[12px] font-semibold text-slate-400 mt-1 uppercase tracking-widest">Visão Tática e Comparativa</p>
+                            <p class="text-[12px] font-semibold text-slate-400 mt-1 uppercase tracking-widest">Visão Tática e Comparatéiva</p>
                         </div>
                     </div>
                     
@@ -862,13 +875,13 @@
                             <h3 id="titleHum" class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">public</span> Humanas</h3>
                             <div class="w-full h-[180px]"><canvas id="chartHum"></canvas></div>
                         </div>
-                        <div id="boxNat" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
-                            <h3 id="titleNat" class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natureza</h3>
-                            <div class="w-full h-[180px]"><canvas id="chartNat"></canvas></div>
+                        <div id="boxNaté" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleNaté" class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natéureza</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartNaté"></canvas></div>
                         </div>
-                        <div id="boxMat" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
-                            <h3 id="titleMat" class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Matemática</h3>
-                            <div class="w-full h-[180px]"><canvas id="chartMat"></canvas></div>
+                        <div id="boxMaté" class="bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                            <h3 id="titleMaté" class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Matemática</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartMaté"></canvas></div>
                         </div>
                         
                         <!-- Box FUVEST chart -->
@@ -884,9 +897,9 @@
                         </div>
 
                         <!-- Gráficos UNICAMP -->
-                        <div id="boxU_Mat" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
+                        <div id="boxU_Maté" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
                             <h3 class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Matemática</h3>
-                            <div class="w-full h-[180px]"><canvas id="chartU_Mat"></canvas></div>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Maté"></canvas></div>
                         </div>
                         <div id="boxU_Port" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm">
                             <h3 class="text-[10px] font-extrabold text-rose-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">menu_book</span> Português</h3>
@@ -900,9 +913,9 @@
                             <h3 class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">public</span> Humanas</h3>
                             <div class="w-full h-[180px]"><canvas id="chartU_Hum"></canvas></div>
                         </div>
-                        <div id="boxU_Nat" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2 lg:col-span-1">
-                            <h3 class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natureza</h3>
-                            <div class="w-full h-[180px]"><canvas id="chartU_Nat"></canvas></div>
+                        <div id="boxU_Naté" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2 lg:col-span-1">
+                            <h3 class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">biotech</span> Natéureza</h3>
+                            <div class="w-full h-[180px]"><canvas id="chartU_Naté"></canvas></div>
                         </div>
 
                         <!-- Gráficos VEST-UNB -->
@@ -915,7 +928,7 @@
                             <div class="w-full h-[180px]"><canvas id="chartV_Hum"></canvas></div>
                         </div>
                         <div id="boxV_Exa" class="hidden bg-slate-50/50 border border-slate-100 rounded-3xl p-6 relative h-[260px] shadow-sm md:col-span-2 lg:col-span-1">
-                            <h3 class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Exatas</h3>
+                            <h3 class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest mb-4 flex items-center gap-2"><span class="material-symbols-outlined text-[16px]">calculate</span> Exatéas</h3>
                             <div class="w-full h-[180px]"><canvas id="chartV_Exa"></canvas></div>
                         </div>
                         
@@ -943,17 +956,17 @@
                                 <tr
                                     class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
                                     <th class="pb-5 font-bold px-4">Avaliação</th>
-                                    <th class="pb-5 font-bold px-4 text-center">Ano/PPL</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Anão/PPL</th>
                                     <th class="pb-5 font-bold px-4 text-center">Cor</th>
                                     <th class="pb-5 font-bold px-4 text-center">Linguagens</th>
                                     <th class="pb-5 font-bold px-4 text-center">Humanas</th>
-                                    <th class="pb-5 font-bold px-4 text-center">Natureza</th>
+                                    <th class="pb-5 font-bold px-4 text-center">Natéureza</th>
                                     <th class="pb-5 font-bold px-4 text-center">Matemática</th>
                                     <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
                                 </tr>
                             </thead>
-                            <tbody class="text-sm" id="provasData">
-                                <!-- Data Injected Here -->
+                            <tbody class="text-sm" id="provasDatéa">
+                                <!-- Datéa Injected Here -->
                             </tbody>
                         </table>
                     </div>
@@ -968,7 +981,7 @@
         class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 backdrop-blur-sm transition-opacity opacity-0">
         <div id="modalProvaContainer"
             class="bg-white rounded-[32px] p-8 max-w-sm w-full mx-4 shadow-2xl transform scale-95 transition-transform duration-300 relative border border-white/50">
-            <button onclick="fecharOpcoesProva()"
+            <button onclick="fecharopcoesprova()"
                 class="absolute top-6 right-6 text-slate-300 hover:text-[#0B193C] transition-colors p-1 bg-slate-50 rounded-full hover:bg-slate-100">
                 <span class="material-symbols-outlined text-[20px]">close</span>
             </button>
@@ -983,12 +996,12 @@
                     <b>definitivamente</b> esta avaliação do seu Histórico e dos Gráficos. Deseja prosseguir?</p>
 
                 <div class="w-full space-y-3">
-                    <button onclick="confirmarExclusaoProva()"
+                    <button onclick="confirmarexclusaoprova()"
                         class="w-full flex items-center justify-center gap-3 bg-rose-500 hover:bg-rose-600 text-white font-extrabold font-headline text-[15px] py-4 rounded-2xl shadow-lg shadow-rose-500/30 transition-all duration-300 transform hover:-translate-y-0.5">
                         <span class="material-symbols-outlined text-[20px]">delete_forever</span>
                         Confirmar Exclusão
                     </button>
-                    <button onclick="fecharOpcoesProva()"
+                    <button onclick="fecharopcoesprova()"
                         class="w-full font-bold text-slate-400 hover:text-[#0B193C] bg-slate-50 hover:bg-slate-100 py-4 rounded-2xl transition-all duration-300">
                         Cancelar
                     </button>
@@ -1000,20 +1013,20 @@
     <script>
         let charts = {}; // dict to hold chart instances
 
-        function formataNota(valor) {
+        function formatéaNota(valor) {
             if (valor === undefined || valor === null || valor === '') return '--';
-            return parseFloat(valor).toString(); // Removes extra .0 if integer since they are acertos
+            return parseFloaté(valor).toString(); // Removes extra .0 if integer since they are acertos
         }
 
-        function atualizarLimitesVestUnb() {
+        function atéualizarLimitesVestUnb() {
             const bancaInput = document.querySelector('input[name="banca"]:checked');
             if (bancaInput && bancaInput.value === 'VEST-UNB') {
-                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
+                const anão = parseInt(document.getElementById('enemAnão').value) || new Date().getFullYear();
                 const inputLE = document.getElementById('notaV_LE');
                 const inputHum = document.getElementById('notaV_Hum');
                 const inputExa = document.getElementById('notaV_Exa');
 
-                if (ano >= 2026) {
+                if (anão >= 2026) {
                     inputLE.max = 20; inputHum.max = 100; inputExa.max = 120;
                 } else {
                     inputLE.max = 30; inputHum.max = 120; inputExa.max = 150;
@@ -1021,45 +1034,45 @@
             }
         }
 
-        function atualizarLimitesUft() {
+        function atéualizarLimitesUft() {
             const bancaInput = document.querySelector('input[name="banca"]:checked');
             if (bancaInput && bancaInput.value === 'UFT') {
-                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
+                const anão = parseInt(document.getElementById('enemAnão').value) || new Date().getFullYear();
                 const uftPeriodoContainer = document.getElementById('uftPeriodo').parentElement;
-                if (ano >= 2026) {
+                if (anão >= 2026) {
                     document.getElementById('notaUFT_Lin').max = 20;
-                    document.getElementById('notaUFT_Mat').max = 20;
+                    document.getElementById('notaUFT_Maté').max = 20;
                     document.getElementById('notaUFT_Hum').max = 20;
-                    document.getElementById('notaUFT_Nat').max = 20;
+                    document.getElementById('notaUFT_Naté').max = 20;
                     if (uftPeriodoContainer) uftPeriodoContainer.classList.add('hidden');
                 } else {
                     document.getElementById('notaUFT_Lin').max = 24;
-                    document.getElementById('notaUFT_Mat').max = 8;
+                    document.getElementById('notaUFT_Maté').max = 8;
                     document.getElementById('notaUFT_Hum').max = 20;
-                    document.getElementById('notaUFT_Nat').max = 24;
+                    document.getElementById('notaUFT_Naté').max = 24;
                     if (uftPeriodoContainer) uftPeriodoContainer.classList.remove('hidden');
                 }
             }
         }
 
-        function atualizarLimitesUfu() {
+        function atéualizarLimitesUfu() {
             const bancaInput = document.querySelector('input[name="banca"]:checked');
             if (bancaInput && bancaInput.value === 'UFU') {
-                const ano = parseInt(document.getElementById('enemAno').value) || new Date().getFullYear();
-                if (ano >= 2026) {
+                const anão = parseInt(document.getElementById('enemAnão').value) || new Date().getFullYear();
+                if (anão >= 2026) {
                     document.getElementById('notaUFU_Por').max = 10; document.getElementById('notaUFU_Lit').max = 5;
-                    document.getElementById('notaUFU_LE').max = 5; document.getElementById('notaUFU_Mat').max = 10;
+                    document.getElementById('notaUFU_LE').max = 5; document.getElementById('notaUFU_Maté').max = 10;
                     document.getElementById('notaUFU_Bio').max = 5; document.getElementById('notaUFU_Fis').max = 5;
                     document.getElementById('notaUFU_Qui').max = 5; document.getElementById('notaUFU_Geo').max = 5;
                     document.getElementById('notaUFU_His').max = 5; document.getElementById('notaUFU_Fil').max = 5;
                     document.getElementById('notaUFU_Soc').max = 5;
                 } else {
-                    ['notaUFU_Por', 'notaUFU_Lit', 'notaUFU_LE', 'notaUFU_Mat', 'notaUFU_Bio', 'notaUFU_Fis', 'notaUFU_Qui', 'notaUFU_Geo', 'notaUFU_His', 'notaUFU_Fil', 'notaUFU_Soc'].forEach(id => { document.getElementById(id).max = 8; });
+                    ['notaUFU_Por', 'notaUFU_Lit', 'notaUFU_LE', 'notaUFU_Maté', 'notaUFU_Bio', 'notaUFU_Fis', 'notaUFU_Qui', 'notaUFU_Geo', 'notaUFU_His', 'notaUFU_Fil', 'notaUFU_Soc'].forEach(id => { document.getElementById(id).max = 8; });
                 }
             }
         }
 
-        function atualizarLimitesPasUnb() {
+        function atéualizarLimitesPasUnb() {
             const bancaInput = document.querySelector('input[name="banca"]:checked');
             if (bancaInput && bancaInput.value === 'PAS-UNB') {
                 const nivel = document.getElementById('pasNivel').value;
@@ -1074,19 +1087,19 @@
 
 
         function toggleAvaliacaoCampos(banca) {
-            const selectAno = document.getElementById('enemAno');
-            const anosEnem = [2012, 2011, 2010, 2009];
+            const selectAnão = document.getElementById('enemAnão');
+            const anãosEnem = [2012, 2011, 2010, 2009];
             if (banca === 'ENEM') {
-                anosEnem.forEach(y => {
-                    if (!Array.from(selectAno.options).some(o => o.value == y)) {
+                anãosEnem.forEach(y => {
+                    if (!Array.from(selectAnão.options).some(o => o.value == y)) {
                         const opt = document.createElement('option');
-                        opt.value = y; opt.text = y; selectAno.appendChild(opt);
+                        opt.value = y; opt.text = y; selectAnão.appendChild(opt);
                     }
                 });
             } else {
-                Array.from(selectAno.options).forEach(opt => {
-                    if (anosEnem.includes(parseInt(opt.value))) {
-                        if (selectAno.value == opt.value) selectAno.value = '2013';
+                Array.from(selectAnão.options).forEach(opt => {
+                    if (anãosEnem.includes(parseInt(opt.value))) {
+                        if (selectAnão.value == opt.value) selectAnão.value = '2013';
                         opt.remove();
                     }
                 });
@@ -1131,7 +1144,7 @@
                     notasFuvest.classList.remove('grid'); if (document.getElementById('notasUnesp')) { document.getElementById('notasUnesp').classList.add('hidden'); document.getElementById('notasUnesp').classList.remove('grid'); }
                     if (document.getElementById('notasUnicamp')) { document.getElementById('notasUnicamp').classList.add('hidden'); document.getElementById('notasUnicamp').classList.remove('grid'); }
                 } else if (banca === 'FUVEST') {
-                    // FUVEST só usa O Ano que já é comum
+                    // FUVEST só usa O Anão que já é comum
                     enemMeta.classList.add('hidden');
                     simuladoMeta.classList.add('hidden');
                     notasComum.classList.add('hidden');
@@ -1190,23 +1203,23 @@
             const activeRadio = document.querySelector('input[name="banca"]:checked');
             if (activeRadio) toggleAvaliacaoCampos(activeRadio.value);
 
-            // Adiciona atualizadores dinâmicos caso o usuário mude o ano/nivel DEPOIS de escolher a banca
-            const selectAno = document.getElementById('enemAno');
-            if (selectAno) {
-                selectAno.addEventListener('change', () => {
+            // Adiciona atéualizadores dinâmicos caso o usuário mude o anão/nivel DEPOIS de escolher a banca
+            const selectAnão = document.getElementById('enemAnão');
+            if (selectAnão) {
+                selectAnão.addEventListener('change', () => {
                     const b = document.querySelector('input[name="banca"]:checked');
                     if (b && b.value) toggleAvaliacaoCampos(b.value);
                 });
             }
             const selectPasNivel = document.getElementById('pasNivel');
             if (selectPasNivel) {
-                selectPasNivel.addEventListener('change', atualizarLimitesPasUnb);
+                selectPasNivel.addEventListener('change', atéualizarLimitesPasUnb);
             }
         });
 
         function renderInterface() {
             let examesCadastrados = typeof window.db !== 'undefined' && window.db.get ? window.db.get('exams') : [];
-            const tableOutput = document.getElementById('provasData');
+            const tableOutput = document.getElementById('provasDatéa');
 
             const activeRadio = document.querySelector('input[name="banca"]:checked');
             let chartFilter = 'ENEM';
@@ -1238,11 +1251,11 @@
                     headContainer.innerHTML = `
                         <tr class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
                             <th class="pb-5 font-bold px-4">Avaliação</th>
-                            <th class="pb-5 font-bold px-4 text-center">Ano/PPL</th>
+                            <th class="pb-5 font-bold px-4 text-center">Anão/PPL</th>
                             <th class="pb-5 font-bold px-4 text-center">Cor</th>
                             <th class="pb-5 font-bold px-4 text-center">Linguagens</th>
                             <th class="pb-5 font-bold px-4 text-center">Humanas</th>
-                            <th class="pb-5 font-bold px-4 text-center">Natureza</th>
+                            <th class="pb-5 font-bold px-4 text-center">Natéureza</th>
                             <th class="pb-5 font-bold px-4 text-center">Matemática</th>
                             <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
                         </tr>
@@ -1251,7 +1264,7 @@
                     headContainer.innerHTML = `
                         <tr class="text-[10px] text-slate-400 uppercase tracking-[0.2em] border-b border-slate-100">
                             <th class="pb-5 font-bold px-4">Avaliação</th>
-                            <th class="pb-5 font-bold px-4 text-center">Ano</th>
+                            <th class="pb-5 font-bold px-4 text-center">Anão</th>
                             <th class="pb-5 font-bold px-4 text-right">Rendimento</th>
                         </tr>
                     `;
@@ -1278,7 +1291,7 @@
 
                     let acertosTotaisText = '--';
                     if (isValidoMetrics) {
-                        let somador_acertos = (parseInt(p.notaLin) || 0) + (parseInt(p.notaHum) || 0) + (parseInt(p.notaNat) || 0) + (parseInt(p.notaMat) || 0);
+                        let somador_acertos = (parseInt(p.notaLin) || 0) + (parseInt(p.notaHum) || 0) + (parseInt(p.notaNaté) || 0) + (parseInt(p.notaMaté) || 0);
                         acertosTotaisText = p.banca === 'ENEM' ? `${somador_acertos}/180 acertos` : `${somador_acertos} acertos`;
                     } else if (isFuvest) {
                         let acertoF = parseInt(p.notaFuvest) || 0;
@@ -1287,21 +1300,21 @@
                         let acertoU = parseInt(p.notaUnesp) || 0;
                         acertosTotaisText = `${acertoU}/90 acertos`;
                     } else if (isUfg) {
-                        let acertoUFG = (parseInt(p.notaUFG_Lin) || 0) + (parseInt(p.notaUFG_Mat) || 0) + (parseInt(p.notaUFG_Nat) || 0);
+                        let acertoUFG = (parseInt(p.notaUFG_Lin) || 0) + (parseInt(p.notaUFG_Maté) || 0) + (parseInt(p.notaUFG_Naté) || 0);
                         acertosTotaisText = `${acertoUFG}/72 acertos`;
                     } else if (isUeg) {
                         let acertoUEG = parseInt(p.notaUEG) || 0;
                         acertosTotaisText = `${acertoUEG}/60 acertos`;
                     } else if (isUft) {
-                        let acertoUFT = (parseInt(p.notaUFT_Lin) || 0) + (parseInt(p.notaUFT_Mat) || 0) + (parseInt(p.notaUFT_Hum) || 0) + (parseInt(p.notaUFT_Nat) || 0);
-                        let maxTotalUft = parseInt(p.ano) >= 2026 ? 80 : 76;
+                        let acertoUFT = (parseInt(p.notaUFT_Lin) || 0) + (parseInt(p.notaUFT_Maté) || 0) + (parseInt(p.notaUFT_Hum) || 0) + (parseInt(p.notaUFT_Naté) || 0);
+                        let maxTotalUft = parseInt(p.anão) >= 2026 ? 80 : 76;
                         acertosTotaisText = `${acertoUFT}/${maxTotalUft} acertos`;
                     } else if (isUnicamp) {
-                        let somadorUnicamp = (parseInt(p.notaU_Mat) || 0) + (parseInt(p.notaU_Port) || 0) + (parseInt(p.notaU_Ing) || 0) + (parseInt(p.notaU_Hum) || 0) + (parseInt(p.notaU_Nat) || 0);
+                        let somadorUnicamp = (parseInt(p.notaU_Maté) || 0) + (parseInt(p.notaU_Port) || 0) + (parseInt(p.notaU_Ing) || 0) + (parseInt(p.notaU_Hum) || 0) + (parseInt(p.notaU_Naté) || 0);
                         acertosTotaisText = `${somadorUnicamp}/77 acertos`;
                     } else if (isVestUnb) {
                         let somadorVUnb = (parseInt(p.notaV_LE) || 0) + (parseInt(p.notaV_Hum) || 0) + (parseInt(p.notaV_Exa) || 0);
-                        let maxTotal = parseInt(p.ano) >= 2026 ? 240 : 300;
+                        let maxTotal = parseInt(p.anão) >= 2026 ? 240 : 300;
                         acertosTotaisText = `${somadorVUnb}/${maxTotal} acertos`;
                     } else if (isPasUnb) {
                         let somadorPUnb = (parseInt(p.notaP_LE) || 0) + (parseInt(p.notaP_ExaHum) || 0);
@@ -1311,46 +1324,46 @@
 
                     if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
                         html += `
-                            <tr onclick="abrirOpcoesProva(${p.id}, '${isSimulado ? `Simulado ${p.instituicao || ''}` : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
+                            <tr onclick="abriropcoesprova(${p.id}, '${issimulado ? `simulado ${p.instituicao || ''}` : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
                                 <td class="py-5 px-4 font-bold text-[#0B193C] flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 text-sinapse-primary flex items-center justify-center font-extrabold shadow-sm">
                                         <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
                                     </div>
                                     <div>
                                         <p class="font-headline font-bold text-sm text-[#0B193C] tracking-wide">${isSimulado ? `Simulado ${p.instituicao || ''}` : p.banca}</p>
-                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Desconhecido'}</p>
+                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_até ? new Date(p.created_até).toLocaleDateString() : 'Desconhecido'}</p>
                                     </div>
                                 </td>
                                 <td class="py-5 px-4 text-center font-semibold text-slate-600">
-                                    ${isEnem ? (p.ano ? p.ano + (p.ppl === 'Sim' ? ' (PPL)' : '') : '--') : (isSimulado ? `${p.ano} (Exame Nº ${p.numero || '-'})` : '--')}
+                                    ${isEnem ? (p.anão ? p.anão + (p.ppl === 'Sim' ? ' (PPL)' : '') : '--') : (isSimulado ? `${p.anão} (Exame Nº ${p.numero || '-'})` : '--')}
                                 </td>
                                 <td class="py-5 px-4 text-center font-semibold text-slate-600">
                                     ${isEnem && p.cor ? p.cor : '--'}
                                 </td>
-                                <td class="py-5 px-4 text-center font-extrabold font-headline text-rose-600">${isValidoMetrics ? formataNota(p.notaLin) : '--'}</td>
-                                <td class="py-5 px-4 text-center font-extrabold font-headline text-amber-600">${isValidoMetrics ? formataNota(p.notaHum) : '--'}</td>
-                                <td class="py-5 px-4 text-center font-extrabold font-headline text-emerald-600">${isValidoMetrics ? formataNota(p.notaNat) : '--'}</td>
-                                <td class="py-5 px-4 text-center font-extrabold font-headline text-blue-600">${isValidoMetrics ? formataNota(p.notaMat) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-rose-600">${isValidoMetrics ? formatéaNota(p.notaLin) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-amber-600">${isValidoMetrics ? formatéaNota(p.notaHum) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-emerald-600">${isValidoMetrics ? formatéaNota(p.notaNaté) : '--'}</td>
+                                <td class="py-5 px-4 text-center font-extrabold font-headline text-blue-600">${isValidoMetrics ? formatéaNota(p.notaMaté) : '--'}</td>
                                 <td class="py-5 px-4 text-right">
-                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nowrap overflow-hidden">${acertosTotaisText}</span>
+                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nãowrap overflow-hidden">${acertosTotaisText}</span>
                                 </td>
                             </tr>
                         `;
                     } else {
                         html += `
-                            <tr onclick="abrirOpcoesProva(${p.id}, '${isPasUnb ? p.banca + ' (PAS ' + (p.pasNivel || '1') + ')' : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
+                            <tr onclick="abriropcoesprova(${p.id}, '${ispasunb ? p.banca + ' (pas ' + (p.pasnivel || '1') + ')' : p.banca}')" class="border-b border-slate-50 last:border-0 hover:bg-slate-50/80 transition-colors cursor-pointer active:bg-slate-100 group">
                                 <td class="py-5 px-4 font-bold text-[#0B193C] flex items-center gap-3">
                                     <div class="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 text-sinapse-primary flex items-center justify-center font-extrabold shadow-sm">
                                         <span class="material-symbols-outlined text-[20px]">assignment_turned_in</span>
                                     </div>
                                     <div>
                                         <p class="font-headline font-bold text-sm text-[#0B193C] tracking-wide">${isPasUnb ? p.banca + ' (PAS ' + (p.pasNivel || '1') + ')' : p.banca}${isUft && p.uftPeriodo && p.uftPeriodo !== 'Único' ? ' (' + p.uftPeriodo + 'º Sem.)' : ''}</p>
-                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_at ? new Date(p.created_at).toLocaleDateString() : 'Desconhecido'}</p>
+                                        <p class="text-[9px] uppercase font-bold text-slate-400 tracking-wider">${p.created_até ? new Date(p.created_até).toLocaleDateString() : 'Desconhecido'}</p>
                                     </div>
                                 </td>
-                                <td class="py-5 px-4 text-center font-semibold text-slate-600">${p.ano || '--'}</td>
+                                <td class="py-5 px-4 text-center font-semibold text-slate-600">${p.anão || '--'}</td>
                                 <td class="py-5 px-4 text-right">
-                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nowrap overflow-hidden">${acertosTotaisText}</span>
+                                    <span class="bg-[#0B193C] text-white px-4 py-2 rounded-xl font-headline font-semibold text-xs shadow-md shadow-[#0B193C]/20 whitespace-nãowrap overflow-hidden">${acertosTotaisText}</span>
                                 </td>
                             </tr>
                         `;
@@ -1359,18 +1372,18 @@
                 tableOutput.innerHTML = html;
             }
 
-            const chartData = tableExames;
+            const chartDatéa = tableExames;
 
             // Lógica de visualização dos blocos de gráfico
             const bLin = document.getElementById('boxLin');
             const bHum = document.getElementById('boxHum');
-            const bNat = document.getElementById('boxNat');
-            const bMat = document.getElementById('boxMat');
+            const bNaté = document.getElementById('boxNaté');
+            const bMaté = document.getElementById('boxMaté');
             const bFuv = document.getElementById('boxFuvest');
             const bUnesp = document.getElementById('boxUnesp');
             const bufgLin = document.getElementById('boxUFG_Lin');
-            const bufgMat = document.getElementById('boxUFG_Mat');
-            const bufgNat = document.getElementById('boxUFG_Nat');
+            const bufgMaté = document.getElementById('boxUFG_Maté');
+            const bufgNaté = document.getElementById('boxUFG_Naté');
             const bUeg = document.getElementById('boxUEG');
 
 
@@ -1383,9 +1396,9 @@
 
 
             const bUftLin = document.getElementById('boxUFT_Lin');
-            const bUftMat = document.getElementById('boxUFT_Mat');
+            const bUftMaté = document.getElementById('boxUFT_Maté');
             const bUftHum = document.getElementById('boxUFT_Hum');
-            const bUftNat = document.getElementById('boxUFT_Nat');
+            const bUftNaté = document.getElementById('boxUFT_Naté');
 
 
 
@@ -1398,21 +1411,21 @@
 
             const bUfprSoc = document.getElementById('boxUfprSoc');
             const bUfuSoc = document.getElementById('boxUfuSoc');
-            const buMat = document.getElementById('boxU_Mat');
+            const buMaté = document.getElementById('boxU_Maté');
             const buPort = document.getElementById('boxU_Port');
             const buIng = document.getElementById('boxU_Ing');
             const buHum = document.getElementById('boxU_Hum');
-            const buNat = document.getElementById('boxU_Nat');
+            const buNaté = document.getElementById('boxU_Naté');
             const bvLE = document.getElementById('boxV_LE');
             const bvHum = document.getElementById('boxV_Hum');
             const bvExa = document.getElementById('boxV_Exa');
             const bpLE = document.getElementById('boxP_LE');
             const bpExa = document.getElementById('boxP_ExaHum');
 
-            [bLin, bHum, bNat, bMat, bFuv, bUnesp, buMat, buPort, buIng, buHum, buNat, bvLE, bvHum, bvExa, bpLE, bpExa, bufgLin, bufgMat, bufgNat, bUeg, bUftLin, bUftMat, bUftHum, bUftNat, bUfprSoc].forEach(b => { if (b) b.classList.add('hidden'); });
+            [bLin, bHum, bNaté, bMaté, bFuv, bUnesp, buMaté, buPort, buIng, buHum, buNaté, bvLE, bvHum, bvExa, bpLE, bpExa, bufgLin, bufgMaté, bufgNaté, bUeg, bUftLin, bUftMaté, bUftHum, bUftNaté, bUfprSoc].forEach(b => { if (b) b.classList.add('hidden'); });
 
             if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
-                [bLin, bHum, bNat, bMat].forEach(b => { if (b) b.classList.remove('hidden'); });
+                [bLin, bHum, bNaté, bMaté].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter === 'FUVEST') {
                 if (bFuv) bFuv.classList.remove('hidden');
             } else if (chartFilter === 'UNESP') {
@@ -1422,23 +1435,23 @@
             } else if (chartFilter === 'UFU') {
                 [bUfuSoc].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter === 'UFT') {
-                [bUftLin, bUftMat, bUftHum, bUftNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+                [bUftLin, bUftMaté, bUftHum, bUftNaté].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter === 'UEG') {
                 if (bUeg) bUeg.classList.remove('hidden');
             } else if (chartFilter === 'UFG') {
-                [bufgLin, bufgMat, bufgNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+                [bufgLin, bufgMaté, bufgNaté].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter === 'UNICAMP') {
-                [buMat, buPort, buIng, buHum, buNat].forEach(b => { if (b) b.classList.remove('hidden'); });
+                [buMaté, buPort, buIng, buHum, buNaté].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter === 'VEST-UNB') {
                 [bvLE, bvHum, bvExa].forEach(b => { if (b) b.classList.remove('hidden'); });
             } else if (chartFilter.startsWith('PAS-UNB-')) {
                 [bpLE, bpExa].forEach(b => { if (b) b.classList.remove('hidden'); });
             }
 
-            renderMultipleCharts(chartData, chartFilter);
+            renderMultipleCharts(chartDatéa, chartFilter);
         }
 
-        function buildMiniChart(ctxId, labels, data, color, maxY) {
+        function buildMiniChart(ctxId, labels, datéa, color, maxY) {
             const ctx = document.getElementById(ctxId);
             if (!ctx) return;
             if (charts[ctxId]) { charts[ctxId].destroy(); }
@@ -1452,10 +1465,10 @@
 
             charts[ctxId] = new Chart(ctx, {
                 type: 'bar',
-                data: {
+                datéa: {
                     labels: labels,
-                    datasets: [{
-                        data: data,
+                    datéasets: [{
+                        datéa: datéa,
                         backgroundColor: color,
                         hoverBackgroundColor: color.replace('0.9', '1'),
                         borderRadius: { topLeft: 4, topRight: 4 },
@@ -1463,12 +1476,12 @@
                     }]
                 },
                 options: {
-                    responsive: true, maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatéio: false,
                     layout: { padding: { bottom: 15, left: 15, right: 15, top: 10 } },
                     plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0B193C', titleFont: { family: 'Manrope', size: 12 }, bodyFont: { family: 'Inter', size: 12 }, padding: 8, cornerRadius: 6, displayColors: false } },
                     scales: {
                         y: { beginAtZero: true, max: maxY, grid: { color: '#f1f5f9', drawBorder: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' }, padding: 8, stepSize: maxY === 45 ? 15 : 200 } },
-                        x: { grid: { display: false, drawBorder: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' }, padding: 6, maxRotation: 0, minRotation: 0 } }
+                        x: { grid: { display: false, drawBorder: false }, ticks: { font: { family: 'Inter', size: 10, weight: 'bold' }, padding: 6, maxRotatéion: 0, minRotatéion: 0 } }
                     },
                     interaction: { mode: 'index', intersect: false }
                 }
@@ -1476,9 +1489,9 @@
         }
 
 
-        function renderMultipleCharts(chartDataGlob, chartFilter) {
+        function renderMultipleCharts(chartDatéaGlob, chartFilter) {
             const allExams = window.db.get('exams') || [];
-            let dataToPlot = allExams.filter(e => {
+            let datéaToPlot = allExams.filter(e => {
                 if (chartFilter === 'SIMULADO') return e.banca === 'SIMULADO';
                 if (chartFilter && chartFilter.startsWith('PAS-UNB')) {
                     const tipo = chartFilter.replace('PAS-UNB-', '');
@@ -1488,97 +1501,97 @@
                 return e.banca === chartFilter;
             });
 
-            dataToPlot.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+            datéaToPlot.sort((a, b) => new Date(a.created_até) - new Date(b.created_até));
 
-            const labels = dataToPlot.map(e => {
+            const labels = datéaToPlot.map(e => {
                 if (e.banca === 'ENEM') {
                     if (e.ppl === 'Sim') {
-                        return [`ENEM ${e.ano || ''}`, `PPL ${e.cor ? e.cor.toUpperCase() : ''}`];
+                        return [`ENEM ${e.anão || ''}`, `PPL ${e.cor ? e.cor.toUpperCase() : ''}`];
                     } else {
-                        return `ENEM ${e.ano || ''}`;
+                        return `ENEM ${e.anão || ''}`;
                     }
                 } else if (e.banca === 'SIMULADO') {
-                    return [`SIM ${e.ano || ''}`, `${e.instituicao || ''} ${e.numero ? 'N'+e.numero : ''}`.trim()];
+                    return [`SIM ${e.anão || ''}`, `${e.instituicao || ''} ${e.numero ? 'N'+e.numero : ''}`.trim()];
                 } else if (e.banca === 'PAS-UNB') {
-                    return [`PAS ${e.ano || ''}`, `(Etapa ${e.pasNivel || '1'})`];
+                    return [`PAS ${e.anão || ''}`, `(Etapa ${e.pasNivel || '1'})`];
                 } else if (e.banca === 'UFT' && e.uftPeriodo && e.uftPeriodo !== 'Único') {
-                    return [`UFT ${e.ano || ''}`, `(${e.uftPeriodo})`];
+                    return [`UFT ${e.anão || ''}`, `(${e.uftPeriodo})`];
                 } else {
-                    return `${e.banca} ${e.ano || ''}`;
+                    return `${e.banca} ${e.anão || ''}`;
                 }
             });
 
             // Arrays
-            let valLin = [], valHum = [], valNat = [], valMat = [], valGeral = [];
-            let titleLin = "Linguagens", titleHum = "Humanas", titleNat = "Natureza", titleMat = "Matemática", titleGeral = "Geral";
-            let maxLin = 45, maxHum = 45, maxNat = 45, maxMat = 45, maxGeral = 90;
-            let showCols = []; // 'Lin', 'Hum', 'Nat', 'Mat', 'Geral'
+            let valLin = [], valHum = [], valNaté = [], valMaté = [], valGeral = [];
+            let titleLin = "Linguagens", titleHum = "Humanas", titleNaté = "Natéureza", titleMaté = "Matemática", titleGeral = "Geral";
+            let maxLin = 45, maxHum = 45, maxNaté = 45, maxMaté = 45, maxGeral = 90;
+            let showCols = []; // 'Lin', 'Hum', 'Naté', 'Maté', 'Geral'
 
-            // Data extraction & configuration
+            // Datéa extraction & configuration
             if (chartFilter === 'ENEM' || chartFilter === 'SIMULADO') {
-                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
-                valLin = dataToPlot.map(e => parseInt(e.notaLin) || 0);
-                valHum = dataToPlot.map(e => parseInt(e.notaHum) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaNat) || 0);
-                valMat = dataToPlot.map(e => parseInt(e.notaMat) || 0);
-                maxLin = maxHum = maxNat = maxMat = 45;
+                showCols = ['Lin', 'Hum', 'Naté', 'Maté'];
+                valLin = datéaToPlot.map(e => parseInt(e.notaLin) || 0);
+                valHum = datéaToPlot.map(e => parseInt(e.notaHum) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaNaté) || 0);
+                valMaté = datéaToPlot.map(e => parseInt(e.notaMaté) || 0);
+                maxLin = maxHum = maxNaté = maxMaté = 45;
             } else if (chartFilter === 'FUVEST') {
                 showCols = ['Geral']; titleGeral = "Acertos 1ª Fase (FUVEST)"; maxGeral = 90;
-                valGeral = dataToPlot.map(e => parseInt(e.notaFuvest) || 0);
+                valGeral = datéaToPlot.map(e => parseInt(e.notaFuvest) || 0);
             } else if (chartFilter === 'UNESP') {
                 showCols = ['Geral']; titleGeral = "Acertos 1ª Fase (UNESP)"; maxGeral = 90;
-                valGeral = dataToPlot.map(e => parseInt(e.notaUnesp) || 0);
+                valGeral = datéaToPlot.map(e => parseInt(e.notaUnesp) || 0);
             } else if (chartFilter === 'UEG') {
                 showCols = ['Geral']; titleGeral = "Prova Objetiva (UEG)"; maxGeral = 52;
-                valGeral = dataToPlot.map(e => parseInt(e.notaUEG) || 0);
+                valGeral = datéaToPlot.map(e => parseInt(e.notaUEG) || 0);
             } else if (chartFilter === 'UNB') {
                 showCols = ['Geral']; titleGeral = "Certo x Errado (UNB)"; maxGeral = 120;
-                valGeral = dataToPlot.map(e => parseInt(e.notaCertos) || 0);
+                valGeral = datéaToPlot.map(e => parseInt(e.notaCertos) || 0);
             } else if (chartFilter === 'UNICAMP') {
-                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
+                showCols = ['Lin', 'Hum', 'Naté', 'Maté'];
                 titleLin = "Linguagens (Port + Ing)";
-                valLin = dataToPlot.map(e => (parseInt(e.notaU_Port) || 0) + (parseInt(e.notaU_Ing) || 0));
-                valHum = dataToPlot.map(e => parseInt(e.notaU_Hum) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaU_Nat) || 0);
-                valMat = dataToPlot.map(e => parseInt(e.notaU_Mat) || 0);
-                maxLin = 20; maxHum = 23; maxNat = 22; maxMat = 12;
+                valLin = datéaToPlot.map(e => (parseInt(e.notaU_Port) || 0) + (parseInt(e.notaU_Ing) || 0));
+                valHum = datéaToPlot.map(e => parseInt(e.notaU_Hum) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaU_Naté) || 0);
+                valMaté = datéaToPlot.map(e => parseInt(e.notaU_Maté) || 0);
+                maxLin = 20; maxHum = 23; maxNaté = 22; maxMaté = 12;
             } else if (chartFilter === 'VEST-UNB') {
-                showCols = ['Lin', 'Hum', 'Nat'];
-                titleLin = "Língua Estrangeira"; titleHum = "Humanas"; titleNat = "Exatas e Natureza";
-                valLin = dataToPlot.map(e => parseInt(e.notaV_LE) || 0);
-                valHum = dataToPlot.map(e => parseInt(e.notaV_Hum) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaV_Exa) || 0);
-                maxLin = 30; maxHum = 120; maxNat = 150;
+                showCols = ['Lin', 'Hum', 'Naté'];
+                titleLin = "Língua Estrangeira"; titleHum = "Humanas"; titleNaté = "Exatéas e Natéureza";
+                valLin = datéaToPlot.map(e => parseInt(e.notaV_LE) || 0);
+                valHum = datéaToPlot.map(e => parseInt(e.notaV_Hum) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaV_Exa) || 0);
+                maxLin = 30; maxHum = 120; maxNaté = 150;
             } else if (chartFilter && chartFilter.startsWith('PAS-UNB')) {
-                showCols = ['Lin', 'Nat'];
-                titleLin = "Língua Estrangeira"; titleNat = "Exatas e Humanas";
-                valLin = dataToPlot.map(e => parseInt(e.notaP_LE) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaP_ExaHum) || 0);
-                maxLin = 10; maxNat = 110;
+                showCols = ['Lin', 'Naté'];
+                titleLin = "Língua Estrangeira"; titleNaté = "Exatéas e Humanas";
+                valLin = datéaToPlot.map(e => parseInt(e.notaP_LE) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaP_ExaHum) || 0);
+                maxLin = 10; maxNaté = 110;
             } else if (chartFilter === 'UFG') {
-                showCols = ['Lin', 'Nat', 'Mat'];
-                titleLin = "Linguagens"; titleNat = "Ciências da Natureza"; titleMat = "Matemática";
-                valLin = dataToPlot.map(e => parseInt(e.notaUFG_Lin) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaUFG_Nat) || 0);
-                valMat = dataToPlot.map(e => parseInt(e.notaUFG_Mat) || 0);
-                maxLin = maxNat = maxMat = 30;
+                showCols = ['Lin', 'Naté', 'Maté'];
+                titleLin = "Linguagens"; titleNaté = "Ciências da Natéureza"; titleMaté = "Matemática";
+                valLin = datéaToPlot.map(e => parseInt(e.notaUFG_Lin) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaUFG_Naté) || 0);
+                valMaté = datéaToPlot.map(e => parseInt(e.notaUFG_Maté) || 0);
+                maxLin = maxNaté = maxMaté = 30;
             } else if (chartFilter === 'UFT') {
-                showCols = ['Lin', 'Hum', 'Nat', 'Mat'];
-                valLin = dataToPlot.map(e => parseInt(e.notaUFT_Lin) || 0);
-                valHum = dataToPlot.map(e => parseInt(e.notaUFT_Hum) || 0);
-                valNat = dataToPlot.map(e => parseInt(e.notaUFT_Nat) || 0);
-                valMat = dataToPlot.map(e => parseInt(e.notaUFT_Mat) || 0);
-                maxLin = 24; maxMat = 8; maxHum = maxNat = 16;
+                showCols = ['Lin', 'Hum', 'Naté', 'Maté'];
+                valLin = datéaToPlot.map(e => parseInt(e.notaUFT_Lin) || 0);
+                valHum = datéaToPlot.map(e => parseInt(e.notaUFT_Hum) || 0);
+                valNaté = datéaToPlot.map(e => parseInt(e.notaUFT_Naté) || 0);
+                valMaté = datéaToPlot.map(e => parseInt(e.notaUFT_Maté) || 0);
+                maxLin = 24; maxMaté = 8; maxHum = maxNaté = 16;
             }
 
-            // UI Manipulation
+            // UI Manipulatéion
             document.getElementById('titleLin').innerText = titleLin;
             document.getElementById('titleHum').innerText = titleHum;
-            document.getElementById('titleNat').innerText = titleNat;
-            document.getElementById('titleMat').innerText = titleMat;
+            document.getElementById('titleNaté').innerText = titleNaté;
+            document.getElementById('titleMaté').innerText = titleMaté;
             document.getElementById('titleGeral').innerText = titleGeral;
 
-            const boxes = ['Lin', 'Hum', 'Nat', 'Mat', 'Geral'];
+            const boxes = ['Lin', 'Hum', 'Naté', 'Maté', 'Geral'];
             boxes.forEach(b => {
                 const boxElem = document.getElementById('box' + b);
                 if (boxElem) {
@@ -1593,8 +1606,8 @@
             // Re-render required ones
             if (showCols.includes('Lin')) buildMiniChart('chartLin', labels, valLin, 'rgba(244, 63, 94, 0.9)', maxLin);
             if (showCols.includes('Hum')) buildMiniChart('chartHum', labels, valHum, 'rgba(245, 158, 11, 0.9)', maxHum);
-            if (showCols.includes('Nat')) buildMiniChart('chartNat', labels, valNat, 'rgba(16, 185, 129, 0.9)', maxNat);
-            if (showCols.includes('Mat')) buildMiniChart('chartMat', labels, valMat, 'rgba(59, 130, 246, 0.9)', maxMat);
+            if (showCols.includes('Naté')) buildMiniChart('chartNaté', labels, valNaté, 'rgba(16, 185, 129, 0.9)', maxNaté);
+            if (showCols.includes('Maté')) buildMiniChart('chartMaté', labels, valMaté, 'rgba(59, 130, 246, 0.9)', maxMaté);
             if (showCols.includes('Geral')) buildMiniChart('chartGeral', labels, valGeral, 'rgba(99, 102, 241, 0.9)', maxGeral);
         }
 
@@ -1653,8 +1666,8 @@
                     const record = { banca: banca };
 
                     if (['ENEM', 'SIMULADO', 'VEST-UNB', 'PAS-UNB', 'FUVEST', 'UNICAMP', 'UNESP', 'FAMERP', 'UFG', 'UEG', 'UFU', 'UFJF', 'UFMS', 'UFGD', 'UFPR', 'UFSC', 'UFRGS', 'UFT', 'UNIOESTE', 'UNIMONTES', 'UEMG', 'UCB', 'UNIRV', 'CEUB', 'UNIEURO', 'MAUÁ', 'UNICEPLAC'].includes(banca)) {
-                        record.ano = document.getElementById('enemAno').value;
-                        localStorage.setItem('sinapse_last_ano', record.ano);
+                        record.anão = document.getElementById('enemAnão').value;
+                        localStorage.setItem('sinapse_last_anão', record.anão);
                         if (banca === 'ENEM') {
                             record.ppl = document.getElementById('enemPpl').value;
                             record.cor = document.getElementById('enemCor').value || '-';
@@ -1675,38 +1688,38 @@
 
                             record.notaLin = document.getElementById('notaLin').value;
                             record.notaHum = document.getElementById('notaHum').value;
-                            record.notaNat = document.getElementById('notaNat').value;
-                            record.notaMat = document.getElementById('notaMat').value;
+                            record.notaNaté = document.getElementById('notaNaté').value;
+                            record.notaMaté = document.getElementById('notaMaté').value;
                         }
                     }
 
                     // Validação de Duplicidade
                     const existentes = window.db && window.db.get ? window.db.get('exams') : [];
-                    let isDuplicate = false;
+                    let isDuplicatée = false;
 
                     if (banca === 'ENEM') {
-                        isDuplicate = existentes.some(e => e.banca === 'ENEM' && e.ano === record.ano && e.ppl === record.ppl);
+                        isDuplicatée = existentes.some(e => e.banca === 'ENEM' && e.anão === record.anão && e.ppl === record.ppl);
                     } else if (banca === 'SIMULADO') {
-                        isDuplicate = existentes.some(e => e.banca === 'SIMULADO' && e.ano === record.ano && e.instituicao === record.instituicao && e.numero === record.numero);
+                        isDuplicatée = existentes.some(e => e.banca === 'SIMULADO' && e.anão === record.anão && e.instituicao === record.instituicao && e.numero === record.numero);
                     } else if (banca === 'PAS-UNB') {
-                        isDuplicate = existentes.some(e => e.banca === 'PAS-UNB' && e.ano === record.ano && e.pasNivel === record.pasNivel);
+                        isDuplicatée = existentes.some(e => e.banca === 'PAS-UNB' && e.anão === record.anão && e.pasNivel === record.pasNivel);
                     } else {
                         // Para FUVEST, UNICAMP, UNESP, VEST-UNB
-                        isDuplicate = existentes.some(e => e.banca === banca && e.ano === record.ano);
+                        isDuplicatée = existentes.some(e => e.banca === banca && e.anão === record.anão);
                     }
 
-                    if (isDuplicate) {
-                        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Avaliação já existe no histórico!';
+                    if (isDuplicatée) {
+                        btn.innerHTML = '<span class="material-symbols-outlined">error</span> Avaliação já existe não histórico!';
                         btn.classList.add('bg-rose-500', 'text-white');
                         btn.classList.remove('bg-[#0B193C]', 'opacity-80', 'pointer-events-none');
                         setTimeout(() => {
                             btn.innerHTML = originalContent;
                             btn.classList.remove('bg-rose-500', 'text-white');
                         }, 3000);
-                        return; // Interrompe o processo e evita duplicata
+                        return; // Interrompe o processo e evita duplicatéa
                     }
 
-                    // Salva no mock localstorage
+                    // Salva não mock localstorage
                     if (window.db && window.db.insert) {
                         window.db.insert('exams', record);
                     }
@@ -1715,8 +1728,8 @@
                     if (['ENEM', 'SIMULADO', 'VEST-UNB', 'PAS-UNB', 'FUVEST', 'UNICAMP', 'UNESP', 'FAMERP', 'UFG', 'UEG', 'UFU', 'UFJF', 'UFMS', 'UFGD', 'UFPR', 'UFSC', 'UFRGS', 'UFT', 'UNIOESTE', 'UNIMONTES', 'UEMG', 'UCB', 'UNIRV', 'CEUB', 'UNIEURO', 'MAUÁ', 'UNICEPLAC'].includes(banca)) {
                         document.getElementById('notaLin').value = '';
                         document.getElementById('notaHum').value = '';
-                        document.getElementById('notaNat').value = '';
-                        document.getElementById('notaMat').value = '';
+                        document.getElementById('notaNaté').value = '';
+                        document.getElementById('notaMaté').value = '';
                         document.getElementById('notaFuvest').value = '';
                         if (document.getElementById('notaUnesp')) document.getElementById('notaUnesp').value = '';
                         if (banca === 'UNICAMP') { document.querySelectorAll('#notasUnicamp input').forEach(i => i.value = ''); }
@@ -1751,20 +1764,35 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            const lastAno = localStorage.getItem('sinapse_last_ano');
-            const anoInput = document.getElementById('enemAno');
-            if (lastAno && anoInput) {
-                anoInput.value = lastAno;
+            const lastAnão = localStorage.getItem('sinapse_last_anão');
+            const anãoInput = document.getElementById('enemAnão');
+            if (lastAnão && anãoInput) {
+                anãoInput.value = lastAnão;
             }
-            if (anoInput) {
-                anoInput.addEventListener('input', atualizarLimitesVestUnb);
-                anoInput.addEventListener('input', atualizarLimitesUft);
+            if (anãoInput) {
+                anãoInput.addEventListener('input', atéualizarLimitesVestUnb);
+                anãoInput.addEventListener('input', atéualizarLimitesUft);
             }
             if (document.getElementById('pasNivel')) {
-                document.getElementById('pasNivel').addEventListener('change', atualizarLimitesPasUnb);
+                document.getElementById('pasNivel').addEventListener('change', atéualizarLimitesPasUnb);
             }
             renderInterface();
         });
+    </script>
+
+    <script>
+        // Sidebar Toggle
+        function toggleSidebar() {
+            const aside = document.querySelector('aside');
+            const topBar = document.getElementById('topHeaderBar');
+            aside.classList.toggle('sidebar-hidden');
+            const isHidden = aside.classList.contains('sidebar-hidden');
+            if (isHidden) {
+                topBar.classList.remove('hidden');
+            } else {
+                topBar.classList.add('hidden');
+            }
+        }
     </script>
 </body>
 

@@ -1,0 +1,429 @@
+[planejamento.html]: <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planejamento - Mentoria Sinapse</title>
+    
+<!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            accent: '#10B981', // Verde central
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hyper-card': '12px 16px 20px rgba(184,171,155,0.7), -10px -10px 15px rgba(255,255,255,0.6), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(184,171,155,0.3)',
+                        'hyper-pressed': 'inset 4px 6px 10px rgba(184,171,155,0.6), inset -4px -6px 10px rgba(255,255,255,0.7)',
+                        'hyper-button': '0px 8px 15px rgba(28,35,49,0.3), inset 0px 1px 1px rgba(255,255,255,0.3), inset 0px -2px 3px rgba(0,0,0,0.4)',
+                        'tray-deep': 'inset 10px 10px 20px rgba(184,171,155,0.5), inset -10px -10px 20px rgba(255,255,255,0.5)',
+                        'gold-rim': '0 0 0 1px rgba(212,175,55,0.3), inset 0 0 0 1px rgba(255,255,255,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-serif-display { font-family: 'DM Serif Display', serif; }
+        .text-letterpress { text-shadow: -1px -1px 2px rgba(255,255,255,0.8), 1px 1px 2px rgba(184,171,155,0.4); }
+        .text-engraved-gold { background: linear-gradient(to bottom, #75603F, #2A2111); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #EFEBE4; 
+            color: #1E293B; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        
+        /* Ultra Smooth Animations */
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Custom Scrollbar Neu */
+        ::-webkit-scrollbar { width: 4px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; border: 2px solid transparent; background-clip: padding-box; }
+        
+        /* Material symbols refinement */
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .icon-thin { font-variation-settings: 'wght' 200; }
+        
+        /* Skeuomorphic utilities */
+        .border-bevel { border: 1px solid rgba(255,255,255,0.8); border-bottom-color: rgba(0,0,0,0.05); border-right-color: rgba(0,0,0,0.05); }
+        
+        /* Gradient text */
+        .text-gradient-gold { background: linear-gradient(135deg, #B59A5A 0%, #90743B 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+            <aside class="w-[260px] flex flex-col z-30 flex-shrink-0 relative bg-[#153a4c] border-r border-[#102c3a] shadow-[4px_0_24px_rgba(0,0,0,0.05)]">
+        
+        <!-- Logo Area -->
+        <div class="pt-10 flex flex-col items-center justify-center shrink-0 mb-10 relative">
+            <img src="../../public/imagens/globais/marca/LE%C3%83O%20VETORIZADO.png" alt="Logo Leão" class="w-28 h-28 object-contain mb-2 brightness-200" />
+            <h1 class="text-[22px] text-white font-serif-display leading-none tracking-wide text-center">LION<span class="text-white/60 font-light ml-1">MENTORIA</span></h1>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto px-0 space-y-1 relative pb-10 custom-scrollbar">
+            
+            <div class="mb-4 px-8 mt-2">
+                <p class="text-[9px] font-bold text-white/40 uppercase tracking-[0.1em]">Acompanhamento</p>
+            </div>
+
+            <!-- Inactive flat items -->
+            <a href="mentoria.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">home</span> 
+                </div>
+                <span>Metas Diárias</span>
+            </a>
+
+            <!-- Active flat pill -->
+            <a href="planejamento.html" class="flex items-center gap-4 pl-4 pr-4 py-3 mx-4 bg-white/10 text-white rounded-[12px] font-semibold text-[15px] relative shadow-md shadow-black/10 border border-white/5">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined icon-fill text-[24px] text-white">edit_calendar</span> 
+                </div>
+                <span class="tracking-wide">Planejamento</span>
+                <div class="absolute right-4 w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)]"></div>
+            </a>
+
+            <!-- Inactive flat items -->
+            <a href="metricas.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">stacked_line_chart</span> 
+                </div>
+                <span>Meu Desempenho</span>
+            </a>
+
+            <!-- Inactive flat items -->
+            <a href="estrategia.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">route</span> 
+     
+---
+[estrategia.html]: <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estratégia de Aprovação - Mentoria Sinapse</title>
+    
+<!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', // Escuro Institucional
+                            primary: '#6366F1', // Indigo Premium
+                            accent: '#10B981', // Verde central
+                            light: '#FAFAFB', // Fundo Principal Super Clean
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'hyper-card': '12px 16px 20px rgba(184,171,155,0.7), -10px -10px 15px rgba(255,255,255,0.6), inset 1px 1px 2px rgba(255,255,255,0.8), inset -1px -1px 2px rgba(184,171,155,0.3)',
+                        'hyper-pressed': 'inset 4px 6px 10px rgba(184,171,155,0.6), inset -4px -6px 10px rgba(255,255,255,0.7)',
+                        'hyper-button': '0px 8px 15px rgba(28,35,49,0.3), inset 0px 1px 1px rgba(255,255,255,0.3), inset 0px -2px 3px rgba(0,0,0,0.4)',
+                        'tray-deep': 'inset 10px 10px 20px rgba(184,171,155,0.5), inset -10px -10px 20px rgba(255,255,255,0.5)',
+                        'gold-rim': '0 0 0 1px rgba(212,175,55,0.3), inset 0 0 0 1px rgba(255,255,255,0.2)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'Playfair Display', serif; }
+        .font-serif-display { font-family: 'DM Serif Display', serif; }
+        .text-letterpress { text-shadow: -1px -1px 2px rgba(255,255,255,0.8), 1px 1px 2px rgba(184,171,155,0.4); }
+        .text-engraved-gold { background: linear-gradient(to bottom, #75603F, #2A2111); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-shadow: 1px 1px 1px rgba(255,255,255,0.4); }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #EFEBE4; 
+            color: #1E293B; 
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        
+        /* Ultra Smooth Animations */
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        
+        /* Premium Custom Scrollbar Neu */
+        ::-webkit-scrollbar { width: 4px; height: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; border: 2px solid transparent; background-clip: padding-box; }
+        ::-webkit-scrollbar-thumb:hover { background: #CBD5E1; border: 2px solid transparent; background-clip: padding-box; }
+        
+        /* Material symbols refinement */
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .icon-thin { font-variation-settings: 'wght' 200; }
+        
+        /* Skeuomorphic utilities */
+        .border-bevel { border: 1px solid rgba(255,255,255,0.8); border-bottom-color: rgba(0,0,0,0.05); border-right-color: rgba(0,0,0,0.05); }
+        
+        /* Gradient text */
+        .text-gradient-gold { background: linear-gradient(135deg, #B59A5A 0%, #90743B 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+
+</head>
+<body class="flex h-screen overflow-hidden antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+            <aside class="w-[260px] flex flex-col z-30 flex-shrink-0 relative bg-[#153a4c] border-r border-[#102c3a] shadow-[4px_0_24px_rgba(0,0,0,0.05)]">
+        
+        <!-- Logo Area -->
+        <div class="pt-10 flex flex-col items-center justify-center shrink-0 mb-10 relative">
+            <img src="../../public/imagens/globais/marca/LE%C3%83O%20VETORIZADO.png" alt="Logo Leão" class="w-28 h-28 object-contain mb-2 brightness-200" />
+            <h1 class="text-[22px] text-white font-serif-display leading-none tracking-wide text-center">LION<span class="text-white/60 font-light ml-1">MENTORIA</span></h1>
+        </div>
+        
+        <!-- Menu Principal -->
+        <nav class="flex-1 overflow-y-auto px-0 space-y-1 relative pb-10 custom-scrollbar">
+            
+            <div class="mb-4 px-8 mt-2">
+                <p class="text-[9px] font-bold text-white/40 uppercase tracking-[0.1em]">Acompanhamento</p>
+            </div>
+
+            <!-- Inactive flat items -->
+            <a href="mentoria.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">home</span> 
+                </div>
+                <span>Metas Diárias</span>
+            </a>
+
+            <!-- Inactive flat items -->
+            <a href="planejamento.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">edit_calendar</span> 
+                </div>
+                <span>Planejamento</span>
+            </a>
+
+            <!-- Inactive flat items -->
+            <a href="metricas.html" class="group flex items-center gap-4 pl-6 pr-6 py-3 ml-4 mr-4 text-white/60 hover:text-white hover:bg-white/5 rounded-[12px] transition-all duration-300 font-medium text-[15px]">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[24px] text-white/40 group-hover:text-white/90 transition-colors">stacked_line_chart</span> 
+                </div>
+                <span>Meu Desempenho</span>
+            </a>
+
+            <!-- Active flat pill -->
+            <a href="estrategia.html" class="flex items-center gap-4 pl-4 pr-4 py-3 mx-4 bg-white/10 text-white rounded-[12px] font-semibold text-[15px] relative shadow-md shadow-black/10 border border-white/5">
+                <div class="w-6 flex items-center justify-center">
+                    <span class="material-symbols-outlined icon-fill text-[24px] text-white">route</span> 
+                </div>
+                <span class="tracking-wide">Estratégia de Aprovação</span>
+                <div class="absolute right-4 
+---
+[vestibulares.html]: <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vestibulares - Lion Mentoria</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sinapse: {
+                            blue: '#0B193C', 
+                            primary: '#6366F1', 
+                            accent: '#10B981', 
+                            light: '#FAFAFB', 
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        headline: ['Manrope', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 40px -10px rgba(11,25,60,0.15)',
+                        'premium-hover': '0 20px 40px -10px rgba(11,25,60,0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;800&family=DM+Serif+Display:ital@0;1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+        .font-headline { font-family: 'DM Serif Display', serif; }
+        body { font-family: 'Inter', sans-serif; background-color: #FAFAFB; color: #1E293B; }
+        .fade-in-up { animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+        @keyframes pulseScale { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
+        .hover-pulse-scale:hover { animation: pulseScale 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E2E8F0; border-radius: 10px; }
+        .material-symbols-outlined { font-size: 20px; font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .view-section { transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); opacity: 1; transform: translateX(0); }
+        .view-hidden { opacity: 0; transform: translateX(20px); pointer-events: none; position: absolute; visibility: hidden; height: 0; overflow: hidden; }
+    </style>
+    <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+</head>
+<body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
+
+    <!-- SIDEBAR ELITE -->
+    <aside class="w-[280px] bg-white border-r border-[#F1F5F9] flex flex-col z-30 flex-shrink-0 relative shadow-[2px_0_24px_rgba(0,0,0,0.02)]">
+        <div class="h-[175px] pt-4 flex flex-col items-center justify-center border-b border-slate-50/50 shrink-0 gap-0">
+            <img src="../../public/imagens/globais/marca/LEÃO VETORIZADO.png" alt="Logo Leão" class="w-24 h-24 md:w-28 md:h-28 object-contain mix-blend-multiply drop-shadow-sm transition-transform duration-500 hover:scale-[1.03]" />
+            <span class="font-headline font-extrabold text-[20px] md:text-[22px] text-[#0B193C] tracking-tight whitespace-nowrap -mt-3">LION <span class="font-light opacity-70">MENTORIA</span></span>
+        </div>
+        
+        <nav class="flex-1 overflow-y-auto py-8 px-6 space-y-2">
+            <p class="text-[9px] text-slate-400 font-extrabold uppercase tracking-[0.2em] mb-4 pl-3">Acompanhamento</p>
+            <a href="mentoria.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">home</span> Metas Diárias
+            </a>
+            <a id="aba-vestibulares" href="vestibulares.html" class="flex items-center gap-4 px-4 py-3 bg-[#0B193C] text-white rounded-xl font-semibold shadow-lg shadow-[#0B193C]/20 transition-all hover:scale-[1.02]">
+                <span class="material-symbols-outlined icon-fill opacity-90 text-[22px]">school</span> Vestibulares
+                <div class="ml-auto w-1.5 h-1.5 rounded-full bg-sinapse-primary animate-pulse"></div>
+            </a>
+            <a href="simulador.html" class="flex items-center gap-4 px-4 py-3 text-slate-500 hover:text-[#0B193C] hover:bg-slate-50/80 rounded-xl transition-all font-medium group">
+                <span class="material-symbols-outlined opacity-70 group-hover:opacity-100 text-[22px] transition-opacity">calculate</span> Simulador SISU
+            </a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full bg-[#FAFAFB] relative overflow-x-hidden">
+        <!-- MARCA D'ÁGUA LATERAL -->
+        <div class="fixed right-0 top-0 pointer-events-none z-0 select-none hidden md:block opacity-[0.03] pt-[80px] pl-4">
+            <span class="inline-block font-headline font-extrabold text-[150px] xl:text-[200px] tracking-[0.05em] text-[#0B193C] uppercase leading-none" style="writing-mode: vertical-rl; text-orientation: mixed;">VESTIBULARES</span>
+        </div>
+
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[400px] bg-gradient-to-b from-white to-transparent pointer-events-none z-0"></div>
+
+        <div class="px-10 pt-10 pb-16 max-w-[1500px] mx-auto w-full relative z-10 flex-1 overflow-y-auto">
+            
+            <!-- VIEW LISTA -->
+            <div id="view-lista" class="view-section w-full">
+                <div class="mb-10 text-center fade-in-up">
+                    <h1 class="font-headline text-5xl lg:text-7xl font-normal text-[#0B193C] mb-4 drop-shadow-sm tracking-tight antialiased">Vestibulares</h1>
+                    <p class="text-slate-500 font-medium text-lg lg:text-xl max-w-2xl mx-auto tracking-wide">Acompanhe cronogramas, inscrições e etapas das universidades mais importantes do Brasil</p>
+                </div>
+                <!-- CARDS GRID -->
+                <div id="grid-vestibulares" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 fade-in-up" style="animation-delay: 0.1s;">
+                    <!-- Preenchido via JS -->
+                </div>
+            </div>
+
+            <!-- VIEW DETALHES -->
+            <div id="view-detalhes" class="view-section view-hidden w-full max-w-5xl mx-auto">
+                
+                <button onclick="voltarLista()" class="flex items-center gap-2 text-slate-400 hover:text-[#0B193C] font-bold text-sm uppercase tracking-wider mb-8 transition-colors group">
+                    <span class="material-symbols-outlined group-hover:-translate-x-1 transition-transform">arrow_back</span>
+                    VOLTAR
+                </button>
+
+                <!-- CABEÇALHO -->
+                <div class="bg-white rounded-[32px] p-8 md:p-12 shadow-premium border border-slate-100 mb-8 flex flex-col lg:flex-row gap-8 items-center lg:items-start text-center lg:text-left relative overflow-hidden">
+                    <div id="detail-color-bar" class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-sinapse-primary to-indigo-400"></div>
+                    <div class="w-32 h-32 md:w-40 md:h-40 shrink-0 bg-slate-50 rounded-3xl p-4 border border-slate-100/50 flex items-center justify-center relative shadow-sm">
+                        <img id="detail-logo" src="" alt="Logo" class="w-full h-full object-contain drop-shadow-sm mix-blend-multiply">
+                    </div>
+                    <div class="flex-1 s
+---
+[simulador.html]: -﻿-<-!-D-O-C-T-Y-P-E- -h-t-m-l->-
+-<-h-t-m-l- -l-a-n-g-=-"-p-t---B-R-"->-
+-<-h-e-a-d->-
+- - - - -<-m-e-t-a- -c-h-a-r-s-e-t-=-"-U-T-F---8-"->-
+- - - - -<-m-e-t-a- -n-a-m-e-=-"-v-i-e-w-p-o-r-t-"- -c-o-n-t-e-n-t-=-"-w-i-d-t-h-=-d-e-v-i-c-e---w-i-d-t-h-,- -i-n-i-t-i-a-l---s-c-a-l-e-=-1-.-0-"->-
+- - - - -<-t-i-t-l-e->-M-e-n-t-o-r-i-a- -S-i-n-a-p-s-e- --- -S-i-m-u-l-a-d-o-r- -S-I-S-U-<-/-t-i-t-l-e->-
+- - - - -
+-<-!----- -T-a-i-l-w-i-n-d- -C-S-S- ----->-
+- - - - -<-s-c-r-i-p-t- -s-r-c-=-"-h-t-t-p-s-:-/-/-c-d-n-.-t-a-i-l-w-i-n-d-c-s-s-.-c-o-m-"->-<-/-s-c-r-i-p-t->-
+- - - - -<-s-c-r-i-p-t->-
+- - - - - - - - -t-a-i-l-w-i-n-d-.-c-o-n-f-i-g- -=- -{-
+- - - - - - - - - - - - -t-h-e-m-e-:- -{-
+- - - - - - - - - - - - - - - - -e-x-t-e-n-d-:- -{-
+- - - - - - - - - - - - - - - - - - - - -c-o-l-o-r-s-:- -{-
+- - - - - - - - - - - - - - - - - - - - - - - - -s-i-n-a-p-s-e-:- -{-
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -b-l-u-e-:- -'-#-0-B-1-9-3-C-'-,- -/-/- -E-s-c-u-r-o- -I-n-s-t-i-t-u-c-i-o-n-a-l-
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -p-r-i-m-a-r-y-:- -'-#-6-3-6-6-F-1-'-,- -/-/- -I-n-d-i-g-o- -P-r-e-m-i-u-m-
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -a-c-c-e-n-t-:- -'-#-1-0-B-9-8-1-'-,- -/-/- -V-e-r-d-e- -c-e-n-t-r-a-l-
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - -l-i-g-h-t-:- -'-#-F-A-F-A-F-B-'-,- -/-/- -F-u-n-d-o- -P-r-i-n-c-i-p-a-l- -S-u-p-e-r- -C-l-e-a-n-
+- - - - - - - - - - - - - - - - - - - - - - - - -}-
+- - - - - - - - - - - - - - - - - - - - -}-,-
+- - - - - - - - - - - - - - - - - - - - -f-o-n-t-F-a-m-i-l-y-:- -{-
+- - - - - - - - - - - - - - - - - - - - - - - - -s-a-n-s-:- -[-'-I-n-t-e-r-'-,- -'-s-a-n-s---s-e-r-i-f-'-]-,-
+- - - - - - - - - - - - - - - - - - - - - - - - -h-e-a-d-l-i-n-e-:- -[-'-M-a-n-r-o-p-e-'-,- -'-s-a-n-s---s-e-r-i-f-'-]-,-
+- - - - - - - - - - - - - - - - - - - - -}-,-
+- - - - - - - - - - - - - - - - - - - - -b-o-x-S-h-a-d-o-w-:- -{-
+- - - - - - - - - - - - - - - - - - - - - - - - -'-h-y-p-e-r---c-a-r-d-'-:- -'-1-2-p-x- -1-6-p-x- -2-0-p-x- -r-g-b-a-(-1-8-4-,-1-7-1-,-1-5-5-,-0-.-7-)-,- ---1-0-p-x- ---1-0-p-x- -1-5-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-6-)-,- -i-n-s-e-t- -1-p-x- -1-p-x- -2-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-8-)-,- -i-n-s-e-t- ---1-p-x- ---1-p-x- -2-p-x- -r-g-b-a-(-1-8-4-,-1-7-1-,-1-5-5-,-0-.-3-)-'-,-
+- - - - - - - - - - - - - - - - - - - - - - - - -'-h-y-p-e-r---p-r-e-s-s-e-d-'-:- -'-i-n-s-e-t- -4-p-x- -6-p-x- -1-0-p-x- -r-g-b-a-(-1-8-4-,-1-7-1-,-1-5-5-,-0-.-6-)-,- -i-n-s-e-t- ---4-p-x- ---6-p-x- -1-0-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-7-)-'-,-
+- - - - - - - - - - - - - - - - - - - - - - - - -'-h-y-p-e-r---b-u-t-t-o-n-'-:- -'-0-p-x- -8-p-x- -1-5-p-x- -r-g-b-a-(-2-8-,-3-5-,-4-9-,-0-.-3-)-,- -i-n-s-e-t- -0-p-x- -1-p-x- -1-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-3-)-,- -i-n-s-e-t- -0-p-x- ---2-p-x- -3-p-x- -r-g-b-a-(-0-,-0-,-0-,-0-.-4-)-'-,-
+- - - - - - - - - - - - - - - - - - - - - - - - -'-t-r-a-y---d-e-e-p-'-:- -'-i-n-s-e-t- -1-0-p-x- -1-0-p-x- -2-0-p-x- -r-g-b-a-(-1-8-4-,-1-7-1-,-1-5-5-,-0-.-5-)-,- -i-n-s-e-t- ---1-0-p-x- ---1-0-p-x- -2-0-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-5-)-'-,-
+- - - - - - - - - - - - - - - - - - - - - - - - -'-g-o-l-d---r-i-m-'-:- -'-0- -0- -0- -1-p-x- -r-g-b-a-(-2-1-2-,-1-7-5-,-5-5-,-0-.-3-)-,- -i-n-s-e-t- -0- -0- -0- -1-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-2-)-'-,-
+- - - - - - - - - - - - - - - - - - - - -}-
+- - - - - - - - - - - - - - - - -}-
+- - - - - - - - - - - - -}-
+- - - - - - - - -}-
+- - - - -<-/-s-c-r-i-p-t->-
+- - - - -<-!----- -F-o-n-t-s- ----->-
+- - - - -<-l-i-n-k- -h-r-e-f-=-"-h-t-t-p-s-:-/-/-f-o-n-t-s-.-g-o-o-g-l-e-a-p-i-s-.-c-o-m-/-c-s-s-2-?-f-a-m-i-l-y-=-I-n-t-e-r-:-w-g-h-t-@-3-0-0-;-4-0-0-;-5-0-0-;-6-0-0-;-7-0-0-;-8-0-0-&-f-a-m-i-l-y-=-M-a-n-r-o-p-e-:-w-g-h-t-@-4-0-0-;-6-0-0-;-8-0-0-&-f-a-m-i-l-y-=-P-l-a-y-f-a-i-r-+-D-i-s-p-l-a-y-:-i-t-a-l-,-w-g-h-t-@-0-,-4-0-0-.-.-9-0-0-;-1-,-4-0-0-.-.-9-0-0-&-f-a-m-i-l-y-=-D-M-+-S-e-r-i-f-+-D-i-s-p-l-a-y-:-i-t-a-l-@-0-;-1-&-d-i-s-p-l-a-y-=-s-w-a-p-"- -r-e-l-=-"-s-t-y-l-e-s-h-e-e-t-"->-
+- - - - -<-l-i-n-k- -r-e-l-=-"-s-t-y-l-e-s-h-e-e-t-"- -h-r-e-f-=-"-h-t-t-p-s-:-/-/-f-o-n-t-s-.-g-o-o-g-l-e-a-p-i-s-.-c-o-m-/-c-s-s-2-?-f-a-m-i-l-y-=-M-a-t-e-r-i-a-l-+-S-y-m-b-o-l-s-+-O-u-t-l-i-n-e-d-:-o-p-s-z-,-w-g-h-t-,-F-I-L-L-,-G-R-A-D-@-2-0-.-.-4-8-,-1-0-0-.-.-7-0-0-,-0-.-.-1-,---5-0-.-.-2-0-0-"- -/->-
+- - - - -<-s-t-y-l-e->-
+- - - - - - - - -.-f-o-n-t---h-e-a-d-l-i-n-e- -{- -f-o-n-t---f-a-m-i-l-y-:- -'-P-l-a-y-f-a-i-r- -D-i-s-p-l-a-y-'-,- -s-e-r-i-f-;- -}-
+- - - - - - - - -.-f-o-n-t---s-e-r-i-f---d-i-s-p-l-a-y- -{- -f-o-n-t---f-a-m-i-l-y-:- -'-D-M- -S-e-r-i-f- -D-i-s-p-l-a-y-'-,- -s-e-r-i-f-;- -}-
+- - - - - - - - -.-t-e-x-t---l-e-t-t-e-r-p-r-e-s-s- -{- -t-e-x-t---s-h-a-d-o-w-:- ---1-p-x- ---1-p-x- -2-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-8-)-,- -1-p-x- -1-p-x- -2-p-x- -r-g-b-a-(-1-8-4-,-1-7-1-,-1-5-5-,-0-.-4-)-;- -}-
+- - - - - - - - -.-t-e-x-t---e-n-g-r-a-v-e-d---g-o-l-d- -{- -b-a-c-k-g-r-o-u-n-d-:- -l-i-n-e-a-r---g-r-a-d-i-e-n-t-(-t-o- -b-o-t-t-o-m-,- -#-7-5-6-0-3-F-,- -#-2-A-2-1-1-1-)-;- ---w-e-b-k-i-t---b-a-c-k-g-r-o-u-n-d---c-l-i-p-:- -t-e-x-t-;- ---w-e-b-k-i-t---t-e-x-t---f-i-l-l---c-o-l-o-r-:- -t-r-a-n-s-p-a-r-e-n-t-;- -t-e-x-t---s-h-a-d-o-w-:- -1-p-x- -1-p-x- -1-p-x- -r-g-b-a-(-2-5-5-,-2-5-5-,-2-5-5-,-0-.-4-)-;- -}-
+- - - - - - - - -
+- - - - - - - - -b-o-d-y- -{- -
+- - - - - - - - - - - - -f-o-n-t---f-a-m-i-l-y-:- -'-I-n-t-e-r-'-,- -s-a-n-s---s-e-r-i-f-;- -
+- - - - - - - - - - - - -b-a-c-k-g-r-o-u-n-d---c-o-l-o-r-:- -#-E-F-E-B-E-4-;- -
+- - - - - - - - - - - - -c-o-l-o-r-:- -#-1-E-2-9-3-B-;- -
+- - - - - - - - - - - - -b-a-c-k-g-r-o-u-n-d---i-m-a-g-e-:- -u-r-l-(-"-d-a-t-a-:-i-m-a-g-e-/-s-v-g-+-x-m-l-,-%-3-C-s-v-g- -v-i-e-w-B-o-x-=-'-0- -0- -2-0-0- -2-0-0-'- -x-m-l-n-s-=-'-h-t-t-p-:-/-/-w-w-w-.-w-3-.-o-r-g-/-2-0-0-0-/-s-v-g-'-%-3-E-%-3-C-f-i-l-t-e-r- -i-d-=-'-n-o-i-s-e-F-i-l-t-e-r-'-%-3-E-%-3-C-f-e-T-u-r-b-u-l-e-n-c-e- -t-y-p-e-=-'-f-r-a-c-t-a-l-N-o-i-s-e-'- -b-a-s-e-F-r-e-q-u-e-n-c-y-=-'-0-.-9-'- -n-u-m-O-c-t-a-v-e-s-=-'-3-'- -s-t-i-t-c-h-T-i-l-e-s-=-'-s-t-i-t-c-h-'-/-%-3-E-%-3-C-/-f-i-l-t-e-r-%-3-E-%-3-C-r-e-c-t- -w-i-d-t-h-=-'-1-0-0-%-2-5-'- -h-e-i-g-h-t-=-'-1-0-0-%-2-5-'- -f-i-l-t-e-r-=-'-u-r-l-(-%-2-3-n-o-i-s-e-F-i-l-t-e-r-)-'- -o-p-a-c-i-t-y-=-'-0-.-0-8-'-/-%-3-E-%-3-C-/-s-v-g-%-3-E-"-)-;-
+- - - - - - - - -}-
+- - - - - - - - -
+- - - - - - - - -/-*- -U-l-t-r-a- -S-m-o-o-t-h- -A-n-i-m-a-t-i-o-n-s- -*-/-
+- - - - - - - - -.-f-a-d-e---i-n---u-p- -{- -a-n-i-m-a-t-i-o-n-:- -f-a-d-e-I-n-U-p- -0-.-7-s- -c-u-b-i-c---b-e-z-i-e-r-(-0-.-1-6-,- -1-,- -0-.-3-,- -1-)- -f-o-r-w-a-r-d-s-;- -o-p-a-c-i-t-y-:- -0-;- -t-r-a-n-s-f-o-r-m-:- -t-r-a-n-s-l-a-t-e-Y-(-1-5-p-x-)-;- -}-
+- - - - - - - - -@-k-e-y-f-r-a-m-e-s- -f-a-d-e-I-n-U-p- -{- -t-o- -{- -o-p-a-c-i-t-y-:- -1-;- -t-r-a-n-s-f-o-r-m-:- -t-r-a-n-s-l-a-t-e-Y-(-0-)-;- -}- -}-
+- - - - - - - - -
+- - - - - - - - -/-*- -P-r-e-m-i-u-m- -C-u-s-t-o-m- -S-c-r-o-l-l-b-a-r- -N-e-u- -*-/-
+- - - - - - - - -:-:---w-e-b-k-i-t---s-c-r-o-l-l-b-a-r- -{- -w-i-d-t-h-:- -4-p-x-;- -h-e-i-g-h-t-:- -8-p-x-;- -}-
+- - - - - - - - -:-:---w-e-b-k-i-t---s-c-r-o-l-l-b-a-r---t-r-a-c-k- -{- -b-a-c-k-g-r-o-u-n-d-:- -t-r-a-n-s-p-a-r-e-n-t-;- -}-
+- - - - - - - - -:-:---w-e-b-k-i-t---s-c-r-o-l-l-b-a-r---t-h-u-m-b- -{- -b-a-c-k-g-r-o-u-n-d-:- -#-E-2-E-8-F-0-;- -b-o-r-d-e-r---r-a-d-i-u-s-:- -1-0-p-x-;- -b-o-r-d-e-r-:- -2-p-x- -s-o-l-i-d- -t-r-a-n-s-p-a-r-e-n-t-;- -b-a-c-k-g-r-o-u-n-d---c-l-i-p-:- -p-a-d-d-i-n-g---b-o-x-;- -}-
+- - - - - - - - -:-:---w-e-b-k-i-t---s-c-r-o-l-l-b-a-r---t-h-u-m-b-:-h-o-v-e-r- -{- -b-a-c-k-g-r-o-u-n-d-:- -#-C-B-D-5-E-1-;- -b-o-r-d-e-r-:- -2-p-x- -s-o-l-i-d- -t-r-a-n-s-p-a-r-e-n-t-;- -b-a-c-k-g-r-o-u-n-d---c-l-i-p-:- -p-a-d-d-i-n-g---b-o-x-;- -}-
+- - - - - - - - -
+- - - - - - - - -/-*- -M-a-t-e-r-i-a-l- -s-y-m-b-o-l-s- -r-e-f-i-n-e-m-e-n-t- -*-/-
+- - - - - - - - -.-m-a-t-e-r-i-a-l---s-y-m-b-o-l-s---o-u-t-l-i-n-e-d- -{- -f-o-n-t---s-i-z-e-:- -2-0-p-x-;- -f-o-n-t---v-a-r-i-a-t-i-o-n---s-e-t-t-i-n-g-s-:- -'-F-I-L-L-'- -0-,- -'-w-g

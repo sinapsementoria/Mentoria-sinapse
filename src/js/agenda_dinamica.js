@@ -3,7 +3,6 @@ const msInDay = 1000 * 60 * 60 * 24;
 let currentDate = new Date();
 currentDate.setHours(12, 0, 0, 0);
 
-// Set currentWeekStart to Sunday
 function getSunday(d) {
     let day = d.getDay();
     let diff = d.getDate() - day;
@@ -12,377 +11,1378 @@ function getSunday(d) {
 
 let currentWeekStart = getSunday(currentDate);
 
-// Banco de dados simulado rodando para semanas infinitas.
-// Ele pega as tasks baseadas puramente pelo Dia da Semana.
-const dbTasksPaterns = [
-    [], // 0 = Domingo
-    [], // 1 = Segunda
-    [], // 2 = Terça
-    [], // 3 = Quarta
-    [], // 4 = Quinta
-    [], // 5 = Sexta
-    []  // 6 = Sábado
-];
-
 function formatDateBr(d) {
     return String(d.getDate()).padStart(2, '0') + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + d.getFullYear();
 }
 
-function formatDayShort(d) {
-    const meses = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
-    return String(d.getDate()).padStart(2, '0') + ' <span class="text-[12px] text-slate-400 font-semibold align-top ml-0.5">' + meses[d.getMonth()] + '</span>';
-}
-
 function createCardHTML(task) {
-    let tagCol = task.color;
-    if(task.color === 'red') tagCol = 'rose';
+    const isConcluido = task.status === 'Concluído' || task.status === 'concluída' || task.status === 'concluida';
     
-    let isConcluido = task.status === 'Concluído' || task.status === 'concluída' || task.status === 'concluida';
-    let isNaoConcluido = task.status === 'Não Concluído' || task.status === 'nao_concluido';
-    
-    let cardClasses = `task-card bg-white p-4 rounded-2xl shadow-sm border border-${tagCol}-100 hover:shadow-md transition-all cursor-pointer group relative overflow-hidden`;
-    let titleClasses = `task-title font-bold text-[#0B193C] text-sm leading-snug pl-2 transition-colors`;
-    let statusTextClasses = `task-status-text text-[10px] font-bold text-slate-400 uppercase`;
-    let statusTextContent = task.status;
-    let dotClasses = `task-dot w-1.5 h-1.5 rounded-full bg-slate-300 group-hover:bg-${tagCol}-400 transition-colors`;
-    let dotContent = ``;
-    let borderClasses = `task-border absolute left-0 top-0 bottom-0 w-1 bg-${tagCol}-500 rounded-l-2xl`;
-
-    if (isConcluido) {
-        cardClasses = `task-card bg-emerald-50/50 p-4 rounded-2xl shadow-sm border border-emerald-200 hover:shadow-md transition-all cursor-pointer group relative overflow-hidden`;
-        titleClasses = `task-title font-bold text-slate-500 line-through text-sm leading-snug pl-2 transition-colors`;
-        statusTextClasses = `task-status-text text-[10px] font-bold text-emerald-600 uppercase`;
-        statusTextContent = `Concluído`;
-        dotClasses = `task-dot flex items-center justify-center w-3 h-3 rounded-full bg-emerald-500`;
-        dotContent = `<span class="material-symbols-outlined text-[8px] text-white font-bold">check</span>`;
-        borderClasses = `task-border absolute left-0 top-0 bottom-0 w-1 bg-emerald-400 rounded-l-2xl`;
-    } else if (isNaoConcluido) {
-        cardClasses = `task-card bg-rose-50/50 p-4 rounded-2xl shadow-sm border border-rose-200 hover:shadow-md transition-all cursor-pointer group relative overflow-hidden`;
-        titleClasses = `task-title font-bold text-rose-700 text-sm leading-snug pl-2 transition-colors`;
-        statusTextClasses = `task-status-text text-[10px] font-bold text-rose-600 uppercase`;
-        statusTextContent = `Não Concluído`;
-        dotClasses = `task-dot flex items-center justify-center w-3 h-3 rounded-full bg-rose-500`;
-        dotContent = `<span class="material-symbols-outlined text-[8px] text-white font-bold">close</span>`;
-        borderClasses = `task-border absolute left-0 top-0 bottom-0 w-1 bg-rose-400 rounded-l-2xl`;
-    }
+    const colorMap = {
+        'Matemática':  { primary: '#7E22CE', secondary: '#A855F7', bg: 'rgba(126, 34, 206, 0.05)', icon: 'functions' },
+        'Física':      { primary: '#B91C1C', secondary: '#EF4444', bg: 'rgba(185, 28, 28, 0.05)', icon: 'bolt' },
+        'Química':     { primary: '#B45309', secondary: '#F59E0B', bg: 'rgba(180, 83, 9, 0.05)', icon: 'science' },
+        'Biologia':    { primary: '#15803D', secondary: '#22C55E', bg: 'rgba(21, 128, 61, 0.05)', icon: 'eco' },
+        'Anki':        { primary: '#059669', secondary: '#10B981', bg: 'rgba(5, 150, 105, 0.05)', icon: 'quiz' },
+        'Geral':       { primary: '#374151', secondary: '#64748b', bg: 'rgba(55, 65, 81, 0.05)', icon: 'task_alt' }
+    };
 
     return `
-    <div class="${cardClasses}" onclick="toggleTaskOptions(this)" data-id="${task.id || ''}" data-isdb="${task.dbRecord ? 'true' : 'false'}">
-        <div class="${borderClasses}"></div>
-        <div class="flex justify-between items-start mb-2 pl-2">
-            <span class="text-[9px] font-extrabold text-${tagCol}-600 bg-${tagCol}-50 px-2.5 py-1 rounded-md uppercase tracking-wider">${task.tag}</span>
-            <span class="material-symbols-outlined text-[14px] text-slate-300 group-hover:text-${tagCol}-400 transition-colors">${task.icon}</span>
-        </div>
-        <h4 class="${titleClasses}">${task.title}</h4>
-        
-        <div class="task-status mt-3 flex items-center gap-2 pl-2">
-            <div class="${dotClasses}">${dotContent}</div>
-            <span class="${statusTextClasses}">${statusTextContent}</span>
-        </div>
+    <div class="kanban-card group bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-col flex-shrink-0 hover:border-[#00B5B5]/50 hover:shadow-md transition-all duration-300 relative overflow-hidden ${isConcluido ? 'opacity-60 grayscale-[0.3]' : ''}"
+         style="min-height: 145px !important; height: 145px !important; margin-bottom: 8px; width: 100% !important;"
+         data-id="${task.id || ''}" data-isdb="${task.dbRecord ? 'true' : 'false'}">
+         
+        <!-- Barra Superior Unificada (Padrão Imagem) -->
+        <div class="absolute top-0 left-0 w-full h-1.5 rounded-t-2xl bg-[#475569]"></div>
 
-        <div class="task-options hidden mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2 w-full animate-[fadeInUp_0.2s_ease-out]">
-            <button onclick="markTaskCard(event, this, 'concluido')" class="w-full bg-emerald-50 text-emerald-600 font-bold text-[10px] py-1.5 rounded-lg hover:bg-emerald-100 transition-colors flex items-center justify-center gap-1">
-                <span class="material-symbols-outlined text-[12px]">check</span> Concluído
+        <div class="flex flex-col flex-1 relative z-10 text-center items-center h-full">
+            <!-- Tag da Disciplina (Pill Style Cinza) -->
+            <div class="inline-flex items-center px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest mb-2 mt-1 bg-slate-100 text-slate-500 border border-slate-200/50">
+                <span class="material-symbols-outlined text-[11px] mr-1">check_circle</span>
+                ${task.tag || 'Geral'}
+            </div>
+
+            <!-- Ícone de Lixeira -->
+            <button onclick="deleteTaskCard(event, this)" 
+                    class="absolute top-0 right-0 p-1 text-slate-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all z-20">
+                <span class="material-symbols-outlined text-[14px]">delete</span>
             </button>
-            <div class="flex gap-2">
-                <button onclick="markTaskCard(event, this, 'nao_concluido')" class="flex-1 bg-rose-50 text-rose-600 font-bold text-[10px] py-1.5 rounded-lg hover:bg-rose-100 transition-colors flex items-center justify-center gap-1">
-                    <span class="material-symbols-outlined text-[12px]">close</span> Pendente
-                </button>
-                <button onclick="deleteTaskCard(event, this)" class="flex-1 bg-slate-50 text-rose-500 font-bold text-[10px] py-1.5 rounded-lg hover:bg-red-50 hover:border-red-200 border border-transparent transition-colors flex items-center justify-center gap-1">
-                    <span class="material-symbols-outlined text-[12px]">delete</span> Excluir
+
+            <!-- Título da Atividade (Azul Escuro) -->
+            <div class="w-full flex-1 flex items-center justify-center mb-3">
+                <h4 class="text-[10px] font-black text-[#0B193C] leading-tight px-1 uppercase tracking-tight break-words w-full overflow-hidden line-clamp-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
+                    ${task.title || task.subject || 'Sem Título'}
+                </h4>
+            </div>
+
+            <!-- Botões de Ação -->
+            <div class="flex flex-col gap-1 w-full pb-0.5 mt-auto">
+                ${isConcluido 
+                    ? `<button onclick="markTaskCard(event, this, 'pendente')" 
+                               class="w-full rounded-md border border-slate-100 bg-white text-slate-400 font-bold uppercase tracking-widest flex items-center justify-center gap-1 hover:bg-slate-50 transition-all" style="height: 22px !important; font-size: 7.5px !important;">
+                           <span class="material-symbols-outlined text-[9px]">undo</span>
+                           Reabrir
+                       </button>`
+                    : `<button onclick="markTaskCard(event, this, 'concluido')" 
+                               class="w-full rounded-md bg-[#10b981] text-white font-bold uppercase tracking-widest flex items-center justify-center gap-1 hover:bg-[#059669] transition-all" style="height: 22px !important; font-size: 7.5px !important;">
+                           <span class="material-symbols-outlined text-[9px] icon-fill">check_circle</span>
+                           Concluir
+                       </button>`
+                }
+
+                <button onclick="openNotesModal(event, this)" 
+                        class="w-full rounded-md border ${task.hasNotes || isConcluido ? 'bg-[#FFEDD5] border-[#FED7AA] text-[#9A3412]' : 'border-slate-200 text-slate-500 bg-white'} font-bold uppercase tracking-widest flex items-center justify-center gap-1 hover:shadow-sm transition-all" style="height: 22px !important; font-size: 7.5px !important;">
+                    <span class="material-symbols-outlined text-[9px]">${task.hasNotes || isConcluido ? 'description' : 'notes'}</span>
+                    ${task.hasNotes || isConcluido ? 'Anotação' : 'Notas'}
                 </button>
             </div>
         </div>
     </div>`;
 }
 
-window.toggleTaskOptions = function(card) {
-    const options = card.querySelector('.task-options');
-    // Hide all other open options first for cleaner UI
-    document.querySelectorAll('.task-options').forEach(opt => {
-        if (opt !== options) opt.classList.add('hidden');
-    });
+window.deleteTaskCard = function(event, btn) {
+    event.stopPropagation();
+    const card = btn.closest('.kanban-card');
+    const id = card.getAttribute('data-id');
+    const isDb = card.getAttribute('data-isdb') === 'true';
+
+    if (confirm('Deseja realmente excluir esta meta?')) {
+        // Animação de saída
+        card.style.transform = 'scale(0.9) translateY(10px)';
+        card.style.opacity = '0';
+        
+        setTimeout(() => {
+            card.remove();
+            
+            // Deletar do banco se necessário
+            if (isDb && window.db) {
+                window.db.delete('activities', id);
+                if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
+            }
+            
+            // Recalcular contadores do cabeçalho
+            const column = card.closest('div'); // Ajuste conforme estrutura da grid
+            if (window.renderWeeklyAgenda) {
+                // Idealmente recarregamos a agenda para atalizar contadores
+                // mas para performance podemos apenas remover e avisar
+            }
+        }, 300);
+    }
+}
+
+window.markTaskCard = function(event, btn, stat) {
+    event.stopPropagation();
+    const card = btn.closest('.kanban-card');
+    const id = card.getAttribute('data-id');
+    const isDb = card.getAttribute('data-isdb') === 'true';
+
+    if (stat === 'concluido') {
+        if (window.confetti) {
+            const rect = btn.getBoundingClientRect();
+            confetti({
+                particleCount: 40, spread: 50, colors: ['#00B5B5', '#0B193C', '#7c3aed'],
+                origin: { x: (rect.left + rect.width / 2) / window.innerWidth, y: (rect.top + rect.height / 2) / window.innerHeight }
+            });
+        }
+        if (isDb && window.db) {
+            window.db.update('activities', id, { status: 'concluida' });
+            if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
+        }
+    } else if (stat === 'nao_concluido') {
+        if (isDb && window.db) {
+            window.db.update('activities', id, { status: 'nao_concluido' });
+            if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
+        }
+    } else if (stat === 'desfazer') {
+        if (isDb && window.db) {
+            window.db.update('activities', id, { status: 'pendente' });
+            if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
+        }
+    }
+
+    renderWeeklyAgenda();
+};
+
+// --- LOGICA DO EDITOR DE ESTUDOS (ULTRA PREMIUM) ---
+let currentTaskIdForNotes = null;
+let currentAttachments = [];
+let mediaRecorder = null;
+let audioChunks = [];
+let savedSelection = null;
+
+// Função para salvar a seleção atual do editor
+function saveSelection() {
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        savedSelection = selection.getRangeAt(0);
+    }
+}
+
+// Função para restaurar a seleção salva
+function restoreSelection() {
+    if (savedSelection) {
+        const selection = window.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(savedSelection);
+    }
+}
+
+// 1. Formatação de Texto (Word Style)
+// 1. Formatação de Texto (Word Style) - Refatrado para Alta Precisão
+// 1. Formatação de Texto (Word Style) - Refatrado para Alta Precisão (30 Regras)
+window.formatDoc = function(cmd, val = null) {
+    if (!cmd) return;
     
-    if (options) {
-        options.classList.toggle('hidden');
+    const editor = document.getElementById('editorContent');
+    editor.focus();
+
+    // Restaurar a seleção antes de aplicar qualquer comando (Regra 3)
+    if (savedSelection) {
+        restoreSelection();
+    }
+
+    // Habilitar CSS para maior precisão (Regra 1)
+    document.execCommand('styleWithCSS', false, true);
+
+    try {
+        if (cmd === 'fontName' || cmd === 'foreColor' || cmd === 'hiliteColor') {
+            // Aplicar comando básico (execCommand lida com seleção ou ponto de inserção)
+            document.execCommand(cmd, false, val);
+        } else if (cmd === 'fontSize') {
+            // Document.execCommand('fontSize') só aceita 1-7. 
+            // Implementação robusta para PX (Regra 5)
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0 && !selection.isCollapsed) {
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.style.fontSize = val;
+                
+                const fragment = range.extractContents();
+                span.appendChild(fragment);
+                range.insertNode(span);
+                
+                const newRange = document.createRange();
+                newRange.selectNodeContents(span);
+                selection.removeAllRanges();
+                selection.addRange(newRange);
+            } else {
+                // Pará próxima digitação (Regra 2)
+                document.execCommand('fontSize', false, "3"); // Placeholder
+                setTimeout(() => {
+                    const selection = window.getSelection();
+                    if (selection.rangeCount > 0) {
+                        let node = selection.anchorNode;
+                        if (node.nodeType === 3) node = node.parentElement;
+                        if (node && (node.tagName === 'FONT' || node.tagName === 'SPAN')) {
+                            node.style.fontSize = val;
+                        }
+                    }
+                }, 0);
+            }
+        } else if (cmd === 'removeFormat') {
+            // Limpeza Seletiva (Regra 9)
+            const selection = window.getSelection();
+            if (selection.rangeCount > 0) {
+                const range = selection.getRangeAt(0);
+                
+                if (selection.isCollapsed) {
+                    // Se não houver seleção, apenas limpa comandos do browser
+                    document.execCommand('removeFormat', false, null);
+                } else {
+                    // Limpeza profunda mantendo estrutura
+                    const span = document.createElement('span');
+                    span.innerHTML = range.toString(); // Pega apenas o texto puro para simplificar
+                    // OU podemos extrair e limpar cada nó
+                    const fragment = range.extractContents();
+                    
+                    // Função recursiva para limpar estilos
+                    const cleanNode = (node) => {
+                        if (node.nodeType === 1) { // Elemento
+                            // Se não for lista ou fórmula, removemos estilos
+                            if (node.tagName !== 'UL' && node.tagName !== 'OL' && node.tagName !== 'LI' && !node.classList.contains('formula-inline-container')) {
+                                node.removeAttribute('style');
+                                // Se for uma tag de estilo pura, transformamos em texto ou removemos
+                                if (['B', 'I', 'U', 'STRIKE', 'FONT', 'STRONG', 'EM', 'SUB', 'SUP'].includes(node.tagName)) {
+                                    const text = node.innerText;
+                                    const textNode = document.createTextNode(text);
+                                    node.parentNode.replaceChild(textNode, node);
+                                }
+                            }
+                        }
+                        if (node.childNodes) {
+                            Array.from(node.childNodes).forEach(cleanNode);
+                        }
+                    };
+                    
+                    cleanNode(fragment);
+                    range.insertNode(fragment);
+                }
+            }
+        } else {
+            // Comandos simples: bold, italic, underline, strikeThrough, subscript, superscript, justify...
+            document.execCommand(cmd, false, val);
+        }
+    } catch (e) {
+        console.error('Erro ao formatar:', e);
+    }
+    saveSelection();
+    window.updateToolbarState();
+};
+
+// toggleColorPicker — definição única mais abaixo (evitar duplicação)
+
+// applyColor — definição única mais abaixo (evitar duplicação)
+
+window.toggleDropdown = function(id) {
+    const dropdown = document.getElementById(id);
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    // Fechar outros dropdowns
+    document.querySelectorAll('.list-picker-dropdown, .color-picker-dropdown').forEach(d => d.classList.add('hidden'));
+    
+    if (isHidden) {
+        saveSelection();
+        dropdown.classList.remove('hidden');
     }
 };
 
-window.markTaskCard = function(event, btn, state) {
-    event.stopPropagation();
-    
-    const card = btn.closest('.task-card');
-    const title = card.querySelector('.task-title');
-    const statusText = card.querySelector('.task-status-text');
-    const dot = card.querySelector('.task-dot');
-    const options = card.querySelector('.task-options');
-    const border = card.querySelector('.task-border');
+let lastUsedBulletStyle = 'disc';
+let lastUsedNumberStyle = 'decimal';
 
-    const id = card.getAttribute('data-id');
-    const isDb = card.getAttribute('data-isdb') === 'true';
-
-    // Reset styles
-    card.className = `task-card bg-white p-4 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all cursor-pointer group relative overflow-hidden`;
-    title.className = `task-title font-bold text-[#0B193C] text-sm leading-snug pl-2 transition-colors`;
+window.switchLibraryTab = function(tab) {
+    const numbersTab = document.getElementById('tab-numbers');
+    const bulletsTab = document.getElementById('tab-bullets');
+    const numbersGrid = document.getElementById('library-numbers');
+    const bulletsGrid = document.getElementById('library-bullets');
     
-    if (state === 'concluido') {
-        card.classList.replace('bg-white', 'bg-emerald-50/50');
-        card.classList.replace('border-slate-100', 'border-emerald-200');
-        title.classList.replace('text-[#0B193C]', 'text-slate-500');
-        title.classList.add('line-through');
+    if (tab === 'numbers') {
+        numbersTab.classList.add('text-indigo-600', 'border-indigo-600');
+        numbersTab.classList.remove('text-slate-400', 'border-transparent');
+        bulletsTab.classList.add('text-slate-400', 'border-transparent');
+        bulletsTab.classList.remove('text-indigo-600', 'border-indigo-600');
         
-        statusText.innerText = "Concluído";
-        statusText.className = "task-status-text text-[10px] font-bold text-emerald-600 uppercase";
+        numbersGrid.classList.remove('hidden');
+        bulletsGrid.classList.add('hidden');
+    } else {
+        bulletsTab.classList.add('text-indigo-600', 'border-indigo-600');
+        bulletsTab.classList.remove('text-slate-400', 'border-transparent');
+        numbersTab.classList.add('text-slate-400', 'border-transparent');
+        numbersTab.classList.remove('text-indigo-600', 'border-indigo-600');
         
-        dot.className = "task-dot flex items-center justify-center w-3 h-3 rounded-full bg-emerald-500";
-        dot.innerHTML = `<span class="material-symbols-outlined text-[8px] text-white font-bold">check</span>`;
-        if(border) border.className = "task-border absolute left-0 top-0 bottom-0 w-1 bg-emerald-400 rounded-l-2xl";
+        bulletsGrid.classList.remove('hidden');
+        numbersGrid.classList.add('hidden');
+    }
+};
+
+window.applyListStyle = function(type, style) {
+    const editor = document.getElementById('editorContent');
+    editor.focus();
+    restoreSelection();
+    
+    // 1. TENTATIVA DE CONVERSÃO/REMOÇÃO
+    if (style === 'none') {
+        const isOL = document.queryCommandState('insertOrderedList');
+        const isUL = document.queryCommandState('insertUnorderedList');
+        if (isOL) document.execCommand('insertOrderedList', false, null);
+        if (isUL) document.execCommand('insertUnorderedList', false, null);
+    } else {
+        const isOL = document.queryCommandState('insertOrderedList');
+        const isUL = document.queryCommandState('insertUnorderedList');
         
-        // Efeito WOW!
-        if(window.confetti) {
+        // Converte para o tipo certo se necessário
+        if (type === 'OL' && !isOL) document.execCommand('insertOrderedList', false, null);
+        else if (type === 'UL' && !isUL) document.execCommand('insertUnorderedList', false, null);
+        
+        // 2. APLICAÇÃO DO ESTILO (Agressivo com Delay para estabilidade)
+        setTimeout(() => {
+            const sel = window.getSelection();
+            if (!sel.rangeCount) return;
+            
+            const getList = (node) => {
+                if (!node) return null;
+                if (node.nodeType === 3) node = node.parentElement;
+                return node.closest('ol, ul');
+            };
+
+            let list = getList(sel.anchorNode) || getList(sel.focusNode);
+            if (!list && sel.rangeCount > 0) {
+                list = getList(sel.getRangeAt(0).commonAncestorContainer);
+            }
+
+            if (list) {
+                // RESET TOTAL DE QUALQUER ESTILO ANTERIOR
+                list.className = '';
+                list.removeAttribute('type');
+                list.style.listStyleType = '';
+                list.querySelectorAll('li').forEach(li => {
+                    li.style.listStyleType = '';
+                    li.removeAttribute('type');
+                    li.removeAttribute('value');
+                });
+
+                // APLICAÇÃO DE CLASSE (Mapping completo para OL e UL)
+                const classMap = {
+                    'decimal': 'list-decimal', 'decimal-paren': 'list-decimal-paren',
+                    'upper-roman': 'list-upper-roman', 'upper-alpha': 'list-upper-alpha',
+                    'upper-alpha-paren': 'list-upper-alpha-paren', 'lower-alpha-paren': 'list-lower-alpha-paren',
+                    'lower-alpha': 'list-lower-alpha', 'lower-roman': 'list-lower-roman',
+                    'disc': 'list-disc', 'circle': 'list-circle', 'square': 'list-square',
+                    'check': 'list-check', 'arrow': 'list-arrow', 'diamond': 'list-diamond',
+                    'star': 'list-star', 'dash': 'list-dash'
+                };
+                if (classMap[style]) list.classList.add(classMap[style]);
+                else if (style !== 'none') list.style.setProperty('list-style-type', style, 'important');
+
+                // REFLOW PARA O BROWSER ACORDAR
+                const d = list.style.display;
+                list.style.display = 'none';
+                list.offsetHeight;
+                list.style.display = d || 'block';
+            }
+            saveSelection();
+            window.updateToolbarState();
+        }, 50);
+    }
+    
+    // Fechar dropdowns
+    document.querySelectorAll('.list-picker-dropdown').forEach(d => d.classList.add('hidden'));
+    saveSelection();
+    window.updateToolbarState();
+};
+
+// Toggle List Picker (Floating no body, igual ao color picker)
+window.toggleListPicker = function(id) {
+    const dropdown = document.getElementById(id);
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    saveSelection();
+    
+    // Fechar todos os dropdowns de lista
+    document.querySelectorAll('.list-picker-dropdown').forEach(d => d.classList.add('hidden'));
+    
+    if (isHidden) {
+        // Na primeira abertura, salvar referência ao botão e mover ao body
+        if (!dropdown._lpBtn) {
+            dropdown._lpBtn = dropdown.previousElementSibling || dropdown.parentElement.querySelector('button');
+            document.body.appendChild(dropdown);
+        }
+        
+        dropdown.classList.remove('hidden');
+        
+        const btn = dropdown._lpBtn;
+        if (btn) {
             const rect = btn.getBoundingClientRect();
-            confetti({
-                particleCount: 80,
-                spread: 60,
-                origin: { 
-                    x: (rect.left + rect.width / 2) / window.innerWidth,
-                    y: (rect.top + rect.height / 2) / window.innerHeight
-                },
-                colors: ['#10B981', '#34D399', '#facc15', '#6366F1'],
-                zIndex: 100
+            let top = rect.bottom + 4;
+            let left = rect.left;
+            
+            const dropW = dropdown.offsetWidth;
+            const dropH = dropdown.offsetHeight;
+            
+            if (left + dropW > window.innerWidth - 12) {
+                left = window.innerWidth - dropW - 12;
+            }
+            if (left < 8) left = 8;
+            
+            if (top + dropH > window.innerHeight - 12) {
+                top = rect.top - dropH - 4;
+            }
+            
+            dropdown.style.top = top + 'px';
+            dropdown.style.left = left + 'px';
+        }
+    }
+};
+
+// Gerenciamento de Teclado para Listas (Regra 4)
+// Envolvido em DOMContentLoaded porque o script carrega ANTES do #editorContent no HTML
+document.addEventListener('DOMContentLoaded', () => {
+    const editorContentEl = document.getElementById('editorContent');
+    if (editorContentEl) editorContentEl.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            const sel = window.getSelection();
+            if (!sel.rangeCount) return;
+
+            let node = sel.anchorNode;
+            if (node.nodeType === 3) node = node.parentElement;
+            const list = node.closest('ol, ul');
+
+            if (list) {
+                const cmd = e.shiftKey ? 'outdent' : 'indent';
+                document.execCommand(cmd, false, null);
+                
+                // Sanitização imediata pós-indentação
+                setTimeout(() => {
+                    const anchor = window.getSelection().anchorNode;
+                    if (!anchor) return;
+                    const el = anchor.nodeType === 3 ? anchor.parentElement : anchor;
+                    const newList = el ? el.closest('ol, ul') : null;
+                    if (newList && newList !== list) {
+                        newList.className = list.className;
+                        if (list.getAttribute('type')) newList.setAttribute('type', list.getAttribute('type'));
+                        if (list.style.listStyleType) newList.style.listStyleType = list.style.listStyleType;
+                    }
+                }, 10);
+            } else {
+                document.execCommand('insertHTML', false, '&nbsp;&nbsp;&nbsp;&nbsp;');
+            }
+        }
+    });
+});
+
+window.changeFontSize = function(delta) {
+    const scale = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
+    const select = document.getElementById('fontSizeSelect');
+    let currentVal = parseInt(select.value);
+    
+    // Encontrar o índice atual ou o mais próximo na escala
+    let currentIdx = scale.findIndex(s => s >= currentVal);
+    if (currentIdx === -1) currentIdx = scale.length - 1;
+    
+    let nextIdx = currentIdx + delta;
+    if (nextIdx >= 0 && nextIdx < scale.length) {
+        const newVal = scale[nextIdx] + 'px';
+        select.value = newVal;
+        window.formatDoc('fontSize', newVal);
+    }
+};
+
+// Atualizar botões ativos na barra (Regra 27 - Active Stat)
+window.updateToolbarState = function() {
+    const commands = [
+        { id: 'btn-bold', cmd: 'bold' },
+        { id: 'btn-italic', cmd: 'italic' },
+        { id: 'btn-underline', cmd: 'underline' },
+        { id: 'btn-strikethrough', cmd: 'strikeThrough' },
+        { id: 'btn-subscript', cmd: 'subscript' },
+        { id: 'btn-superscript', cmd: 'superscript' },
+        { id: 'btn-justifyLeft', cmd: 'justifyLeft' },
+        { id: 'btn-justifyCenter', cmd: 'justifyCenter' },
+        { id: 'btn-justifyRight', cmd: 'justifyRight' },
+        { id: 'btn-justifyFull', cmd: 'justifyFull' },
+        { id: 'btn-unorderedList', cmd: 'insertUnorderedList' },
+        { id: 'btn-orderedList', cmd: 'insertOrderedList' }
+    ];
+
+    commands.forEach(c => {
+        const btn = document.getElementById(c.id);
+        if (btn) {
+            try {
+                if (document.queryCommandState(c.cmd)) {
+                    btn.classList.add('bg-indigo-50', 'text-indigo-600');
+                    btn.classList.remove('text-slate-600');
+                } else {
+                    btn.classList.remove('bg-indigo-50', 'text-indigo-600');
+                    btn.classList.add('text-slate-600');
+                }
+            } catch(e) {}
+        }
+    });
+
+    // Destacar opção ativa nos dropdowns de lista
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        let node = selection.anchorNode;
+        if (node && node.nodeType === 3) node = node.parentElement;
+        const list = node ? node.closest('ol, ul') : null;
+        
+        // Limpar destaques anteriores
+        document.querySelectorAll('.list-style-option').forEach(opt => opt.classList.remove('active', 'bg-indigo-50', 'border-indigo-200'));
+
+        if (list) {
+            let currentStyle = list.style.listStyleType || 'none';
+            if (list.classList.contains('list-check')) currentStyle = 'check';
+            else if (list.classList.contains('list-arrow')) currentStyle = 'arrow';
+            else if (list.classList.contains('list-diamond')) currentStyle = 'diamond';
+            else if (list.classList.contains('list-decimal-paren')) currentStyle = 'decimal-paren';
+            else if (list.classList.contains('list-lower-alpha-paren')) currentStyle = 'lower-alpha-paren';
+            else if (list.classList.contains('list-upper-alpha-paren')) currentStyle = 'upper-alpha-paren';
+            else if (list.classList.contains('list-decimal')) currentStyle = 'decimal';
+            else if (list.classList.contains('list-upper-alpha')) currentStyle = 'upper-alpha';
+            else if (list.classList.contains('list-lower-alpha')) currentStyle = 'lower-alpha';
+            else if (list.classList.contains('list-upper-roman')) currentStyle = 'upper-roman';
+            else if (list.classList.contains('list-lower-roman')) currentStyle = 'lower-roman';
+            else if (list.getAttribute('type')) {
+                const t = list.getAttribute('type');
+                if (t === 'A') currentStyle = 'upper-alpha';
+                else if (t === 'a') currentStyle = 'lower-alpha';
+                else if (t === 'I') currentStyle = 'upper-roman';
+                else if (t === 'i') currentStyle = 'lower-roman';
+                else if (t === '1') currentStyle = 'decimal';
+            }
+
+            // Encontrar e destacar a opção no dropdown
+            const type = list.tagName;
+            document.querySelectorAll(`.list-style-option[onclick*="'${type}'"][onclick*="'${currentStyle}'"]`).forEach(opt => {
+                opt.classList.add('active', 'bg-indigo-50', 'border-indigo-200');
             });
         }
-        
-        if (isDb && window.db) {
-            window.db.update('activities', Number(id), { status: 'concluida' });
-        }
-        
-    } else if (state === 'nao_concluido') {
-        card.classList.replace('bg-white', 'bg-rose-50/50');
-        card.classList.replace('border-slate-100', 'border-rose-200');
-        title.classList.replace('text-[#0B193C]', 'text-rose-700');
-        
-        statusText.innerText = "Não Concluído";
-        statusText.className = "task-status-text text-[10px] font-bold text-rose-600 uppercase";
-        
-        dot.className = "task-dot flex items-center justify-center w-3 h-3 rounded-full bg-rose-500";
-        dot.innerHTML = `<span class="material-symbols-outlined text-[8px] text-white font-bold">close</span>`;
-        if(border) border.className = "task-border absolute left-0 top-0 bottom-0 w-1 bg-rose-400 rounded-l-2xl";
-
-        if (isDb && window.db) {
-            window.db.update('activities', Number(id), { status: 'nao_concluido' });
-        }
     }
 
-    if (options) {
-        options.classList.add('hidden');
+    // Sincronizar Seletores e Previews
+    try {
+        const fontName = document.queryCommandValue('fontName').replace(/"/g, "");
+        const foreColor = document.queryCommandValue('foreColor');
+        const backColor = document.queryCommandValue('backColor');
+        
+        const fontSelect = document.getElementById('fontFamilySelect');
+        if (fontSelect && fontName && fontName !== 'undefined') {
+            fontSelect.value = fontName;
+        }
+
+        if (foreColor) {
+            const preview = document.getElementById('textColorPreview');
+            if (preview) preview.style.backgroundColor = foreColor;
+        }
+
+        if (backColor && backColor !== 'transparent' && backColor !== 'rgba(0, 0, 0, 0)') {
+            const preview = document.getElementById('highlightPreview');
+            if (preview) preview.style.backgroundColor = backColor;
+        } else {
+            const preview = document.getElementById('highlightPreview');
+            if (preview) preview.style.backgroundColor = 'transparent';
+        }
+    } catch(e) {}
+};
+
+// Listeners de toolbar — definição única mais abaixo (evitar duplicação)
+
+window.changeCase = function(type) {
+    const selection = window.getSelection();
+    if (!selection.rangeCount || selection.isCollapsed) {
+        // Alerta discreto customizado (Regra 8)
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 bg-[#0B193C] text-white px-6 py-3 rounded-full text-[11px] font-bold shadow-2xl z-[2000] animate-bounce';
+        toast.innerText = "Selecione um texto para alterar maiúsculas/minúsculas.";
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2500);
+        return;
     }
+
+    const range = selection.getRangeAt(0);
+    const content = range.toString();
+    if (!content) return;
+
+    let newText = "";
+    if (type === 'upper') newText = content.toUpperCase();
+    else if (type === 'lower') newText = content.toLowerCase();
+    else if (type === 'capitalize') {
+        newText = content.toLowerCase().replace(/(^\w|\s\w)/g, m => m.toUpperCase());
+    } else if (type === 'toggle') {
+        newText = content.split('').map(c => 
+            c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase()
+        ).join('');
+    }
+
+    const span = document.createElement('span');
+    span.textContent = newText;
+    
+    // Manter estilos do pai se possível
+    range.deleteContents();
+    range.insertNode(span);
+    
+    // Reposicionar seleção
+    selection.removeAllRanges();
+    const newRange = document.createRange();
+    newRange.selectNodeContents(span);
+    selection.addRange(newRange);
+    saveSelection();
+};
+
+// 2. Sistema de Anexos
+window.triggerFileAttach = function() {
+    document.getElementById('editorFileInput').click();
+};
+
+window.handleFileAttach = async function(input) {
+    const files = Array.from(input.files);
+    for (const file of files) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const fileData = {
+                id: Date.now() + Math.random(),
+                name: file.name,
+                type: file.type,
+                base64: e.target.result,
+                size: (file.size / 1024).toFixed(1) + ' KB'
+            };
+            currentAttachments.push(fileData);
+            renderAttachmentCard(fileData);
+        };
+        reader.readAsDataURL(file);
+    }
+    input.value = ''; // Limpar input
+};
+
+function renderAttachmentCard(file) {
+    const container = document.getElementById('editorAttachments');
+    const isAudio = file.type.includes('audio');
+    const isImage = file.type.includes('image');
+    const isPdf = file.type.includes('pdf');
+    const isDoc = file.type.includes('word') || file.type.includes('msword') || file.type.includes('officedocument');
+    
+    let icon = 'description';
+    if (isAudio) icon = 'headset';
+    else if (isPdf) icon = 'picture_as_pdf';
+    else if (isDoc) icon = 'description';
+    
+    const card = document.createElement('div');
+    card.className = `attachment-card ${isImage ? 'is-image' : ''}`;
+    card.id = `attach-${file.id}`;
+    
+    let mediaHtml = `<span class="material-symbols-outlined">${icon}</span>`;
+    if (isImage && file.base64) {
+        mediaHtml = `<img src="${file.base64}" alt="thumbnail" style="width: 100%; height: 100%; object-fit: contain; background: white;">`;
+    }
+
+    card.innerHTML = `
+        <div class="attachment-icon">
+            ${mediaHtml}
+        </div>
+        <div class="attachment-info">
+            <span class="attachment-name" title="${file.name}">${file.name}</span>
+            <span class="attachment-size">${file.size}</span>
+        </div>
+        <div class="attachment-delete" onclick="removeAttachment('${file.id}')" title="Excluir">
+            <span class="material-symbols-outlined" style="font-size: 18px;">delete</span>
+        </div>
+        ${isImage ? `
+        <div class="attachment-insert-btn" onclick="insertImageToEditor('${file.base64}')" title="Inserir no texto">
+            <span class="material-symbols-outlined" style="font-size: 18px;">add_photo_alternat</span>
+        </div>` : ''}
+    `;
+    
+    if (isAudio && card.querySelector('.attachment-info')) {
+        const audio = document.createElement('audio');
+        audio.controls = true;
+        audio.src = file.base64;
+        audio.className = 'mt-2 w-full h-8 scale-90 origin-left';
+        card.querySelector('.attachment-info').appendChild(audio);
+    }
+    
+    container.appendChild(card);
 }
 
-window.deleteTaskCard = function(event, btn) {
-    event.stopPropagation();
-    if (!confirm('Deseja realmente excluir esta atividade?')) return;
-    
-    const card = btn.closest('.task-card');
-    const id = card.getAttribute('data-id');
-    const isDb = card.getAttribute('data-isdb') === 'true';
+window.removeAttachment = function(id) {
+    currentAttachments = currentAttachments.filter(a => String(a.id) !== String(id));
+    const el = document.getElementById(`attach-${id}`);
+    if (el) el.remove();
+};
 
-    if (isDb && window.db) {
-        window.db.delete('activities', Number(id));
-        // Limpar metricas se existir
-        const metrics = window.db.get('metrics_entries') || [];
-        const m = metrics.find(x => x.activity_id === Number(id));
-        if(m) window.db.delete('metrics_entries', m.id);
-    }
+window.insertImageToEditor = function(datUrl) {
+    const editor = document.getElementById('editorContent');
+    editor.focus();
     
-    // Anima a remoção 
-    card.classList.add('opacity-0', 'scale-95');
+    // Restaurar seleção se existir
+    restoreSelection();
+    
+    // Inserir imagem
+    document.execCommand('insertImage', false, datUrl);
+    
+    // Adicionar classe para permitir redimensionamento (opcional, ajuda no CSS)
+    const imgs = editor.getElementsByTagName('img');
+    const lastImg = imgs[imgs.length - 1];
+    if (lastImg) {
+        lastImg.style.maxWidth = '100%';
+        lastImg.style.cursor = 'nwse-resize';
+    }
+};
+
+// 3. Gravador de Áudio
+window.toggleAudioRecording = async function() {
+    const btn = document.getElementById('audioRecordBtn');
+    
+    if (!mediaRecorder || mediaRecorder.state === "inactive") {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+            audioChunks = [];
+
+            mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
+            mediaRecorder.onstop = () => {
+                const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const audioData = {
+                        id: Date.now(),
+                        name: `Gravação_${new Date().toLocaleTimeString()}.webm`,
+                        type: 'audio/webm',
+                        base64: e.target.result,
+                        size: (audioBlob.size / 1024).toFixed(1) + ' KB'
+                    };
+                    currentAttachments.push(audioData);
+                    renderAttachmentCard(audioData);
+                };
+                reader.readAsDataURL(audioBlob);
+                stream.getTracks().forEach(track => track.stop());
+            };
+
+            mediaRecorder.start();
+            btn.classList.add('recording-pulse', 'text-rose-600', 'bg-rose-50');
+            btn.querySelector('span').innerText = 'stop_circle';
+        } catch (err) {
+            alert('Permissão de microfone negada ou não disponível.');
+        }
+    } else {
+        mediaRecorder.stop();
+        btn.classList.remove('recording-pulse', 'text-rose-600', 'bg-rose-50');
+        btn.querySelector('span').innerText = 'mic';
+    }
+};
+
+// 4. Fórmulas Matemáticas Avançadas (MathLive - Estilo Word)
+let editingFormulaElement = null;
+
+window.insertFormula = function() {
+    editingFormulaElement = null;
+    const modal = document.getElementById('formulaModal');
+    const mf = document.getElementById('formulaMathField');
+    
+    mf.value = ''; // Limpa
+    modal.classList.remove('hidden');
+    
+    // Forçar renderização do KaTeX nos botões e símbolos
     setTimeout(() => {
-        if (window.renderWeeklyAgenda) window.renderWeeklyAgenda();
-    }, 300);
+        if (window.renderMathInElement) {
+            renderMathInElement(modal, {
+                delimiters: [
+                    {left: "$$", right: "$$", display: true},
+                    {left: "$", right: "$", display: false}
+                ],
+                throwOnError : false
+            });
+        }
+        mf.focus();
+    }, 200); // 200ms para garantir que o DOM está visível
+};
+
+// 4. Editor de Equações Premium (Office Style)
+let activeMathField = null; 
+
+// Toggle de categorias matemáticas (dropdowns Word-style)
+window.toggleMathCat = function(btnEl) {
+    const cat = btnEl.closest('.math-cat');
+    const dropdown = cat.querySelector('.math-cat-dropdown');
+    const isOpen = dropdown.classList.contains('show');
+    
+    // Fechar todas as outras
+    document.querySelectorAll('.math-cat-dropdown.show').forEach(d => d.classList.remove('show'));
+    
+    if (!isOpen) {
+        dropdown.classList.add('show');
+    }
+};
+
+// Fechar dropdowns ao clicar fora
+document.addEventListener('mousedown', function(e) {
+    if (!e.target.closest('.math-cat')) {
+        document.querySelectorAll('.math-cat-dropdown.show').forEach(d => d.classList.remove('show'));
+    }
+});
+
+window.toggleMathRibbon = function() {
+    const ribbon = document.getElementById('math-ribbon');
+    const sigmaBtn = document.getElementById('sigmaBtn');
+    
+    if (ribbon.classList.contains('hidden')) {
+        // Ativar Ribbon
+        ribbon.classList.remove('hidden');
+        sigmaBtn.classList.add('bg-indigo-600', 'text-white');
+        sigmaBtn.classList.remove('bg-indigo-50/50', 'text-indigo-600');
+        
+        // Renderizar KaTeX na ribbon
+        renderMathInElementRecursive(ribbon);
+        
+        // Se não houver um campo atvo, criar um novo inline
+        if (!activeMathField) {
+            window.insertInlineEquation();
+        }
+    } else {
+        // Desativar Ribbon
+        ribbon.classList.add('hidden');
+        sigmaBtn.classList.remove('bg-indigo-600', 'text-white');
+        sigmaBtn.classList.add('bg-indigo-50/50', 'text-indigo-600');
+        closeAllMathDropdowns();
+    }
+};
+
+window.insertInlineEquation = function() {
+    // Verificar se MathLive carregou (custom element registrado)
+    if (!customElements.get('math-field')) {
+        console.log('MathLive ainda carregando, aguardando...');
+        customElements.whenDefined('math-field').then(() => {
+            window.insertInlineEquation();
+        });
+        return;
+    }
+    
+    const editor = document.getElementById('editorContent');
+    editor.focus();
+    
+    // Restaurar seleção salva para garantir inserção no lugar certo
+    restoreSelection();
+    
+    const mfContainer = document.createElement('span');
+    mfContainer.className = 'formula-inline-container is-editing';
+    mfContainer.contentEditable = "false";
+    
+    const newMf = document.createElement('math-field');
+    newMf.style.cssText = 'font-size:inherit; min-width:15px; display:inline-block; margin:0; padding:0; border:none; outline:none;';
+    
+    // Configurar MathLive para UI 100% limpa (sem teclado, sem menu, sem ícones)
+    newMf.setAttribute('math-virtual-keyboard-policy', 'manual');
+    newMf.setAttribute('virtual-keyboard-mode', 'off');
+    newMf.setAttribute('menu-items', '[]');
+    newMf.setAttribute('smart-mode', '');
+    
+    newMf.onfocus = () => {
+        activeMathField = newMf;
+        mfContainer.classList.add('is-editing');
+        newMf.removeAttribute('read-only');
+        document.getElementById('math-ribbon').classList.remove('hidden');
+    };
+    
+    newMf.onblur = () => {
+        setTimeout(() => {
+            if (document.activeElement !== newMf && !newMf.contains(document.activeElement)) {
+                // Esconder teclado virtual do MathLive
+                try { window.mathVirtualKeyboard.visible = false; } catch(e) {}
+                
+                if (!newMf.value || !newMf.value.trim()) {
+                    mfContainer.remove();
+                    if (activeMathField === newMf) activeMathField = null;
+                } else {
+                    mfContainer.classList.remove('is-editing');
+                    newMf.setAttribute('read-only', '');
+                    if (activeMathField === newMf) activeMathField = null;
+                }
+                // Esconder ribbon se nenhum campo ativo
+                if (!activeMathField) {
+                    document.getElementById('math-ribbon').classList.add('hidden');
+                }
+            }
+        }, 250);
+    };
+    
+    // Clique no container reativa edição
+    mfContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        mfContainer.classList.add('is-editing');
+        newMf.removeAttribute('read-only');
+        newMf.focus();
+    });
+    
+    mfContainer.appendChild(newMf);
+    
+    // Inserir no cursor
+    const selection = window.getSelection();
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        range.deleteContents();
+        range.insertNode(mfContainer);
+        
+        // Criar nó de texto após a equação para o cursor pousar
+        const textAfter = document.createTextNode('\u200B');
+        mfContainer.parentNode.insertBefore(textAfter, mfContainer.nextSibling);
+        
+        // Mover cursor para o texto após a equação
+        const newRange = document.createRange();
+        newRange.setStart(textAfter, 1);
+        newRange.collapse(true);
+        selection.removeAllRanges();
+        selection.addRange(newRange);
+    }
+    
+    activeMathField = newMf;
+    setTimeout(() => newMf.focus(), 50);
+};
+
+// Insere LaTeX no campo de equação ativo (MathLive)
+window.insertToWorkspace = function(latex) {
+    // Salvar seleção antes de qualquer operação
+    saveSelection();
+    
+    // Se não houver campo ativo, criar um novo
+    if (!activeMathField) {
+        window.insertInlineEquation();
+    }
+    
+    // Aguardar o campo ficar pronto e inserir
+    const delay = activeMathField ? 50 : 200;
+    setTimeout(() => {
+        if (activeMathField) {
+            activeMathField.focus();
+            // Usar a API insert do MathLive
+            try {
+                activeMathField.insert(latex, { focus: true, feedback: true });
+            } catch(e) {
+                // Fallback: append ao valor atual
+                try {
+                    const current = activeMathField.value || '';
+                    activeMathField.value = current + latex;
+                } catch(e2) {
+                    console.error('Erro ao inserir LaTeX:', e2);
+                }
+            }
+        }
+    }, delay);
+};
+
+window.toggleMathDropdown = function(id) {
+    const dropdown = document.getElementById(id);
+    const btn = document.querySelector(`[onclick="toggleMathDropdown('${id}')"]`);
+    const wasActive = dropdown.classList.contains('active');
+    
+    // Fechar todos antes
+    closeAllMathDropdowns();
+    
+    if (!wasActive) {
+        dropdown.classList.add('active');
+        if (btn) btn.classList.add('active');
+        renderMathInElementRecursive(dropdown);
+    }
+};
+
+function closeAllMathDropdowns() {
+    document.querySelectorAll('.math-dropdown-premium').forEach(d => d.classList.remove('active'));
+    document.querySelectorAll('.ribbon-btn-premium').forEach(b => b.classList.remove('active'));
 }
+
+window.insertToWorkspace = function(latx) {
+    if (!activeMathField) {
+        window.insertInlineEquation();
+    }
+    const mf = activeMathField;
+    if (mf) {
+        mf.insert(latx, {
+            focus: true,
+            feedback: true,
+            mode: 'math',
+            format: 'latex'
+        });
+    }
+    closeAllMathDropdowns();
+};
+
+
+function renderMathInElementRecursive(el) {
+    if (window.renderMathInElement) {
+        window.renderMathInElement(el, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false}
+            ],
+            throwOnError: false
+        });
+    }
+}
+
+window.toggleColorPicker = function(id) {
+    const dropdown = document.getElementById(id);
+    const isHidden = dropdown.classList.contains('hidden');
+    
+    // Salvar seleção antes de abrir para não perder o foco
+    saveSelection();
+    
+    // Fechar todos os dropdowns de cor primeiro
+    document.querySelectorAll('.color-picker-dropdown').forEach(d => d.classList.add('hidden'));
+    
+    if (isHidden) {
+        // Na primeira abertura, encontrar o botão e salvar referência, mover dropdown ao body
+        if (!dropdown._cpBtn) {
+            // O botão é o irmão anterior antes de mover ao body
+            dropdown._cpBtn = dropdown.previousElementSibling || dropdown.parentElement.querySelector('button');
+            // Mover ao body para escapar do transform do modal
+            document.body.appendChild(dropdown);
+        }
+        
+        dropdown.classList.remove('hidden');
+        
+        const btn = dropdown._cpBtn;
+        if (btn) {
+            const rect = btn.getBoundingClientRect();
+            let top = rect.bottom + 4;
+            let left = rect.left;
+            
+            // Medir o dropdown após exibido
+            const dropW = dropdown.offsetWidth;
+            const dropH = dropdown.offsetHeight;
+            
+            // Ajustar se ultrapassar a direita da tela
+            if (left + dropW > window.innerWidth - 12) {
+                left = window.innerWidth - dropW - 12;
+            }
+            if (left < 8) left = 8;
+            
+            // Ajustar se ultrapassar o fundo da tela
+            if (top + dropH > window.innerHeight - 12) {
+                top = rect.top - dropH - 4;
+            }
+            
+            dropdown.style.top = top + 'px';
+            dropdown.style.left = left + 'px';
+        }
+    }
+};
+
+window.applyColor = function(color, cmd) {
+    const editor = document.getElementById('editorContent');
+    editor.focus();
+    
+    // Restaura a seleção que foi salva ao abrir o dropdown ou antes do clique
+    restoreSelection();
+    
+    // Se a cor for "Automático" (transparent ou inherit), usamos comandos específicos
+    let colorValue = color;
+    if (color === 'transparent' && cmd === 'foreColor') colorValue = 'inherit';
+
+    // Aplica a formatação
+    window.formatDoc(cmd, colorValue);
+    
+    // Atualizar preview visual na barra
+    if (cmd === 'foreColor') {
+        document.getElementById('textColorPreview').style.backgroundColor = color === 'inherit' ? '#000' : color;
+    } else if (cmd === 'hiliteColor') {
+        document.getElementById('highlightPreview').style.backgroundColor = color === 'transparent' ? 'transparent' : color;
+    }
+    
+    // Salvar nova seleção após aplicar (caso tenha mudado)
+    saveSelection();
+    
+    // Fechar dropdown
+    document.querySelectorAll('.color-picker-dropdown').forEach(d => d.classList.add('hidden'));
+};
+
+// Fechar paletas e dropdowns ao clicar fora
+document.addEventListener('mousedown', (e) => {
+    if (!e.target.closest('.color-picker-dropdown') && !e.target.closest('.list-picker-dropdown') && !e.target.closest('.relative') && !e.target.closest('.cp-swatch') && !e.target.closest('.cp-auto-btn') && !e.target.closest('.lp-option') && !e.target.closest('.lp-option-none')) {
+        document.querySelectorAll('.color-picker-dropdown, .list-picker-dropdown').forEach(p => p.classList.add('hidden'));
+    }
+    if (!e.target.closest('.ribbon-group') && !e.target.closest('.math-ribbon-premium')) {
+        closeAllMathDropdowns();
+    }
+});
+
+const style = document.createElement('style');
+style.innerHTML = `
+    .animate-hourglass-premium {
+        animation: hourglass-flow 3s infinite linear;
+    }
+    @keyframes hourglass-flow {
+        0% { transform: rotate(0deg); }
+        45% { transform: rotate(0deg); }
+        55% { transform: rotate(180deg); }
+        100% { transform: rotate(180deg); }
+    }
+`;
+document.head.appendChild(style);
+
+// Detectar duplo clique no editor para editar fórmulas (MathLive Reload)
+document.addEventListener('DOMContentLoaded', () => {
+    const editorForDblClick = document.getElementById('editorContent');
+    if (editorForDblClick) editorForDblClick.addEventListener('dblclick', function(e) {
+        const target = e.target.closest('.formula-card');
+        if (target) {
+            editingFormulaElement = target;
+            const latex = target.getAttribute('data-latex');
+            document.getElementById('formulaModal').classList.remove('hidden');
+            
+            setTimeout(() => {
+                const mf = document.getElementById('formulaMathField');
+                mf.value = latex;
+                mf.focus();
+            }, 100);
+        }
+    });
+});
+
+// 5. Abertura e Fechamento do Modal Principal de Notas
+window.openNotesModal = function(event, btn) {
+    event.stopPropagation();
+    
+    const modal = document.getElementById('notesModal');
+    const content = document.getElementById('notesModalContent');
+    const editor = document.getElementById('editorContent');
+    const attachments = document.getElementById('editorAttachments');
+    const subjectLabel = document.getElementById('notesSubjectTitle');
+
+    // RESET TOTAL ANTES DE CARREGAR
+    editor.innerHTML = '';
+    attachments.innerHTML = '';
+    currentAttachments = [];
+    currentTaskIdForNotes = null;
+    savedSelection = null;
+    activeMathField = null;
+
+    const card = btn.closest('.kanban-card');
+    const id = card.getAttribute('data-id');
+    const title = card.querySelector('h4').innerText;
+    
+    currentTaskIdForNotes = id;
+    subjectLabel.innerText = title;
+    
+    // Carregar do banco
+    if (window.db) {
+        const activities = window.db.get('activities') || [];
+        const task = activities.find(a => String(a.id) === String(id));
+        
+        if (task) {
+            editor.innerHTML = task.notesHtml || task.notes || '';
+            if (task.attachments) {
+                currentAttachments = [...task.attachments];
+                currentAttachments.forEach(renderAttachmentCard);
+            }
+        }
+    }
+
+    modal.classList.remove('hidden');
+    
+    // Resetar previews da barra para padrão Word
+    const textPreview = document.getElementById('textColorPreview');
+    const highPreview = document.getElementById('highlightPreview');
+    if (textPreview) textPreview.style.backgroundColor = '#000000';
+    if (highPreview) highPreview.style.backgroundColor = '#ffff00';
+    
+    setTimeout(() => {
+        content.classList.remove('scale-95', 'opacity-0');
+        content.classList.add('scale-100', 'opacity-100');
+        window.updateToolbarState();
+    }, 10);
+};
+
+window.closeNotesModal = function() {
+    const modal = document.getElementById('notesModal');
+    const content = document.getElementById('notesModalContent');
+    const editor = document.getElementById('editorContent');
+    const attachments = document.getElementById('editorAttachments');
+    
+    // Animação de saída
+    content.classList.remove('scale-100', 'opacity-100');
+    content.classList.add('scale-95', 'opacity-0');
+    
+    setTimeout(() => { 
+        modal.classList.add('hidden'); 
+        
+        // LIMPEZA TOTAL PARA EVITAR PERSISTÊNCIA DE RASCUNHOS NÃO SALVOS
+        if (editor) editor.innerHTML = '';
+        if (attachments) attachments.innerHTML = '';
+        
+        currentTaskIdForNotes = null;
+        currentAttachments = [];
+        savedSelection = null;
+        activeMathField = null;
+        
+        // Ocultar ribbon de matemática se estiver aberta
+        const ribbon = document.getElementById('math-ribbon');
+        if (ribbon) ribbon.classList.add('hidden');
+    }, 300);
+};
+
+// Listeners para o Editor
+document.addEventListener('selectionchange', () => {
+    if (document.activeElement.id === 'editorContent') {
+        saveSelection();
+        window.updateToolbarState();
+    }
+});
+
+const editorEl = document.getElementById('editorContent');
+if (editorEl) {
+    editorEl.addEventListener('keyup', () => {
+        saveSelection();
+        window.updateToolbarState();
+    });
+    editorEl.addEventListener('mouseup', () => {
+        saveSelection();
+        window.updateToolbarState();
+    });
+}
+
+window.saveTaskNotes = function() {
+    if (!currentTaskIdForNotes || !window.db) return;
+    
+    const htmlContent = document.getElementById('editorContent').innerHTML;
+    
+    window.db.update('activities', currentTaskIdForNotes, { 
+        notesHtml: htmlContent,
+        attachments: currentAttachments,
+        updatedAt: new Date().toISOString()
+    });
+    
+    const saveBtn = document.querySelector('#notesModalContent button[onclick="saveTaskNotes()"]');
+    const originalContent = saveBtn.innerHTML;
+    saveBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> SALVO!';
+    saveBtn.classList.replace('bg-amber-500', 'bg-emerald-500');
+    
+    setTimeout(() => {
+        saveBtn.innerHTML = originalContent;
+        saveBtn.classList.replace('bg-emerald-500', 'bg-amber-500');
+        closeNotesModal();
+        renderWeeklyAgenda();
+    }, 1000);
+};
 
 function renderWeeklyAgenda() {
     const endOfWeek = new Date(currentWeekStart.getTime() + (6 * msInDay));
-    
-    // Check if it's the current real week to mark the label "Semana Atual" or "Outra Semana"
+    const lblSemana = document.getElementById('lblSemana');
     const realSunday = getSunday(currentDate);
-    document.getElementById('lblSemana').innerText = (realSunday.getTime() === currentWeekStart.getTime()) ? "Semana Atual" : "Visualizando";
-    
-    // Update Header
-    document.getElementById('weekDateRange').innerHTML = formatDateBr(currentWeekStart) + ' <span class="text-slate-300 font-normal mx-1">a</span> ' + formatDateBr(endOfWeek);
+
+    if (lblSemana) {
+        lblSemana.innerText = (realSunday.getTime() === currentWeekStart.getTime()) ? "SEMANA ATUAL" : "VISUALIZANDO";
+    }
+
+    const dateRangeEl = document.getElementById('weekDateRange');
+    if (dateRangeEl) {
+        const startStr = currentWeekStart.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }).toUpperCase();
+        const endStr   = endOfWeek.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' }).toUpperCase();
+        dateRangeEl.innerHTML = `${startStr} A ${endStr}`;
+    }
 
     const grid = document.getElementById('weeklyAgendaGrid');
-    if (!grid) return; // Safely exit if not on Planejamento page
-    grid.innerHTML = ''; // Limpa
+    if (!grid) return;
+    grid.innerHTML = '';
 
-    const daysNames = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+    const daysNames = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
 
     for (let i = 0; i < 7; i++) {
         let colDate = new Date(currentWeekStart.getTime() + (i * msInDay));
         let isToday = (colDate.toDateString() === currentDate.toDateString());
+        let isPast  = colDate.getTime() < currentDate.getTime() && !isToday;
+        let dStr    = colDate.getFullYear() + '-' + String(colDate.getMonth()+1).padStart(2,'0') + '-' + String(colDate.getDate()).padStart(2,'0');
+
+        let allActivities = window.db ? (window.db.get('activities') || []) : [];
+        let dailyTasks    = allActivities.filter(a => a.date === dStr);
+        let concluded     = dailyTasks.filter(a => a.status === 'concluida' || a.status === 'concluída').length;
+
+        const dayNamesPt = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+        const dayShort   = dayNamesPt[i];
+        const dayNum     = colDate.getDate();
+        const monthStr   = colDate.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '').toUpperCase();
         
-        // Render Column structure
-        let containerClass = "snap-start flex-shrink-0 w-[290px] xl:w-[calc(14.28%-20px)] flex flex-col h-[700px] group";
+        // Estilização Bem Definida para o dia de hoje
+        const isTodayContainer = isToday ? 'bg-white shadow-lg ring-2 ring-[#00B5B5]/40' : 'bg-slate-50/50';
+        const progressPercent = dailyTasks.length > 0 ? (concluded / dailyTasks.length) * 100 : 0;
         
-        let dStr = colDate.getFullYear() + '-' + String(colDate.getMonth()+1).padStart(2,'0') + '-' + String(colDate.getDate()).padStart(2,'0');
-
-        // Se for menor que hoje na semana atual ou uma semana do passado, da uma leve opacidade.
-        let isPast = (colDate.getTime() < currentDate.getTime() && !isToday);
-        if (isPast) containerClass += " opacity-60 hover:opacity-100 transition-opacity";
-
-        // Inject highlights if it is Today
-        let headerInner = "";
-        if(isToday) {
-            headerInner = `
-            <div class="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-sinapse-primary to-blue-500 text-white text-[9px] font-extrabold uppercase px-4 py-1 rounded-full shadow-md z-20 tracking-widest">Hoje</div>
-            <div class="flex items-center justify-between w-full">
-                <div class="text-left">
-                    <h3 class="text-[11px] font-extrabold text-sinapse-primary uppercase tracking-widest">${daysNames[i]}</h3>
-                    <p class="text-[26px] font-headline font-extrabold text-[#0B193C] mt-0.5 leading-none">${formatDayShort(colDate)}</p>
+        const headerHTML = `
+            <div class="flex flex-col items-center pt-3 pb-2 px-4 bg-[#D6EEF2] rounded-t-[28px] mb-2 border-b border-white/20">
+                <!-- Selo de Dat -->
+                <div class="w-10 h-10 bg-[#00B5B5] rounded-xl flex flex-col items-center justify-center text-white mb-1 shadow-sm">
+                    <span class="text-[13px] font-black leading-none">${colDate.getDate()}</span>
+                    <span class="text-[7px] font-bold uppercase tracking-tighter opacity-80">${colDate.toLocaleDateString('pt-BR', { month: 'short' }).replace('.','').toUpperCase()}</span>
                 </div>
-                <button onclick="if(window.abrirModalAtividadeParaData) window.abrirModalAtividadeParaData('${dStr}')" class="w-9 h-9 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-sinapse-primary hover:bg-sinapse-primary hover:text-white hover:border-transparent transition-all opacity-80 group-hover:opacity-100 shadow-sm" title="Planejar meta neste dia">
-                    <span class="material-symbols-outlined text-[20px]">add</span>
-                </button>
-            </div>`;
-        } else {
-            headerInner = `
-            <div class="flex items-center justify-between w-full">
-                <div class="text-left">
-                    <h3 class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest">${daysNames[i]}</h3>
-                    <p class="text-[26px] font-headline font-extrabold text-[#0B193C] mt-0.5 leading-none opacity-80">${formatDayShort(colDate)}</p>
+
+                <!-- Nome do Dia -->
+                <div class="flex items-center gap-2 mb-1">
+                    <div class="w-2 h-2 rounded-full bg-[#00B5B5] opacity-20"></div>
+                    <span class="text-[13px] font-black text-[#006B6B] uppercase tracking-widest" style="font-family: 'Playfair Display', serif;">
+                        ${daysNames[i] === 'Dom' ? 'DOMINGO' : 
+                          daysNames[i] === 'Seg' ? 'SEGUNDA' : 
+                          daysNames[i] === 'Ter' ? 'TERÇA' : 
+                          daysNames[i] === 'Qua' ? 'QUARTA' : 
+                          daysNames[i] === 'Qui' ? 'QUINTA' : 
+                          daysNames[i] === 'Sex' ? 'SEXTA' : 'SÁBADO'}
+                    </span>
                 </div>
-                <button onclick="if(window.abrirModalAtividadeParaData) window.abrirModalAtividadeParaData('${dStr}')" class="w-9 h-9 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-slate-400 hover:text-sinapse-primary hover:border-sinapse-primary/50 transition-all opacity-0 group-hover:opacity-100 shadow-sm" title="Planejar meta neste dia">
-                    <span class="material-symbols-outlined text-[20px]">add</span>
-                </button>
-            </div>`;
-        }
 
-        let tasksHTML = "";
-        let dayTasks = dbTasksPaterns[i] ? [...dbTasksPaterns[i]] : [];
+                <!-- Barra de Progresso -->
+                <div class="w-full h-1 bg-slate-200/50 rounded-full overflow-hidden mb-1">
+                    <div class="h-full bg-[#00B5B5] transition-all duration-1000" style="width: ${progressPercent}%"></div>
+                </div>
 
-        // Puxar metas REAIS criadas via Planejamento Semanal + Modal
-        let realActivities = [];
-        if (window.db) {
-            let allActivities = window.db.get('activities') || [];
-            let filtered = allActivities.filter(a => a.date === dStr);
-            
-            realActivities = filtered.map(a => {
-                let colorMap = {
-                    'Matemática': 'blue',
-                    'Física': 'rose',
-                    'Química': 'amber',
-                    'Biologia': 'emerald',
-                    'Filosofia': 'slate',
-                    'Sociologia': 'slate',
-                    'História': 'orange',
-                    'Geografia': 'green',
-                    'Literatura': 'purple',
-                    'Linguagens': 'purple',
-                    'Inglês': 'indigo',
-                    'Espanhol': 'indigo',
-                    'Artes': 'pink'
-                };
-                let iconMap = {
-                    'Matemática': 'functions',
-                    'Física': 'speed',
-                    'Química': 'experiment',
-                    'Biologia': 'biotech',
-                    'Filosofia': 'lightbulb',
-                    'Sociologia': 'groups',
-                    'História': 'history',
-                    'Geografia': 'public',
-                    'Literatura': 'menu_book',
-                    'Linguagens': 'edit_document',
-                    'Inglês': 'language',
-                    'Espanhol': 'translate',
-                    'Artes': 'palette'
-                };
-                let c = colorMap[a.discipline] || 'indigo';
-                let ic = iconMap[a.discipline] || 'assignment';
-                
-                let finalStatus = 'Pendente';
-                if (a.status === 'concluída' || a.status === 'concluida') finalStatus = 'Concluído';
-                else if (a.status === 'nao_concluido' || a.status === 'Não Concluído') finalStatus = 'Não Concluído';
+                <!-- Contador -->
+                <div class="text-[9px] font-black text-[#64748B] uppercase tracking-widest">
+                    ${concluded}/${dailyTasks.length} METAS
+                </div>
+            </div>
+        `;
 
-                return {
+        // Tasks
+        let tasksHTML = '';
+        if (dailyTasks.length > 0) {
+            dailyTasks.forEach(a => {
+                tasksHTML += createCardHTML({
                     id: a.id,
-                    dbRecord: true, // Identify it's real
-                    tag: a.discipline.substring(0,12),
-                    color: c,
-                    prefix: c,
-                    icon: ic,
+                    dbRecord: true,
+                    tag: a.discipline,
                     title: a.subject,
-                    status: finalStatus
-                };
+                    priority: a.priority || 'média',
+                    status: a.status === 'concluída' || a.status === 'concluida'
+                        ? 'Concluído'
+                        : (a.status === 'nao_concluido' ? 'Não Concluído' : 'Pendente'),
+                    hasNotes: !!(a.notesHtml && a.notesHtml.trim() !== '')
+                });
             });
         }
-        
-        // Merge real metas WITH mock metas (real metas first)
-        let mergedTasks = [...realActivities, ...dayTasks];
 
-        // Se for depois de dezembro, não tem tasks?
-        if (colDate.getFullYear() > currentDate.getFullYear()) {
-             // Mock vazio para ano que vem se quiser
-             tasksHTML = `<p class="text-xs font-bold text-slate-300 text-center mt-10 uppercase tracking-widest">Aguardando Planejamento</p>`;
-        } else {
-            if (mergedTasks.length === 0) {
-                // Empty State Premium
-                let isPastES = colDate.getTime() < currentDate.getTime() && !isToday;
-                let textColor = isPastES ? "text-slate-300" : "text-sinapse-primary/40";
-                
-                tasksHTML = `
-                <div class="h-full w-full flex flex-col items-center justify-center pt-20 pb-10 select-none group-hover:opacity-100 transition-opacity ${isPastES ? 'opacity-40' : 'opacity-60'}">
-                    <div class="w-14 h-14 rounded-full border border-dashed border-slate-300 flex items-center justify-center mb-4 bg-white/50 shadow-sm">
-                        <span class="material-symbols-outlined text-[24px] text-slate-300">event_available</span>
-                    </div>
-                    <p class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">Dia Livre</p>
-                </div>`;
-            } else {
-                mergedTasks.forEach(task => {
-                    tasksHTML += createCardHTML(task);
-                });
-            }
-        }
-
-        let bgBody = isToday ? "bg-gradient-to-b from-[#F0F4FF] to-white/50 border-blue-100/60 shadow-[inset_0_2px_10px_rgba(37,99,235,0.02)]" : "bg-[#F8FAFC]/50 border-slate-100/80";
-        let bdHeader = isToday ? "border-blue-100/60 bg-white" : "border-slate-100/80 bg-white/80 backdrop-blur-md";
-
-        let finalCol = `
-        <div class="${containerClass}">
-            <div class="rounded-t-[32px] border-b-0 border ${bdHeader} p-6 pb-5 relative z-10 shrink-0 shadow-sm">
-                ${headerInner}
+        grid.innerHTML += `
+            <div class="flex flex-col gap-0 transition-all duration-500 agenda-day-column ${isTodayContainer} ${isPast ? 'opacity-50 grayscale-[0.3]' : ''}" 
+                 style="height: 605px !important; overflow: hidden !important; border-radius: 28px !important; background-color: #ffffff !important; border: 1px solid rgba(0, 181, 181, 0.1);">
+                ${headerHTML}
+                <div class="flex-1 flex flex-col gap-3 overflow-y-auto custom-scrollbar agenda-scroll-container px-4 pb-5">
+                    ${tasksHTML}
+                    ${dailyTasks.length === 0 ? `
+                        <div class="flex flex-col items-center justify-center py-10 opacity-20">
+                            <span class="material-symbols-outlined text-[32px] mb-2">event_busy</span>
+                            <span class="text-[10px] font-black uppercase tracking-widest">Sem Metas</span>
+                        </div>
+                    ` : ''}
+                </div>
             </div>
-            <div class="${bgBody} border border-t-0 rounded-b-[32px] p-3 pt-5 flex-1 overflow-y-auto space-y-3 relative custom-scrollbar">
-                ${tasksHTML}
-            </div>
-        </div>`;
-
-        grid.innerHTML += finalCol;
+        `;
     }
 }
 
 function agendaPrev() {
-    let d = new Date(currentWeekStart);
-    d.setDate(d.getDate() - 7);
-    currentWeekStart = d;
+    currentWeekStart.setDate(currentWeekStart.getDate() - 7);
     renderWeeklyAgenda();
 }
 
 function agendaNext() {
-    let d = new Date(currentWeekStart);
-    d.setDate(d.getDate() + 7);
-    currentWeekStart = d;
-    renderWeeklyAgenda();
-}
-
-function agendaToday() {
-    currentWeekStart = getSunday(currentDate);
+    currentWeekStart.setDate(currentWeekStart.getDate() + 7);
     renderWeeklyAgenda();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Only bind if elements exist
     if (document.getElementById('weeklyAgendaGrid')) {
         renderWeeklyAgenda();
     }

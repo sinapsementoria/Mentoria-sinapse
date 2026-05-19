@@ -1,0 +1,44 @@
+function baixarPdfIndividual(matricula) {
+            verEspelho(matricula);
+            
+            setTimeout(() => {
+                const pages = Array.from(document.getElementById('pdf-espelho-pag1').parentElement.children).filter(el => el.id && el.id.startsWith('pdf-espelho-pag'));
+                const element = document.createElement('div');
+                pages.forEach(p => {
+                    let clone = p.cloneNode(true);
+                    clone.style.pageBreakAfter = 'always';
+                    clone.classList.remove('shadow-2xl', 'mb-8'); // clean up for print
+                    clone.style.margin = '0';
+                    clone.style.transform = 'scale(0.98)';
+                    clone.style.transformOrigin = 'top center';
+                    
+                    // Copy canvas pixel data from original to clone (for Chart.js radar)
+                    const originalCanvases = p.getElementsByTagName('canvas');
+                    const clonedCanvases = clone.getElementsByTagName('canvas');
+                    for (let i = 0; i < originalCanvases.length; i++) {
+                        clonedCanvases[i].getContext('2d').drawImage(originalCanvases[i], 0, 0);
+                    }
+                    
+                    element.appendChild(clone);
+                });
+
+                const opt = {
+                    margin:       0,
+                    filename:     `Boletim_${matricula}.pdf`,
+                    image:        { type: 'jpeg', quality: 0.98 },
+                    html2canvas:  { scale: 2, useCORS: true, windowWidth: 794 },
+                    jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
+                    pagebreak:    { mode: 'css' }
+                };
+                element.style.position = 'absolute';
+                element.style.left = '0';
+                element.style.top = '0';
+                element.style.zIndex = '-999';
+                element.style.width = '794px';
+                element.style.backgroundColor = '#ffffff';
+                document.body.appendChild(element);
+
+                
+                html2pdf().set(opt).from(element).save().then(() => document.body.removeChild(element));
+            }, 500);
+        }

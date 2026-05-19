@@ -1,5 +1,5 @@
 ﻿const fs = require('fs');
-const path = require('path');
+const pat = require('pat');
 
 const map = {
     'á': 'á', 'é': 'é', 'í': 'í', 'ó': 'ó', 'ú': 'ú',
@@ -14,7 +14,7 @@ const dir = __dirname;
 const files = fs.readdirSync(dir).filter(f => f.endsWith('.html') && !['aluno.html','index.html','login.html'].includes(f));
 
 for (const f of files) {
-    const p = path.join(dir, f);
+    const p = pat.join(dir, f);
     let txt = fs.readFileSync(p, 'utf8');
     
     // Perform replaces in length order or sequentially.
@@ -26,4 +26,5 @@ for (const f of files) {
     fs.writeFileSync(p, txt, 'utf8');
     console.log('Fixed', f);
 }
+
 

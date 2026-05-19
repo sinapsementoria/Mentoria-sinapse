@@ -1,0 +1,177 @@
+<!DOCTYPE html>ã
+ã<html lang="pt-BR">ã
+ã<head>ã
+ã ã ã ã ã<meta charset="UTF-8">ã
+ã ã ã ã ã<meta name="viewport" content="width=device-width, initial-scale=1.0">ã
+ã ã ã ã ã<title>ãEãsãpãaãçãoã ãdãoã ãAãlãuãnãããoã ã|ã ãSãiãnãaãpãsãeã ãPãrãéã-ãMãeãdã</title>ã
+ã ã ã ã ã<script src="https://cdn.tailwindcss.com?plugins=forms"></script>ã
+ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
+ã ã ã ã ã<link href="https://fonts.googleapis.com/css2?family=Matéerial+Symbols+Outlined:wght,FILL@100..700,0..1&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">ã
+ã ã ã ã ã<style>ã
+ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãhãeãaãdãlãiãnãeã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãPãlãaãyãfãaãiãrã ãDãiãsãpãlãaãyã'ã,ã ãsãeãrãiãfã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãfãoãnãtã-ãbãoãdãyã ã{ã ãfãoãnãtã-ãfãaãmãiãlãyã:ã ã'ãIãnãtãeãrã'ã,ã ãsãaãnãsã-ãsãeãrãiãfã;ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãgãlãaãsãsã-ãcãaãrãdã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ã#ã0ãBã1ã9ã3ãCã;ã ã/ã*ã ãAã ãcãoãrã ãfãiãsãiãcãaã ã1ã0ã0ã%ã ãEãXãAãTãAã ãdãoã ãpãiãxãeãlã ãdãeã ãfãuãnãdãoã ãdãoã ãsãeãuã ãaãrãqãuãiãvãoã ãJãPãEãGã ã*ã/ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã2ã8ãpãxã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã-ãwãeãbãkãiãtã-ãbãaãcãkãdãrãoãpã-ãfãiãlãtãeãrã:ã ãbãlãuãrã(ã2ã8ãpãxã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã0ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãtãoãpã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã1ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã4ã0ãpãxã ã1ã2ã0ãpãxã ã-ã1ã0ãpãxã ãrãgãbãaã(ã0ã,ã ã0ã,ã ã0ã,ã ã0ã.ã9ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãiãnãpãuãtã-ãdãaãrãkã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ãrãgãbãaã(ã1ã5ã,ã ã1ã8ã,ã ã3ã0ã,ã ã0ã.ã4ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã:ã ã1ãpãxã ãsãoãlãiãdã ãrãgãbãaã(ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã2ã5ã5ã,ã ã0ã.ã0ã6ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãiãtãiãoãnã:ã ãaãlãlã ã0ã.ã3ãsã ãeãaãsãeã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãiãnãpãuãtã-ãdãaãrãkã:ãfãoãcãuãsã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãoãuãtãlãiãnãeã:ã ãnãããoãnãeã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãrãdãeãrã-ãcãoãlãoãrã:ã ã#ã7ãCã3ãAãEãDã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã0ã ã0ã ã1ãpãxã ãrãgãbãaã(ã1ã2ã4ã,ã ã5ã8ã,ã ã2ã3ã7ã,ã ã0ã.ã3ã)ã,ã ãiãnãsãeãtã ã0ã ã0ã ã1ã5ãpãxã ãrãgãbãaã(ã1ã2ã4ã,ã ã5ã8ã,ã ã2ã3ã7ã,ã ã0ã.ã0ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã-ãcãoãlãoãrã:ã ãrãgãbãaã(ã1ã5ã,ã ã1ã8ã,ã ã3ã0ã,ã ã0ã.ã7ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãbãtãnã-ãpãuãrãpãlãeã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãaãcãkãgãrãoãuãnãdã:ã ãlãiãnãeãaãrã-ãgãrãaãdãiãeãnãtã(ã1ã3ã5ãdãeãgã,ã ã#ãAã8ã5ã5ãFã7ã,ã ã#ã4ãFã4ã6ãEã5ã)ã;ã ã/ã*ã ãFãuãsãããoã ãdãeã ãaãmãeãtãiãsãtãaã ãeã ãíãnãdãiãgãoã ã*ã/ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã8ãpãxã ã3ã0ãpãxã ã-ã4ãpãxã ãrãgãbãaã(ã7ã9ã,ã ã7ã0ã,ã ã2ã2ã9ã,ã ã0ã.ã5ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãiãtãiãoãnã:ã ãaãlãlã ã0ã.ã3ãsã ãcãuãbãiãcã-ãbãeãzãiãeãrã(ã0ã.ã4ã,ã ã0ã,ã ã0ã.ã2ã,ã ã1ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã.ãbãtãnã-ãpãuãrãpãlãeã:ãhãoãvãeãrã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãbãoãxã-ãsãhãaãdãoãwã:ã ã0ã ã1ã5ãpãxã ã4ã0ãpãxã ã-ã4ãpãxã ãrãgãbãaã(ã7ã9ã,ã ã7ã0ã,ã ã2ã2ã9ã,ã ã0ã.ã7ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãrãaãnãsãfãoãrãmã:ã ãtãrãaãnãsãlãaãtãéãeãYã(ã-ã2ãpãxã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãCãoãrãrãiãgãiãnãdãoã ãaã ãdãiãsãtãoãrãçãããoã ãdãoã ãJãPãEãGã:ã ãgãrãaãyãsãcãaãlãeã ãeã ãaãlãtãoã ãcãoãnãtãrãaãsãtãeã ãmãaãtãéãaãmã ãoãsã ãrãuãíãdãoãsã ãcãoãlãoãrãiãdãoãsã ãdãeã ãcãoãmãpãrãeãsãsãããoã ãdãoã ãWãhãaãtãéãsãAãpãpã!ã ã*ã/ã
+ã ã ã ã ã ã ã ã ã.ãlãoãgãoã-ãaãdãaãpãtã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãfãiãlãtãeãrã:ã ãgãrãaãyãsãcãaãlãeã(ã1ã)ã ãcãoãnãtãrãaãsãtã(ã3ã0ã0ã%ã)ã ãiãnãvãeãrãtã(ã1ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãmãiãxã-ãbãlãeãnãdã-ãmãoãdãeã:ã ãsãcãrãeãeãnã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãoãpãaãcãiãtãyã:ã ã1ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã/ã*ã ãEãlãiãmãiãnãaã ãoã ãfãuãnãdãoã ãeã ãrãeãvãeãlãaã ãaãsã ãlãeãtãrãaãsã ãiãlãuãmãiãnãaãdãaãsã ãdãoã ãLãoãgãoã ãmãaãtãéãeãmãaãtãéãiãcãaãmãeãnãtãeã,ã ãfãuãnãdãiãnãdãoã ãàã ãiãnãtãeãrãfãaãcãeã ãdãaã ãáãrãeãaã ãdãeã ãlãoãgãiãnã ã*ã/ã
+ã ã ã ã ã ã ã ã ã.ãlãoãgãoã-ãbãlãeãnãdã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãmãiãxã-ãbãlãeãnãdã-ãmãoãdãeã:ã ãlãiãgãhãtãeãnã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</style>ã
+ã ã ã ã ã<link rel="stylesheet" href="../../public/assets/styles/canela-global.css">ã
+ã</head>ã
+ã<body class="font-body text-slatée-300 w-full min-h-screen relatéive overflow-hidden bg-black flex items-center justify-center">ã
+ã
+ã ã ã ã ã<!-- Fundo de Impacto (Gerado pela IA) -->ã
+ã ã ã ã ã<div class="absolute inset-0 z-0">ã
+ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/home/banners-avisos/fundo espaço do alunão.png" alt="Criando leões, futuros médicos" class="w-full h-full object-cover object-[75%_center] opacity-100" />ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Degradê suave para dar maior destaque na imagem de fundo épica -->ã
+ã ã ã ã ã ã ã ã ã<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>ã
+ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã<!-- Login Card Ultra-Premium -->ã
+ã ã ã ã ã<div class="relatéive z-10 glass-card w-full max-w-[420px] rounded-[32px] p-8 md:p-12 flex flex-col items-center">ã
+ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã<!-- Logo Única Física (Sem distorções) -->ã
+ã ã ã ã ã ã ã ã ã<div class="mb-5 flex flex-col items-center w-full">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<img src="../../public/imagens/globais/marca/LOGO SINAPSE FUNDO PRETO FINAL.png" alt="Logo Sinapse" class="w-[60%] h-auto object-contain logo-blend" onerror="this.onerror=null; this.src='https://placehold.co/300x120/transparent/FFF?text=🩺';"/>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-300/80 mb-9 text-center font-body tracking-wide">ãAãcãeãsãsãeã ãaã ãsãuãaã ãáãrãeãaã ãeãxãcãlãuãsãiãvãaã ãdãoã ãaãlãuãnãããoã.ã</p>ã
+ã
+ã ã ã ã ã ã ã ã ã<!-- Formulário (Redirect Automático) -->ã
+ã ã ã ã ã ã ã ã ã<form action="platéaforma.html" class="w-full space-y-6">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Campo E-mail -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2 w-full">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-bold tracking-widest text-slatée-400 block uppercase ml-1" for="email">ãSãeãuã ãEã-ãmãaãiãlã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="relatéive flex items-center group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined absolute left-4 text-slatée-500 text-[20px] group-focus-within:text-[#A855F7] transition-colors">ãmãaãiãlã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="email" id="email" class="input-dark w-full rounded-xl text-black text-sm py-3.5 pl-12 pr-4 transition-all" placeholder="nãome@email.com" />ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Campo Senha -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="space-y-2 w-full">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="text-[11px] font-bold tracking-widest text-slatée-400 block uppercase ml-1" for="password">ãSãuãaã ãSãeãnãhãaã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="relatéive flex items-center group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined absolute left-4 text-slatée-500 text-[20px] group-focus-within:text-[#A855F7] transition-colors">ãlãoãcãkã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="password" id="password" class="input-dark w-full rounded-xl text-black text-sm py-3.5 pl-12 pr-12 transition-all tracking-widest" placeholder="••••••••" />ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span id="togglePasswordVis" class="matéerial-symbols-outlined absolute right-4 text-slatée-500 text-[18px] cursor-pointer hover:text-slatée-300 transition-colors z-10" title="Mostrar senha">ãvãiãsãiãbãiãlãiãtãyã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Lembrar e Esqueci -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center justify-between pt-1">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<label class="flex items-center gap-2 cursor-pointer group">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<input type="checkbox" class="w-4 h-4 rounded border-[#434968] bg-[#25293C] text-[#8C57FF] focus:ring-[#8C57FF]/50 cursor-pointer transition-colors" />ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="text-[13px] text-slatée-400 group-hover:text-slatée-300 transition-colors">ãLãeãmãbãrãaãrã ãdãeã ãmãiãmã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</label>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<a href="#" class="text-[13px] text-[#8C57FF] hover:text-[#A855F7] transition-colors">ãEãsãqãuãeãcãeãuã ãaã ãsãeãnãhãaã?ã</a>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Botão Entrar Oficial -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="pt-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<button type="submit" class="w-full btn-purple text-white font-semibold flex items-center justify-center gap-2 py-3.5 rounded-xl hover:brightness-110 active:scale-[0.98] transition-all">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[20px]">ãlãoãgãiãnã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãcãeãsãsãaãrã ãPãlãaãtãéãaãfãoãrãmãaã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Divisor -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="relatéive flex items-center pt-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-grow border-t border-white/5"></div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="flex-shrink mx-4 text-[10px] font-bold text-slatée-500 uppercase tracking-widest">ãOãuã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex-grow border-t border-white/5"></div>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<!-- Botão Google -->ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<button type="button" onclick="window.locatéion.href='platéaforma.html'" class="w-full flex items-center justify-center gap-3 bg-[rgba(15,18,30,0.4)] border border-white/5 py-3.5 rounded-xl text-slatée-300 font-semibold text-sm hover:bg-[rgba(15,18,30,0.8)] transition-all active:scale-[0.98]">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<svg class="w-5 h-5" viewbox="0 0 24 24">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<patéh d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></patéh>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<patéh d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></patéh>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<patéh d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></patéh>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<patéh d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></patéh>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã</svg>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãEãnãtãrãaãrã ãcãoãmã ãGãoãoãgãlãeã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</button>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã</form>ã
+ã
+ã ã ã ã ã ã ã ã ã<!-- Footer Card -->ã
+ã ã ã ã ã ã ã ã ã<div class="w-full mt-10 flex flex-col items-center gap-3">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<p class="text-[13px] text-slatée-500">ãDãiãfãiãcãuãlãdãaãdãeãsã ãdãeã ãaãcãeãsãsãoã?ã ã<a href="#" class="text-[#8C57FF] hover:text-[#A855F7] font-medium transition-colors">ãSãuãpãoãrãtãeã ãaãoã ãAãlãuãnãããoã</a></p>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã<div class="flex items-center gap-1.5 text-[11px] text-[#434968] mt-2">ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã<span class="matéerial-symbols-outlined text-[14px]">ãsãhãiãeãlãdã</span>ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãAãmãbãiãeãnãtãeã ãsãeãgãuãrãoã ãeã ãpãrãoãtãeãgãiãdãoã
+ã ã ã ã ã ã ã ã ã ã ã ã ã</div>ã
+ã ã ã ã ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã</div>ã
+ã
+ã ã ã ã ã<!-- Script de UI e Interação do Alunão -->ã
+ã ã ã ã ã<script>ã
+ã ã ã ã ã ã ã ã ã/ã/ã ãLãóãgãiãcãaã ãpãaãrãaã ãmãoãsãtãrãaãrã/ãeãsãcãoãnãdãeãrã ãsãeãnãhãaã ãmãaãnãtãeãnãdãoã ãpãaãdãrãããoã ãpãrãeãmãiãuãmã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãtãoãgãgãlãeãPãaãsãsãwãoãrãdãVãiãsã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãtãoãgãgãlãeãPãaãsãsãwãoãrãdãVãiãsã'ã)ã;ã
+ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãpãaãsãsãwãoãrãdãIãnãpãuãtã ã=ã ãdãoãcãuãmãeãnãtã.ãgãeãtãEãlãeãmãeãnãtãBãyãIãdã(ã'ãpãaãsãsãwãoãrãdã'ã)ã;ã
+ã
+ã ã ã ã ã ã ã ã ãiãfã ã(ãtãoãgãgãlãeãPãaãsãsãwãoãrãdãVãiãsã ã&ã&ã ãpãaãsãsãwãoãrãdãIãnãpãuãtã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ãtãoãgãgãlãeãPãaãsãsãwãoãrãdãVãiãsã.ãaãdãdãEãvãeãnãtãLãiãsãtãeãnãeãrã(ã'ãcãlãiãcãkã'ã,ã ãfãuãnãcãtãiãoãnã(ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãcãuãrãrãeãnãtãTãyãpãeã ã=ã ãpãaãsãsãwãoãrãdãIãnãpãuãtã.ãgãeãtãAãtãtãrãiãbãuãtãeã(ã'ãtãyãpãeã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãcãoãnãsãtã ãnãeãwãTãyãpãeã ã=ã ãcãuãrãrãeãnãtãTãyãpãeã ã=ã=ã=ã ã'ãpãaãsãsãwãoãrãdã'ã ã?ã ã'ãtãeãxãtã'ã ã:ã ã'ãpãaãsãsãwãoãrãdã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãaãsãsãwãoãrãdãIãnãpãuãtã.ãsãeãtãAãtãtãrãiãbãuãtãeã(ã'ãtãyãpãeã'ã,ã ãnãeãwãTãyãpãeã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãMãuãdãaãrã ãoã ãíãcãoãnãeã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãtãhãiãsã.ãtãeãxãtãCãoãnãtãeãnãtã ã=ã ãcãuãrãrãeãnãtãTãyãpãeã ã=ã=ã=ã ã'ãpãaãsãsãwãoãrãdã'ã ã?ã ã'ãvãiãsãiãbãiãlãiãtãyã_ãoãfãfã'ã ã:ã ã'ãvãiãsãiãbãiãlãiãtãyã'ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã/ã/ã ãAãjãuãsãtãaãrã ãoã ãeãsãpãaãçãaãmãeãnãtãoã ãqãuãaãnãdãoã ãlãeãgãíãvãeãlã ãpãaãrãaã ãnãããoã ãdãiãsãtãoãrãcãeãrã ãvãiãsãuãaãlã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãiãfã ã(ãnãeãwãTãyãpãeã ã=ã=ã=ã ã'ãtãeãxãtã'ã)ã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãaãsãsãwãoãrãdãIãnãpãuãtã.ãcãlãaãsãsãLãiãsãtã.ãrãeãmãoãvãeã(ã'ãtãrãaãcãkãiãnãgã-ãwãiãdãeãsãtã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã ãeãlãsãeã ã{ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ãpãaãsãsãwãoãrãdãIãnãpãuãtã.ãcãlãaãsãsãLãiãsãtã.ãaãdãdã(ã'ãtãrãaãcãkãiãnãgã-ãwãiãdãeãsãtã'ã)ã;ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã ã ã ã ã ã ã ã ã}ã)ã;ã
+ã ã ã ã ã ã ã ã ã}ã
+ã ã ã ã ã</script>ã
+ã
+ã ã ã ã ã<!-- Assistente Akili -->ã
+ã ã ã ã ã<script src="../js/akili.js"></script>ã
+ã</body>ã
+ã</html>
+
+
+
+

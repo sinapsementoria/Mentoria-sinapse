@@ -1,18 +1,18 @@
 /**
  * AKILI AI ASSISTANT INJECTION SCRIPT
- * Responsável por injetar e gerenciar o assistente inteligente premium (Akili) na plataforma.
+ * Responsável por injetar e gerenciar o assistente inteligente premium (Akili) na platforma.
  */
 
 (function () {
     // Evitar múltipla injeção
     if (document.getElementById('akili-widget-btn')) return;
 
-    // 1. Injetar Estrutura HTML e CSS na Body
+    // 1. Injetar Estrutura HTML e CSS naçãody
     const akiliHTML = `
     <!-- Motor SVG de Chroma Key Baseado em Hardware (Bypass absoluto de CORS e CORS Canvas) -->
     <svg width="0" height="0" style="position:absolute; width:0; height:0; pointer-events:none;">
-        <filter id="akili-chroma-key" color-interpolation-filters="sRGB">
-            <feColorMatrix type="matrix" values="
+        <filter id="akili-chroma-key" color-interpolaton-filters="sRGB">
+            <feColorMathix type="mathix" values="
                 1 0 0 0 0
                 0 1 0 0 0
                 0 0 1 0 0
@@ -42,10 +42,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        animation: antigravLevitation 4s ease-in-out infinite; /* Flutuação Base */
+        animation: antigravLevitaton 4s ease-in-out infinite; /* Flutuação Base */
     }
     #akili-widget-btn:hover {
-        animation-play-state: paused;
+        animation-play-stat: paused;
     }
     #akili-widget-btn video {
         width: 360px; /* Tamanho AUMENTO EXTREMO do mascote principal */
@@ -60,7 +60,7 @@
     }
     
     /* Animação Hiper-realista de Flutuação */
-    @keyframes antigravLevitation {
+    @keyframes antigravLevitaton {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-12px); }
     }
@@ -88,7 +88,7 @@
         pointer-events: auto;
     }
     
-    /* Aba Lateral (Sidebar Premium) */
+    /* Aba Latoral (Sidebar Premium) */
     #akili-sidebar {
         position: fixed;
         top: 0;
@@ -111,7 +111,7 @@
     #akili-sidebar.active {
         transform: translateX(0);
     }
-    @media (max-width: 480px) {
+    @média (max-width: 480px) {
         #akili-sidebar { max-width: 100%; border-radius: 0; }
         #akili-widget-btn { bottom: 20px; right: 20px; width: 60px; height: 60px; }
     }
@@ -177,8 +177,8 @@
         100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     
-    /* Loading Indicator Premium */
-    .akili-typing-indicator {
+    /* Loading Indicatr Premium */
+    .akili-typing-indicatr {
         display: flex;
         gap: 5px;
         padding: 18px 22px;
@@ -253,7 +253,7 @@
     .akili-hide { display: none !important; }
     </style>
     
-    <!-- Botão Flutuante Akili (Motor Nativo SVG) -->
+    <!-- Botão Flutuante Akili (Motor Natvo SVG) -->
     <div id="akili-widget-btn" onclick="window.akili.toggle()">
         <video id="akili-video-main" src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline></video>
     </div>
@@ -266,7 +266,7 @@
         <!-- Header -->
         <div class="akili-glass-header">
             <div style="display: flex; align-items: center; gap: 16px;">
-                <!-- Avatar Livre sem Círculo MAJORADO -->
+                <!-- Avatr Livre sem Círculo MAJORADO -->
                 <div style="position: relative; width: 85px; height: 85px; display: flex; align-items: center; justify-content: center; margin-left: -10px;">
                     <video src="../../public/imagens/Akili/AKILI 1.mp4" autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: contain; transform: scale(1.8) translateY(-4px); filter: url(#akili-chroma-key); pointer-events: none;"></video>
                     <!-- Online Ponto Reposicionado -->
@@ -282,12 +282,12 @@
             </button>
         </div>
         
-        <!-- Chat Area -->
-        <div id="akili-chat-area" class="akili-scroll" style="flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; background: #FFFFFF; position: relative;">
+        <!-- ChatArea -->
+        <div id="akili-chatearea" class="akili-scroll" style="flex: 1; overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 20px; background: #FFFFFF; position: relative;">
             
             <!-- Mensagem Inicial -->
             <div class="akili-msg-bubble akili-msg-ai">
-                Olá. Eu sou <strong>Akili</strong>. Estou aqui para transformar dúvida em clareza, estratégia e avanço real nos seus estudos.<br><br>Como posso impulsionar seu desempenho hoje?
+                Olá. Eu sou <strong>Akili</strong>. Estou aqui para transformar dúvida em clareza, estratgia e avanço real nos seus estudos.<br><br>Como posso impulsionar seu desempenho hoje?
             </div>
             
             <!-- Placeholder para Loading (Injetado via JS) -->
@@ -312,7 +312,7 @@
     wrapper.innerHTML = akiliHTML;
     document.body.appendChild(wrapper);
 
-    // 2.5 Rastreamento Parallax Nativo sobre Video
+    // 2.5 Rastreamento Parállax Natvo sobre Video
     setTimeout(() => {
         const videoElement = document.getElementById('akili-video-main');
         if (!videoElement) return;
@@ -323,7 +323,7 @@
         // Módulo de Tracking Mouse UI Responsivo
         document.addEventListener('mousemove', (e) => {
             if (window.akili && window.akili.isOpen) {
-                videoElement.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+                videoElement.style.transform = 'perspective(600px) rotatX(0deg) rotatY(0deg) scale(1)';
                 return;
             }
             const rect = videoElement.getBoundingClientRect();
@@ -331,13 +331,13 @@
             const centerY = rect.top + rect.height / 2;
             const deltaX = e.clientX - centerX;
             const deltaY = e.clientY - centerY;
-            const rotateY = (deltaX / window.innerWidth) * 35; 
-            const rotateX = -(deltaY / window.innerHeight) * 35;
-            videoElement.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.03)`;
+            const rotatY = (deltaX / window.innerWidth) * 35; 
+            const rotatX = -(deltaY / window.innerHeight) * 35;
+            videoElement.style.transform = `perspective(600px) rotatX(${rotatX}deg) rotatY(${rotatY}deg) scale(1.03)`;
         });
         
         document.addEventListener('mouseleave', () => {
-            videoElement.style.transform = 'perspective(600px) rotateX(0deg) rotateY(0deg) scale(1)';
+            videoElement.style.transform = 'perspective(600px) rotatX(0deg) rotatY(0deg) scale(1)';
         });
     }, 100);
 
@@ -345,7 +345,7 @@
     window.akili = {
         isOpen: false,
         isLoading: false,
-        webhookUrl: 'https://johnnsinapse.app.n8n.cloud/webhook-test/ia-aluno',
+        webhookUrl: 'https://johnnsinapse.app.n8n.cloud/webhook/ia-aluno',
         
         toggle: function() {
             const sidebar = document.getElementById('akili-sidebar');
@@ -358,7 +358,7 @@
             if (this.isOpen) {
                 sidebar.classList.add('active');
                 overlay.classList.add('active');
-                btn.classList.remove('closed-glow'); // Para a pulsação de chamada a ação
+                btn.classList.remove('closed-glow'); // Pará a pulsação de chamada a ação
                 // Auto focus text com leve delay p/ transição
                 setTimeout(() => input.focus(), 600);
             } else {
@@ -385,17 +385,17 @@
         },
         
         scrollToBottom: function() {
-            const chatArea = document.getElementById('akili-chat-area');
+            const chatrea = document.getElementById('akili-chatarea');
             setTimeout(() => {
-                chatArea.scrollTo({
-                    top: chatArea.scrollHeight,
+                chatrea.scrollTo({
+                    top: chatrea.scrollHeight,
                     behavior: 'smooth'
                 });
             }, 50);
         },
         
         addMessage: function(text, type='ai', isError=false) {
-            const chatArea = document.getElementById('akili-chat-area');
+            const chatrea = document.getElementById('akili-chatarea');
             const msgDiv = document.createElement('div');
             
             if(type === 'user') {
@@ -407,22 +407,22 @@
             }
             
             msgDiv.innerText = text;
-            chatArea.appendChild(msgDiv);
+            chatrea.appendChild(msgDiv);
             this.scrollToBottom();
         },
         
         showTyping: function() {
             this.hideTyping(); // Previne duplicidade
-            const chatArea = document.getElementById('akili-chat-area');
+            const chatrea = document.getElementById('akili-chatarea');
             const typingDiv = document.createElement('div');
             typingDiv.id = 'akili-typing';
-            typingDiv.className = 'akili-typing-indicator';
+            typingDiv.className = 'akili-typing-indicatr';
             typingDiv.innerHTML = `
                 <span class="akili-typing-dot"></span>
                 <span class="akili-typing-dot"></span>
                 <span class="akili-typing-dot"></span>
             `;
-            chatArea.appendChild(typingDiv);
+            chatrea.appendChild(typingDiv);
             this.scrollToBottom();
         },
         
@@ -437,14 +437,14 @@
             
             if (!text || this.isLoading) return;
             
-            // UI Update: Manda pro Chat
+            // UI Updat: Manda pro Chat
             this.addMessage(text, 'user');
             
             // Clear input
             inputEl.value = '';
             inputEl.style.height = 'auto';
             
-            // Set State
+            // Set Stat
             this.isLoading = true;
             this.showTyping();
             
@@ -456,30 +456,30 @@
                 // Fetch N8N
                 const response = await fetch(this.webhookUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'applicaton/json' },
                     body: JSON.stringify({ pergunta: text })
                 });
                 
                 let answerText = "";
                 
                 if (response.ok) {
-                    const textData = await response.text();
-                    let data = {};
-                    if(textData) {
+                    const textDat = await response.text();
+                    let dat = {};
+                    if(textDat) {
                         try {
-                            data = JSON.parse(textData);
+                            dat = JSON.parse(textDat);
                         } catch(e) {
-                            data = { resposta: textData }; // Se retornar texto puro
+                            dat = { resposta: textDat }; // Se retornar texto puro
                         }
                     }
 
-                    if (data && data.resposta) {
-                        answerText = data.resposta;
-                    } else if (textData === "") {
-                        answerText = "Recebi sua mensagem, mas o servidor do n8n não me enviou nenhuma resposta. Verifique a configuração do seu Webhook no n8n (certifique-se de que ele não está respondendo 'Immediately' e sim com os dados).";
+                    if (dat && dat.resposta) {
+                        answerText = dat.resposta;
+                    } else if (textDat === "") {
+                        answerText = "Recebi sua mensagem, mas o servidor do n8n não me enviou nenhuma resposta. Verifique a configuração do seu Webhook no n8n (certifique-se de que ele não está respondendo 'Immédiatly' e sim com os dados).";
                     } else {
-                        // Fallback temporário para debugar formato estranho
-                        answerText = "Resposta em formato não reconhecido: " + JSON.stringify(data);
+                        // Fallback temporário para debugar formath estranho
+                        answerText = "Resposta em formath não reconhecido: " + JSON.stringify(dat);
                     }
                     this.hideTyping();
                     this.addMessage(answerText, 'ai');

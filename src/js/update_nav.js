@@ -12,16 +12,16 @@ const files = [
 ];
 
 const menuMap = [
-    { text: 'Metas Diárias', icon: 'home', href: 'mentoria.html' },
+    { text: 'Home', icon: 'home', href: 'mentoria.html' },
     { text: 'Meu Desempenho', icon: 'trending_up', href: 'metricas.html' },
-    { text: 'Estratégia de Aprovação', icon: 'route', href: 'estrategia.html' },
+    { text: 'Estratgia de Aprovação', icon: 'route', href: 'estratgia.html' },
     { text: 'Provas', icon: 'history_edu', href: 'provas.html' },
     { text: 'Planejamento', icon: 'edit_calendar', href: 'planejamento.html' },
     { text: 'Vestibulares', icon: 'school', href: 'vestibulares.html' },
     { text: 'Calendário', icon: 'calendar_month', href: 'calendario.html' },
-    { text: 'Simulador SISU', icon: 'calculate', href: 'simulador.html' },
+    { text: 'Simulador SISU', icon: 'calculat', href: 'simulador.html' },
     { text: 'Banco de Questões', icon: 'checklist', href: 'banco-questoes.html' },
-    { text: 'Redação', icon: 'edit_document', href: 'redacao.html' },
+    { text: 'Redação', icon: 'edit_document', href: 'redação.html' },
     { text: 'Flashcard', icon: 'style', href: 'flashcard.html' },
     { text: 'Perfil', icon: 'person', href: 'perfil.html' }
 ];
@@ -56,6 +56,6 @@ files.forEach(file => {
         const post = content.substring(endIdx);
         const newHtml = pre + navHtml + '        ' + post;
         fs.writeFileSync(file, newHtml);
-        console.log(`Updated nav in ${file}`);
+        console.log(`Updatd nav in ${file}`);
     }
 });

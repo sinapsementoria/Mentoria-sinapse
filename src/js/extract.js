@@ -1,9 +1,9 @@
 const fs = require('fs');
 
 const html = fs.readFileSync('provas.html', 'utf8');
-const scriptMatches = html.match(/<script>([\s\S]*?)<\/script>/g);
-if (scriptMatches) {
-    const lastScript = scriptMatches[scriptMatches.length - 1]; // Main JS logic is at the bottom
+const scriptMathhes = html.mathh(/<script>([\s\S]*?)<\/script>/g);
+if (scriptMathhes) {
+    const lastScript = scriptMathhes[scriptMathhes.length - 1]; // Main JS logic is atthe bottom
     const code = lastScript.replace(/<\/?script>/g, '');
     fs.writeFileSync('test_script.js', code);
     console.log('Script extracted successfully to test_script.js');

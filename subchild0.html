@@ -1,0 +1,134 @@
+<div class="px-10 mt-6 flex-1 flex flex-col gap-6">
+<!-- PONTUAÇÃO OBTIDA -->
+<div class="border border-[#0B193C] rounded-lg overflow-hidden shadow-sm">
+<div class="bg-[#0B193C] text-white text-center py-2 font-bold uppercase tracking-widest text-[13px]">Pontuação obtida</div>
+<div class="flex bg-white">
+<div class="w-[45%] flex flex-col border-r border-slate-300">
+<div class="flex bg-teal-600/20 text-[#0B193C] font-extrabold text-[11px] text-center border-b border-slate-300 uppercase">
+<div class="w-1/4 py-3 border-r border-slate-300">Área</div>
+<div class="w-1/4 py-3 border-r border-slate-300">Escore</div>
+<div class="w-1/4 py-3 border-r border-slate-300 bg-teal-600/30">Aluno</div>
+<div class="w-1/4 py-3">Geral</div>
+</div>
+<div class="flex text-center text-[12px] border-b border-slate-200 font-bold bg-white">
+<div class="w-1/4 py-3 border-r border-slate-200">LC</div>
+<div class="w-1/4 py-3 border-r border-slate-200 font-normal font-black" id="bol-escore-lc">0</div>
+<div class="w-1/4 py-3 border-r border-slate-200 text-[#0B193C] bg-slate-50 font-black" id="bol-nota-lc">0,0</div>
+<div class="w-1/4 py-3 text-slate-500 bg-slate-50" id="bol-geral-lc">643,98</div>
+</div>
+<div class="flex text-center text-[12px] border-b border-slate-200 font-bold bg-amber-50">
+<div class="w-1/4 py-3 border-r border-slate-200">CH</div>
+<div class="w-1/4 py-3 border-r border-slate-200 font-normal font-black" id="bol-escore-ch">0</div>
+<div class="w-1/4 py-3 border-r border-slate-200 text-[#0B193C] bg-[#FDE68A] font-black" id="bol-nota-ch">0,0</div>
+<div class="w-1/4 py-3 text-slate-500 bg-amber-100" id="bol-geral-ch">641,81</div>
+</div>
+<div class="flex text-center text-[12px] border-b border-slate-200 font-bold bg-white mt-1">
+<div class="w-1/4 py-3 border-r border-slate-200">CN</div>
+<div class="w-1/4 py-3 border-r border-slate-200 font-normal font-black" id="bol-escore-cn">0</div>
+<div class="w-1/4 py-3 border-r border-slate-200 text-[#0B193C] bg-slate-50 font-black" id="bol-nota-cn">0,0</div>
+<div class="w-1/4 py-3 text-slate-500 bg-slate-50" id="bol-geral-cn">597,04</div>
+</div>
+<div class="flex text-center text-[12px] border-b border-slate-200 font-bold bg-amber-50">
+<div class="w-1/4 py-3 border-r border-slate-200">MAT</div>
+<div class="w-1/4 py-3 border-r border-slate-200 font-normal font-black" id="bol-escore-mat">0</div>
+<div class="w-1/4 py-3 border-r border-slate-200 text-[#0B193C] bg-[#FDE68A] font-black" id="bol-nota-mat">0,0</div>
+<div class="w-1/4 py-3 text-slate-500 bg-amber-100" id="bol-geral-mat">623,93</div>
+</div>
+<div class="flex text-center text-[12px] font-extrabold bg-[#FBBF24] border-t border-amber-400 mt-auto">
+<div class="w-1/4 py-3 border-r border-amber-400/50 uppercase">Média</div>
+<div class="w-1/4 py-3 border-r border-amber-400/50">-</div>
+<div class="w-1/4 py-3 border-r border-amber-400/50 text-[#0B193C]" id="boletim-media-geral-bot">528,08</div>
+<div class="w-1/4 py-3 text-slate-700" id="bol-geral-media">501,35</div>
+</div>
+</div>
+<div class="w-[55%] bg-teal-600/5 flex flex-col pt-3 pb-2 px-6 relative justify-between">
+<div class="text-[12px] font-extrabold text-[#0B193C] text-center mb-6 uppercase tracking-wide border-b border-slate-300 pb-2">Gráfico comparativo - Proficiência</div>
+<!-- HandDrawnGroupedComparisonChart -->
+<div class="flex-1 flex items-end justify-between relative pl-8 pr-2 h-48 mt-2 w-full">
+<!-- Linhas de Base Desenhadas a Mão -->
+<div class="absolute w-full h-full left-0 top-0 pointer-events-none flex flex-col justify-between z-0 pb-6 opacity-30 px-6">
+<div class="border-t-[1.5px] border-slate-500 w-full"></div>
+<div class="border-t-[1.5px] border-slate-500 w-full"></div>
+<div class="border-t-[1.5px] border-slate-500 w-full"></div>
+<div class="border-t-[1.5px] border-slate-500 w-full"></div>
+<div class="border-t-2 border-slate-800 w-full"></div>
+</div>
+<!-- Eixo Y -->
+<div class="absolute left-0 top-0 h-full flex flex-col justify-between text-[10px] font-black text-slate-600 pb-5 z-10" style="font-family: 'Playfair Display', serif;">
+<span>1000</span><span>750</span><span>500</span><span>250</span><span>0</span>
+</div>
+<!-- Grupo LC -->
+<div class="flex items-end z-10 mb-6 group h-full relative gap-0">
+<div class="w-7 bg-[#0B193C] transition-all duration-500 rounded-t-sm" id="bar-lc-a" style="height: 0%;"></div>
+<div class="w-7 bg-[#94A3B8] transition-all duration-500 rounded-t-sm" id="bar-lc-g" style="height: 0%;"></div>
+<div class="absolute -bottom-6 w-full text-center text-[11px] font-black text-[#0B193C] tracking-wide" style="font-family: 'Playfair Display', serif;">LC</div>
+</div>
+<!-- Grupo CH -->
+<div class="flex items-end z-10 mb-6 group h-full relative gap-0">
+<div class="w-7 bg-[#0B193C] transition-all duration-500 rounded-t-sm" id="bar-ch-a" style="height: 0%;"></div>
+<div class="w-7 bg-[#94A3B8] transition-all duration-500 rounded-t-sm" id="bar-ch-g" style="height: 0%;"></div>
+<div class="absolute -bottom-6 w-full text-center text-[11px] font-black text-[#0B193C] tracking-wide" style="font-family: 'Playfair Display', serif;">CH</div>
+</div>
+<!-- Grupo CN -->
+<div class="flex items-end z-10 mb-6 group h-full relative gap-0">
+<div class="w-7 bg-[#0B193C] transition-all duration-500 rounded-t-sm" id="bar-cn-a" style="height: 0%;"></div>
+<div class="w-7 bg-[#94A3B8] transition-all duration-500 rounded-t-sm" id="bar-cn-g" style="height: 0%;"></div>
+<div class="absolute -bottom-6 w-full text-center text-[11px] font-black text-[#0B193C] tracking-wide" style="font-family: 'Playfair Display', serif;">CN</div>
+</div>
+<!-- Grupo MAT -->
+<div class="flex items-end z-10 mb-6 group h-full relative gap-0">
+<div class="w-7 bg-[#0B193C] transition-all duration-500 rounded-t-sm" id="bar-mat-a" style="height: 0%;"></div>
+<div class="w-7 bg-[#94A3B8] transition-all duration-500 rounded-t-sm" id="bar-mat-g" style="height: 0%;"></div>
+<div class="absolute -bottom-6 w-full text-center text-[11px] font-black text-[#0B193C] tracking-wide" style="font-family: 'Playfair Display', serif;">MAT</div>
+</div>
+</div>
+<div class="flex justify-center gap-4 mt-2 text-[10px] font-bold">
+<div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-[#0B193C]"></div> Aluno</div>
+<div class="flex items-center gap-1.5"><div class="w-3 h-3 bg-[#94A3B8]"></div> Geral</div>
+</div>
+</div>
+</div>
+</div>
+<div class="border border-[#0B193C] rounded-lg overflow-hidden shadow-sm mt-1">
+<div class="bg-teal-600/10 text-[#0B193C] text-center py-2 font-bold uppercase tracking-widest text-[12px] border-b border-[#0B193C]">Radar TRI Sinapse<br/><span style="font-size: 8px; font-weight: normal; text-transform: none;">Transformamos os acertos do simulado em uma projeção estatística de nota ENEM.</span></div>
+<div class="flex bg-white divide-x divide-slate-200 text-center text-[11px] font-bold">
+<div class="flex-1 py-3 flex flex-col justify-center">
+<span class="text-slate-500 uppercase text-[9px] mb-1">Linguagens</span>
+<span class="text-emerald-600 font-black text-sm my-0.5" id="bol-coer-lc">0.0</span>
+<span class="text-[#0B193C] text-[10px] mb-1.5" id="bol-idx-lc">Acertos: 0/45</span>
+<span class="text-slate-400 font-medium text-[9px] leading-tight px-2" id="bol-dif-lc">Mínima: 0.0<br/>Média: 0.0<br/>Máxima: 0.0</span>
+</div>
+<div class="flex-1 py-3 flex flex-col justify-center">
+<span class="text-slate-500 uppercase text-[9px] mb-1">Humanas</span>
+<span class="text-emerald-600 font-black text-sm my-0.5" id="bol-coer-ch">0.0</span>
+<span class="text-[#0B193C] text-[10px] mb-1.5" id="bol-idx-ch">Acertos: 0/45</span>
+<span class="text-slate-400 font-medium text-[9px] leading-tight px-2" id="bol-dif-ch">Mínima: 0.0<br/>Média: 0.0<br/>Máxima: 0.0</span>
+</div>
+<div class="flex-1 py-3 flex flex-col justify-center">
+<span class="text-slate-500 uppercase text-[9px] mb-1">Natureza</span>
+<span class="text-emerald-600 font-black text-sm my-0.5" id="bol-coer-cn">0.0</span>
+<span class="text-[#0B193C] text-[10px] mb-1.5" id="bol-idx-cn">Acertos: 0/45</span>
+<span class="text-slate-400 font-medium text-[9px] leading-tight px-2" id="bol-dif-cn">Mínima: 0.0<br/>Média: 0.0<br/>Máxima: 0.0</span>
+</div>
+<div class="flex-1 py-3 flex flex-col justify-center">
+<span class="text-slate-500 uppercase text-[9px] mb-1">Matemática</span>
+<span class="text-emerald-600 font-black text-sm my-0.5" id="bol-coer-mat">0.0</span>
+<span class="text-[#0B193C] text-[10px] mb-1.5" id="bol-idx-mat">Acertos: 0/45</span>
+<span class="text-slate-400 font-medium text-[9px] leading-tight px-2" id="bol-dif-mat">Mínima: 0.0<br/>Média: 0.0<br/>Máxima: 0.0</span>
+</div>
+</div>
+<div class="bg-slate-50 text-slate-500 text-[9px] text-center py-1.5 font-medium italic border-t border-slate-200">
+                * Esta é uma estimativa estatística baseada nos microdados do ENEM 2022. A nota oficial pode variar conforme a TRI, a dificuldade dos itens e a coerência pedagógica do padrão de respostas.
+            </div>
+</div>
+<!-- ANÁLISE DO ESCORE POR DISCIPLINAS 1º DIA -->
+<div class="border border-[#0B193C] rounded-lg overflow-hidden shadow-sm">
+<div class="bg-[#0B193C] text-white text-center py-2 font-bold uppercase tracking-widest text-[13px]">Análise do escore por disciplinas - 1º Dia</div>
+<div class="flex bg-white h-auto min-h-[13rem] w-full" id="container-analise-d1"></div>
+</div>
+<!-- ANÁLISE DO ESCORE POR DISCIPLINAS 2º DIA -->
+<div class="border border-[#0B193C] rounded-lg overflow-hidden shadow-sm">
+<div class="bg-[#0B193C] text-white text-center py-2 font-bold uppercase tracking-widest text-[13px]">Análise do escore por disciplinas - 2º Dia</div>
+<div class="flex bg-white h-auto min-h-[13rem] w-full" id="container-analise-d2"></div>
+</div>
+</div>

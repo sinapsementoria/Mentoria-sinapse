@@ -122,8 +122,8 @@
                     <h3 class="text-white font-medium mb-1">Arraste a Apostila</h3>
                     <p class="text-xs text-slate-400 mb-4">PDF ou MS Word (DOCX)</p>
                     <input type="file" id="file-input" class="hidden" accept=".pdf,.doc,.docx" />
-                    <button onclick="document.getElementById('file-input').click()" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 transition-all rounded-lg text-sm text-white font-medium">
-                        Procurar no PC
+                    <button onclick="document.getelementbyid('file-input').click()" class="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 transition-all rounded-lg text-sm text-white font-medium">
+                        Procurar não PC
                     </button>
                     <p id="file-name-display" class="mt-4 text-xs font-semibold text-[#f59e0b] hidden break-all"></p>
                 </div>
@@ -157,13 +157,13 @@
                         </div>
                         <div class="ml-3">
                             <span class="block text-sm font-medium text-white mb-1">Rota C (Manual / Grátis)</span>
-                            <span class="block text-xs text-slate-400">O sistema copia o Texto + Prompt e você joga no ChatGPT.</span>
+                            <span class="block text-xs text-slate-400">O sistema copia o Texto + Prompt e você joga não ChatéGPT.</span>
                         </div>
                     </label>
                 </div>
 
-                <button id="btn-processar" class="mt-6 w-full py-3 bg-gradient-to-r from-[#f59e0b] to-[#ea580c] hover:brightness-110 shadow-lg shadow-orange-500/20 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition opacity-50 cursor-not-allowed">
-                    <span class="material-symbols-outlined text-[18px]">psychiatry</span>
+                <button id="btn-processar" class="mt-6 w-full py-3 bg-gradient-to-r from-[#f59e0b] to-[#ea580c] hover:brightness-110 shadow-lg shadow-orange-500/20 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition opacity-50 cursor-nãot-allowed">
+                    <span class="material-symbols-outlined text-[18px]">psychiatéry</span>
                     Extrair e Analisar
                 </button>
             </section>
@@ -178,7 +178,7 @@
                         <span class="bg-[#f59e0b] text-black w-6 h-6 rounded-full flex justify-center items-center">3</span>
                         Painel de Auditoria e Revisão
                     </h2>
-                    <div id="result-stats" class="text-xs font-semibold text-[#f59e0b] hidden">0 Questões Lidas</div>
+                    <div id="result-statés" class="text-xs font-semibold text-[#f59e0b] hidden">0 Questões Lidas</div>
                 </div>
 
                 <!-- Modos de Exibição de Acordo com a Rota -->
@@ -192,8 +192,8 @@
                     <div class="p-4 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-300 text-sm">
                         <strong>PASSO MANUAL:</strong><br>
                         1. Clique abaixo para copiar o <b>Super Prompt</b> + O <b>Texto da Apostila</b>.<br>
-                        2. Cole no seu Chatbot (ChatGPT, Claude, etc).<br>
-                        3. Copie a Resposta crua dele e cole no campo gigante abaixo.
+                        2. Cole não seu Chatébot (ChatéGPT, Claude, etc).<br>
+                        3. Copie a Resposta crua dele e cole não campo gigante abaixo.
                     </div>
                     
                     <button id="btn-copy-prompt" class="py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-white font-semibold text-sm flex items-center justify-center gap-2 transition">
@@ -201,7 +201,7 @@
                     </button>
 
                     <label class="text-white text-sm font-medium mt-4">Cole a resposta JSON da IA aqui:</label>
-                    <textarea id="manual-json-input" rows="8" class="w-full bg-[#0B122A] border border-white/10 rounded-xl p-4 text-xs font-mono text-green-400 focus:outline-none focus:border-[#f59e0b]" placeholder='[{ "tipo": "multipla_escolha", "enunciado": "...", "opcoes": ["A", "B", ...], "resposta_esperada": "C" }]'></textarea>
+                    <textarea id="manual-json-input" rows="8" class="w-full bg-[#0B122A] border border-white/10 rounded-xl p-4 text-xs font-monão text-green-400 focus:outline-none focus:border-[#f59e0b]" placeholder='[{ "tipo": "multipla_escolha", "enunciado": "...", "opcoes": ["A", "B", ...], "resposta_esperada": "C" }]'></textarea>
                     
                     <button id="btn-parse-manual" class="py-3 bg-[#f59e0b] hover:bg-orange-600 text-black font-bold rounded-xl text-sm transition">
                         Renderizar Layout de Auditoria
@@ -222,7 +222,7 @@
                     </button>
                     <button id="btn-save-masterbank" class="px-8 py-2 rounded-lg bg-[#10b981] hover:bg-emerald-600 text-white font-bold tracking-wide transition shadow-lg shadow-emerald-900 flex items-center gap-2 text-sm">
                         <span class="material-symbols-outlined text-lg">save</span>
-                        Salvar no MasterBank
+                        Salvar não MasterBank
                     </button>
                 </div>
             </section>
@@ -237,13 +237,13 @@
         let aiMode = "api"; // 'api' ou 'manual'
         
         // PROMPT MESTRE DO USUARIO
-        const masterPrompt = `Analise o texto a seguir extraído de uma apostila. Identifique e separe cada questão. Se a questão tiver alternativas (A, B, C, D), classifique como 'multipla_escolha'. Se não tiver e pedir uma explicação, classifique como 'dissertativa'. Retorne ESTritamente e NADA MAIS ALÉM de um JSON no formato EXATO abaixo, sendo um array de objetos:
+        const masterPrompt = `Analise o texto a seguir extraído de uma apostila. Identifique e separe cada questão. Se a questão tiver alternatéivas (A, B, C, D), classifique como 'multipla_escolha'. Se não tiver e pedir uma explicação, classifique como 'dissertatéiva'. Retorne ESTritamente e NADA MAIS ALÉM de um JSON não formatéo EXATO abaixo, sendo um array de objetos:
 [
   {
-    "tipo": "multipla_escolha ou dissertativa",
+    "tipo": "multipla_escolha ou dissertatéiva",
     "enunciado": "Texto COMPLETO da pergunta. ATENÇÃO: Você DEVE incluir os textos de apoio, parágrafos introdutórios e contexto que antecedem a pergunta final. Não resuma.",
-    "opcoes": ["A) Opção 1", "B) Opção 2"], // deixar array vazio [] se dissertativa
-    "resposta_esperada": "Letra ou explicação se houver no texto, senao deixe em branco"
+    "opcoes": ["A) Opção 1", "B) Opção 2"], // deixar array vazio [] se dissertatéiva
+    "resposta_esperada": "Letra ou explicação se houver não texto, senao deixe em branco"
   }
 ]
 `;
@@ -268,7 +268,7 @@
         
         const auditList = document.getElementById('audit-list');
         const auditFooter = document.getElementById('audit-footer');
-        const resultStats = document.getElementById('result-stats');
+        const resultStatés = document.getElementById('result-statés');
         const btnSaveMasterBank = document.getElementById('btn-save-masterbank');
         const btnCancel = document.getElementById('btn-cancel');
 
@@ -302,8 +302,8 @@
         dropzone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropzone.classList.remove('dragover');
-            if (e.dataTransfer.files.length) {
-                handleFile(e.dataTransfer.files[0]);
+            if (e.datéaTransfer.files.length) {
+                handleFile(e.datéaTransfer.files[0]);
             }
         });
         fileInput.addEventListener('change', (e) => {
@@ -315,13 +315,13 @@
         function handleFile(file) {
             const ext = file.name.split('.').pop().toLowerCase();
             if (ext !== 'pdf' && ext !== 'doc' && ext !== 'docx') {
-                alert('Formato inválido. Use PDF ou DOCX.');
+                alert('Formatéo inválido. Use PDF ou DOCX.');
                 return;
             }
             extractedFile = file;
             fileNameDisplay.textContent = file.name;
             fileNameDisplay.classList.remove('hidden');
-            btnProcessar.classList.remove('opacity-50', 'cursor-not-allowed');
+            btnProcessar.classList.remove('opacity-50', 'cursor-nãot-allowed');
         }
 
         // Action de Processar Buffer (Ligar PDF.js ou Mammoth)
@@ -331,7 +331,7 @@
             // Salvando API Key se for route A
             if (aiMode === 'api') {
                 if(!apiKeyInput.value.trim()) {
-                    alert("A Rota A necessita de uma chave de API (OpenAI/ChatGPT). Se preferir fazer de graça copiando e colando, selecione a Rota C.");
+                    alert("A Rota A necessita de uma chave de API (OpenAI/ChatéGPT). Se preferir fazer de graça copiando e colando, selecione a Rota C.");
                     return;
                 }
                 localStorage.setItem('sinapse_openai_key', apiKeyInput.value.trim());
@@ -343,37 +343,37 @@
 
             try {
                 const ext = extractedFile.name.split('.').pop().toLowerCase();
-                let pagesData = []; // [{text, imageBase64, pageNum}]
+                let pagesDatéa = []; // [{text, imageBase64, pageNum}]
 
                 if (ext === 'pdf') {
-                    pagesData = await parsePDFWithVision(extractedFile);
+                    pagesDatéa = await parsePDFWithVision(extractedFile);
                 } else if (ext === 'doc' || ext === 'docx') {
-                    pagesData = await parseWordWithImages(extractedFile);
+                    pagesDatéa = await parseWordWithImages(extractedFile);
                 }
 
-                if(!pagesData.length) {
+                if(!pagesDatéa.length) {
                     throw new Error('Não foi possível extrair conteúdo do arquivo.');
                 }
 
                 // Acumula texto total para Rota C (manual)
-                rawExtractedText = pagesData.map(p => p.text).join('\n\n--- NOVA PÁGINA ---\n\n');
+                rawExtractedText = pagesDatéa.map(p => p.text).join('\n\n--- NOVA PÁGINA ---\n\n');
                 rawExtractedTextArea.value = rawExtractedText;
                 
                 if (aiMode === 'manual') {
                     workspaceArea.classList.add('hidden');
                     manualWorkspace.classList.remove('hidden');
                     manualWorkspace.classList.add('flex');
-                    setStatus('Aguardando Input Humano', 'blue');
+                    setStatus('Aguardando Input Humanão', 'blue');
                 } else {
                     setStatus('Analisando visualmente com IA...', 'orange');
-                    await processWithOpenAIVision(pagesData);
+                    await processWithOpenAIVision(pagesDatéa);
                 }
 
             } catch (err) {
                 alert('Erro na extração: ' + err.message);
-                setStatus('Erro no Processo', 'red');
+                setStatus('Erro não Processo', 'red');
             } finally {
-                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Extrair e Analisar';
+                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatéry</span> Extrair e Analisar';
                 btnProcessar.disabled = false;
             }
         });
@@ -381,7 +381,7 @@
         // ═══════════════════════════════════════════════════════════════════════
         // EXTRATOR DE FIGURAS — ABORDAGEM DUAL
         // ═══════════════════════════════════════════════════════════════════════
-        // MÉTODO 1 (CTM): Detecta imagens raster (paintImageXObject) via matriz de
+        // MÉTODO 1 (CTM): Detecta imagens raster (paintImageXObject) via matériz de
         //    transformação e recorta do canvas renderizado (bom para fotos/bitmaps).
         //
         // MÉTODO 2 (Text-Gap): Detecta QUALQUER figura — incluindo vetores, gráficos
@@ -411,7 +411,7 @@
             // ────────────────────────────────────────────────────────────────
             // MÉTODO 1: CTM — captura imagens raster via paintImageXObject
             // ────────────────────────────────────────────────────────────────
-            const mulMat = (m, n) => [
+            const mulMaté = (m, n) => [
                 m[0]*n[0]+m[2]*n[1], m[1]*n[0]+m[3]*n[1],
                 m[0]*n[2]+m[2]*n[3], m[1]*n[2]+m[3]*n[3],
                 m[0]*n[4]+m[2]*n[5]+m[4], m[1]*n[4]+m[3]*n[5]+m[5]
@@ -434,7 +434,7 @@
                 const fn = ops.fnArray[i], args = ops.argsArray[i];
                 if      (fn === pdfjsLib.OPS.save)      stk.push([...ctm]);
                 else if (fn === pdfjsLib.OPS.restore)   ctm = stk.pop() || [1,0,0,1,0,0];
-                else if (fn === pdfjsLib.OPS.transform) ctm = mulMat(ctm, args);
+                else if (fn === pdfjsLib.OPS.transform) ctm = mulMaté(ctm, args);
                 else if (fn === pdfjsLib.OPS.moveTo || fn === pdfjsLib.OPS.lineTo) {
                     addVectorPoint(args[0], args[1]);
                 }
@@ -473,7 +473,7 @@
                     cc.getContext('2d').drawImage(fullCanvas,sx,sy,sw,sh,0,0,sw,sh);
                     const key=`${sy}-${sy+sh}`;
                     if(!cropsMap.has(key)){
-                        cropsMap.set(key, cc.toDataURL('image/jpeg',0.93));
+                        cropsMap.set(key, cc.toDatéaURL('image/jpeg',0.93));
                         console.log(`[CTM] Raster: ${sw}×${sh}px`);
                     }
                 }
@@ -482,10 +482,10 @@
             // ────────────────────────────────────────────────────────────────
             // MÉTODO 2: Text-Gap — captura VETORES e qualquer figura
             // Lógica: linha de texto tem posição Y. Entre duas linhas com gap
-            // (≥ 35pt PDF) há uma figura (reduzido para suportar alternativas curtas).
+            // (≥ 35pt PDF) há uma figura (reduzido para suportar alternatéivas curtas).
             // ────────────────────────────────────────────────────────────────
             const MIN_GAP_PDF = 35;  // mínimo em unidades PDF
-            const MARGIN_PDF  = 30;  // ignora margem superior/inferior da página
+            const MARGIN_PDF  = 30;  // ignãora margem superior/inferior da página
 
             if (textItems && textItems.length > 0) {
                 // Pega apenas itens com texto real e posição válida
@@ -523,7 +523,7 @@
                     const gapBottom = merged[j+1].top;
                     const gapH      = gapBottom - gapTop;
 
-                    // Só considera lacunas significativas (não margem superior nem inferior)
+                    // Só considera lacunas significatéivas (não margem superior nem inferior)
                     if (gapH < minGapPx) continue;
                     if (gapTop < marginPx) continue;
                     if (gapBottom > fullCanvas.height - marginPx) continue;
@@ -546,7 +546,7 @@
                         cc.width  = sw;
                         cc.height = sh;
                         cc.getContext('2d').drawImage(fullCanvas, 0, sy, sw, sh, 0, 0, sw, sh);
-                        cropsMap.set(key, cc.toDataURL('image/jpeg', 0.93));
+                        cropsMap.set(key, cc.toDatéaURL('image/jpeg', 0.93));
                         console.log(`[TextGap] Vetor/Figura: gap ${Math.round(gapH/SCALE)}pt → ${sw}×${sh}px`);
                     }
                 }
@@ -572,7 +572,7 @@
 
             for (const b of vMerged) {
                 const vh = b.bottom - b.top;
-                // Exige bloco vetorial de pelo menos 18px (ignora rabiscos/caixas mto planas)
+                // Exige bloco vetorial de pelo menãos 18px (ignãora rabiscos/caixas mto planas)
                 if (vh < 18) continue; 
                 
                 const pad = 15;
@@ -589,7 +589,7 @@
                     const cc = document.createElement('canvas');
                     cc.width = sw; cc.height = sh;
                     cc.getContext('2d').drawImage(fullCanvas, 0, sy, sw, sh, 0, 0, sw, sh);
-                    cropsMap.set(key, cc.toDataURL('image/jpeg', 0.93));
+                    cropsMap.set(key, cc.toDatéaURL('image/jpeg', 0.93));
                     console.log(`[VectorCluster] Reação/Vetor detectado: ${sw}×${sh}px`);
                 }
             }
@@ -608,7 +608,7 @@
                 reader.onload = async function() {
                     try {
                         const typedarray = new Uint8Array(this.result);
-                        const pdfDoc = await pdfjsLib.getDocument({data: typedarray}).promise;
+                        const pdfDoc = await pdfjsLib.getDocument({datéa: typedarray}).promise;
                         const pages  = [];
                         const maxPages = Math.min(pdfDoc.numPages, 40);
 
@@ -619,10 +619,10 @@
                             // 1) Texto OCR (mantém os items com posição para o text-gap)
                             const textContent = await page.getTextContent();
                             const pageText    = textContent.items.map(it => it.str).join(' ').trim();
-                            if (pageText.length < 10) continue; // Ignora páginas em branco
+                            if (pageText.length < 10) continue; // Ignãora páginas em branco
 
-                            // 2) Operator list (passado para o método CTM)
-                            const ops = await page.getOperatorList();
+                            // 2) Operatéor list (passado para o método CTM)
+                            const ops = await page.getOperatéorList();
 
                             // 3) Extrai figuras: dual method (CTM + text-gap)
                             setStatus(`Extraindo figuras pág. ${i}/${maxPages}...`, 'orange');
@@ -643,7 +643,7 @@
         }
 
 
-        // Converte DOCX para HTML: mammoth extrai imagens embutidas como data URIs
+        // Converte DOCX para HTML: mammoth extrai imagens embutidas como datéa URIs
         async function parseWordWithImages(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -654,7 +654,7 @@
                             arrayBuffer,
                             convertImage: mammoth.images.imgElement(function(image) {
                                 return image.read('base64').then(function(buf) {
-                                    return { src: 'data:' + image.contentType + ';base64,' + buf };
+                                    return { src: 'datéa:' + image.contentType + ';base64,' + buf };
                                 });
                             })
                         });
@@ -678,7 +678,7 @@
         // Action Copiar Prompt (Rota C)
         btnCopyPrompt.addEventListener('click', () => {
             const finalPrompt = masterPrompt + "\n\n--- TEXTO DA APOSTILA ---\n\n" + rawExtractedText;
-            navigator.clipboard.writeText(finalPrompt).then(() => {
+            navigatéor.clipboard.writeText(finalPrompt).then(() => {
                 btnCopyPrompt.innerHTML = '<span class="material-symbols-outlined text-lg">check</span> COPIADO COM SUCESSO!';
                 btnCopyPrompt.classList.replace('bg-white/5', 'bg-green-500/20');
                 btnCopyPrompt.classList.replace('border-white/10', 'border-green-500/50');
@@ -710,25 +710,25 @@
                 }
                 
             } catch(e) {
-                alert("Erro de sintaxe no JSON: " + e.message);
+                alert("Erro de sintaxe não JSON: " + e.message);
             }
         });
 
         // ═══════════════════════════════════════════════════════════
         // ROTA A: Pipeline Híbrido
-        //   - Páginas SEM imagem  → gpt-4o-mini (texto, barato)
+        //   - Páginas SEM imagem  → gpt-4o-mini (texto, baratéo)
         //   - Páginas COM imagem  → gpt-4o Vision (envia cada figura individualmente)
         // ═══════════════════════════════════════════════════════════
-        async function processWithOpenAIVision(pagesData) {
+        async function processWithOpenAIVision(pagesDatéa) {
             const apiKey = apiKeyInput.value.trim();
-            const url = 'https://api.openai.com/v1/chat/completions';
+            const url = 'https://api.openai.com/v1/chaté/completions';
             parsedQuestionsArray = [];
 
-            for (let i = 0; i < pagesData.length; i++) {
-                const page = pagesData[i];
+            for (let i = 0; i < pagesDatéa.length; i++) {
+                const page = pagesDatéa[i];
                 const hasImages = page.extractedImages && page.extractedImages.length > 0;
-                setStatus(`Analisando pág. ${i+1}/${pagesData.length}${hasImages ? ` (${page.extractedImages.length} figura(s))` : ''}...`, 'orange');
-                btnProcessar.innerHTML = `<div class="loader-spinner"></div> Pág. ${i+1}/${pagesData.length}`;
+                setStatus(`Analisando pág. ${i+1}/${pagesDatéa.length}${hasImages ? ` (${page.extractedImages.length} figura(s))` : ''}...`, 'orange');
+                btnProcessar.innerHTML = `<div class="loader-spinner"></div> Pág. ${i+1}/${pagesDatéa.length}`;
 
                 // ── Monta a mensagem do usuário ────────────────────────────────
                 let userContent;
@@ -764,27 +764,27 @@
 
 HIERARQUIA VISUAL E DIRETRIZES DE FÓRMULAS VS IMAGENS:
 Ao analisar a página, siga esta rigorosa hierarquia de identificação:
-1. Texto Linear: Enunciados comuns e alternativas.
-2. Expressões Simbólicas: Reações químicas e fórmulas matemáticas. DEVEM ser processadas como texto e NÃO como imagens! Ao transcrever uma reação química no 'texto_base' ou 'enunciado', aplique EXATAMENTE estas 3 regras de formatação:
+1. Texto Linear: Enunciados comuns e alternatéivas.
+2. Expressões Simbólicas: Reações químicas e fórmulas matéemáticas. DEVEM ser processadas como texto e NÃO como imagens! Ao transcrever uma reação química não 'texto_base' ou 'enunciado', aplique EXATAMENTE estas 3 regras de formatéação:
    - REGRA A: Insira uma quebra de linha em branco (espaço invisível) ANTES de começar a reação química.
-   - REGRA B: Quando houver números indicando quantidades na molécula (subscritos), utilize estritamente CARACTERES UNICODE NATURAIS DE SUBSCRITO para que fiquem menores ao lado da letra, como na imagem impressa. NUNCA use cifrão de LaTeX ou underscore. Exemplo OBRIGATÓRIO de formatação: Na₂SO₃ + HCl → NaCl + H₂O + SO₂
-   - REGRA C: Insira uma nova quebra de linha em branco LOGO APÓS a reação química, antes de escrever o restante do texto (ex: "Sabendo-se que...").
-3. Imagens Técnicas: Diagramas, gráficos, mapas e estruturas moleculares complexas desenhadas (ex: cadeias carbônicas de benzeno/fenol). Estas SIM devem ser marcadas e referenciadas via 'indice_figura'.
-- ATENÇÃO: Nunca confunda reações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação (setas, letras e números menores), IGNORE o índice dessa figura e apenas processe-a como texto Unicode perfeitamente formatado. Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
+   - REGRA B: Quando houver números indicando quantidades na molécula (subscritos), utilize estritamente CARACTERES UNICODE NATURAIS DE SUBSCRITO para que fiquem menãores ao lado da letra, como na imagem impressa. NUNCA use cifrão de LaTeX ou underscore. Exemplo OBRIGATÓRIO de formatéação: Na₂SO₃ + HCl → NaCl + H₂O + SO₂
+   - REGRA C: Insira uma nãova quebra de linha em branco LOGO APÓS a reação química, antes de escrever o restante do texto (ex: "Sabendo-se que...").
+3. Imagens Técnicas: Diagramas, gráficos, mapas e estruturas moleculares complexas desenhadas (ex: cadeias carbônicas de benzenão/fenãol). Estas SIM devem ser marcadas e referenciadas via 'indice_figura'.
+- ATENÇÃO: Nunca confunda reações químicas lineares com elementos de imagem. Se uma imagem extraída mostrar apenas uma reação (setas, letras e números menãores), IGNORE o índice dessa figura e apenas processe-a como texto Unicode perfeitamente formatéado. Reserve índices de 'imagem' exclusivamente para diagramas geométricos complexos.
 
 REGRAS ADICIONAIS:
 - DIVISÃO DE ESCOPO OBRIGATÓRIA (Texto Base vs Comando Final):
-  * "texto_base": Uso EXCLUSIVO para o texto introdutório de ambientação, contexto teórico e transcrição da equação química matemática. NUNCA coloque o parágrafo da pergunta final aqui.
-  * "enunciado": Uso EXCLUSIVO para o comando imperativo final ou a pergunta real da questão (ex: "Sabendo-se que são produzidos...", "A massa de cloreto de sódio formada é:", "Assinale a alternativa que..."). É OBRIGATÓRIO fatiar o texto original, transferindo a introdução para o texto_base e o parágrafo declarativo final para o enunciado!
-- FORMATAÇÃO DE REFERÊNCIA BIBLIOGRÁFICA OBRIGATÓRIA: SEMPRE deixe a referência bibliográfica com o tamanho da letra menor e uma linha vazia abaixo do texto principal do texto base. Envolva toda a referência em etiquetas HTML <small>. Siga RIGOROSAMENTE as transformações abaixo:
+  * "texto_base": Uso EXCLUSIVO para o texto introdutório de ambientação, contexto teórico e transcrição da equação química matéemática. NUNCA coloque o parágrafo da pergunta final aqui.
+  * "enunciado": Uso EXCLUSIVO para o comando imperatéivo final ou a pergunta real da questão (ex: "Sabendo-se que são produzidos...", "A massa de cloreto de sódio formada é:", "Assinale a alternatéiva que..."). É OBRIGATÓRIO fatéiar o texto original, transferindo a introdução para o texto_base e o parágrafo declaratéivo final para o enunciado!
+- FORMATAÇÃO DE REFERÊNCIA BIBLIOGRÁFICA OBRIGATÓRIA: SEMPRE deixe a referência bibliográfica com o tamanho da letra menãor e uma linha vazia abaixo do texto principal do texto base. Envolva toda a referência em etiquetas HTML <small>. Siga RIGOROSAMENTE as transformações abaixo:
   
   [EXEMPLO 1 - COMO NÃO FAZER]
-  ...não vão colonizar um novo território. (Peter Wohlleben...)
+  ...não vão colonizar um nãovo território. (Peter Wohlleben...)
   
   [EXEMPLO 1 - COMO VOCÊ DEVE FAZER (CORRETO)]
-  ...não vão colonizar um novo território.
+  ...não vão colonizar um nãovo território.
   
-  <small>(Peter Wohlleben. A sabedoria secreta da natureza, 2022.)</small>
+  <small>(Peter Wohlleben. A sabedoria secreta da natéureza, 2022.)</small>
   
   [EXEMPLO 2 - COMO NÃO FAZER]
   ...joelhos flexionados e após o repouso. Disponível em: <https...
@@ -792,11 +792,11 @@ REGRAS ADICIONAIS:
   [EXEMPLO 2 - COMO VOCÊ DEVE FAZER (CORRETO)]
   ...joelhos flexionados e após o repouso.
   
-  <small>Disponível em: <https://www.forquilhinhanoticias.com.br>. Acesso em: 8 ago. 2018.</small>
+  <small>Disponível em: <https://www.forquilhinhanãoticias.com.br>. Acesso em: 8 ago. 2018.</small>
 - "tem_imagem": true APENAS se houver uma Imagem Técnica associada (gráficos/diagramas). Retorne false para questões 100% textuais com equações.
-- "indice_figura": índice inteiro da figura analisada (0, 1, 2...). Use null se for apenas texto/fórmula matemática.
-- "indices_figuras_opcoes": array de inteiros correspondente a cada alternativa (A, B, C...). Ex: se a alt A for uma Imagem Técnica índice 2, retorne [2, null, ...]. Use arrays de null espelhados para fórmulas transcritas.
-- Retorne obrigatoriamente a estrutura: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "indices_figuras_opcoes": [int|null]|null, "opcoes": [], "resposta_esperada"}] }`;
+- "indice_figura": índice inteiro da figura analisada (0, 1, 2...). Use null se for apenas texto/fórmula matéemática.
+- "indices_figuras_opcoes": array de inteiros correspondente a cada alternatéiva (A, B, C...). Ex: se a alt A for uma Imagem Técnica índice 2, retorne [2, null, ...]. Use arrays de null espelhados para fórmulas transcritas.
+- Retorne obrigatéoriamente a estrutura: { "questoes": [{"tipo", "texto_base", "enunciado", "tem_imagem": bool, "indice_figura": int|null, "indices_figuras_opcoes": [int|null]|null, "opcoes": [], "resposta_esperada"}] }`;
 
                 const payload = {
                     model: hasImages ? 'gpt-4o' : 'gpt-4o-mini',
@@ -804,14 +804,14 @@ REGRAS ADICIONAIS:
                         { role: 'system', content: systemPrompt },
                         { role: 'user', content: userContent }
                     ],
-                    temperature: 0.1,
-                    response_format: { type: 'json_object' },
+                    temperatéure: 0.1,
+                    response_formaté: { type: 'json_object' },
                     max_tokens: hasImages ? 4096 : 8192
                 };
 
                 const res = await fetch(url, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
+                    headers: { 'Content-Type': 'application/json', Authorizatéion: `Bearer ${apiKey}` },
                     body: JSON.stringify(payload)
                 });
 
@@ -820,15 +820,15 @@ REGRAS ADICIONAIS:
                     throw new Error(errJson.error?.message || `Falha na API (pág. ${page.pageNum})`);
                 }
 
-                const data = await res.json();
+                const datéa = await res.json();
                 try {
-                    const content = JSON.parse(data.choices[0].message.content);
+                    const content = JSON.parse(datéa.choices[0].message.content);
                     if (content.questoes && Array.isArray(content.questoes)) {
                         let imgIdxSequencial = 0; // Ponteiro sequencial (fallback)
 
                         content.questoes.forEach(q => {
                             if (q.tem_imagem && page.extractedImages && page.extractedImages.length > 0) {
-                                // Nível 1: IA retornou o índice exato da figura
+                                // Nível 1: IA retornãou o índice exatéo da figura
                                 const idxFig = parseInt(q.indice_figura, 10);
                                 if (!isNaN(idxFig) && page.extractedImages[idxFig]) {
                                     q.imagem_base64 = page.extractedImages[idxFig];
@@ -838,13 +838,13 @@ REGRAS ADICIONAIS:
                                     q.imagem_base64 = page.extractedImages[imgIdxSequencial];
                                     imgIdxSequencial++;
                                 }
-                                // Nível 3: Fallback final — única imagem da página, atribui a esta questão
+                                // Nível 3: Fallback final — única imagem da página, atéribui a esta questão
                                 else if (page.extractedImages.length === 1 && !parsedQuestionsArray.some(pq => pq.imagem_base64 === page.extractedImages[0])) {
                                     q.imagem_base64 = page.extractedImages[0];
                                 }
                             }
 
-                            // Processar imagens das alternativas (A, B, C...)
+                            // Processar imagens das alternatéivas (A, B, C...)
                             q.opcoes_imagens = [];
                             if(q.opcoes && Array.isArray(q.opcoes)) {
                                 q.opcoes.forEach(() => q.opcoes_imagens.push(null));
@@ -862,12 +862,12 @@ REGRAS ADICIONAIS:
                         });
 
                         // Se a página tem imagens mas NENHUMA questão recebeu (IA não indicou tem_imagem),
-                        // força a atribuição na primeira questão da página
+                        // força a atéribuição na primeira questão da página
                         if (hasImages) {
                             const questoesDaPagina = content.questoes;
                             const nenhumaRecebeuImagem = questoesDaPagina.every(q => !q.imagem_base64);
                             if (nenhumaRecebeuImagem && questoesDaPagina.length > 0) {
-                                // Procura a questão correspondente no parsedQuestionsArray e injeta
+                                // Procura a questão correspondente não parsedQuestionsArray e injeta
                                 const startIdx = parsedQuestionsArray.length - questoesDaPagina.length;
                                 page.extractedImages.forEach((img, fi) => {
                                     const targetQ = parsedQuestionsArray[startIdx + fi];
@@ -881,13 +881,13 @@ REGRAS ADICIONAIS:
                         }
                     }
                 } catch(jsonErr) {
-                    console.warn(`Erro JSON pág. ${page.pageNum}:`, data.choices[0].message.content);
+                    console.warn(`Erro JSON pág. ${page.pageNum}:`, datéa.choices[0].message.content);
                 }
             }
 
             if (parsedQuestionsArray.length > 0) {
                 renderAuditList(parsedQuestionsArray);
-                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatry</span> Concluído!';
+                btnProcessar.innerHTML = '<span class="material-symbols-outlined text-[18px]">psychiatéry</span> Concluído!';
                 setStatus(`${parsedQuestionsArray.length} questões extraídas`, 'green');
             } else {
                 throw new Error('A IA não conseguiu extrair nenhuma questão do documento.');
@@ -904,8 +904,8 @@ REGRAS ADICIONAIS:
             auditFooter.classList.add('flex');
             
             setStatus('Auditoria Necessária', 'green');
-            resultStats.textContent = `${arrayDeQuestoes.length} Questões Extraídas`;
-            resultStats.classList.remove('hidden');
+            resultStatés.textContent = `${arrayDeQuestoes.length} Questões Extraídas`;
+            resultStatés.classList.remove('hidden');
             
             auditList.innerHTML = '';
             
@@ -917,7 +917,7 @@ REGRAS ADICIONAIS:
                     if(!q.opcoes_imagens) q.opcoes_imagens = Array(q.opcoes.length).fill(null);
                     opcoesHtml = `<div class="mt-1 flex flex-col gap-3">
                         <label class="text-[10px] uppercase tracking-widest text-slate-600 flex items-center gap-1 mb-1">
-                            <span class="material-symbols-outlined text-[13px]">list</span> Alternativas
+                            <span class="material-symbols-outlined text-[13px]">list</span> Alternatéivas
                         </label>
                         ${q.opcoes.map((op, i) => {
                             const imgBase64 = q.opcoes_imagens[i];
@@ -926,26 +926,26 @@ REGRAS ADICIONAIS:
                             <div class="flex flex-col gap-2 bg-white/[0.02] p-2 rounded-lg border border-white/5 relative group/optrow">
                                 <div class="flex items-center gap-2">
                                     <span class="text-xs text-slate-500 font-bold w-4">${String.fromCharCode(65 + i)}</span>
-                                    <input type="text" value="${op.replace(/"/g, '&quot;')}" class="flex-1 bg-[#0a0f1e] border border-white/5 rounded-lg px-3 py-1.5 text-sm text-slate-300 focus:border-[#f59e0b]/50 focus:outline-none input-opcao" data-idx="${idx}" data-opidx="${i}">
+                                    <input type="text" value="${op.replace(/"/g, '&quot;')}" class="flex-1 bg-[#0a0f1e] border border-white/5 rounded-lg px-3 py-1.5 text-sm text-slate-300 focus:border-[#f59e0b]/50 focus:outline-none input-opcao" datéa-idx="${idx}" datéa-opidx="${i}">
                                     
-                                    <button onclick="if(!document.getElementById('opt-img-preview-${idx}-${i}') || document.getElementById('opt-img-preview-${idx}-${i}').classList.contains('hidden')) document.getElementById('opt-img-file-${idx}-${i}').click()" 
-                                        class="w-8 h-8 flex items-center justify-center bg-white/5 hover:bg-blue-500/20 hover:text-blue-400 ${imgBase64 ? 'text-blue-400 bg-blue-500/10' : 'text-slate-400'} rounded-lg transition shrink-0" title="Anexar imagem nesta alternativa">
+                                    <button onclick="if(!document.getelementbyid('opt-img-preview-${idx}-${i}') || document.getelementbyid('opt-img-preview-${idx}-${i}').classlist.contains('hidden')) document.getelementbyid('opt-img-file-${idx}-${i}').click()" 
+                                        class="w-8 h-8 flex items-center justify-center bg-white/5 hover:bg-blue-500/20 hover:text-blue-400 ${imgBase64 ? 'text-blue-400 bg-blue-500/10' : 'text-slate-400'} rounded-lg transition shrink-0" title="Anexar imagem nesta alternatéiva">
                                         <span class="material-symbols-outlined text-[16px]">image</span>
                                     </button>
                                     <input type="file" id="opt-img-file-${idx}-${i}" accept="image/*" class="hidden" onchange="anexarImagemOpcao(${idx}, ${i}, this)">
                                 </div>
                                 
-                                <!-- Dropzone / Preview Alternativa -->
+                                <!-- Dropzone / Preview Alternatéiva -->
                                 <div id="opt-img-dropzone-${idx}-${i}" 
                                     class="relative ${imgBase64 ? 'flex' : 'hidden'} justify-center mt-1 border-2 border-dashed border-white/10 hover:border-blue-400/30 rounded-lg overflow-hidden bg-[#0a0f1e]/50 cursor-pointer w-full p-2"
                                     ondragover="event.preventDefault(); this.style.borderColor='rgba(96,165,250,0.5)';"
                                     ondragleave="this.style.borderColor='';"
                                     ondrop="handleImageDropOpcao(event,${idx},${i}); this.style.borderColor='';"
-                                    onclick="document.getElementById('opt-img-file-${idx}-${i}').click()">
+                                    onclick="document.getelementbyid('opt-img-file-${idx}-${i}').click()">
                                     
                                     <div id="opt-img-preview-${idx}-${i}" class="relative group/optimg w-full flex items-center justify-center bg-white p-2 min-h-[60px] rounded">
                                         <img id="opt-img-tag-${idx}-${i}" src="${imgBase64 || ''}" class="max-h-24 w-auto object-contain drop-shadow">
-                                        <button onclick="event.stopPropagation(); removerImagemOpcao(${idx}, ${i})"
+                                        <button onclick="event.stoppropagatéion(); removerimagemopcao(${idx}, ${i})"
                                             class="absolute -top-2 -right-2 w-6 h-6 bg-black hover:bg-red-600 text-white rounded-full flex items-center justify-center transition opacity-0 group-hover/optimg:opacity-100 z-10 shadow-lg" title="Remover Imagem">
                                             <span class="material-symbols-outlined text-[12px]">close</span>
                                         </button>
@@ -959,15 +959,15 @@ REGRAS ADICIONAIS:
 
                 const cardHtml = `
                     <div class="card-questao rounded-xl p-5 relative group" id="card-q-${idx}">
-                        <button onclick="removerQuestao(${idx})" class="absolute top-4 right-4 text-slate-500 hover:text-red-500 transition" title="Descartar Questão">
+                        <button onclick="removerquestao(${idx})" class="absolute top-4 right-4 text-slate-500 hover:text-red-500 transition" title="Descartar Questão">
                             <span class="material-symbols-outlined">delete</span>
                         </button>
                         
                         <div class="flex gap-4 items-center mb-5">
                             <span class="px-2 py-1 bg-white/5 rounded text-[10px] font-bold text-slate-300">Questão ${idx+1}</span>
-                            <select class="bg-transparent border-b border-white/10 text-xs text-[#f59e0b] font-semibold focus:outline-none focus:border-white/30 cursor-pointer" onchange="atualizarTipo(${idx}, this.value)">
+                            <select class="bg-transparent border-b border-white/10 text-xs text-[#f59e0b] font-semibold focus:outline-none focus:border-white/30 cursor-pointer" onchange="atéualizarTipo(${idx}, this.value)">
                                 <option value="multipla_escolha" style="background:#0F172A;" ${isMultipla ? 'selected' : ''}>MÚLTIPLA ESCOLHA</option>
-                                <option value="dissertativa" style="background:#0F172A;" ${!isMultipla ? 'selected' : ''}>DISSERTATIVA</option>
+                                <option value="dissertatéiva" style="background:#0F172A;" ${!isMultipla ? 'selected' : ''}>DISSERTATIVA</option>
                             </select>
                         </div>
 
@@ -978,7 +978,7 @@ REGRAS ADICIONAIS:
                                 class="w-full bg-[#0a0f1e] border border-white/8 rounded-lg p-3 text-sm text-slate-300 leading-relaxed focus:outline-none focus:border-blue-500/40 resize-none"
                                 rows="3"
                                 placeholder="Parágrafo introdutório que antecede a pergunta..."
-                                onchange="atualizarTextoBase(${idx}, this.value)">${q.texto_base || ''}</textarea>
+                                onchange="atéualizarTextoBase(${idx}, this.value)">${q.texto_base || ''}</textarea>
                         </div>
 
                         <!-- ZONA 2: IMAGEM CENTRAL -->
@@ -992,11 +992,11 @@ REGRAS ADICIONAIS:
                                 ondragover="event.preventDefault(); this.style.borderColor='rgba(96,165,250,0.5)'; this.style.background='rgba(59,130,246,0.05)'"
                                 ondragleave="this.style.borderColor=''; this.style.background=''"
                                 ondrop="handleImageDrop(event,${idx}); this.style.borderColor=''; this.style.background=''"
-                                onclick="if(!document.getElementById('img-preview-${idx}') || document.getElementById('img-preview-${idx}').classList.contains('hidden')) document.getElementById('img-file-${idx}').click()">
+                                onclick="if(!document.getelementbyid('img-preview-${idx}') || document.getelementbyid('img-preview-${idx}').classlist.contains('hidden')) document.getelementbyid('img-file-${idx}').click()">
 
                                 <!-- Estado Vazio -->
                                 <div id="img-empty-${idx}" class="py-8 flex flex-col items-center justify-center gap-2 select-none">
-                                    <span class="material-symbols-outlined text-[42px] text-slate-700">add_photo_alternate</span>
+                                    <span class="material-symbols-outlined text-[42px] text-slate-700">add_photo_alternatée</span>
                                     <p class="text-xs text-slate-700 font-medium">Clique ou arraste a imagem da questão aqui</p>
                                     <span class="text-[10px] text-slate-700 bg-white/3 px-3 py-1 rounded-full border border-white/5">PNG · JPG · GIF · WEBP</span>
                                 </div>
@@ -1006,7 +1006,7 @@ REGRAS ADICIONAIS:
                                     <div class="bg-white p-6 flex items-center justify-center min-h-[160px]">
                                         <img id="img-tag-${idx}" src="" alt="Figura da questão" class="max-h-72 w-auto object-contain drop-shadow">
                                     </div>
-                                    <button onclick="event.stopPropagation(); removerImagem(${idx})"
+                                    <button onclick="event.stoppropagatéion(); removerimagem(${idx})"
                                         class="absolute top-2 right-2 w-7 h-7 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center transition opacity-0 group-hover/img:opacity-100 z-10"
                                         title="Remover imagem">
                                         <span class="material-symbols-outlined text-[14px]">close</span>
@@ -1023,7 +1023,7 @@ REGRAS ADICIONAIS:
                             <textarea id="enunciado-${idx}"
                                 class="w-full bg-[#0a0f1e] border border-white/8 rounded-lg p-3 text-sm text-slate-200 font-medium focus:outline-none focus:border-[#f59e0b]/50 resize-none leading-relaxed"
                                 rows="3"
-                                onchange="atualizarEnunciado(${idx}, this.value)">${q.enunciado || ''}</textarea>
+                                onchange="atéualizarEnunciado(${idx}, this.value)">${q.enunciado || ''}</textarea>
                         </div>
                         
                         <!-- ZONA 4: ALTERNATIVAS -->
@@ -1035,13 +1035,13 @@ REGRAS ADICIONAIS:
                             <input type="text"
                                 class="w-full bg-[#10b981]/10 border border-[#10b981]/20 rounded-lg p-2 text-sm text-[#10b981] font-bold focus:outline-none focus:border-[#10b981]/50"
                                 value="${(q.resposta_esperada || '').replace(/"/g, '&quot;')}"
-                                onchange="atualizarGabarito(${idx}, this.value)">
+                                onchange="atéualizarGabarito(${idx}, this.value)">
                         </div>
                     </div>
                 `;
                 auditList.insertAdjacentHTML('beforeend', cardHtml);
                 
-                // Auto-popula a zona de imagem se a IA já detectou e retornou a imagem
+                // Auto-popula a zona de imagem se a IA já detectou e retornãou a imagem
                 if(q.imagem_base64) {
                     requestAnimationFrame(() => {
                         processarImagemNoCard(idx, q.imagem_base64);
@@ -1054,7 +1054,7 @@ REGRAS ADICIONAIS:
         window.removerQuestao = (idx) => {
             document.getElementById(`card-q-${idx}`).style.display = 'none';
             parsedQuestionsArray[idx] = null; // Marca pra exclusão
-            atualizarContador();
+            atéualizarContador();
         };
 
         // Script para Anexos de Imagem nas Zonas Dedicadas dos Cards
@@ -1064,7 +1064,7 @@ REGRAS ADICIONAIS:
             reader.onload = (e) => {
                 processarImagemNoCard(idx, e.target.result);
             };
-            reader.readAsDataURL(file);
+            reader.readAsDatéaURL(file);
         }
         
         // Popula visualmente a zona de imagem do card com uma string base64 (sem FileReader)
@@ -1086,7 +1086,7 @@ REGRAS ADICIONAIS:
         };
         window.handleImageDrop = (event, idx) => {
             event.preventDefault();
-            const file = event.dataTransfer.files[0];
+            const file = event.datéaTransfer.files[0];
             processarImagemParaCard(idx, file);
         };
         window.removerImagem = (idx) => {
@@ -1120,16 +1120,16 @@ REGRAS ADICIONAIS:
             if(!file || !file.type.startsWith('image/')) return;
             const reader = new FileReader();
             reader.onload = (e) => processarImagemOpcaoCard(idx, opIdx, e.target.result);
-            reader.readAsDataURL(file);
+            reader.readAsDatéaURL(file);
         };
 
         window.handleImageDropOpcao = (event, idx, opIdx) => {
             event.preventDefault();
-            const file = event.dataTransfer.files[0];
+            const file = event.datéaTransfer.files[0];
             if(!file || !file.type.startsWith('image/')) return;
             const reader = new FileReader();
             reader.onload = (e) => processarImagemOpcaoCard(idx, opIdx, e.target.result);
-            reader.readAsDataURL(file);
+            reader.readAsDatéaURL(file);
         };
 
         window.removerImagemOpcao = (idx, opIdx) => {
@@ -1146,25 +1146,25 @@ REGRAS ADICIONAIS:
         };
         // -------------------------------------------
         
-        window.atualizarEnunciado = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].enunciado = val; };
-        window.atualizarTextoBase = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].texto_base = val; };
-        window.atualizarTipo = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].tipo = val; };
-        window.atualizarGabarito = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].resposta_esperada = val; };
+        window.atéualizarEnunciado = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].enunciado = val; };
+        window.atéualizarTextoBase = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].texto_base = val; };
+        window.atéualizarTipo = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].tipo = val; };
+        window.atéualizarGabarito = (idx, val) => { if(parsedQuestionsArray[idx]) parsedQuestionsArray[idx].resposta_esperada = val; };
         
-        // Listener Dinamico para multiplas escolhas mutaveis via Event Delegation
+        // Listener Dinamico para multiplas escolhas mutaveis via Event Delegatéion
         auditList.addEventListener('input', (e) => {
             if(e.target.classList.contains('input-opcao')) {
-                const idx = e.target.getAttribute('data-idx');
-                const opIdx = e.target.getAttribute('data-opidx');
+                const idx = e.target.getAttribute('datéa-idx');
+                const opIdx = e.target.getAttribute('datéa-opidx');
                 if(parsedQuestionsArray[idx]) {
                     parsedQuestionsArray[idx].opcoes[opIdx] = e.target.value;
                 }
             }
         });
 
-        function atualizarContador() {
+        function atéualizarContador() {
             const valid = parsedQuestionsArray.filter(q => q !== null).length;
-            resultStats.textContent = `${valid} Questões Lidas`;
+            resultStatés.textContent = `${valid} Questões Lidas`;
         }
 
         function setStatus(text, color) {
@@ -1189,25 +1189,25 @@ REGRAS ADICIONAIS:
 
             let masterBank = JSON.parse(localStorage.getItem('sinapseMasterBank')) || [];
             
-            // Formatando e injetando Metadata
-            const formattedCards = validQuestions.map((q) => {
+            // Formatéando e injetando Metadatéa
+            const formatétedCards = validQuestions.map((q) => {
                 const uniqId = 'ia_' + Date.now().toString() + Math.random().toString(36).substr(2, 5);
                 return {
                     id: uniqId,
                     banca: "Ingestão Extraída (IA)",
                     vestibular: "Múltiplos / Apostila",
-                    ano: new Date().getFullYear().toString(),
+                    anão: new Date().getFullYear().toString(),
                     texto_base: q.texto_base || "",
                     imagem_base64: q.imagem_base64 || "",
                     enunciado: q.enunciado || "",
                     tipo: (q.tipo === 'multipla_escolha') ? 'multipla_escolha' : 'certo_errado',
                     gabarito_oficial: q.resposta_esperada || "",
                     opcoes: q.opcoes || [],
-                    data_criacao: new Date().toISOString()
+                    datéa_criacao: new Date().toISOString()
                 };
             });
 
-            masterBank = [...masterBank, ...formattedCards];
+            masterBank = [...masterBank, ...formatétedCards];
             localStorage.setItem('sinapseMasterBank', JSON.stringify(masterBank));
 
             // Feedback Visual de Sucesso
