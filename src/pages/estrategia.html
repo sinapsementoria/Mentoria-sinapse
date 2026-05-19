@@ -202,53 +202,74 @@
                 <!-- COLUNA ESQUERDA: INPUT PANEL -->
                 <div class="lg:col-span-4 flex flex-col gap-4 min-h-0">
                     <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col min-h-0 relative h-full">
-                        <div class="mb-6">
-                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 text-rose-500 text-[10px] uppercase font-extrabold tracking-widest rounded-lg mb-4">
+                        <div class="mb-5">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 text-rose-500 text-[10px] uppercase font-extrabold tracking-widest rounded-lg mb-3">
                                 <span class="material-symbols-outlined text-[16px]">target</span> Mapear Déficit
                             </div>
                             <h2 class="font-headline text-[22px] font-extrabold text-[#0B193C] leading-tight mb-1">Mapeamento Tático</h2>
-                            <p class="text-xs text-slate-400 font-medium">Não ignãore o que você errou ou teve branco.</p>
+                            <p class="text-xs text-slate-400 font-medium">Não ignore o que você errou ou teve branco.</p>
                         </div>
 
-                        <div class="space-y-5 flex-1">
-                            <div class="space-y-1.5">
+                        <div class="space-y-4 flex-1">
+                            <!-- MATÉRIA (dropdown customizado) -->
+                            <div class="space-y-1.5 relative">
                                 <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">A MATÉRIA DEFICIENTE</label>
-                                <select id="bDisciplina" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-bold appearance-none text-sm cursor-pointer hover:border-indigo-200">
+                                <select id="eDisciplina" class="hidden">
                                     <option value="">SELECIONE A MATÉRIA</option>
-                                    <option value="Matemática">MATEMÁTICA</option>
-                                    <option value="Física">FÍSICA</option>
-                                    <option value="Química">QUÍMICA</option>
-                                    <option value="Biologia">BIOLOGIA</option>
-                                    <option value="Filosofia">FILOSOFIA</option>
-                                    <option value="Sociologia">SOCIOLOGIA</option>
-                                    <option value="História">HISTÓRIA</option>
-                                    <option value="Geografia">GEOGRAFIA</option>
-                                    <option value="Literatura">LITERATURA</option>
-                                    <option value="Gramática">GRAMÁTICA</option>
-                                    <option value="Linguagens">LINGUAGENS</option>
-                                    <option value="Inglês">INGLÊS</option>
-                                    <option value="Espanhol">ESPANHOL</option>
-                                    <option value="Artes">ARTES</option>
                                 </select>
+                                <div id="eCustomDisciplinaWrap" class="relative">
+                                    <button type="button" id="eCustomDisciplinaBtn" onclick="toggleEDropdown('Disciplina')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                        <span id="eCustomDisciplinaLabel">SELECIONE A MATÉRIA</span>
+                                        <svg id="eCustomDisciplinaArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </button>
+                                    <div id="eCustomDisciplinaList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin">
+                                    </div>
+                                </div>
                             </div>
-                            <div class="space-y-1.5">
+
+                            <!-- ASSUNTO (dropdown customizado) -->
+                            <div class="space-y-1.5 relative">
                                 <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">QUAL O ASSUNTO ESPECÍFICO?</label>
-                                <select id="bAssunto" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-bold appearance-none text-sm cursor-pointer hover:border-indigo-200">
+                                <select id="eAssunto" class="hidden">
                                     <option value="">SELECIONE A MATÉRIA PRIMEIRO...</option>
                                 </select>
+                                <div id="eCustomAssuntoWrap" class="relative">
+                                    <button type="button" id="eCustomAssuntoBtn" onclick="toggleEDropdown('Assunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                        <span id="eCustomAssuntoLabel">SELECIONE A MATÉRIA PRIMEIRO...</span>
+                                        <svg id="eCustomAssuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </button>
+                                    <div id="eCustomAssuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SUBASSUNTO (dropdown customizado) -->
+                            <div id="eWrapSubassunto" class="space-y-1.5 relative">
+                                <label class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest block pl-1">SUBASSUNTO</label>
+                                <select id="eSubassunto" class="hidden">
+                                    <option value="">SELECIONE O ASSUNTO PRIMEIRO...</option>
+                                </select>
+                                <div id="eCustomSubassuntoWrap" class="relative">
+                                    <button type="button" id="eCustomSubassuntoBtn" onclick="toggleEDropdown('Subassunto')" class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3.5 outline-none focus:border-sinapse-primary transition-all font-extrabold text-sm cursor-pointer hover:border-indigo-200 text-left flex items-center justify-between">
+                                        <span id="eCustomSubassuntoLabel">SELECIONE O ASSUNTO PRIMEIRO...</span>
+                                        <svg id="eCustomSubassuntoArrow" class="w-4 h-4 text-slate-400 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </button>
+                                    <div id="eCustomSubassuntoList" class="hidden absolute z-50 w-full mt-1.5 bg-white border border-slate-200 rounded-xl shadow-lg max-h-[280px] overflow-y-auto" style="scrollbar-width:thin">
+                                    </div>
+                                </div>
                             </div>
                             
-                            <div class="pt-2">
-                                <div class="p-4 rounded-xl bg-orange-50/50 border border-orange-100 flex gap-3 items-start">
+                            <div class="pt-1">
+                                <div class="p-3 rounded-xl bg-orange-50/50 border border-orange-100 flex gap-3 items-start">
                                     <span class="material-symbols-outlined text-orange-400 text-[18px]">info</span>
-                                    <p class="text-[11px] text-orange-700/80 font-medium leading-relaxed">
-                                        Ao salvar, o sistema fará a conta mecânica para reavivar sua memória nãos momentos de quase-esquecimento. <strong>Esse assunto será reapresentado nas suas Metas Diárias nas datéas exatéas.</strong>
+                                    <p class="text-[10px] text-orange-700/80 font-medium leading-relaxed">
+                                        Ao salvar, o sistema fará a conta mecânica para reavivar sua memória nos momentos de quase-esquecimento. <strong>Esse assunto será reapresentado nas suas Metas Diárias nas datas exatas.</strong>
                                     </p>
                                 </div>
                             </div>
                         </div>
 
-                        <button onclick="gerarestratéegia()" class="mt-6 w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-xl font-bold shadow-premium-hover transition-all flex items-center justify-center gap-2 active:scale-95 group text-sm">
+                        <button onclick="gerarEstrategia()" class="mt-4 w-full bg-[#0B193C] hover:bg-sinapse-primary text-white py-4 rounded-xl font-bold shadow-premium-hover transition-all flex items-center justify-center gap-2 active:scale-95 group text-sm">
                             <span class="material-symbols-outlined text-[20px] group-hover:rotate-180 transition-transform duration-500">sync</span> Gerar Estratégia de Aprovação
                         </button>
                     </div>
@@ -258,21 +279,21 @@
                 <div class="lg:col-span-8 flex flex-col overflow-hidden min-h-0 gap-4">
                     
                     <!-- Ãšltima estratégia programada -->
-                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col mb-8 relative overflow-hidden h-[300px]" id="lastStratéegyDisplay">
+                    <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col mb-8 relative overflow-hidden h-[300px]" id="lastStrategyDisplay">
                         
                         <!-- Estado Vazio -->
-                        <div class="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white z-10 transition-opacity duration-300" id="emptyStratéegyStatée">
+                        <div class="absolute inset-0 flex flex-col items-center justify-center p-8 bg-white z-10 transition-opacity duration-300" id="emptyStrategyState">
                             <div class="w-16 h-16 rounded-full bg-slate-50 flex items-center justify-center mb-4 border border-slate-100">
                                 <span class="material-symbols-outlined text-[32px] text-slate-300">hub</span>
                             </div>
                             <h3 class="font-headline text-[17px] font-extrabold text-[#0B193C] mb-1">Nenhuma revisão em foco</h3>
-                            <p class="text-xs font-medium text-slate-400 text-center max-w-[300px]">Lance um déficit não painel latéeral. A inteligência pedagógica mapeará o ciclo perfeito para você.</p>
+                            <p class="text-xs font-medium text-slate-400 text-center max-w-[300px]">Lance um déficit no painel lateral. A inteligência pedagógica mapeará o ciclo perfeito para você.</p>
                         </div>
 
                         <!-- Estado Preenchido -->
-                        <div class="flex-none flex items-center justify-between mb-6 opacity-0" id="headerStratéegyStatée">
+                        <div class="flex-none flex items-center justify-between mb-6 opacity-0" id="headerStrategyState">
                             <div>
-                                <h3 class="font-headline text-lg font-extrabold text-[#0B193C]">Trilha de Revisão Automatéizada</h3>
+                                <h3 class="font-headline text-lg font-extrabold text-[#0B193C]">Trilha de Revisão Automatizada</h3>
                                 <p class="text-xs text-slate-400 font-medium">Seu déficit virou estratégia. Programamos 3 missões futuras para garantir a fixação.</p>
                             </div>
                             <div class="bg-emerald-50 text-emerald-600 text-[10px] uppercase tracking-widest font-extrabold px-3 py-1.5 rounded-lg border border-emerald-100 flex items-center gap-1.5">
@@ -280,7 +301,7 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-3 gap-5 flex-1 opacity-0" id="cardsStratéegyStatée">
+                        <div class="grid grid-cols-3 gap-5 flex-1 opacity-0" id="cardsStrategyState">
                             <!-- Card 7 Dias -->
                             <div class="glass-panel p-5 rounded-2xl border border-indigo-100/50 flex flex-col items-center text-center shadow-sm relative overflow-hidden bg-gradient-to-b from-white to-slate-50/50">
                                 <div class="absolute inset-x-0 top-0 h-1 bg-[#818CF8]"></div>
@@ -387,226 +408,227 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="../../src/js/database.js"></script>
+    <script src="../../src/js/materia_data.js?v=5"></script>
     <script>
-        // Mapeamento completo de assuntos por disciplina
-        const assuntosPorDisciplina = {
-            'Matemática': ['Equação do 1º Grau', 'Função do 1º Grau', 'Equação do 2º Grau', 'Função do 2º Grau', 'Equação Exponencial', 'Função Exponencial', 'Função Logarítmica', 'Progressão Aritmética', 'Progressão Geométrica', 'Matrizes', 'Determinantes', 'Sistemas Lineares', 'Trigonometria no Triângulo Retângulo', 'Funções Trigonométricas', 'Retas Paralelas Cortadas por uma Transversal', 'Triângulos', 'Semelhança de Triângulos', 'Teorema de Tales', 'Relações Métricas no Triângulo Retângulo', 'Cevianas e Pontos Notáveis', 'Polígonos', 'Quadriláteros Notáveis', 'Áreas de Figuras Planas', 'Circunferência - Ângulos e Arcos', 'Poliedros', 'Prisma', 'Pirâmide', 'Tronco de Pirâmide', 'Cilindro', 'Cone', 'Tronco de Cone', 'Esfera', 'Estudo do Ponto', 'Estudo da Reta', 'Circunferência', 'Sólidos Semelhantes', 'Conjuntos Numéricos', 'Teoria de Conjuntos', 'MMC', 'MDC', 'Razão e Proporção', 'Grandezas Proporcionais', 'Porcentagem', 'Matemática Financeira', 'Princípio Fundamental da Contagem', 'Permutação', 'Arranjo', 'Combinação', 'Probabilidade', 'Estatística - Média', 'Função'],
-            'Física': ['Cinemática', 'Dinâmica', 'Estática', 'Hidrostática', 'Termodinâmica', 'Calorimetria', 'Óptica Geométrica', 'Ondulatória', 'Eletrostática', 'Eletrodinâmica', 'Eletromagnetismo', 'Física Moderna'],
-            'Química': ['Modelos Atômicos', 'Tabela Periódica', 'Ligações Químicas', 'Funções Inorgânicas', 'Estequiometria', 'Soluções', 'Termoquímica', 'Cinética Química', 'Equilíbrio Químico', 'Eletroquímica', 'Radioatividade', 'Química Orgânica - Funções', 'Isomeria', 'Reações Orgânicas', 'Polímeros', 'Química Ambiental', 'Separação de Misturas'],
-            'Biologia': ['Ecologia', 'Citologia', 'Divisão Celular', 'Metabolismo Energético', 'Genética Mendeliana', 'Engenharia Genética', 'Evolução', 'Fisiologia Humana', 'Imunologia', 'Botânica', 'Zoologia', 'Microbiologia', 'Parasitologia'],
-            'História': ['Introdução ao Curso de História Geral', 'A Formação do Povo Grego', 'Esparta e Atenas', 'Período Clássico e Helenístico', 'Nascimento de Roma (Monarquia e República)', 'Império Romano', 'Reinos Bárbaros – Império Bizantino e Carolíngio', 'O Islamismo – Origem e Expansão', 'Feudalismo', 'Baixa Idade Média – Renascimento Comercial e Urbano / Cruzadas', 'Ascensão das Monarquias Nacionais: O Absolutismo', 'Renascimento', 'Mercantilismo', 'A Reforma Protestante', 'Revolução Inglesa', 'Revoluções Industriais', 'História dos EUA', 'Revolução Francesa', 'Período Napoleônico', 'Revoluções Burguesas', 'Imperialismo e Neocolonialismo', 'Primeira Grande Guerra', 'Revolução Russa', 'Entre Guerras, Crise de 20 e Totalitarismo', 'Segunda Grande Guerra', 'O Mundo Pós-Guerra', 'Brasil Pré-Cabralino', 'Expansão Marítima Portuguesa', 'América Portuguesa', 'União Ibérica', 'Brasil Colonial', 'Crise do Sistema Colonial', 'O Processo de Independência', 'Independência na América Latina', 'Primeiro Reinado', 'Período Regencial – Revoltas Regenciais', 'Segundo Reinado', 'Trabalho Escravo no Brasil – Legado Sociocultural', 'Transição da Monarquia à República', 'Primeira República', 'Era Vargas', 'República Populista', 'JK – História de Brasília', 'Crise do Populismo', 'Ditaduras Militares na América do Sul', 'Reconstrução Democrática'],
-            'Geografia': ['Geopolítica', 'Globalização', 'Geografia Agrária', 'Urbanização', 'Indústria', 'Fontes de Energia', 'População', 'Migrações', 'Questões Ambientais', 'Cartografia', 'Climatologia', 'Geomorfologia', 'Biomas e Vegetação', 'Hidrografia'],
-            'Filosofia': ['Filosofia Antiga (Pré-socráticos, Sócrates, Platão, Aristóteles)', 'Filosofia Helenística', 'Filosofia Medieval (Patrística e Escolástica)', 'Filosofia Moderna (Racionalismo e Empirismo)', 'Iluminismo', 'Contratualismo (Hobbes, Locke, Rousseau)', 'Kant', 'Filosofia Contemporânea (Nietzsche, Sartre, Foucault)', 'Ética e Moral', 'Filosofia Política'],
-            'Sociologia': ['Surgimento da Sociologia', 'Cultura e Ideologia', 'Indústria Cultural e Meios de Comunicação', 'Max Weber', 'Émile Durkheim', 'Karl Marx', 'Estratificação e Desigualdade Social', 'Movimentos Sociais', 'Trabalho e Sociedade', 'Cidadania e Direitos Humanos', 'Sociologia Brasileira'],
-            'Artes': ['Arte Pré-Histórica e Antiga', 'Arte Medieval', 'Renascimento', 'Barroco e Rococó', 'Neoclassicismo e Romantismo', 'Realismo e Impressionismo', 'Vanguardas Europeias (Cubismo, Expressionismo, Surrealismo)', 'Modernismo Brasileiro (Semana de 22)', 'Arte Contemporânea', 'Cultura Popular e Folclore', 'Patrimônio Histórico'],
-            'Linguagens': ['Interpretação de Textos', 'Variação Linguística', 'Funções da Linguagem', 'Figuras de Linguagem', 'Tipologia Textual', 'Gêneros Textuais', 'Coesão e Coerência', 'Semântica', 'Sintaxe e Morfologia', 'Estratégias Argumentativas'],
-            'Literatura': ['Trovadorismo e Humanismo', 'Quinhentismo', 'Barroco', 'Arcadismo', 'Romantismo', 'Realismo e Naturalismo', 'Parnasianismo e Simbolismo', 'Pré-Modernismo', 'Modernismo - 1ª Geração', 'Modernismo - 2ª Geração', 'Modernismo - 3ª Geração e Contemporânea'],
-            'Gramática': ['Fonética e Fonologia', 'Morfologia', 'Sintaxe', 'Concordância Verbal e Nominal', 'Regência Verbal e Nominal', 'Crase', 'Pontuação', 'Colocação Pronominal', 'Semântica'],
-            'Inglês': ['Reading Comprehension', 'Vocabulary in Context', 'Grammar Essentials', 'Text Interpretation', 'Cognates and False Cognates'],
-            'Espanhol': ['Comprensión Lectora', 'Vocabulario en Contexto', 'Gramática Esencial', 'Interpretación de Textos', 'Heterogenéricos y Heterosemánticos']
-        };
+        // ══════════════════════════════════════════════
+        // DROPDOWN CUSTOMIZADO — Estratégia (prefixo 'e')
+        // ══════════════════════════════════════════════
+        function toggleEDropdown(nome) {
+            ['Disciplina','Assunto','Subassunto'].forEach(n => {
+                if (n !== nome) {
+                    const l = document.getElementById('eCustom' + n + 'List');
+                    const a = document.getElementById('eCustom' + n + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+            const list = document.getElementById('eCustom' + nome + 'List');
+            const arrow = document.getElementById('eCustom' + nome + 'Arrow');
+            if (!list) return;
+            const isHidden = list.classList.contains('hidden');
+            if (isHidden) { list.classList.remove('hidden'); arrow.style.transform = 'rotate(180deg)'; }
+            else { list.classList.add('hidden'); arrow.style.transform = 'rotate(0deg)'; }
+        }
 
-        function popularAssuntos(disciplina) {
-            const assuntoSelect = document.getElementById('bAssunto');
-            if (!assuntoSelect) return;
-            assuntoSelect.innerHTML = '';
-            if (disciplina && assuntosPorDisciplina[disciplina]) {
-                assuntoSelect.innerHTML = '<option value="">SELECIONE O ASSUNTO</option>';
-                assuntosPorDisciplina[disciplina].forEach(topic => {
-                    assuntoSelect.innerHTML += `<option value="${topic}">${topic}</option>`;
-                });
+        function selectEItem(nome, selectId, value, label) {
+            const sel = document.getElementById(selectId);
+            if (sel) sel.value = value;
+            document.getElementById('eCustom' + nome + 'Label').textContent = label || value;
+            document.getElementById('eCustom' + nome + 'List').classList.add('hidden');
+            document.getElementById('eCustom' + nome + 'Arrow').style.transform = 'rotate(0deg)';
+            document.querySelectorAll('#eCustom' + nome + 'List div').forEach(d => {
+                d.classList.remove('bg-indigo-50','text-sinapse-primary');
+                d.classList.add('text-[#0B193C]');
+            });
+            const selected = document.querySelector(`#eCustom${nome}List div[data-value="${value}"]`);
+            if (selected) { selected.classList.add('bg-indigo-50','text-sinapse-primary'); selected.classList.remove('text-[#0B193C]'); }
+            if (sel) sel.dispatchEvent(new Event('change'));
+        }
+
+        function buildEList(nome, items, selectId) {
+            const list = document.getElementById('eCustom' + nome + 'List');
+            if (!list) return;
+            list.innerHTML = '';
+            items.forEach(item => {
+                const div = document.createElement('div');
+                div.setAttribute('data-value', item);
+                div.className = 'px-4 py-2.5 text-sm font-bold text-[#0B193C] cursor-pointer hover:bg-indigo-50 hover:text-sinapse-primary transition-colors';
+                div.textContent = item;
+                div.onclick = function() { selectEItem(nome, selectId, item, item); };
+                list.appendChild(div);
+            });
+        }
+
+        // Fechar ao clicar fora
+        document.addEventListener('click', function(e) {
+            ['Disciplina','Assunto','Subassunto'].forEach(nome => {
+                const wrap = document.getElementById('eCustom' + nome + 'Wrap');
+                if (wrap && !wrap.contains(e.target)) {
+                    const l = document.getElementById('eCustom' + nome + 'List');
+                    const a = document.getElementById('eCustom' + nome + 'Arrow');
+                    if (l) l.classList.add('hidden');
+                    if (a) a.style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        // Popula Matérias
+        function ePopularMaterias() {
+            if (typeof listaMaterias === 'undefined') return;
+            const sel = document.getElementById('eDisciplina');
+            listaMaterias.forEach(m => { const o = document.createElement('option'); o.value = m; o.textContent = m; sel.appendChild(o); });
+            buildEList('Disciplina', listaMaterias, 'eDisciplina');
+        }
+
+        // Popula Assuntos
+        function ePopularAssuntos(materia) {
+            const aSel = document.getElementById('eAssunto');
+            const sSel = document.getElementById('eSubassunto');
+            aSel.innerHTML = ''; sSel.innerHTML = '<option value="">SELECIONE O ASSUNTO PRIMEIRO...</option>';
+            document.getElementById('eCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+            document.getElementById('eCustomSubassuntoList').innerHTML = '';
+            if (materia && materiaHierarquia[materia]) {
+                aSel.innerHTML = '<option value="">SELECIONE O ASSUNTO</option>';
+                const assuntos = Object.keys(materiaHierarquia[materia]);
+                assuntos.forEach(a => { aSel.innerHTML += `<option value="${a}">${a}</option>`; });
+                document.getElementById('eCustomAssuntoLabel').textContent = 'SELECIONE O ASSUNTO';
+                buildEList('Assunto', assuntos, 'eAssunto');
             } else {
-                assuntoSelect.innerHTML = '<option value="">SELECIONE A MATÉRIA PRIMEIRO...</option>';
+                aSel.innerHTML = '<option value="">SELECIONE A MATÉRIA PRIMEIRO...</option>';
+                document.getElementById('eCustomAssuntoLabel').textContent = 'SELECIONE A MATÉRIA PRIMEIRO...';
+                document.getElementById('eCustomAssuntoList').innerHTML = '';
+            }
+        }
+
+        // Popula Subassuntos
+        function ePopularSubassuntos(materia, assunto) {
+            const sSel = document.getElementById('eSubassunto');
+            sSel.innerHTML = '';
+            if (materia && assunto && materiaHierarquia[materia] && materiaHierarquia[materia][assunto]) {
+                sSel.innerHTML = '<option value="">SELECIONE O SUBASSUNTO</option>';
+                const subs = materiaHierarquia[materia][assunto];
+                subs.forEach(s => { sSel.innerHTML += `<option value="${s}">${s}</option>`; });
+                document.getElementById('eCustomSubassuntoLabel').textContent = 'SELECIONE O SUBASSUNTO';
+                buildEList('Subassunto', subs, 'eSubassunto');
+            } else {
+                sSel.innerHTML = '<option value="">SELECIONE O ASSUNTO PRIMEIRO...</option>';
+                document.getElementById('eCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
+                document.getElementById('eCustomSubassuntoList').innerHTML = '';
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Listener para auto-popular assuntos
-            const discSelect = document.getElementById('bDisciplina');
-            if (discSelect) {
-                discSelect.addEventListener('change', (e) => {
-                    popularAssuntos(e.target.value);
-                });
-            }
+            ePopularMaterias();
+            document.getElementById('eDisciplina').addEventListener('change', (e) => { ePopularAssuntos(e.target.value); });
+            document.getElementById('eAssunto').addEventListener('change', (e) => {
+                const mat = document.getElementById('eDisciplina').value;
+                ePopularSubassuntos(mat, e.target.value);
+            });
             renderDeficitsHistory();
         });
 
-        function formatéBRLDate(dVal) {
-            // Recebe yyyy-MM-dd
+        function formatBRLDate(dVal) {
             if(!dVal) return "";
             const parts = dVal.split('-');
             if(parts.length !== 3) return dVal;
             return `${parts[2]}/${parts[1]}/${parts[0]}`;
         }
 
-        function gerarEstratéegia() {
-            const disciplina = document.getElementById('bDisciplina').value;
-            const assunto = document.getElementById('bAssunto').value;
+        function gerarEstrategia() {
+            const disciplina = document.getElementById('eDisciplina').value;
+            const assunto = document.getElementById('eAssunto').value;
+            const subassunto = document.getElementById('eSubassunto').value;
 
             if(!disciplina) { alert("Por favor, selecione a matéria!"); return; }
             if(!assunto) { alert("Por favor, selecione o assunto!"); return; }
 
             const today = new Date();
-            // Evitar problemas timezone criando Datéa limpa (meio dia garante isso)
             const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
             
-            const addDaysAndFormaté = (baseDateStr, days) => {
+            const addDays = (baseDateStr, days) => {
                 const parts = baseDateStr.split('-');
                 const d = new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]), 12, 0, 0);
                 d.setDate(d.getDate() + days);
                 return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
             };
 
-            const datéa7 = addDaysAndFormaté(todayStr, 7);
-            const datéa21 = addDaysAndFormaté(todayStr, 21);
-            const datéa60 = addDaysAndFormaté(todayStr, 60);
+            const data7 = addDays(todayStr, 7);
+            const data21 = addDays(todayStr, 21);
+            const data60 = addDays(todayStr, 60);
+            const subLabel = subassunto ? ` (${subassunto})` : '';
 
             if(window.db) {
-                // 1) Registrar não DB de Déficits para o painel
-                window.db.insert('deficits', {
-                    discipline: disciplina,
-                    subject: assunto,
-                    date_registered: todayStr,
-                    r7: datéa7,
-                    r21: datéa21,
-                    r60: datéa60,
-                    status: 'active'
-                });
-
-                // 2) Gerar e empurrar 3 rotinas para a tabela padrão "activities" das Metas Diárias (diario/agenda/home)
+                window.db.insert('deficits', { discipline: disciplina, subject: assunto, subsubject: subassunto || '', date_registered: todayStr, r7: data7, r21: data21, r60: data60, status: 'active' });
                 const pushMeta = (dateStr, days) => {
                     const dObj = new Date(dateStr + "T12:00:00");
-                    window.db.insert('activities', {
-                        user_id: 1, 
-                        title: `Revisão Estratégica (${days}d): ${assunto}`,
-                        description: `Missão autogerada pela Plataforma (Repetição Espaçada). Faça *5 Questões* diretas sobre [${assunto}] da matéria de [${disciplina}]. Essa repetição não ponto de curva de esquecimento gravará o conteúdo na memória de longo prazo.`,
-                        date: dateStr,
-                        time: '18:00', // Põe não final da tarde default
-                        weekday: dObj.getDay(),
-                        activity_type: 'revisão',
-                        discipline: disciplina,
-                        subject: assunto,
-                        priority: 'Alta', // Alta urgencia para blindar falhas
-                        status: 'pendente' 
-                    });
+                    window.db.insert('activities', { user_id: 1, title: `Revisão Estratégica (${days}d): ${assunto}${subLabel}`, description: `Missão autogerada (Repetição Espaçada). Faça 5 Questões sobre [${assunto}] de [${disciplina}].`, date: dateStr, time: '18:00', weekday: dObj.getDay(), activity_type: 'revisão', discipline: disciplina, subject: assunto, subsubject: subassunto || '', priority: 'Alta', status: 'pendente' });
                 };
-
-                pushMeta(datéa7, 7);
-                pushMeta(datéa21, 21);
-                pushMeta(datéa60, 60);
+                pushMeta(data7, 7); pushMeta(data21, 21); pushMeta(data60, 60);
             }
 
-            // UI Actions
-            renderLastStratéegy(disciplina, assunto, datéa7, datéa21, datéa60);
+            renderLastStrategy(disciplina, assunto, data7, data21, data60);
             renderDeficitsHistory();
-            
-            if (typeof confetti === 'function') {
-                confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 }, colors: ['#6366F1', '#10B981'] });
-            }
-            
-            document.getElementById('bAssunto').value = '';
+            if (typeof confetti === 'function') { confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 }, colors: ['#6366F1', '#10B981'] }); }
+            // Reset
+            document.getElementById('eAssunto').value = '';
+            document.getElementById('eCustomAssuntoLabel').textContent = 'SELECIONE O ASSUNTO';
+            document.getElementById('eSubassunto').value = '';
+            document.getElementById('eCustomSubassuntoLabel').textContent = 'SELECIONE O ASSUNTO PRIMEIRO...';
         }
 
-        function renderLastStratéegy(disciplina, assunto, d7, d21, d60) {
-            // Remove empty statée, reveal cards
-            document.getElementById('emptyStratéegyStatée').style.opacity = '0';
-            setTimeout(() => { document.getElementById('emptyStratéegyStatée').style.display = 'none'; }, 300);
-            
-            document.getElementById('headerStratéegyStatée').classList.remove('opacity-0');
-            document.getElementById('cardsStratéegyStatée').classList.remove('opacity-0');
-            document.getElementById('headerStratéegyStatée').classList.add('draft-slide-in');
-            document.getElementById('cardsStratéegyStatée').classList.add('draft-slide-in');
-
-            // Fill Text
+        function renderLastStrategy(disciplina, assunto, d7, d21, d60) {
+            document.getElementById('emptyStrategyState').style.opacity = '0';
+            setTimeout(() => { document.getElementById('emptyStrategyState').style.display = 'none'; }, 300);
+            document.getElementById('headerStrategyState').classList.remove('opacity-0');
+            document.getElementById('cardsStrategyState').classList.remove('opacity-0');
+            document.getElementById('headerStrategyState').classList.add('draft-slide-in');
+            document.getElementById('cardsStrategyState').classList.add('draft-slide-in');
             ['7', '21', '60'].forEach((day, index) => {
                 document.getElementById(`card${day}Subject`).innerText = assunto;
                 document.getElementById(`card${day}Disc`).innerText = disciplina;
-                document.getElementById(`card${day}Date`).innerText = formatéBRLDate([d7, d21, d60][index]);
+                document.getElementById(`card${day}Date`).innerText = formatBRLDate([d7, d21, d60][index]);
             });
         }
 
         function renderDeficitsHistory() {
             const tableBody = document.getElementById('deficitsTableBody');
             const lblCount = document.getElementById('lblDeficitsCount');
-            
             if(!window.db) return;
             let list = window.db.get('deficits') || [];
-            
             lblCount.innerText = list.length;
-
             if(list.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-slate-400 italic mx-auto"><span class="block material-symbols-outlined text-[32px] mb-2 opacity-50 text-center w-full">auto_stories</span> Nenhuma demanda estratégica mapeada. Aproveite para registrar o primeiro déficit.</td></tr>`;
+                tableBody.innerHTML = `<tr><td colspan="7" class="text-center py-10 text-slate-400 italic mx-auto"><span class="block material-symbols-outlined text-[32px] mb-2 opacity-50 text-center w-full">auto_stories</span> Nenhuma demanda estratégica mapeada.</td></tr>`;
                 return;
             }
-
-            // Exibir os mais nãovos em cima
             const sorted = [...list].sort((a,b) => new Date(b.date_registered) - new Date(a.date_registered));
-
             tableBody.innerHTML = sorted.map(item => `
                 <tr class="hover:bg-slate-50 transition-colors group">
-                    <td class="py-4 px-5 whitespace-nãowrap">
-                        <span class="bg-white border border-slate-200 text-slate-600 text-[11px] font-bold px-2.5 py-1.5 rounded shadow-sm">${formatéBRLDate(item.date_registered)}</span>
-                    </td>
-                    <td class="py-4 px-4 whitespace-nãowrap">
-                        <span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2 py-1 rounded max-w-fit uppercase tracking-widest">${item.discipline}</span>
-                    </td>
-                    <td class="py-4 px-4 w-[35%]">
-                        <span class="text-sm font-bold text-[#0B193C] leading-snug line-clamp-2">${item.subject}</span>
-                    </td>
-                    <td class="py-4 px-4 text-center whitespace-nãowrap">
-                        <span class="inline-flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
-                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatéBRLDate(item.r7).slice(0,5)}</span>
-                        </span>
-                    </td>
-                    <td class="py-4 px-4 text-center whitespace-nãowrap">
-                        <span class="inline-flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
-                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatéBRLDate(item.r21).slice(0,5)}</span>
-                        </span>
-                    </td>
-                    <td class="py-4 px-4 text-center whitespace-nãowrap">
-                        <span class="inline-flex flex-col items-center justify-center">
-                            <span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span>
-                            <span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatéBRLDate(item.r60).slice(0,5)}</span>
-                        </span>
-                    </td>
-                    <td class="py-4 px-4 text-center whitespace-nãowrap">
-                        <button onclick="removerdeficit(${item.id})" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all" title="Excluir Ciclo de Repetição">
-                            <span class="material-symbols-outlined text-[18px]">delete</span>
-                        </button>
-                    </td>
+                    <td class="py-4 px-5 whitespace-nowrap"><span class="bg-white border border-slate-200 text-slate-600 text-[11px] font-bold px-2.5 py-1.5 rounded shadow-sm">${formatBRLDate(item.date_registered)}</span></td>
+                    <td class="py-4 px-4 whitespace-nowrap"><span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2 py-1 rounded max-w-fit uppercase tracking-widest">${item.discipline}</span></td>
+                    <td class="py-4 px-4 w-[35%]"><span class="text-sm font-bold text-[#0B193C] leading-snug line-clamp-2">${item.subject}</span>${item.subsubject ? `<span class="block text-[10px] text-slate-400 font-bold mt-0.5">${item.subsubject}</span>` : ''}</td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r7).slice(0,5)}</span></span></td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r21).slice(0,5)}</span></span></td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap"><span class="inline-flex flex-col items-center justify-center"><span class="material-symbols-outlined text-slate-300 text-[18px]">calendar_clock</span><span class="text-[10px] font-bold text-slate-500 mt-0.5">${formatBRLDate(item.r60).slice(0,5)}</span></span></td>
+                    <td class="py-4 px-4 text-center whitespace-nowrap"><button onclick="removerDeficit('${item.id}')" class="text-slate-300 hover:text-red-500 hover:bg-red-50 p-1.5 rounded-lg transition-all" title="Excluir"><span class="material-symbols-outlined text-[18px]">delete</span></button></td>
                 </tr>
             `).join('');
         }
 
         function removerDeficit(id) {
-            if(!confirm("Tem certeza que deseja apagar este ciclo de déficit?\nAtenção: isso não removerá as atéividades que já foram postadas nas Metas Diárias. Você pode excluí-las manualmente lá.")) return;
-
+            if(!confirm("Tem certeza que deseja apagar este ciclo de déficit?")) return;
             window.db.delete('deficits', id);
             renderDeficitsHistory();
         }
     </script>
 
     <script>
-        // Sidebar Toggle
         function toggleSidebar() {
             const aside = document.querySelector('aside');
             const topBar = document.getElementById('topHeaderBar');
             aside.classList.toggle('sidebar-hidden');
             const isHidden = aside.classList.contains('sidebar-hidden');
-            if (isHidden) {
-                topBar.classList.remove('hidden');
-            } else {
-                topBar.classList.add('hidden');
-            }
+            if (isHidden) { topBar.classList.remove('hidden'); } else { topBar.classList.add('hidden'); }
         }
     </script>
 </body>
 </html>
-
-
-
-
-
-
