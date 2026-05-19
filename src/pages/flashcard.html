@@ -63,6 +63,8 @@
         aside.sidebar-hidden { margin-left: -280px; opacity: 0; pointer-events: none; }
     </style>
     <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
 </head>
 <body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
 
@@ -205,7 +207,7 @@
                     <div class="max-w-4xl mx-auto flex justify-center gap-4">
                         <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
                         <button onclick="abrirmodalnãovobaralho()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-[#0B193C] border border-slate-200 hover:bg-slate-50 shadow-sm focus:ring-2 focus:ring-sinapse-primary">Criar Baralho</button>
-                        <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Importar arquivo</button>
+                        <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Importar arquivo</button>
                     </div>
                 </div>
 
@@ -482,6 +484,24 @@
             <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2.5 hover:bg-rose-50 hover:text-rose-600 flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span> Excluir Deck</button>
         </div>
 
+        <!-- MODAL IMPORTAR FLASHCARDS -->
+        <div id="modalImport" class="fixed inset-0 z-[70] hidden opacity-0 transition-opacity duration-300">
+            <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharModalImport()"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform transition-transform duration-300 flex flex-col max-h-[85vh]">
+                <div class="p-6 border-b border-slate-100 flex justify-between items-center shrink-0">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center"><span class="material-symbols-outlined icon-fill">upload_file</span></div>
+                        <div>
+                            <h3 class="font-headline font-extrabold text-xl text-[#0B193C]">Importar Flashcards</h3>
+                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5" id="importStepLabel">Escolha o formato</p>
+                        </div>
+                    </div>
+                    <button onclick="fecharModalImport()" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px]">close</span></button>
+                </div>
+                <div id="importBody" class="p-6 flex-1 overflow-y-auto custom-scrollbar"></div>
+            </div>
+        </div>
+
         <!-- MODAL ESTUDO OTIMIZADO -->
         <div id="modalEstudo" class="fixed inset-0 z-50 hidden opacity-0 transition-opacity duration-300 bg-[#E4F1F5]">
              <!-- Top bar study -->
@@ -570,6 +590,9 @@
     <script src="../../src/js/database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../../src/js/import_csv.js"></script>
+    <script src="../../src/js/import_apkg.js"></script>
+    <script src="../../src/js/import_controller.js"></script>
     <script>
         // ===============================
         // CORE SPA ROUTER & NAVIGATION
