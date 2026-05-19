@@ -467,6 +467,78 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.execCommand('insertHTML', false, '&nbsp;&nbsp;&nbsp;&nbsp;');
             }
         }
+
+        // Backspace / Delete para remover equações inteiras
+        if (e.key === 'Backspace' || e.key === 'Delete') {
+            const sel = window.getSelection();
+            if (!sel.rangeCount || !sel.isCollapsed) return;
+            
+            const anchorNode = sel.anchorNode;
+            const offset = sel.anchorOffset;
+            
+            let formulaToRemove = null;
+            
+            if (e.key === 'Backspace') {
+                // Caso 1: cursor em text node logo após a equação (incluindo zero-width space)
+                if (anchorNode.nodeType === 3) {
+                    const text = anchorNode.textContent;
+                    // Se estamos no início do text node OU o texto é só zero-width space
+                    if (offset <= 1 && (text === '\u200B' || text.trim() === '')) {
+                        const prevSibling = anchorNode.previousSibling;
+                        if (prevSibling && prevSibling.classList && prevSibling.classList.contains('formula-inline-container')) {
+                            formulaToRemove = prevSibling;
+                            // Também remover o text node zero-width
+                            anchorNode.remove();
+                        }
+                    } else if (offset === 0) {
+                        const prevSibling = anchorNode.previousSibling;
+                        if (prevSibling && prevSibling.classList && prevSibling.classList.contains('formula-inline-container')) {
+                            formulaToRemove = prevSibling;
+                        }
+                    }
+                }
+                // Caso 2: cursor num element node antes de um formula-container
+                if (!formulaToRemove && anchorNode.nodeType === 1 && offset > 0) {
+                    const prevChild = anchorNode.childNodes[offset - 1];
+                    if (prevChild && prevChild.classList && prevChild.classList.contains('formula-inline-container')) {
+                        formulaToRemove = prevChild;
+                    }
+                }
+            }
+            
+            if (e.key === 'Delete') {
+                // Caso: cursor antes da equação
+                if (anchorNode.nodeType === 3 && offset === anchorNode.textContent.length) {
+                    const nextSibling = anchorNode.nextSibling;
+                    if (nextSibling && nextSibling.classList && nextSibling.classList.contains('formula-inline-container')) {
+                        formulaToRemove = nextSibling;
+                    }
+                }
+                if (!formulaToRemove && anchorNode.nodeType === 1) {
+                    const nextChild = anchorNode.childNodes[offset];
+                    if (nextChild && nextChild.classList && nextChild.classList.contains('formula-inline-container')) {
+                        formulaToRemove = nextChild;
+                    }
+                }
+            }
+            
+            if (formulaToRemove) {
+                e.preventDefault();
+                // Limpar referência do activeMathField se for este
+                const mf = formulaToRemove.querySelector('math-field');
+                if (mf && activeMathField === mf) activeMathField = null;
+                // Remover zero-width space adjacente se existir
+                const nextNode = formulaToRemove.nextSibling;
+                if (nextNode && nextNode.nodeType === 3 && nextNode.textContent === '\u200B') {
+                    nextNode.remove();
+                }
+                formulaToRemove.remove();
+                // Esconder ribbon se não houver mais campos ativos
+                if (!activeMathField) {
+                    document.getElementById('math-ribbon').classList.add('hidden');
+                }
+            }
+        }
     });
 });
 
