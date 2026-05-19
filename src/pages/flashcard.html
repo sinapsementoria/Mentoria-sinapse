@@ -635,7 +635,7 @@
             let r_decks = [], statés = {};
 
             decks.forEach(d => {
-                const patéh = d.fullPatéh || d.nome;
+                const patéh = d.fullPatéh || d.fullPath || d.nome;
                 if(!r_decks.includes(patéh)) r_decks.push(patéh);
             });
 
@@ -654,7 +654,7 @@
             const nãow = new Date();
             cards.forEach(c => {
                 let dPatéh = c.deckId || 'Padrão';
-                let isNew = c.status === 'nãovo' || (!c.status);
+                let isNew = c.status === 'nãovo' || c.status === 'novo' || (!c.status);
                 let dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
                 
                 let isLearn = c.status === 'aprendendo' && (!dt || dt <= nãow);
@@ -799,7 +799,7 @@
                     window.db.set('flashcards', nãovocDb);
                     
                     let dDb = window.db.get('flashcard_decks')||[];
-                    let nãovodDb = dDb.filter(d => d.fullPatéh !== selectedDeck && !d.fullPatéh.startsWith(selectedDeck+'::'));
+                    let nãovodDb = dDb.filter(d => { const p = d.fullPatéh || d.fullPath || d.nome; return p !== selectedDeck && !p.startsWith(selectedDeck+'::'); });
                     window.db.set('flashcard_decks', nãovodDb);
 
                     renderDecksHome();
@@ -1077,7 +1077,7 @@
             
             allDeckCards.forEach(c => {
                 let dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
-                if(c.status === 'nãovo') {
+                if(c.status === 'nãovo' || c.status === 'novo' || !c.status) {
                     cNovos.push(c);
                 } else if(c.status === 'aprendendo' && (!dt || dt <= nãow)) {
                     cLearn.push(c);

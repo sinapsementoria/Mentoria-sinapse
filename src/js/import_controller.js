@@ -338,7 +338,7 @@ function computeImportStats() {
 
 function checkExistingDecks() {
     const existing = window.db ? (window.db.get('flashcard_decks') || []) : [];
-    const names = existing.map(d => d.fullPath || d.nome);
+    const names = existing.map(d => d.fullPath || d.nome || '').concat(existing.map(d => Object.values(d).find(v => typeof v === 'string' && v.includes('::')) || d.nome || ''));
     return importState.deckNames.filter(n => names.includes(n));
 }
 
