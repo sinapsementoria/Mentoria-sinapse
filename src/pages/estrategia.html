@@ -191,16 +191,16 @@
 
 
 
-        <!-- DASHBOARD CONTENT (SCROLLABLE AREA) -->
-        <div class="flex-1 overflow-y-auto px-10 pt-6 pb-20 max-w-[1500px] mx-auto w-full styled-scrollbar relative z-10">
+        <!-- DASHBOARD CONTENT (FIXED - NO SCROLL) -->
+        <div class="flex-1 overflow-hidden px-10 pt-4 pb-4 max-w-[1500px] mx-auto w-full relative z-10 flex flex-col min-h-0">
             
 
 
             <!-- SECTION: BUILDER E ESTRATEGIA -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 min-h-0 mb-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 min-h-0">
                     
                 <!-- COLUNA ESQUERDA: INPUT PANEL -->
-                <div class="lg:col-span-4 flex flex-col gap-5">
+                <div class="lg:col-span-4 flex flex-col gap-4 min-h-0">
                     <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col min-h-0 relative h-full">
                         <div class="mb-6">
                             <div class="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 text-rose-500 text-[10px] uppercase font-extrabold tracking-widest rounded-lg mb-4">
@@ -255,7 +255,7 @@
                 </div>
 
                 <!-- COLUNA DIREITA: ESTRATÃ‰GIA GERADA E CONCLUÍDOS -->
-                <div class="lg:col-span-8 flex flex-col overflow-hidden min-h-0 bg-transparent">
+                <div class="lg:col-span-8 flex flex-col overflow-hidden min-h-0 gap-4">
                     
                     <!-- Ãšltima estratégia programada -->
                     <div class="bg-white rounded-[24px] p-6 shadow-premium border border-slate-100 flex flex-col mb-8 relative overflow-hidden h-[300px]" id="lastStratéegyDisplay">
@@ -344,7 +344,7 @@
                     </div>
 
                     <!-- BANCO DE HISTÃ“RICO DE DÃ‰FICITS -->
-                    <div class="glass-panel rounded-[24px] shadow-premium p-8 overflow-hidden flex-1 border border-slate-100 bg-white">
+                    <div class="glass-panel rounded-[24px] shadow-premium p-6 flex-1 border border-slate-100 bg-white flex flex-col overflow-hidden min-h-0">
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-[17px] font-headline font-extrabold text-[#0B193C] flex items-center gap-2">
                                 <span class="material-symbols-outlined text-slate-400 icon-fill">table_chart</span>
@@ -355,7 +355,7 @@
                             </div>
                         </div>
                         
-                        <div class="w-full overflow-x-auto rounded-xl border border-slate-100">
+                        <div class="w-full overflow-auto rounded-xl border border-slate-100 flex-1 min-h-0 styled-scrollbar">
                             <table class="w-full text-left border-collapse">
                                 <thead>
                                     <tr class="bg-slate-50/80 border-b border-slate-100 text-[10px] font-extrabold text-slate-400 uppercase tracking-widest">
