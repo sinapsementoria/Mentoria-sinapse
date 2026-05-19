@@ -189,6 +189,8 @@ window.formatDoc = function(cmd, val = null) {
             // Aplicar comando básico (execCommand lida com seleção ou ponto de inserção)
             document.execCommand(cmd, false, val);
         } else if (cmd === 'fontSize') {
+            // Verificar se há equação ativa/selecionada primeiro
+            if (applyFontSizeToEquation(val)) return;
             // Document.execCommand('fontSize') só aceita 1-7. 
             // Implementação robusta para PX (Regra 5)
             const selection = window.getSelection();
@@ -555,9 +557,48 @@ window.changeFontSize = function(delta) {
     if (nextIdx >= 0 && nextIdx < scale.length) {
         const newVal = scale[nextIdx] + 'px';
         select.value = newVal;
+        
+        // Verificar se há equação ativa ou selecionada
+        if (applyFontSizeToEquation(newVal)) return;
+        
         window.formatDoc('fontSize', newVal);
     }
 };
+
+// Aplica fontSize em equações (math-field) ativas ou selecionadas
+function applyFontSizeToEquation(sizeVal) {
+    // Caso 1: math-field ativo em foco
+    if (activeMathField) {
+        activeMathField.style.fontSize = sizeVal;
+        const container = activeMathField.closest('.formula-inline-container');
+        if (container) container.style.fontSize = sizeVal;
+        return true;
+    }
+    
+    // Caso 2: seleção contém equações
+    const sel = window.getSelection();
+    if (!sel.rangeCount) return false;
+    
+    const range = sel.getRangeAt(0);
+    const editor = document.getElementById('editorContent');
+    if (!editor) return false;
+    
+    // Verificar se a seleção inclui formula-inline-container
+    let found = false;
+    const containers = editor.querySelectorAll('.formula-inline-container');
+    containers.forEach(container => {
+        if (range.intersectsNode(container)) {
+            const mf = container.querySelector('math-field');
+            if (mf) {
+                mf.style.fontSize = sizeVal;
+                container.style.fontSize = sizeVal;
+                found = true;
+            }
+        }
+    });
+    
+    return found;
+}
 
 // Atualizar botões ativos na barra (Regra 27 - Active Stat)
 window.updateToolbarState = function() {
