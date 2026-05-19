@@ -27,9 +27,12 @@ function createCardHTML(task) {
         'Geral':       { primary: '#374151', secondary: '#64748b', bg: 'rgba(55, 65, 81, 0.05)', icon: 'task_alt' }
     };
 
+    const hasSubject = task.subsubject && task.subsubject.trim();
+    const cardHeight = hasSubject ? '170px' : '145px';
+
     return `
     <div class="kanban-card group bg-white rounded-2xl p-4 shadow-sm border border-slate-200 flex flex-col flex-shrink-0 hover:border-[#00B5B5]/50 hover:shadow-md transition-all duration-300 relative overflow-hidden ${isConcluido ? 'opacity-60 grayscale-[0.3]' : ''}"
-         style="min-height: 145px !important; height: 145px !important; margin-bottom: 8px; width: 100% !important;"
+         style="min-height: ${cardHeight} !important; height: ${cardHeight} !important; margin-bottom: 8px; width: 100% !important;"
          data-id="${task.id || ''}" data-isdb="${task.dbRecord ? 'true' : 'false'}">
          
         <!-- Barra Superior Unificada (Padrão Imagem) -->
@@ -49,10 +52,11 @@ function createCardHTML(task) {
             </button>
 
             <!-- Título da Atividade (Azul Escuro) -->
-            <div class="w-full flex-1 flex items-center justify-center mb-3">
+            <div class="w-full flex-1 flex flex-col items-center justify-center ${hasSubject ? 'mb-1' : 'mb-3'}">
                 <h4 class="text-[10px] font-black text-[#0B193C] leading-tight px-1 uppercase tracking-tight break-words w-full overflow-hidden line-clamp-2" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;">
                     ${task.title || task.subject || 'Sem Título'}
                 </h4>
+                ${hasSubject ? `<p class="text-[8px] font-bold text-slate-400 uppercase tracking-wide mt-0.5 px-1 truncate w-full" title="${task.subsubject}">${task.subsubject}</p>` : ''}
             </div>
 
             <!-- Botões de Ação -->
@@ -1503,6 +1507,7 @@ function renderWeeklyAgenda() {
                     dbRecord: true,
                     tag: a.discipline,
                     title: a.subject,
+                    subsubject: a.subsubject || '',
                     priority: a.priority || 'média',
                     status: a.status === 'concluída' || a.status === 'concluida'
                         ? 'Concluído'
