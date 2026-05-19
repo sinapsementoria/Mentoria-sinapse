@@ -594,7 +594,7 @@
             }
             const sorted = [...list].sort((a,b) => new Date(b.date_registered) - new Date(a.date_registered));
             container.innerHTML = sorted.map(item => `
-                <div class="p-4 bg-slate-50/80 rounded-xl border border-slate-200 flex items-center justify-between gap-4 draft-slide-in hover:bg-slate-100/80 transition-colors group">
+                <div class="p-4 bg-[#D5F0ED] rounded-xl border border-[#B8E4DE] flex items-center justify-between gap-4 draft-slide-in shadow-sm hover:bg-[#C8EBE6] transition-colors group">
                     <div class="flex items-center gap-4 flex-1 min-w-0">
                         <span class="text-[11px] font-bold text-slate-500 bg-white border border-slate-200 px-3 py-1.5 rounded-lg shadow-sm whitespace-nowrap flex-none">${formatBRLDate(item.date_registered)}</span>
                         <span class="text-[9px] font-extrabold bg-[#0B193C] text-white px-2.5 py-1 rounded tracking-widest uppercase whitespace-nowrap flex-none">${item.discipline}</span>
