@@ -137,6 +137,11 @@ window.markTaskCard = function(event, btn, stat) {
             window.db.update('activities', id, { status: 'nao_concluido' });
             if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
         }
+    } else if (stat === 'pendente') {
+        if (isDb && window.db) {
+            window.db.update('activities', id, { status: 'pendente' });
+            if (window.refreshMentoriaKPIs) window.refreshMentoriaKPIs();
+        }
     } else if (stat === 'desfazer') {
         if (isDb && window.db) {
             window.db.update('activities', id, { status: 'pendente' });
@@ -145,6 +150,29 @@ window.markTaskCard = function(event, btn, stat) {
     }
 
     renderWeeklyAgenda();
+};
+
+// Atualiza KPIs da mentoria em tempo real após concluir/reabrir metas
+window.refreshMentoriaKPIs = function() {
+    if (!window.db || !window.db.getAcademicSummary) return;
+    
+    const globais = window.db.getAcademicSummary();
+    
+    // Atualizar KPI: Conclusão de Metas
+    const metasNode = document.getElementById('hubDisplayMetas');
+    const metasBar = document.getElementById('kpiBarMetas');
+    if (metasNode) {
+        metasNode.innerText = globais.conclusaoMetas;
+        if (metasBar) metasBar.style.width = Math.min(parseFloat(globais.conclusaoMetas) || 0, 100) + '%';
+    }
+    
+    // Atualizar KPI: Desempenho Geral
+    const desempenhoNode = document.getElementById('hubDisplayDesempenho');
+    const desempenhoBar = document.getElementById('kpiBarDesempenho');
+    if (desempenhoNode && globais.acertosGlobal !== undefined) {
+        desempenhoNode.innerText = globais.acertosGlobal;
+        if (desempenhoBar) desempenhoBar.style.width = Math.min(parseFloat(globais.acertosGlobal) || 0, 100) + '%';
+    }
 };
 
 // --- LOGICA DO EDITOR DE ESTUDOS (ULTRA PREMIUM) ---

@@ -200,7 +200,7 @@ function getAcademicSummary() {
     // 4. Conclusão de Metas (activities)
     const activities = db['activities'] || [];
     let metasTotal = activities.length;
-    let metasConcluidas = activities.filter(a => a.status === 'concluida').length;
+    let metasConcluidas = activities.filter(a => a.status === 'concluida' || a.status === 'concluída').length;
     let conclusaoPercent = metasTotal > 0 ? Math.round((metasConcluidas / metasTotal) * 100) : 0;
     
     let summary = {
