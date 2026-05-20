@@ -318,7 +318,7 @@ function renderBrowserPreview(card) {
         <!-- Card Content Area (fundo escuro) -->
         <div class="flex-1 flex flex-col overflow-y-auto custom-scrollbar" style="background:#2a2a2a">
             <!-- Frente \u2014 centralizada -->
-            <div class="flex-1 flex items-start justify-center px-6 pt-10 pb-4">
+            <div class="flex-1 flex items-start justify-center px-5 pt-6 pb-3">
                 <div class="text-center text-[15px] font-medium leading-relaxed break-words max-w-full" style="color:rgba(255,255,255,0.9)">${card.front || '<span style="color:#666;font-style:italic">Sem conte\u00fado</span>'}</div>
             </div>
 
@@ -328,7 +328,7 @@ function renderBrowserPreview(card) {
             </div>
 
             <!-- Verso \u2014 inicialmente oculto -->
-            <div id="previewVersoArea" class="flex-1 flex items-start justify-center px-6 pt-4 pb-6" style="display:none">
+            <div id="previewVersoArea" class="flex-1 flex items-start justify-center px-5 pt-3 pb-4" style="display:none">
                 <div class="text-center text-[14px] font-normal leading-relaxed break-words max-w-full" style="color:#ccc">${card.back || '<span style="color:#666;font-style:italic">Sem conte\u00fado</span>'}</div>
             </div>
 
@@ -350,7 +350,7 @@ function renderBrowserPreview(card) {
         </div>
 
         <!-- Bottom Controls (estilo Anki) -->
-        <div class="px-3 py-2.5 flex items-center justify-between shrink-0" style="background:#1e1e1e;border-top:1px solid #333">
+        <div class="px-3 py-1.5 flex items-center justify-between shrink-0" style="background:#1e1e1e;border-top:1px solid #333">
             <div class="flex gap-1.5">
                 <button onclick="togglePreviewVerso()" id="btnToggleVerso" class="px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors" style="background:#333;border:1px solid #555;color:#ccc">
                     Mostrar Verso
