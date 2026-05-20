@@ -527,12 +527,21 @@
             </div>
         </div>
 
-        <!-- CONTEXT MENU BARALHOS -->
-        <div id="deckContextMenu" class="hidden absolute z-50 bg-white border border-slate-200 shadow-premium rounded-xl w-48 py-2 text-sm font-bold text-slate-600 flex flex-col overflow-hidden">
-            <button onclick="contextmenuaction('estudar')" class="text-left px-4 py-2.5 hover:bg-indigo-50 hover:text-indigo-600 flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">play_circle</span> Estudar Agora</button>
-            <button onclick="contextmenuaction('adicionar')" class="text-left px-4 py-2.5 hover:bg-slate-50 hover:text-[#0B193C] flex items-center gap-2 border-b border-slate-100 transition-colors"><span class="material-symbols-outlined text-[18px]">add</span> Adicionar Card</button>
-            <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2.5 hover:bg-slate-50 hover:text-[#0B193C] flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">edit</span> Renomear</button>
-            <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2.5 hover:bg-rose-50 hover:text-rose-600 flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[18px]">delete</span> Excluir Deck</button>
+        <!-- CONTEXT MENU BARALHOS (Estilo Anki dark) -->
+        <div id="deckContextMenu" class="hidden absolute z-50 rounded-lg w-44 py-1 flex flex-col overflow-hidden" style="background:#2d2d2d;border:1px solid #444;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+            <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
+                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">edit</span> Renomear
+            </button>
+            <button onclick="contextmenuaction('opcoes')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
+                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">tune</span> Opções
+            </button>
+            <button onclick="contextmenuaction('exportar')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
+                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">download</span> Exportar
+            </button>
+            <div style="border-top:1px solid #444;margin:2px 8px"></div>
+            <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#ef4444" onmouseover="this.style.background='rgba(239,68,68,0.12)'" onmouseout="this.style.background='transparent'">
+                <span class="material-symbols-outlined text-[16px]">delete</span> Excluir
+            </button>
         </div>
 
         <!-- MODAL IMPORTAR FLASHCARDS -->
@@ -1013,12 +1022,15 @@
 
         function contextMenuAction(a) {
             document.getElementById('deckContextMenu').classList.add('hidden');
-            if(a==='estudar') return abEstudo(selectedDeck);
-            if(a==='adicionar') { switchTab(1); setTimeout(() => { document.getElementById('addDeck').value = selectedDeck; }, 50); return; }
             if(a==='renomear') return abrirModalNovoBaralho(selectedDeck);
+            if(a==='opcoes') return abrirModalOpcoesDeck(selectedDeck);
+            if(a==='exportar') return exportarDeck(selectedDeck);
             if(a==='excluir') {
-                if(confirm(`ATENÇÃO!\nTem certeza que deseja apagar o baralho "${selectedDeck}" e TODOS os seus cartões?`)){
-                    let cDb = window.db.get('flashcards')||[];
+                // Contar cartões antes de confirmar
+                let cDb = window.db ? window.db.get('flashcards') || [] : [];
+                let count = cDb.filter(c => c.deckId === selectedDeck || (c.deckId && c.deckId.startsWith(selectedDeck+'::'))).length;
+                
+                if(confirm(`ATENÇÃO!\n\nTem certeza que deseja apagar o baralho "${selectedDeck}" e TODOS os seus ${count} cartão(ões)?\n\nEsta ação não pode ser desfeita.`)){
                     let nãovocDb = cDb.filter(c => c.deckId !== selectedDeck && !c.deckId.startsWith(selectedDeck+'::'));
                     window.db.set('flashcards', nãovocDb);
                     
@@ -1026,9 +1038,132 @@
                     let nãovodDb = dDb.filter(d => { const p = d.fullPatéh || d.fullPath || d.nome; return p !== selectedDeck && !p.startsWith(selectedDeck+'::'); });
                     window.db.set('flashcard_decks', nãovodDb);
 
+                    showToast(`Baralho "${selectedDeck}" excluído com ${count} cartão(ões)`, 'success');
                     renderDecksHome();
                 }
             }
+        }
+
+        // ===== OPÇÕES DO BARALHO =====
+        function abrirModalOpcoesDeck(deckPath) {
+            let cDb = window.db ? window.db.get('flashcards') || [] : [];
+            let deckCards = cDb.filter(c => c.deckId === deckPath || (c.deckId && c.deckId.startsWith(deckPath+'::')));
+            let totalCards = deckCards.length;
+            let newCards = deckCards.filter(c => c.status === 'novo' || c.status === 'nãovo' || !c.status).length;
+            let learnCards = deckCards.filter(c => c.status === 'aprendendo').length;
+            let reviewCards = deckCards.filter(c => c.status === 'revisao').length;
+            let createdDates = deckCards.map(c => c.created_at || c['created_até']).filter(Boolean).sort();
+            let oldest = createdDates.length ? new Date(createdDates[0]).toLocaleDateString('pt-BR') : '—';
+            let newest = createdDates.length ? new Date(createdDates[createdDates.length-1]).toLocaleDateString('pt-BR') : '—';
+            let tags = [...new Set(deckCards.flatMap(c => c.tags || []))];
+
+            let m = document.createElement('div');
+            m.id = 'modalOpcoesDeck';
+            m.className = 'fixed inset-0 z-[80] flex items-center justify-center';
+            m.style.cssText = 'background:rgba(0,0,0,0.5);backdrop-filter:blur(4px)';
+            m.onclick = function(e) { if(e.target === m) m.remove(); };
+            m.innerHTML = `
+                <div class="w-full max-w-md rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.4)]" style="background:#2a2a2a;border:1px solid #3a3a3a">
+                    <!-- Header -->
+                    <div class="px-5 py-3.5 flex items-center justify-between" style="background:#8b5e7a">
+                        <h3 class="text-[14px] font-bold flex items-center gap-2" style="color:rgba(255,255,255,0.95)">
+                            <span class="material-symbols-outlined text-[18px]">tune</span> Opções do Baralho
+                        </h3>
+                        <button onclick="this.closest('#modalOpcoesDeck').remove()" class="w-6 h-6 rounded flex items-center justify-center" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)">
+                            <span class="material-symbols-outlined text-[14px]">close</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Deck name -->
+                    <div class="px-5 py-3 flex items-center gap-3" style="border-bottom:1px solid #3a3a3a">
+                        <span class="material-symbols-outlined text-[20px]" style="color:#60a5fa">style</span>
+                        <div>
+                            <p class="text-[11px] font-bold uppercase tracking-wider" style="color:#888">Baralho</p>
+                            <p class="text-[15px] font-bold" style="color:#eee">${deckPath}</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="px-5 py-4 grid grid-cols-3 gap-3" style="border-bottom:1px solid #3a3a3a">
+                        <div class="text-center">
+                            <p class="text-[20px] font-extrabold" style="color:#60a5fa">${newCards}</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wider" style="color:#888">Novos</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-[20px] font-extrabold" style="color:#f59e0b">${learnCards}</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wider" style="color:#888">Aprendendo</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-[20px] font-extrabold" style="color:#34d399">${reviewCards}</p>
+                            <p class="text-[10px] font-bold uppercase tracking-wider" style="color:#888">Revisão</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Info details -->
+                    <div class="px-5 py-3 space-y-2.5" style="border-bottom:1px solid #3a3a3a">
+                        <div class="flex justify-between text-[12px]">
+                            <span style="color:#888" class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">layers</span>Total de cartões</span>
+                            <span class="font-bold" style="color:#ccc">${totalCards}</span>
+                        </div>
+                        <div class="flex justify-between text-[12px]">
+                            <span style="color:#888" class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">calendar_today</span>Criado mais antigo</span>
+                            <span class="font-bold" style="color:#ccc">${oldest}</span>
+                        </div>
+                        <div class="flex justify-between text-[12px]">
+                            <span style="color:#888" class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">event</span>Criado mais recente</span>
+                            <span class="font-bold" style="color:#ccc">${newest}</span>
+                        </div>
+                        ${tags.length ? `<div class="flex justify-between text-[12px] items-start">
+                            <span style="color:#888" class="flex items-center gap-1.5 shrink-0"><span class="material-symbols-outlined text-[14px]">sell</span>Etiquetas</span>
+                            <div class="flex flex-wrap gap-1 justify-end">${tags.map(t => `<span class="px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:rgba(255,255,255,0.08);color:#aaa;border:1px solid rgba(255,255,255,0.1)">${t}</span>`).join('')}</div>
+                        </div>` : ''}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="px-5 py-3 flex gap-2">
+                        <button onclick="this.closest('#modalOpcoesDeck').remove(); contextMenuAction('renomear')" class="flex-1 py-2 rounded-lg text-[12px] font-bold flex items-center justify-center gap-1.5 transition-colors" style="background:#333;border:1px solid #555;color:#ccc" onmouseover="this.style.background='#444'" onmouseout="this.style.background='#333'">
+                            <span class="material-symbols-outlined text-[14px]">edit</span> Renomear
+                        </button>
+                        <button onclick="this.closest('#modalOpcoesDeck').remove(); contextMenuAction('exportar')" class="flex-1 py-2 rounded-lg text-[12px] font-bold flex items-center justify-center gap-1.5 transition-colors" style="background:#333;border:1px solid #555;color:#ccc" onmouseover="this.style.background='#444'" onmouseout="this.style.background='#333'">
+                            <span class="material-symbols-outlined text-[14px]">download</span> Exportar
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(m);
+        }
+
+        // ===== EXPORTAR BARALHO (CSV) =====
+        function exportarDeck(deckPath) {
+            let cDb = window.db ? window.db.get('flashcards') || [] : [];
+            let deckCards = cDb.filter(c => c.deckId === deckPath || (c.deckId && c.deckId.startsWith(deckPath+'::')));
+            
+            if (deckCards.length === 0) {
+                showToast('Este baralho não possui cartões para exportar.', 'error');
+                return;
+            }
+
+            // Build CSV
+            let csvRows = ['Frente\tVerso\tBaralho\tTags\tStatus'];
+            deckCards.forEach(c => {
+                let front = (c.front || '').replace(/\t/g, ' ').replace(/\n/g, '<br>');
+                let back = (c.back || '').replace(/\t/g, ' ').replace(/\n/g, '<br>');
+                let deck = c.deckId || 'Default';
+                let tags = (c.tags || []).join(' ');
+                let status = c.status || 'novo';
+                csvRows.push(`${front}\t${back}\t${deck}\t${tags}\t${status}`);
+            });
+
+            let csvContent = csvRows.join('\n');
+            let blob = new Blob(['\uFEFF' + csvContent], { type: 'text/csv;charset=utf-8;' });
+            let url = URL.createObjectURL(blob);
+            let a = document.createElement('a');
+            a.href = url;
+            a.download = `${deckPath.replace(/::/g, '_')}_export.csv`;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            showToast(`${deckCards.length} cartão(ões) exportados com sucesso!`, 'success');
         }
 
         // ===============================
