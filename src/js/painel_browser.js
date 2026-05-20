@@ -50,15 +50,16 @@ function renderBrowserSidebar(cards, now) {
     const todayStr = now.toISOString().substring(0, 10);
 
     cards.forEach(c => {
-        const isNew = c.status === 'novo' || !c.status;
+        const st = normalizeStatus(c.status);
         const dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
-        if (isNew) counts.novo++;
-        else if (c.status === 'aprendendo') counts.aprendendo++;
-        else if (c.status === 'revisao') {
+        if (st === 'novo') counts.novo++;
+        else if (st === 'aprendendo') counts.aprendendo++;
+        else if (st === 'revisao') {
             counts.revisao++;
             if (dt && dt < now) counts.atrasado++;
         }
-        if (c.created_at && c.created_at.substring(0, 10) === todayStr) counts.hoje++;
+        const cat = getCreatedAt(c);
+        if (cat && cat.substring(0, 10) === todayStr) counts.hoje++;
         if (c.ultimoEstudoEm && c.ultimoEstudoEm.substring(0, 10) === todayStr) counts.estudados++;
     });
 
@@ -129,11 +130,11 @@ function renderBrowserCounters(cards, now) {
     const todayStr = now.toISOString().substring(0, 10);
     let novo = 0, aprender = 0, revisar = 0, atrasado = 0;
     cards.forEach(c => {
-        const isNew = c.status === 'novo' || !c.status;
+        const st = normalizeStatus(c.status);
         const dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
-        if (isNew) novo++;
-        else if (c.status === 'aprendendo') aprender++;
-        else if (c.status === 'revisao') {
+        if (st === 'novo') novo++;
+        else if (st === 'aprendendo') aprender++;
+        else if (st === 'revisao') {
             revisar++;
             if (dt && dt < now) atrasado++;
         }
@@ -163,14 +164,14 @@ function applyBrowserFilters(cards, now) {
 
     // Quick filter
     if (currentQuickFilter && currentQuickFilter !== 'all') {
-        if (currentQuickFilter === 'novo') filtered = filtered.filter(c => c.status === 'novo' || !c.status);
-        else if (currentQuickFilter === 'aprendendo') filtered = filtered.filter(c => c.status === 'aprendendo');
-        else if (currentQuickFilter === 'revisao') filtered = filtered.filter(c => c.status === 'revisao');
+        if (currentQuickFilter === 'novo') filtered = filtered.filter(c => normalizeStatus(c.status) === 'novo');
+        else if (currentQuickFilter === 'aprendendo') filtered = filtered.filter(c => normalizeStatus(c.status) === 'aprendendo');
+        else if (currentQuickFilter === 'revisao') filtered = filtered.filter(c => normalizeStatus(c.status) === 'revisao');
         else if (currentQuickFilter === 'atrasado') filtered = filtered.filter(c => {
             const dt = c.proximaRevisaoEm ? new Date(c.proximaRevisaoEm) : null;
-            return c.status === 'revisao' && dt && dt < now;
+            return normalizeStatus(c.status) === 'revisao' && dt && dt < now;
         });
-        else if (currentQuickFilter === 'hoje') filtered = filtered.filter(c => c.created_at && c.created_at.substring(0, 10) === todayStr);
+        else if (currentQuickFilter === 'hoje') filtered = filtered.filter(c => { const cat = getCreatedAt(c); return cat && cat.substring(0, 10) === todayStr; });
         else if (currentQuickFilter === 'estudados') filtered = filtered.filter(c => c.ultimoEstudoEm && c.ultimoEstudoEm.substring(0, 10) === todayStr);
     }
 
@@ -237,7 +238,8 @@ function renderBrowserCards(cards) {
         const backText = stripHTMLText(c.back || '');
         const deckShort = c.deckId ? c.deckId.split('::').pop() : 'Default';
         const revisao = c.proximaRevisaoEm ? formatRelativeDate(new Date(c.proximaRevisaoEm), now) : '—';
-        const criado = c.created_at ? c.created_at.substring(0, 10).split('-').reverse().join('/') : '—';
+        const cat = getCreatedAt(c);
+        const criado = cat ? cat.substring(0, 10).split('-').reverse().join('/') : '—';
 
         return `
         <tr class="border-b border-slate-100 transition-colors cursor-pointer group ${isSelected ? 'bg-indigo-50/80 border-l-2 border-l-indigo-400' : 'hover:bg-slate-50/80'}" onclick="selectBrowserCard('${c.id}')">
@@ -285,7 +287,7 @@ function renderBrowserPreview(card) {
     const now = new Date();
     const statusInfo = getStatusInfo(card, now);
     const revisao = card.proximaRevisaoEm ? new Date(card.proximaRevisaoEm).toLocaleDateString('pt-BR') : 'Não agendada';
-    const criado = card.created_at ? new Date(card.created_at).toLocaleDateString('pt-BR') : '—';
+    const criado = getCreatedAt(card) ? new Date(getCreatedAt(card)).toLocaleDateString('pt-BR') : '—';
     const tags = (card.tags || []);
 
     panel.innerHTML = `
@@ -398,12 +400,27 @@ function toggleBrowserSort(field) {
 }
 
 // ===== UTILIDADES =====
+// Normaliza status que pode estar corrompido pelo encoding (ex: 'nãovo' -> 'novo')
+function normalizeStatus(status) {
+    if (!status) return 'novo';
+    const s = status.toLowerCase().trim();
+    if (s === 'novo' || s === 'n\u00e3ovo' || s === 'nãovo' || s.includes('ovo')) return 'novo';
+    if (s === 'aprendendo') return 'aprendendo';
+    if (s === 'revisao' || s === 'revis\u00e3o' || s === 'revisão') return 'revisao';
+    return 'novo';
+}
+
+// Pega o campo created_at, que pode estar como created_até (encoding corrompido)
+function getCreatedAt(card) {
+    return card.created_at || card['created_at\u00e9'] || card['created_até'] || null;
+}
+
 function getStatusInfo(card, now) {
-    const isNew = card.status === 'novo' || !card.status;
+    const st = normalizeStatus(card.status);
     const dt = card.proximaRevisaoEm ? new Date(card.proximaRevisaoEm) : null;
-    if (isNew) return { text: 'Novo', cls: 'text-sky-600 bg-sky-50 border border-sky-200' };
-    if (card.status === 'aprendendo') return { text: 'Aprender', cls: 'text-amber-600 bg-amber-50 border border-amber-200' };
-    if (card.status === 'revisao') {
+    if (st === 'novo') return { text: 'Novo', cls: 'text-sky-600 bg-sky-50 border border-sky-200' };
+    if (st === 'aprendendo') return { text: 'Aprender', cls: 'text-amber-600 bg-amber-50 border border-amber-200' };
+    if (st === 'revisao') {
         if (dt && dt < now) return { text: 'Atrasado', cls: 'text-rose-600 bg-rose-50 border border-rose-200' };
         return { text: 'Revisar', cls: 'text-emerald-600 bg-emerald-50 border border-emerald-200' };
     }

@@ -321,9 +321,9 @@
                             <div class="p-3 border-b border-slate-100 flex items-center gap-3 bg-white z-10 shrink-0">
                                 <div class="relative flex-1 group">
                                     <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors text-[18px]">search</span>
-                                    <input id="browserSearchInput" type="text" placeholder="Pesquisar em toda a cole\u00e7\u00e3o: frente, verso, baralho ou etiqueta..." 
+                                    <input id="browserSearchInput" type="text" placeholder="Pesquisar em toda a coleção: frente, verso, baralho ou etiqueta..." 
                                         class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 font-medium text-[13px] outline-none focus:border-indigo-400 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all shadow-sm placeholder:text-slate-300"
-                                        oninput="onBrowserSearch(this.value)" onkeydown="if(event.key==='Escape'){this.value=\'\';onBrowserSearch(\'\');}">
+                                        oninput="onBrowserSearch(this.value)" onkeydown="if(event.key==='Escape'){this.value='';onBrowserSearch('');}">
                                 </div>
                             </div>
                             
@@ -348,7 +348,7 @@
                                             <th class="px-3 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('created_at')">
                                                 Criado <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
                                             </th>
-                                            <th class="px-3 py-3 font-medium w-[70px]">A\u00e7\u00f5es</th>
+                                            <th class="px-3 py-3 font-medium w-[70px]">Ações</th>
                                         </tr>
                                     </thead>
                                     <tbody id="browserTableBody" class="divide-y divide-slate-100 text-slate-700 font-medium cursor-pointer">
@@ -360,7 +360,7 @@
                             <!-- Quick Edit Panel (overlay) -->
                             <div id="quickEditPanel" class="absolute top-0 bottom-0 right-0 w-[450px] bg-white border-l border-slate-200 shadow-[0_0_40px_rgba(0,0,0,0.08)] transform translate-x-full transition-transform duration-300 ease-out flex flex-col z-20">
                                 <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                                    <h3 class="font-headline font-extrabold text-lg text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined icon-fill text-sinapse-primary">edit_square</span> Editor R\u00e1pido</h3>
+                                    <h3 class="font-headline font-extrabold text-lg text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined icon-fill text-sinapse-primary">edit_square</span> Editor Rápido</h3>
                                     <button onclick="fecharquickedit()" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px]">close</span></button>
                                 </div>
                                 <div class="p-6 flex-1 overflow-y-auto space-y-5 custom-scrollbar">
@@ -388,8 +388,8 @@
                         <div id="browserPreview" class="w-72 bg-white border-l border-slate-200 flex flex-col h-full overflow-hidden shrink-0">
                             <div class="flex-1 flex flex-col items-center justify-center text-center p-6">
                                 <span class="material-symbols-outlined text-[56px] text-slate-200 mb-3">preview</span>
-                                <p class="font-bold text-slate-400 text-sm mb-1">Selecione um cart\u00e3o</p>
-                                <p class="text-[11px] text-slate-400">Clique em um cart\u00e3o na tabela para visualizar.</p>
+                                <p class="font-bold text-slate-400 text-sm mb-1">Selecione um cartão</p>
+                                <p class="text-[11px] text-slate-400">Clique em um cartão na tabela para visualizar.</p>
                             </div>
                         </div>
                     </div>
@@ -977,7 +977,7 @@
             document.getElementById('quickEditPanel').classList.add('translate-x-full');
         }
         function excluirCartao(id) {
-            if(confirm('Tem certeza que deseja excluir este cart\u00e3o?')) {
+            if(confirm('Tem certeza que deseja excluir este cartão?')) {
                 let cards = window.db ? window.db.get('flashcards')||[] : [];
                 window.db.set('flashcards', cards.filter(c=>c.id!==id));
                 fecharQuickEdit();
