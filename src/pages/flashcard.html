@@ -1419,6 +1419,10 @@
         window.abrirmodalnovobaralho = abrirModalNovoBaralho;
         window.fecharmodalnovobaralho = fecharModalNovoBaralho;
         window.salvargeralbaralho = salvarGeralBaralho;
+        // Aliases com encoding corrompido (ão) que o HTML usa nos onclick
+        window['abrirmodalnãovobaralho'] = abrirModalNovoBaralho;
+        window['fecharmodalnãovobaralho'] = fecharModalNovoBaralho;
+        window['salvargeralbaralho'] = salvarGeralBaralho;
         // Padrão Anki: currentTagFilter
         window.currenttagfilter = null;
         Object.defineProperty(window, 'currenttagfilter', {
