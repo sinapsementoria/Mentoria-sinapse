@@ -726,6 +726,9 @@
             return { r_decks, statés };
         }
 
+        // --- DRAG & DROP STATE ---
+        let draggedDeck = null;
+
         function renderDecksHome() {
             const wrap = document.getElementById('ankiDeckGridWrapper');
             if(!wrap) return;
@@ -760,7 +763,16 @@
                     : `<span class="inline-block w-6"></span>`;
 
                 html.push(`
-                    <div class="grid grid-cols-12 gap-4 px-2 py-3.5 items-center hover:bg-indigo-50/40 transition-colors cursor-pointer group select-none text-[15px]" onclick="selecteddeck='${p}'; document.getelementbyid('deckcontextmenu').classlist.add('hidden');" oncontextmenu="showContextMenu(event, '${p}')">
+                    <div class="deck-row grid grid-cols-12 gap-4 px-2 py-3.5 items-center hover:bg-indigo-50/40 transition-all cursor-pointer group select-none text-[15px] rounded-lg"
+                         data-deck-path="${p}"
+                         draggable="true"
+                         ondragstart="onDeckDragStart(event, '${p}')"
+                         ondragover="onDeckDragOver(event, '${p}')"
+                         ondragleave="onDeckDragLeave(event)"
+                         ondrop="onDeckDrop(event, '${p}')"
+                         ondragend="onDeckDragEnd(event)"
+                         onclick="selecteddeck='${p}'; document.getelementbyid('deckcontextmenu').classlist.add('hidden');"
+                         oncontextmenu="showContextMenu(event, '${p}')">
                         <div class="col-span-6 flex items-center pr-2" style="padding-left: ${pl}px">
                             ${chevron}
                             <span class="ml-1.5 font-bold text-[#0B193C] hover:underline whitespace-nãowrap overflow-hidden text-ellipsis flex-1" onclick="event.stoppropagatéion(); abestudo('${p}')">${name}</span>
@@ -775,6 +787,136 @@
                 `);
             });
             wrap.innerHTML = html.join('');
+        }
+
+        // --- DRAG & DROP HANDLERS ---
+        function onDeckDragStart(e, deckPath) {
+            draggedDeck = deckPath;
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', deckPath);
+            // Visual: make the dragged row semi-transparent
+            setTimeout(() => {
+                const row = e.target.closest('.deck-row');
+                if (row) row.style.opacity = '0.4';
+            }, 0);
+        }
+
+        function onDeckDragOver(e, targetPath) {
+            e.preventDefault();
+            if (!draggedDeck || draggedDeck === targetPath) return;
+            // Don't allow dropping into own children
+            if (targetPath.startsWith(draggedDeck + '::')) return;
+            e.dataTransfer.dropEffect = 'move';
+            // Visual highlight
+            const row = e.target.closest('.deck-row');
+            if (row) {
+                row.style.background = 'rgba(99, 102, 241, 0.12)';
+                row.style.outline = '2px dashed rgba(99, 102, 241, 0.5)';
+                row.style.outlineOffset = '-2px';
+                row.style.borderRadius = '8px';
+            }
+        }
+
+        function onDeckDragLeave(e) {
+            const row = e.target.closest('.deck-row');
+            if (row) {
+                row.style.background = '';
+                row.style.outline = '';
+                row.style.outlineOffset = '';
+            }
+        }
+
+        function onDeckDrop(e, targetPath) {
+            e.preventDefault();
+            e.stopPropagation();
+            const row = e.target.closest('.deck-row');
+            if (row) {
+                row.style.background = '';
+                row.style.outline = '';
+                row.style.outlineOffset = '';
+            }
+            if (!draggedDeck || draggedDeck === targetPath) return;
+            // Prevent dropping into own children
+            if (targetPath.startsWith(draggedDeck + '::')) return;
+            // Prevent dropping into current parent (already there)
+            const draggedParts = draggedDeck.split('::');
+            const draggedName = draggedParts[draggedParts.length - 1];
+            const newPath = targetPath + '::' + draggedName;
+            if (newPath === draggedDeck) return;
+
+            // Move the deck: rename deckId in all cards & update deck registry
+            moveDeckInto(draggedDeck, targetPath);
+            draggedDeck = null;
+        }
+
+        function onDeckDragEnd(e) {
+            // Reset opacity on all rows
+            document.querySelectorAll('.deck-row').forEach(r => {
+                r.style.opacity = '';
+                r.style.background = '';
+                r.style.outline = '';
+                r.style.outlineOffset = '';
+            });
+            draggedDeck = null;
+        }
+
+        function moveDeckInto(sourcePath, targetPath) {
+            const sourceParts = sourcePath.split('::');
+            const sourceName = sourceParts[sourceParts.length - 1];
+            const newPath = targetPath + '::' + sourceName;
+
+            // Check if destination already exists
+            let dDb = window.db ? (window.db.get('flashcard_decks') || []) : [];
+            let cDb = window.db ? (window.db.get('flashcards') || []) : [];
+            const gp = function(d) { return d.fullPath || d.nome || ''; };
+
+            // Rename in decks registry
+            dDb.forEach(function(d) {
+                var dp = gp(d);
+                if (dp === sourcePath) {
+                    d.fullPath = newPath;
+                    d.nome = newPath.split('::').pop();
+                } else if (dp && dp.startsWith(sourcePath + '::')) {
+                    d.fullPath = dp.replace(sourcePath, newPath);
+                    d.nome = d.fullPath.split('::').pop();
+                }
+            });
+
+            // Rename in flashcards
+            cDb.forEach(function(c) {
+                if (c.deckId === sourcePath) {
+                    c.deckId = newPath;
+                } else if (c.deckId && c.deckId.startsWith(sourcePath + '::')) {
+                    c.deckId = c.deckId.replace(sourcePath, newPath);
+                }
+            });
+
+            // Save
+            if (window.db) {
+                window.db.set('flashcards', cDb);
+                window.db.set('flashcard_decks', dDb);
+            }
+
+            // Expand the target so user can see the moved deck
+            expandedDecks.add(targetPath);
+
+            // Show success toast
+            showToast(`"${sourceName}" movido para "${targetPath.split('::').pop()}"`, 'success');
+
+            // Re-render
+            renderDecksHome();
+        }
+
+        // Simple toast notification
+        function showToast(msg, type) {
+            let toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 z-[9999] px-5 py-3 rounded-xl shadow-lg text-sm font-bold transition-all duration-300';
+            toast.style.cssText = type === 'success' 
+                ? 'background:rgba(16,185,129,0.95);color:white;backdrop-filter:blur(10px)' 
+                : 'background:rgba(239,68,68,0.95);color:white;backdrop-filter:blur(10px)';
+            toast.textContent = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 2500);
         }
 
         // --- CONTEXT MENU & MODAL NOVO BARALHO ---
