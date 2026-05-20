@@ -286,80 +286,112 @@ function renderBrowserPreview(card) {
     if (!panel) return;
     const now = new Date();
     const statusInfo = getStatusInfo(card, now);
-    const revisao = card.proximaRevisaoEm ? new Date(card.proximaRevisaoEm).toLocaleDateString('pt-BR') : 'Não agendada';
-    const criado = getCreatedAt(card) ? new Date(getCreatedAt(card)).toLocaleDateString('pt-BR') : '—';
+    const revisao = card.proximaRevisaoEm ? new Date(card.proximaRevisaoEm).toLocaleDateString('pt-BR') : '\u2014';
+    const criado = getCreatedAt(card) ? new Date(getCreatedAt(card)).toLocaleDateString('pt-BR') : '\u2014';
     const tags = (card.tags || []);
+    const deckName = card.deckId || 'Default';
+
+    // Get all cards for navigation
+    const allCards = window.db ? window.db.get('flashcards') || [] : [];
+    const currentIdx = allCards.findIndex(c => c.id === card.id);
+    const prevId = currentIdx > 0 ? allCards[currentIdx - 1].id : null;
+    const nextId = currentIdx < allCards.length - 1 ? allCards[currentIdx + 1].id : null;
+
+    const statusColor = statusInfo.text === 'Novo' ? '#60a5fa' : statusInfo.text === 'Aprender' ? '#fbbf24' : statusInfo.text === 'Revisar' ? '#34d399' : '#f87171';
 
     panel.innerHTML = `
-        <div class="p-5 border-b border-slate-100 bg-slate-50/50 flex items-center justify-between shrink-0">
-            <h3 class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest flex items-center gap-2">
-                <span class="material-symbols-outlined text-[16px] text-indigo-500">preview</span> Pré-visualização
-            </h3>
-            <div class="flex gap-1.5">
-                <button onclick="openQuickEdit('${card.id}')" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-indigo-600 hover:border-indigo-200 flex items-center justify-center transition-colors" title="Editar">
-                    <span class="material-symbols-outlined text-[14px]">edit</span>
+        <!-- Header Bar (rosa/mauve estilo Anki) -->
+        <div class="px-4 py-2 flex items-center justify-between shrink-0" style="background:#8b5e7a">
+            <span class="text-[11px] font-bold tracking-wide flex items-center gap-1.5" style="color:rgba(255,255,255,0.9)">
+                <span class="material-symbols-outlined text-[14px]">preview</span> Pr\u00e9-visualiza\u00e7\u00e3o
+            </span>
+            <div class="flex gap-1">
+                <button onclick="openQuickEdit('${card.id}')" class="w-6 h-6 rounded flex items-center justify-center transition-colors" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" title="Editar">
+                    <span class="material-symbols-outlined text-[13px]">edit</span>
                 </button>
-                <button onclick="excluirCartao('${card.id}')" class="w-7 h-7 rounded-lg bg-white border border-slate-200 text-slate-400 hover:text-rose-600 hover:border-rose-200 flex items-center justify-center transition-colors" title="Excluir">
-                    <span class="material-symbols-outlined text-[14px]">delete</span>
+                <button onclick="excluirCartao('${card.id}')" class="w-6 h-6 rounded flex items-center justify-center transition-colors" style="background:rgba(255,255,255,0.15);color:rgba(255,255,255,0.8)" title="Excluir">
+                    <span class="material-symbols-outlined text-[13px]">delete</span>
                 </button>
             </div>
         </div>
-        <div class="flex-1 overflow-y-auto custom-scrollbar p-5 space-y-4">
-            <!-- Frente -->
-            <div>
-                <p class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[13px]">quiz</span> Frente
-                </p>
-                <div class="bg-indigo-50/40 border border-indigo-100 rounded-xl p-4 text-[13px] text-[#0B193C] font-medium leading-relaxed prose-sm break-words">${card.front || '<span class="italic text-slate-400">Vazio</span>'}</div>
+
+        <!-- Card Content Area (fundo escuro) -->
+        <div class="flex-1 flex flex-col overflow-y-auto custom-scrollbar" style="background:#2a2a2a">
+            <!-- Frente \u2014 centralizada -->
+            <div class="flex-1 flex items-start justify-center px-6 pt-10 pb-4">
+                <div class="text-center text-[15px] font-medium leading-relaxed break-words max-w-full" style="color:rgba(255,255,255,0.9)">${card.front || '<span style="color:#666;font-style:italic">Sem conte\u00fado</span>'}</div>
             </div>
-            <!-- Verso -->
-            <div>
-                <p class="text-[10px] font-extrabold text-emerald-500 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[13px]">lightbulb</span> Verso
-                </p>
-                <div class="bg-emerald-50/40 border border-emerald-100 rounded-xl p-4 text-[13px] text-slate-700 font-medium leading-relaxed prose-sm break-words">${card.back || '<span class="italic text-slate-400">Vazio</span>'}</div>
+
+            <!-- Divisor fino central -->
+            <div class="flex justify-center px-8 shrink-0">
+                <div style="width:64px;height:2px;background:#555;border-radius:4px"></div>
             </div>
+
+            <!-- Verso \u2014 inicialmente oculto -->
+            <div id="previewVersoArea" class="flex-1 flex items-start justify-center px-6 pt-4 pb-6" style="display:none">
+                <div class="text-center text-[14px] font-normal leading-relaxed break-words max-w-full" style="color:#ccc">${card.back || '<span style="color:#666;font-style:italic">Sem conte\u00fado</span>'}</div>
+            </div>
+
             ${card.extra ? `
-            <div>
-                <p class="text-[10px] font-extrabold text-amber-500 uppercase tracking-widest mb-1.5">Extra</p>
-                <div class="bg-amber-50/40 border border-amber-100 rounded-xl p-3 text-[12px] text-slate-600 font-medium break-words">${card.extra}</div>
+            <div id="previewExtraArea" class="px-6 pb-4" style="display:none">
+                <div class="text-center text-[12px] font-normal leading-relaxed break-words" style="color:#999">${card.extra}</div>
             </div>` : ''}
-            <!-- Metadados -->
-            <div class="border-t border-slate-100 pt-4 space-y-2.5">
-                <div class="flex items-center justify-between text-[12px]">
-                    <span class="text-slate-400 font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">style</span>Baralho</span>
-                    <span class="font-bold text-[#0B193C] bg-slate-100 px-2 py-0.5 rounded">${card.deckId || 'Default'}</span>
-                </div>
-                <div class="flex items-center justify-between text-[12px]">
-                    <span class="text-slate-400 font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">flag</span>Status</span>
-                    <span class="${statusInfo.cls} px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">${statusInfo.text}</span>
-                </div>
-                <div class="flex items-center justify-between text-[12px]">
-                    <span class="text-slate-400 font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">event</span>Próxima revisão</span>
-                    <span class="font-bold text-slate-600">${revisao}</span>
-                </div>
-                <div class="flex items-center justify-between text-[12px]">
-                    <span class="text-slate-400 font-bold flex items-center gap-1.5"><span class="material-symbols-outlined text-[14px]">calendar_today</span>Criado em</span>
-                    <span class="font-bold text-slate-600">${criado}</span>
-                </div>
-                ${tags.length ? `
-                <div class="pt-1">
-                    <span class="text-slate-400 font-bold text-[12px] flex items-center gap-1.5 mb-2"><span class="material-symbols-outlined text-[14px]">sell</span>Etiquetas</span>
-                    <div class="flex flex-wrap gap-1.5">${tags.map(t => `<span class="bg-amber-50 text-amber-700 border border-amber-200 px-2 py-0.5 rounded text-[10px] font-bold">${t}</span>`).join('')}</div>
-                </div>` : ''}
+        </div>
+
+        <!-- Info bar (metadados discretos) -->
+        <div class="px-4 py-2 shrink-0" style="background:#222;border-top:1px solid #3a3a3a">
+            <div class="flex items-center justify-between text-[10px]" style="color:#888">
+                <span class="flex items-center gap-1 truncate">
+                    <span class="material-symbols-outlined text-[12px]">style</span>${deckName}
+                </span>
+                <span class="text-[10px] px-1.5 py-0.5 rounded font-bold" style="color:${statusColor};background:rgba(255,255,255,0.06)">${statusInfo.text}</span>
+            </div>
+            ${tags.length ? `<div class="flex flex-wrap gap-1 mt-1.5">${tags.map(t => `<span class="px-1.5 py-0.5 rounded text-[9px] font-bold" style="background:rgba(255,255,255,0.05);color:#aaa;border:1px solid rgba(255,255,255,0.05)">${t}</span>`).join('')}</div>` : ''}
+        </div>
+
+        <!-- Bottom Controls (estilo Anki) -->
+        <div class="px-3 py-2.5 flex items-center justify-between shrink-0" style="background:#1e1e1e;border-top:1px solid #333">
+            <div class="flex gap-1.5">
+                <button onclick="togglePreviewVerso()" id="btnToggleVerso" class="px-3 py-1.5 rounded-lg text-[11px] font-bold transition-colors" style="background:#333;border:1px solid #555;color:#ccc">
+                    Mostrar Verso
+                </button>
+            </div>
+            <div class="flex items-center gap-1.5">
+                <button onclick="${prevId ? "selectBrowserCard('" + prevId + "')" : ''}" class="w-7 h-7 rounded-lg flex items-center justify-center transition-colors" style="${prevId ? 'background:#333;border:1px solid #555;color:#ccc;cursor:pointer' : 'background:#252525;border:1px solid #333;color:#555;cursor:not-allowed'}" ${!prevId ? 'disabled' : ''}>
+                    <span class="material-symbols-outlined text-[16px]">chevron_left</span>
+                </button>
+                <span class="text-[10px] font-bold min-w-[40px] text-center" style="color:#666">${currentIdx + 1}/${allCards.length}</span>
+                <button onclick="${nextId ? "selectBrowserCard('" + nextId + "')" : ''}" class="w-7 h-7 rounded-lg flex items-center justify-center transition-colors" style="${nextId ? 'background:#444;border:1px solid #666;color:#fff;cursor:pointer' : 'background:#252525;border:1px solid #333;color:#555;cursor:not-allowed'}" ${!nextId ? 'disabled' : ''}>
+                    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+                </button>
             </div>
         </div>
     `;
+}
+
+// Toggle mostrar/ocultar verso
+function togglePreviewVerso() {
+    const verso = document.getElementById('previewVersoArea');
+    const extra = document.getElementById('previewExtraArea');
+    const btn = document.getElementById('btnToggleVerso');
+    if (!verso || !btn) return;
+
+    const isHidden = verso.style.display === 'none';
+    verso.style.display = isHidden ? 'flex' : 'none';
+    if (extra) extra.style.display = isHidden ? 'block' : 'none';
+    btn.textContent = isHidden ? 'Apenas a Frente' : 'Mostrar Verso';
+    btn.style.background = isHidden ? '#555' : '#333';
+    btn.style.borderColor = isHidden ? '#777' : '#555';
 }
 
 function clearBrowserPreview() {
     const panel = document.getElementById('browserPreview');
     if (!panel) return;
     panel.innerHTML = `
-        <div class="flex-1 flex flex-col items-center justify-center text-center p-6">
-            <span class="material-symbols-outlined text-[56px] text-slate-200 mb-3">preview</span>
-            <p class="font-bold text-slate-400 text-sm mb-1">Selecione um cartão</p>
-            <p class="text-[11px] text-slate-400">Clique em um cartão na tabela para visualizar.</p>
+        <div class="flex-1 flex flex-col items-center justify-center text-center p-8" style="background:#2a2a2a">
+            <span class="material-symbols-outlined text-[56px] mb-3" style="color:#555">preview</span>
+            <p class="font-bold text-sm mb-1" style="color:#888">Pr\u00e9-visualiza\u00e7\u00e3o</p>
+            <p class="text-[11px]" style="color:#666">Selecione um cart\u00e3o na tabela para visualizar.</p>
         </div>
     `;
 }
