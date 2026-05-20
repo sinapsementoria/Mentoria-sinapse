@@ -304,44 +304,51 @@
                     </div>
                 </div>
 
-                <!-- VIEW 3: PAINEL (BROWSER) -->
-                <div id="view-painel" class="view-section hidden fade-in-up h-full flex flex-col max-h-[80vh]">
-                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 flex-1 flex overflow-hidden min-h-[500px]">
+                <!-- VIEW 3: PAINEL (BROWSER) — Estilo Anki -->
+                <div id="view-painel" class="view-section hidden fade-in-up h-full flex flex-col" style="max-height:82vh">
+                    <!-- Contadores Top -->
+                    <div id="browserCounters" class="flex flex-wrap gap-2 mb-3 shrink-0"></div>
+                    
+                    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 flex-1 flex overflow-hidden min-h-[480px]">
                         <!-- Sidebar Filtros -->
-                        <div class="w-64 bg-slate-50/50 border-r border-slate-200 flex flex-col p-5 h-full">
-                            <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-4 ml-1">Filtros Rápidos</h3>
-                            <ul class="space-y-1.5 text-sm font-semibold text-slate-600 mb-6">
-                                <li onclick="currenttagfilter=null; renderbrowsertable();" class="px-3 py-2.5 rounded-xl cursor-pointer hover:bg-slate-100 bg-[#0B193C]/5 text-[#0B193C] flex items-center gap-2 border border-[#0B193C]/10 transition-colors"><span class="material-symbols-outlined text-[16px]">all_inbox</span> Coleção Completa</li>
-                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-blue-500">today</span> Adicionados Hoje</li>
-                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-emerald-500">replay</span> Para Revisar</li>
-                                <li class="px-3 py-2.5 hover:bg-slate-100 rounded-xl cursor-pointer flex items-center gap-2 transition-colors"><span class="material-symbols-outlined text-[16px] text-rose-500">warning</span> Em Atraso</li>
-                            </ul>
-                            <h3 class="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-3 ml-1">Por Etiqueta</h3>
-                            <div class="flex-1 overflow-y-auto custom-scrollbar pr-1 -mr-2">
-                                <ul id="browserDeckFilter" class="space-y-1 text-sm font-medium text-slate-500">
-                                    <!-- Injetado via JS -->
-                                </ul>
-                            </div>
+                        <div id="browserSidebar" class="w-56 bg-slate-50/50 border-r border-slate-200 flex flex-col p-4 h-full overflow-y-auto custom-scrollbar shrink-0">
+                            <!-- Injetado via JS -->
                         </div>
                         
-                        <!-- Content -->
-                        <div class="flex-1 flex flex-col bg-white relative h-full">
-                            <div class="p-4 border-b border-slate-100 flex items-center gap-4 bg-white z-10 shrink-0">
+                        <!-- Content Central -->
+                        <div class="flex-1 flex flex-col bg-white relative h-full min-w-0">
+                            <!-- Barra de Pesquisa -->
+                            <div class="p-3 border-b border-slate-100 flex items-center gap-3 bg-white z-10 shrink-0">
                                 <div class="relative flex-1 group">
-                                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-sinapse-primary transition-colors">search</span>
-                                    <input type="text" placeholder="Pesquisar em toda a coleção (frente, verso ou tag)..." class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-12 pr-4 py-2.5 font-medium text-sm outline-none focus:border-sinapse-primary focus:bg-white transition-all shadow-sm">
+                                    <span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-indigo-500 transition-colors text-[18px]">search</span>
+                                    <input id="browserSearchInput" type="text" placeholder="Pesquisar em toda a cole\u00e7\u00e3o: frente, verso, baralho ou etiqueta..." 
+                                        class="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 font-medium text-[13px] outline-none focus:border-indigo-400 focus:bg-white focus:ring-4 focus:ring-indigo-50 transition-all shadow-sm placeholder:text-slate-300"
+                                        oninput="onBrowserSearch(this.value)" onkeydown="if(event.key==='Escape'){this.value=\'\';onBrowserSearch(\'\');}">
                                 </div>
                             </div>
                             
                             <!-- Table -->
                             <div class="flex-1 overflow-auto custom-scrollbar flex flex-col relative bg-slate-50/30">
-                                <table class="w-full text-left text-sm whitespace-nãowrap">
+                                <table class="w-full text-left text-sm">
                                     <thead class="sticky top-0 bg-white border-b border-slate-200 z-10 shadow-sm">
                                         <tr class="text-slate-400 font-extrabold text-[10px] uppercase tracking-wider">
-                                            <th class="px-8 py-3.5 font-medium">Pergunta (Frente)</th>
-                                            <th class="px-6 py-3.5 font-medium">Resposta (Verso)</th>
-                                            <th class="px-6 py-3.5 font-medium">Baralho</th>
-                                            <th class="px-6 py-3.5 font-medium">Status</th>
+                                            <th class="px-4 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('front')">
+                                                Frente <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
+                                            </th>
+                                            <th class="px-4 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('back')">
+                                                Verso <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
+                                            </th>
+                                            <th class="px-3 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('deckId')">
+                                                Baralho <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
+                                            </th>
+                                            <th class="px-3 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('status')">
+                                                Status <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
+                                            </th>
+                                            <th class="px-3 py-3 font-medium">A Revisar</th>
+                                            <th class="px-3 py-3 font-medium cursor-pointer hover:text-slate-600 transition-colors" onclick="toggleBrowserSort('created_at')">
+                                                Criado <span class="material-symbols-outlined text-[12px] align-middle">unfold_more</span>
+                                            </th>
+                                            <th class="px-3 py-3 font-medium w-[70px]">A\u00e7\u00f5es</th>
                                         </tr>
                                     </thead>
                                     <tbody id="browserTableBody" class="divide-y divide-slate-100 text-slate-700 font-medium cursor-pointer">
@@ -350,10 +357,10 @@
                                 </table>
                             </div>
 
-                            <!-- Preview Painel (Quick Edit) overlay -->
+                            <!-- Quick Edit Panel (overlay) -->
                             <div id="quickEditPanel" class="absolute top-0 bottom-0 right-0 w-[450px] bg-white border-l border-slate-200 shadow-[0_0_40px_rgba(0,0,0,0.08)] transform translate-x-full transition-transform duration-300 ease-out flex flex-col z-20">
                                 <div class="p-5 border-b border-slate-100 flex justify-between items-center bg-slate-50/50">
-                                    <h3 class="font-headline font-extrabold text-lg text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined icon-fill text-sinapse-primary">edit_square</span> Editor Rápido</h3>
+                                    <h3 class="font-headline font-extrabold text-lg text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined icon-fill text-sinapse-primary">edit_square</span> Editor R\u00e1pido</h3>
                                     <button onclick="fecharquickedit()" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px]">close</span></button>
                                 </div>
                                 <div class="p-6 flex-1 overflow-y-auto space-y-5 custom-scrollbar">
@@ -371,15 +378,24 @@
                                     </div>
                                 </div>
                                 <div class="p-5 border-t border-slate-100 bg-slate-50/50 flex gap-3">
-                                    <button onclick="excluircartao(document.getelementbyid('qeditid').value)" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-50 hover:border-rose-300 transition-colors shadow-sm flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px]">delete</span> Apagar</button>
+                                    <button onclick="excluircartao(document.getElementById('qEditId').value)" class="px-5 py-2.5 bg-white border border-rose-200 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-50 hover:border-rose-300 transition-colors shadow-sm flex items-center gap-1.5"><span class="material-symbols-outlined text-[18px]">delete</span> Apagar</button>
                                     <button onclick="salvarquickedit()" class="flex-1 py-2.5 bg-[#0B193C] text-white rounded-xl font-bold text-sm hover:bg-sinapse-primary transition-all shadow-md flex justify-center items-center gap-2">Salvar Fechar <span class="material-symbols-outlined text-[18px]">arrow_forward</span></button>
                                 </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Preview Lateral -->
+                        <div id="browserPreview" class="w-72 bg-white border-l border-slate-200 flex flex-col h-full overflow-hidden shrink-0">
+                            <div class="flex-1 flex flex-col items-center justify-center text-center p-6">
+                                <span class="material-symbols-outlined text-[56px] text-slate-200 mb-3">preview</span>
+                                <p class="font-bold text-slate-400 text-sm mb-1">Selecione um cart\u00e3o</p>
+                                <p class="text-[11px] text-slate-400">Clique em um cart\u00e3o na tabela para visualizar.</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- VIEW 4: ESTATÍSTICAS -->
+<!-- VIEW 4: ESTATÍSTICAS -->
                 <div id="view-estatéisticas" class="view-section hidden fade-in-up space-y-6 max-w-[1000px] mx-auto pb-10">
                     <div class="flex justify-between items-center bg-white p-6 rounded-2xl shadow-sm border border-slate-200 mb-2">
                         <div class="flex items-center gap-3">
@@ -628,6 +644,7 @@
     <script src="../../src/js/import_csv.js"></script>
     <script src="../../src/js/import_apkg.js"></script>
     <script src="../../src/js/import_controller.js"></script>
+    <script src="../../src/js/painel_browser.js"></script>
     <script>
         // ===============================
         // CORE SPA ROUTER & NAVIGATION
@@ -942,55 +959,9 @@
         });
 
         // ===============================
-        // TAB 3: BROWSER / PAINEL
+        // TAB 3: BROWSER / PAINEL (externo: painel_browser.js)
         // ===============================
-        let currentTagFilter = null;
-        function renderBrowserTable() {
-            const table = document.getElementById('browserTableBody');
-            const dFilter = document.getElementById('browserDeckFilter');
-            let cards = window.db ? window.db.get('flashcards')||[] : [];
-
-            // Tags left filter menu
-            let tagsMap = [...new Set(cards.flatéMap(c => c.tags || []))].sort();
-            dFilter.innerHTML = tagsMap.map(t => {
-                let isActive = currentTagFilter === t;
-                let t_class = isActive ? 'bg-sinapse-primary/10 text-sinapse-primary border border-sinapse-primary/20' : 'text-slate-600 hover:bg-slate-100';
-                let icon_class = isActive ? 'text-sinapse-primary' : 'text-slate-400';
-                return `<li onclick="currenttagfilter='${t}'; renderbrowsertable();" class="px-3 py-2.5 rounded-xl cursor-pointer truncate transition-colors font-bold ${t_class}" title="${t}"><span class="material-symbols-outlined text-[14px] ${icon_class} mr-1 align-sub">sell</span>${t}</li>`;
-            }).join('');
-
-            // Fazer a filtragem caso haja etiqueta selecionada
-            let finalCards = [...cards];
-            if(currentTagFilter) {
-                finalCards = finalCards.filter(c => c.tags && c.tags.includes(currentTagFilter));
-            }
-
-            // Fill table logic (latest 50 for quickness)
-            const sortedCards = finalCards.reverse();
-            if(sortedCards.length === 0) {
-                table.innerHTML = `<tr><td colspan="4" class="px-6 py-10 text-center text-slate-400 font-bold">Nenhum cartão cadastrado na coleção.</td></tr>`;
-                return;
-            }
-
-            table.innerHTML = sortedCards.slice(0,50).map(c => {
-                let statusColor = "text-blue-500 bg-blue-50";
-                let statusText = "NOVO";
-                if(c.status === 'aprendendo') { statusColor = "text-rose-500 bg-rose-50"; statusText = "APRENDENDO"; }
-                else if(c.status === 'revisao') { statusColor = "text-emerald-500 bg-emerald-50"; statusText = "REVISÃO"; }
-                
-                return `
-                <tr class="hover:bg-indigo-50/50 border-b border-slate-100 transition-colors group" onclick="abestudounico('${c.id}')">
-                    <td class="px-8 py-4 truncate max-w-[250px] font-bold text-[#0B193C]">${c.front}</td>
-                    <td class="px-6 py-4 truncate max-w-[200px] text-slate-500 font-medium">${c.back || '<span class="opacity-50 italic">Vazio</span>'}</td>
-                    <td class="px-6 py-4 truncate max-w-[150px]"><span class="bg-slate-100 text-slate-600 px-2 py-0.5 rounded text-[10px] uppercase font-bold relative -top-0.5">${c.deckId}</span></td>
-                    <td class="px-6 py-4">
-                        <span class="${statusColor} px-2.5 py-1.5 flex items-center justify-center rounded text-[10px] uppercase font-bold tracking-widest relative -top-0.5 max-w-max border ${statusColor.split(' ')[0].replace('text','border')}">
-                            ${statusText}
-                        </span>
-                    </td>
-                </tr>
-            `}).join('');
-        }
+        // renderBrowserTable(), selectBrowserCard(), etc. vem de painel_browser.js
 
         function openQuickEdit(id) {
             let cards = window.db ? window.db.get('flashcards')||[] : [];
@@ -1006,7 +977,7 @@
             document.getElementById('quickEditPanel').classList.add('translate-x-full');
         }
         function excluirCartao(id) {
-            if(confirm('Tem certeza que deseja apagar permanentemente este cartão?')) {
+            if(confirm('Tem certeza que deseja excluir este cart\u00e3o?')) {
                 let cards = window.db ? window.db.get('flashcards')||[] : [];
                 window.db.set('flashcards', cards.filter(c=>c.id!==id));
                 fecharQuickEdit();
@@ -1423,12 +1394,14 @@
         window['abrirmodalnãovobaralho'] = abrirModalNovoBaralho;
         window['fecharmodalnãovobaralho'] = fecharModalNovoBaralho;
         window['salvargeralbaralho'] = salvarGeralBaralho;
-        // Padrão Anki: currentTagFilter
-        window.currenttagfilter = null;
-        Object.defineProperty(window, 'currenttagfilter', {
-            get() { return currentTagFilter; },
-            set(v) { currentTagFilter = v; }
-        });
+        // Aliases do painel browser (funções de painel_browser.js)
+        window.selectbrowsercard = selectBrowserCard;
+        window.onbrowsersearch = onBrowserSearch;
+        window.togglebrowsersort = toggleBrowserSort;
+        window.setquickfilter = setQuickFilter;
+        window.setdeckfilter = setDeckFilter;
+        window.settagfilter = setTagFilter;
+        window.clearallfilters = clearAllFilters;
     </script>
 
     <script>
