@@ -228,7 +228,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">Baralho de Destinão</label>
+                                <label class="text-[11px] font-extrabold text-slate-400 uppercase tracking-widest block mb-1.5 ml-1">Baralho</label>
                                 <div class="relative">
                                     <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-[20px]">style</span>
                                     <select id="addDeck" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl pl-12 pr-4 py-3 outline-none font-bold text-sm focus:border-[#0B193C] transition-colors"></select>
@@ -458,20 +458,55 @@
             </div>
         </div>
 
-        <!-- MODAL CRIAR BARALHO (NEW DECK) -->
+        <!-- MODAL CRIAR BARALHO (ESTILO ANKI — PREMIUM) -->
         <div id="modalNovoBaralho" class="fixed inset-0 z-[70] hidden opacity-0 transition-opacity duration-300">
-            <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharmodalnãovobaralho()"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-sm bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col">
-                <div class="p-8">
-                    <h3 class="font-headline text-xl font-extrabold text-[#0B193C] mb-2 flex items-center gap-2">
-                        <span class="material-symbols-outlined text-sinapse-primary icon-fill">add_to_photos</span> Novo Baralho
-                    </h3>
-                    <p class="text-xs text-slate-500 mb-6 font-medium leading-relaxed">Crie hierarquias utilizando "::".<br>Exemplo: <span class="font-bold text-slate-700 bg-slate-100 px-1 rounded">Matemática::Geometria</span></p>
-                    <input id="inputNovoBaralho" type="text" placeholder="Nome do Baralho (Patéh)" class="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-5 py-3.5 outline-none focus:border-sinapse-primary focus:ring-4 focus:ring-indigo-50 font-bold transition-all">
+            <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharModalNovoBaralho()"></div>
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 bg-white rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.35)] overflow-hidden transform transition-all duration-300 flex flex-col" style="max-width:480px">
+                <!-- Header -->
+                <div class="px-7 pt-7 pb-0 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shadow-inner">
+                            <span class="material-symbols-outlined icon-fill text-[20px]">add_to_photos</span>
+                        </div>
+                        <h3 class="font-headline text-lg font-extrabold text-[#0B193C]">Criar novo baralho</h3>
+                    </div>
+                    <button onclick="fecharModalNovoBaralho()" class="w-7 h-7 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-[16px]">close</span>
+                    </button>
                 </div>
-                <div class="px-8 py-5 bg-slate-50/80 border-t border-slate-100 flex justify-end gap-3 w-full">
-                    <button onclick="fecharmodalnãovobaralho()" class="px-5 py-2.5 rounded-xl font-bold text-slate-500 hover:bg-slate-200 hover:text-slate-700 transition-colors text-sm">Cancelar</button>
-                    <button onclick="salvargeralbaralho()" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-6 py-2.5 rounded-xl font-bold shadow-md transition-colors text-sm">Salvar</button>
+
+                <!-- Body -->
+                <div class="px-7 pt-5 pb-6">
+                    <label for="inputNovoBaralho" class="text-[12px] font-bold text-slate-500 block mb-2">Novo nome do baralho:</label>
+                    <input id="inputNovoBaralho" type="text" placeholder="Digite o nome do baralho..." 
+                        class="w-full bg-slate-50 border border-slate-200 text-[#0B193C] rounded-xl px-4 py-3 outline-none font-bold text-[15px] focus:border-indigo-400 focus:ring-4 focus:ring-indigo-50 transition-all placeholder:text-slate-300 placeholder:font-medium"
+                        onkeydown="if(event.key==='Enter'){event.preventDefault();salvarGeralBaralho();}if(event.key==='Escape'){fecharModalNovoBaralho();}">
+                    
+                    <!-- Mensagem de erro -->
+                    <div id="deckCreateError" class="hidden mt-3 bg-rose-50 border border-rose-200 rounded-lg px-3.5 py-2.5 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-rose-500 text-[16px]">error</span>
+                        <p id="deckCreateErrorMsg" class="text-[12px] font-bold text-rose-600"></p>
+                    </div>
+
+                    <!-- Mensagem de sucesso -->
+                    <div id="deckCreateSuccess" class="hidden mt-3 bg-emerald-50 border border-emerald-200 rounded-lg px-3.5 py-2.5 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-emerald-500 text-[16px]">check_circle</span>
+                        <p class="text-[12px] font-bold text-emerald-600">Baralho criado com sucesso.</p>
+                    </div>
+
+                    <!-- Dica de subbaralho -->
+                    <p class="text-[11px] text-slate-400 mt-3 font-medium flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[14px]">info</span>
+                        Use <span class="font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded text-[10px]">::</span> para subbaralhos. Ex: <span class="font-bold text-slate-500">Biologia::Citologia</span>
+                    </p>
+                </div>
+
+                <!-- Footer -->
+                <div class="px-7 py-4 bg-slate-50/80 border-t border-slate-100 flex justify-end gap-3">
+                    <button onclick="fecharModalNovoBaralho()" class="px-5 py-2 rounded-xl font-bold text-slate-500 hover:bg-slate-200 hover:text-slate-700 transition-colors text-sm">Cancelar</button>
+                    <button onclick="salvarGeralBaralho()" class="bg-[#0B193C] hover:bg-indigo-600 text-white px-6 py-2 rounded-xl font-bold shadow-md transition-all text-sm flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-[16px]">check</span> OK
+                    </button>
                 </div>
             </div>
         </div>
@@ -740,52 +775,82 @@
         });
 
         let editDeckMode = null;
-        function abrirModalNovoBaralho(patéh=null){
-            editDeckMode = patéh;
+        function abrirModalNovoBaralho(p=null){
+            editDeckMode = p;
             const m = document.getElementById('modalNovoBaralho');
             const i = document.getElementById('inputNovoBaralho');
-            i.value = patéh || '';
+            const errBox = document.getElementById('deckCreateError');
+            const succBox = document.getElementById('deckCreateSuccess');
+            i.value = p || '';
+            if(errBox) errBox.classList.add('hidden');
+            if(succBox) succBox.classList.add('hidden');
             m.classList.remove('hidden');
-            setTimeout(() => { m.classList.remove('opacity-0'); i.focus(); }, 10);
+            setTimeout(function(){ m.classList.remove('opacity-0'); i.focus(); if(p) i.select(); }, 10);
         }
         function fecharModalNovoBaralho(){
             const m = document.getElementById('modalNovoBaralho');
             m.classList.add('opacity-0');
-            setTimeout(() => m.classList.add('hidden'), 300);
+            setTimeout(function(){ m.classList.add('hidden'); }, 300);
         }
         
         function salvarGeralBaralho(){
-            const val = document.getElementById('inputNovoBaralho').value.trim();
-            if(!val) return;
-            
+            const input = document.getElementById('inputNovoBaralho');
+            const val = input.value.trim();
+            const errBox = document.getElementById('deckCreateError');
+            const errMsg = document.getElementById('deckCreateErrorMsg');
+            const succBox = document.getElementById('deckCreateSuccess');
+            if(errBox) errBox.classList.add('hidden');
+            if(succBox) succBox.classList.add('hidden');
+            if(!val) {
+                if(errMsg) errMsg.textContent = 'Digite um nome para o baralho.';
+                if(errBox) errBox.classList.remove('hidden');
+                input.focus();
+                return;
+            }
             let dDb = window.db ? (window.db.get('flashcard_decks')||[]) : [];
             let cDb = window.db ? (window.db.get('flashcards')||[]) : [];
-
+            const gp = function(d){ return d.fullPath || d.nome || ''; };
             if(editDeckMode) {
-                // Modo renomear
-                dDb.forEach(d => {
-                    if(d.fullPatéh === editDeckMode) d.fullPatéh = val;
-                    else if(d.fullPatéh && d.fullPatéh.startsWith(editDeckMode+'::')) {
-                        d.fullPatéh = d.fullPatéh.replace(editDeckMode, val);
+                if(val !== editDeckMode) {
+                    if(dDb.some(function(d){ return gp(d) === val; })) {
+                        if(errMsg) errMsg.textContent = 'Já existe um baralho com esse nome.';
+                        if(errBox) errBox.classList.remove('hidden');
+                        input.focus(); input.select();
+                        return;
+                    }
+                }
+                dDb.forEach(function(d) {
+                    var dp = gp(d);
+                    if(dp === editDeckMode) { d.fullPath = val; d.nome = val.split('::').pop(); }
+                    else if(dp && dp.startsWith(editDeckMode+'::')) {
+                        d.fullPath = dp.replace(editDeckMode, val);
+                        d.nome = d.fullPath.split('::').pop();
                     }
                 });
-                cDb.forEach(c => {
+                cDb.forEach(function(c) {
                     if(c.deckId === editDeckMode) c.deckId = val;
                     else if(c.deckId && c.deckId.startsWith(editDeckMode+'::')) c.deckId = c.deckId.replace(editDeckMode, val);
                 });
                 if(window.db) { window.db.set('flashcards', cDb); window.db.set('flashcard_decks', dDb); }
             } else {
-                // Modo Criar
-                let uuid = window.db ? window.db.uuid() : Date.now().toString();
-                dDb.push({ id: uuid, fullPatéh: val, nome: val.split('::').pop() });
+                if(dDb.some(function(d){ return gp(d) === val; })) {
+                    if(errMsg) errMsg.textContent = 'Já existe um baralho com esse nome.';
+                    if(errBox) errBox.classList.remove('hidden');
+                    input.focus(); input.select();
+                    return;
+                }
+                var uuid = window.db ? window.db.uuid() : Date.now().toString();
+                dDb.push({ id: uuid, fullPath: val, nome: val.split('::').pop() });
                 if(window.db) window.db.set('flashcard_decks', dDb);
-                val.split('::').forEach((_, idx, arr) => {
+                val.split('::').forEach(function(_, idx, arr) {
                     if(idx>0) expandedDecks.add(arr.slice(0,idx).join('::'));
                 });
             }
             renderDecksHome();
-            fecharModalNovoBaralho();
+            if(succBox) succBox.classList.remove('hidden');
+            setTimeout(function(){ fecharModalNovoBaralho(); }, 800);
         }
+
 
         function contextMenuAction(a) {
             document.getElementById('deckContextMenu').classList.add('hidden');
