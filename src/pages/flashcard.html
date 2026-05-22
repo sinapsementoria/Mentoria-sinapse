@@ -733,35 +733,40 @@
         let draggedDeck = null;
 
         function getDeckIllustration(deckPath) {
-            // Uses the LAST part of the deck path (the leaf name) to find the image
             const parts = deckPath.split('::');
             const name = parts[parts.length - 1].trim();
-            // Try exact match first (e.g. "FISICA" -> "FÍSICA.png")
-            // Build a lookup with normalized keys
-            const files = [
-                'ARTES','BIOLOGIA','CEUB','EDUCAÇÃO FÍSICA','ENEM','ESPANHOL','FAMERP',
-                'FILOSOFIA','FUVEST','FÍSICA','GEOGRAFIA','GRAMÁTICA','HISTÓRIA',
-                'INGLÊS','LINGUAGENS','LITERATURA','MATEMÁTICA','MAUÁ','MÚSICA',
-                'QUÍMICA','REDAÇÃO','SOCIOLOGIA','UCB','UEG','UEMG','UFG','UFGD',
+            const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
+            const nName = norm(name);
+            const parentName = parts.length > 1 ? norm(parts[0]) : '';
+
+            // Matérias têm PRIORIDADE na busca de imagem
+            const materiaFiles = [
+                'ARTES','BIOLOGIA','EDUCAÇÃO FÍSICA','ESPANHOL','FILOSOFIA','FÍSICA',
+                'GEOGRAFIA','GRAMÁTICA','HISTÓRIA','INGLÊS','LINGUAGENS','LITERATURA',
+                'MATEMÁTICA','MÚSICA','QUÍMICA','REDAÇÃO','SOCIOLOGIA'
+            ];
+            const uniFiles = [
+                'CEUB','ENEM','FAMERP','FUVEST','MAUÁ','UCB','UEG','UEMG','UFG','UFGD',
                 'UFGRS','UFJF','UFMS','UFPR','UFSC','UFT','UFU','UNB','UNESP',
                 'UNICAMP','UNICEPLAC','UNIEURO','UNIMONTES','UNIOSTE','UNIRV','USP'
             ];
-            const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
-            const nName = norm(name);
-            // Also try the parent for sub-decks
-            const parentName = parts.length > 1 ? norm(parts[0]) : '';
-            
-            for (let f of files) {
+
+            // 1) Procura matéria no nome (ex: "GEOGRAFIA - ENEM" → GEOGRAFIA)
+            for (let f of materiaFiles) {
+                if (nName.includes(norm(f))) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
+            }
+            // 2) Match exato com universidade
+            for (let f of uniFiles) {
                 if (norm(f) === nName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
             }
-            // Try partial match
-            for (let f of files) {
+            // 3) Match parcial com universidade
+            for (let f of uniFiles) {
                 if (nName.includes(norm(f)) || norm(f).includes(nName)) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
             }
-            // Try matching the FIRST part (parent deck) for sub-decks
+            // 4) Tenta o pai (sub-baralhos via ::)
             if (parentName) {
-                for (let f of files) {
-                    if (norm(f) === parentName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
+                for (let f of [...materiaFiles, ...uniFiles]) {
+                    if (norm(f) === parentName || parentName.includes(norm(f))) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
                 }
             }
             return '../../CARDS MENTORIA SINAPSE/ENEM.png';
