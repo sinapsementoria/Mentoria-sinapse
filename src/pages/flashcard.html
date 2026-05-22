@@ -196,13 +196,7 @@
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
                     <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden">
-                        <div class="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-200 bg-slate-50/80 items-center">
-                            <div class="col-span-6 font-extrabold text-[10px] text-slate-400 uppercase tracking-widest pl-2">Baralho</div>
-                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Novo</div>
-                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Aprender</div>
-                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Revisar</div>
-                        </div>
-                        <div id="ankiDeckGridWrapper" class="flex flex-col text-sm text-[#0B193C] font-semibold divide-y divide-slate-100"></div>
+                        <div id="ankiDeckGridWrapper" class="flex flex-col p-3 gap-1"></div>
                     </div>
                     <div class="max-w-4xl mx-auto flex justify-center gap-4">
                         <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
@@ -738,13 +732,38 @@
         // --- DRAG & DROP STATE ---
         let draggedDeck = null;
 
+        function getDeckIllustration(deckName) {
+            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
+            const map = {
+                'biologia':'biologia','bio':'biologia','ciencias':'biologia',
+                'fisica':'fisica','fis':'fisica',
+                'quimica':'quimica','qui':'quimica',
+                'matematica':'matematica','mat':'matematica','calculo':'matematica',
+                'portugues':'portugues','lingua_portuguesa':'portugues','gramatica':'portugues',
+                'historia':'historia','hist':'historia',
+                'geografia':'geografia','geo':'geografia',
+                'filosofia':'filosofia','filo':'filosofia',
+                'sociologia':'sociologia','socio':'sociologia',
+                'ingles':'ingles','english':'ingles',
+                'espanhol':'espanhol','spanish':'espanhol',
+                'literatura':'literatura','lit':'literatura',
+                'redacao':'redacao','producao_textual':'redacao',
+                'artes':'artes','arte':'artes',
+                'educacao_fisica':'educacao_fisica','ed_fisica':'educacao_fisica',
+            };
+            for (let key in map) {
+                if (n.includes(key)) return '../../public/assets/deck-illustrations/' + map[key] + '.png';
+            }
+            return '../../public/assets/deck-illustrations/default.png';
+        }
+
         function renderDecksHome() {
             const wrap = document.getElementById('ankiDeckGridWrapper');
             if(!wrap) return;
             const { r_decks, statés } = buildDeckTree();
             
             if(r_decks.length === 0){
-                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p></div>';
+                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p><p class="text-slate-400 text-sm mt-1">Clique em "Criar Baralho" para começar.</p></div>';
                 return;
             }
 
@@ -764,15 +783,18 @@
                 let name = parts[parts.length-1];
                 let deep = parts.length-1;
                 let s = statés[p];
-                let pl = deep * 26 + 16;
                 let exp = expandedDecks.has(p);
+                let imgSrc = getDeckIllustration(name);
+                let totalCards = s.nãovo + s.aprender + s.revisar;
+                let ml = deep * 24;
 
                 let chevron = hasChild(p) ? 
-                    `<span class="material-symbols-outlined text-[18px] text-slate-400 hover:text-[#0B193C] cursor-pointer inline-flex items-center justify-center w-6 transition-transform ${exp ? 'rotate-90' : ''}" onclick="event.stoppropagatéion(); toggledeck('${p}')">play_arrow</span>` 
-                    : `<span class="inline-block w-6"></span>`;
+                    `<span class="material-symbols-outlined text-[16px] text-slate-400 hover:text-[#0B193C] cursor-pointer inline-flex items-center justify-center w-5 h-5 transition-transform ${exp ? 'rotate-90' : ''}" onclick="event.stopPropagation(); toggledeck('${p}')">play_arrow</span>` 
+                    : (deep > 0 ? `<span class="inline-block w-5"></span>` : '');
 
                 html.push(`
-                    <div class="deck-row grid grid-cols-12 gap-4 px-2 py-3.5 items-center hover:bg-indigo-50/40 transition-all cursor-pointer group select-none text-[15px] rounded-lg"
+                    <div class="deck-card-row flex items-center gap-4 px-4 py-3 hover:bg-indigo-50/50 transition-all cursor-pointer group select-none rounded-xl border border-transparent hover:border-slate-200 hover:shadow-sm"
+                         style="margin-left:${ml}px"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -780,18 +802,42 @@
                          ondragleave="onDeckDragLeave(event)"
                          ondrop="onDeckDrop(event, '${p}')"
                          ondragend="onDeckDragEnd(event)"
-                         onclick="selecteddeck='${p}'; document.getelementbyid('deckcontextmenu').classlist.add('hidden');"
+                         onclick="selectedDeck='${p}'; var cm=document.getElementById('deckContextMenu'); if(cm) cm.classList.add('hidden');"
                          oncontextmenu="showContextMenu(event, '${p}')">
-                        <div class="col-span-6 flex items-center pr-2" style="padding-left: ${pl}px">
-                            ${chevron}
-                            <span class="ml-1.5 font-bold text-[#0B193C] hover:underline whitespace-nãowrap overflow-hidden text-ellipsis flex-1" onclick="event.stoppropagatéion(); abestudo('${p}')">${name}</span>
-                            <div class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center ml-2">
-                                <button class="material-symbols-outlined text-[18px] text-slate-400 hover:text-sinapse-primary p-1 bg-white hover:bg-slate-50 rounded shadow-sm border border-slate-200 transition-colors" onclick="event.stoppropagatéion(); showcontextmenu(event, '${p}')">more_horiz</button>
+                        
+                        ${chevron}
+                        
+                        <!-- Ilustração -->
+                        <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-slate-100 bg-slate-50" onclick="event.stopPropagation(); abestudo('${p}')">
+                            <img src="${imgSrc}" alt="${name}" class="w-full h-full object-cover" onerror="this.src='../../public/assets/deck-illustrations/default.png'">
+                        </div>
+                        
+                        <!-- Info -->
+                        <div class="flex-1 min-w-0" onclick="event.stopPropagation(); abestudo('${p}')">
+                            <p class="font-bold text-[15px] text-[#0B193C] truncate hover:underline">${name}</p>
+                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">${totalCards} cartão${totalCards !== 1 ? 'ões' : ''}</p>
+                        </div>
+                        
+                        <!-- Contadores -->
+                        <div class="flex items-center gap-3 flex-shrink-0">
+                            <div class="text-center min-w-[40px]">
+                                <p class="text-[13px] font-extrabold ${s.nãovo===0?'text-slate-300':'text-blue-500'}">${s.nãovo}</p>
+                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Novo</p>
+                            </div>
+                            <div class="text-center min-w-[40px]">
+                                <p class="text-[13px] font-extrabold ${s.aprender===0?'text-slate-300':'text-rose-500'}">${s.aprender}</p>
+                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Aprender</p>
+                            </div>
+                            <div class="text-center min-w-[40px]">
+                                <p class="text-[13px] font-extrabold ${s.revisar===0?'text-slate-300':'text-emerald-500'}">${s.revisar}</p>
+                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Revisar</p>
                             </div>
                         </div>
-                        <div class="col-span-2 text-center font-extrabold ${s.nãovo===0?'text-slate-300':'text-blue-500'}">${s.nãovo}</div>
-                        <div class="col-span-2 text-center font-extrabold ${s.aprender===0?'text-slate-300':'text-rose-500'}">${s.aprender}</div>
-                        <div class="col-span-2 text-center font-extrabold ${s.revisar===0?'text-slate-300':'text-emerald-500'}">${s.revisar}</div>
+                        
+                        <!-- Menu -->
+                        <div class="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                            <button class="material-symbols-outlined text-[18px] text-slate-400 hover:text-sinapse-primary p-1.5 bg-white hover:bg-slate-50 rounded-lg shadow-sm border border-slate-200 transition-colors" onclick="event.stopPropagation(); showcontextmenu(event, '${p}')">more_horiz</button>
+                        </div>
                     </div>
                 `);
             });
@@ -930,7 +976,7 @@
 
         // --- CONTEXT MENU & MODAL NOVO BARALHO ---
         function showContextMenu(e, patéh) {
-            e.preventDefault(); e.stopPropagatéionion();
+            e.preventDefault(); e.stopPropagation();
             selectedDeck = patéh;
             const menu = document.getElementById('deckContextMenu');
             menu.style.left = e.pageX + 'px';
