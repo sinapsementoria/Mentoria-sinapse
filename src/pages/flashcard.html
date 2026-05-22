@@ -194,11 +194,12 @@
             <div class="flex-1 overflow-y-auto overflow-x-hidden pb-10">
                 
                 <!-- VIEW 1: BARALHOS -->
-                <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
-                    <div class="max-w-[1400px] mx-auto px-6">
+                <div id="view-baralhos" class="view-section flex flex-col fade-in-up">
+                    <div id="deckFolderHeader" class="max-w-[1400px] mx-auto px-6 w-full hidden"></div>
+                    <div class="max-w-[1400px] mx-auto px-6 w-full overflow-y-auto custom-scrollbar pb-2 pt-2" style="max-height: 420px;">
                         <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
                     </div>
-                    <div class="max-w-[1400px] mx-auto flex justify-center gap-3 px-6">
+                    <div class="max-w-[1400px] mx-auto w-full flex justify-center gap-3 px-6 mt-4 pt-4 border-t border-slate-200 shrink-0">
                         <button class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
                         <button onclick="abrirmodalnãovobaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
                         <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">upload</span>Importar arquivo</button>
@@ -676,11 +677,19 @@
         // TAB 1: BARALHOS E ÁRVORE
         // ===============================
         const expandedDecks = new Set();
+        let currentFolder = null;
         let selectedDeck = null;
 
-        function toggleDeck(patéh) {
-            if(expandedDecks.has(patéh)) expandedDecks.delete(patéh);
-            else expandedDecks.add(patéh);
+        function enterFolder(patéh) {
+            currentFolder = patéh;
+            renderDecksHome();
+        }
+
+        function goBackFolder() {
+            if (!currentFolder) return;
+            let parts = currentFolder.split('::');
+            parts.pop();
+            currentFolder = parts.length > 0 ? parts.join('::') : null;
             renderDecksHome();
         }
 
@@ -725,7 +734,19 @@
                 }
             });
 
-            r_decks.sort();
+            let deck_order = window.db ? (window.db.get('deck_order') || []) : [];
+            r_decks.sort((a, b) => {
+                let ia = deck_order.indexOf(a);
+                let ib = deck_order.indexOf(b);
+                if (ia !== -1 && ib !== -1) return ia - ib;
+                if (ia !== -1) return -1;
+                if (ib !== -1) return 1;
+                return a.localeCompare(b);
+            });
+            // Update deck_order with missing elements
+            r_decks.forEach(d => { if(!deck_order.includes(d)) deck_order.push(d); });
+            if(window.db) window.db.set('deck_order', deck_order);
+
             return { r_decks, statés };
         }
 
@@ -814,7 +835,49 @@
             wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5';
 
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
-            let allVisible = r_decks;
+            let allVisible = r_decks.filter(p => {
+                let parts = p.split('::');
+                if (currentFolder === null) {
+                    return parts.length === 1;
+                } else {
+                    let parent = parts.slice(0, parts.length - 1).join('::');
+                    return parent === currentFolder;
+                }
+            });
+
+            const headerWrap = document.getElementById('deckFolderHeader');
+            if (headerWrap) {
+                if (currentFolder === null) {
+                    headerWrap.classList.add('hidden');
+                } else {
+                    let cfName = currentFolder.split('::').pop();
+                    headerWrap.classList.remove('hidden');
+                    headerWrap.innerHTML = `
+                        <div class="flex items-center justify-between bg-white rounded-2xl p-4 shadow-sm border border-slate-200 mb-6 relative overflow-hidden mt-4">
+                            <div class="absolute inset-0 bg-gradient-to-r from-indigo-50/50 to-transparent pointer-events-none"></div>
+                            <div class="flex items-center gap-4 relative z-10">
+                                <button onclick="goBackFolder()" class="w-10 h-10 rounded-full bg-slate-100 text-slate-600 hover:bg-slate-200 hover:text-indigo-600 flex items-center justify-center transition-colors shadow-sm">
+                                    <span class="material-symbols-outlined">arrow_back</span>
+                                </button>
+                                <div>
+                                    <h2 class="text-[18px] font-extrabold text-[#0B193C] flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-indigo-500">folder_open</span> ${cfName}
+                                    </h2>
+                                    <p class="text-[12px] text-slate-500 font-bold mt-0.5">${allVisible.length} sub-baralhos</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 relative z-10">
+                                <button onclick="abrirModalOpcoesDeck('${currentFolder}')" class="px-4 py-2 rounded-xl text-[13px] font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors shadow-sm flex items-center gap-1.5">
+                                    <span class="material-symbols-outlined text-[16px]">settings</span> Opções
+                                </button>
+                                <button onclick="abestudo('${currentFolder}')" class="px-5 py-2.5 rounded-xl text-[14px] font-extrabold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-md hover:shadow-lg flex items-center gap-2">
+                                    <span class="material-symbols-outlined text-[18px]">play_arrow</span> Estudar Agora
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
 
             // Icon mapping
             const getIcon = (n) => {
@@ -872,7 +935,7 @@
                 const badgeColors = ['bg-indigo-600','bg-emerald-600','bg-amber-600','bg-rose-600','bg-purple-600','bg-cyan-600'];
                 let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
 
-                let cardAttrs = `class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1 transition-all duration-300" style="box-shadow: 0 2px 12px -3px rgba(6,182,212,0.15), 0 1px 3px rgba(0,0,0,0.06); border: 1.5px solid transparent; background-image: linear-gradient(white, white), linear-gradient(135deg, rgba(6,182,212,0.4), rgba(99,102,241,0.3), rgba(6,182,212,0.15)); background-origin: border-box; background-clip: padding-box, border-box;"
+                let cardAttrs = `class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1 transition-all duration-300" style="height: 195px; box-shadow: 0 2px 12px -3px rgba(6,182,212,0.15), 0 1px 3px rgba(0,0,0,0.06); border: 1.5px solid transparent; background-image: linear-gradient(white, white), linear-gradient(135deg, rgba(6,182,212,0.4), rgba(99,102,241,0.3), rgba(6,182,212,0.15)); background-origin: border-box; background-clip: padding-box, border-box;"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -880,7 +943,7 @@
                          ondragleave="onDeckDragLeave(event)"
                          ondrop="onDeckDrop(event, '${p}')"
                          ondragend="onDeckDragEnd(event)"
-                         onclick="event.stopPropagation(); abestudo('${p}')"
+                         onclick="event.stopPropagation(); enterFolder('${p}')"
                          oncontextmenu="showContextMenu(event, '${p}')"
                          onmouseenter="this.style.boxShadow='0 8px 25px -5px rgba(6,182,212,0.25), 0 4px 10px rgba(99,102,241,0.1)'; this.style.backgroundImage='linear-gradient(white, white), linear-gradient(135deg, rgba(6,182,212,0.6), rgba(99,102,241,0.5), rgba(6,182,212,0.3))';"
                          onmouseleave="this.style.boxShadow='0 2px 12px -3px rgba(6,182,212,0.15), 0 1px 3px rgba(0,0,0,0.06)'; this.style.backgroundImage='linear-gradient(white, white), linear-gradient(135deg, rgba(6,182,212,0.4), rgba(99,102,241,0.3), rgba(6,182,212,0.15))';"`;
@@ -899,17 +962,17 @@
                         <div class="absolute bottom-0 left-0 right-0 h-[3px] z-20" style="background:linear-gradient(90deg, #06b6d4, #6366f1, #22d3ee, transparent)"></div>
 
                         <!-- Conteúdo -->
-                        <div class="relative z-10 p-4 pb-3 flex flex-col" style="min-height:195px">
-                            <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm backdrop-blur-sm">
+                        <div class="relative z-10 p-4 pb-3 flex flex-col h-full">
+                            <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm backdrop-blur-sm shrink-0">
                                 <span class="material-symbols-outlined text-[20px]">${icon}</span>
                             </div>
-                            <h3 class="font-extrabold text-[16px] text-[#0B193C] leading-tight mb-1.5">${name}</h3>
-                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap min-h-[20px]">
+                            <h3 class="font-extrabold text-[16px] text-[#0B193C] leading-tight mb-1.5 shrink-0">${name}</h3>
+                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap min-h-[20px] shrink-0">
                                 ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${badgeColor}">${parentName}</span>` : ''}
-                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400">+ sub-baralhos</span>` : ''}
+                                ${subCount > 0 ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white bg-indigo-500 shadow-sm flex items-center gap-1"><span class="material-symbols-outlined text-[10px]">folder</span> ${subCount} sub-baralhos</span>` : ''}
                             </div>
                             <div class="flex-1"></div>
-                            <div class="flex items-center gap-4 mt-3 pt-2 text-[11px] font-bold text-slate-500">
+                            <div class="flex items-center gap-4 mt-1 pt-2 text-[11px] font-bold text-slate-500 shrink-0">
                                 <div class="flex items-center gap-1">
                                     <span class="w-1.5 h-1.5 rounded-full ${s.nãovo === 0 ? 'bg-slate-300' : 'bg-blue-500'}"></span>
                                     <span>Novo</span>
@@ -933,12 +996,17 @@
                     // ===== CARD DE UNIVERSIDADE: imagem completa =====
                     html.push(`
                     <div ${cardAttrs}>
-                        <img src="${imgSrc}" alt="${name}" class="w-full h-auto block" style="min-height:195px; object-fit:cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
+                        <img src="${imgSrc}" alt="${name}" class="w-full h-full block object-cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
                     </div>
                     `);
                 }
             });
-            wrap.innerHTML = html.join('');
+
+            if (allVisible.length === 0) {
+                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center col-span-full"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">inbox</span><p class="text-slate-500 font-bold">Nenhum sub-baralho</p><p class="text-slate-400 text-sm mt-1">Clique em "Estudar Agora" no cabeçalho ou crie sub-baralhos.</p></div>';
+            } else {
+                wrap.innerHTML = html.join('');
+            }
         }
 
         // --- DRAG & DROP HANDLERS ---
@@ -962,10 +1030,24 @@
             // Visual highlight
             const row = e.target.closest('.deck-card');
             if (row) {
-                row.style.background = 'rgba(99, 102, 241, 0.12)';
-                row.style.outline = '2px dashed rgba(99, 102, 241, 0.5)';
-                row.style.outlineOffset = '-2px';
-                row.style.borderRadius = '8px';
+                const rect = row.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                row.style.background = '';
+                row.style.outline = '';
+                row.style.outlineOffset = '';
+                row.style.borderLeft = '';
+                row.style.borderRight = '';
+                row.style.borderRadius = '16px';
+                
+                if (x < rect.width * 0.25) {
+                    row.style.borderLeft = '4px solid #6366f1';
+                } else if (x > rect.width * 0.75) {
+                    row.style.borderRight = '4px solid #6366f1';
+                } else {
+                    row.style.background = 'rgba(99, 102, 241, 0.12)';
+                    row.style.outline = '2px dashed rgba(99, 102, 241, 0.5)';
+                    row.style.outlineOffset = '-2px';
+                }
             }
         }
 
@@ -975,6 +1057,8 @@
                 row.style.background = '';
                 row.style.outline = '';
                 row.style.outlineOffset = '';
+                row.style.borderLeft = '';
+                row.style.borderRight = '';
             }
         }
 
@@ -982,23 +1066,52 @@
             e.preventDefault();
             e.stopPropagation();
             const row = e.target.closest('.deck-card');
+            let action = 'into';
             if (row) {
+                const rect = row.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                if (x < rect.width * 0.25) action = 'before';
+                else if (x > rect.width * 0.75) action = 'after';
+                
                 row.style.background = '';
                 row.style.outline = '';
                 row.style.outlineOffset = '';
+                row.style.borderLeft = '';
+                row.style.borderRight = '';
             }
             if (!draggedDeck || draggedDeck === targetPath) return;
             // Prevent dropping into own children
             if (targetPath.startsWith(draggedDeck + '::')) return;
-            // Prevent dropping into current parent (already there)
-            const draggedParts = draggedDeck.split('::');
-            const draggedName = draggedParts[draggedParts.length - 1];
-            const newPath = targetPath + '::' + draggedName;
-            if (newPath === draggedDeck) return;
 
-            // Move the deck: rename deckId in all cards & update deck registry
-            moveDeckInto(draggedDeck, targetPath);
+            if (action === 'into') {
+                // Prevent dropping into current parent (already there)
+                const draggedParts = draggedDeck.split('::');
+                const draggedName = draggedParts[draggedParts.length - 1];
+                const newPath = targetPath + '::' + draggedName;
+                if (newPath === draggedDeck) { draggedDeck = null; return; }
+                moveDeckInto(draggedDeck, targetPath);
+            } else {
+                reorderDeck(draggedDeck, targetPath, action);
+            }
             draggedDeck = null;
+        }
+
+        function reorderDeck(dragged, target, position) {
+            let deck_order = window.db ? (window.db.get('deck_order') || []) : [];
+            let iD = deck_order.indexOf(dragged);
+            if(iD !== -1) deck_order.splice(iD, 1);
+            let iT = deck_order.indexOf(target);
+            if(iT === -1) iT = deck_order.length;
+            
+            if(position === 'before') {
+                deck_order.splice(iT, 0, dragged);
+            } else {
+                deck_order.splice(iT + 1, 0, dragged);
+            }
+            if(window.db) window.db.set('deck_order', deck_order);
+            renderDecksHome();
+            setTimeout(renderDecksHome, 100);
+            setTimeout(renderDecksHome, 300);
         }
 
         function onDeckDragEnd(e) {
@@ -1008,6 +1121,8 @@
                 r.style.background = '';
                 r.style.outline = '';
                 r.style.outlineOffset = '';
+                r.style.borderLeft = '';
+                r.style.borderRight = '';
             });
             draggedDeck = null;
         }
@@ -1020,17 +1135,20 @@
             // Check if destination already exists
             let dDb = window.db ? (window.db.get('flashcard_decks') || []) : [];
             let cDb = window.db ? (window.db.get('flashcards') || []) : [];
-            const gp = function(d) { return d.fullPath || d.nome || ''; };
+            const gp = function(d) { return d.fullPatéh || d.fullPath || d.nome || ''; };
 
             // Rename in decks registry
             dDb.forEach(function(d) {
                 var dp = gp(d);
                 if (dp === sourcePath) {
+                    if (d.fullPatéh !== undefined) d.fullPatéh = newPath;
                     d.fullPath = newPath;
                     d.nome = newPath.split('::').pop();
                 } else if (dp && dp.startsWith(sourcePath + '::')) {
-                    d.fullPath = dp.replace(sourcePath, newPath);
-                    d.nome = d.fullPath.split('::').pop();
+                    let newSubPath = dp.replace(sourcePath, newPath);
+                    if (d.fullPatéh !== undefined) d.fullPatéh = newSubPath;
+                    d.fullPath = newSubPath;
+                    d.nome = newSubPath.split('::').pop();
                 }
             });
 
@@ -1043,20 +1161,44 @@
                 }
             });
 
+            // Update custom deck_order
+            let deck_order = window.db ? (window.db.get('deck_order') || []) : [];
+            for (let j = 0; j < deck_order.length; j++) {
+                if (deck_order[j] === sourcePath) {
+                    deck_order[j] = newPath;
+                } else if (deck_order[j].startsWith(sourcePath + '::')) {
+                    deck_order[j] = deck_order[j].replace(sourcePath, newPath);
+                }
+            }
+            // Move it directly after its new parent in the list
+            let toMove = [];
+            deck_order = deck_order.filter(d => {
+                if (d === newPath || d.startsWith(newPath + '::')) {
+                    toMove.push(d);
+                    return false;
+                }
+                return true;
+            });
+            let targetIdx = deck_order.indexOf(targetPath);
+            if(targetIdx !== -1) {
+                deck_order.splice(targetIdx + 1, 0, ...toMove);
+            } else {
+                deck_order.push(...toMove);
+            }
+
             // Save
             if (window.db) {
                 window.db.set('flashcards', cDb);
                 window.db.set('flashcard_decks', dDb);
+                window.db.set('deck_order', deck_order);
             }
-
-            // Expand the target so user can see the moved deck
-            expandedDecks.add(targetPath);
 
             // Show success toast
             showToast(`"${sourceName}" movido para "${targetPath.split('::').pop()}"`, 'success');
 
-            // Re-render
+            // Re-render immediately and after a short delay to account for async DB writes
             renderDecksHome();
+            setTimeout(renderDecksHome, 250);
         }
 
         // Simple toast notification
