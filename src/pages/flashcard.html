@@ -732,41 +732,52 @@
         // --- DRAG & DROP STATE ---
         let draggedDeck = null;
 
-        function getDeckIllustration(deckName) {
-            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s+/g, '_');
-            const map = {
-                'biologia':'biologia','bio':'biologia','ciencias':'biologia',
-                'fisica':'fisica','fis':'fisica',
-                'quimica':'quimica','qui':'quimica',
-                'matematica':'matematica','mat':'matematica','calculo':'matematica',
-                'portugues':'portugues','lingua_portuguesa':'portugues','gramatica':'portugues',
-                'historia':'historia','hist':'historia',
-                'geografia':'geografia','geo':'geografia',
-                'filosofia':'filosofia','filo':'filosofia',
-                'sociologia':'sociologia','socio':'sociologia',
-                'ingles':'ingles','english':'ingles',
-                'espanhol':'espanhol','spanish':'espanhol',
-                'literatura':'literatura','lit':'literatura',
-                'redacao':'redacao','producao_textual':'redacao',
-                'artes':'artes','arte':'artes',
-                'educacao_fisica':'educacao_fisica','ed_fisica':'educacao_fisica',
-            };
-            for (let key in map) {
-                if (n.includes(key)) return '../../public/assets/deck-illustrations/' + map[key] + '.png';
+        function getDeckIllustration(deckPath) {
+            // Uses the LAST part of the deck path (the leaf name) to find the image
+            const parts = deckPath.split('::');
+            const name = parts[parts.length - 1].trim();
+            // Try exact match first (e.g. "FISICA" -> "FÍSICA.png")
+            // Build a lookup with normalized keys
+            const files = [
+                'ARTES','BIOLOGIA','CEUB','EDUCAÇÃO FÍSICA','ENEM','ESPANHOL','FAMERP',
+                'FILOSOFIA','FUVEST','FÍSICA','GEOGRAFIA','GRAMÁTICA','HISTÓRIA',
+                'INGLÊS','LINGUAGENS','LITERATURA','MATEMÁTICA','MAUÁ','MÚSICA',
+                'QUÍMICA','REDAÇÃO','SOCIOLOGIA','UCB','UEG','UEMG','UFG','UFGD',
+                'UFGRS','UFJF','UFMS','UFPR','UFSC','UFT','UFU','UNB','UNESP',
+                'UNICAMP','UNICEPLAC','UNIEURO','UNIMONTES','UNIOSTE','UNIRV','USP'
+            ];
+            const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
+            const nName = norm(name);
+            // Also try the parent for sub-decks
+            const parentName = parts.length > 1 ? norm(parts[0]) : '';
+            
+            for (let f of files) {
+                if (norm(f) === nName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
             }
-            return '../../public/assets/deck-illustrations/default.png';
+            // Try partial match
+            for (let f of files) {
+                if (nName.includes(norm(f)) || norm(f).includes(nName)) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
+            }
+            // Try matching the FIRST part (parent deck) for sub-decks
+            if (parentName) {
+                for (let f of files) {
+                    if (norm(f) === parentName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
+                }
+            }
+            return '../../CARDS MENTORIA SINAPSE/ENEM.png';
         }
 
         function getDeckDescription(deckName) {
             const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
             const descs = {
                 'fisica': 'Leis, fenômenos e relações que explicam o universo.',
-                'quimica': 'Reações, estruturas e transformações que...',
-                'matematica': 'Raciocínio, lógica e precisão para resolver...',
+                'quimica': 'Reações, estruturas e transformações que movem o mundo.',
+                'matematica': 'Raciocínio, lógica e precisão para resolver problemas.',
                 'biologia': 'Vida, evolução e os sistemas que nos conectam.',
                 'historia': 'Eventos, contextos e transformações da humanidade.',
                 'geografia': 'Espaço, território e relações socioambientais.',
                 'portugues': 'Gramática, interpretação e domínio da língua.',
+                'gramatica': 'Regras, estruturas e o uso correto da língua.',
                 'literatura': 'Obras, autores e movimentos literários.',
                 'filosofia': 'Pensamento crítico e as grandes questões.',
                 'sociologia': 'Sociedade, cultura e relações humanas.',
@@ -775,27 +786,14 @@
                 'redacao': 'Argumentação, coesão e técnicas de escrita.',
                 'artes': 'Expressão, movimentos e manifestações artísticas.',
                 'educacao_fisica': 'Corpo, movimento e saúde em equilíbrio.',
+                'linguagens': 'Comunicação, expressão e linguagem em contexto.',
+                'musica': 'Ritmo, harmonia e expressão sonora.',
+                'enem': 'Prepare-se para o maior vestibular do Brasil.',
             };
             for (let key in descs) {
                 if (n.includes(key)) return descs[key];
             }
             return 'Organize seus estudos e revise no tempo certo.';
-        }
-
-        function getDeckIcon(deckName) {
-            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            if (n.includes('fisica') || n.includes('quimica')) return 'science';
-            if (n.includes('matematica') || n.includes('calculo')) return 'calculate';
-            if (n.includes('biologia') || n.includes('ciencia')) return 'biotech';
-            if (n.includes('historia')) return 'menu_book';
-            if (n.includes('geografia')) return 'public';
-            if (n.includes('portugues') || n.includes('gramatica') || n.includes('literatura')) return 'auto_stories';
-            if (n.includes('filosofia') || n.includes('sociologia')) return 'psychology';
-            if (n.includes('ingles') || n.includes('espanhol')) return 'translate';
-            if (n.includes('redacao')) return 'edit_note';
-            if (n.includes('artes')) return 'palette';
-            if (n.includes('med') || n.includes('medicina')) return 'local_hospital';
-            return 'style';
         }
 
         function renderDecksHome() {
@@ -808,14 +806,9 @@
                 wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p><p class="text-slate-400 text-sm mt-1">Clique em "Criar Baralho" para começar.</p></div>';
                 return;
             }
-            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
+            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5';
 
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
-
-            // Only show top-level decks as cards (sub-decks appear as badges)
-            let topDecks = r_decks.filter(p => !p.includes('::'));
-            // Also include sub-decks that are direct children if their parent is expanded
-            // For the card view, we show ALL decks as individual cards
             let allVisible = r_decks;
 
             let html = [];
@@ -825,18 +818,18 @@
                 let deep = parts.length - 1;
                 let parentName = deep > 0 ? parts[0] : '';
                 let s = statés[p];
-                let imgSrc = getDeckIllustration(name);
+                let imgSrc = getDeckIllustration(p);
                 let desc = getDeckDescription(name);
-                let icon = getDeckIcon(name);
                 let hasSubs = hasChild(p);
                 let subCount = hasSubs ? r_decks.filter(d => d.startsWith(p+'::') && d !== p && d.split('::').length === parts.length + 1).length : 0;
 
-                // Badge colors based on parent
+                // Badge colors
                 const badgeColors = ['bg-indigo-600','bg-emerald-600','bg-amber-600','bg-rose-600','bg-purple-600','bg-cyan-600'];
                 let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
 
                 html.push(`
-                    <div class="deck-card relative bg-white rounded-2xl border border-slate-200 overflow-hidden cursor-pointer group hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300"
+                    <div class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                         style="min-height:220px"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -847,47 +840,44 @@
                          onclick="event.stopPropagation(); abestudo('${p}')"
                          oncontextmenu="showContextMenu(event, '${p}')">
                         
-                        <!-- Ilustração watermark no canto superior direito -->
-                        <div class="absolute top-2 right-2 w-20 h-20 opacity-20 pointer-events-none">
-                            <img src="${imgSrc}" alt="" class="w-full h-full object-contain" onerror="this.src='../../public/assets/deck-illustrations/default.png'">
-                        </div>
-
-                        <!-- Conteúdo do card -->
-                        <div class="p-4 pb-2 relative z-10">
-                            <!-- Ícone -->
-                            <div class="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mb-3">
-                                <span class="material-symbols-outlined text-[18px] text-slate-500">${icon}</span>
-                            </div>
-
+                        <!-- Imagem de fundo -->
+                        <img src="${imgSrc}" alt="${name}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
+                        
+                        <!-- Overlay gradiente para legibilidade -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                        
+                        <!-- Conteúdo sobre a imagem -->
+                        <div class="relative z-10 flex flex-col justify-end h-full p-4">
+                            
                             <!-- Nome do baralho -->
-                            <h3 class="font-extrabold text-[15px] text-[#0B193C] leading-tight mb-1.5 truncate group-hover:text-indigo-700 transition-colors">${name}</h3>
+                            <h3 class="font-extrabold text-[17px] text-white leading-tight mb-1 drop-shadow-lg">${name}</h3>
 
                             <!-- Badges -->
                             <div class="flex items-center gap-1.5 mb-2 flex-wrap">
-                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${badgeColor}">${parentName}</span>` : ''}
-                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">+ ${subCount} sub-baralho${subCount !== 1 ? 's' : ''}</span>` : ''}
+                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${badgeColor} shadow-sm">${parentName}</span>` : ''}
+                                ${hasSubs ? `<span class="text-[9px] font-medium text-white/80 bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">+ ${subCount} sub-baralho${subCount !== 1 ? 's' : ''}</span>` : ''}
                             </div>
 
                             <!-- Descrição -->
-                            <p class="text-[11px] text-slate-400 leading-relaxed mb-3 line-clamp-2" style="min-height:30px">${desc}</p>
-                        </div>
+                            <p class="text-[11px] text-white/75 leading-relaxed mb-3 line-clamp-2">${desc}</p>
 
-                        <!-- Rodapé com contadores -->
-                        <div class="px-4 py-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold bg-slate-50/50">
-                            <div class="flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[13px] ${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-500'}">fiber_new</span>
-                                <span class="text-slate-500">Novo</span>
-                                <span class="${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-600'}">${s.nãovo}</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[13px] ${s.aprender === 0 ? 'text-slate-300' : 'text-amber-500'}">local_fire_department</span>
-                                <span class="text-slate-500">Aprender</span>
-                                <span class="${s.aprender === 0 ? 'text-slate-300' : 'text-amber-600'}">${s.aprender}</span>
-                            </div>
-                            <div class="flex items-center gap-1">
-                                <span class="material-symbols-outlined text-[13px] ${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-500'}">refresh</span>
-                                <span class="text-slate-500">Revisar</span>
-                                <span class="${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-600'}">${s.revisar}</span>
+                            <!-- Contadores -->
+                            <div class="flex items-center gap-3 text-[11px] font-bold">
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px] text-blue-300">fiber_new</span>
+                                    <span class="text-white/70">Novo</span>
+                                    <span class="${s.nãovo === 0 ? 'text-white/40' : 'text-blue-300 font-extrabold'}">${s.nãovo}</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px] text-amber-300">local_fire_department</span>
+                                    <span class="text-white/70">Aprender</span>
+                                    <span class="${s.aprender === 0 ? 'text-white/40' : 'text-amber-300 font-extrabold'}">${s.aprender}</span>
+                                </div>
+                                <div class="flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[13px] text-emerald-300">refresh</span>
+                                    <span class="text-white/70">Revisar</span>
+                                    <span class="${s.revisar === 0 ? 'text-white/40' : 'text-emerald-300 font-extrabold'}">${s.revisar}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
