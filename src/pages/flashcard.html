@@ -195,10 +195,10 @@
                 
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
-                    <div class="max-w-5xl mx-auto px-6">
-                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+                    <div class="max-w-6xl mx-auto px-6">
+                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
                     </div>
-                    <div class="max-w-5xl mx-auto flex justify-center gap-3 px-6">
+                    <div class="max-w-6xl mx-auto flex justify-center gap-3 px-6">
                         <button class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
                         <button onclick="abrirmodalnãovobaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
                         <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">upload</span>Importar arquivo</button>
@@ -806,7 +806,7 @@
                 wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p><p class="text-slate-400 text-sm mt-1">Clique em "Criar Baralho" para começar.</p></div>';
                 return;
             }
-            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5';
+            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5';
 
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
             let allVisible = r_decks;
