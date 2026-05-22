@@ -861,7 +861,7 @@
                 let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
 
                 html.push(`
-                    <div class="deck-card relative bg-white rounded-2xl border border-slate-200/80 overflow-hidden cursor-pointer group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                    <div class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -872,52 +872,8 @@
                          onclick="event.stopPropagation(); abestudo('${p}')"
                          oncontextmenu="showContextMenu(event, '${p}')">
                         
-                        <!-- Borda inferior ciano gradiente -->
-                        <div class="absolute bottom-0 left-0 right-0 h-[3px]" style="background:linear-gradient(90deg, #06b6d4, #22d3ee, transparent)"></div>
-
-                        <!-- Watermark ilustração no canto superior direito -->
-                        <div class="absolute top-3 right-3 w-[85px] h-[85px] opacity-[0.15] pointer-events-none">
-                            <img src="${imgSrc}" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'">
-                        </div>
-
-                        <!-- Conteúdo do card -->
-                        <div class="relative z-10 p-4 pb-3 flex flex-col" style="min-height:195px">
-                            <!-- Ícone circular -->
-                            <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm">
-                                <span class="material-symbols-outlined text-[20px]">${icon}</span>
-                            </div>
-
-                            <!-- Nome do baralho -->
-                            <h3 class="font-extrabold text-[16px] text-[#0B193C] leading-tight mb-1.5">${name}</h3>
-
-                            <!-- Badges -->
-                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap min-h-[20px]">
-                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${badgeColor}">${parentName}</span>` : ''}
-                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400">+ sub-baralhos</span>` : ''}
-                            </div>
-
-                            <!-- Descrição -->
-                            <p class="text-[11px] text-slate-400 leading-relaxed mb-auto line-clamp-2">${desc}</p>
-
-                            <!-- Contadores -->
-                            <div class="flex items-center gap-4 mt-3 pt-2 text-[11px] font-bold text-slate-400">
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.nãovo === 0 ? 'bg-slate-300' : 'bg-blue-500'}"></span>
-                                    <span>Novo</span>
-                                    <span class="${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-600 font-extrabold'}">${s.nãovo}</span>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.aprender === 0 ? 'bg-slate-300' : 'bg-amber-500'}"></span>
-                                    <span>Aprender</span>
-                                    <span class="${s.aprender === 0 ? 'text-slate-300' : 'text-amber-600 font-extrabold'}">${s.aprender}</span>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.revisar === 0 ? 'bg-slate-300' : 'bg-emerald-500'}"></span>
-                                    <span>Revisar</span>
-                                    <span class="${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-600 font-extrabold'}">${s.revisar}</span>
-                                </div>
-                            </div>
-                        </div>
+                        <!-- Imagem de fundo do card -->
+                        <img src="${imgSrc}" alt="${name}" class="w-full h-auto block" style="min-height:195px; object-fit:cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
                     </div>
                 `);
             });
