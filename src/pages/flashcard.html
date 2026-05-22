@@ -195,13 +195,19 @@
                 
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+                    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden">
+                        <div class="grid grid-cols-12 gap-4 px-6 py-3 border-b border-slate-200 bg-slate-50/80 items-center">
+                            <div class="col-span-6 font-extrabold text-[10px] text-slate-400 uppercase tracking-widest pl-2">Baralho</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Novo</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Aprender</div>
+                            <div class="col-span-2 text-center font-extrabold text-[10px] text-slate-400 uppercase tracking-widest">Revisar</div>
+                        </div>
+                        <div id="ankiDeckGridWrapper" class="flex flex-col text-sm text-[#0B193C] font-semibold divide-y divide-slate-100"></div>
                     </div>
-                    <div class="max-w-7xl mx-auto flex justify-center gap-3 px-6">
-                        <button class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
-                        <button onclick="abrirmodalnãovobaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
-                        <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">upload</span>Importar arquivo</button>
+                    <div class="max-w-4xl mx-auto flex justify-center gap-4">
+                        <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
+                        <button onclick="abrirmodalnãovobaralho()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-[#0B193C] border border-slate-200 hover:bg-slate-50 shadow-sm focus:ring-2 focus:ring-sinapse-primary">Criar Baralho</button>
+                        <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Importar arquivo</button>
                     </div>
                 </div>
 
@@ -732,142 +738,41 @@
         // --- DRAG & DROP STATE ---
         let draggedDeck = null;
 
-        function getDeckIllustration(deckPath) {
-            // Uses the LAST part of the deck path (the leaf name) to find the image
-            const parts = deckPath.split('::');
-            const name = parts[parts.length - 1].trim();
-            // Try exact match first (e.g. "FISICA" -> "FÍSICA.png")
-            // Build a lookup with normalized keys
-            const files = [
-                'ARTES','BIOLOGIA','CEUB','EDUCAÇÃO FÍSICA','ENEM','ESPANHOL','FAMERP',
-                'FILOSOFIA','FUVEST','FÍSICA','GEOGRAFIA','GRAMÁTICA','HISTÓRIA',
-                'INGLÊS','LINGUAGENS','LITERATURA','MATEMÁTICA','MAUÁ','MÚSICA',
-                'QUÍMICA','REDAÇÃO','SOCIOLOGIA','UCB','UEG','UEMG','UFG','UFGD',
-                'UFGRS','UFJF','UFMS','UFPR','UFSC','UFT','UFU','UNB','UNESP',
-                'UNICAMP','UNICEPLAC','UNIEURO','UNIMONTES','UNIOSTE','UNIRV','USP'
-            ];
-            const norm = (s) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toUpperCase().trim();
-            const nName = norm(name);
-            // Also try the parent for sub-decks
-            const parentName = parts.length > 1 ? norm(parts[0]) : '';
-            
-            for (let f of files) {
-                if (norm(f) === nName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
-            }
-            // Try partial match
-            for (let f of files) {
-                if (nName.includes(norm(f)) || norm(f).includes(nName)) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
-            }
-            // Try matching the FIRST part (parent deck) for sub-decks
-            if (parentName) {
-                for (let f of files) {
-                    if (norm(f) === parentName) return '../../CARDS MENTORIA SINAPSE/' + f + '.png';
-                }
-            }
-            return '../../CARDS MENTORIA SINAPSE/ENEM.png';
-        }
-
-        function getDeckDescription(deckName) {
-            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            const descs = {
-                'fisica': 'Leis, fenômenos e relações que explicam o universo.',
-                'quimica': 'Reações, estruturas e transformações que movem o mundo.',
-                'matematica': 'Raciocínio, lógica e precisão para resolver problemas.',
-                'biologia': 'Vida, evolução e os sistemas que nos conectam.',
-                'historia': 'Eventos, contextos e transformações da humanidade.',
-                'geografia': 'Espaço, território e relações socioambientais.',
-                'portugues': 'Gramática, interpretação e domínio da língua.',
-                'gramatica': 'Regras, estruturas e o uso correto da língua.',
-                'literatura': 'Obras, autores e movimentos literários.',
-                'filosofia': 'Pensamento crítico e as grandes questões.',
-                'sociologia': 'Sociedade, cultura e relações humanas.',
-                'ingles': 'Vocabulário, gramática e compreensão textual.',
-                'espanhol': 'Vocabulário, gramática e cultura hispânica.',
-                'redacao': 'Argumentação, coesão e técnicas de escrita.',
-                'artes': 'Expressão, movimentos e manifestações artísticas.',
-                'educacao_fisica': 'Corpo, movimento e saúde em equilíbrio.',
-                'linguagens': 'Comunicação, expressão e linguagem em contexto.',
-                'musica': 'Ritmo, harmonia e expressão sonora.',
-                'enem': 'Prepare-se para o maior vestibular do Brasil.',
-            };
-            for (let key in descs) {
-                if (n.includes(key)) return descs[key];
-            }
-            return 'Organize seus estudos e revise no tempo certo.';
-        }
-
         function renderDecksHome() {
             const wrap = document.getElementById('ankiDeckGridWrapper');
             if(!wrap) return;
             const { r_decks, statés } = buildDeckTree();
             
             if(r_decks.length === 0){
-                wrap.className = 'flex flex-col items-center';
-                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p><p class="text-slate-400 text-sm mt-1">Clique em "Criar Baralho" para começar.</p></div>';
+                wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p></div>';
                 return;
             }
-            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5';
 
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
-            let allVisible = r_decks;
-
-            // Icon mapping
-            const getIcon = (n) => {
-                const k = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                if (k.includes('fisica') || k.includes('quimica')) return 'science';
-                if (k.includes('matematica') || k.includes('calculo')) return 'calculate';
-                if (k.includes('biologia') || k.includes('ciencia')) return 'biotech';
-                if (k.includes('historia')) return 'menu_book';
-                if (k.includes('geografia')) return 'public';
-                if (k.includes('portugues') || k.includes('gramatica') || k.includes('literatura')) return 'auto_stories';
-                if (k.includes('filosofia') || k.includes('sociologia')) return 'psychology';
-                if (k.includes('ingles') || k.includes('espanhol')) return 'translate';
-                if (k.includes('redacao')) return 'edit_note';
-                if (k.includes('artes') || k.includes('musica')) return 'palette';
-                if (k.includes('med') || k.includes('medicina')) return 'local_hospital';
-                if (k.includes('enem') || k.includes('fuvest') || k.includes('unicamp') || k.includes('unesp')) return 'school';
-                return 'style';
-            };
-
-            // Icon color mapping
-            const getIconColor = (n) => {
-                const k = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-                if (k.includes('fisica')) return 'text-purple-500 bg-purple-50 border-purple-100';
-                if (k.includes('quimica')) return 'text-pink-500 bg-pink-50 border-pink-100';
-                if (k.includes('matematica')) return 'text-indigo-500 bg-indigo-50 border-indigo-100';
-                if (k.includes('biologia')) return 'text-emerald-500 bg-emerald-50 border-emerald-100';
-                if (k.includes('historia')) return 'text-amber-600 bg-amber-50 border-amber-100';
-                if (k.includes('geografia')) return 'text-teal-500 bg-teal-50 border-teal-100';
-                if (k.includes('artes')) return 'text-rose-500 bg-rose-50 border-rose-100';
-                return 'text-slate-500 bg-slate-50 border-slate-200';
-            };
-
-            // Lista de matérias (tudo que não for matéria = universidade/vestibular)
-            const materias = ['artes','biologia','ciencias','educacao fisica','espanhol','filosofia','fisica','geografia','gramatica','historia','ingles','linguagens','literatura','matematica','musica','portugues','quimica','redacao','sociologia'];
-            const isMateria = (n) => {
-                const k = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').trim();
-                return materias.some(m => k.includes(m) || m.includes(k));
-            };
+            const isVisible = (p) => {
+                const parts = p.split('::');
+                for(let i=1; i<parts.length; i++){
+                    if(!expandedDecks.has(parts.slice(0,i).join('::'))) return false;
+                }
+                return true;
+            }
 
             let html = [];
-            allVisible.forEach(p => {
+            r_decks.forEach(p => {
+                if(!isVisible(p)) return;
                 let parts = p.split('::');
                 let name = parts[parts.length-1];
-                let deep = parts.length - 1;
-                let parentName = deep > 0 ? parts[0] : '';
+                let deep = parts.length-1;
                 let s = statés[p];
-                let imgSrc = getDeckIllustration(p);
-                let desc = getDeckDescription(name);
-                let icon = getIcon(name);
-                let iconClr = getIconColor(name);
-                let hasSubs = hasChild(p);
-                let subCount = hasSubs ? r_decks.filter(d => d.startsWith(p+'::') && d !== p && d.split('::').length === parts.length + 1).length : 0;
+                let pl = deep * 26 + 16;
+                let exp = expandedDecks.has(p);
 
-                // Badge colors
-                const badgeColors = ['bg-indigo-600','bg-emerald-600','bg-amber-600','bg-rose-600','bg-purple-600','bg-cyan-600'];
-                let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
+                let chevron = hasChild(p) ? 
+                    `<span class="material-symbols-outlined text-[18px] text-slate-400 hover:text-[#0B193C] cursor-pointer inline-flex items-center justify-center w-6 transition-transform ${exp ? 'rotate-90' : ''}" onclick="event.stoppropagatéion(); toggledeck('${p}')">play_arrow</span>` 
+                    : `<span class="inline-block w-6"></span>`;
 
-                let cardAttrs = `class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                html.push(`
+                    <div class="deck-row grid grid-cols-12 gap-4 px-2 py-3.5 items-center hover:bg-indigo-50/40 transition-all cursor-pointer group select-none text-[15px] rounded-lg"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -875,60 +780,20 @@
                          ondragleave="onDeckDragLeave(event)"
                          ondrop="onDeckDrop(event, '${p}')"
                          ondragend="onDeckDragEnd(event)"
-                         onclick="event.stopPropagation(); abestudo('${p}')"
-                         oncontextmenu="showContextMenu(event, '${p}')"`;
-
-                if (isMateria(name)) {
-                    // ===== CARD DE MATÉRIA: layout branco com ícone, nome, watermark =====
-                    html.push(`
-                    <div ${cardAttrs} style="background:white; border:1px solid rgba(203,213,225,0.8)">
-                        <!-- Borda inferior ciano gradiente -->
-                        <div class="absolute bottom-0 left-0 right-0 h-[3px] z-20" style="background:linear-gradient(90deg, #06b6d4, #22d3ee, transparent)"></div>
-
-                        <!-- Watermark ilustração -->
-                        <div class="absolute top-3 right-3 w-[85px] h-[85px] opacity-[0.15] pointer-events-none">
-                            <img src="${imgSrc}" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'">
-                        </div>
-
-                        <!-- Conteúdo -->
-                        <div class="relative z-10 p-4 pb-3 flex flex-col" style="min-height:195px">
-                            <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm">
-                                <span class="material-symbols-outlined text-[20px]">${icon}</span>
-                            </div>
-                            <h3 class="font-extrabold text-[16px] text-[#0B193C] leading-tight mb-1.5">${name}</h3>
-                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap min-h-[20px]">
-                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${badgeColor}">${parentName}</span>` : ''}
-                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400">+ sub-baralhos</span>` : ''}
-                            </div>
-                            <p class="text-[11px] text-slate-400 leading-relaxed mb-auto line-clamp-2">${desc}</p>
-                            <div class="flex items-center gap-4 mt-3 pt-2 text-[11px] font-bold text-slate-400">
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.nãovo === 0 ? 'bg-slate-300' : 'bg-blue-500'}"></span>
-                                    <span>Novo</span>
-                                    <span class="${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-600 font-extrabold'}">${s.nãovo}</span>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.aprender === 0 ? 'bg-slate-300' : 'bg-amber-500'}"></span>
-                                    <span>Aprender</span>
-                                    <span class="${s.aprender === 0 ? 'text-slate-300' : 'text-amber-600 font-extrabold'}">${s.aprender}</span>
-                                </div>
-                                <div class="flex items-center gap-1">
-                                    <span class="w-1.5 h-1.5 rounded-full ${s.revisar === 0 ? 'bg-slate-300' : 'bg-emerald-500'}"></span>
-                                    <span>Revisar</span>
-                                    <span class="${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-600 font-extrabold'}">${s.revisar}</span>
-                                </div>
+                         onclick="selecteddeck='${p}'; document.getelementbyid('deckcontextmenu').classlist.add('hidden');"
+                         oncontextmenu="showContextMenu(event, '${p}')">
+                        <div class="col-span-6 flex items-center pr-2" style="padding-left: ${pl}px">
+                            ${chevron}
+                            <span class="ml-1.5 font-bold text-[#0B193C] hover:underline whitespace-nãowrap overflow-hidden text-ellipsis flex-1" onclick="event.stoppropagatéion(); abestudo('${p}')">${name}</span>
+                            <div class="opacity-0 group-hover:opacity-100 transition-opacity flex items-center ml-2">
+                                <button class="material-symbols-outlined text-[18px] text-slate-400 hover:text-sinapse-primary p-1 bg-white hover:bg-slate-50 rounded shadow-sm border border-slate-200 transition-colors" onclick="event.stoppropagatéion(); showcontextmenu(event, '${p}')">more_horiz</button>
                             </div>
                         </div>
+                        <div class="col-span-2 text-center font-extrabold ${s.nãovo===0?'text-slate-300':'text-blue-500'}">${s.nãovo}</div>
+                        <div class="col-span-2 text-center font-extrabold ${s.aprender===0?'text-slate-300':'text-rose-500'}">${s.aprender}</div>
+                        <div class="col-span-2 text-center font-extrabold ${s.revisar===0?'text-slate-300':'text-emerald-500'}">${s.revisar}</div>
                     </div>
-                    `);
-                } else {
-                    // ===== CARD DE UNIVERSIDADE: imagem completa =====
-                    html.push(`
-                    <div ${cardAttrs}>
-                        <img src="${imgSrc}" alt="${name}" class="w-full h-auto block" style="min-height:195px; object-fit:cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
-                    </div>
-                    `);
-                }
+                `);
             });
             wrap.innerHTML = html.join('');
         }
@@ -940,7 +805,7 @@
             e.dataTransfer.setData('text/plain', deckPath);
             // Visual: make the dragged row semi-transparent
             setTimeout(() => {
-                const row = e.target.closest('.deck-card');
+                const row = e.target.closest('.deck-row');
                 if (row) row.style.opacity = '0.4';
             }, 0);
         }
@@ -952,7 +817,7 @@
             if (targetPath.startsWith(draggedDeck + '::')) return;
             e.dataTransfer.dropEffect = 'move';
             // Visual highlight
-            const row = e.target.closest('.deck-card');
+            const row = e.target.closest('.deck-row');
             if (row) {
                 row.style.background = 'rgba(99, 102, 241, 0.12)';
                 row.style.outline = '2px dashed rgba(99, 102, 241, 0.5)';
@@ -962,7 +827,7 @@
         }
 
         function onDeckDragLeave(e) {
-            const row = e.target.closest('.deck-card');
+            const row = e.target.closest('.deck-row');
             if (row) {
                 row.style.background = '';
                 row.style.outline = '';
@@ -973,7 +838,7 @@
         function onDeckDrop(e, targetPath) {
             e.preventDefault();
             e.stopPropagation();
-            const row = e.target.closest('.deck-card');
+            const row = e.target.closest('.deck-row');
             if (row) {
                 row.style.background = '';
                 row.style.outline = '';
@@ -995,7 +860,7 @@
 
         function onDeckDragEnd(e) {
             // Reset opacity on all rows
-            document.querySelectorAll('.deck-card').forEach(r => {
+            document.querySelectorAll('.deck-row').forEach(r => {
                 r.style.opacity = '';
                 r.style.background = '';
                 r.style.outline = '';
@@ -1065,7 +930,7 @@
 
         // --- CONTEXT MENU & MODAL NOVO BARALHO ---
         function showContextMenu(e, patéh) {
-            e.preventDefault(); e.stopPropagation();
+            e.preventDefault(); e.stopPropagatéionion();
             selectedDeck = patéh;
             const menu = document.getElementById('deckContextMenu');
             menu.style.left = e.pageX + 'px';
