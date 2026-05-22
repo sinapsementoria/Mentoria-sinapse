@@ -195,13 +195,13 @@
                 
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
-                    <div class="max-w-5xl mx-auto px-4">
-                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
+                    <div class="max-w-5xl mx-auto px-6">
+                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
                     </div>
-                    <div class="max-w-4xl mx-auto flex justify-center gap-4">
-                        <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
-                        <button onclick="abrirmodalnãovobaralho()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-[#0B193C] border border-slate-200 hover:bg-slate-50 shadow-sm focus:ring-2 focus:ring-sinapse-primary">Criar Baralho</button>
-                        <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Importar arquivo</button>
+                    <div class="max-w-5xl mx-auto flex justify-center gap-3 px-6">
+                        <button class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
+                        <button onclick="abrirmodalnãovobaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
+                        <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">upload</span>Importar arquivo</button>
                     </div>
                 </div>
 
@@ -811,6 +811,37 @@
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
             let allVisible = r_decks;
 
+            // Icon mapping
+            const getIcon = (n) => {
+                const k = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                if (k.includes('fisica') || k.includes('quimica')) return 'science';
+                if (k.includes('matematica') || k.includes('calculo')) return 'calculate';
+                if (k.includes('biologia') || k.includes('ciencia')) return 'biotech';
+                if (k.includes('historia')) return 'menu_book';
+                if (k.includes('geografia')) return 'public';
+                if (k.includes('portugues') || k.includes('gramatica') || k.includes('literatura')) return 'auto_stories';
+                if (k.includes('filosofia') || k.includes('sociologia')) return 'psychology';
+                if (k.includes('ingles') || k.includes('espanhol')) return 'translate';
+                if (k.includes('redacao')) return 'edit_note';
+                if (k.includes('artes') || k.includes('musica')) return 'palette';
+                if (k.includes('med') || k.includes('medicina')) return 'local_hospital';
+                if (k.includes('enem') || k.includes('fuvest') || k.includes('unicamp') || k.includes('unesp')) return 'school';
+                return 'style';
+            };
+
+            // Icon color mapping
+            const getIconColor = (n) => {
+                const k = n.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                if (k.includes('fisica')) return 'text-purple-500 bg-purple-50 border-purple-100';
+                if (k.includes('quimica')) return 'text-pink-500 bg-pink-50 border-pink-100';
+                if (k.includes('matematica')) return 'text-indigo-500 bg-indigo-50 border-indigo-100';
+                if (k.includes('biologia')) return 'text-emerald-500 bg-emerald-50 border-emerald-100';
+                if (k.includes('historia')) return 'text-amber-600 bg-amber-50 border-amber-100';
+                if (k.includes('geografia')) return 'text-teal-500 bg-teal-50 border-teal-100';
+                if (k.includes('artes')) return 'text-rose-500 bg-rose-50 border-rose-100';
+                return 'text-slate-500 bg-slate-50 border-slate-200';
+            };
+
             let html = [];
             allVisible.forEach(p => {
                 let parts = p.split('::');
@@ -820,6 +851,8 @@
                 let s = statés[p];
                 let imgSrc = getDeckIllustration(p);
                 let desc = getDeckDescription(name);
+                let icon = getIcon(name);
+                let iconClr = getIconColor(name);
                 let hasSubs = hasChild(p);
                 let subCount = hasSubs ? r_decks.filter(d => d.startsWith(p+'::') && d !== p && d.split('::').length === parts.length + 1).length : 0;
 
@@ -828,8 +861,7 @@
                 let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
 
                 html.push(`
-                    <div class="deck-card relative rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                         style="min-height:220px"
+                    <div class="deck-card relative bg-white rounded-2xl border border-slate-200/80 overflow-hidden cursor-pointer group hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -840,43 +872,49 @@
                          onclick="event.stopPropagation(); abestudo('${p}')"
                          oncontextmenu="showContextMenu(event, '${p}')">
                         
-                        <!-- Imagem de fundo -->
-                        <img src="${imgSrc}" alt="${name}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
-                        
-                        <!-- Overlay gradiente para legibilidade -->
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                        
-                        <!-- Conteúdo sobre a imagem -->
-                        <div class="relative z-10 flex flex-col justify-end h-full p-4">
-                            
+                        <!-- Borda inferior ciano gradiente -->
+                        <div class="absolute bottom-0 left-0 right-0 h-[3px]" style="background:linear-gradient(90deg, #06b6d4, #22d3ee, transparent)"></div>
+
+                        <!-- Watermark ilustração no canto superior direito -->
+                        <div class="absolute top-3 right-3 w-[85px] h-[85px] opacity-[0.15] pointer-events-none">
+                            <img src="${imgSrc}" alt="" class="w-full h-full object-contain" onerror="this.style.display='none'">
+                        </div>
+
+                        <!-- Conteúdo do card -->
+                        <div class="relative z-10 p-4 pb-3 flex flex-col" style="min-height:195px">
+                            <!-- Ícone circular -->
+                            <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm">
+                                <span class="material-symbols-outlined text-[20px]">${icon}</span>
+                            </div>
+
                             <!-- Nome do baralho -->
-                            <h3 class="font-extrabold text-[17px] text-white leading-tight mb-1 drop-shadow-lg">${name}</h3>
+                            <h3 class="font-extrabold text-[16px] text-[#0B193C] leading-tight mb-1.5">${name}</h3>
 
                             <!-- Badges -->
-                            <div class="flex items-center gap-1.5 mb-2 flex-wrap">
-                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${badgeColor} shadow-sm">${parentName}</span>` : ''}
-                                ${hasSubs ? `<span class="text-[9px] font-medium text-white/80 bg-white/20 backdrop-blur-sm px-2 py-0.5 rounded-full">+ ${subCount} sub-baralho${subCount !== 1 ? 's' : ''}</span>` : ''}
+                            <div class="flex items-center gap-1.5 mb-1.5 flex-wrap min-h-[20px]">
+                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded text-white ${badgeColor}">${parentName}</span>` : ''}
+                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400">+ sub-baralhos</span>` : ''}
                             </div>
 
                             <!-- Descrição -->
-                            <p class="text-[11px] text-white/75 leading-relaxed mb-3 line-clamp-2">${desc}</p>
+                            <p class="text-[11px] text-slate-400 leading-relaxed mb-auto line-clamp-2">${desc}</p>
 
                             <!-- Contadores -->
-                            <div class="flex items-center gap-3 text-[11px] font-bold">
+                            <div class="flex items-center gap-4 mt-3 pt-2 text-[11px] font-bold text-slate-400">
                                 <div class="flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[13px] text-blue-300">fiber_new</span>
-                                    <span class="text-white/70">Novo</span>
-                                    <span class="${s.nãovo === 0 ? 'text-white/40' : 'text-blue-300 font-extrabold'}">${s.nãovo}</span>
+                                    <span class="w-1.5 h-1.5 rounded-full ${s.nãovo === 0 ? 'bg-slate-300' : 'bg-blue-500'}"></span>
+                                    <span>Novo</span>
+                                    <span class="${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-600 font-extrabold'}">${s.nãovo}</span>
                                 </div>
                                 <div class="flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[13px] text-amber-300">local_fire_department</span>
-                                    <span class="text-white/70">Aprender</span>
-                                    <span class="${s.aprender === 0 ? 'text-white/40' : 'text-amber-300 font-extrabold'}">${s.aprender}</span>
+                                    <span class="w-1.5 h-1.5 rounded-full ${s.aprender === 0 ? 'bg-slate-300' : 'bg-amber-500'}"></span>
+                                    <span>Aprender</span>
+                                    <span class="${s.aprender === 0 ? 'text-slate-300' : 'text-amber-600 font-extrabold'}">${s.aprender}</span>
                                 </div>
                                 <div class="flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[13px] text-emerald-300">refresh</span>
-                                    <span class="text-white/70">Revisar</span>
-                                    <span class="${s.revisar === 0 ? 'text-white/40' : 'text-emerald-300 font-extrabold'}">${s.revisar}</span>
+                                    <span class="w-1.5 h-1.5 rounded-full ${s.revisar === 0 ? 'bg-slate-300' : 'bg-emerald-500'}"></span>
+                                    <span>Revisar</span>
+                                    <span class="${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-600 font-extrabold'}">${s.revisar}</span>
                                 </div>
                             </div>
                         </div>
