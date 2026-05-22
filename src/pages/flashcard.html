@@ -195,8 +195,8 @@
                 
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section space-y-6 fade-in-up">
-                    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-[0_4px_20px_-10px_rgba(0,0,0,0.08)] border border-slate-200 overflow-hidden">
-                        <div id="ankiDeckGridWrapper" class="flex flex-col p-3 gap-1"></div>
+                    <div class="max-w-5xl mx-auto px-4">
+                        <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"></div>
                     </div>
                     <div class="max-w-4xl mx-auto flex justify-center gap-4">
                         <button class="px-5 py-2.5 rounded-lg font-bold text-sm text-slate-500 border border-slate-200 hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm">Obter compartilhados</button>
@@ -757,44 +757,86 @@
             return '../../public/assets/deck-illustrations/default.png';
         }
 
+        function getDeckDescription(deckName) {
+            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            const descs = {
+                'fisica': 'Leis, fenômenos e relações que explicam o universo.',
+                'quimica': 'Reações, estruturas e transformações que...',
+                'matematica': 'Raciocínio, lógica e precisão para resolver...',
+                'biologia': 'Vida, evolução e os sistemas que nos conectam.',
+                'historia': 'Eventos, contextos e transformações da humanidade.',
+                'geografia': 'Espaço, território e relações socioambientais.',
+                'portugues': 'Gramática, interpretação e domínio da língua.',
+                'literatura': 'Obras, autores e movimentos literários.',
+                'filosofia': 'Pensamento crítico e as grandes questões.',
+                'sociologia': 'Sociedade, cultura e relações humanas.',
+                'ingles': 'Vocabulário, gramática e compreensão textual.',
+                'espanhol': 'Vocabulário, gramática e cultura hispânica.',
+                'redacao': 'Argumentação, coesão e técnicas de escrita.',
+                'artes': 'Expressão, movimentos e manifestações artísticas.',
+                'educacao_fisica': 'Corpo, movimento e saúde em equilíbrio.',
+            };
+            for (let key in descs) {
+                if (n.includes(key)) return descs[key];
+            }
+            return 'Organize seus estudos e revise no tempo certo.';
+        }
+
+        function getDeckIcon(deckName) {
+            const n = deckName.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+            if (n.includes('fisica') || n.includes('quimica')) return 'science';
+            if (n.includes('matematica') || n.includes('calculo')) return 'calculate';
+            if (n.includes('biologia') || n.includes('ciencia')) return 'biotech';
+            if (n.includes('historia')) return 'menu_book';
+            if (n.includes('geografia')) return 'public';
+            if (n.includes('portugues') || n.includes('gramatica') || n.includes('literatura')) return 'auto_stories';
+            if (n.includes('filosofia') || n.includes('sociologia')) return 'psychology';
+            if (n.includes('ingles') || n.includes('espanhol')) return 'translate';
+            if (n.includes('redacao')) return 'edit_note';
+            if (n.includes('artes')) return 'palette';
+            if (n.includes('med') || n.includes('medicina')) return 'local_hospital';
+            return 'style';
+        }
+
         function renderDecksHome() {
             const wrap = document.getElementById('ankiDeckGridWrapper');
             if(!wrap) return;
             const { r_decks, statés } = buildDeckTree();
             
             if(r_decks.length === 0){
+                wrap.className = 'flex flex-col items-center';
                 wrap.innerHTML = '<div class="p-10 text-center flex flex-col items-center"><span class="material-symbols-outlined text-[40px] text-slate-300 mb-4">folder_open</span><p class="text-slate-500 font-bold">Nenhum baralho criado.</p><p class="text-slate-400 text-sm mt-1">Clique em "Criar Baralho" para começar.</p></div>';
                 return;
             }
+            wrap.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
 
             const hasChild = (p) => r_decks.some(d => d.startsWith(p+'::') && d!==p);
-            const isVisible = (p) => {
-                const parts = p.split('::');
-                for(let i=1; i<parts.length; i++){
-                    if(!expandedDecks.has(parts.slice(0,i).join('::'))) return false;
-                }
-                return true;
-            }
+
+            // Only show top-level decks as cards (sub-decks appear as badges)
+            let topDecks = r_decks.filter(p => !p.includes('::'));
+            // Also include sub-decks that are direct children if their parent is expanded
+            // For the card view, we show ALL decks as individual cards
+            let allVisible = r_decks;
 
             let html = [];
-            r_decks.forEach(p => {
-                if(!isVisible(p)) return;
+            allVisible.forEach(p => {
                 let parts = p.split('::');
                 let name = parts[parts.length-1];
-                let deep = parts.length-1;
+                let deep = parts.length - 1;
+                let parentName = deep > 0 ? parts[0] : '';
                 let s = statés[p];
-                let exp = expandedDecks.has(p);
                 let imgSrc = getDeckIllustration(name);
-                let totalCards = s.nãovo + s.aprender + s.revisar;
-                let ml = deep * 24;
+                let desc = getDeckDescription(name);
+                let icon = getDeckIcon(name);
+                let hasSubs = hasChild(p);
+                let subCount = hasSubs ? r_decks.filter(d => d.startsWith(p+'::') && d !== p && d.split('::').length === parts.length + 1).length : 0;
 
-                let chevron = hasChild(p) ? 
-                    `<span class="material-symbols-outlined text-[16px] text-slate-400 hover:text-[#0B193C] cursor-pointer inline-flex items-center justify-center w-5 h-5 transition-transform ${exp ? 'rotate-90' : ''}" onclick="event.stopPropagation(); toggledeck('${p}')">play_arrow</span>` 
-                    : (deep > 0 ? `<span class="inline-block w-5"></span>` : '');
+                // Badge colors based on parent
+                const badgeColors = ['bg-indigo-600','bg-emerald-600','bg-amber-600','bg-rose-600','bg-purple-600','bg-cyan-600'];
+                let badgeColor = parentName ? badgeColors[parentName.length % badgeColors.length] : '';
 
                 html.push(`
-                    <div class="deck-card-row flex items-center gap-4 px-4 py-3 hover:bg-indigo-50/50 transition-all cursor-pointer group select-none rounded-xl border border-transparent hover:border-slate-200 hover:shadow-sm"
-                         style="margin-left:${ml}px"
+                    <div class="deck-card relative bg-white rounded-2xl border border-slate-200 overflow-hidden cursor-pointer group hover:shadow-lg hover:border-slate-300 hover:-translate-y-0.5 transition-all duration-300"
                          data-deck-path="${p}"
                          draggable="true"
                          ondragstart="onDeckDragStart(event, '${p}')"
@@ -802,41 +844,51 @@
                          ondragleave="onDeckDragLeave(event)"
                          ondrop="onDeckDrop(event, '${p}')"
                          ondragend="onDeckDragEnd(event)"
-                         onclick="selectedDeck='${p}'; var cm=document.getElementById('deckContextMenu'); if(cm) cm.classList.add('hidden');"
+                         onclick="event.stopPropagation(); abestudo('${p}')"
                          oncontextmenu="showContextMenu(event, '${p}')">
                         
-                        ${chevron}
-                        
-                        <!-- Ilustração -->
-                        <div class="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0 shadow-sm border border-slate-100 bg-slate-50" onclick="event.stopPropagation(); abestudo('${p}')">
-                            <img src="${imgSrc}" alt="${name}" class="w-full h-full object-cover" onerror="this.src='../../public/assets/deck-illustrations/default.png'">
+                        <!-- Ilustração watermark no canto superior direito -->
+                        <div class="absolute top-2 right-2 w-20 h-20 opacity-20 pointer-events-none">
+                            <img src="${imgSrc}" alt="" class="w-full h-full object-contain" onerror="this.src='../../public/assets/deck-illustrations/default.png'">
                         </div>
-                        
-                        <!-- Info -->
-                        <div class="flex-1 min-w-0" onclick="event.stopPropagation(); abestudo('${p}')">
-                            <p class="font-bold text-[15px] text-[#0B193C] truncate hover:underline">${name}</p>
-                            <p class="text-[11px] text-slate-400 font-medium mt-0.5">${totalCards} cartão${totalCards !== 1 ? 'ões' : ''}</p>
+
+                        <!-- Conteúdo do card -->
+                        <div class="p-4 pb-2 relative z-10">
+                            <!-- Ícone -->
+                            <div class="w-9 h-9 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center mb-3">
+                                <span class="material-symbols-outlined text-[18px] text-slate-500">${icon}</span>
+                            </div>
+
+                            <!-- Nome do baralho -->
+                            <h3 class="font-extrabold text-[15px] text-[#0B193C] leading-tight mb-1.5 truncate group-hover:text-indigo-700 transition-colors">${name}</h3>
+
+                            <!-- Badges -->
+                            <div class="flex items-center gap-1.5 mb-2 flex-wrap">
+                                ${parentName ? `<span class="text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full text-white ${badgeColor}">${parentName}</span>` : ''}
+                                ${hasSubs ? `<span class="text-[9px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">+ ${subCount} sub-baralho${subCount !== 1 ? 's' : ''}</span>` : ''}
+                            </div>
+
+                            <!-- Descrição -->
+                            <p class="text-[11px] text-slate-400 leading-relaxed mb-3 line-clamp-2" style="min-height:30px">${desc}</p>
                         </div>
-                        
-                        <!-- Contadores -->
-                        <div class="flex items-center gap-3 flex-shrink-0">
-                            <div class="text-center min-w-[40px]">
-                                <p class="text-[13px] font-extrabold ${s.nãovo===0?'text-slate-300':'text-blue-500'}">${s.nãovo}</p>
-                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Novo</p>
+
+                        <!-- Rodapé com contadores -->
+                        <div class="px-4 py-2.5 border-t border-slate-100 flex items-center justify-between text-[11px] font-bold bg-slate-50/50">
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[13px] ${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-500'}">fiber_new</span>
+                                <span class="text-slate-500">Novo</span>
+                                <span class="${s.nãovo === 0 ? 'text-slate-300' : 'text-blue-600'}">${s.nãovo}</span>
                             </div>
-                            <div class="text-center min-w-[40px]">
-                                <p class="text-[13px] font-extrabold ${s.aprender===0?'text-slate-300':'text-rose-500'}">${s.aprender}</p>
-                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Aprender</p>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[13px] ${s.aprender === 0 ? 'text-slate-300' : 'text-amber-500'}">local_fire_department</span>
+                                <span class="text-slate-500">Aprender</span>
+                                <span class="${s.aprender === 0 ? 'text-slate-300' : 'text-amber-600'}">${s.aprender}</span>
                             </div>
-                            <div class="text-center min-w-[40px]">
-                                <p class="text-[13px] font-extrabold ${s.revisar===0?'text-slate-300':'text-emerald-500'}">${s.revisar}</p>
-                                <p class="text-[9px] font-bold uppercase tracking-wider text-slate-400">Revisar</p>
+                            <div class="flex items-center gap-1">
+                                <span class="material-symbols-outlined text-[13px] ${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-500'}">refresh</span>
+                                <span class="text-slate-500">Revisar</span>
+                                <span class="${s.revisar === 0 ? 'text-slate-300' : 'text-emerald-600'}">${s.revisar}</span>
                             </div>
-                        </div>
-                        
-                        <!-- Menu -->
-                        <div class="opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
-                            <button class="material-symbols-outlined text-[18px] text-slate-400 hover:text-sinapse-primary p-1.5 bg-white hover:bg-slate-50 rounded-lg shadow-sm border border-slate-200 transition-colors" onclick="event.stopPropagation(); showcontextmenu(event, '${p}')">more_horiz</button>
                         </div>
                     </div>
                 `);
@@ -851,7 +903,7 @@
             e.dataTransfer.setData('text/plain', deckPath);
             // Visual: make the dragged row semi-transparent
             setTimeout(() => {
-                const row = e.target.closest('.deck-row');
+                const row = e.target.closest('.deck-card');
                 if (row) row.style.opacity = '0.4';
             }, 0);
         }
@@ -863,7 +915,7 @@
             if (targetPath.startsWith(draggedDeck + '::')) return;
             e.dataTransfer.dropEffect = 'move';
             // Visual highlight
-            const row = e.target.closest('.deck-row');
+            const row = e.target.closest('.deck-card');
             if (row) {
                 row.style.background = 'rgba(99, 102, 241, 0.12)';
                 row.style.outline = '2px dashed rgba(99, 102, 241, 0.5)';
@@ -873,7 +925,7 @@
         }
 
         function onDeckDragLeave(e) {
-            const row = e.target.closest('.deck-row');
+            const row = e.target.closest('.deck-card');
             if (row) {
                 row.style.background = '';
                 row.style.outline = '';
@@ -884,7 +936,7 @@
         function onDeckDrop(e, targetPath) {
             e.preventDefault();
             e.stopPropagation();
-            const row = e.target.closest('.deck-row');
+            const row = e.target.closest('.deck-card');
             if (row) {
                 row.style.background = '';
                 row.style.outline = '';
@@ -906,7 +958,7 @@
 
         function onDeckDragEnd(e) {
             // Reset opacity on all rows
-            document.querySelectorAll('.deck-row').forEach(r => {
+            document.querySelectorAll('.deck-card').forEach(r => {
                 r.style.opacity = '';
                 r.style.background = '';
                 r.style.outline = '';
