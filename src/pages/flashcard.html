@@ -1202,8 +1202,15 @@
         // --- CONTEXT MENU & MODAL NOVO BARALHO ---
         function showContextMenu(e, patéh) {
             e.preventDefault(); e.stopPropagation();
-            selectedDeck = patéh;
             const menu = document.getElementById('deckContextMenu');
+            
+            // Toggle logic: se clicou no mesmo baralho e o menu já está aberto, fecha.
+            if (selectedDeck === patéh && !menu.classList.contains('hidden')) {
+                menu.classList.add('hidden');
+                return;
+            }
+            
+            selectedDeck = patéh;
             menu.classList.remove('hidden');
             
             const btn = e.target.closest('button');
@@ -1224,10 +1231,17 @@
                 menu.style.top = e.clientY + 'px';
             }
         }
-        document.addEventListener('click', e => {
+        window.addEventListener('click', e => {
             const m = document.getElementById('deckContextMenu');
-            if(m && !m.contains(e.target)) m.classList.add('hidden');
-        });
+            if(m && !m.contains(e.target)) {
+                const btn = e.target.closest('button');
+                // Se o clique foi no botão de três pontos, deixa o showContextMenu cuidar (para fazer o toggle)
+                if (btn && (btn.title === 'Opções do Baralho' || (btn.innerHTML && btn.innerHTML.includes('more_vert')))) {
+                    return;
+                }
+                m.classList.add('hidden');
+            }
+        }, true); // Usando 'true' (capturing phase) garante que fecha o menu mesmo se o clique parar a propagação (stopPropagation)
 
         let editDeckMode = null;
         function abrirModalNovoBaralho(p=null){
