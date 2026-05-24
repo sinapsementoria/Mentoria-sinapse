@@ -499,20 +499,20 @@
             </div>
         </div>
 
-        <!-- CONTEXT MENU BARALHOS (Estilo Anki dark) -->
-        <div id="deckContextMenu" class="hidden fixed z-50 rounded-lg w-44 py-1 flex flex-col overflow-hidden" style="background:#2d2d2d;border:1px solid #444;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
-            <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
-                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">edit</span> Renomear
+        <!-- CONTEXT MENU BARALHOS (Estilo Light Platform) -->
+        <div id="deckContextMenu" class="hidden fixed z-50 rounded-xl w-44 py-1.5 flex flex-col overflow-hidden bg-white border border-slate-200" style="box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)">
+            <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[18px] text-slate-400">edit</span> Renomear
             </button>
-            <button onclick="contextmenuaction('opcoes')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
-                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">tune</span> Opções
+            <button onclick="contextmenuaction('opcoes')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[18px] text-slate-400">tune</span> Opções
             </button>
-            <button onclick="contextmenuaction('exportar')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
-                <span class="material-symbols-outlined text-[16px]" style="color:#aaa">download</span> Exportar
+            <button onclick="contextmenuaction('exportar')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[18px] text-slate-400">download</span> Exportar
             </button>
-            <div style="border-top:1px solid #444;margin:2px 8px"></div>
-            <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#ef4444" onmouseover="this.style.background='rgba(239,68,68,0.12)'" onmouseout="this.style.background='transparent'">
-                <span class="material-symbols-outlined text-[16px]">delete</span> Excluir
+            <div class="h-[1px] bg-slate-100 my-1 mx-3"></div>
+            <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-red-500 hover:bg-red-50 hover:text-red-600">
+                <span class="material-symbols-outlined text-[18px]">delete</span> Excluir
             </button>
         </div>
 
@@ -939,7 +939,7 @@
                         <div class="absolute bottom-0 left-0 right-0 h-[3px] z-20" style="background:linear-gradient(90deg, #06b6d4, #6366f1, #22d3ee, transparent)"></div>
 
                         <!-- Menu 3 pontos -->
-                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full hover:bg-slate-200/50 flex items-center justify-center transition-colors z-30 text-slate-500 hover:text-slate-800" title="Opções do Baralho">
+                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-sm backdrop-blur-sm transition-all z-30 text-slate-500 hover:text-indigo-600 border border-slate-200/50" title="Opções do Baralho">
                             <span class="material-symbols-outlined text-[20px]">more_vert</span>
                         </button>
 
@@ -980,7 +980,7 @@
                     <div ${cardAttrs}>
                         <img src="${imgSrc}" alt="${name}" class="w-full h-full block object-cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
                         <!-- Menu 3 pontos -->
-                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center backdrop-blur-sm transition-colors z-30 text-white" title="Opções do Baralho">
+                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-md backdrop-blur-md transition-all z-30 text-slate-600 hover:text-indigo-600 border border-slate-200/50" title="Opções do Baralho">
                             <span class="material-symbols-outlined text-[20px]">more_vert</span>
                         </button>
                     </div>
