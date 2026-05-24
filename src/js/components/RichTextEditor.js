@@ -731,13 +731,7 @@ class RichTextEditor {
                     </div>
                 </div>
             </div>
-            <!-- Editor Area -->
-            <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
-                <div id="editorContent" contenteditable="true" data-placeholder="Comece a digitar suas anotações..." spellcheck="true"></div>
 
-                <!-- Attachments Area -->
-                <div id="editorAttachments" class="px-6 pb-4"></div>
-            </div>
 
 
         `;
@@ -765,17 +759,27 @@ class RichTextEditor {
         return html;
     }
 
+
+    getEditorHTML() {
+        const suffix = '_' + this.id;
+        return `
+            <!-- Editor Area -->
+            <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
+                <div id="editorContent${suffix}" contenteditable="true" data-placeholder="${this.placeholder}" spellcheck="true" class="p-4 min-h-[40px] outline-none"></div>
+                <div id="editorAttachments${suffix}" class="px-6 pb-4"></div>
+            </div>
+        `;
+    }
+
     render() {
-        if (this.options.noToolbar) {
-            this.container.innerHTML = `
-                <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
-                    <div id="editorContent_${this.id}" contenteditable="true" data-placeholder="${this.placeholder}" spellcheck="true" class="p-4 min-h-[40px] outline-none"></div>
-                    <div id="editorAttachments_${this.id}" class="px-6 pb-4"></div>
-                </div>
-            `;
-        } else {
-            this.container.innerHTML = this.getToolbarHTML();
+        let html = '';
+        if (!this.options.noToolbar) {
+            html += this.getToolbarHTML();
         }
+        if (!this.options.toolbarOnly) {
+            html += this.getEditorHTML();
+        }
+        this.container.innerHTML = html;
         this.container.classList.add('rich-text-editor-container');
         this.editorElement = document.getElementById('editorContent_' + this.id);
     }

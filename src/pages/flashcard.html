@@ -2305,7 +2305,7 @@
             window.backEditor = new RichTextEditor("backEditorContainer", { id: "back", placeholder: "Insira a resposta oculta...", noToolbar: true });
             
             // Initialize Global Toolbar
-            const dummy = new RichTextEditor("globalEditorToolbar", { id: "global" });
+            const dummy = new RichTextEditor("globalEditorToolbar", { id: "global", toolbarOnly: true });
             document.getElementById("globalEditorToolbar").innerHTML = dummy.getToolbarHTML();
             document.getElementById("globalEditorToolbar").classList.remove("rich-text-editor-container");
         }, 100);
