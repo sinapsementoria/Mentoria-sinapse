@@ -500,7 +500,7 @@
         </div>
 
         <!-- CONTEXT MENU BARALHOS (Estilo Anki dark) -->
-        <div id="deckContextMenu" class="hidden absolute z-50 rounded-lg w-44 py-1 flex flex-col overflow-hidden" style="background:#2d2d2d;border:1px solid #444;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
+        <div id="deckContextMenu" class="hidden fixed z-50 rounded-lg w-44 py-1 flex flex-col overflow-hidden" style="background:#2d2d2d;border:1px solid #444;box-shadow:0 8px 24px rgba(0,0,0,0.4)">
             <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-medium" style="color:#e0e0e0" onmouseover="this.style.background='#3a3a3a'" onmouseout="this.style.background='transparent'">
                 <span class="material-symbols-outlined text-[16px]" style="color:#aaa">edit</span> Renomear
             </button>
@@ -1204,25 +1204,24 @@
             e.preventDefault(); e.stopPropagation();
             selectedDeck = patéh;
             const menu = document.getElementById('deckContextMenu');
-            
-            // Show first to get dimensions
             menu.classList.remove('hidden');
             
             const btn = e.target.closest('button');
             if (btn && (btn.title === 'Opções do Baralho' || btn.innerHTML.includes('more_vert'))) {
                 const rect = btn.getBoundingClientRect();
-                // Align right edge of menu to right edge of button
-                let leftPos = rect.right - menu.offsetWidth + window.scrollX;
-                let topPos = rect.bottom + window.scrollY + 4;
                 
-                // Prevent going off screen (right side)
-                if (leftPos < 0) leftPos = rect.left + window.scrollX;
+                // Position relative to the viewport (fixed)
+                // Align right edge of menu with right edge of button
+                let leftPos = rect.right - 176; // 176px is w-44
+                let topPos = rect.bottom + 4;
+                
+                if (leftPos < 0) leftPos = 10;
                 
                 menu.style.left = leftPos + 'px';
                 menu.style.top = topPos + 'px';
             } else {
-                menu.style.left = e.pageX + 'px';
-                menu.style.top = e.pageY + 'px';
+                menu.style.left = e.clientX + 'px';
+                menu.style.top = e.clientY + 'px';
             }
         }
         document.addEventListener('click', e => {
