@@ -766,7 +766,16 @@ class RichTextEditor {
     }
 
     render() {
-        this.container.innerHTML = this.getToolbarHTML();
+        if (this.options.noToolbar) {
+            this.container.innerHTML = `
+                <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
+                    <div id="editorContent_${this.id}" contenteditable="true" data-placeholder="${this.placeholder}" spellcheck="true" class="p-4 min-h-[150px] outline-none"></div>
+                    <div id="editorAttachments_${this.id}" class="px-6 pb-4"></div>
+                </div>
+            `;
+        } else {
+            this.container.innerHTML = this.getToolbarHTML();
+        }
         this.container.classList.add('rich-text-editor-container');
         this.editorElement = document.getElementById('editorContent_' + this.id);
     }

@@ -233,12 +233,43 @@
                         </div>
 
                         <div class="space-y-4">
+                            <!-- GLOBAL TOOLBAR -->
+                            <div id="globalEditorToolbar" class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-6"></div>
+
                             <!-- Frente -->
-                            <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-400 transition-colors shadow-sm">
-                            <div id="frontEditorContainer" class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-400 transition-colors shadow-sm mb-4" style="min-height: 150px;"></div>
+                            <div class="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden focus-within:border-indigo-400 focus-within:ring-1 focus-within:ring-indigo-400 transition-all">
+                                <div class="flex items-center justify-between px-4 py-2 bg-slate-50 border-b border-slate-100 cursor-pointer" onclick="document.getElementById('frontBody').classList.toggle('hidden')">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+                                        <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Frente</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <button class="text-slate-400 hover:text-indigo-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
+                                        <button class="text-slate-400 hover:text-indigo-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
+                                    </div>
+                                </div>
+                                <div id="frontBody" class="p-0">
+                                    <div id="frontEditorContainer" class="w-full"></div>
+                                </div>
+                            </div>
+
                             <!-- Verso -->
-                            <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-emerald-400 transition-colors shadow-sm">
-                            <div id="backEditorContainer" class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-emerald-400 transition-colors shadow-sm mb-4" style="min-height: 150px;"></div>
+                            <div class="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden focus-within:border-emerald-400 focus-within:ring-1 focus-within:ring-emerald-400 transition-all mb-4">
+                                <div class="flex items-center justify-between px-4 py-2 bg-slate-50 border-b border-slate-100 cursor-pointer" onclick="document.getElementById('backBody').classList.toggle('hidden')">
+                                    <div class="flex items-center gap-2">
+                                        <span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
+                                        <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Verso</span>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <button class="text-slate-400 hover:text-emerald-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
+                                        <button class="text-slate-400 hover:text-emerald-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
+                                    </div>
+                                </div>
+                                <div id="backBody" class="p-0">
+                                    <div id="backEditorContainer" class="w-full"></div>
+                                </div>
+                            </div>
+
                             <!-- Extra Box -->
                             <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-amber-400 transition-colors hidden shadow-sm" id="extraBoxContainer">
                                 <div class="bg-amber-50/50 border-b border-amber-100 px-4 py-2 flex items-center">
@@ -258,17 +289,20 @@
                         </div>
                         
                         <div class="flex justify-between items-center pt-6 border-t border-slate-100">
-                            <button class="text-xs text-slate-500 font-bold hover:text-[#0B193C] hover:underline flex items-center gap-1" onclick="document.getelementbyid('extraboxcontainer').classlist.toggle('hidden')">
-                                <span class="material-symbols-outlined text-[16px]">add_nãotes</span> Campo Extra / Dicas
-                            </button>
-                            <div class="flex gap-4 items-center">
-                                <div class="group relative flex items-center">
-                                    <button onclick="limparformadd()" class="w-10 h-10 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center transition-colors">
-                                        <span class="material-symbols-outlined text-[20px]">mop</span>
-                                    </button>
-                                </div>
-                                <button onclick="salvarcard()" id="btnSaveCard" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-3 rounded-xl font-extrabold shadow-[0_4px_14px_0_rgb(11,25,60,0.39)] hover:shadow-[0_6px_20px_rgba(99,102,241,0.23)] transition-all text-sm flex items-center gap-2 hover:-translate-y-0.5 transform duration-200">
-                                    Adicionar Cartão
+                            <div class="flex gap-2">
+                                <button onclick="salvarcard()" id="btnSaveCard" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-2.5 rounded-xl font-extrabold shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2">
+                                    Adicionar
+                                </button>
+                                <button class="bg-white border border-slate-200 text-slate-600 px-4 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm flex items-center gap-1 shadow-sm">
+                                    Histórico <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+                                </button>
+                            </div>
+                            <div class="flex gap-2">
+                                <button onclick="abrirView('painel')" class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
+                                    Fechar
+                                </button>
+                                <button class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
+                                    Ajuda
                                 </button>
                             </div>
                         </div>
@@ -2267,7 +2301,7 @@
     <script src="../js/components/RichTextEditor.js"></script>
     <script>
         setTimeout(() => {
-            window.frontEditor = new RichTextEditor("frontEditorContainer", { id: "front", placeholder: "Insira o conceito que deseja relembrar..." });
+            window.frontEditor = new RichTextEditor("frontEditorContainer", { id: "front", placeholder: "Insira o conceito que deseja relembrar...", noToolbar: true });
             window.backEditor = new RichTextEditor("backEditorContainer", { id: "back", placeholder: "Insira a resposta oculta..." });
         }, 100);
     </script>
