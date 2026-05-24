@@ -1,3 +1,13 @@
+
+// Helper para pegar elemento baseado na instância ativa do editor
+window.getEditorEl = function(baseId) {
+    if (window.activeEditorId) {
+        const el = document.getElementById(baseId + '_' + window.activeEditorId);
+        if (el) return el;
+    }
+    return document.getElementById(baseId);
+};
+
 const msInDay = 1000 * 60 * 60 * 24;
 
 let currentDate = new Date();
@@ -205,7 +215,7 @@ function restoreSelection() {
 window.formatDoc = function(cmd, val = null) {
     if (!cmd) return;
     
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     editor.focus();
 
     // Restaurar a seleção antes de aplicar qualquer comando (Regra 3)
@@ -349,7 +359,7 @@ window.switchLibraryTab = function(tab) {
 };
 
 window.applyListStyle = function(type, style) {
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     editor.focus();
     restoreSelection();
     
@@ -470,7 +480,7 @@ window.toggleListPicker = function(id) {
 // Gerenciamento de Teclado para Listas (Regra 4)
 // Envolvido em DOMContentLoaded porque o script carrega ANTES do #editorContent no HTML
 document.addEventListener('DOMContentLoaded', () => {
-    const editorContentEl = document.getElementById('editorContent');
+    const editorContentEl = getEditorEl('editorContent');
     if (editorContentEl) editorContentEl.addEventListener('keydown', (e) => {
         if (e.key === 'Tab') {
             e.preventDefault();
@@ -569,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 formulaToRemove.remove();
                 // Esconder ribbon se não houver mais campos ativos
                 if (!activeMathField) {
-                    document.getElementById('math-ribbon').classList.add('hidden');
+                    getEditorEl('math-ribbon').classList.add('hidden');
                 }
             }
         }
@@ -578,7 +588,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.changeFontSize = function(delta) {
     const scale = [8, 9, 10, 11, 12, 14, 16, 18, 20, 22, 24, 26, 28, 36, 48, 72];
-    const select = document.getElementById('fontSizeSelect');
+    const select = getEditorEl('fontSizeSelect');
     let currentVal = parseInt(select.value);
     
     // Encontrar o índice atual ou o mais próximo na escala
@@ -612,7 +622,7 @@ function applyFontSizeToEquation(sizeVal) {
     if (!sel.rangeCount) return false;
     
     const range = sel.getRangeAt(0);
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     if (!editor) return false;
     
     // Verificar se a seleção inclui formula-inline-container
@@ -710,21 +720,21 @@ window.updateToolbarState = function() {
         const foreColor = document.queryCommandValue('foreColor');
         const backColor = document.queryCommandValue('backColor');
         
-        const fontSelect = document.getElementById('fontFamilySelect');
+        const fontSelect = getEditorEl('fontFamilySelect');
         if (fontSelect && fontName && fontName !== 'undefined') {
             fontSelect.value = fontName;
         }
 
         if (foreColor) {
-            const preview = document.getElementById('textColorPreview');
+            const preview = getEditorEl('textColorPreview');
             if (preview) preview.style.backgroundColor = foreColor;
         }
 
         if (backColor && backColor !== 'transparent' && backColor !== 'rgba(0, 0, 0, 0)') {
-            const preview = document.getElementById('highlightPreview');
+            const preview = getEditorEl('highlightPreview');
             if (preview) preview.style.backgroundColor = backColor;
         } else {
-            const preview = document.getElementById('highlightPreview');
+            const preview = getEditorEl('highlightPreview');
             if (preview) preview.style.backgroundColor = 'transparent';
         }
     } catch(e) {}
@@ -776,7 +786,7 @@ window.changeCase = function(type) {
 
 // 2. Sistema de Anexos
 window.triggerFileAttach = function() {
-    document.getElementById('editorFileInput').click();
+    getEditorEl('editorFileInput').click();
 };
 
 window.handleFileAttach = async function(input) {
@@ -791,8 +801,12 @@ window.handleFileAttach = async function(input) {
                 base64: e.target.result,
                 size: (file.size / 1024).toFixed(1) + ' KB'
             };
-            currentAttachments.push(fileData);
-            renderAttachmentCard(fileData);
+            if (file.type.includes('image')) {
+                insertImageToEditor(e.target.result);
+            } else {
+                currentAttachments.push(fileData);
+                renderAttachmentCard(fileData);
+            }
         };
         reader.readAsDataURL(file);
     }
@@ -800,7 +814,7 @@ window.handleFileAttach = async function(input) {
 };
 
 function renderAttachmentCard(file) {
-    const container = document.getElementById('editorAttachments');
+    const container = getEditorEl('editorAttachments');
     const isAudio = file.type.includes('audio');
     const isImage = file.type.includes('image');
     const isPdf = file.type.includes('pdf');
@@ -855,27 +869,61 @@ window.removeAttachment = function(id) {
 };
 
 window.insertImageToEditor = function(datUrl) {
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     editor.focus();
-    
-    // Restaurar seleção se existir
     restoreSelection();
     
-    // Inserir imagem
-    document.execCommand('insertImage', false, datUrl);
+    // Insert with paragraphs above and below to allow typing
+    const id = 'img_' + Date.now();
+    const html = `<div><br></div><div>&#8203;<span class="editor-img-wrapper" contenteditable="false">
+        <img id="${id}" src="${datUrl}" style="width: 300px; cursor: pointer; display: inline-block;">
+        <div class="editor-img-resizer" onmousedown="startImageResize(event, '${id}')"></div>
+    </span>&#8203;</div><div><br></div>`;
     
-    // Adicionar classe para permitir redimensionamento (opcional, ajuda no CSS)
-    const imgs = editor.getElementsByTagName('img');
-    const lastImg = imgs[imgs.length - 1];
-    if (lastImg) {
-        lastImg.style.maxWidth = '100%';
-        lastImg.style.cursor = 'nwse-resize';
-    }
+    document.execCommand('insertHTML', false, html);
 };
+
+// Global resizing logic
+let isResizingImg = false;
+let currentResizingImg = null;
+let imgStartX = 0;
+let imgStartWidth = 0;
+
+window.startImageResize = function(e, imgId) {
+    e.preventDefault();
+    e.stopPropagation();
+    isResizingImg = true;
+    currentResizingImg = document.getElementById(imgId);
+    imgStartX = e.clientX;
+    imgStartWidth = currentResizingImg.offsetWidth;
+    
+    currentResizingImg.parentElement.classList.add('active');
+    
+    document.addEventListener('mousemove', handleImageResize);
+    document.addEventListener('mouseup', stopImageResize);
+};
+
+function handleImageResize(e) {
+    if (!isResizingImg || !currentResizingImg) return;
+    const diffX = e.clientX - imgStartX;
+    const newWidth = Math.max(50, imgStartWidth + diffX); // min 50px
+    currentResizingImg.style.width = newWidth + 'px';
+}
+
+function stopImageResize() {
+    if (currentResizingImg) {
+        currentResizingImg.parentElement.classList.remove('active');
+    }
+    isResizingImg = false;
+    currentResizingImg = null;
+    document.removeEventListener('mousemove', handleImageResize);
+    document.removeEventListener('mouseup', stopImageResize);
+}
+
 
 // 3. Gravador de Áudio
 window.toggleAudioRecording = async function() {
-    const btn = document.getElementById('audioRecordBtn');
+    const btn = getEditorEl('audioRecordBtn');
     
     if (!mediaRecorder || mediaRecorder.state === "inactive") {
         try {
@@ -966,8 +1014,8 @@ document.addEventListener('mousedown', function(e) {
 });
 
 window.toggleMathRibbon = function() {
-    const ribbon = document.getElementById('math-ribbon');
-    const sigmaBtn = document.getElementById('sigmaBtn');
+    const ribbon = getEditorEl('math-ribbon');
+    const sigmaBtn = getEditorEl('sigmaBtn');
     
     if (ribbon.classList.contains('hidden')) {
         // Ativar Ribbon
@@ -1001,7 +1049,7 @@ window.insertInlineEquation = function() {
         return;
     }
     
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     editor.focus();
     
     // Restaurar seleção salva para garantir inserção no lugar certo
@@ -1024,7 +1072,7 @@ window.insertInlineEquation = function() {
         activeMathField = newMf;
         mfContainer.classList.add('is-editing');
         newMf.removeAttribute('read-only');
-        document.getElementById('math-ribbon').classList.remove('hidden');
+        getEditorEl('math-ribbon').classList.remove('hidden');
     };
     
     newMf.onblur = () => {
@@ -1043,7 +1091,7 @@ window.insertInlineEquation = function() {
                 }
                 // Esconder ribbon se nenhum campo ativo
                 if (!activeMathField) {
-                    document.getElementById('math-ribbon').classList.add('hidden');
+                    getEditorEl('math-ribbon').classList.add('hidden');
                 }
             }
         }, 250);
@@ -1211,7 +1259,7 @@ window.toggleColorPicker = function(id) {
 };
 
 window.applyColor = function(color, cmd) {
-    const editor = document.getElementById('editorContent');
+    const editor = getEditorEl('editorContent');
     editor.focus();
     
     // Restaura a seleção que foi salva ao abrir o dropdown ou antes do clique
@@ -1226,9 +1274,9 @@ window.applyColor = function(color, cmd) {
     
     // Atualizar preview visual na barra
     if (cmd === 'foreColor') {
-        document.getElementById('textColorPreview').style.backgroundColor = color === 'inherit' ? '#000' : color;
+        getEditorEl('textColorPreview').style.backgroundColor = color === 'inherit' ? '#000' : color;
     } else if (cmd === 'hiliteColor') {
-        document.getElementById('highlightPreview').style.backgroundColor = color === 'transparent' ? 'transparent' : color;
+        getEditorEl('highlightPreview').style.backgroundColor = color === 'transparent' ? 'transparent' : color;
     }
     
     // Salvar nova seleção após aplicar (caso tenha mudado)
@@ -1264,7 +1312,7 @@ document.head.appendChild(style);
 
 // Detectar duplo clique no editor para editar fórmulas (MathLive Reload)
 document.addEventListener('DOMContentLoaded', () => {
-    const editorForDblClick = document.getElementById('editorContent');
+    const editorForDblClick = getEditorEl('editorContent');
     if (editorForDblClick) editorForDblClick.addEventListener('dblclick', function(e) {
         const target = e.target.closest('.formula-card');
         if (target) {
@@ -1332,8 +1380,8 @@ window.openNotesModal = function(event, btn) {
     
     const modal = document.getElementById('notesModal');
     const content = document.getElementById('notesModalContent');
-    const editor = document.getElementById('editorContent');
-    const attachments = document.getElementById('editorAttachments');
+    const editor = getEditorEl('editorContent');
+    const attachments = getEditorEl('editorAttachments');
     const subjectLabel = document.getElementById('notesSubjectTitle');
 
     // RESET TOTAL ANTES DE CARREGAR
@@ -1368,8 +1416,8 @@ window.openNotesModal = function(event, btn) {
     modal.classList.remove('hidden');
     
     // Resetar previews da barra para padrão Word
-    const textPreview = document.getElementById('textColorPreview');
-    const highPreview = document.getElementById('highlightPreview');
+    const textPreview = getEditorEl('textColorPreview');
+    const highPreview = getEditorEl('highlightPreview');
     if (textPreview) textPreview.style.backgroundColor = '#000000';
     if (highPreview) highPreview.style.backgroundColor = '#ffff00';
     
@@ -1383,8 +1431,8 @@ window.openNotesModal = function(event, btn) {
 window.closeNotesModal = function() {
     const modal = document.getElementById('notesModal');
     const content = document.getElementById('notesModalContent');
-    const editor = document.getElementById('editorContent');
-    const attachments = document.getElementById('editorAttachments');
+    const editor = getEditorEl('editorContent');
+    const attachments = getEditorEl('editorAttachments');
     
     // Animação de saída
     content.classList.remove('scale-100', 'opacity-100');
@@ -1403,20 +1451,20 @@ window.closeNotesModal = function() {
         activeMathField = null;
         
         // Ocultar ribbon de matemática se estiver aberta
-        const ribbon = document.getElementById('math-ribbon');
+        const ribbon = getEditorEl('math-ribbon');
         if (ribbon) ribbon.classList.add('hidden');
     }, 300);
 };
 
 // Listeners para o Editor
 document.addEventListener('selectionchange', () => {
-    if (document.activeElement.id === 'editorContent') {
+    if (document.activeElement.id.startsWith('editorContent')) {
         saveSelection();
         window.updateToolbarState();
     }
 });
 
-const editorEl = document.getElementById('editorContent');
+const editorEl = getEditorEl('editorContent');
 if (editorEl) {
     editorEl.addEventListener('keyup', () => {
         saveSelection();
@@ -1431,7 +1479,7 @@ if (editorEl) {
 window.saveTaskNotes = function() {
     if (!currentTaskIdForNotes || !window.db) return;
     
-    const htmlContent = document.getElementById('editorContent').innerHTML;
+    const htmlContent = getEditorEl('editorContent').innerHTML;
     
     window.db.update('activities', currentTaskIdForNotes, { 
         notesHtml: htmlContent,

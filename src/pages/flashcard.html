@@ -65,6 +65,7 @@
     <link rel="stylesheet" href="../../public/assets/styles/canela-global.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
+    <link rel="stylesheet" href="../css/editor.css">
 </head>
 <body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
 
@@ -234,34 +235,10 @@
                         <div class="space-y-4">
                             <!-- Frente -->
                             <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-400 transition-colors shadow-sm">
-                                <div class="bg-slate-50 border-b border-slate-200 px-4 py-2.5 flex justify-between items-center">
-                                    <div class="text-[10px] font-extrabold text-indigo-500 uppercase tracking-wider">Frente do Card</div>
-                                    <div class="flex gap-1 items-center">
-                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded font-bold text-xs text-slate-600 transition-colors tooltip" title="Negrito">B</button>
-                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded italic text-xs text-slate-600 transition-colors tooltip" title="Itálico">I</button>
-                                        <button type="button" class="hover:bg-slate-200 w-7 h-7 flex items-center justify-center rounded underline text-xs text-slate-600 transition-colors tooltip" title="Sublinhado">U</button>
-                                        <div class="w-px h-4 bg-slate-300 mx-1"></div>
-                                        <button type="button" class="border border-slate-200 hover:border-indigo-300 bg-white hover:bg-indigo-50 px-2 py-1 rounded text-xs flex items-center gap-1 font-bold text-slate-600 hover:text-indigo-600 transition-colors">
-                                            <span class="material-symbols-outlined text-[14px]">image</span> Add Imagem
-                                        </button>
-                                    </div>
-                                </div>
-                                <textarea id="addFront" rows="3" placeholder="Insira o conceito que deseja relembrar..." class="w-full p-5 outline-none font-medium resize-y bg-white min-h-[120px] text-slate-700"></textarea>
-                            </div>
-                            
+                            <div id="frontEditorContainer" class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-indigo-400 transition-colors shadow-sm mb-4" style="min-height: 150px;"></div>
                             <!-- Verso -->
                             <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-emerald-400 transition-colors shadow-sm">
-                                <div class="bg-emerald-50/50 border-b border-slate-200 px-4 py-2.5 flex justify-between items-center">
-                                    <div class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-wider">Verso (Resposta Oculta)</div>
-                                    <div class="flex gap-1 items-center">
-                                        <button type="button" class="border border-emerald-200 hover:border-emerald-400 bg-white hover:bg-emerald-50 px-2 py-1 rounded text-xs flex items-center gap-1 font-bold text-emerald-700 transition-colors">
-                                            <span class="material-symbols-outlined text-[14px]">image</span> Add Imagem
-                                        </button>
-                                    </div>
-                                </div>
-                                <textarea id="addBack" rows="4" placeholder="Insira a resposta, fórmula ou resolução..." class="w-full p-5 outline-none font-medium resize-y bg-emerald-50/10 min-h-[140px] text-slate-700"></textarea>
-                            </div>
-
+                            <div id="backEditorContainer" class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-emerald-400 transition-colors shadow-sm mb-4" style="min-height: 150px;"></div>
                             <!-- Extra Box -->
                             <div class="border border-slate-200 rounded-xl overflow-hidden focus-within:border-amber-400 transition-colors hidden shadow-sm" id="extraBoxContainer">
                                 <div class="bg-amber-50/50 border-b border-amber-100 px-4 py-2 flex items-center">
@@ -1466,18 +1443,18 @@
         }
 
         function limparFormAdd(manterSelect = true) {
-            document.getElementById('addFront').value='';
-            document.getElementById('addBack').value='';
+            if(window.frontEditor) window.frontEditor.setContent('');
+            if(window.backEditor) window.backEditor.setContent('');
             document.getElementById('addExtra').value='';
             document.getElementById('addTags').value='';
-            document.getElementById('addFront').focus();
+            if(window.frontEditor && window.frontEditor.editorElement) window.frontEditor.editorElement.focus();
         }
 
         function salvarCard() {
             let type = document.getElementById('addType').value;
             let deckId = document.getElementById('addDeck').value;
-            let front = document.getElementById('addFront').value;
-            let back = document.getElementById('addBack').value;
+            let front = (window.frontEditor ? window.frontEditor.getContent() : '');
+            let back = (window.backEditor ? window.backEditor.getContent() : '');
             let extra = document.getElementById('addExtra').value;
             let tags = document.getElementById('addTags').value.split(',').map(s=>s.trim()).filter(s=>s);
 
@@ -1981,6 +1958,15 @@
                 topBar.classList.add('hidden');
             }
         }
+    </script>
+    <script type="module" src="https://unpkg.com/mathlive"></script>
+    <script src="../../src/js/agenda_dinamica.js"></script>
+    <script src="../js/components/RichTextEditor.js"></script>
+    <script>
+        setTimeout(() => {
+            window.frontEditor = new RichTextEditor("frontEditorContainer", { id: "front", placeholder: "Insira o conceito que deseja relembrar..." });
+            window.backEditor = new RichTextEditor("backEditorContainer", { id: "back", placeholder: "Insira a resposta oculta..." });
+        }, 100);
     </script>
 </body>
 </html>
