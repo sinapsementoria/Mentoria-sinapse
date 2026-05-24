@@ -938,6 +938,11 @@
                         <!-- Borda inferior ciano gradiente -->
                         <div class="absolute bottom-0 left-0 right-0 h-[3px] z-20" style="background:linear-gradient(90deg, #06b6d4, #6366f1, #22d3ee, transparent)"></div>
 
+                        <!-- Menu 3 pontos -->
+                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full hover:bg-slate-200/50 flex items-center justify-center transition-colors z-30 text-slate-500 hover:text-slate-800" title="Opções do Baralho">
+                            <span class="material-symbols-outlined text-[20px]">more_vert</span>
+                        </button>
+
                         <!-- Conteúdo -->
                         <div class="relative z-10 p-4 pb-3 flex flex-col h-full">
                             <div class="w-10 h-10 rounded-full ${iconClr} border flex items-center justify-center mb-3 shadow-sm backdrop-blur-sm shrink-0">
@@ -974,6 +979,10 @@
                     html.push(`
                     <div ${cardAttrs}>
                         <img src="${imgSrc}" alt="${name}" class="w-full h-full block object-cover" onerror="this.src='../../CARDS MENTORIA SINAPSE/ENEM.png'">
+                        <!-- Menu 3 pontos -->
+                        <button onclick="event.stopPropagation(); showContextMenu(event, '${p}')" class="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/30 hover:bg-black/50 flex items-center justify-center backdrop-blur-sm transition-colors z-30 text-white" title="Opções do Baralho">
+                            <span class="material-symbols-outlined text-[20px]">more_vert</span>
+                        </button>
                     </div>
                     `);
                 }
