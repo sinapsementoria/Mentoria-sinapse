@@ -765,7 +765,7 @@ class RichTextEditor {
         return `
             <!-- Editor Area -->
             <div class="flex-1 overflow-y-auto bg-white" style="min-height: 0;">
-                <div id="editorContent${suffix}" contenteditable="true" data-placeholder="${this.placeholder}" spellcheck="true" class="p-4 min-h-[40px] outline-none"></div>
+                <div id="editorContent${suffix}" contenteditable="true" data-placeholder="${this.placeholder}" spellcheck="true" class="px-4 py-2 min-h-[40px] outline-none"></div>
                 <div id="editorAttachments${suffix}" class="px-6 pb-4"></div>
             </div>
         `;
