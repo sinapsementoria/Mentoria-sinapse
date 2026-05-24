@@ -201,8 +201,8 @@
                         <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
                     </div>
                     <div class="max-w-[1400px] mx-auto w-full flex justify-center gap-3 px-6 mt-4 pt-4 border-t border-slate-200 shrink-0">
-                        <button class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
-                        <button onclick="abrirmodalnãovobaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
+                        <button onclick="abrirModalCompartilhados()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">groups</span>Obter compartilhados</button>
+                        <button onclick="abrirModalNovoBaralho()" class="px-6 py-2.5 rounded-xl font-bold text-sm text-white bg-[#0B193C] hover:bg-[#162d5c] shadow-md hover:shadow-lg transition-all flex items-center gap-2"><span class="material-symbols-outlined text-[18px] icon-fill">add_circle</span>Criar Baralho</button>
                         <button onclick="abrirModalImport()" class="px-5 py-2.5 rounded-xl font-bold text-sm text-slate-500 border border-slate-200 bg-white hover:bg-slate-50 hover:text-[#0B193C] transition-colors shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">upload</span>Importar arquivo</button>
                     </div>
                 </div>
@@ -516,7 +516,53 @@
             </button>
         </div>
 
-        <!-- MODAL IMPORTAR FLASHCARDS -->
+        
+    <!-- MODAL OBTER COMPARTILHADOS -->
+    <div id="modalCompartilhados" class="fixed inset-0 z-[70] hidden opacity-0 transition-opacity duration-300">
+        <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharModalCompartilhados()"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-3xl bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform transition-transform duration-300 flex flex-col max-h-[85vh]">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center"><span class="material-symbols-outlined icon-fill">cloud_download</span></div>
+                    <div>
+                        <h3 class="font-headline font-extrabold text-xl text-[#0B193C]">Baralhos Compartilhados</h3>
+                        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">Explore a comunidade</p>
+                    </div>
+                </div>
+                <button onclick="fecharModalCompartilhados()" class="w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:text-rose-500 hover:border-rose-200 flex items-center justify-center transition-colors shadow-sm"><span class="material-symbols-outlined text-[18px]">close</span></button>
+            </div>
+            <div class="p-6 flex-1 overflow-y-auto custom-scrollbar bg-slate-50">
+                <div class="relative mb-6">
+                    <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input type="text" placeholder="Buscar baralhos sobre Biologia, ENEM, Idiomas..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 font-medium text-slate-600 shadow-sm placeholder-slate-300">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+                        <div>
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-bold text-[#0B193C]">Biologia ENEM - Completo</h4>
+                                <span class="bg-emerald-50 text-emerald-600 text-[10px] font-bold px-2 py-1 rounded-md">840 Cards</span>
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4">Revisão focada em ecologia, citologia e genética. Atualizado 2024.</p>
+                        </div>
+                        <button onclick="fecharModalCompartilhados(); alert('Download iniciado! (Mock)')" class="w-full py-2 bg-indigo-50 text-indigo-600 font-bold rounded-xl text-sm hover:bg-indigo-100 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[16px]">download</span> Baixar Baralho</button>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow cursor-pointer">
+                        <div>
+                            <div class="flex items-start justify-between mb-2">
+                                <h4 class="font-bold text-[#0B193C]">Inglês Essencial</h4>
+                                <span class="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-md">2000 Cards</span>
+                            </div>
+                            <p class="text-xs text-slate-500 leading-relaxed mb-4">Vocabulário mais frequente com áudio e frases de exemplo.</p>
+                        </div>
+                        <button onclick="fecharModalCompartilhados(); alert('Download iniciado! (Mock)')" class="w-full py-2 bg-indigo-50 text-indigo-600 font-bold rounded-xl text-sm hover:bg-indigo-100 transition-colors flex items-center justify-center gap-2"><span class="material-symbols-outlined text-[16px]">download</span> Baixar Baralho</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL IMPORTAR FLASHCARDS -->
         <div id="modalImport" class="fixed inset-0 z-[70] hidden opacity-0 transition-opacity duration-300">
             <div class="absolute inset-0 bg-[#0B193C]/50 backdrop-blur-sm" onclick="fecharModalImport()"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 max-w-2xl bg-white rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.3)] overflow-hidden transform transition-transform duration-300 flex flex-col max-h-[85vh]">
@@ -1247,6 +1293,40 @@
         }, true); // Usando 'true' (capturing phase) garante que fecha o menu mesmo se o clique parar a propagação (stopPropagation)
 
         let editDeckMode = null;
+        
+        function abrirModalImport() {
+            const m = document.getElementById('modalImport');
+            const body = document.getElementById('importBody');
+            body.innerHTML = `
+                <div class="flex flex-col items-center justify-center py-10 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50 cursor-pointer hover:bg-slate-100 hover:border-indigo-300 transition-colors group">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm border border-slate-100 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl text-indigo-500">note_add</span>
+                    </div>
+                    <h4 class="font-bold text-[#0B193C] text-lg">Clique para procurar ou arraste o arquivo</h4>
+                    <p class="text-sm text-slate-400 mt-2 text-center max-w-sm">Suporta arquivos .apkg (Pacote Anki), .csv e .txt formatados.</p>
+                    <input type="file" id="importFileInput" class="hidden" accept=".apkg,.csv,.txt" onchange="alert('Arquivo selecionado: ' + this.files[0].name + ' (Importação visual pronta)')">
+                    <button onclick="document.getElementById('importFileInput').click()" class="mt-6 px-6 py-2.5 bg-[#0B193C] text-white font-bold rounded-xl shadow-md hover:bg-indigo-600 transition-colors">Selecionar Arquivo</button>
+                </div>
+`;
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
+        }
+        function fecharModalImport() {
+            const m = document.getElementById('modalImport');
+            m.classList.add('opacity-0');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+        function abrirModalCompartilhados() {
+            const m = document.getElementById('modalCompartilhados');
+            m.classList.remove('hidden');
+            setTimeout(() => m.classList.remove('opacity-0'), 10);
+        }
+        function fecharModalCompartilhados() {
+            const m = document.getElementById('modalCompartilhados');
+            m.classList.add('opacity-0');
+            setTimeout(() => m.classList.add('hidden'), 300);
+        }
+
         function abrirModalNovoBaralho(p=null){
             editDeckMode = p;
             const m = document.getElementById('modalNovoBaralho');
