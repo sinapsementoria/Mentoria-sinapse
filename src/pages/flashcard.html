@@ -2302,7 +2302,12 @@
     <script>
         setTimeout(() => {
             window.frontEditor = new RichTextEditor("frontEditorContainer", { id: "front", placeholder: "Insira o conceito que deseja relembrar...", noToolbar: true });
-            window.backEditor = new RichTextEditor("backEditorContainer", { id: "back", placeholder: "Insira a resposta oculta..." });
+            window.backEditor = new RichTextEditor("backEditorContainer", { id: "back", placeholder: "Insira a resposta oculta...", noToolbar: true });
+            
+            // Initialize Global Toolbar
+            const dummy = new RichTextEditor("globalEditorToolbar", { id: "global" });
+            document.getElementById("globalEditorToolbar").innerHTML = dummy.getToolbarHTML();
+            document.getElementById("globalEditorToolbar").classList.remove("rich-text-editor-container");
         }, 100);
     </script>
 
