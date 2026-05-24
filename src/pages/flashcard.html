@@ -500,19 +500,19 @@
         </div>
 
         <!-- CONTEXT MENU BARALHOS (Estilo Light Platform) -->
-        <div id="deckContextMenu" class="hidden fixed z-50 rounded-xl w-44 py-1.5 flex flex-col overflow-hidden bg-white border border-slate-200" style="box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)">
-            <button onclick="contextmenuaction('renomear')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
-                <span class="material-symbols-outlined text-[18px] text-slate-400">edit</span> Renomear
+        <div id="deckContextMenu" class="hidden fixed z-50 rounded-xl w-36 py-1.5 flex flex-col overflow-hidden bg-white border border-slate-200" style="box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1)">
+            <button onclick="contextmenuaction('renomear')" class="text-left px-3.5 py-1.5 flex items-center gap-2 transition-colors text-[12px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[16px] text-slate-400">edit</span> Renomear
             </button>
-            <button onclick="contextmenuaction('opcoes')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
-                <span class="material-symbols-outlined text-[18px] text-slate-400">tune</span> Opções
+            <button onclick="contextmenuaction('opcoes')" class="text-left px-3.5 py-1.5 flex items-center gap-2 transition-colors text-[12px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[16px] text-slate-400">tune</span> Opções
             </button>
-            <button onclick="contextmenuaction('exportar')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
-                <span class="material-symbols-outlined text-[18px] text-slate-400">download</span> Exportar
+            <button onclick="contextmenuaction('exportar')" class="text-left px-3.5 py-1.5 flex items-center gap-2 transition-colors text-[12px] font-bold text-slate-600 hover:bg-slate-50 hover:text-[#0B193C]">
+                <span class="material-symbols-outlined text-[16px] text-slate-400">download</span> Exportar
             </button>
             <div class="h-[1px] bg-slate-100 my-1 mx-3"></div>
-            <button onclick="contextmenuaction('excluir')" class="text-left px-4 py-2 flex items-center gap-2.5 transition-colors text-[13px] font-bold text-red-500 hover:bg-red-50 hover:text-red-600">
-                <span class="material-symbols-outlined text-[18px]">delete</span> Excluir
+            <button onclick="contextmenuaction('excluir')" class="text-left px-3.5 py-1.5 flex items-center gap-2 transition-colors text-[12px] font-bold text-red-500 hover:bg-red-50 hover:text-red-600">
+                <span class="material-symbols-outlined text-[16px]">delete</span> Excluir
             </button>
         </div>
 
@@ -1219,7 +1219,7 @@
                 
                 // Position relative to the viewport (fixed)
                 // Align right edge of menu with right edge of button
-                let leftPos = rect.right - 176; // 176px is w-44
+                let leftPos = rect.right - 144; // 144px is w-36 // 176px is w-44
                 let topPos = rect.bottom + 4;
                 
                 if (leftPos < 0) leftPos = 10;
