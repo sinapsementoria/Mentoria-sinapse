@@ -297,15 +297,15 @@
                                 <button onclick="salvarcard()" id="btnSaveCard" class="bg-[#0B193C] hover:bg-sinapse-primary text-white px-8 py-2.5 rounded-xl font-extrabold shadow-md hover:shadow-lg transition-all text-sm flex items-center gap-2">
                                     Adicionar
                                 </button>
-                                <button class="bg-white border border-slate-200 text-slate-600 px-4 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm flex items-center gap-1 shadow-sm">
+                                <button onclick="abrirHistoricoAdd()" class="bg-white border border-slate-200 text-slate-600 px-4 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm flex items-center gap-1 shadow-sm">
                                     Histórico <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
                                 </button>
                             </div>
                             <div class="flex gap-2">
-                                <button onclick="abrirView('painel')" class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
+                                <button onclick="fecharModalAdd()" class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
                                     Fechar
                                 </button>
-                                <button class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
+                                <button onclick="abrirAjudaAdd()" class="bg-white border border-slate-200 text-slate-600 px-6 py-2.5 rounded-xl font-bold hover:bg-slate-50 transition-all text-sm shadow-sm">
                                     Ajuda
                                 </button>
                             </div>
@@ -1602,12 +1602,92 @@
             if(current && decks.includes(current)) sel.value = current;
         }
 
+        function atualizarSugestoesTags() {
+            if(!window.db) return;
+            let cards = window.db.get('flashcards') || [];
+            let allTags = new Set();
+            cards.forEach(c => {
+                if(c.tags && Array.isArray(c.tags)) {
+                    c.tags.forEach(t => allTags.add(t));
+                }
+            });
+            let dl = document.getElementById('tagsDatalist');
+            if(dl) {
+                dl.innerHTML = '';
+                Array.from(allTags).sort().forEach(tag => {
+                    dl.innerHTML += `<option value="${tag}">`;
+                });
+            }
+        }
+
         function limparFormAdd(manterSelect = true) {
             if(window.frontEditor) window.frontEditor.setContent('');
             if(window.backEditor) window.backEditor.setContent('');
             document.getElementById('addExtra').value='';
-            document.getElementById('addTags').value='';
+            // Keep tags!
             if(window.frontEditor && window.frontEditor.editorElement) window.frontEditor.editorElement.focus();
+            
+            atualizarSugestoesTags();
+        }
+
+        function formIsDirty() {
+            let front = (window.frontEditor ? window.frontEditor.getContent() : '').trim();
+            let back = (window.backEditor ? window.backEditor.getContent() : '').trim();
+            front = front.replace(/<[^>]*>/g, '').trim();
+            back = back.replace(/<[^>]*>/g, '').trim();
+            return (front !== '' || back !== '');
+        }
+
+        function fecharModalAdd() {
+            if (formIsDirty()) {
+                document.getElementById('modalConfirmarSaidaAdd').classList.replace('hidden', 'flex');
+            } else {
+                abrirView('painel');
+            }
+        }
+
+        function fecharModalAddForcado() {
+            document.getElementById('modalConfirmarSaidaAdd').classList.replace('flex', 'hidden');
+            if(window.frontEditor) window.frontEditor.setContent('');
+            if(window.backEditor) window.backEditor.setContent('');
+            abrirView('painel');
+        }
+
+        function abrirAjudaAdd() {
+            document.getElementById('modalAjudaAdd').classList.replace('hidden', 'flex');
+        }
+
+        function abrirHistoricoAdd() {
+            let cards = window.db ? (window.db.get('flashcards') || []) : [];
+            let lista = document.getElementById('historicoAddLista');
+            if(lista) {
+                lista.innerHTML = '';
+                let recentes = cards.slice().reverse().slice(0, 10);
+                
+                if (recentes.length === 0) {
+                    lista.innerHTML = '<div class="p-8 text-center text-slate-400">Nenhum cartão adicionado ainda.</div>';
+                } else {
+                    recentes.forEach(c => {
+                        let frontText = c.front ? c.front.replace(/<[^>]*>/g, ' ').substring(0, 60) + '...' : 'Sem frente';
+                        let deckName = c.deckId || 'Sem baralho';
+                        let dateStr = new Date(c.created_at || Date.now()).toLocaleString('pt-BR');
+                        
+                        lista.innerHTML += `
+                            <div class="px-6 py-4 border-b border-slate-100 hover:bg-slate-50 transition-colors">
+                                <div class="flex justify-between items-start mb-1">
+                                    <span class="font-bold text-[#0B193C] text-sm">${frontText}</span>
+                                    <span class="text-[10px] font-medium text-slate-400 bg-slate-100 px-2 py-0.5 rounded">${dateStr}</span>
+                                </div>
+                                <div class="flex gap-2 items-center">
+                                    <span class="text-xs text-slate-500 flex items-center gap-1"><span class="material-symbols-outlined text-[14px]">view_agenda</span> ${deckName}</span>
+                                    ${c.tags && c.tags.length > 0 ? `<div class="flex gap-1 ml-2">${c.tags.map(t => `<span class="bg-indigo-50 text-indigo-600 px-1.5 py-0.5 rounded text-[10px] font-bold">#${t}</span>`).join('')}</div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                document.getElementById('modalHistoricoAdd').classList.replace('hidden', 'flex');
+            }
         }
 
         function salvarCard() {
@@ -1616,20 +1696,30 @@
             let front = (window.frontEditor ? window.frontEditor.getContent() : '');
             let back = (window.backEditor ? window.backEditor.getContent() : '');
             let extra = document.getElementById('addExtra').value;
-            let tags = document.getElementById('addTags').value.split(',').map(s=>s.trim()).filter(s=>s);
+            
+            let rawFront = front.replace(/<[^>]*>/g, '').trim();
+            let rawBack = back.replace(/<[^>]*>/g, '').trim();
 
-            if(!front) { alert("A frente do cartão não pode estar vazia."); return; }
-            if(type === 'basico' && !back) { alert("O verso do cartão básico não pode estar vazio."); return; }
-            if(type === 'cloze' && !front.includes('{{c')) { alert("Para cartões Omissão, você deve usar a notação {{c1::palavra}} na pergunta."); return; }
+            if(!rawFront && !rawBack) {
+                alert("Preencha a frente e o verso do cartão."); return;
+            } else if(!rawFront) { 
+                alert("Preencha a frente do cartão."); return; 
+            } else if(type === 'basico' && !rawBack) { 
+                alert("Preencha o verso do cartão."); return; 
+            }
+
+            let tagsInput = document.getElementById('addTags').value;
+            let rawTags = tagsInput.split(',').map(s => s.trim().toLowerCase()).filter(s => s);
+            let tags = [...new Set(rawTags)];
 
             let id = window.db ? window.db.uuid() : Date.now().toString();
             let card = {
                 id, deckId, tipo: type,
                 front, back, extra, tags,
-                status: 'nãovo', easeFactor: 2.5, intervaloDias: 0, passosAprendizado: 0,
+                status: 'novo', easeFactor: 2.5, intervaloDias: 0, passosAprendizado: 0,
                 repeticoes: 0, acertos: 0, erros: 0, ultimaResposta: null,
                 ultimoEstudoEm: null, proximaRevisaoEm: null, tempoRespostaSegundos: 0,
-                created_até: new Date().toISOString()
+                created_at: new Date().toISOString()
             };
 
             if(window.db) {
@@ -1638,17 +1728,25 @@
                 window.db.set('flashcards', cards);
             }
 
-            // Green feedback flow
             const btn = document.getElementById('btnSaveCard');
             const oldHtml = btn.innerHTML;
             btn.classList.add('bg-emerald-500'); btn.classList.remove('bg-[#0B193C]', 'hover:bg-sinapse-primary');
-            btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Adicionado!';
+            btn.innerHTML = '<span class="material-symbols-outlined text-[18px]">check</span> Cartão adicionado com sucesso!';
             setTimeout(() => {
                 btn.classList.remove('bg-emerald-500'); btn.classList.add('bg-[#0B193C]', 'hover:bg-sinapse-primary');
                 btn.innerHTML = oldHtml;
                 limparFormAdd();
             }, 800);
         }
+
+        document.addEventListener('keydown', function(e) {
+            let addView = document.getElementById('view-adicionar');
+            if (!addView || addView.classList.contains('hidden')) return;
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                e.preventDefault();
+                salvarCard();
+            }
+        });
 
         document.addEventListener('keydown', e => {
             if(e.ctrlKey && e.key === 'Enter') {
@@ -2422,5 +2520,60 @@
     </div>
 
 <script src="../js/components/DeckOptions.js"></script>
+
+<!-- Modal Ajuda Adicionar -->
+<div id="modalAjudaAdd" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[999] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl overflow-hidden animate-fade-in-up">
+        <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <h3 class="font-extrabold text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined text-indigo-500">help</span> Adicionar Cartão</h3>
+            <button onclick="document.getElementById('modalAjudaAdd').classList.replace('flex', 'hidden')" class="text-slate-400 hover:text-slate-600 transition-colors"><span class="material-symbols-outlined text-[20px]">close</span></button>
+        </div>
+        <div class="p-6 text-sm text-slate-600 space-y-4 max-h-[70vh] overflow-y-auto">
+            <p>Nesta tela, você cria novos flashcards para estudar.</p>
+            <div><b class="text-slate-800">Frente</b><br>A frente é a parte que aparece primeiro durante o estudo. Use esse campo para escrever a pergunta, conceito ou comando que deseja lembrar.</div>
+            <div><b class="text-slate-800">Verso</b><br>O verso é a resposta oculta. Ele aparece somente depois que você clica em "Mostrar Resposta" durante o estudo.</div>
+            <div><b class="text-slate-800">Etiquetas</b><br>As etiquetas (tags) servem para organizar os cartões por matéria, assunto, dificuldade ou vestibular.<br><i>Exemplo: biologia, citologia, enem</i></div>
+            <div><b class="text-slate-800">Botão Adicionar</b><br>Salva o cartão no baralho selecionado e o deixa disponível para estudo.</div>
+            <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 text-indigo-800"><b class="flex items-center gap-1"><span class="material-symbols-outlined text-[16px]">keyboard</span> Atalho rápido</b>Use <kbd class="bg-white px-1.5 py-0.5 rounded border border-indigo-200 text-xs">Ctrl + Enter</kbd> para adicionar o cartão rapidamente.</div>
+        </div>
+        <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+            <button onclick="document.getElementById('modalAjudaAdd').classList.replace('flex', 'hidden')" class="bg-[#0B193C] text-white px-6 py-2 rounded-xl font-bold hover:bg-sinapse-primary transition-colors text-sm">Aceitar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Histórico Adicionar -->
+<div id="modalHistoricoAdd" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[999] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden animate-fade-in-up">
+        <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
+            <h3 class="font-extrabold text-[#0B193C] flex items-center gap-2"><span class="material-symbols-outlined text-emerald-500">history</span> Últimos Adicionados</h3>
+            <button onclick="document.getElementById('modalHistoricoAdd').classList.replace('flex', 'hidden')" class="text-slate-400 hover:text-slate-600 transition-colors"><span class="material-symbols-outlined text-[20px]">close</span></button>
+        </div>
+        <div class="p-0 max-h-[60vh] overflow-y-auto" id="historicoAddLista">
+            <!-- Items injected by JS -->
+        </div>
+        <div class="px-6 py-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+            <button onclick="document.getElementById('modalHistoricoAdd').classList.replace('flex', 'hidden')" class="bg-slate-200 text-slate-700 px-6 py-2 rounded-xl font-bold hover:bg-slate-300 transition-colors text-sm">Fechar</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirmar Saída -->
+<div id="modalConfirmarSaidaAdd" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-[999] hidden items-center justify-center p-4">
+    <div class="bg-white rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden animate-fade-in-up">
+        <div class="p-6 text-center">
+            <div class="w-16 h-16 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                <span class="material-symbols-outlined text-[32px]">warning</span>
+            </div>
+            <h3 class="font-extrabold text-[#0B193C] text-lg mb-2">Alterações não salvas</h3>
+            <p class="text-sm text-slate-500">Você tem conteúdo digitado que não foi adicionado. Deseja sair mesmo assim?</p>
+        </div>
+        <div class="px-6 py-4 bg-slate-50 flex justify-center gap-3">
+            <button onclick="document.getElementById('modalConfirmarSaidaAdd').classList.replace('flex', 'hidden')" class="bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-bold hover:bg-slate-300 transition-colors text-sm w-full">Cancelar</button>
+            <button onclick="fecharModalAddForcado()" class="bg-red-500 text-white px-4 py-2 rounded-xl font-bold hover:bg-red-600 transition-colors text-sm w-full">Sair sem salvar</button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
