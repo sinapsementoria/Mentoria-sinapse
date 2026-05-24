@@ -26,7 +26,7 @@ class RichTextEditor {
                     <!-- Custom Font Dropdown Premium -->
                     <select id="fontFamilySelect" class="hidden"><option value="Inter">Inter</option></select>
                     <div id="fontPickerWrap" class="relative" style="min-width: 150px;">
-                        <button type="button" id="fontPickerBtn" onclick="toggleFontPicker()" class="h-8 px-3 text-[11px] font-bold text-slate-700 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer hover:border-indigo-300 transition-all flex items-center justify-between gap-2 w-full">
+                        <button type="button" id="fontPickerBtn" onclick="toggleFontPicker(this.id)" class="h-8 px-3 text-[11px] font-bold text-slate-700 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer hover:border-indigo-300 transition-all flex items-center justify-between gap-2 w-full">
                             <span id="fontPickerLabel" style="font-family:'Inter',sans-serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">Inter</span>
                             <svg class="w-3 h-3 text-slate-400 flex-shrink-0 transition-transform" id="fontPickerArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
@@ -741,7 +741,7 @@ class RichTextEditor {
         const idsToSuffix = [
             'fontFamilySelect', 'fontPickerBtn', 'fontPickerLabel', 'fontPickerArrow', 'fontPickerDropdown', 'fontPickerSearch', 'fontPickerList',
             'fontSizeSelect', 'textColorPalette', 'highlightPalette', 'bulletListPicker', 'numberListPicker',
-            'editorContent', 'editorAttachments', 'math-ribbon', 'math-ribbon-premium', 'math-tabs-premium'
+            'editorContent', 'editorAttachments', 'sigmaBtn', 'math-ribbon', 'math-ribbon-premium', 'math-tabs-premium'
         ];
         
         for (const id of idsToSuffix) {
