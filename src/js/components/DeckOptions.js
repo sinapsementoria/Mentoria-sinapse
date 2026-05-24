@@ -60,10 +60,25 @@ function initDeckOptionsUI() {
     
     deckOptionsData.tabs.forEach((tab, index) => {
         // Sidebar link
+        const isActive = index === 0;
         const btn = document.createElement('button');
-        btn.className = `w-full text-left px-4 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-colors text-[13px] ${index === 0 ? 'bg-indigo-50 text-indigo-700' : 'text-slate-600 hover:bg-slate-100 hover:text-[#0B193C]'}`;
+        
+        // Premium Button Classes
+        btn.className = `group w-full text-left px-3 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-all text-[13px] ${isActive ? 'bg-white shadow-sm text-[#0B193C] border border-slate-200/80' : 'text-slate-500 hover:bg-slate-200/50 hover:text-[#0B193C] border border-transparent'}`;
         btn.onclick = () => deckOptionsSwitchTab(tab.id, btn);
-        btn.innerHTML = `<span class="material-symbols-outlined text-[18px] ${index === 0 ? 'text-indigo-600' : 'text-slate-400'}">${tab.icon}</span> ${tab.name}`;
+        btn.setAttribute('data-tab-id', tab.id);
+        
+        // Premium Icon Box Classes
+        const iconBoxClass = isActive 
+            ? 'bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-md shadow-indigo-300/40 text-white' 
+            : 'bg-slate-100 text-slate-400 group-hover:bg-white group-hover:text-indigo-500 group-hover:shadow-sm';
+            
+        btn.innerHTML = `
+            <div class="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 ${iconBoxClass}">
+                <span class="material-symbols-outlined text-[18px] ${isActive ? '' : 'transition-transform group-hover:scale-110'}">${tab.icon}</span>
+            </div>
+            ${tab.name}
+        `;
         sidebar.appendChild(btn);
         
         // Mobile option
@@ -75,24 +90,33 @@ function initDeckOptionsUI() {
 }
 
 function deckOptionsSwitchTab(tabId, btnElement = null) {
-    // Update active state in sidebar
-    if (btnElement) {
-        const sidebar = document.getElementById('deckOptionsSidebar');
-        Array.from(sidebar.children).forEach(btn => {
-            btn.className = 'w-full text-left px-4 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-colors text-[13px] text-slate-600 hover:bg-slate-100 hover:text-[#0B193C]';
-            btn.querySelector('span').className = 'material-symbols-outlined text-[18px] text-slate-400';
-        });
-        btnElement.className = 'w-full text-left px-4 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-colors text-[13px] bg-indigo-50 text-indigo-700';
-        btnElement.querySelector('span').className = 'material-symbols-outlined text-[18px] text-indigo-600';
-    } else {
-        // Find button by index if called from select
+    const sidebar = document.getElementById('deckOptionsSidebar');
+    
+    if (!btnElement) {
+        // Find button by index if called from select or programmatically
         const idx = deckOptionsData.tabs.findIndex(t => t.id === tabId);
-        if(idx >= 0) {
-            const sidebar = document.getElementById('deckOptionsSidebar');
-            if(sidebar.children[idx]) deckOptionsSwitchTab(tabId, sidebar.children[idx]);
+        if(idx >= 0 && sidebar.children[idx]) {
+            btnElement = sidebar.children[idx];
+        } else {
             return;
         }
     }
+
+    // Reset all buttons
+    Array.from(sidebar.children).forEach(btn => {
+        btn.className = 'group w-full text-left px-3 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-all text-[13px] text-slate-500 hover:bg-slate-200/50 hover:text-[#0B193C] border border-transparent';
+        const box = btn.querySelector('div');
+        box.className = 'w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 bg-slate-100 text-slate-400 group-hover:bg-white group-hover:text-indigo-500 group-hover:shadow-sm';
+        const iconSpan = box.querySelector('span');
+        iconSpan.className = 'material-symbols-outlined text-[18px] transition-transform group-hover:scale-110';
+    });
+    
+    // Set active button
+    btnElement.className = 'group w-full text-left px-3 py-2.5 rounded-xl font-bold flex items-center gap-3 transition-all text-[13px] bg-white shadow-sm text-[#0B193C] border border-slate-200/80';
+    const activeBox = btnElement.querySelector('div');
+    activeBox.className = 'w-8 h-8 rounded-lg flex items-center justify-center shrink-0 transition-all duration-300 bg-gradient-to-br from-indigo-500 to-indigo-600 shadow-md shadow-indigo-300/40 text-white';
+    const activeSpan = activeBox.querySelector('span');
+    activeSpan.className = 'material-symbols-outlined text-[18px]';
     
     // Update Mobile Select to match
     document.getElementById('deckOptionsMobileSelect').value = tabId;
