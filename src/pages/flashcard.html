@@ -66,6 +66,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.10.3/sql-wasm.js"></script>
     <link rel="stylesheet" href="../css/editor.css">
+
+    <style>
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
 </head>
 <body class="flex h-screen overflow-hidden text-slate-800 antialiased selection:bg-sinapse-primary selection:text-white">
 
@@ -192,7 +203,7 @@
             </header>
 
             <!-- CONTAINER PRINCIPAL -->
-            <div class="flex-1 flex flex-col overflow-hidden pb-4">
+            <div class="flex-1 overflow-y-auto overflow-x-hidden pb-4 scrollbar-hide">
                 
                 <!-- VIEW 1: BARALHOS -->
                 <div id="view-baralhos" class="view-section flex flex-col flex-1 overflow-y-auto fade-in-up">
@@ -208,8 +219,8 @@
                 </div>
 
                 <!-- VIEW 2: ADICIONAR CARD -->
-                <div id="view-adicionar" class="view-section hidden fade-in-up max-w-4xl mx-auto flex-1 overflow-hidden w-full flex flex-col pb-4">
-                    <div class="bg-white rounded-[16px] shadow-sm border border-slate-200 p-5 flex flex-col gap-3 flex-1 overflow-hidden">
+                <div id="view-adicionar" class="view-section hidden fade-in-up max-w-4xl mx-auto flex-1 overflow-y-auto w-full flex flex-col pb-4 scrollbar-hide">
+                    <div class="bg-white rounded-[16px] shadow-sm border border-slate-200 p-5 flex flex-col gap-3 flex-1 shrink-0">
                         <div class="flex items-center gap-4 mb-2 border-b border-slate-100 pb-4">
                             <div class="w-10 h-10 rounded-full bg-[#0B193C]/5 text-[#0B193C] flex items-center justify-center"><span class="material-symbols-outlined icon-fill">add_circle</span></div>
                             <h2 class="font-headline font-extrabold text-2xl text-[#0B193C]">Adicionar Cartão</h2>

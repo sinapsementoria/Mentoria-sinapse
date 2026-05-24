@@ -16,7 +16,7 @@
 
 
         /* ── Editor Styles ── */
-        [id^="editorContent"] { min-height: 40px; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.7; color: #1e293b; padding: 24px 28px; }
+        [id^="editorContent"] { min-height: 40px; outline: none; font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.7; color: #1e293b; padding: 8px 12px; }
         [id^="editorContent"]:empty::before { content: attr(data-placeholder); color: #94a3b8; pointer-events: none; }
         #editorContent img { max-width: 100%; border-radius: 8px; margin: 8px 0; }
         #editorContent ul, #editorContent ol { padding-left: 24px; margin: 4px 0; }
