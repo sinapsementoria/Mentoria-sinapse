@@ -192,10 +192,10 @@
             </header>
 
             <!-- CONTAINER PRINCIPAL -->
-            <div class="flex-1 overflow-y-auto overflow-x-hidden pb-10">
+            <div class="flex-1 flex flex-col overflow-hidden pb-4">
                 
                 <!-- VIEW 1: BARALHOS -->
-                <div id="view-baralhos" class="view-section flex flex-col fade-in-up">
+                <div id="view-baralhos" class="view-section flex flex-col flex-1 overflow-y-auto fade-in-up">
                     <div id="deckFolderHeader" class="max-w-[1400px] mx-auto px-6 w-full hidden"></div>
                     <div class="max-w-[1400px] mx-auto px-6 w-full overflow-y-auto custom-scrollbar pb-2 pt-2" style="max-height: 420px;">
                         <div id="ankiDeckGridWrapper" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
@@ -208,8 +208,8 @@
                 </div>
 
                 <!-- VIEW 2: ADICIONAR CARD -->
-                <div id="view-adicionar" class="view-section hidden fade-in-up max-w-4xl mx-auto space-y-6 flex-1 w-full flex flex-col pb-8">
-                    <div class="bg-white rounded-[24px] shadow-sm border border-slate-200 p-8 flex flex-col gap-6">
+                <div id="view-adicionar" class="view-section hidden fade-in-up max-w-4xl mx-auto flex-1 overflow-hidden w-full flex flex-col pb-4">
+                    <div class="bg-white rounded-[16px] shadow-sm border border-slate-200 p-5 flex flex-col gap-3 flex-1 overflow-hidden">
                         <div class="flex items-center gap-4 mb-2 border-b border-slate-100 pb-4">
                             <div class="w-10 h-10 rounded-full bg-[#0B193C]/5 text-[#0B193C] flex items-center justify-center"><span class="material-symbols-outlined icon-fill">add_circle</span></div>
                             <h2 class="font-headline font-extrabold text-2xl text-[#0B193C]">Adicionar Cartão</h2>
