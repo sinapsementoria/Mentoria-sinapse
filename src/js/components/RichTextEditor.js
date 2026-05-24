@@ -516,7 +516,7 @@ class RichTextEditor {
                             <span class="math-cat-icon" style="font-size:11px;font-weight:700;line-height:1">lim<br><span style="font-size:7px;font-weight:400">n→∞</span></span>
                             <span class="math-cat-label">Limite e<br>Logaritmo<span class="math-arrow">▾</span></span>
                         </button>
-                        <div class="math-cat-dropdown" style="min-width:260px;">
+                        <div class="math-cat-dropdown" style="min-width:260px; right:0; left:auto;">
                             <div class="math-cat-title">Funções</div>
                             <div class="math-cat-grid" style="grid-template-columns:repeat(3,1fr);">
                                 <button onclick="insertToWorkspace('\\log_{}')" class="math-tpl" style="font-size:12px" title="Log com base">log<sub>▫</sub> ▫</button>
@@ -549,7 +549,7 @@ class RichTextEditor {
                             <span class="math-cat-icon" style="font-size:13px;line-height:1">△<br><span style="font-size:8px">≡</span></span>
                             <span class="math-cat-label">Operador<span class="math-arrow">▾</span></span>
                         </button>
-                        <div class="math-cat-dropdown" style="min-width:240px;">
+                        <div class="math-cat-dropdown" style="min-width:240px; right:0; left:auto;">
                             <div class="math-cat-title">Operadores Básicos</div>
                             <div class="math-cat-grid">
                                 <button onclick="insertToWorkspace(':=')" class="math-tpl" style="font-size:13px" title="Definição">:=</button>
@@ -586,7 +586,7 @@ class RichTextEditor {
                             <span class="math-cat-icon" style="font-size:9px;font-family:monospace;line-height:1.1">⌈1 0⌉<br>⌊0 1⌋</span>
                             <span class="math-cat-label">Matriz<span class="math-arrow">▾</span></span>
                         </button>
-                        <div class="math-cat-dropdown" style="min-width:320px; max-height:420px; overflow-y:auto;">
+                        <div class="math-cat-dropdown" style="min-width:320px; max-height:420px; overflow-y:auto; right:0; left:auto;">
                             <div class="math-cat-title">Matrizes Vazias</div>
                             <div class="math-cat-grid" style="grid-template-columns:repeat(4,1fr);">
                                 <button onclick="insertToWorkspace('\\begin{pmatrix} & \\end{pmatrix}')" class="math-tpl" style="font-size:9px" title="1×2">[ ▫  ▫ ]</button>
@@ -634,7 +634,7 @@ class RichTextEditor {
                             <span class="math-cat-icon" style="font-size:14px">±</span>
                             <span class="math-cat-label">Símbolos<span class="math-arrow">▾</span></span>
                         </button>
-                        <div class="math-cat-dropdown math-cat-dropdown-wide">
+                        <div class="math-cat-dropdown math-cat-dropdown-wide" style="right:0; left:auto;">
                             <div class="math-cat-title">Matemática Básica</div>
                             <div class="math-sym-grid">
                                 <button onclick="insertToWorkspace('\\pm')" class="math-sym">±</button>
