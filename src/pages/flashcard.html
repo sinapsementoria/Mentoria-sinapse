@@ -1204,9 +1204,26 @@
             e.preventDefault(); e.stopPropagation();
             selectedDeck = patéh;
             const menu = document.getElementById('deckContextMenu');
-            menu.style.left = e.pageX + 'px';
-            menu.style.top = e.pageY + 'px';
+            
+            // Show first to get dimensions
             menu.classList.remove('hidden');
+            
+            const btn = e.target.closest('button');
+            if (btn && (btn.title === 'Opções do Baralho' || btn.innerHTML.includes('more_vert'))) {
+                const rect = btn.getBoundingClientRect();
+                // Align right edge of menu to right edge of button
+                let leftPos = rect.right - menu.offsetWidth + window.scrollX;
+                let topPos = rect.bottom + window.scrollY + 4;
+                
+                // Prevent going off screen (right side)
+                if (leftPos < 0) leftPos = rect.left + window.scrollX;
+                
+                menu.style.left = leftPos + 'px';
+                menu.style.top = topPos + 'px';
+            } else {
+                menu.style.left = e.pageX + 'px';
+                menu.style.top = e.pageY + 'px';
+            }
         }
         document.addEventListener('click', e => {
             const m = document.getElementById('deckContextMenu');
