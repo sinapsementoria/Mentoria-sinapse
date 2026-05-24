@@ -237,36 +237,40 @@
                             <div id="globalEditorToolbar" class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm mb-2"></div>
 
                             <!-- Frente -->
-                            <div class="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden focus-within:border-indigo-400 focus-within:ring-1 focus-within:ring-indigo-400 transition-all">
-                                <div class="flex items-center justify-between px-4 py-1.5 bg-slate-50 border-b border-slate-100 cursor-pointer" onclick="document.getElementById('frontBody').classList.toggle('hidden')">
-                                    <div class="flex items-center gap-2">
+                            <div class="mb-3">
+                                <div class="flex items-center justify-between px-1 py-1 cursor-pointer mb-1" onclick="document.getElementById('frontBody').classList.toggle('hidden')">
+                                    <div class="flex items-center gap-1">
                                         <span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
-                                        <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Frente</span>
+                                        <span class="text-[13px] font-medium text-slate-700">Frente</span>
                                     </div>
                                     <div class="flex items-center gap-3">
-                                        <button class="text-slate-400 hover:text-indigo-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
-                                        <button class="text-slate-400 hover:text-indigo-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
+                                        <button class="text-slate-400 hover:text-blue-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
+                                        <button class="text-slate-400 hover:text-blue-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
                                     </div>
                                 </div>
                                 <div id="frontBody" class="p-0">
-                                    <div id="frontEditorContainer" class="w-full"></div>
+                                    <div class="border border-slate-300 rounded overflow-hidden focus-within:border-[#0066ff] focus-within:ring-1 focus-within:ring-[#0066ff] transition-all bg-white shadow-sm">
+                                        <div id="frontEditorContainer" class="w-full"></div>
+                                    </div>
                                 </div>
                             </div>
 
                             <!-- Verso -->
-                            <div class="border border-slate-200 rounded-xl bg-white shadow-sm overflow-hidden focus-within:border-emerald-400 focus-within:ring-1 focus-within:ring-emerald-400 transition-all mb-4">
-                                <div class="flex items-center justify-between px-4 py-1.5 bg-slate-50 border-b border-slate-100 cursor-pointer" onclick="document.getElementById('backBody').classList.toggle('hidden')">
-                                    <div class="flex items-center gap-2">
+                            <div class="mb-4">
+                                <div class="flex items-center justify-between px-1 py-1 cursor-pointer mb-1" onclick="document.getElementById('backBody').classList.toggle('hidden')">
+                                    <div class="flex items-center gap-1">
                                         <span class="material-symbols-outlined text-[16px] text-slate-400">expand_more</span>
-                                        <span class="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">Verso</span>
+                                        <span class="text-[13px] font-medium text-slate-700">Verso</span>
                                     </div>
                                     <div class="flex items-center gap-3">
-                                        <button class="text-slate-400 hover:text-emerald-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
-                                        <button class="text-slate-400 hover:text-emerald-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
+                                        <button class="text-slate-400 hover:text-blue-500 transition-colors" title="Editar HTML"><span class="material-symbols-outlined text-[16px]">code</span></button>
+                                        <button class="text-slate-400 hover:text-blue-500 transition-colors" title="Fixar campo"><span class="material-symbols-outlined text-[16px]">push_pin</span></button>
                                     </div>
                                 </div>
                                 <div id="backBody" class="p-0">
-                                    <div id="backEditorContainer" class="w-full"></div>
+                                    <div class="border border-slate-300 rounded overflow-hidden focus-within:border-[#0066ff] focus-within:ring-1 focus-within:ring-[#0066ff] transition-all bg-white shadow-sm">
+                                        <div id="backEditorContainer" class="w-full"></div>
+                                    </div>
                                 </div>
                             </div>
 
